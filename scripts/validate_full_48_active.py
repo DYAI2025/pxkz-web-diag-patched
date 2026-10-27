@@ -4,9 +4,41 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
+
+
+# Approved, hash-chained changes to protected files. Reasons and the paths they may touch are fixed here, so the
+# change report cannot widen them; every row must start from the current effective digest of its path.
+PROTECTED_CHANGE_REPORT = "reports/active-measurement-protected-changes.json"
+ALLOWED_PROTECTED_CHANGES = {
+    "IMPRESSUM_CUSTOMER_RISK_SCHEMA": {"schemas/diagnosis-report.schema.json"},
+    "VIBECHECK03_DIAGNOSTICS_SCHEMA": {"schemas/diagnosis-report.schema.json"},
+}
+SHA_RX = re.compile(r"^[0-9a-f]{64}$")
+
+
+def apply_protected_changes(protected: dict[str, str], report: dict | None) -> dict[str, str]:
+    effective = dict(protected)
+    if report is None:
+        return effective
+    if report.get("status") != "PASS":
+        raise ValueError("protected change report status is not PASS")
+    for row in report.get("changes") or []:
+        rel, reason = row.get("path"), row.get("reason")
+        if rel not in effective:
+            raise ValueError(f"protected change for path that is not protected: {rel}")
+        if rel not in ALLOWED_PROTECTED_CHANGES.get(reason, set()):
+            raise ValueError(f"protected change reason not allowed for {rel}: {reason}")
+        prev, cur = row.get("previous_sha256"), row.get("current_sha256")
+        if not (isinstance(prev, str) and SHA_RX.match(prev) and isinstance(cur, str) and SHA_RX.match(cur)):
+            raise ValueError(f"protected change for {rel} needs previous/current sha256")
+        if prev != effective[rel]:
+            raise ValueError(f"protected change chain broken for {rel}: {prev} != {effective[rel]}")
+        effective[rel] = cur
+    return effective
 
 
 def fail(msg: str) -> int:
@@ -74,7 +106,11 @@ def main(argv: list[str]) -> int:
     if determinism.get("timestamps_excluded_from_semantic_digest") is not True:
         errors.append("timestamp digest policy not proven")
 
-    protected = baseline.get("protected_files", {})
+    try:
+        changes_path = root / PROTECTED_CHANGE_REPORT
+        protected = apply_protected_changes(baseline.get("protected_files", {}), load(changes_path) if changes_path.is_file() else None)
+    except Exception as exc:
+        return fail(f"protected change report invalid: {exc}")
     for rel, expected in protected.items():
         path = root / rel
         if not path.exists():
