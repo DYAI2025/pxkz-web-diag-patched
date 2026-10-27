@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0",
+  "baseline_tree_digest": "f8a385b42c6a3291e8544f1c600e405b112c1c8b27080cfe6bdf682304ab3e55",
+  "protected_files": [
+    {
+      "path": "assets/measurement-registry.json",
+      "sha256": "b527f71f397b2f95194ec35f2b85e6ff68024ab90ed25c65d2eccc255a93acac"
+    },
+    {
+      "path": "assets/capability-registry.json",
+      "sha256": "0616474e57be73ccaa9cd330d788167557f6874861b21a1660cd63d0d0d9c1b9"
+    },
+    {
+      "path": "scripts/compute_score.py",
+      "sha256": "1df90b548be6ec0af857a932c43c2d9b30442ccd993420a00b62acc2ad6c56c6"
+    },
+    {
+      "path": "scripts/measurement_enrichment.py",
+      "sha256": "04c8e9cfb4c8a988281cc8e5d626a30aa056eb0664326ca0f407ef8591c803be"
+    },
+    {
+      "path": "scripts/measurement_adapters.py",
+      "sha256": "35a10699236d6932cda4b1831affa05197c8590364ea3785c7a58ad6c0e1fea7"
+    },
+    {
+      "path": "scripts/browser_measurements.py",
+      "sha256": "f0cb11a83f903ee204c1a8434c0cae71330112358463de8f334ee007df48f053"
+    },
+    {
+      "path": "schemas/measurement-enrichment.schema.json",
+      "sha256": "21d8b679764116a09b33018a86dae409f87f1115d60c6d55032be33c9aabd0ee"
+    },
+    {
+      "path": "scripts/render_diagnosis_pdf.py",
+      "sha256": "411d7adfe8952de7b5dd60f566b0384ccfc3ceda8b7b4b5c83378b471f474ea1"
+    },
+    {
+      "path": "scripts/svg_chart_renderer.py",
+      "sha256": "35d0ee5acb12d7d798d41e50ab9e9b0593ebca18f66e9fd1dbbe40e38befba89"
+    },
+    {
+      "path": "scripts/vega_spec_builder.py",
+      "sha256": "af44041b3e6e43cc10799c2685f3ec3ff6214b895b834b592ae9f9cef4d58a7b"
+    },
+    {
+      "path": "scripts/render_visualizations.py",
+      "sha256": "a970f978693166b721b49ad2dd00a779431f0fc54d2a1034d139ad11584f346e"
+    },
+    {
+      "path": "scripts/build_visualization_plan.py",
+      "sha256": "baf5d85df264a812165d4ba0fb534619e0ab5b9f3a601b8011955164358be954"
+    },
+    {
+      "path": "scripts/build_audit_deliverables.py",
+      "sha256": "b8d3ba5536a2054d2545c17ef2868950597a2fdf7c01bf9dae2a4adf1bae203b"
+    },
+    {
+      "path": "templates/visualization-catalog.v2.json",
+      "sha256": "07e0b8d11a49b54b835b097b54120c01962ec082f426470069059f6d3d7624d1"
+    },
+    {
+      "path": "templates/chart-library.v1.json",
+      "sha256": "f0bde6926339f42ad07afcd2e2f5a55a7c3fc14c5b7b71b18cc8c7663518364c"
+    },
+    {
+      "path": "templates/client-report-template.json",
+      "sha256": "ccbfa129538a29167b63a7ac0d82d269563046174c5179fe430510540f954100"
+    },
+    {
+      "path": "templates/presentation.html.j2",
+      "sha256": "71c4af5c66c59e9db107fc1f903e7527c93a3a4101d0693e33df9a9e6287fb02"
+    },
+    {
+      "path": "assets/presentation.css",
+      "sha256": "ffd55bb7baa0b458de6db423792842f2bd4c0ee6e061003f53823ef588955a23"
+    },
+    {
+      "path": "scripts/client_story.py",
+      "sha256": "3798a2babca162db109ce7750b324b7e1c993eb1ba48f1ab0afe4bebba230b2d"
+    },
+    {
+      "path": "scripts/customer_story_semantics.py",
+      "sha256": "7aa7c2edaae58dad8fccb2a7433484a08afe0788a9edbbf183b8dc1a57a61db1"
+    },
+    {
+      "path": "scripts/customer_status.py",
+      "sha256": "b49892295c93f0402434004313b3212c852d9b585d4bc3db7dfa84f3cc7053f5"
+    },
+    {
+      "path": "scripts/build_client_report_model.py",
+      "sha256": "433a909ec9bb38b29a4864f468d2cdf66a4a83b1beef0fdada2f6db8716a538e"
+    },
+    {
+      "path": "schemas/client-report.schema.json",
+      "sha256": "91b48b4c8795149219d4e35cc9999467cbfe793dcaad3c76e89f67b3879ce875"
+    },
+    {
+      "path": "contracts/pixelkiez-elevenlabs-batch-contract-v1.3.json",
+      "sha256": "ed9924084c479c3627ceb2648ef301162d5b99bbfddfe3fefe265c7cec915d38"
+    },
+    {
+      "path": "contracts/pixelkiez-elevenlabs-batch-contract-v1.2.json",
+      "sha256": "798864ba5998d0e7784137749d8bf857c7d1f7747c996e0c9bc58e7ae8962f76"
+    },
+    {
+      "path": "contracts/pixelkiez-elevenlabs-batch-contract-v1.1.json",
+      "sha256": "ab5570bac1066d4c999a0e8f9b674a9ebfb13eccfabbb1cd0fd049400f0cec5a"
+    },
+    {
+      "path": "contracts/pixelkiez_elevenlabs_batch_variable_contract.v1.json",
+      "sha256": "66018327ad7480c44e17cf071e6e864105f7d9185d4965cafbd76f9c168edfe5"
+    },
+    {
+      "path": "schemas/batch-context.v1.3.schema.json",
+      "sha256": "40cf22851c954428a9cad0c260f0b2eea9722c09e48a36c30298256cf5cfa228"
+    },
+    {
+      "path": "schemas/batch-row.v1.3.schema.json",
+      "sha256": "f3e23e06e2f2aedcba6a8ea70fbebe23bbae8ef7fa8a249b606fee009eaa3232"
+    },
+    {
+      "path": "scripts/batch_contract.py",
+      "sha256": "591da086ba48c72abd943e72bdf0ed2b42d62176f429bf13c9e256d9ba699c69"
+    },
+    {
+      "path": "scripts/build_elevenlabs_batch_csv.py",
+      "sha256": "0a6c8121f35175010f36d918792e497d024039159f44ca52500dae412014930d"
+    },
+    {
+      "path": "scripts/validate_batch_contract.py",
+      "sha256": "095dcb4ca083d3fb7e52efef53498ea8e99e3332fd6997eb0487896353608b7c"
+    },
+    {
+      "path": "scripts/validate_elevenlabs_batch_csv.py",
+      "sha256": "b1841e9a92871c73c40d1daa135321e4f6eb35f84cd8aea12b30d1e2202fdae7"
+    },
+    {
+      "path": "templates/visualizations/V01_OVERALL_SCORE.vl.json",
+      "sha256": "ffe74197aafedc51dbdcc6a2112e16efda74032567c8f208b85221f1fe9b5006"
+    },
+    {
+      "path": "templates/visualizations/V02_CATEGORY_BARS.vl.json",
+      "sha256": "d143a96c3be93c95b51a874a3df60842c67e621f30969c509a4f108223802984"
+    },
+    {
+      "path": "templates/visualizations/V03_TOP_LEVERS.vl.json",
+      "sha256": "8701b93ab87e44dc04d0525f9900e9b2497117745911cc5d863d034be3b1754a"
+    },
+    {
+      "path": "templates/visualizations/V04_FINDABILITY_BENCHMARK.vl.json",
+      "sha256": "6ceae7a5ba11c2d308d29c1025a6194b01db8c5d1f8fe0b5202aed1be3880cde"
+    },
+    {
+      "path": "templates/visualizations/V05_RANKING_POSITION.vl.json",
+      "sha256": "361ea8573776c086602e36575ff22525289c69fe0cc392b4bc386bbd5f625234"
+    },
+    {
+      "path": "templates/visualizations/V06_QUERY_COVERAGE.vl.json",
+      "sha256": "0faf450fe486d668cbaa260710d503f29d9287900ccb3d240e797084e85161d4"
+    },
+    {
+      "path": "templates/visualizations/V07_PERFORMANCE_THRESHOLD.vl.json",
+      "sha256": "2b608a8004bae1f9dbf1ce526818b3dadb3533182c4f5569477c07f72eee0428"
+    },
+    {
+      "path": "templates/visualizations/V08_AI_ANSWERABILITY.vl.json",
+      "sha256": "08d5500fca936e91e5d15225904c663f13ee11871821817a369c9698e1527751"
+    },
+    {
+      "path": "templates/visualizations/V09_AGENT_READINESS.vl.json",
+      "sha256": "b78f5f0a20e8aa6dda36f79300b7f4a99ac47ed6de96a2164119ce591494eb91"
+    },
+    {
+      "path": "templates/visualizations/V10_TRUST_MATRIX.vl.json",
+      "sha256": "f713257cfc6526294a4fe1a58c5e3929d001980171db641d51d3b260639720f3"
+    },
+    {
+      "path": "templates/visualizations/V11_SEVERITY_DISTRIBUTION.vl.json",
+      "sha256": "297a3d3a604ce284803d09153530351b2e81fd5c147ff524f8872b35fea08a4d"
+    },
+    {
+      "path": "templates/visualizations/V12_AUDIT_COVERAGE.vl.json",
+      "sha256": "5c98b4051fdf8ea62ab830299899de73b7abe1e952c1adfa233a678165f00570"
+    },
+    {
+      "path": "templates/visualizations/V13_IMPACT_EFFORT.vl.json",
+      "sha256": "64d2971d5c8c79d45f01426d4ad08b1d9c957be86e1304c550a2b6cfb440f282"
+    },
+    {
+      "path": "templates/visualizations/V14_REPEAT_AUDIT.vl.json",
+      "sha256": "9a4cfd80e1715b383a3669248e7d08e32cc10cc98921d2098e983d22b2e35361"
+    }
+  ]
+}

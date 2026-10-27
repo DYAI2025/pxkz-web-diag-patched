@@ -1,0 +1,17 @@
+<enterprise_skill_evaluation>
+  <scores>
+    <spec_compliance>5</spec_compliance>
+    <research_quality>5</research_quality>
+    <enterprise_readiness>5</enterprise_readiness>
+    <architecture_quality>5</architecture_quality>
+    <release_gate_integrity>5</release_gate_integrity>
+  </scores>
+  <blocking_issues>
+    <item>NONE</item>
+  </blocking_issues>
+  <required_revisions>
+    <item>NONE</item>
+  </required_revisions>
+  <decision>PASS</decision>
+  <reason>The P0 Impressum Customer-Truth patch is narrowly scoped and deterministic: it separates legal claim state from customer-risk priority, preserves the 48-metric Core score and coverage firewall, adds mandatory non-core Legal routing through the four-lever customer story, and fails closed on omission while retaining anti-overclaim controls. The Bo-Feng-Lin-class Golden Regression, 31 Legal cases, score-delta-zero checks, Strategic Relevance route, rendered-PDF visibility check, protected Measurement Platform baseline, reporting regressions, installability and security checks pass for artifact digest 959ea94775c147ca3d6c197a4cc62f4e603557b53ec6bf8ca236a67ffabee13b. Exact production display-font availability remains an external runtime condition for strict customer-PDF release and does not block skill packaging.</reason>
+</enterprise_skill_evaluation>

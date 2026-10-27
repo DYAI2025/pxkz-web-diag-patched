@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "fixture_only": true,
+  "artifact_digest": "9f1ce88027c785069dcd1048f7f7f14143801ab781a570db7903e332eba2cb04",
+  "compute_score_changed": false,
+  "registry_weights_unchanged": true,
+  "independent_recompute": {
+    "score": 52,
+    "coverage_percent": 100,
+    "category_scores": {
+      "findability_seo": 51,
+      "performance_technology": 61,
+      "ux_conversion": 51,
+      "accessibility": 49,
+      "trust_privacy_content": 46,
+      "ai_readiness": 54
+    }
+  },
+  "compute_score_summary": {
+    "policy_version": "2.0.0",
+    "registry_version": "1.0.0",
+    "label": "Pixelkiez Score",
+    "score": 52,
+    "display_status": "FULL_SCORE",
+    "coverage_percent": 100,
+    "confidence": "HIGH",
+    "interpretation": "Deutlicher Verbesserungsbedarf",
+    "blocker_present": false,
+    "category_scores": [
+      {
+        "category": "findability_seo",
+        "label": "Auffindbarkeit & SEO",
+        "score": 51,
+        "coverage_percent": 100,
+        "confidence": "HIGH"
+      },
+      {
+        "category": "performance_technology",
+        "label": "Performance & Technik",
+        "score": 61,
+        "coverage_percent": 100,
+        "confidence": "HIGH"
+      },
+      {
+        "category": "ux_conversion",
+        "label": "Nutzerführung & Conversion",
+        "score": 51,
+        "coverage_percent": 100,
+        "confidence": "MEDIUM"
+      },
+      {
+        "category": "accessibility",
+        "label": "Barrierefreiheit",
+        "score": 49,
+        "coverage_percent": 100,
+        "confidence": "HIGH"
+      },
+      {
+        "category": "trust_privacy_content",
+        "label": "Vertrauen, Datenschutz & Inhalt",
+        "score": 46,
+        "coverage_percent": 100,
+        "confidence": "HIGH"
+      },
+      {
+        "category": "ai_readiness",
+        "label": "KI-Verständlichkeit",
+        "score": 54,
+        "coverage_percent": 100,
+        "confidence": "MEDIUM"
+      }
+    ],
+    "does_not_prove": [
+      "keine universelle Website-Qualität",
+      "kein Ranking-, Umsatz- oder Conversion-Nachweis",
+      "keine rechtliche oder WCAG-Konformität"
+    ]
+  }
+}

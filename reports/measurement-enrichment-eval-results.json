@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "status": "PASS",
+  "checks": {
+    "fixture_collection_pass": true,
+    "schema_truth_validation_pass": true,
+    "provider_families_present": true,
+    "serp_page_fail_closed": true,
+    "serp_vs_gsc_truth_separated": true,
+    "phone_click_not_lead": true,
+    "warning_semantics_action_x": true,
+    "unknown_not_red": true,
+    "score_core_unchanged": true,
+    "v10_privacy_action_visible": true,
+    "serp_visual_selected": true,
+    "closing_replaces_limitations": true,
+    "closing_surfaces_real_measurements": true
+  },
+  "diagnostics": {},
+  "browser_runtime": "SEPARATE_RUNTIME_PROBE",
+  "note": "Provider/API parsing is deterministic fixture replay; live credentials/provider responses are not claimed by this eval."
+}

@@ -1,0 +1,1894 @@
+{
+  "schema_version": "1.0",
+  "basis": "installed skill digest frozen before active migration",
+  "total_metrics": 48,
+  "allowed_current_runtime_statuses": [
+    "EXECUTABLE_AND_SCORE_READY",
+    "EXECUTABLE_NOT_SCORE_READY",
+    "PARTIALLY_IMPLEMENTED",
+    "NO_EXECUTION_PATH",
+    "POLICY_BLOCKED",
+    "SOURCE_BLOCKED",
+    "CONTRACT_CONFLICT"
+  ],
+  "metrics": [
+    {
+      "metric_id": "FIND-01",
+      "category": "findability_seo",
+      "metric_weight": 10,
+      "category_weight": 25,
+      "score_mode": "binary_or_graded",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Fetch canonical public URL and record status/final URL.",
+      "capability_id": "public_http_fetch",
+      "current_executor": "Measurement Gateway normalized public HTTP subset + agent public HTTP workflow",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "measured_or_observed",
+        "control_basis": "PUBLIC_REPRODUCIBLE"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED",
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "EXECUTABLE_NOT_SCORE_READY",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::FIND-01",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "FIND-02",
+      "category": "findability_seo",
+      "metric_weight": 10,
+      "category_weight": 25,
+      "score_mode": "binary_or_graded",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Fetch robots.txt and sitemap locations when public.",
+      "capability_id": "public_http_fetch",
+      "current_executor": "Measurement Gateway normalized public HTTP subset + agent public HTTP workflow",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "measured_or_observed",
+        "control_basis": "PUBLIC_REPRODUCIBLE"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED",
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "EXECUTABLE_NOT_SCORE_READY",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::FIND-02",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "FIND-03",
+      "category": "findability_seo",
+      "metric_weight": 10,
+      "category_weight": 25,
+      "score_mode": "binary_or_graded",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect index directives, canonical tags and redirect behavior on sampled templates.",
+      "capability_id": "html_inspection",
+      "current_executor": "agent fetched-HTML inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PUBLIC_REPRODUCIBLE"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::FIND-03",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "FIND-04",
+      "category": "findability_seo",
+      "metric_weight": 10,
+      "category_weight": 25,
+      "score_mode": "search_sample",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Run dated brand query and record visible result/snippet evidence.",
+      "capability_id": "search_sample",
+      "current_executor": "measurement_adapters.py SERP/GSC enrichment; non-core before migration",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PUBLIC_SEARCH_SAMPLE"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E5",
+      "current_runtime_status": "EXECUTABLE_NOT_SCORE_READY",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::FIND-04",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "FIND-05",
+      "category": "findability_seo",
+      "metric_weight": 15,
+      "category_weight": 25,
+      "score_mode": "search_sample",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Run at least three dated non-brand intent queries relevant to visible offer/market.",
+      "capability_id": "search_sample",
+      "current_executor": "measurement_adapters.py SERP/GSC enrichment; non-core before migration",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PUBLIC_SEARCH_SAMPLE"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E5",
+      "current_runtime_status": "EXECUTABLE_NOT_SCORE_READY",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::FIND-05",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "FIND-06",
+      "category": "findability_seo",
+      "metric_weight": 10,
+      "category_weight": 25,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect sampled titles, descriptions, H1/H2 structure and intent alignment.",
+      "capability_id": "html_inspection",
+      "current_executor": "agent fetched-HTML inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::FIND-06",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "FIND-07",
+      "category": "findability_seo",
+      "metric_weight": 10,
+      "category_weight": 25,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect public structured data for syntax, entity fit and visible-content consistency.",
+      "capability_id": "structured_data_inspection",
+      "current_executor": "agent structured-data inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::FIND-07",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "FIND-08",
+      "category": "findability_seo",
+      "metric_weight": 15,
+      "category_weight": 25,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect navigation depth, contextual links, descriptive anchors, breadcrumbs and orphan-risk patterns in bounded sample.",
+      "capability_id": "crawl_sample",
+      "current_executor": "agent bounded crawl/sample workflow; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "measured_or_observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED",
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::FIND-08",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "FIND-09",
+      "category": "findability_seo",
+      "metric_weight": 5,
+      "category_weight": 25,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect sampled image alt text, context, filenames and responsive image delivery.",
+      "capability_id": "html_inspection",
+      "current_executor": "agent fetched-HTML inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::FIND-09",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "FIND-10",
+      "category": "findability_seo",
+      "metric_weight": 5,
+      "category_weight": 25,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect applicable local entity and language-alternate signals.",
+      "capability_id": "html_inspection",
+      "current_executor": "agent fetched-HTML inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::FIND-10",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "PERF-01",
+      "category": "performance_technology",
+      "metric_weight": 20,
+      "category_weight": 20,
+      "score_mode": "external_threshold",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": true,
+      "defined_test_method": "Use current public/user-authorized real-user field metrics for URL/origin when available.",
+      "capability_id": "performance_field",
+      "current_executor": "measurement_adapters.py CrUX enrichment; non-core before migration",
+      "current_data_source": {
+        "permission": "public_or_user_authorized",
+        "evidence": "measured",
+        "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E2",
+      "current_runtime_status": "EXECUTABLE_NOT_SCORE_READY",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::PERF-01",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "PERF-02",
+      "category": "performance_technology",
+      "metric_weight": 15,
+      "category_weight": 20,
+      "score_mode": "external_threshold",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": true,
+      "defined_test_method": "Run controlled mobile lab measurement and retain tool/date/config.",
+      "capability_id": "performance_lab",
+      "current_executor": "measurement_adapters.py PageSpeed/Lighthouse enrichment; non-core before migration",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "measured",
+        "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E2",
+      "current_runtime_status": "EXECUTABLE_NOT_SCORE_READY",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::PERF-02",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "PERF-03",
+      "category": "performance_technology",
+      "metric_weight": 10,
+      "category_weight": 20,
+      "score_mode": "external_threshold",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": true,
+      "defined_test_method": "Run controlled desktop lab measurement and retain tool/date/config.",
+      "capability_id": "performance_lab",
+      "current_executor": "measurement_adapters.py PageSpeed/Lighthouse enrichment; non-core before migration",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "measured",
+        "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E2",
+      "current_runtime_status": "EXECUTABLE_NOT_SCORE_READY",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::PERF-03",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "PERF-04",
+      "category": "performance_technology",
+      "metric_weight": 10,
+      "category_weight": 20,
+      "score_mode": "graded_measurement",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Measure sampled transfer/resource weight and identify dominant resource classes.",
+      "capability_id": "asset_inspection",
+      "current_executor": "agent/page tooling inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "measured_or_observed",
+        "control_basis": "PUBLIC_REPRODUCIBLE"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED",
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::PERF-04",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "PERF-05",
+      "category": "performance_technology",
+      "metric_weight": 10,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect formats, responsive images, lazy loading and media delivery on sampled templates.",
+      "capability_id": "asset_inspection",
+      "current_executor": "agent/page tooling inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "measured_or_observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED",
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::PERF-05",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "PERF-06",
+      "category": "performance_technology",
+      "metric_weight": 10,
+      "category_weight": 20,
+      "score_mode": "graded_measurement",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect public caching/compression headers or reproducible response behavior.",
+      "capability_id": "header_inspection",
+      "current_executor": "Measurement Gateway public header subset; non-core before migration",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "measured",
+        "control_basis": "PUBLIC_REPRODUCIBLE"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "EXECUTABLE_NOT_SCORE_READY",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::PERF-06",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "PERF-07",
+      "category": "performance_technology",
+      "metric_weight": 10,
+      "category_weight": 20,
+      "score_mode": "graded_measurement",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect sampled blocking CSS/JS/resource dependencies with available lab or page tooling.",
+      "capability_id": "asset_inspection",
+      "current_executor": "agent/page tooling inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "measured_or_observed",
+        "control_basis": "PUBLIC_REPRODUCIBLE"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED",
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::PERF-07",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "PERF-08",
+      "category": "performance_technology",
+      "metric_weight": 5,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect responsive rendering and delivery on representative mobile/desktop viewports.",
+      "capability_id": "public_page_render",
+      "current_executor": "browser_measurements.py where applicable + agent-render inspection",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::PERF-08",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "PERF-09",
+      "category": "performance_technology",
+      "metric_weight": 10,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Record observable delivery/CMS/framework hints without asserting private architecture.",
+      "capability_id": "html_inspection",
+      "current_executor": "agent fetched-HTML inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E5",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::PERF-09",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "UX-01",
+      "category": "ux_conversion",
+      "metric_weight": 15,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect whether first screen states entity/offer/audience/value clearly.",
+      "capability_id": "public_page_render",
+      "current_executor": "browser_measurements.py where applicable + agent-render inspection",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::UX-01",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "UX-02",
+      "category": "ux_conversion",
+      "metric_weight": 15,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect prominence and clarity of the primary next action.",
+      "capability_id": "public_page_render",
+      "current_executor": "browser_measurements.py where applicable + agent-render inspection",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::UX-02",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "UX-03",
+      "category": "ux_conversion",
+      "metric_weight": 15,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect labels, navigation paths, orientation and information scent.",
+      "capability_id": "public_page_render",
+      "current_executor": "browser_measurements.py where applicable + agent-render inspection",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::UX-03",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "UX-04",
+      "category": "ux_conversion",
+      "metric_weight": 15,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect mobile text hierarchy, spacing, tap targets and content order in sample viewport.",
+      "capability_id": "public_page_render",
+      "current_executor": "browser_measurements.py where applicable + agent-render inspection",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::UX-04",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "UX-05",
+      "category": "ux_conversion",
+      "metric_weight": 15,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect public contact/form path for field burden, clarity and visible friction without submitting.",
+      "capability_id": "public_page_render",
+      "current_executor": "browser_measurements.py where applicable + agent-render inspection",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::UX-05",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "UX-06",
+      "category": "ux_conversion",
+      "metric_weight": 10,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect trust cues located near decision/contact moments.",
+      "capability_id": "content_inspection",
+      "current_executor": "agent content/entity/trust inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::UX-06",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "UX-07",
+      "category": "ux_conversion",
+      "metric_weight": 10,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect visual/content hierarchy and scanability on representative templates.",
+      "capability_id": "public_page_render",
+      "current_executor": "browser_measurements.py where applicable + agent-render inspection",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::UX-07",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "UX-08",
+      "category": "ux_conversion",
+      "metric_weight": 5,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect visible validation/error/feedback states only when safely observable without submission.",
+      "capability_id": "public_page_render",
+      "current_executor": "browser_measurements.py where applicable + agent-render inspection",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::UX-08",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "A11Y-01",
+      "category": "accessibility",
+      "metric_weight": 20,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Keyboard-sample navigation and visible focus on representative interactive elements.",
+      "capability_id": "accessibility_manual_sample",
+      "current_executor": "browser keyboard sample + manual review; partial core workflow",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::A11Y-01",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "A11Y-02",
+      "category": "accessibility",
+      "metric_weight": 20,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect landmarks, headings, labels and semantic structure in sampled HTML.",
+      "capability_id": "html_inspection",
+      "current_executor": "agent fetched-HTML inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::A11Y-02",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "A11Y-03",
+      "category": "accessibility",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect representative informative/decorative image alternatives.",
+      "capability_id": "html_inspection",
+      "current_executor": "agent fetched-HTML inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::A11Y-03",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "A11Y-04",
+      "category": "accessibility",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_measurement",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Measure or inspect representative text/background contrast with a reproducible method.",
+      "capability_id": "accessibility_manual_sample",
+      "current_executor": "browser keyboard sample + manual review; partial core workflow",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::A11Y-04",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "A11Y-05",
+      "category": "accessibility",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect public form labels/names/instructions without submission.",
+      "capability_id": "html_inspection",
+      "current_executor": "agent fetched-HTML inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::A11Y-05",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "A11Y-06",
+      "category": "accessibility",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_measurement",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Run automated accessibility snapshot and retain tool/version/page scope.",
+      "capability_id": "accessibility_automation",
+      "current_executor": "browser_measurements.py optional automation; non-core before migration",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "measured",
+        "control_basis": "VENDOR_TOOL_SIGNAL"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E5",
+      "current_runtime_status": "EXECUTABLE_NOT_SCORE_READY",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::A11Y-06",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "TRUST-01",
+      "category": "trust_privacy_content",
+      "metric_weight": 10,
+      "category_weight": 15,
+      "score_mode": "presence_only",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Check visible imprint/legal surface presence and accessibility.",
+      "capability_id": "content_inspection",
+      "current_executor": "agent content/entity/trust inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PRESENCE_CHECK_ONLY"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::TRUST-01",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "TRUST-02",
+      "category": "trust_privacy_content",
+      "metric_weight": 15,
+      "category_weight": 15,
+      "score_mode": "presence_only",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect visible privacy/consent surface and consistency with observed public behavior where possible.",
+      "capability_id": "public_page_render",
+      "current_executor": "browser_measurements.py where applicable + agent-render inspection",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PRESENCE_CHECK_ONLY"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::TRUST-02",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "TRUST-03",
+      "category": "trust_privacy_content",
+      "metric_weight": 15,
+      "category_weight": 15,
+      "score_mode": "graded_measurement",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Check HTTPS and selected public security headers without active exploitation.",
+      "capability_id": "header_inspection",
+      "current_executor": "Measurement Gateway public header subset; non-core before migration",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "measured",
+        "control_basis": "PUBLIC_REPRODUCIBLE"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "EXECUTABLE_NOT_SCORE_READY",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::TRUST-03",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "TRUST-04",
+      "category": "trust_privacy_content",
+      "metric_weight": 10,
+      "category_weight": 15,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Compare entity, contact, service and location facts across sampled public surfaces.",
+      "capability_id": "content_inspection",
+      "current_executor": "agent content/entity/trust inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::TRUST-04",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "TRUST-05",
+      "category": "trust_privacy_content",
+      "metric_weight": 15,
+      "category_weight": 15,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect visible dates, team/service/project recency and stale references.",
+      "capability_id": "content_inspection",
+      "current_executor": "agent content/entity/trust inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::TRUST-05",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "TRUST-06",
+      "category": "trust_privacy_content",
+      "metric_weight": 15,
+      "category_weight": 15,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect references, testimonials, credentials, cases and proof-to-claim proximity.",
+      "capability_id": "content_inspection",
+      "current_executor": "agent content/entity/trust inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::TRUST-06",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "TRUST-07",
+      "category": "trust_privacy_content",
+      "metric_weight": 10,
+      "category_weight": 15,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect public contact identity, channels and location transparency.",
+      "capability_id": "content_inspection",
+      "current_executor": "agent content/entity/trust inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::TRUST-07",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "TRUST-08",
+      "category": "trust_privacy_content",
+      "metric_weight": 10,
+      "category_weight": 15,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect user-authorized analytics/search measurement readiness or public tag evidence only within permission.",
+      "capability_id": "private_measurement_export",
+      "current_executor": "authorized GSC/GA4/export enrichment; not a direct TRUST-08 core normalizer",
+      "current_data_source": {
+        "permission": "user_authorized_private",
+        "evidence": "measured",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E5",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::TRUST-08",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "AI-01",
+      "category": "ai_readiness",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Check whether the entity can be explicitly identified from visible content and structured data.",
+      "capability_id": "content_inspection",
+      "current_executor": "agent content/entity/trust inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::AI-01",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "AI-02",
+      "category": "ai_readiness",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Check explicit service, audience, location and applicability statements.",
+      "capability_id": "content_inspection",
+      "current_executor": "agent content/entity/trust inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::AI-02",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "AI-03",
+      "category": "ai_readiness",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Check direct answer sections, FAQs and question-to-answer structure.",
+      "capability_id": "content_inspection",
+      "current_executor": "agent content/entity/trust inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::AI-03",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "AI-04",
+      "category": "ai_readiness",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect summaries, schema and machine-readable organization of key facts.",
+      "capability_id": "structured_data_inspection",
+      "current_executor": "agent structured-data inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E5",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::AI-04",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "AI-05",
+      "category": "ai_readiness",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect whether material claims are near attributable proof/cases/references.",
+      "capability_id": "content_inspection",
+      "current_executor": "agent content/entity/trust inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::AI-05",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "AI-06",
+      "category": "ai_readiness",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Compare key entity/service/location facts across sampled pages and structured surfaces.",
+      "capability_id": "content_inspection",
+      "current_executor": "agent content/entity/trust inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::AI-06",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    },
+    {
+      "metric_id": "AI-07",
+      "category": "ai_readiness",
+      "metric_weight": 10,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "score_anchor": {
+        "strong": 100,
+        "minor_gaps": 75,
+        "mixed": 50,
+        "weak": 25,
+        "blocking": 0
+      },
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect topical depth and coverage of likely user questions across sampled content.",
+      "capability_id": "content_inspection",
+      "current_executor": "agent content/entity/trust inspection; no dedicated core normalizer",
+      "current_data_source": {
+        "permission": "public_read_only",
+        "evidence": "observed",
+        "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+      },
+      "normalization_path": "BASELINE: direct/agent canonical metric assembly; ACTIVE: CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "current_runtime_status": "PARTIALLY_IMPLEMENTED",
+      "current_score_admission_status": "BASELINE_CANONICAL_ROW_ONLY_NO_EXPLICIT_UPSTREAM_ADMISSION",
+      "current_report_mapping": "diagnosis-report metric -> compute_score -> internal analysis; active patch adds weight/contribution traceability",
+      "gap": "No explicit per-metric normalized execution/evidence admission contract existed before this migration.",
+      "required_patch": "active binding + structured execution bundle + evidence admission + canonical materializer + unchanged compute_score + internal reconciliation",
+      "validation_test": "FULL48-ACTIVE::AI-07",
+      "post_patch_execution_status": "EXECUTABLE_AND_SCORE_READY"
+    }
+  ]
+}

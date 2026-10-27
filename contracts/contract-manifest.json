@@ -1,0 +1,81 @@
+{
+  "default_contract_selector": "v1.3",
+  "contract_version": "1.3.0",
+  "contract_sha256": "ed9924084c479c3627ceb2648ef301162d5b99bbfddfe3fefe265c7cec915d38",
+  "field_count": 96,
+  "requiredness_counts": {
+    "YES": 51,
+    "YES*": 1,
+    "RECOMMENDED": 21,
+    "OPTIONAL": 23
+  },
+  "delimiter": ",",
+  "encoding": "utf-8-sig",
+  "contract_path": "contracts/pixelkiez-elevenlabs-batch-contract-v1.3.json",
+  "legacy_v1": {
+    "selector": "v1",
+    "path": "contracts/pixelkiez_elevenlabs_batch_variable_contract.v1.json",
+    "version": "2026-08-27",
+    "sha256": "66018327ad7480c44e17cf071e6e864105f7d9185d4965cafbd76f9c168edfe5",
+    "field_count": 82,
+    "requiredness_counts": {
+      "YES": 38,
+      "YES*": 1,
+      "RECOMMENDED": 21,
+      "OPTIONAL": 22
+    },
+    "compatibility": "SUPPORTED_EXPLICITLY; never silently rewritten to v1.1"
+  },
+  "golden_fixtures": {
+    "v1_csv_template": "evals/fixtures/pixelkiez_elevenlabs_batch_template.csv",
+    "v1_xlsx_template": "evals/fixtures/pixelkiez_elevenlabs_batch_template.xlsx",
+    "v1_simulation_csv": "evals/fixtures/pixelkiez_elevenlabs_batch_example_SIMULATION.csv",
+    "v1_1_simulation_csv": "evals/fixtures/pixelkiez_elevenlabs_batch_example_v1.1_SIMULATION.csv",
+    "v1_2_simulation_csv": "evals/fixtures/pixelkiez_elevenlabs_batch_example_v1.2_SIMULATION.csv",
+    "v1_3_simulation_csv": "evals/fixtures/pixelkiez_elevenlabs_batch_example_v1.3_SIMULATION.csv"
+  },
+  "special_overrides_excluded": [
+    "language",
+    "first_message",
+    "system_prompt",
+    "voice_id"
+  ],
+  "digest_semantics": "SHA-256 of the exact selected canonical contract JSON bytes bundled in contracts/.",
+  "migration_semantics": "v1.3 keeps the exact 96-column v1.2 wire header and replaces monolithic readiness with five mutually exclusive classifications. Missing OPTIONAL/INTERNAL_RECORD fields do not block ElevenLabs upload readiness; PRODUCTION_GATE_ONLY fields affect only the separate production prerequisite gate.",
+  "previous_v1_1": {
+    "selector": "v1.1",
+    "path": "contracts/pixelkiez-elevenlabs-batch-contract-v1.1.json",
+    "version": "1.1.0",
+    "sha256": "ab5570bac1066d4c999a0e8f9b674a9ebfb13eccfabbb1cd0fd049400f0cec5a",
+    "field_count": 83,
+    "requiredness_counts": {
+      "YES": 38,
+      "YES*": 1,
+      "RECOMMENDED": 21,
+      "OPTIONAL": 23
+    },
+    "compatibility": "SUPPORTED_EXPLICITLY; first 83 fields preserved byte-semantically"
+  },
+  "classification_model": "v1.3-five-class-readiness",
+  "classification_counts": {
+    "INTERNAL_RECORD": 48,
+    "EL_RUNTIME_REQUIRED": 3,
+    "EL_RUNTIME_DEFAULTED": 18,
+    "OPTIONAL": 14,
+    "PRODUCTION_GATE_ONLY": 13
+  },
+  "previous_v1_2": {
+    "selector": "v1.2",
+    "path": "contracts/pixelkiez-elevenlabs-batch-contract-v1.2.json",
+    "version": "1.2.0",
+    "sha256": "798864ba5998d0e7784137749d8bf857c7d1f7747c996e0c9bc58e7ae8962f76",
+    "field_count": 96,
+    "requiredness_counts": {
+      "YES": 51,
+      "YES*": 1,
+      "RECOMMENDED": 21,
+      "OPTIONAL": 23
+    },
+    "compatibility": "SUPPORTED_EXPLICITLY; same 96-column header as v1.3, legacy readiness semantics remain selectable with --contract-version v1.2"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "patch_id": "IMPRESSUM_CUSTOMER_TRUTH_PATCH",
+  "status": "PASS",
+  "artifact_digest": "959ea94775c147ca3d6c197a4cc62f4e603557b53ec6bf8ca236a67ffabee13b",
+  "goal": "Prevent omission of material possible/obvious Impressum provider-identification risks from customer presentation while preserving strict legal claim boundaries.",
+  "implemented": [
+    "central resolver",
+    "consolidated Legal finding",
+    "non-core Strategic Relevance route",
+    "mandatory top-four rank 1",
+    "cover warning",
+    "roadmap/closing persistence",
+    "cross-layer omission validator",
+    "Bo Feng Lin Golden Regression"
+  ],
+  "preserved": [
+    "48 Core metric IDs",
+    "Core weights",
+    "category weights",
+    "score anchors",
+    "compute_score.py",
+    "coverage rules",
+    "Legal sidecar NONE_DIRECT score impact",
+    "anti-overclaim/voice isolation"
+  ],
+  "golden_expectation": {
+    "jurisdiction": "UNRESOLVED",
+    "claim_state": "POSSIBLE_LEGAL_REVIEW",
+    "customer_priority": "MANDATORY_CRITICAL",
+    "iles_points": 0,
+    "legal_lever_rank": 1,
+    "score_delta": 0,
+    "coverage_delta": 0
+  },
+  "validation": "PASS"
+}

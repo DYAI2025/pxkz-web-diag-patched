@@ -1,0 +1,62 @@
+{
+  "baseline_default_model_byte_identical": {
+    "candidate_sha256": "db81b8be852bc3f38b7df1753874ff3cb371f3f304c137a5a04591047036d8e7",
+    "original_sha256": "db81b8be852bc3f38b7df1753874ff3cb371f3f304c137a5a04591047036d8e7",
+    "status": "PASS"
+  },
+  "batch": {
+    "log_file": "branch-evidence-batch.log",
+    "returncode": 0,
+    "status": "PASS"
+  },
+  "enrichment": {
+    "log_file": "branch-evidence-enrichment.log",
+    "returncode": 0,
+    "status": "PASS"
+  },
+  "full48": {
+    "log_file": "branch-evidence-full48.log",
+    "returncode": 0,
+    "status": "PASS"
+  },
+  "new_branch_priority_unit_tests": {
+    "cases": 16,
+    "command": "python -m unittest discover -s tests -p test_branch_priority.py -q",
+    "status": "PASS"
+  },
+  "priority_integration_evals": {
+    "command": "python scripts/run_branch_priority_evals.py",
+    "status": "PASS"
+  },
+  "quick_validate": {
+    "command": "python scripts/quick_validate.py .",
+    "status": "PASS"
+  },
+  "reporting": {
+    "log_file": "branch-evidence-reporting.log",
+    "returncode": 0,
+    "status": "PASS"
+  },
+  "schema_validation": {
+    "command": "python scripts/validate_schema.py .",
+    "status": "PASS"
+  },
+  "score_gate_evals": {
+    "log": "outside package, copied to validation evidence",
+    "status": "PASS"
+  },
+  "source_map_validation": {
+    "command": "python scripts/validate_source_map.py .",
+    "status": "PASS"
+  },
+  "strategic": {
+    "log_file": "branch-evidence-strategic.log",
+    "returncode": 0,
+    "status": "PASS"
+  },
+  "vibecheck03_tests": {
+    "cases": 18,
+    "command": "python -m unittest discover -s tests -p test_vibecheck03.py",
+    "status": "PASS"
+  }
+}

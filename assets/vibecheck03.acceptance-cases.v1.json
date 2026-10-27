@@ -1,0 +1,27 @@
+{
+  "suite": "PXAPI_VIBECHECK03_CONTRACT_CASES",
+  "version": "1.0.0-draft",
+  "status": "PROPOSED_CASES_NOT_EXECUTED_AGAINST_PXAPI",
+  "cases": [
+    {"id":"T01", "check":"VC03-01", "input":"valid title and rel=icon, asset fetch 200 image", "expected":"Known title and icon signals; no duplicate core title score"},
+    {"id":"T02", "check":"VC03-01", "input":"no rel=icon but valid same-origin favicon.ico fallback", "expected":"Do not claim icon missing"},
+    {"id":"T03", "check":"VC03-01", "input":"apple-touch-icon absent", "expected":"No mandatory failure solely from optional Apple icon"},
+    {"id":"T04", "check":"VC03-02", "input":"og:title, og:type, og:url, og:image present, og:description absent", "expected":"Four OGP base properties present; optional description separate"},
+    {"id":"T05", "check":"VC03-02", "input":"og:image points at blocked/private network target", "expected":"Fail closed without fetch, record unassessed delivery, no fabricated 404"},
+    {"id":"T06", "check":"VC03-02", "input":"truncated HTML before complete head", "expected":"Missing declarations not converted into known absence"},
+    {"id":"T07", "check":"VC03-03", "input":"unknown route returns 404 with plain navigable page", "expected":"Correct status; branded 404 not a hard mandatory requirement"},
+    {"id":"T08", "check":"VC03-03", "input":"unknown route returns 200 with not-found page", "expected":"Observed HTTP 200 and suspected soft-404, no Google-index claim"},
+    {"id":"T09", "check":"VC03-03", "input":"unknown-route request denied by target policy", "expected":"NOT_ASSESSED/PERMISSION_DENIED, no website defect"},
+    {"id":"T10", "check":"VC03-04", "input":"decorative img alt=empty string", "expected":"Count empty alt; no automatic accessibility defect"},
+    {"id":"T11", "check":"VC03-04", "input":"img lacks alt", "expected":"Count missing alt, with evidence and page source"},
+    {"id":"T12", "check":"VC03-04", "input":"zero img elements", "expected":"Counts zero; percentage NULL, do not claim 100 percent"},
+    {"id":"T13", "check":"VC03-04", "input":"nonempty alt text 'IMG_0002'", "expected":"Markup present; semantic quality NOT established"},
+    {"id":"T14", "check":"VC03-05", "input":"no safe async UI scenario observable", "expected":"NOT_ASSESSED/UNSUPPORTED, no quality penalty"},
+    {"id":"T15", "check":"VC03-05", "input":"isolated allowed loading scenario and accessible status message", "expected":"Scenario-bound positive observations, not general UI conformance"},
+    {"id":"T16", "check":"VC03-05", "input":"simulated timeout blocked by test permission", "expected":"No injection; not assessed and neutral"},
+    {"id":"T17", "check":"ALL", "input":"provider timeout, runtime error or unknown state", "expected":"No negative WebsiteEvidence polarity and no score penalty"},
+    {"id":"T18", "check":"ALL", "input":"known Boolean false and integer zero", "expected":"Retain as valid observed values, not null/missing"},
+    {"id":"T19", "check":"ALL", "input":"same page in repeated runs with same policy and input", "expected":"Deterministic findings; provenance and collector_version recorded"},
+    {"id":"T20", "check":"ALL", "input":"customer PDF projection from non-scoring check with no evidence refs", "expected":"Reject ungrounded customer finding"}
+  ]
+}

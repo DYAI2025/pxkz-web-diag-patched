@@ -1,0 +1,192 @@
+{
+  "schema_version": "1.0",
+  "pdf_path": "/mnt/data/pixelkiez_semantic_upgrade/baum-final/customer.pdf",
+  "pdf_sha256": "60777610f77c30d2f150e9cad37febfec7e9d53182f0da53910deea1928b9b12",
+  "client_model_path": "/mnt/data/pixelkiez_semantic_upgrade/baum-final/client-report-model.json",
+  "client_model_sha256": "ee932b422c4d579dba472ad6390ce0889323a1335ec0d84dea2f07cd110c8d6e",
+  "scored_report_path": "/mnt/data/pixelkiez_semantic_upgrade/baum-final/scored.json",
+  "scored_report_sha256": "46a0916e0c2667bf5790fd460cffdc2541e2381a21ce9b084543bd71d5b386b5",
+  "customer": "Baumdienst Renner",
+  "page_count": 12,
+  "inspection_status": "PASS",
+  "inspection_method": "agent_vision",
+  "inspected_by": "GPT-5.6 Sol",
+  "overall_checks": {
+    "customer_specificity": true,
+    "plain_language_comprehension": true,
+    "scan_first_story": true,
+    "evidence_fidelity": true,
+    "priority_quality": true,
+    "quantitative_content_visualized": true,
+    "cross_page_coherence": true,
+    "actionability": true,
+    "no_generic_agency_copy": true,
+    "no_unsupported_business_claims": true
+  },
+  "pages": [
+    {
+      "page": 1,
+      "role": "cover",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Kunde, URL, Score-Zustand, Messabdeckung und fehlende Gesamtzahl sind sofort verständlich."
+    },
+    {
+      "page": 2,
+      "role": "executive",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Kundenspezifische Stärken und Bremsen sind scanbar; Haupthebel ist konkret benannt."
+    },
+    {
+      "page": 3,
+      "role": "categories",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Sechs Bereiche zeigen Zahl oder Nicht-gemessen-Zustand mit kurzer verständlicher Einordnung."
+    },
+    {
+      "page": 4,
+      "role": "coverage",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Geprüfte und offene Bereiche sind in alltagstauglicher Sprache getrennt dargestellt."
+    },
+    {
+      "page": 5,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Adresskonflikt wird mit drei konkreten öffentlichen Belegen statt abstraktem Score erklärt."
+    },
+    {
+      "page": 6,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Veraltete Impressumsverweise werden mit drei konkreten Belegen und klarer Grenze gezeigt."
+    },
+    {
+      "page": 7,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Mehrere Startseiten-Adressen werden mit zwei konkreten Belegen nachvollziehbar gezeigt."
+    },
+    {
+      "page": 8,
+      "role": "findings",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Zwei priorisierte Website-Probleme sind kurz beschrieben und mit konkreten nächsten Schritten versehen."
+    },
+    {
+      "page": 9,
+      "role": "findings",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Weitere Prioritäten bleiben verständlich; Such- und KI-Systeme werden natürlich statt technisch erklärt."
+    },
+    {
+      "page": 10,
+      "role": "roadmap",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Roadmap ordnet konkrete kundenbezogene Maßnahmen zeitlich; keine generischen Agenturaufgaben."
+    },
+    {
+      "page": 11,
+      "role": "recommendation",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Empfehlung ist auf den stärksten belegten Befund und einen konkreten nächsten Schritt reduziert."
+    },
+    {
+      "page": 12,
+      "role": "limits",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Messgrenzen und noch fehlende Daten sind ohne Technikdump verständlich und klar getrennt."
+    }
+  ],
+  "review_questions": [
+    "Würde der Kerninhalt ohne Firmenname/Logo noch konkrete Beobachtungen dieser Website enthalten?",
+    "Kann ein Nicht-Fachmann je Prioritätsseite in einem Satz Problem und nächsten Schritt erklären?",
+    "Sind direkt messbare oder zählbare Signale als Zahl/Visual sichtbar statt im Fließtext versteckt?",
+    "Passt jedes Visual zur Aussage der Seite und zum kanonischen Audit?",
+    "Sind die wichtigsten 3-4 Hebel des konkreten Kunden priorisiert statt generischer Agenturthemen?"
+  ],
+  "inspection_note": "PASS after actual rendered-page vision review of all 12 pages against client-report-model.json and the scored Baumdienst Renner regression audit. No external commercial outcome is implied."
+}

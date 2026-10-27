@@ -1,0 +1,100 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Pixelkiez approved template V12_AUDIT_COVERAGE: Audit-Abdeckung",
+  "usermeta": {
+    "template_id": "V12_AUDIT_COVERAGE",
+    "name": "Audit-Abdeckung",
+    "purpose": "Anteile gemessen/beobachtet/offen",
+    "brand_contract": "pixelkiez-v1"
+  },
+  "width": 620,
+  "height": 310,
+  "data": {
+    "values": [
+      {
+        "group": "Audit",
+        "state": "gemessen",
+        "count": 18
+      },
+      {
+        "group": "Audit",
+        "state": "beobachtet",
+        "count": 20
+      },
+      {
+        "group": "Audit",
+        "state": "offen",
+        "count": 10
+      }
+    ]
+  },
+  "mark": {
+    "type": "bar",
+    "cornerRadius": 2
+  },
+  "encoding": {
+    "y": {
+      "field": "group",
+      "type": "nominal",
+      "axis": null
+    },
+    "x": {
+      "field": "count",
+      "type": "quantitative",
+      "stack": "normalize",
+      "axis": {
+        "title": "Anteil",
+        "format": ".0%"
+      }
+    },
+    "color": {
+      "field": "state",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "gemessen",
+          "beobachtet",
+          "offen"
+        ],
+        "range": [
+          "#EC5E43",
+          "#0E1414",
+          "#C6D4D1"
+        ]
+      }
+    }
+  },
+  "config": {
+    "background": "#FFFFFF",
+    "font": "Schibsted Grotesk",
+    "title": {
+      "font": "Schibsted Grotesk",
+      "fontSize": 18,
+      "fontWeight": 700,
+      "color": "#0E1414",
+      "anchor": "start"
+    },
+    "axis": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 11,
+      "titleFont": "Schibsted Grotesk",
+      "titleFontSize": 12,
+      "labelColor": "#0E1414",
+      "titleColor": "#0E1414",
+      "gridColor": "#C6D4D1",
+      "domainColor": "#566360",
+      "tickColor": "#566360"
+    },
+    "legend": {
+      "labelFont": "Schibsted Grotesk",
+      "labelFontSize": 11,
+      "titleFont": "Schibsted Grotesk",
+      "titleFontSize": 12,
+      "labelColor": "#0E1414",
+      "titleColor": "#0E1414"
+    },
+    "view": {
+      "stroke": null
+    }
+  }
+}

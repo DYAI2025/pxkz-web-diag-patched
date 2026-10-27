@@ -1,0 +1,23 @@
+{
+  "skill_name": "pixelkiez-website-diagnosis",
+  "agent_agnostic_ready": true,
+  "semantic_portability": "HIGH_FOR_INSTRUCTIONS_AND_DETERMINISTIC_SCRIPTS",
+  "identical_cross_platform_behavior_guaranteed": false,
+  "portable_components": [
+    "SKILL.md", "references", "contracts", "schemas", "client-story selector and validators", "batch validators", "evals"
+  ],
+  "runtime_specific_components": [
+    "agents/openai.yaml", "authorized public web/search access", "PDF rendering dependencies", "visual inspection capability"
+  ],
+  "runtime_specific_dependencies": [
+    "authorized public web/search access for live evidence",
+    "optional field/lab performance tooling",
+    "Python 3 with the declared report dependencies for deterministic rendering",
+    "a PDF rasterizer plus vision-capable or human page review for final customer visual QA"
+  ],
+  "tested_runtimes": ["OpenAI container runtime for deterministic scripts and synthetic rendering"],
+  "unverified_runtimes": ["Claude and Claude Code", "Cursor", "Windsurf", "other agent runtimes without equivalent browser, filesystem, Python and PDF tooling"],
+  "not_guaranteed": ["tool availability", "frontend install UI", "connector permissions", "ElevenLabs provider behavior", "identical downstream voice-agent behavior"],
+  "fallback": "If equivalent measurement or rendering capabilities are unavailable, preserve the canonical JSON and batch contracts, mark affected metrics not_assessed, and do not claim a complete customer PDF without the required visual-story and visual-QA gates.",
+  "claude_notes": "Use SKILL.md as the control plane; run deterministic scripts locally when a filesystem/Python runtime is available; provider integrations remain separate."
+}

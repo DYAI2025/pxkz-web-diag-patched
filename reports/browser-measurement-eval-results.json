@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "status": "BLOCKED_RUNTIME_POLICY",
+  "checks": {
+    "playwright_import_available": true,
+    "chromium_executable_available": true,
+    "browser_navigation_executed": false
+  },
+  "metric_count": 0,
+  "axe_runtime": "OPTIONAL_NOT_REQUIRED_FOR_BASE_EVAL",
+  "runtime_error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://172.26.39.242:43811/index.html\nCall log:\n  - navigating to \"http://172.26.39.242:43811/index.html\", waiting until \"domcontentloaded\"\n",
+  "runtime_policy_note": "Chromium navigation is blocked by the execution environment. Do not claim live browser validation until the skill is run in a runtime that permits navigation."
+}

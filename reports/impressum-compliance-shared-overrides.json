@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "patch_id": "IMPRESSUM_COMPLIANCE_PATCH",
+  "authorization_basis": "Explicit user authorization on 2026-09-08 to extend the Measurement Platform preservation validator for the approved Impressum integration paths only.",
+  "scope_note": "This report authorizes only the hash-bound Impressum patch changes listed below. It does not relax any other Measurement Platform baseline protection.",
+  "overrides": [
+    {
+      "path": "scripts/build_audit_deliverables.py",
+      "baseline_sha256": "b8d3ba5536a2054d2545c17ef2868950597a2fdf7c01bf9dae2a4adf1bae203b",
+      "previous_sha256": "99e4518c3ec255206f5fb93e2815816f8a544bdf314b989ffadc1e15fc6605bc",
+      "current_sha256": "58589b5fd21b4a9646b9a1cea4103203f96be173da10fe4d33df52d6026386bf",
+      "reason": "IMPRESSUM_COMPLIANCE_PATCH"
+    },
+    {
+      "path": "scripts/build_elevenlabs_batch_csv.py",
+      "baseline_sha256": "0a6c8121f35175010f36d918792e497d024039159f44ca52500dae412014930d",
+      "previous_sha256": "0a6c8121f35175010f36d918792e497d024039159f44ca52500dae412014930d",
+      "current_sha256": "1523a159116efb278a6e244b8ef57739da4623c0d27bc880dd2d7bfc8056ad63",
+      "reason": "IMPRESSUM_COMPLIANCE_PATCH"
+    }
+  ]
+}

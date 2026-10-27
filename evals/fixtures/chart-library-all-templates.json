@@ -1,0 +1,628 @@
+{
+  "visualizations": [
+    {
+      "id": "VIZ-001",
+      "template_id": "V01",
+      "category": "performance_technology",
+      "metric_refs": [
+        "PERF-02"
+      ],
+      "finding_ref": "F-002",
+      "title": "V01 stellt einen entscheidungsrelevanten Messwert verständlich dar.",
+      "metric_label": "V01 synthetische Golden Fixture",
+      "current_value_label": "42",
+      "evidence": {
+        "grade": "E4",
+        "mode": "LAB",
+        "scope": "SITE",
+        "population": "synthetische Golden-Fixture-Population",
+        "tool": "Pixelkiez chart eval",
+        "version": "1.0",
+        "date": "27.08.2026"
+      },
+      "threshold": {
+        "label": "Ziel 2,5 s",
+        "value": 2.5,
+        "source": "fixture-source"
+      },
+      "does_not_prove": "Die synthetische Darstellung beweist weder reale Website-Qualität noch Ranking, Umsatz oder Conversion.",
+      "data": {
+        "series": [
+          {
+            "label": "Apr",
+            "value": 2.1
+          },
+          {
+            "label": "Mai",
+            "value": 2.7
+          },
+          {
+            "label": "Jun",
+            "value": 3.2
+          },
+          {
+            "label": "Jul",
+            "value": 3.8
+          }
+        ]
+      }
+    },
+    {
+      "id": "VIZ-002",
+      "template_id": "V02",
+      "category": "performance_technology",
+      "metric_refs": [
+        "PERF-02"
+      ],
+      "finding_ref": "F-002",
+      "title": "V02 stellt einen entscheidungsrelevanten Messwert verständlich dar.",
+      "metric_label": "V02 synthetische Golden Fixture",
+      "current_value_label": "42",
+      "evidence": {
+        "grade": "E4",
+        "mode": "LAB",
+        "scope": "SITE",
+        "population": "synthetische Golden-Fixture-Population",
+        "tool": "Pixelkiez chart eval",
+        "version": "1.0",
+        "date": "27.08.2026"
+      },
+      "threshold": {
+        "label": "gut ≤ 200 ms",
+        "value": 200,
+        "source": "fixture-source"
+      },
+      "does_not_prove": "Die synthetische Darstellung beweist weder reale Website-Qualität noch Ranking, Umsatz oder Conversion.",
+      "data": {
+        "series": [
+          {
+            "label": "KW 1",
+            "value": 180
+          },
+          {
+            "label": "KW 2",
+            "value": 220
+          },
+          {
+            "label": "KW 3",
+            "value": 310
+          },
+          {
+            "label": "KW 4",
+            "value": 460
+          }
+        ],
+        "bands": [
+          {
+            "label": "gut",
+            "boundary": 200,
+            "status": "good",
+            "source": "fixture-source"
+          },
+          {
+            "label": "mittel",
+            "boundary": 500,
+            "status": "warn",
+            "source": "fixture-source"
+          },
+          {
+            "label": "schlecht",
+            "boundary": 800,
+            "status": "bad",
+            "source": "fixture-source"
+          }
+        ]
+      }
+    },
+    {
+      "id": "VIZ-003",
+      "template_id": "V03",
+      "category": "performance_technology",
+      "metric_refs": [
+        "PERF-02"
+      ],
+      "finding_ref": "F-002",
+      "title": "V03 stellt einen entscheidungsrelevanten Messwert verständlich dar.",
+      "metric_label": "V03 synthetische Golden Fixture",
+      "current_value_label": "42",
+      "evidence": {
+        "grade": "E4",
+        "mode": "LAB",
+        "scope": "SITE",
+        "population": "synthetische Golden-Fixture-Population",
+        "tool": "Pixelkiez chart eval",
+        "version": "1.0",
+        "date": "27.08.2026"
+      },
+      "threshold": {
+        "label": "Ziel 2.500 ms",
+        "value": 2500,
+        "source": "fixture-source"
+      },
+      "does_not_prove": "Die synthetische Darstellung beweist weder reale Website-Qualität noch Ranking, Umsatz oder Conversion.",
+      "data": {
+        "groups": [
+          "Start",
+          "Leistung",
+          "Blog"
+        ],
+        "series": [
+          {
+            "name": "Mobil",
+            "values": [
+              4100,
+              3600,
+              3200
+            ]
+          },
+          {
+            "name": "Desktop",
+            "values": [
+              2100,
+              1900,
+              1800
+            ]
+          }
+        ],
+        "unit": "ms"
+      }
+    },
+    {
+      "id": "VIZ-004",
+      "template_id": "V04",
+      "category": "performance_technology",
+      "metric_refs": [
+        "PERF-02"
+      ],
+      "finding_ref": "F-002",
+      "title": "V04 stellt einen entscheidungsrelevanten Messwert verständlich dar.",
+      "metric_label": "V04 synthetische Golden Fixture",
+      "current_value_label": "42",
+      "evidence": {
+        "grade": "E4",
+        "mode": "LAB",
+        "scope": "SITE",
+        "population": "synthetische Golden-Fixture-Population",
+        "tool": "Pixelkiez chart eval",
+        "version": "1.0",
+        "date": "27.08.2026"
+      },
+      "threshold": null,
+      "does_not_prove": "Die synthetische Darstellung beweist weder reale Website-Qualität noch Ranking, Umsatz oder Conversion.",
+      "data": {
+        "rows": [
+          {
+            "label": "Produktdetail",
+            "value": 34
+          },
+          {
+            "label": "Formular",
+            "value": 28
+          },
+          {
+            "label": "Übersicht",
+            "value": 19
+          },
+          {
+            "label": "Startseite",
+            "value": 12
+          }
+        ]
+      }
+    },
+    {
+      "id": "VIZ-005",
+      "template_id": "V05",
+      "category": "performance_technology",
+      "metric_refs": [
+        "PERF-02"
+      ],
+      "finding_ref": "F-002",
+      "title": "V05 stellt einen entscheidungsrelevanten Messwert verständlich dar.",
+      "metric_label": "V05 synthetische Golden Fixture",
+      "current_value_label": "42",
+      "evidence": {
+        "grade": "E4",
+        "mode": "LAB",
+        "scope": "SITE",
+        "population": "synthetische Golden-Fixture-Population",
+        "tool": "Pixelkiez chart eval",
+        "version": "1.0",
+        "date": "27.08.2026"
+      },
+      "threshold": {
+        "label": "sourced bands",
+        "value": null,
+        "source": "fixture-source"
+      },
+      "does_not_prove": "Die synthetische Darstellung beweist weder reale Website-Qualität noch Ranking, Umsatz oder Conversion.",
+      "data": {
+        "classes": [
+          {
+            "name": "gut",
+            "status": "good"
+          },
+          {
+            "name": "mittel",
+            "status": "warn"
+          },
+          {
+            "name": "schlecht",
+            "status": "bad"
+          }
+        ],
+        "rows": [
+          {
+            "label": "LCP",
+            "values": [
+              34,
+              41,
+              25
+            ]
+          },
+          {
+            "label": "INP",
+            "values": [
+              62,
+              29,
+              9
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "VIZ-006",
+      "template_id": "V06",
+      "category": "performance_technology",
+      "metric_refs": [
+        "PERF-02"
+      ],
+      "finding_ref": "F-002",
+      "title": "V06 stellt einen entscheidungsrelevanten Messwert verständlich dar.",
+      "metric_label": "V06 synthetische Golden Fixture",
+      "current_value_label": "42",
+      "evidence": {
+        "grade": "E4",
+        "mode": "LAB",
+        "scope": "SITE",
+        "population": "synthetische Golden-Fixture-Population",
+        "tool": "Pixelkiez chart eval",
+        "version": "1.0",
+        "date": "27.08.2026"
+      },
+      "threshold": null,
+      "does_not_prove": "Die synthetische Darstellung beweist weder reale Website-Qualität noch Ranking, Umsatz oder Conversion.",
+      "data": {
+        "parts": [
+          {
+            "label": "Bilder",
+            "value": 1.9
+          },
+          {
+            "label": "Skripte",
+            "value": 0.9
+          },
+          {
+            "label": "Schriften",
+            "value": 0.4
+          },
+          {
+            "label": "Übrige",
+            "value": 0.4
+          }
+        ],
+        "sum": 3.6,
+        "unit": "MB"
+      }
+    },
+    {
+      "id": "VIZ-007",
+      "template_id": "V07",
+      "category": "performance_technology",
+      "metric_refs": [
+        "PERF-02"
+      ],
+      "finding_ref": "F-002",
+      "title": "V07 stellt einen entscheidungsrelevanten Messwert verständlich dar.",
+      "metric_label": "V07 synthetische Golden Fixture",
+      "current_value_label": "42",
+      "evidence": {
+        "grade": "E4",
+        "mode": "LAB",
+        "scope": "SITE",
+        "population": "synthetische Golden-Fixture-Population",
+        "tool": "Pixelkiez chart eval",
+        "version": "1.0",
+        "date": "27.08.2026"
+      },
+      "threshold": null,
+      "does_not_prove": "Die synthetische Darstellung beweist weder reale Website-Qualität noch Ranking, Umsatz oder Conversion.",
+      "data": {
+        "value": 42,
+        "scale": {
+          "min": 0,
+          "max": 100,
+          "source": "fixture-scale"
+        },
+        "tiles": [
+          {
+            "value": "1.240 ms",
+            "label": "Total Blocking Time"
+          },
+          {
+            "value": "6,4 s",
+            "label": "Speed Index"
+          }
+        ]
+      }
+    },
+    {
+      "id": "VIZ-008",
+      "template_id": "V08",
+      "category": "performance_technology",
+      "metric_refs": [
+        "PERF-02"
+      ],
+      "finding_ref": "F-002",
+      "title": "V08 stellt einen entscheidungsrelevanten Messwert verständlich dar.",
+      "metric_label": "V08 synthetische Golden Fixture",
+      "current_value_label": "42",
+      "evidence": {
+        "grade": "E4",
+        "mode": "LAB",
+        "scope": "SITE",
+        "population": "synthetische Golden-Fixture-Population",
+        "tool": "Pixelkiez chart eval",
+        "version": "1.0",
+        "date": "27.08.2026"
+      },
+      "threshold": null,
+      "does_not_prove": "Die synthetische Darstellung beweist weder reale Website-Qualität noch Ranking, Umsatz oder Conversion.",
+      "data": {
+        "points": [
+          {
+            "label": "Marke",
+            "x": 2,
+            "y": 10,
+            "r": 3
+          },
+          {
+            "label": "Dach Berlin",
+            "x": 9,
+            "y": 2,
+            "r": 10
+          },
+          {
+            "label": "Flachdach",
+            "x": 13,
+            "y": 1.5,
+            "r": 5
+          }
+        ],
+        "x_axis": {
+          "name": "Position",
+          "unit": ""
+        },
+        "y_axis": {
+          "name": "CTR",
+          "unit": "%"
+        },
+        "radius_legend": "Fläche = Impressionen"
+      }
+    },
+    {
+      "id": "VIZ-009",
+      "template_id": "V09",
+      "category": "performance_technology",
+      "metric_refs": [
+        "PERF-02"
+      ],
+      "finding_ref": "F-002",
+      "title": "V09 stellt einen entscheidungsrelevanten Messwert verständlich dar.",
+      "metric_label": "V09 synthetische Golden Fixture",
+      "current_value_label": "42",
+      "evidence": {
+        "grade": "E4",
+        "mode": "LAB",
+        "scope": "SITE",
+        "population": "synthetische Golden-Fixture-Population",
+        "tool": "Pixelkiez chart eval",
+        "version": "1.0",
+        "date": "27.08.2026"
+      },
+      "threshold": null,
+      "does_not_prove": "Die synthetische Darstellung beweist weder reale Website-Qualität noch Ranking, Umsatz oder Conversion.",
+      "data": {
+        "axes": [
+          {
+            "label": "Performance"
+          },
+          {
+            "label": "Crawling"
+          },
+          {
+            "label": "On-Page"
+          },
+          {
+            "label": "A11y"
+          },
+          {
+            "label": "Recht"
+          },
+          {
+            "label": "Analytics"
+          }
+        ],
+        "scale": {
+          "min": 0,
+          "max": 4,
+          "source": "fixture-scale"
+        },
+        "nets": [
+          {
+            "name": "Erhebung",
+            "values": [
+              1,
+              3,
+              2,
+              1,
+              1,
+              2
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "VIZ-010",
+      "template_id": "V10",
+      "category": "performance_technology",
+      "metric_refs": [
+        "PERF-02"
+      ],
+      "finding_ref": "F-002",
+      "title": "V10 stellt einen entscheidungsrelevanten Messwert verständlich dar.",
+      "metric_label": "V10 synthetische Golden Fixture",
+      "current_value_label": "42",
+      "evidence": {
+        "grade": "E4",
+        "mode": "LAB",
+        "scope": "SITE",
+        "population": "synthetische Golden-Fixture-Population",
+        "tool": "Pixelkiez chart eval",
+        "version": "1.0",
+        "date": "27.08.2026"
+      },
+      "threshold": null,
+      "does_not_prove": "Die synthetische Darstellung beweist weder reale Website-Qualität noch Ranking, Umsatz oder Conversion.",
+      "data": {
+        "rows": [
+          {
+            "label": "LCP p75",
+            "value_a": 4100,
+            "value_b": 2600,
+            "unit": "ms"
+          },
+          {
+            "label": "Seitengewicht",
+            "value_a": 3.6,
+            "value_b": 2.2,
+            "unit": "MB"
+          },
+          {
+            "label": "TTFB p75",
+            "value_a": 980,
+            "value_b": 620,
+            "unit": "ms"
+          }
+        ],
+        "comparison": {
+          "definition": "synthetische Kohorte",
+          "n": 40
+        }
+      }
+    },
+    {
+      "id": "VIZ-011",
+      "template_id": "V11",
+      "category": "performance_technology",
+      "metric_refs": [
+        "PERF-02"
+      ],
+      "finding_ref": "F-002",
+      "title": "V11 stellt einen entscheidungsrelevanten Messwert verständlich dar.",
+      "metric_label": "V11 synthetische Golden Fixture",
+      "current_value_label": "42",
+      "evidence": {
+        "grade": "E4",
+        "mode": "LAB",
+        "scope": "SITE",
+        "population": "synthetische Golden-Fixture-Population",
+        "tool": "Pixelkiez chart eval",
+        "version": "1.0",
+        "date": "27.08.2026"
+      },
+      "threshold": null,
+      "does_not_prove": "Die synthetische Darstellung beweist weder reale Website-Qualität noch Ranking, Umsatz oder Conversion.",
+      "data": {
+        "classes": [
+          {
+            "label": "1",
+            "n": 12
+          },
+          {
+            "label": "2",
+            "n": 48
+          },
+          {
+            "label": "3",
+            "n": 96
+          },
+          {
+            "label": "4",
+            "n": 61
+          },
+          {
+            "label": "5",
+            "n": 22
+          },
+          {
+            "label": "6+",
+            "n": 9
+          }
+        ],
+        "total_n": 248,
+        "median": 3
+      }
+    },
+    {
+      "id": "VIZ-012",
+      "template_id": "V12",
+      "category": "performance_technology",
+      "metric_refs": [
+        "PERF-02"
+      ],
+      "finding_ref": "F-002",
+      "title": "V12 stellt einen entscheidungsrelevanten Messwert verständlich dar.",
+      "metric_label": "V12 synthetische Golden Fixture",
+      "current_value_label": "42",
+      "evidence": {
+        "grade": "E4",
+        "mode": "LAB",
+        "scope": "SITE",
+        "population": "synthetische Golden-Fixture-Population",
+        "tool": "Pixelkiez chart eval",
+        "version": "1.0",
+        "date": "27.08.2026"
+      },
+      "threshold": null,
+      "does_not_prove": "Die synthetische Darstellung beweist weder reale Website-Qualität noch Ranking, Umsatz oder Conversion.",
+      "data": {
+        "rows": [
+          {
+            "metric": "LCP p75 mobil",
+            "value": "4.100 ms",
+            "threshold_origin": "≤ 2.500 ms · S001",
+            "evidence": "E2",
+            "does_not_prove": "keine Rankingwirkung"
+          },
+          {
+            "metric": "axe-Befunde",
+            "value": "34",
+            "threshold_origin": "werkzeugspezifisch",
+            "evidence": "E4",
+            "does_not_prove": "keine WCAG-Konformität"
+          },
+          {
+            "metric": "AI-Abdeckung",
+            "value": "12 %",
+            "threshold_origin": "CONTEXT_DEPENDENT",
+            "evidence": "E6",
+            "does_not_prove": "kein Plattformstandard"
+          }
+        ]
+      }
+    }
+  ]
+}

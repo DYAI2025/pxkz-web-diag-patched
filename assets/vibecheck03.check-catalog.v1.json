@@ -1,0 +1,106 @@
+{
+  "catalog_id": "PXAPI_VIBECHECK03",
+  "catalog_version": "1.0.0-draft",
+  "status": "PROPOSED_NOT_IMPLEMENTED",
+  "source": {
+    "kind": "USER_PROVIDED_IMAGES",
+    "label": "Digimato Vibe-Check #03: five website checks",
+    "received_date": "2026-10-27"
+  },
+  "pxapi_snapshot": {
+    "repository": "DYAI2025/PXAPI-Analyse-API",
+    "main_sha": "ce4de1820d2516f9b3bf73b11ad9441dbad941ba",
+    "measurement_carrier": "contracts/v1/schemas/measurement-record.v1.json",
+    "evidence_carrier": "contracts/v1/schemas/website-evidence.v1.json"
+  },
+  "policy": {
+    "new_core_score_metrics": 0,
+    "alter_existing_48_skill_core_metrics": false,
+    "score_effect": "NONE_DIRECT",
+    "source_of_measurement_truth": "PXAPI_CANONICAL_MEASUREMENT",
+    "unknown_is_not_negative": true,
+    "provider_error_is_not_negative": true,
+    "customer_findings_require_evidence_refs": true,
+    "sample_scope": "CANONICAL_SAMPLING_MANIFEST",
+    "not_assessed_encoding": "PXAPI_ASSESSMENT_NOT_ASSESSED_REASON",
+    "compatibility": "Additive metric_id vocabulary in measurement-record.v1, not a claim that producers exist"
+  },
+  "checks": [
+    {
+      "check_id": "VC03-01",
+      "title": "Favicon and tab identity",
+      "priority": "STATIC_FIRST",
+      "collector": "STATIC_HTML_WITH_BOUNDED_ASSET_PROBE",
+      "metrics": [
+        {"metric_id":"SITE_ICON_DECLARED", "type":"BOOLEAN", "required_for_check":false},
+        {"metric_id":"SITE_ICON_FETCH_OK", "type":"BOOLEAN", "required_for_check":false, "note":"Only if permitted asset probe completed"},
+        {"metric_id":"APPLE_TOUCH_ICON_DECLARED", "type":"BOOLEAN", "required_for_check":false, "note":"Optional platform enhancement, not a mandatory failure"}
+      ],
+      "reuse": {"pxapi":"PAGE_TITLE_PRESENT, PAGE_TITLE", "skill":"FIND-06"},
+      "verdict_rule": "Assess title separately; usable icon evidence is link declaration with valid asset or an observed permitted /favicon.ico fallback. Brand match requires validated brand reference or human review.",
+      "non_claims": ["A declared icon alone is not proof of browser display", "Missing apple-touch-icon alone is not a defect"]
+    },
+    {
+      "check_id": "VC03-02",
+      "title": "Social link preview metadata",
+      "priority": "STATIC_FIRST",
+      "collector": "STATIC_HTML_WITH_BOUNDED_ASSET_PROBE",
+      "metrics": [
+        {"metric_id":"OG_TITLE_PRESENT", "type":"BOOLEAN", "required_for_check":true},
+        {"metric_id":"OG_TYPE_PRESENT", "type":"BOOLEAN", "required_for_check":true},
+        {"metric_id":"OG_URL_PRESENT", "type":"BOOLEAN", "required_for_check":true},
+        {"metric_id":"OG_IMAGE_PRESENT", "type":"BOOLEAN", "required_for_check":true},
+        {"metric_id":"OG_DESCRIPTION_PRESENT", "type":"BOOLEAN", "required_for_check":false},
+        {"metric_id":"OG_IMAGE_FETCH_OK", "type":"BOOLEAN", "required_for_check":false, "note":"Only if external resource safety allows a successful fetch"}
+      ],
+      "reuse": {"pxapi":"META_DESCRIPTION_PRESENT and page identity, without conflating og:description", "skill":"FIND-06 informs page metadata only"},
+      "verdict_rule": "Check four OGP base properties, then optional description/image metadata and permitted image delivery. Social platform preview is not guaranteed by markup.",
+      "non_claims": ["1200x630 is a practical design target, not a universal protocol condition", "WhatsApp sharing appearance cannot be proven from markup alone"]
+    },
+    {
+      "check_id": "VC03-03",
+      "title": "Unknown-route error experience",
+      "priority": "SEPARATE_OPT_IN_SAFE_PROBE",
+      "collector": "SAME_ORIGIN_NON_MUTATING_HTTP_PROBE",
+      "metrics": [
+        {"metric_id":"UNKNOWN_ROUTE_HTTP_STATUS", "type":"INTEGER", "required_for_check":true},
+        {"metric_id":"ERROR_PAGE_HOME_LINK_PRESENT", "type":"BOOLEAN", "required_for_check":false},
+        {"metric_id":"ERROR_PAGE_CONTACT_LINK_PRESENT", "type":"BOOLEAN", "required_for_check":false, "note":"Optional; not every website needs a contact link on 404"}
+      ],
+      "reuse": {"pxapi":"HTTP_STATUS transport facts; DO NOT parse error documents as selected-page content", "skill":"UX-08 applies to feedback states; no new core weight"},
+      "verdict_rule": "A safely probed non-existent route should normally return 404; observe whether recovery navigation is available. A generic but usable 404 is not automatically defective. Distinguish blocked / intercepted fetch from site response.",
+      "non_claims": ["An HTTP 404 is not by itself poor UX", "HTTP 200 with missing-page content is a soft-404 candidate, not a proven Google Search Console verdict"]
+    },
+    {
+      "check_id": "VC03-04",
+      "title": "Image alternative markup",
+      "priority": "STATIC_FIRST",
+      "collector": "STATIC_HTML_IMAGE_ELEMENT_SAMPLE",
+      "metrics": [
+        {"metric_id":"IMG_ELEMENT_COUNT", "type":"INTEGER", "required_for_check":true},
+        {"metric_id":"IMG_ALT_MISSING_COUNT", "type":"INTEGER", "required_for_check":true},
+        {"metric_id":"IMG_ALT_EMPTY_COUNT", "type":"INTEGER", "required_for_check":true},
+        {"metric_id":"IMG_ALT_NONEMPTY_COUNT", "type":"INTEGER", "required_for_check":true}
+      ],
+      "reuse": {"pxapi":"New observations only; semantic judgement is separate", "skill":"A11Y-03, FIND-09 (avoid additional score weight)"},
+      "derived_kpi": "alt_markup_coverage_pct = 100 * (IMG_ALT_EMPTY_COUNT + IMG_ALT_NONEMPTY_COUNT) / IMG_ELEMENT_COUNT when IMG_ELEMENT_COUNT > 0; NULL otherwise",
+      "verdict_rule": "An absent alt attribute is a markup observation; alt=\"\" can be correct for decorative images. Informative / functional appropriateness needs context or review.",
+      "non_claims": ["Alt markup coverage is not semantic alt quality", "No images does not mean 100% accessibility", "Not a WCAG certification"]
+    },
+    {
+      "check_id": "VC03-05",
+      "title": "Loading, errors and recovery feedback",
+      "priority": "BROWSER_LATER",
+      "collector": "ISOLATED_RENDERED_SCENARIO_OBSERVATION",
+      "metrics": [
+        {"metric_id":"UI_LOADING_FEEDBACK_OBSERVED", "type":"BOOLEAN", "required_for_check":false},
+        {"metric_id":"UI_ERROR_FEEDBACK_OBSERVED", "type":"BOOLEAN", "required_for_check":false},
+        {"metric_id":"UI_ERROR_RECOVERY_OBSERVED", "type":"BOOLEAN", "required_for_check":false},
+        {"metric_id":"UI_STATUS_ANNOUNCED_TO_A11Y_API", "type":"BOOLEAN", "required_for_check":false}
+      ],
+      "reuse": {"pxapi":"requires future RenderedPagePort and bounded scenario policy", "skill":"UX-08, A11Y-02 as relevant; no extra core weights"},
+      "verdict_rule": "Only evaluate scenario-specific states actually triggered in authorized non-mutating browser conditions. No safe trigger or no browser equals NOT_ASSESSED. ARIA/live messages are judged in the context of WCAG status messages.",
+      "non_claims": ["No UI transition triggered does not mean feedback is absent", "No synthetic error injection against production unless explicitly authorized"]
+    }
+  ]
+}

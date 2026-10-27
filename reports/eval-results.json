@@ -1,0 +1,82 @@
+{
+  "evaluated_at": "2026-09-09T01:34:00+02:00",
+  "artifact_digest": "959ea94775c147ca3d6c197a4cc62f4e603557b53ec6bf8ca236a67ffabee13b",
+  "overall_status": "PASS",
+  "trigger_eval": {
+    "status": "PASS",
+    "cases": 22
+  },
+  "output_eval_design": {
+    "status": "PASS",
+    "cases": 26
+  },
+  "impressum_compliance_eval": {
+    "status": "PASS",
+    "cases": 31,
+    "golden_case": "LEG-GOLD-BFL"
+  },
+  "legal_customer_projection_eval": {
+    "schema_version": "1.0",
+    "status": "PASS",
+    "golden_case": "LEG-GOLD-BFL",
+    "checks": [
+      "bo_feng_lin_mandatory_projection",
+      "core_score_coverage_delta_zero",
+      "mandatory_legal_risk_rank1_cover_roadmap_closing",
+      "mandatory_legal_risk_visible_in_rendered_pdf",
+      "omission_fails_closed",
+      "cover_warning_required",
+      "roadmap_action_required",
+      "anti_overclaim_preserved"
+    ],
+    "expected_customer_priority": "MANDATORY_CRITICAL",
+    "expected_claim_state": "POSSIBLE_LEGAL_REVIEW",
+    "pixelkiez_score_impact": "NONE_DIRECT"
+  },
+  "strategic_relevance_eval": {
+    "schema_version": "1.0",
+    "status": "PASS",
+    "baseline_release": "3.2.1-measurement-platform-integration",
+    "north_star_question": "Hätte ein Unternehmer, der Geld mit seiner Seite oder dem beworbenen Service/Produkt verdient, einen strategischen Vorteil, wenn er diese Information hätte?",
+    "checks": [
+      "partial_score_customer_bewertungsstand",
+      "process_finding_rejected",
+      "not_assessed_not_customer_problem",
+      "legal_sidecar_route_customer_eligible",
+      "customer_visual_score_coverage_guard",
+      "internal_transparency_preserved"
+    ],
+    "customer_partial_score_policy": "NUMERIC_BEWERTUNGSSTAND_NO_COVERAGE",
+    "customer_process_metadata_policy": "FORBIDDEN",
+    "not_assessed_customer_penalty": false,
+    "customer_visual_exclusions": [
+      "V01_OVERALL_SCORE",
+      "V12_AUDIT_COVERAGE"
+    ],
+    "internal_metric_inventory": 48
+  },
+  "customer_presentation_quality_eval": {
+    "schema_version": "1.0",
+    "status": "PASS",
+    "checks": [
+      "partial_score_as_bewertungsstand",
+      "ordinal_priority_no_fake_magnitude",
+      "privacy_overclaim_rejected",
+      "closing_action_fragment_rejected",
+      "four_lever_business_impact_rendered"
+    ],
+    "quality_contract": "non_compensatory",
+    "regression_target": "bad-first-pass -> inspected/repaired-second-pass"
+  },
+  "active_core_eval": {
+    "status": "PASS",
+    "metrics": 48,
+    "checks": 33,
+    "mutations": 20
+  },
+  "reporting_bundle_eval": {
+    "status": "PASS"
+  },
+  "live_customer_side_effects": "none",
+  "pixelkiez_score_impact": "NONE_DIRECT"
+}

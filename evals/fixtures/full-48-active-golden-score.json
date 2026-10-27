@@ -1,0 +1,18 @@
+{
+  "fixture_only": true,
+  "does_not_prove_live_measurement": true,
+  "execution_semantic_digest": "fa0f763b6c98703fe3c5114498105517dc0ee71c65e0a93ec000e464e91ed90f",
+  "measurement_registry_digest": "b527f71f397b2f95194ec35f2b85e6ff68024ab90ed25c65d2eccc255a93acac",
+  "expected": {
+    "score": 52,
+    "coverage_percent": 100,
+    "category_scores": {
+      "findability_seo": 51,
+      "performance_technology": 61,
+      "ux_conversion": 51,
+      "accessibility": 49,
+      "trust_privacy_content": 46,
+      "ai_readiness": 54
+    }
+  }
+}

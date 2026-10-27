@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pixelkiez.local/schemas/core-score-admission-report.schema.json",
+  "title": "Pixelkiez Core Score Admission Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "target_url", "execution_run_id", "mode", "binding_contract_version",
+    "measurement_registry_version", "binding_digest", "measurement_registry_digest",
+    "execution_semantic_digest", "total_registry_metrics", "execution_results", "score_admitted",
+    "metrics", "release_state"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "target_url": {"type": "string"},
+    "execution_run_id": {"type": "string"},
+    "mode": {"enum": ["LIVE", "FIXTURE", "REPLAY"]},
+    "binding_contract_version": {"const": "1.0.0"},
+    "measurement_registry_version": {"type": "string"},
+    "binding_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "measurement_registry_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "execution_semantic_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "total_registry_metrics": {"const": 48},
+    "execution_results": {"const": 48},
+    "score_admitted": {"type": "integer", "minimum": 0, "maximum": 48},
+    "metrics": {"type": "array", "minItems": 48, "maxItems": 48, "items": {"type": "object"}},
+    "release_state": {"enum": ["FULL_48_ACTIVE_PASS", "BLOCKED_FULL_48_ACTIVE"]}
+  }
+}

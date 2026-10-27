@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pixelkiez ElevenLabs Batch Context v1",
+  "description": "Generated from the selected canonical batch contract. Audit-owned fields are intentionally excluded from batch_context.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "phone_number": {
+      "type": "string"
+    },
+    "recipient_number": {
+      "type": "string"
+    },
+    "campaign_id": {
+      "type": "string"
+    },
+    "lead_id": {
+      "type": "string"
+    },
+    "customer_name": {
+      "type": "string"
+    },
+    "customer_salutation": {
+      "type": "string"
+    },
+    "customer_website": {
+      "type": "string"
+    },
+    "website_language": {
+      "type": "string"
+    },
+    "customer_language": {
+      "type": "string"
+    },
+    "customer_locale": {
+      "type": "string"
+    },
+    "restaurant_name": {
+      "type": "string"
+    },
+    "customer_role": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "district": {
+      "type": "string"
+    },
+    "restaurant_category": {
+      "type": "string"
+    },
+    "cuisine_type": {
+      "type": "string"
+    },
+    "prospect_company": {
+      "type": "string"
+    },
+    "prospect_role": {
+      "type": "string"
+    },
+    "prospect_locale": {
+      "type": "string"
+    },
+    "website_role": {
+      "type": "string"
+    },
+    "primary_customer_type": {
+      "type": "string"
+    },
+    "lead_source_current": {
+      "type": "string"
+    },
+    "compliance_status": {
+      "type": "string"
+    },
+    "do_not_contact": {
+      "type": "boolean"
+    },
+    "jurisdiction": {
+      "type": "string"
+    },
+    "contact_type": {
+      "type": "string"
+    },
+    "ai_disclosure_required": {
+      "type": "boolean"
+    },
+    "recording_status": {
+      "type": "string"
+    },
+    "call_stage": {
+      "type": "string"
+    },
+    "interest_level": {
+      "type": "string"
+    },
+    "confirmed_relevance": {
+      "type": "boolean"
+    },
+    "meeting_readiness": {
+      "type": "string"
+    },
+    "preferred_followup_time": {
+      "type": "string"
+    },
+    "opt_out": {
+      "type": "boolean"
+    },
+    "needs_human": {
+      "type": "boolean"
+    },
+    "meeting_offer": {
+      "type": "string"
+    },
+    "meeting_timezone": {
+      "type": "string"
+    },
+    "consultant_id": {
+      "type": "string"
+    },
+    "meeting_duration_minutes": {
+      "type": "number"
+    },
+    "_contract_digest": {
+      "type": "string",
+      "const": "66018327ad7480c44e17cf071e6e864105f7d9185d4965cafbd76f9c168edfe5"
+    },
+    "_contract_version": {
+      "type": "string",
+      "const": "2026-08-27"
+    },
+    "_allow_website_language_customer_language_default": {
+      "type": "boolean"
+    }
+  },
+  "x-contract-version": "2026-08-27",
+  "x-generated-from-contract-sha256": "66018327ad7480c44e17cf071e6e864105f7d9185d4965cafbd76f9c168edfe5"
+}

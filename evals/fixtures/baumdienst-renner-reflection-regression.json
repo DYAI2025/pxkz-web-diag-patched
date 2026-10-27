@@ -1,0 +1,1638 @@
+{
+  "meta": {
+    "report_title": "Website-Analyse 2026",
+    "customer_name": "Baumdienst Renner",
+    "audited_url": "https://baumdienstrenner.de/",
+    "audit_date": "28.08.2026",
+    "timezone": "Europe/Berlin",
+    "language": "de",
+    "auditor": "Pixelkiez",
+    "audit_mode": "public_surface",
+    "scope_summary": "Öffentliche Website-Diagnose mit Browser-/Suchstichprobe. Private Analytics, Quellcode, Feld-/Lab-Performance und vollständige Accessibility-Prüfung waren nicht verfügbar.",
+    "audit_id": "AUD-BAUMDIENST-RENNER-20260828",
+    "website_language": "de"
+  },
+  "coverage": {
+    "sampled_pages": [
+      {
+        "page_type": "Startseite",
+        "url": "https://baumdienstrenner.de/",
+        "accessed_at": "2026-08-28T02:35:00+02:00"
+      },
+      {
+        "page_type": "Leistungen",
+        "url": "https://baumdienstrenner.de/leistungen/",
+        "accessed_at": "2026-08-28T02:35:00+02:00"
+      },
+      {
+        "page_type": "Baumpflege & Baumfällung",
+        "url": "https://baumdienstrenner.de/baumpflege-u-baumfaellung/index.php/",
+        "accessed_at": "2026-08-28T02:35:00+02:00"
+      },
+      {
+        "page_type": "Obstbaum- & Heckenschnitt",
+        "url": "https://baumdienstrenner.de/obstbaumschnitt-u-heckenschnitt/",
+        "accessed_at": "2026-08-28T02:35:00+02:00"
+      },
+      {
+        "page_type": "Über uns",
+        "url": "https://baumdienstrenner.de/ueber-uns/",
+        "accessed_at": "2026-08-28T02:35:00+02:00"
+      },
+      {
+        "page_type": "Kontakt",
+        "url": "https://baumdienstrenner.de/kontakt/",
+        "accessed_at": "2026-08-28T02:35:00+02:00"
+      },
+      {
+        "page_type": "Impressum",
+        "url": "https://baumdienstrenner.de/impressum/",
+        "accessed_at": "2026-08-28T02:35:00+02:00"
+      },
+      {
+        "page_type": "Datenschutz",
+        "url": "https://baumdienstrenner.de/datenschutz/",
+        "accessed_at": "2026-08-28T02:35:00+02:00"
+      },
+      {
+        "page_type": "Startseiten-Variante",
+        "url": "https://baumdienstrenner.de/home/",
+        "accessed_at": "2026-08-28T02:35:00+02:00"
+      }
+    ],
+    "not_tested": [
+      "robots.txt und sitemap.xml direkt",
+      "Raw-HTML Canonical/Robots-Meta/JSON-LD",
+      "Search Console",
+      "Analytics/CRM",
+      "CrUX/Felddaten",
+      "Lighthouse/PageSpeed-Labortest",
+      "Assetgrößen und Response-Header",
+      "pixelgenaue Mobile-/Desktop-Viewportprüfung",
+      "Tastatur/Fokus/Kontrast/automatisierter WCAG-Snapshot",
+      "Repository, Backend und Deployment"
+    ],
+    "tools_available": [
+      "öffentlicher Browser-/Webabruf",
+      "datiertes öffentliches Suchsample",
+      "lokale Pixelkiez Scoring-/Validierungs-/PDF-Werkzeuge"
+    ],
+    "tools_unavailable": [
+      "direkter CrUX/PSI/Lighthouse-Messrunner",
+      "vollständiger Roh-HTML-/Header-Inspektor",
+      "Search Console/Analytics/CRM",
+      "interaktiver Accessibility-/Viewport-Runner",
+      "Repository-/Deployment-Zugriff"
+    ],
+    "capabilities": [
+      {
+        "id": "public_http_fetch",
+        "status": "available",
+        "note": "Öffentliche Seiten über Browser/Web-Abruf zugänglich; keine Header-/Rohantwortanalyse."
+      },
+      {
+        "id": "public_page_render",
+        "status": "available",
+        "note": "Browser-rendered Text/Struktur verfügbar; keine pixelgenaue Screenshot-/Viewport-Messung."
+      },
+      {
+        "id": "html_inspection",
+        "status": "available",
+        "note": "Sichtbare Dokumentstruktur und Bildtexte teilweise extrahierbar; Canonical/JSON-LD/Rohattribute nicht vollständig verfügbar."
+      },
+      {
+        "id": "crawl_sample",
+        "status": "available",
+        "note": "Begrenzte manuelle Stichprobe mehrerer Seitentypen, kein vollständiger Crawlergraph."
+      },
+      {
+        "id": "search_sample",
+        "status": "available",
+        "note": "Datiertes öffentliches Suchsample für Marke und drei relevante Non-Brand-Intentionen."
+      },
+      {
+        "id": "structured_data_inspection",
+        "status": "unavailable",
+        "note": "Kein verlässlicher Roh-HTML-/JSON-LD-Inspektor verfügbar."
+      },
+      {
+        "id": "performance_field",
+        "status": "unavailable",
+        "note": "Keine CrUX-/reale Nutzerdatenquelle in dieser Laufzeit."
+      },
+      {
+        "id": "performance_lab",
+        "status": "unavailable",
+        "note": "Kein Lighthouse/PageSpeed-Labrunner in dieser Laufzeit."
+      },
+      {
+        "id": "asset_inspection",
+        "status": "unavailable",
+        "note": "Keine reproduzierbare Asset-/Transfergrößenmessung."
+      },
+      {
+        "id": "header_inspection",
+        "status": "unavailable",
+        "note": "Keine reproduzierbare Response-Header-Inspektion."
+      },
+      {
+        "id": "accessibility_manual_sample",
+        "status": "unavailable",
+        "note": "Kein interaktiver Keyboard-/Fokus-/Kontrast-Viewporttest; nur sichtbare Inhalts-/Label-Beobachtung."
+      },
+      {
+        "id": "accessibility_automation",
+        "status": "unavailable",
+        "note": "Kein axe/Lighthouse-Accessibility-Runner."
+      },
+      {
+        "id": "content_inspection",
+        "status": "available",
+        "note": "Öffentliche Inhalte, Kontakt, Rechtstexte und Qualifikationen direkt geprüft."
+      },
+      {
+        "id": "private_measurement_export",
+        "status": "unavailable",
+        "note": "Keine Search Console-, Analytics-, CRM- oder Kundendaten bereitgestellt."
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "id": "FIND-01",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "strong",
+      "value": "HTTPS-Startseite und zentrale öffentliche Seiten abrufbar",
+      "score": 100,
+      "confidence": 5,
+      "source_or_method": "Öffentlicher Browserabruf von Startseite und Stichprobenseiten am 28.08.2026.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-001"
+      ],
+      "does_not_prove": "Erreichbarkeit beweist weder stabile Verfügbarkeit noch Ranking oder Conversion.",
+      "note": null
+    },
+    {
+      "id": "FIND-02",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "robots.txt und sitemap.xml konnten in dieser Laufzeit nicht direkt sicher abgerufen werden.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprüft bedeutet nicht, dass robots.txt oder Sitemap fehlen.",
+      "note": null
+    },
+    {
+      "id": "FIND-03",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": "Root- und /home/-Variante öffentlich auffindbar; Canonical-Tag selbst nicht inspiziert",
+      "score": null,
+      "confidence": 2,
+      "source_or_method": "Öffentliche Such-/Seitensamples; kein Roh-HTML-Canonical-Check.",
+      "threshold_source": null,
+      "evidence_refs": [
+        "E-008"
+      ],
+      "does_not_prove": "Mehrere sichtbare URL-Varianten beweisen ohne Canonical-/Redirect-Inspektion keinen Canonical-Fehler.",
+      "note": null
+    },
+    {
+      "id": "FIND-04",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E5",
+      "status": "strong",
+      "value": "Markensuche führt die Website im öffentlichen Suchsample",
+      "score": 100,
+      "confidence": 4,
+      "source_or_method": "Datiertes öffentliches Suchsample für „Baumdienst Renner Berlin“, 28.08.2026.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-009"
+      ],
+      "does_not_prove": "Ein Suchsample beweist keine dauerhaft stabile Markenposition.",
+      "note": null
+    },
+    {
+      "id": "FIND-05",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E5",
+      "status": "minor_gaps",
+      "value": {
+        "sampled_queries": 3,
+        "site_visible_in_sample": 3,
+        "queries": [
+          "Baumpflege Berlin",
+          "Baumfällung Berlin",
+          "Heckenschnitt Berlin"
+        ]
+      },
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Drei datierte öffentliche Non-Brand-Suchtests, 28.08.2026; Website/Detailseiten jeweils im gelieferten Ergebnissample sichtbar.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-010",
+        "E-011",
+        "E-012"
+      ],
+      "does_not_prove": "Drei Suchtests beweisen weder stabile Rankings, Marktanteil noch Traffic.",
+      "note": null
+    },
+    {
+      "id": "FIND-06",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Seitentitel, sichtbare Hauptüberschriften, Leistung und Region stimmen im Sample überwiegend zusammen",
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Browser-/Suchsnippet-Stichprobe von Startseite und zwei Leistungsseiten.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-001",
+        "E-002",
+        "E-003"
+      ],
+      "does_not_prove": "Die sichtbare Stichprobe ersetzt keine vollständige Meta-/HTML-Prüfung aller URLs.",
+      "note": null
+    },
+    {
+      "id": "FIND-07",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "JSON-LD/strukturierte Daten konnten nicht im Roh-HTML inspiziert werden.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprüft bedeutet nicht, dass strukturierte Daten fehlen.",
+      "note": null
+    },
+    {
+      "id": "FIND-08",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Einfache Navigation mit Leistungsübersicht und eigenen Detailseiten; Stichprobe zeigt klare Themenpfade",
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Bounded browser sample: Startseite, Leistungen, zwei Leistungsdetails, Über uns, Kontakt.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-001",
+        "E-002",
+        "E-003",
+        "E-004"
+      ],
+      "does_not_prove": "Die Stichprobe beweist keinen vollständigen Crawlgraphen und keine Orphan-Freiheit.",
+      "note": null
+    },
+    {
+      "id": "FIND-09",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Mehrere repräsentative Bilder tragen beschreibende Alternativtexte mit Leistung/Ort",
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Browserextraktion sichtbarer Bild-Alternativtexte auf Start- und Leistungsseiten.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-001",
+        "E-002",
+        "E-003"
+      ],
+      "does_not_prove": "Die Stichprobe beweist keine vollständige Bild-SEO- oder Accessibility-Abdeckung.",
+      "note": null
+    },
+    {
+      "id": "FIND-10",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "weak",
+      "value": "Datenschutzerklärung nennt Büdnerring 24; Kontakt und Impressum nennen Am Kesselpfuhl 39; Verzeichnisse zeigen weitere Altstände",
+      "score": 25,
+      "confidence": 5,
+      "source_or_method": "First-party Kontakt/Impressum/Datenschutz plus Gelbe Seiten/Cylex Stichprobe, 28.08.2026.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-005",
+        "E-006",
+        "E-007",
+        "E-013",
+        "E-014"
+      ],
+      "does_not_prove": "Adressabweichungen beweisen weder Rankingverlust noch fehlerhafte Google-Business-Daten.",
+      "note": null
+    },
+    {
+      "id": "PERF-01",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Keine belastbare Feld-/Lab-/Asset-/Header-/Viewport-Messung in dieser Laufzeit verfügbar.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht gemessen bedeutet nicht langsam, fehlerhaft oder unsicher.",
+      "note": null
+    },
+    {
+      "id": "PERF-02",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Keine belastbare Feld-/Lab-/Asset-/Header-/Viewport-Messung in dieser Laufzeit verfügbar.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht gemessen bedeutet nicht langsam, fehlerhaft oder unsicher.",
+      "note": null
+    },
+    {
+      "id": "PERF-03",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Keine belastbare Feld-/Lab-/Asset-/Header-/Viewport-Messung in dieser Laufzeit verfügbar.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht gemessen bedeutet nicht langsam, fehlerhaft oder unsicher.",
+      "note": null
+    },
+    {
+      "id": "PERF-04",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Keine belastbare Feld-/Lab-/Asset-/Header-/Viewport-Messung in dieser Laufzeit verfügbar.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht gemessen bedeutet nicht langsam, fehlerhaft oder unsicher.",
+      "note": null
+    },
+    {
+      "id": "PERF-05",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Keine belastbare Feld-/Lab-/Asset-/Header-/Viewport-Messung in dieser Laufzeit verfügbar.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht gemessen bedeutet nicht langsam, fehlerhaft oder unsicher.",
+      "note": null
+    },
+    {
+      "id": "PERF-06",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Keine belastbare Feld-/Lab-/Asset-/Header-/Viewport-Messung in dieser Laufzeit verfügbar.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht gemessen bedeutet nicht langsam, fehlerhaft oder unsicher.",
+      "note": null
+    },
+    {
+      "id": "PERF-07",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Keine belastbare Feld-/Lab-/Asset-/Header-/Viewport-Messung in dieser Laufzeit verfügbar.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht gemessen bedeutet nicht langsam, fehlerhaft oder unsicher.",
+      "note": null
+    },
+    {
+      "id": "PERF-08",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Keine belastbare Feld-/Lab-/Asset-/Header-/Viewport-Messung in dieser Laufzeit verfügbar.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht gemessen bedeutet nicht langsam, fehlerhaft oder unsicher.",
+      "note": null
+    },
+    {
+      "id": "PERF-09",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E5",
+      "status": "mixed",
+      "value": "Öffentliche Seitenausgabe enthält STRATO-Editor-Hinweis; private Architektur unbekannt",
+      "score": 50,
+      "confidence": 3,
+      "source_or_method": "Öffentliche Browserextraktion zeigt strato-editor.com als Seitensignal.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-001"
+      ],
+      "does_not_prove": "Ein öffentliches Builder-/CMS-Signal beweist weder Backend-, Wartbarkeits- noch Performancequalität.",
+      "note": null
+    },
+    {
+      "id": "UX-01",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Name, Leistung, Region und Kontakt werden früh im gerenderten Inhalt klar",
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "Browser-rendered Text-/Strukturstichprobe; keine pixelgenaue First-Viewport-Prüfung.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-001"
+      ],
+      "does_not_prove": "Strukturklarheit beweist keine tatsächliche Wahrnehmung oder Conversion.",
+      "note": null
+    },
+    {
+      "id": "UX-02",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Telefon, E-Mail und kostenlose Besichtigung/Angebot sind klar als nächste Schritte genannt",
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "Startseite und Kontaktseite, öffentliche Browserstichprobe.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-001",
+        "E-004"
+      ],
+      "does_not_prove": "Sichtbare Kontaktwege beweisen keine Anfrage- oder Abschlussrate.",
+      "note": null
+    },
+    {
+      "id": "UX-03",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Kurze Navigation: Home, Leistungen, drei Leistungsbereiche, Über uns, Kontakt",
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Öffentliche Navigation auf mehreren Seitentypen.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-001",
+        "E-002",
+        "E-003",
+        "E-004"
+      ],
+      "does_not_prove": "Klare Labels beweisen keine erfolgreiche Navigation für alle Nutzer.",
+      "note": null
+    },
+    {
+      "id": "UX-04",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Kein pixelgenauer mobiler Viewport-/Tap-Target-Test verfügbar.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprüft bedeutet nicht, dass die mobile Darstellung problematisch ist.",
+      "note": null
+    },
+    {
+      "id": "UX-05",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Kontaktformular verlangt Vorname, Nachname, E-Mail und Einwilligung; Telefon und E-Mail sind Alternativen",
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "Öffentliche Kontaktseite; Formular wurde nicht abgesendet.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-004"
+      ],
+      "does_not_prove": "Oberflächenprüfung misst weder Formularabbrüche noch Zustellbarkeit.",
+      "note": null
+    },
+    {
+      "id": "UX-06",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "mixed",
+      "value": "Ausbildung, langjährige Berufspraxis und Fachqualifikationen sichtbar; wenig projektbezogene Belege im Sample",
+      "score": 50,
+      "confidence": 3,
+      "source_or_method": "Über-uns-/Leistungsinhalte in öffentlicher Stichprobe.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-015"
+      ],
+      "does_not_prove": "Sichtbare Eigenaussagen beweisen weder Kundenzufriedenheit noch die Wahrheit jedes Qualifikationsclaims.",
+      "note": null
+    },
+    {
+      "id": "UX-07",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Leistungsseiten besitzen klare H1/H2-Themenblöcke und kurze Kontaktabschlüsse",
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "Öffentliche Browserstichprobe repräsentativer Leistungsseiten.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-002",
+        "E-003"
+      ],
+      "does_not_prove": "Inhaltshierarchie ersetzt keine Nutzerstudie oder visuelle Detailprüfung.",
+      "note": null
+    },
+    {
+      "id": "UX-08",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": "Eine Pflichtfeldmeldung ist sichtbar, interaktive Zustände wurden nicht provoziert",
+      "score": null,
+      "confidence": 2,
+      "source_or_method": "Read-only Audit; keine Formularübermittlung oder Fehlerzustands-Interaktion.",
+      "threshold_source": null,
+      "evidence_refs": [
+        "E-004"
+      ],
+      "does_not_prove": "Nicht getestete Interaktionen erlauben keine Aussage über vollständiges Feedbackverhalten.",
+      "note": null
+    },
+    {
+      "id": "A11Y-01",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Kein Tastatur-/Fokus-Test in einer interaktiven Live-Session verfügbar.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprüft bedeutet nicht, dass Tastaturbedienung fehlerhaft ist.",
+      "note": null
+    },
+    {
+      "id": "A11Y-02",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "mixed",
+      "value": "Überschriftenstruktur ist sichtbar; vollständige Landmark-/DOM-Semantik nicht geprüft",
+      "score": null,
+      "confidence": 3,
+      "source_or_method": "Browserextraktion sichtbarer H1/H2/H3-Struktur; Roh-DOM nicht vollständig verfügbar.",
+      "threshold_source": null,
+      "evidence_refs": [
+        "E-001",
+        "E-002",
+        "E-003"
+      ],
+      "does_not_prove": "Die Stichprobe belegt keine WCAG-Konformität oder vollständige semantische Struktur.",
+      "note": null
+    },
+    {
+      "id": "A11Y-03",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Repräsentative Bilder zeigen beschreibende Alternativtexte",
+      "score": null,
+      "confidence": 4,
+      "source_or_method": "Öffentliche Browserextraktion von Bild-Alternativtexten auf mehreren Seiten.",
+      "threshold_source": null,
+      "evidence_refs": [
+        "E-001",
+        "E-002",
+        "E-003"
+      ],
+      "does_not_prove": "Die Stichprobe belegt weder vollständige Alt-Text-Abdeckung noch WCAG-Konformität.",
+      "note": null
+    },
+    {
+      "id": "A11Y-04",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Keine reproduzierbare Kontrastmessung verfügbar.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht gemessen bedeutet nicht, dass Kontraste unzureichend sind.",
+      "note": null
+    },
+    {
+      "id": "A11Y-05",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "mixed",
+      "value": "Sichtbare Feldbezeichnungen und Pflichtfeldhinweise vorhanden; programmatische Zuordnung nicht geprüft",
+      "score": null,
+      "confidence": 3,
+      "source_or_method": "Öffentliche Kontaktseite; kein Roh-DOM/Screenreader-Test.",
+      "threshold_source": null,
+      "evidence_refs": [
+        "E-004"
+      ],
+      "does_not_prove": "Sichtbare Labels belegen keine vollständige barrierefreie Formularimplementierung.",
+      "note": null
+    },
+    {
+      "id": "A11Y-06",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Kein automatisierter Accessibility-Runner verfügbar.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Kein automatisierter Snapshot bedeutet weder Fehlerfreiheit noch Fehlerhaftigkeit.",
+      "note": null
+    },
+    {
+      "id": "TRUST-01",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "strong",
+      "value": "Impressum öffentlich erreichbar und mit Betreiber/Kontakt versehen",
+      "score": 100,
+      "confidence": 5,
+      "source_or_method": "First-party Impressum, 28.08.2026.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-006"
+      ],
+      "does_not_prove": "Vorhandensein beweist keine rechtliche Aktualität oder Vollständigkeit.",
+      "note": null
+    },
+    {
+      "id": "TRUST-02",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "strong",
+      "value": "Datenschutzerklärung öffentlich erreichbar; Einwilligungs-/Datenschutzbezug im Kontaktformular sichtbar",
+      "score": 100,
+      "confidence": 4,
+      "source_or_method": "First-party Datenschutz- und Kontaktseite, 28.08.2026.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-004",
+        "E-007"
+      ],
+      "does_not_prove": "Vorhandene Hinweise beweisen keine DSGVO-Konformität oder Consent-Implementierung.",
+      "note": null
+    },
+    {
+      "id": "TRUST-03",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Öffentliche Response-Header konnten nicht reproduzierbar inspiziert werden.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprüfte Security-Header erlauben keine Sicherheitsbewertung.",
+      "note": null
+    },
+    {
+      "id": "TRUST-04",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "weak",
+      "value": "Adressangaben sind über First-Party-Seiten und Verzeichnisse nicht konsistent",
+      "score": 25,
+      "confidence": 5,
+      "source_or_method": "Kontakt/Impressum vs. Datenschutzerklärung sowie Gelbe Seiten/Cylex Stichprobe.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-004",
+        "E-006",
+        "E-007",
+        "E-013",
+        "E-014"
+      ],
+      "does_not_prove": "Datenabweichungen beweisen keine konkrete Verwechslung, Ranking- oder Umsatzwirkung.",
+      "note": null
+    },
+    {
+      "id": "TRUST-05",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "mixed",
+      "value": "Seitenpflege 2026 sichtbar, aber Impressum nutzt TMG-/RStV- und ODR-Verweise, die aktuell überprüfungsbedürftig sind",
+      "score": 50,
+      "confidence": 5,
+      "source_or_method": "First-party Impressum plus aktuelle Primärquellen DDG §5 und EU-Kommission ODR-Status, 28.08.2026.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-006",
+        "E-016",
+        "E-017"
+      ],
+      "does_not_prove": "Veraltete Verweise sind kein automatischer Rechtsverstoß und keine Rechtsberatung.",
+      "note": null
+    },
+    {
+      "id": "TRUST-06",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "mixed",
+      "value": "Berufshistorie und Qualifikationen gut beschrieben; wenig externe/Projektbelege auf geprüften Seiten",
+      "score": 50,
+      "confidence": 3,
+      "source_or_method": "First-party Über-uns-Seite und Leistungsstichprobe.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-015"
+      ],
+      "does_not_prove": "Eigenaussagen und fehlende Belege im Sample beweisen keine schlechte Arbeitsqualität.",
+      "note": null
+    },
+    {
+      "id": "TRUST-07",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "strong",
+      "value": "Telefon, E-Mail, Kontaktformular und Geschäftsadresse öffentlich sichtbar",
+      "score": 100,
+      "confidence": 5,
+      "source_or_method": "First-party Start-, Kontakt- und Impressumsseite.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-001",
+        "E-004",
+        "E-006"
+      ],
+      "does_not_prove": "Kontaktmöglichkeiten beweisen keine Reaktionszeit oder Anfragequalität.",
+      "note": null
+    },
+    {
+      "id": "TRUST-08",
+      "applicable": false,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_applicable",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Für diesen öffentlichen Audit nicht anwendbar.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Keine Aussage über reale Geschäftsleistung.",
+      "note": null
+    },
+    {
+      "id": "AI-01",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Unternehmen, Region, Kernleistungen und fachlicher Kontext sind textlich klar extrahierbar",
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "First-party Start-, Leistungs- und Über-uns-Inhalte.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-001",
+        "E-002",
+        "E-003",
+        "E-015"
+      ],
+      "does_not_prove": "Extrahierbarkeit beweist keine Nennung oder Empfehlung durch KI-Systeme.",
+      "note": null
+    },
+    {
+      "id": "AI-02",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Leistungs- und Ortsbezug sind klar, Ziel-/Einsatzkontexte werden jedoch nur teilweise systematisch beschrieben",
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "First-party Inhaltsstichprobe.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-001",
+        "E-002",
+        "E-003"
+      ],
+      "does_not_prove": "Klare Texte beweisen keine AI-Sichtbarkeit oder Suchnachfrage.",
+      "note": null
+    },
+    {
+      "id": "AI-03",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "weak",
+      "value": "Leistungsseiten beantworten Basisfragen, aber zentrale Entscheidungsfragen sind nicht als kompakte Antwortblöcke/FAQ strukturiert",
+      "score": 25,
+      "confidence": 3,
+      "source_or_method": "Repräsentative Leistungsseiten: Baumfällung sowie Obstbaum-/Heckenschnitt.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-002",
+        "E-003"
+      ],
+      "does_not_prove": "Fehlende FAQ-Struktur beweist keine schlechtere KI-Zitation oder Conversion.",
+      "note": null
+    },
+    {
+      "id": "AI-04",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Strukturierte Daten/JSON-LD im Roh-HTML nicht inspizierbar.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprüft bedeutet nicht, dass Schema.org-Auszeichnung fehlt.",
+      "note": null
+    },
+    {
+      "id": "AI-05",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "mixed",
+      "value": "Qualifikationsclaims vorhanden; kaum claim-nahe Projekt-/Zertifikatsbelege im geprüften Inhalt",
+      "score": 50,
+      "confidence": 3,
+      "source_or_method": "First-party Über-uns-/Leistungsstichprobe.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-015"
+      ],
+      "does_not_prove": "Wenig öffentlich sichtbare Belege beweisen keine fehlende Qualifikation.",
+      "note": null
+    },
+    {
+      "id": "AI-06",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "weak",
+      "value": "Adressentität widerspricht sich zwischen Kontakt/Impressum, Datenschutz und externen Verzeichnissen",
+      "score": 25,
+      "confidence": 5,
+      "source_or_method": "First-party Seiten plus öffentliche Branchenverzeichnisse.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-004",
+        "E-006",
+        "E-007",
+        "E-013",
+        "E-014"
+      ],
+      "does_not_prove": "Entitätsinkonsistenz beweist keine konkrete Fehlantwort eines KI-Systems.",
+      "note": null
+    },
+    {
+      "id": "AI-07",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Mehrere eigenständige Leistungsseiten bilden relevante Baum-/Grünpflege-Themen ab",
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "First-party Seitenstichprobe.",
+      "threshold_source": "Pixelkiez Produkt-Rubrik v3.0.0 / Messregister 1.0.0, geprüft 28.08.2026",
+      "evidence_refs": [
+        "E-002",
+        "E-003"
+      ],
+      "does_not_prove": "Thematische Tiefe beweist weder Autorität noch KI-/Suchsichtbarkeit.",
+      "note": null
+    }
+  ],
+  "score_summary": {
+    "policy_version": "3.0.0",
+    "registry_version": "1.0.0",
+    "label": "Pixelkiez Teilscore",
+    "score": 71,
+    "display_status": "PARTIAL_SCORE",
+    "coverage_percent": 56,
+    "confidence": "MEDIUM",
+    "interpretation": "Solide Basis, klare Hebel",
+    "blocker_present": false,
+    "category_scores": [
+      {
+        "category": "findability_seo",
+        "label": "Auffindbarkeit & SEO",
+        "score": 79,
+        "coverage_percent": 70,
+        "confidence": "MEDIUM"
+      },
+      {
+        "category": "performance_technology",
+        "label": "Performance & Technik",
+        "score": null,
+        "coverage_percent": 10,
+        "confidence": "LOW"
+      },
+      {
+        "category": "ux_conversion",
+        "label": "Nutzerführung & Conversion",
+        "score": 72,
+        "coverage_percent": 80,
+        "confidence": "MEDIUM"
+      },
+      {
+        "category": "accessibility",
+        "label": "Barrierefreiheit",
+        "score": null,
+        "coverage_percent": 0,
+        "confidence": "LOW"
+      },
+      {
+        "category": "trust_privacy_content",
+        "label": "Vertrauen, Datenschutz & Inhalt",
+        "score": 70,
+        "coverage_percent": 83,
+        "confidence": "HIGH"
+      },
+      {
+        "category": "ai_readiness",
+        "label": "KI-Verständlichkeit",
+        "score": 53,
+        "coverage_percent": 85,
+        "confidence": "MEDIUM"
+      }
+    ],
+    "does_not_prove": [
+      "keine universelle Website-Qualität",
+      "kein Ranking-, Umsatz- oder Conversion-Nachweis",
+      "keine rechtliche oder WCAG-Konformität"
+    ]
+  },
+  "executive_summary": {
+    "overall_status": "needs_action",
+    "decision": "Die Website hat eine brauchbare lokale Suchbasis. Wichtigste Hebel sind einheitliche Firmendaten, aktuelle Rechtstexte und klare Leistungsseiten.",
+    "recommended_route": "targeted_modernization",
+    "top_risks": [
+      "Uneinheitliche Adressdaten auf eigener Website und in Verzeichnissen.",
+      "Veraltete Referenzen im Impressum, darunter TMG- und ODR-Verweise.",
+      "Mehrere Startseiten-URL-Varianten plus noch wenig strukturierte Entscheidungsantworten."
+    ],
+    "top_strengths": [
+      "Marke und drei wichtige Leistungssuchen sind im öffentlichen Stichprobe auffindbar.",
+      "Leistungen, Region und direkte Kontaktwege sind klar benannt.",
+      "Ausbildung, Berufserfahrung und Fachqualifikationen sind transparent beschrieben."
+    ]
+  },
+  "pillar_summary": [],
+  "findings": [
+    {
+      "id": "F-001",
+      "category": "trust_privacy_content",
+      "title": "Eine Firma, mehrere öffentliche Adressen",
+      "severity": "high",
+      "observation": "Kontakt und Impressum nennen Am Kesselpfuhl 39, die Datenschutzerklärung Büdnerring 24; Gelbe Seiten führt Illerzeile 39 und Cylex Büdnerring 24.",
+      "evidence": [
+        {
+          "id": "E-101",
+          "type": "first_party_observation",
+          "detail": "Kontaktseite nennt Am Kesselpfuhl 39, 13437 Berlin und ein Formular mit Pflichtfeldern.",
+          "url": "https://baumdienstrenner.de/kontakt/",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "public browser retrieval",
+          "asset_path": null
+        },
+        {
+          "id": "E-102",
+          "type": "first_party_observation",
+          "detail": "Impressum nennt Am Kesselpfuhl 39, § 5 TMG und verlinkt die EU-OS-Plattform.",
+          "url": "https://baumdienstrenner.de/impressum/",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "public browser retrieval",
+          "asset_path": null
+        },
+        {
+          "id": "E-103",
+          "type": "first_party_observation",
+          "detail": "Datenschutzerklärung nennt als verantwortliche Stelle weiterhin Büdnerring 24, 13409 Berlin.",
+          "url": "https://baumdienstrenner.de/datenschutz/",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "public browser retrieval",
+          "asset_path": null
+        },
+        {
+          "id": "E-104",
+          "type": "secondary_directory_observation",
+          "detail": "Gelbe Seiten listet Baumdienst Renner mit Illerzeile 39, 13509 Berlin und passender Telefonnummer.",
+          "url": "https://www.gelbeseiten.de/branchen/baumpflege/berlin",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "public directory sample",
+          "asset_path": null
+        },
+        {
+          "id": "E-105",
+          "type": "secondary_directory_observation",
+          "detail": "Cylex listet Baumdienst Renner mit Büdnerring 24, 13409 Berlin und passender Telefonnummer.",
+          "url": "https://web2.cylex.de/firma-home/baumdienst-renner-15393433.html",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "public directory sample",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Uneinheitliche Firmendaten können Interessenten und maschinelle Systeme verunsichern. Eine konkrete Ranking- oder Umsatzwirkung wurde nicht gemessen."
+      },
+      "client_observation": "Auf der eigenen Website und in Verzeichnissen stehen unterschiedliche Adressen.",
+      "client_impact": "Das schafft vermeidbare Unsicherheit darüber, welche Firmenadresse aktuell ist.",
+      "client_action": "Eine verbindliche Adresse festlegen und Website, Datenschutz, Verzeichnisse und strukturierte Daten angleichen.",
+      "recommendation": {
+        "action": "Authoritative Firmenadresse festlegen und alle öffentlichen Vorkommen synchronisieren.",
+        "owner": "Inhaber / Webpflege / Local SEO",
+        "horizon": "now",
+        "acceptance_test": "Kontakt, Impressum, Datenschutz und priorisierte Verzeichnisse zeigen denselben Namen, dieselbe Adresse und dieselbe Telefonnummer."
+      },
+      "confidence": 5,
+      "visual_asset": null,
+      "metric_refs": [
+        "FIND-10",
+        "TRUST-04",
+        "AI-06"
+      ],
+      "voice_hook": {
+        "evidence_class": "VERIFIED_FACT",
+        "dimension": "entity-consistency",
+        "priority": "HIGH",
+        "observation": "Kontakt/Impressum und Datenschutzerklärung zeigen unterschiedliche Adressen.",
+        "evidence_pointer": "F-001 / first-party Kontakt, Impressum, Datenschutz",
+        "confidence": 0.99,
+        "spoken": "Bei unserem Website-Check ist uns aufgefallen, dass Kontakt und Impressum Am Kesselpfuhl 39 nennen, die Datenschutzerklärung aber noch Büdnerring 24. Ist die ältere Adresse noch beabsichtigt?",
+        "possible_relevance": "Einheitliche Firmendaten können für Kundenorientierung und maschinelle Zuordnung wichtig sein.",
+        "prohibited_claims": [
+          "Dadurch verlieren Sie Google-Rankings",
+          "Das kostet Sie Umsatz",
+          "Google bestraft Ihre Website"
+        ],
+        "selector_score": 0.96,
+        "allow_as_hook_3": true
+      }
+    },
+    {
+      "id": "F-002",
+      "category": "trust_privacy_content",
+      "title": "Das Impressum enthält veraltete Referenzen",
+      "severity": "medium",
+      "observation": "Das Impressum verwendet § 5 TMG, § 55 Abs. 2 RStV und einen Link zur EU-OS-Plattform. § 5 ist heute im DDG geregelt; die ODR-Plattform ist seit 20.07.2025 eingestellt.",
+      "evidence": [
+        {
+          "id": "E-201",
+          "type": "first_party_observation",
+          "detail": "Impressum nennt Am Kesselpfuhl 39, § 5 TMG und verlinkt die EU-OS-Plattform.",
+          "url": "https://baumdienstrenner.de/impressum/",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "public browser retrieval",
+          "asset_path": null
+        },
+        {
+          "id": "E-202",
+          "type": "primary_standard_source",
+          "detail": "Aktueller § 5 DDG trägt die Überschrift Allgemeine Informationspflichten.",
+          "url": "https://www.gesetze-im-internet.de/ddg/__5.html",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "current primary-source check",
+          "asset_path": null
+        },
+        {
+          "id": "E-203",
+          "type": "primary_platform_source",
+          "detail": "EU-Kommission: ODR-Plattform ist seit 20.07.2025 eingestellt.",
+          "url": "https://consumer-redress.ec.europa.eu/site-relocation_en",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "current primary-source check",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "recommendation",
+        "text": "Das ist ein sichtbarer Wartungsbedarf bei Rechtstexten. Ob daraus eine konkrete rechtliche Pflichtverletzung folgt, wurde nicht beurteilt."
+      },
+      "client_observation": "Im Impressum stehen noch ältere Gesetzes- und Streitbeilegungsverweise.",
+      "client_impact": "Das wirkt ungepflegt und sollte fachlich geprüft werden; eine Rechtsverletzung wird hier nicht behauptet.",
+      "client_action": "Impressum und Rechtstexte mit qualifizierter Stelle auf aktuelle Verweise prüfen und aktualisieren.",
+      "recommendation": {
+        "action": "Impressum fachlich/rechtlich prüfen und veraltete Template-Verweise ersetzen.",
+        "owner": "Inhaber / Rechtsprüfung / Webpflege",
+        "horizon": "now",
+        "acceptance_test": "Aktualisierte Rechtstexte sind von einer zuständigen Stelle freigegeben; tote/veraltete ODR-Referenzen sind entfernt oder korrekt ersetzt."
+      },
+      "confidence": 5,
+      "visual_asset": null,
+      "metric_refs": [
+        "TRUST-01",
+        "TRUST-05"
+      ]
+    },
+    {
+      "id": "F-003",
+      "category": "findability_seo",
+      "title": "Die Startseite ist unter mehreren Webadressen erreichbar",
+      "severity": "medium",
+      "observation": "Das öffentliche Such-/Seitensample führt sowohl https://baumdienstrenner.de/ als auch https://baumdienstrenner.de/home/ mit praktisch demselben Startseiteninhalt. Canonical-Tags und Redirects konnten nicht direkt geprüft werden.",
+      "evidence": [
+        {
+          "id": "E-301",
+          "type": "first_party_observation",
+          "detail": "Startseite nennt Baumdienst Renner, Berlin & Brandenburg, Kernleistungen, Telefon/E-Mail und kostenlose Besichtigung.",
+          "url": "https://baumdienstrenner.de/",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "public browser retrieval",
+          "asset_path": null
+        },
+        {
+          "id": "E-302",
+          "type": "search_observation",
+          "detail": "Öffentliches Suchsample führt die inhaltlich gleiche Startseite sowohl unter / als auch /home/.",
+          "url": "https://baumdienstrenner.de/home/",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "public search sample + page retrieval",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Wenn beide Varianten indexierbar bleiben, kann das Signale unnötig verteilen. Ob Suchmaschinen die Varianten bereits korrekt kanonisieren, ist offen."
+      },
+      "client_observation": "Die Startseite ist öffentlich unter mehreren Webadressen erreichbar.",
+      "client_impact": "Das sollte technisch bereinigt werden, damit eine eindeutige Hauptadresse für die Seite feststeht.",
+      "client_action": "Weiterleitungen prüfen und für /home/ eine eindeutige Hauptadresse festlegen.",
+      "recommendation": {
+        "action": "Root-/Home-/index.php-Varianten technisch prüfen und auf eine kanonische Ziel-URL normalisieren.",
+        "owner": "Webentwicklung / SEO",
+        "horizon": "0_30_days",
+        "acceptance_test": "Jede geprüfte Doppelvariante liefert 301 auf die kanonische URL oder einen konsistenten Canonical; Suchsample wird nach Re-Crawl erneut geprüft."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "FIND-03",
+        "FIND-08"
+      ],
+      "voice_hook": {
+        "evidence_class": "UNKNOWN",
+        "dimension": "indexability",
+        "priority": "MEDIUM",
+        "observation": "Root und /home/ liefern im öffentlichen Sample denselben Startseiteninhalt; Canonical/Redirect ist noch offen.",
+        "evidence_pointer": "F-003 / root + /home/ public sample",
+        "confidence": 0.82,
+        "spoken": "Ein zweiter Punkt: Ihre Startseite taucht bei unserem öffentlichen Check sowohl unter der Hauptadresse als auch unter /home/ auf. Ob die technische Kanonisierung das sauber zusammenführt, konnten wir noch nicht verifizieren.",
+        "possible_relevance": "Eine eindeutige Haupt-URL kann die technische Zuordnung vereinfachen.",
+        "prohibited_claims": [
+          "Sie haben Duplicate Content Penalty",
+          "Google rankt Sie deshalb schlechter",
+          "Ihre Rankings brechen ein"
+        ],
+        "selector_score": 0.78,
+        "allow_as_hook_3": true
+      }
+    },
+    {
+      "id": "F-004",
+      "category": "ai_readiness",
+      "title": "Leistungsseiten beantworten den Job, aber noch wenig Entscheidungsfragen",
+      "severity": "medium",
+      "observation": "Die Leistungsseiten erklären Baumfällung, Baumpflege, Obstbaum- und Heckenschnitt fachlich. Häufige Entscheidungsfragen zu Ablauf, Kostenfaktoren, Voraussetzungen, Entsorgung und konkreten Einsatzfällen sind nur teilweise strukturiert beantwortet.",
+      "evidence": [
+        {
+          "id": "E-401",
+          "type": "first_party_observation",
+          "detail": "Leistungsseite Baumfällung erklärt Pflege/Fällung, Genehmigungshinweis und Telefon-CTA.",
+          "url": "https://baumdienstrenner.de/baumpflege-u-baumfaellung/index.php/",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "public browser retrieval",
+          "asset_path": null
+        },
+        {
+          "id": "E-402",
+          "type": "first_party_observation",
+          "detail": "Leistungsseite Obstbaum-/Heckenschnitt enthält ausführliche Leistungsbeschreibung und Telefon-CTA.",
+          "url": "https://baumdienstrenner.de/obstbaumschnitt-u-heckenschnitt/",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "public browser retrieval",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Mehr klar beantwortete Kundenfragen können Leistungen für Menschen und Maschinen eindeutiger machen. Wirkung auf Leads oder KI-Nennungen wurde nicht gemessen."
+      },
+      "client_observation": "Die Leistungen sind verständlich beschrieben, aber wichtige Entscheidungsfragen bleiben verteilt oder offen.",
+      "client_impact": "Interessenten müssen für Basisfragen häufiger direkt anrufen; Such- und KI-Systeme finden weniger klare Antworten.",
+      "client_action": "Pro Hauptleistung 5-7 echte Kundenfragen mit kurzen, überprüften Antworten und klarer nächster Aktion ergänzen.",
+      "recommendation": {
+        "action": "Entscheidungsrelevante FAQ-/Antwortblöcke auf den wichtigsten Leistungsseiten ergänzen.",
+        "owner": "Content / Fachverantwortlicher / SEO",
+        "horizon": "0_30_days",
+        "acceptance_test": "Jede priorisierte Leistungsseite beantwortet mindestens fünf verifizierte Kundenfragen ohne erfundene Preise oder Leistungsversprechen."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "AI-03",
+        "AI-05",
+        "UX-05"
+      ],
+      "voice_hook": {
+        "evidence_class": "SUPPORTED_INFERENCE",
+        "dimension": "answerability",
+        "priority": "MEDIUM",
+        "observation": "Die Leistungsseiten erklären die Arbeit, decken aber wichtige Entscheidungsfragen nur teilweise strukturiert ab.",
+        "evidence_pointer": "F-004 / sampled service pages",
+        "confidence": 0.78,
+        "spoken": "Die Leistungen erklären Sie fachlich schon gut. In unserem Check fehlen aber noch kompakte Antworten auf einige typische Entscheidungsfragen, zum Beispiel Ablauf oder Kostenfaktoren. Wäre das für Sie grundsätzlich ein Thema?",
+        "possible_relevance": "Kompakte Antworten können Orientierung und maschinelle Verständlichkeit verbessern.",
+        "prohibited_claims": [
+          "ChatGPT empfiehlt deshalb Ihre Konkurrenz",
+          "Damit bekommen Sie mehr Anfragen",
+          "Das steigert Ihre Conversion"
+        ],
+        "selector_score": 0.74,
+        "allow_as_hook_3": true
+      }
+    },
+    {
+      "id": "F-005",
+      "category": "trust_privacy_content",
+      "title": "Fachkompetenz ist sichtbar, Projektbelege sind im Sample dünn",
+      "severity": "low",
+      "observation": "Die Über-uns-Seite nennt Ausbildung, Berufserfahrung und Qualifikationen. Auf den geprüften Seiten sind jedoch kaum konkrete Projektfälle, freigegebene Kundenstimmen oder sichtbare Zertifikatsbelege eingebettet.",
+      "evidence": [
+        {
+          "id": "E-501",
+          "type": "first_party_observation",
+          "detail": "Über-uns-Seite nennt Ausbildung, Berufsstationen und Qualifikationen wie SKT A/B und AS-BAUM I/II.",
+          "url": "https://baumdienstrenner.de/ueber-uns/",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "public browser retrieval",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Mehr überprüfbare Belege können Eigenaussagen glaubwürdiger machen. Es wurde nicht geprüft, welche Nachweise intern vorhanden sind."
+      },
+      "client_observation": "Die Qualifikationen sind gut beschrieben, konkrete Arbeitsbeispiele könnten sie stärker belegen.",
+      "client_impact": "Interessenten sehen Kompetenz, erhalten aber nur wenig überprüfbaren Kontext zu ausgeführten Projekten.",
+      "client_action": "Freigegebene Vorher-Nachher-Fälle, Zertifikatsbelege und echte Kundenstimmen gezielt ergänzen.",
+      "recommendation": {
+        "action": "Zwei bis vier belegte Referenz-/Projektmodule mit Quelle, Aufgabe und Ergebnis ergänzen.",
+        "owner": "Inhaber / Content",
+        "horizon": "31_90_days",
+        "acceptance_test": "Mindestens zwei veröffentlichte Projektbeispiele enthalten konkrete Leistung, Ausgangslage, Ergebnis und belastbaren Bild-/Quellennachweis."
+      },
+      "confidence": 3,
+      "visual_asset": null,
+      "metric_refs": [
+        "TRUST-06",
+        "AI-05"
+      ]
+    },
+    {
+      "id": "F-006",
+      "category": "findability_seo",
+      "title": "Die Website ist im kleinen Suchsample bereits auffindbar",
+      "severity": "positive",
+      "observation": "Die Website erschien bei der Markensuche und in allen drei geprüften Non-Brand-Suchintentionen im gelieferten öffentlichen Ergebnissample.",
+      "evidence": [
+        {
+          "id": "E-601",
+          "type": "search_observation",
+          "detail": "Markensuchsample „Baumdienst Renner Berlin“ führt die First-Party-Website.",
+          "url": "https://baumdienstrenner.de/",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "dated public search sample",
+          "asset_path": null
+        },
+        {
+          "id": "E-602",
+          "type": "search_observation",
+          "detail": "Non-Brand-Suchsample „Baumpflege Berlin“ enthält die First-Party-Website im gelieferten Ergebnissample.",
+          "url": "https://baumdienstrenner.de/",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "dated public search sample",
+          "asset_path": null
+        },
+        {
+          "id": "E-603",
+          "type": "search_observation",
+          "detail": "Non-Brand-Suchsample „Baumfällung Berlin“ enthält die First-Party-Leistungsseite im gelieferten Ergebnissample.",
+          "url": "https://baumdienstrenner.de/baumpflege-u-baumfaellung/index.php/",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "dated public search sample",
+          "asset_path": null
+        },
+        {
+          "id": "E-604",
+          "type": "search_observation",
+          "detail": "Non-Brand-Suchsample „Heckenschnitt Berlin“ enthält die First-Party-Leistungsseite im gelieferten Ergebnissample.",
+          "url": "https://baumdienstrenner.de/obstbaumschnitt-u-heckenschnitt/",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "dated public search sample",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "fact",
+        "text": "Das ist eine gute Ausgangsbasis für lokale Auffindbarkeit. Die Stichprobe ist kein Nachweis stabiler Rankingpositionen oder Traffic."
+      },
+      "client_observation": "Die Website ist für die Marke und mehrere wichtige Leistungssuchen bereits öffentlich auffindbar.",
+      "client_impact": "Damit existiert eine reale Suchbasis, auf der gezielt weitergearbeitet werden kann.",
+      "client_action": "Die bestehenden, relevanten Leistungsseiten erhalten und nach Bereinigung gezielt weiter vertiefen.",
+      "recommendation": {
+        "action": "Suchbasis erhalten und die Stichprobe nach technischen/contentseitigen Korrekturen erneut ausführen.",
+        "owner": "SEO / Content",
+        "horizon": "monitor",
+        "acceptance_test": "Die vier definierten Suchtests werden dokumentiert wiederholt; Veränderungen werden als Snapshot, nicht als Rankinggarantie, protokolliert."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "FIND-04",
+        "FIND-05"
+      ]
+    },
+    {
+      "id": "F-007",
+      "category": "ux_conversion",
+      "title": "Kontakt und Kernleistungen sind direkt verständlich",
+      "severity": "positive",
+      "observation": "Startseite und Navigation nennen Kernleistungen, Region, Telefonnummer, E-Mail und die kostenlose unverbindliche Besichtigung klar.",
+      "evidence": [
+        {
+          "id": "E-701",
+          "type": "first_party_observation",
+          "detail": "Startseite nennt Baumdienst Renner, Berlin & Brandenburg, Kernleistungen, Telefon/E-Mail und kostenlose Besichtigung.",
+          "url": "https://baumdienstrenner.de/",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "public browser retrieval",
+          "asset_path": null
+        },
+        {
+          "id": "E-702",
+          "type": "first_party_observation",
+          "detail": "Kontaktseite nennt Am Kesselpfuhl 39, 13437 Berlin und ein Formular mit Pflichtfeldern.",
+          "url": "https://baumdienstrenner.de/kontakt/",
+          "observed_at": "2026-08-28T02:35:00+02:00",
+          "method": "public browser retrieval",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "fact",
+        "text": "Das reduziert Erklärungsbedarf im öffentlichen Kontaktweg. Reale Kontakt- oder Abschlussraten wurden nicht gemessen."
+      },
+      "client_observation": "Leistungen, Einsatzgebiet und Kontaktmöglichkeiten sind schnell verständlich.",
+      "client_impact": "Interessenten finden ohne komplizierte Navigation einen direkten Kontaktweg.",
+      "client_action": "Diese Klarheit bei allen Modernisierungen erhalten.",
+      "recommendation": {
+        "action": "Klare Leistungs-/Kontaktstruktur bei künftigen Änderungen als Akzeptanzkriterium sichern.",
+        "owner": "UX / Content",
+        "horizon": "monitor",
+        "acceptance_test": "Kernleistung, Region und mindestens ein primärer Kontaktweg bleiben auf repräsentativen Seiten ohne Fachjargon auffindbar."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "UX-01",
+        "UX-02",
+        "UX-03",
+        "TRUST-07"
+      ]
+    }
+  ],
+  "scenario_horizons": [],
+  "options": [],
+  "roadmap": [
+    {
+      "priority": "P1",
+      "horizon": "now",
+      "action": "Eine authoritative Firmenadresse festlegen und Kontakt, Impressum, Datenschutz sowie priorisierte Verzeichnisse synchronisieren.",
+      "owner": "Inhaber / Webpflege / Local SEO",
+      "evidence_basis": [
+        "F-001"
+      ]
+    },
+    {
+      "priority": "P1",
+      "horizon": "now",
+      "action": "Impressum und Rechtstexte fachlich auf aktuelle Gesetzes-/ODR-Verweise prüfen und aktualisieren.",
+      "owner": "Inhaber / Rechtsprüfung / Webpflege",
+      "evidence_basis": [
+        "F-002"
+      ]
+    },
+    {
+      "priority": "P1",
+      "horizon": "0_30_days",
+      "action": "Mehrere Startseiten-Adressen prüfen und auf eine eindeutige Hauptadresse weiterleiten.",
+      "owner": "Webentwicklung / SEO",
+      "evidence_basis": [
+        "F-003"
+      ]
+    },
+    {
+      "priority": "P2",
+      "horizon": "0_30_days",
+      "action": "Die wichtigsten Leistungsseiten um verifizierte Entscheidungsfragen, Ablauf- und Kostenfaktoren ergänzen.",
+      "owner": "Fachverantwortlicher / Content / SEO",
+      "evidence_basis": [
+        "F-004"
+      ]
+    },
+    {
+      "priority": "P2",
+      "horizon": "31_90_days",
+      "action": "Belegte Projektbeispiele, Zertifikats-/Qualifikationsnachweise und freigegebene Kundenstimmen gezielt ergänzen.",
+      "owner": "Inhaber / Content",
+      "evidence_basis": [
+        "F-005"
+      ]
+    },
+    {
+      "priority": "P3",
+      "horizon": "monitor",
+      "action": "Nach den Korrekturen Audit mit Performance-, Mobile-, Accessibility- und privaten Such-/Nutzungsdaten erweitern.",
+      "owner": "Web / SEO / Analytics",
+      "evidence_basis": [
+        "F-006",
+        "F-007"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S001",
+      "type": "primary",
+      "title": "Baumdienst Renner - öffentliche Website",
+      "location": "https://baumdienstrenner.de/",
+      "purpose": "First-party Inhalte, Leistungen, Kontakt und Seitensample"
+    },
+    {
+      "id": "S002",
+      "type": "primary",
+      "title": "Baumdienst Renner - Kontakt",
+      "location": "https://baumdienstrenner.de/kontakt/",
+      "purpose": "First-party Kontaktweg und Adresse"
+    },
+    {
+      "id": "S003",
+      "type": "primary",
+      "title": "Baumdienst Renner - Impressum",
+      "location": "https://baumdienstrenner.de/impressum/",
+      "purpose": "First-party Betreiberangaben und sichtbare Rechtstext-Referenzen"
+    },
+    {
+      "id": "S004",
+      "type": "primary",
+      "title": "Baumdienst Renner - Datenschutz",
+      "location": "https://baumdienstrenner.de/datenschutz/",
+      "purpose": "First-party Verantwortlichenangabe und Datenschutzoberfläche"
+    },
+    {
+      "id": "S005",
+      "type": "primary",
+      "title": "Digitale-Dienste-Gesetz § 5",
+      "location": "https://www.gesetze-im-internet.de/ddg/__5.html",
+      "purpose": "Aktuelle Primärquelle für Bezeichnung der allgemeinen Informationspflichten"
+    },
+    {
+      "id": "S006",
+      "type": "primary",
+      "title": "EU Commission - ODR platform closure",
+      "location": "https://consumer-redress.ec.europa.eu/site-relocation_en",
+      "purpose": "Aktueller Status der früheren Online-Streitbeilegungsplattform"
+    },
+    {
+      "id": "S007",
+      "type": "secondary",
+      "title": "Gelbe Seiten - Baumpflege Berlin",
+      "location": "https://www.gelbeseiten.de/branchen/baumpflege/berlin",
+      "purpose": "Öffentliche Verzeichnis-Stichprobe für Firmendaten"
+    },
+    {
+      "id": "S008",
+      "type": "secondary",
+      "title": "Cylex - Baumdienst Renner",
+      "location": "https://web2.cylex.de/firma-home/baumdienst-renner-15393433.html",
+      "purpose": "Öffentliche Verzeichnis-Stichprobe für Firmendaten"
+    },
+    {
+      "id": "S009",
+      "type": "derived",
+      "title": "Pixelkiez dated search sample",
+      "location": "queries: Baumdienst Renner Berlin; Baumpflege Berlin; Baumfällung Berlin; Heckenschnitt Berlin",
+      "purpose": "Stichprobe der öffentlichen Suchauffindbarkeit am 28.08.2026"
+    }
+  ],
+  "limitations": [
+    "Public-Surface-Audit: keine Search-Console-, Analytics-, CRM-, Quellcode- oder Backenddaten.",
+    "Keine belastbaren Core-Web-Vitals-/Lighthouse-/PageSpeed-Messwerte in dieser Laufzeit; Performance bleibt weitgehend unbewertet.",
+    "robots.txt, sitemap.xml, Canonical-Tags, Raw-HTML-JSON-LD und Response-Header konnten nicht direkt verifiziert werden.",
+    "Keine pixelgenaue Mobile-/Desktop-, Keyboard-, Fokus-, Kontrast- oder automatisierte Accessibility-Prüfung; keine WCAG-Zertifizierung.",
+    "Suchergebnisse sind datierte Stichproben, keine Aussage über stabile Rankings, Sichtbarkeitsanteile oder Traffic."
+  ],
+  "missing": [
+    "Private Nutzungs-/Conversiondaten",
+    "Search-Console-Daten",
+    "Feld-/Lab-Performancewerte",
+    "vollständige Accessibility-Messung",
+    "direkte Canonical/Redirect/robots/sitemap/JSON-LD/Headers-Inspektion"
+  ],
+  "source_needed": [
+    "Authoritative aktuelle Firmenadresse für die Synchronisierung",
+    "Qualifizierte fachlich/rechtliche Freigabe aktualisierter Rechtstexte",
+    "Private Leistungsdaten für belastbare Aussagen zu Leads, Conversion oder Umsatzwirkung"
+  ],
+  "visualizations": []
+}

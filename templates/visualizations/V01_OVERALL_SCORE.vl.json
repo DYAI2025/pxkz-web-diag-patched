@@ -1,0 +1,118 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Pixelkiez approved template V01_OVERALL_SCORE: Gesamtscore als Bullet",
+  "usermeta": {
+    "template_id": "V01_OVERALL_SCORE",
+    "name": "Gesamtscore als Bullet",
+    "purpose": "Ein Wert auf 0-100 Skala mit Zielmarke",
+    "brand_contract": "pixelkiez-v1"
+  },
+  "width": 620,
+  "height": 310,
+  "data": {
+    "values": [
+      {
+        "label": "Gesamtscore",
+        "value": 64,
+        "target": 75
+      }
+    ]
+  },
+  "config": {
+    "background": "#FFFFFF",
+    "font": "Schibsted Grotesk",
+    "title": {
+      "font": "Schibsted Grotesk",
+      "fontSize": 18,
+      "fontWeight": 700,
+      "color": "#0E1414",
+      "anchor": "start"
+    },
+    "axis": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 11,
+      "titleFont": "Schibsted Grotesk",
+      "titleFontSize": 12,
+      "labelColor": "#0E1414",
+      "titleColor": "#0E1414",
+      "gridColor": "#C6D4D1",
+      "domainColor": "#566360",
+      "tickColor": "#566360"
+    },
+    "legend": {
+      "labelFont": "Schibsted Grotesk",
+      "labelFontSize": 11,
+      "titleFont": "Schibsted Grotesk",
+      "titleFontSize": 12,
+      "labelColor": "#0E1414",
+      "titleColor": "#0E1414"
+    },
+    "view": {
+      "stroke": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "color": "#C6D4D1",
+        "cornerRadius": 5
+      },
+      "encoding": {
+        "x": {
+          "datum": 100
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "bar",
+        "color": "#EC5E43",
+        "cornerRadiusEnd": 5
+      },
+      "encoding": {
+        "x": {
+          "field": "value",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "tick",
+        "color": "#0E1414",
+        "thickness": 3,
+        "size": 34
+      },
+      "encoding": {
+        "x": {
+          "field": "target",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 8,
+        "font": "IBM Plex Mono",
+        "fontSize": 16,
+        "fontWeight": 700,
+        "color": "#0E1414"
+      },
+      "encoding": {
+        "x": {
+          "field": "value",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "value",
+          "type": "quantitative",
+          "format": ".0f"
+        }
+      }
+    }
+  ]
+}

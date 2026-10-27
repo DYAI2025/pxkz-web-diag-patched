@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "status": "PASS",
+  "proof_mode": "STAGED_PIPELINE_AFTER_ATOMIC_BUILDER_RUNTIME_TIMEOUT",
+  "renderer": "WEASYPRINT",
+  "page_count": 12,
+  "selected_visual_count": 7,
+  "four_levers": 4,
+  "internal_metric_count": 48,
+  "pdf_output": "PASS",
+  "pdf_brand": "PASS",
+  "customer_language": "PASS",
+  "visualization_gallery": "PASS_14_VEGA_PLUS_1_FALLBACK",
+  "protected_visual_catalog": true,
+  "protected_customer_closing": true,
+  "protected_core_score": true,
+  "protected_csv_v13": true,
+  "live_gateway_network": "NOT_ASSESSED_RUNTIME_NETWORK_LIMIT",
+  "atomic_builder": "INCOMPLETE_BY_RUNTIME_TIMEOUT",
+  "component_pipeline": "PASS",
+  "customer_presentation_sha256": "573f2d43d6cd485d5efc2fd4d9365d663f036b109b802b42a6707762430ec68b",
+  "client_model_sha256": "46e2611f72770ea05ee86a7f20df912c7b36b9d33746970de07cca996a82e18d",
+  "visualization_plan_sha256": "ebc0c33279bc0fa563f3203c8d3cc5ab732670078580c70fa0b0577b7fd30db5",
+  "notes": [
+    "The existing customer closing, renderer, visualization catalog, core score and CSV contracts are protected by baseline hashes and were not edited by this patch.",
+    "A gateway-enriched fixture completed all staged renderer/output/brand/language validators; the monolithic builder invocation exceeded the host tool time window, so the component result is recorded explicitly rather than relabeled as an atomic PASS.",
+    "Live public gateway networking is optional and was not validated in this host; fixture and injected-transport security tests remain deterministic and passing."
+  ]
+}

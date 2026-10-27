@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "status": "PASS",
+  "checks": [
+    "partial_score_as_bewertungsstand",
+    "ordinal_priority_no_fake_magnitude",
+    "privacy_overclaim_rejected",
+    "closing_action_fragment_rejected",
+    "four_lever_business_impact_rendered"
+  ],
+  "quality_contract": "non_compensatory",
+  "regression_target": "bad-first-pass -> inspected/repaired-second-pass"
+}

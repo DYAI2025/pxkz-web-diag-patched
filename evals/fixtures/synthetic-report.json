@@ -1,0 +1,1479 @@
+{
+  "meta": {
+    "report_title": "Website-Analyse 2026",
+    "customer_name": "Meyer & Sohn Bau GmbH",
+    "audited_url": "https://example.com/",
+    "audit_date": "27.08.2026",
+    "timezone": "Europe/Berlin",
+    "language": "de",
+    "auditor": "Pixelkiez",
+    "audit_mode": "measured_public",
+    "scope_summary": "Öffentliche Website-Stichprobe mit synthetischen Mess- und Beobachtungsdaten für den Skill-Test."
+  },
+  "coverage": {
+    "sampled_pages": [
+      {
+        "page_type": "Startseite",
+        "url": "https://example.com/",
+        "accessed_at": "2026-08-27T00:00:00+02:00"
+      },
+      {
+        "page_type": "Leistung",
+        "url": "https://example.com/services",
+        "accessed_at": "2026-08-27T00:02:00+02:00"
+      },
+      {
+        "page_type": "Über uns",
+        "url": "https://example.com/about",
+        "accessed_at": "2026-08-27T00:03:00+02:00"
+      },
+      {
+        "page_type": "Kontakt",
+        "url": "https://example.com/contact",
+        "accessed_at": "2026-08-27T00:04:00+02:00"
+      },
+      {
+        "page_type": "Datenschutz",
+        "url": "https://example.com/privacy",
+        "accessed_at": "2026-08-27T00:05:00+02:00"
+      }
+    ],
+    "not_tested": [
+      "Search Console",
+      "Analytics/CRM",
+      "Core Web Vitals Felddaten",
+      "Desktop-Labormessung",
+      "vollständige WCAG-Prüfung",
+      "Repository und Deployment"
+    ],
+    "tools_available": [
+      "synthetischer Browser",
+      "synthetischer Such-Sample",
+      "synthetischer HTTP-Check",
+      "synthetischer mobiler Labortest"
+    ],
+    "tools_unavailable": [
+      "Search Console",
+      "Analytics",
+      "CrUX Felddaten",
+      "Repository-Zugriff"
+    ],
+    "capabilities": [
+      {
+        "id": "public_http_fetch",
+        "status": "available",
+        "note": "Synthetic fixture capability state; no live external measurement asserted."
+      },
+      {
+        "id": "public_page_render",
+        "status": "available",
+        "note": "Synthetic fixture capability state; no live external measurement asserted."
+      },
+      {
+        "id": "html_inspection",
+        "status": "available",
+        "note": "Synthetic fixture capability state; no live external measurement asserted."
+      },
+      {
+        "id": "crawl_sample",
+        "status": "available",
+        "note": "Synthetic fixture capability state; no live external measurement asserted."
+      },
+      {
+        "id": "search_sample",
+        "status": "available",
+        "note": "Synthetic fixture capability state; no live external measurement asserted."
+      },
+      {
+        "id": "structured_data_inspection",
+        "status": "available",
+        "note": "Synthetic fixture capability state; no live external measurement asserted."
+      },
+      {
+        "id": "performance_field",
+        "status": "unavailable",
+        "note": "Synthetic fixture capability state; no live external measurement asserted."
+      },
+      {
+        "id": "performance_lab",
+        "status": "available",
+        "note": "Synthetic fixture capability state; no live external measurement asserted."
+      },
+      {
+        "id": "asset_inspection",
+        "status": "available",
+        "note": "Synthetic fixture capability state; no live external measurement asserted."
+      },
+      {
+        "id": "header_inspection",
+        "status": "available",
+        "note": "Synthetic fixture capability state; no live external measurement asserted."
+      },
+      {
+        "id": "accessibility_manual_sample",
+        "status": "available",
+        "note": "Synthetic fixture capability state; no live external measurement asserted."
+      },
+      {
+        "id": "accessibility_automation",
+        "status": "unavailable",
+        "note": "Synthetic fixture capability state; no live external measurement asserted."
+      },
+      {
+        "id": "content_inspection",
+        "status": "available",
+        "note": "Synthetic fixture capability state; no live external measurement asserted."
+      },
+      {
+        "id": "private_measurement_export",
+        "status": "unavailable",
+        "note": "Synthetic fixture capability state; no live external measurement asserted."
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "id": "FIND-01",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "strong",
+      "value": "Synthetic result for Öffentliche Erreichbarkeit",
+      "unit": null,
+      "score": 100,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "FIND-02",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Synthetic result for robots.txt & Sitemap",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "FIND-03",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Indexierbarkeit & Canonicals",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "FIND-04",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E5",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Brand-Sichtbarkeit",
+      "unit": null,
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "FIND-05",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E5",
+      "status": "mixed",
+      "value": "1 of 3 sampled intents visibly represented",
+      "unit": null,
+      "score": 50,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "FIND-06",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Titles, Metas & Überschriften",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "FIND-07",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "mixed",
+      "value": "Synthetic result for Strukturierte Daten",
+      "unit": null,
+      "score": 50,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "FIND-08",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "mixed",
+      "value": "Synthetic result for Interne Verlinkung & Informationsarchitektur",
+      "unit": null,
+      "score": 50,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "FIND-09",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Bild-SEO",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "FIND-10",
+      "applicable": false,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_applicable",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "für dieses synthetische Beispiel nicht anwendbar",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Keine Aussage über nicht anwendbare Kriterien.",
+      "note": null
+    },
+    {
+      "id": "PERF-01",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Messfähigkeit im Fixture absichtlich nicht verfügbar",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Die fehlende Messung ist weder ein guter noch ein schlechter Website-Befund.",
+      "note": "Fixture gap"
+    },
+    {
+      "id": "PERF-02",
+      "applicable": true,
+      "measurement_class": "measured",
+      "evidence_grade": "E2",
+      "status": "mixed",
+      "value": 3.8,
+      "unit": "s",
+      "score": 50,
+      "confidence": 4,
+      "source_or_method": "Synthetic lab fixture",
+      "threshold_source": "synthetic lab threshold fixture",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "PERF-03",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Messfähigkeit im Fixture absichtlich nicht verfügbar",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Die fehlende Messung ist weder ein guter noch ein schlechter Website-Befund.",
+      "note": "Fixture gap"
+    },
+    {
+      "id": "PERF-04",
+      "applicable": true,
+      "measurement_class": "measured",
+      "evidence_grade": "E4",
+      "status": "mixed",
+      "value": "Synthetic result for Asset-Gewicht & Ressourcenlast",
+      "unit": null,
+      "score": 50,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "PERF-05",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "mixed",
+      "value": "Synthetic result for Bild- & Media-Pipeline",
+      "unit": null,
+      "score": 50,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "PERF-06",
+      "applicable": true,
+      "measurement_class": "measured",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Caching & Kompression",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "PERF-07",
+      "applicable": true,
+      "measurement_class": "measured",
+      "evidence_grade": "E4",
+      "status": "mixed",
+      "value": "Synthetic result for Render-blockierende Ressourcen",
+      "unit": null,
+      "score": 50,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "PERF-08",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Responsive Auslieferung",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "PERF-09",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E5",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Öffentlicher Technologie-Snapshot",
+      "unit": null,
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "UX-01",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "mixed",
+      "value": "Synthetic result for Klarheit im ersten Sichtbereich",
+      "unit": null,
+      "score": 50,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "UX-02",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "weak",
+      "value": "Synthetic result for Klarheit des nächsten Schritts",
+      "unit": null,
+      "score": 25,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "UX-03",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Navigation & Orientierung",
+      "unit": null,
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "UX-04",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "mixed",
+      "value": "Synthetic result for Mobile Lesbarkeit & Hierarchie",
+      "unit": null,
+      "score": 50,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "UX-05",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "mixed",
+      "value": "Synthetic result for Kontakt- & Formularreibung",
+      "unit": null,
+      "score": 50,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "UX-06",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Vertrauenssignale im Entscheidungsweg",
+      "unit": null,
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "UX-07",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Inhaltshierarchie",
+      "unit": null,
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "UX-08",
+      "applicable": false,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_applicable",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "für dieses synthetische Beispiel nicht anwendbar",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Keine Aussage über nicht anwendbare Kriterien.",
+      "note": null
+    },
+    {
+      "id": "A11Y-01",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "weak",
+      "value": "Synthetic result for Tastatur & sichtbarer Fokus",
+      "unit": null,
+      "score": 25,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "A11Y-02",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Semantische Struktur & Landmarks",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "A11Y-03",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Alternativtexte im Stichprobenumfang",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "A11Y-04",
+      "applicable": true,
+      "measurement_class": "measured",
+      "evidence_grade": "E4",
+      "status": "mixed",
+      "value": "Synthetic result for Kontrast-Stichprobe",
+      "unit": null,
+      "score": 50,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "A11Y-05",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Formularbeschriftungen",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "A11Y-06",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Messfähigkeit im Fixture absichtlich nicht verfügbar",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Die fehlende Messung ist weder ein guter noch ein schlechter Website-Befund.",
+      "note": "Fixture gap"
+    },
+    {
+      "id": "TRUST-01",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "strong",
+      "value": "Synthetic result for Impressum & rechtliche Oberfläche",
+      "unit": null,
+      "score": 100,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "TRUST-02",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "strong",
+      "value": "Synthetic result for Datenschutz- & Consent-Oberfläche",
+      "unit": null,
+      "score": 100,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "TRUST-03",
+      "applicable": true,
+      "measurement_class": "measured",
+      "evidence_grade": "E4",
+      "status": "strong",
+      "value": "Synthetic result for HTTPS & sichtbare Security-Header",
+      "unit": null,
+      "score": 100,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "TRUST-04",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Konsistente Unternehmens- & Leistungsdaten",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "TRUST-05",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Aktualität sichtbarer Inhalte",
+      "unit": null,
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "TRUST-06",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Referenzen, Belege & Proof Points",
+      "unit": null,
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "TRUST-07",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "strong",
+      "value": "Synthetic result for Kontakttransparenz",
+      "unit": null,
+      "score": 100,
+      "confidence": 4,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "TRUST-08",
+      "applicable": false,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_applicable",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "für dieses synthetische Beispiel nicht anwendbar",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Keine Aussage über nicht anwendbare Kriterien.",
+      "note": null
+    },
+    {
+      "id": "AI-01",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Entitätsklarheit",
+      "unit": null,
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "AI-02",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Leistung, Zielgruppe & Standort explizit",
+      "unit": null,
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "AI-03",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "mixed",
+      "value": "Synthetic result for Antwortbarkeit & FAQ-Struktur",
+      "unit": null,
+      "score": 50,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "AI-04",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E5",
+      "status": "mixed",
+      "value": "Synthetic result for Strukturierte Zusammenfassungen & Schema",
+      "unit": null,
+      "score": 50,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "AI-05",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "mixed",
+      "value": "Synthetic result for Zuordnung von Claims zu Belegen",
+      "unit": null,
+      "score": 50,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "AI-06",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Faktenkonsistenz über Seiten hinweg",
+      "unit": null,
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    },
+    {
+      "id": "AI-07",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Synthetic result for Thematische Tiefe",
+      "unit": null,
+      "score": 75,
+      "confidence": 3,
+      "source_or_method": "Synthetic fixture · Pixelkiez rubric",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Belegt nur den synthetisch geprüften Umfang; keine Ranking-, Umsatz- oder Rechtswirkung.",
+      "note": null
+    }
+  ],
+  "score_summary": {
+    "label": "Score nicht belastbar",
+    "score": null,
+    "display_status": "NO_SCORE",
+    "coverage_percent": 0,
+    "confidence": "LOW",
+    "interpretation": "wird durch compute_score.py ersetzt",
+    "blocker_present": false,
+    "category_scores": [],
+    "does_not_prove": [
+      "keine universelle Website-Qualität",
+      "kein Ranking-, Umsatz- oder Conversion-Nachweis"
+    ],
+    "policy_version": "2.0.0",
+    "registry_version": "1.0.0"
+  },
+  "executive_summary": {
+    "overall_status": "needs_action",
+    "decision": "Die Website hat eine brauchbare technische und vertrauensbildende Basis. Der größte Hebel liegt in klarerer mobiler Nutzerführung, besserer Non-Brand-Auffindbarkeit und gezielten Accessibility-Korrekturen.",
+    "recommended_route": "targeted_modernization",
+    "top_risks": [
+      "Mobil ist der wichtigste nächste Schritt nicht klar genug.",
+      "Für wichtige Non-Brand-Suchen fehlen klare Einstiegsseiten.",
+      "Der Tastaturfokus ist nicht zuverlässig sichtbar."
+    ],
+    "top_strengths": [
+      "HTTPS und wichtige Rechts-/Kontaktflächen sind gut erreichbar.",
+      "Sitemap und Canonicals bilden eine brauchbare technische Basis.",
+      "Das Leistungsangebot ist textlich klar genug, um die Entität zu erkennen."
+    ]
+  },
+  "pillar_summary": [],
+  "findings": [
+    {
+      "id": "F-001",
+      "category": "ux_conversion",
+      "title": "Der nächste Schritt ist mobil nicht klar genug",
+      "severity": "high",
+      "observation": "Im mobilen ersten Sichtbereich konkurrieren mehrere gleich gewichtete Links; ein eindeutiger Anfrageweg ist nicht hervorgehoben.",
+      "evidence": [
+        {
+          "id": "E-001",
+          "type": "visible_observation",
+          "detail": "Kein dominanter Anfrage-CTA im synthetischen 390px-Viewport.",
+          "url": "https://example.com/",
+          "observed_at": "2026-08-27T00:10:00+02:00",
+          "method": "synthetic mobile viewport review",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Besucher können mehr Orientierung benötigen, bevor sie den Kontaktweg erkennen; reale Abbrüche erfordern Nutzungsdaten."
+      },
+      "client_observation": "Auf dem Handy ist nicht sofort klar, was der wichtigste nächste Schritt ist.",
+      "client_impact": "Interessenten müssen erst suchen. Das kann unnötige Reibung vor der Kontaktaufnahme erzeugen.",
+      "client_action": "Eine klare Hauptaktion im ersten sichtbaren Bereich priorisieren und Nebenwege zurücknehmen.",
+      "recommendation": {
+        "action": "Primären CTA priorisieren.",
+        "owner": "UX & Frontend",
+        "horizon": "0_30_days",
+        "acceptance_test": "Bei 390px Breite ist die Hauptaktion ohne Scrollen eindeutig erkennbar."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "UX-02",
+        "UX-04"
+      ]
+    },
+    {
+      "id": "F-002",
+      "category": "performance_technology",
+      "title": "Die mobile Hauptdarstellung ist im Labortest zu langsam",
+      "severity": "medium",
+      "observation": "Die synthetische mobile Labormessung ergab einen LCP von 3,8 Sekunden; Felddaten liegen nicht vor.",
+      "evidence": [
+        {
+          "id": "E-002",
+          "type": "lab_measurement",
+          "detail": "Mobile synthetic LCP: 3.8 s.",
+          "url": "https://example.com/",
+          "observed_at": "2026-08-27T00:10:00+02:00",
+          "method": "synthetic lab run",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Eine langsamere Hauptdarstellung kann die wahrgenommene Reaktionsfähigkeit verschlechtern; reale Nutzerwirkung bleibt ohne Felddaten offen."
+      },
+      "client_observation": "Der wichtigste sichtbare Inhalt erscheint im mobilen Labortest spürbar verzögert.",
+      "client_impact": "Die Seite fühlt sich langsamer an, bevor ein Besucher überhaupt mit dem Angebot arbeiten kann.",
+      "client_action": "LCP-Element, Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen.",
+      "recommendation": {
+        "action": "LCP-Pfad optimieren und nachmessen.",
+        "owner": "Frontend & Betrieb",
+        "horizon": "0_30_days",
+        "acceptance_test": "Reproduzierbarer Labortest dokumentiert die Verbesserung; Felddaten werden separat aufgebaut."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "PERF-02",
+        "PERF-05",
+        "PERF-07"
+      ]
+    },
+    {
+      "id": "F-003",
+      "category": "accessibility",
+      "title": "Der Tastaturfokus ist nicht zuverlässig sichtbar",
+      "severity": "high",
+      "observation": "Beim synthetischen Tastaturdurchlauf wechselte der Fokus, ohne dass der aktive Link in allen getesteten Zuständen sichtbar markiert war.",
+      "evidence": [
+        {
+          "id": "E-003",
+          "type": "visible_observation",
+          "detail": "Focus moved without consistent visible indication.",
+          "url": "https://example.com/",
+          "observed_at": "2026-08-27T00:10:00+02:00",
+          "method": "synthetic keyboard review",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Tastaturnutzer können die aktuelle Position schwerer erkennen; daraus folgt keine vollständige WCAG-Bewertung."
+      },
+      "client_observation": "Wer die Seite per Tastatur bedient, sieht nicht immer deutlich, wo er sich gerade befindet.",
+      "client_impact": "Die Orientierung wird unnötig schwer und ein Teil der Nutzer kann wichtige Elemente schlechter bedienen.",
+      "client_action": "Einen klar sichtbaren Fokusstil für alle interaktiven Elemente einführen und testen.",
+      "recommendation": {
+        "action": "Fokusstil im Designsystem definieren.",
+        "owner": "Designsystem & Frontend",
+        "horizon": "now",
+        "acceptance_test": "Alle interaktiven Elemente zeigen bei Tastaturbedienung einen klar sichtbaren Fokus."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "A11Y-01"
+      ]
+    },
+    {
+      "id": "F-004",
+      "category": "findability_seo",
+      "title": "Die Website ist technisch auffindbar, aber für Non-Brand-Suchen noch schwach aufgestellt",
+      "severity": "high",
+      "observation": "Die synthetische Suchstichprobe zeigte die Marke, aber nur eine von drei geprüften Non-Brand-Intentionen war klar durch eine passende Landingpage vertreten.",
+      "evidence": [
+        {
+          "id": "E-004",
+          "type": "search_observation",
+          "detail": "Brand query visible; 1/3 synthetic non-brand intents mapped to a clear landing page.",
+          "url": "https://example.com/",
+          "observed_at": "2026-08-27T00:10:00+02:00",
+          "method": "synthetic search sample",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Die Website kann für Nutzer ohne Markenkenntnis weniger passende Einstiegspunkte bieten; stabile Rankings sind daraus nicht ableitbar."
+      },
+      "client_observation": "Wer die Marke schon kennt, findet die Website. Für wichtige Suchanliegen fehlen noch klare Einstiegsseiten.",
+      "client_impact": "Potenzielle Kunden ohne Markenkenntnis bekommen weniger eindeutige Treffer für ihr konkretes Anliegen.",
+      "client_action": "Die drei wichtigsten Suchintentionen auf eigene, klar verlinkte Leistungsseiten abbilden.",
+      "recommendation": {
+        "action": "Intent-Landingpages priorisieren.",
+        "owner": "SEO & Content",
+        "horizon": "31_90_days",
+        "acceptance_test": "Für drei priorisierte Non-Brand-Intentionen existieren eindeutige Landingpages mit internem Linkpfad."
+      },
+      "confidence": 3,
+      "visual_asset": null,
+      "metric_refs": [
+        "FIND-05",
+        "FIND-08"
+      ]
+    },
+    {
+      "id": "F-005",
+      "category": "ai_readiness",
+      "title": "Die Leistungen sind lesbar, aber Fragen werden noch nicht konsequent beantwortet",
+      "severity": "medium",
+      "observation": "Entität und Leistungen sind im Text erkennbar; FAQ-ähnliche Antwortblöcke und die Verbindung von Claims zu Belegen sind im Fixture nur teilweise vorhanden.",
+      "evidence": [
+        {
+          "id": "E-005",
+          "type": "dom_observation",
+          "detail": "Services visible; limited FAQ and proof-to-claim mapping.",
+          "url": "https://example.com/",
+          "observed_at": "2026-08-27T00:10:00+02:00",
+          "method": "synthetic DOM review",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Maschinen können Grundinformationen extrahieren, müssen aber bei Detailfragen stärker inferieren; echte AI-Zitation wurde nicht gemessen."
+      },
+      "client_observation": "Die Website erklärt das Angebot, beantwortet typische Detailfragen aber noch nicht direkt genug.",
+      "client_impact": "Menschen und KI-Systeme müssen mehr zusammensetzen, statt klare Antworten und Belege vorzufinden.",
+      "client_action": "Wichtige Kundenfragen direkt beantworten und Aussagen mit passenden Referenzen oder Belegen verbinden.",
+      "recommendation": {
+        "action": "Antwortblöcke und Proof-Mapping ergänzen.",
+        "owner": "Content & SEO",
+        "horizon": "31_90_days",
+        "acceptance_test": "Priorisierte Fragen lassen sich aus einer klaren Seite mit sichtbaren Belegen beantworten."
+      },
+      "confidence": 3,
+      "visual_asset": null,
+      "metric_refs": [
+        "AI-03",
+        "AI-05"
+      ]
+    },
+    {
+      "id": "F-006",
+      "category": "trust_privacy_content",
+      "title": "Vertrauen und rechtliche Basisflächen sind gut sichtbar",
+      "severity": "positive",
+      "observation": "HTTPS, Kontakt, Impressum und Datenschutz sind in der synthetischen Stichprobe sichtbar und konsistent erreichbar.",
+      "evidence": [
+        {
+          "id": "E-006",
+          "type": "http_observation",
+          "detail": "HTTPS and legal/contact surfaces reachable.",
+          "url": "https://example.com/",
+          "observed_at": "2026-08-27T00:10:00+02:00",
+          "method": "synthetic public surface review",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "fact",
+        "text": "Diese sichtbaren Basissignale sind im geprüften Umfang vorhanden; sie ersetzen keine Rechts- oder Sicherheitsprüfung."
+      },
+      "client_observation": "Kontakt, Impressum und Datenschutz sind gut erreichbar und die Website läuft über HTTPS.",
+      "client_impact": "Das schafft eine solide sichtbare Vertrauensbasis, die bei weiteren Änderungen erhalten bleiben sollte.",
+      "client_action": "Diese Basis beibehalten und bei Änderungen regelmäßig gegen reale Datenflüsse prüfen.",
+      "recommendation": {
+        "action": "Positive Basissignale erhalten.",
+        "owner": "Betrieb",
+        "horizon": "monitor",
+        "acceptance_test": "Kontakt- und Rechtsseiten bleiben erreichbar; HTTPS bleibt aktiv."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "TRUST-01",
+        "TRUST-02",
+        "TRUST-03",
+        "TRUST-07"
+      ]
+    },
+    {
+      "id": "F-007",
+      "category": "findability_seo",
+      "title": "Sitemap und Canonicals bilden bereits eine brauchbare technische Basis",
+      "severity": "positive",
+      "observation": "Im synthetischen Fixture sind Sitemap und Canonical-Signale vorhanden und die Kernseiten öffentlich erreichbar.",
+      "evidence": [
+        {
+          "id": "E-007",
+          "type": "technical_observation",
+          "detail": "Synthetic sitemap and canonical signals present.",
+          "url": "https://example.com/",
+          "observed_at": "2026-08-27T00:10:00+02:00",
+          "method": "synthetic technical review",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "fact",
+        "text": "Diese technischen Grundlagen sind im geprüften Umfang vorhanden."
+      },
+      "client_observation": "Die wichtigsten technischen Grundlagen für Crawling und Seitenzuordnung sind bereits vorhanden.",
+      "client_impact": "Verbesserungen können auf einer brauchbaren Basis aufbauen, statt zuerst Grundfehler reparieren zu müssen.",
+      "client_action": "Die vorhandene Basis bei neuen Seiten und Weiterleitungen konsequent beibehalten.",
+      "recommendation": {
+        "action": "Technische SEO-Basis erhalten.",
+        "owner": "SEO & Entwicklung",
+        "horizon": "monitor",
+        "acceptance_test": "Neue Kernseiten sind in Sitemap und Canonical-Logik konsistent eingebunden."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "FIND-02",
+        "FIND-03"
+      ]
+    }
+  ],
+  "scenario_horizons": [
+    {
+      "years": 2,
+      "paths": [
+        {
+          "scenario": "inaction",
+          "outcome": "Bestehende Reibung kann sichtbar bleiben.",
+          "assumptions": [
+            "keine strukturellen Änderungen"
+          ],
+          "leading_indicators": [
+            "stabile öffentliche Oberfläche"
+          ],
+          "counterfactors": [
+            "größere Neupositionierung"
+          ]
+        }
+      ]
+    },
+    {
+      "years": 5,
+      "paths": [
+        {
+          "scenario": "targeted_modernization",
+          "outcome": "Die Website kann schrittweise auf neue Anforderungen angepasst werden.",
+          "assumptions": [
+            "regelmäßige Pflege"
+          ],
+          "leading_indicators": [
+            "wiederholte Messungen"
+          ],
+          "counterfactors": [
+            "grundlegender Strategiewechsel"
+          ]
+        }
+      ]
+    }
+  ],
+  "options": [
+    {
+      "route": "monitor",
+      "evidence_basis": [
+        "F-006",
+        "F-007"
+      ]
+    },
+    {
+      "route": "maintenance",
+      "evidence_basis": [
+        "F-006",
+        "F-007"
+      ]
+    },
+    {
+      "route": "targeted_modernization",
+      "evidence_basis": [
+        "F-001",
+        "F-003",
+        "F-004",
+        "F-005"
+      ]
+    },
+    {
+      "route": "redesign",
+      "evidence_basis": [
+        "F-001",
+        "F-004"
+      ]
+    }
+  ],
+  "roadmap": [
+    {
+      "priority": "P1",
+      "horizon": "now",
+      "action": "Sichtbaren Tastaturfokus für alle interaktiven Elemente herstellen.",
+      "owner": "Designsystem & Frontend",
+      "evidence_basis": [
+        "F-003"
+      ]
+    },
+    {
+      "priority": "P1",
+      "horizon": "0_30_days",
+      "action": "Mobilen Haupt-CTA im ersten Sichtbereich eindeutig priorisieren.",
+      "owner": "UX & Frontend",
+      "evidence_basis": [
+        "F-001"
+      ]
+    },
+    {
+      "priority": "P1",
+      "horizon": "0_30_days",
+      "action": "Mobile Hauptdarstellung optimieren und erneut messen.",
+      "owner": "Frontend & Betrieb",
+      "evidence_basis": [
+        "F-002"
+      ]
+    },
+    {
+      "priority": "P2",
+      "horizon": "31_90_days",
+      "action": "Drei priorisierte Non-Brand-Intentionen auf klare Landingpages abbilden.",
+      "owner": "SEO & Content",
+      "evidence_basis": [
+        "F-004"
+      ]
+    },
+    {
+      "priority": "P2",
+      "horizon": "31_90_days",
+      "action": "FAQ- und Proof-Strukturen für wichtige Kundenfragen ergänzen.",
+      "owner": "Content & SEO",
+      "evidence_basis": [
+        "F-005"
+      ]
+    },
+    {
+      "priority": "P3",
+      "horizon": "monitor",
+      "action": "Technische SEO- und Vertrauensbasis bei Releases beibehalten.",
+      "owner": "Betrieb & SEO",
+      "evidence_basis": [
+        "F-006",
+        "F-007"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S001",
+      "type": "user_provided",
+      "title": "Pixelkiez Design System",
+      "location": "attached design-system snapshot",
+      "purpose": "brand and report template contract"
+    },
+    {
+      "id": "S002",
+      "type": "user_provided",
+      "title": "Website Intelligence integration analysis",
+      "location": "user attachment markdown(3).md",
+      "purpose": "method and scoring-gap requirements"
+    },
+    {
+      "id": "S003",
+      "type": "derived",
+      "title": "Synthetic fixture evidence",
+      "location": "eval fixture",
+      "purpose": "deterministic renderer/eval test only"
+    }
+  ],
+  "limitations": [
+    "Synthetisches Testfixture, keine reale Kundenseite.",
+    "Keine realen Feld-, Search-Console-, Analytics- oder CRM-Daten.",
+    "Keine rechtliche oder vollständige WCAG-Prüfung."
+  ],
+  "missing": [
+    "Reale Kundendaten für dieses Fixture."
+  ],
+  "source_needed": [
+    "Aktuelle Primärquellen für dynamische Standards bei einem realen Audit."
+  ],
+  "visualizations": [
+    {
+      "id": "VIZ-001",
+      "template_id": "V02",
+      "category": "performance_technology",
+      "metric_refs": [
+        "PERF-02"
+      ],
+      "finding_ref": "F-002",
+      "title": "Die mobile Labormessung bleibt in vier Testläufen über dem Zielband.",
+      "metric_label": "Mobile Ladezeit · synthetische Testreihe",
+      "current_value_label": "3,8 s",
+      "evidence": {
+        "grade": "E2",
+        "mode": "LAB",
+        "scope": "PAGE",
+        "population": "4 kontrollierte mobile Läufe",
+        "tool": "Synthetic fixture",
+        "version": "1.0",
+        "date": "27.08.2026"
+      },
+      "threshold": {
+        "label": "Ziel ≤ 2,5 s",
+        "value": 2.5,
+        "source": "synthetic lab threshold fixture"
+      },
+      "does_not_prove": "Labordaten sind keine reale Nutzerpopulation und beweisen weder Ranking noch Conversion.",
+      "data": {
+        "series": [
+          {
+            "label": "Lauf 1",
+            "value": 3.2
+          },
+          {
+            "label": "Lauf 2",
+            "value": 3.5
+          },
+          {
+            "label": "Lauf 3",
+            "value": 3.6
+          },
+          {
+            "label": "Lauf 4",
+            "value": 3.8
+          }
+        ],
+        "bands": [
+          {
+            "label": "gut",
+            "boundary": 2.5,
+            "status": "good",
+            "source": "synthetic lab threshold fixture"
+          },
+          {
+            "label": "mittel",
+            "boundary": 4.0,
+            "status": "warn",
+            "source": "synthetic lab threshold fixture"
+          },
+          {
+            "label": "schlecht",
+            "boundary": 6.0,
+            "status": "bad",
+            "source": "synthetic lab threshold fixture"
+          }
+        ]
+      }
+    },
+    {
+      "id": "VIZ-002",
+      "template_id": "V12",
+      "category": "findability_seo",
+      "metric_refs": [
+        "FIND-05",
+        "FIND-08",
+        "A11Y-01"
+      ],
+      "finding_ref": "F-004",
+      "title": "Drei priorisierte Messpunkte brauchen nachvollziehbare Korrektur.",
+      "metric_label": "Kritische Messpunkte · Stichprobe",
+      "current_value_label": "3 Punkte",
+      "evidence": {
+        "grade": "E4",
+        "mode": "HYBRID",
+        "scope": "SITE",
+        "population": "öffentliche synthetische Audit-Stichprobe",
+        "tool": "Pixelkiez fixture",
+        "version": "1.0",
+        "date": "27.08.2026"
+      },
+      "threshold": null,
+      "does_not_prove": "Die Tabelle ist eine priorisierte Stichprobe und kein Vollständigkeits- oder Konformitätsnachweis.",
+      "data": {
+        "rows": [
+          {
+            "metric": "Non-Brand-Sichtbarkeit",
+            "value": "1/3 Intents",
+            "threshold_origin": "Kontextabhängig",
+            "evidence": "E5",
+            "does_not_prove": "keine stabile Ranking-Abdeckung"
+          },
+          {
+            "metric": "Informationsarchitektur",
+            "value": "mixed",
+            "threshold_origin": "Produkt-Rubrik",
+            "evidence": "E4",
+            "does_not_prove": "keine gemessene Conversion"
+          },
+          {
+            "metric": "Barrierefreiheit",
+            "value": "high finding",
+            "threshold_origin": "Stichprobenbefund",
+            "evidence": "E4",
+            "does_not_prove": "keine WCAG-Konformität"
+          }
+        ]
+      }
+    }
+  ]
+}

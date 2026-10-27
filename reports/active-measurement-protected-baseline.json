@@ -1,0 +1,30 @@
+{
+  "status": "FROZEN",
+  "working_copy": "/mnt/data/pxk-active-measurement-migration/pixelkiez-website-diagnosis",
+  "source_baseline": "/home/oai/skills/pixelkiez-website-diagnosis",
+  "git_repository": false,
+  "branch_head": "NOT_APPLICABLE_INSTALLED_SKILL_BASELINE",
+  "initial_tree_digest": "dbe282325a1ebd1acaaa0b02c822037a235e573e548e39b0a36ae96ad60569f2",
+  "baseline_gate_status": {
+    "quick_validate": "PASS",
+    "validate_schema": "PASS",
+    "measurement_gateway_evals": "PASS",
+    "score_gate_evals": "PASS",
+    "core_parity": "PASS",
+    "measurement_platform_baseline": "PASS",
+    "release_gate": "PASS",
+    "batch_contract_evals": "PASS",
+    "full_reporting_runtime_rerun": "UNVERIFIED_RUNTIME_TIMEOUT"
+  },
+  "protected_files": {
+    "assets/measurement-registry.json": "b527f71f397b2f95194ec35f2b85e6ff68024ab90ed25c65d2eccc255a93acac",
+    "assets/capability-registry.json": "0616474e57be73ccaa9cd330d788167557f6874861b21a1660cd63d0d0d9c1b9",
+    "scripts/compute_score.py": "1df90b548be6ec0af857a932c43c2d9b30442ccd993420a00b62acc2ad6c56c6",
+    "scripts/normalize_gateway_measurements.py": "904a1118da835a97595927a750ca04ff65d4fbc8b6f97999bce13c0a3313ad90",
+    "schemas/diagnosis-report.schema.json": "7fb5adef99df470054cd70dd101262e278553f96d1c03ea0714ca91d3869ab82",
+    "schemas/measurement-enrichment.schema.json": "21d8b679764116a09b33018a86dae409f87f1115d60c6d55032be33c9aabd0ee",
+    "contracts/pixelkiez-elevenlabs-batch-contract-v1.3.json": "ed9924084c479c3627ceb2648ef301162d5b99bbfddfe3fefe265c7cec915d38",
+    "scripts/render_diagnosis_pdf.py": "411d7adfe8952de7b5dd60f566b0384ccfc3ceda8b7b4b5c83378b471f474ea1"
+  },
+  "truth_boundary": "The reporting timeout is not recorded as a functional failure and is not promoted to PASS. Fresh post-patch report rendering must be independently demonstrated before packaging."
+}

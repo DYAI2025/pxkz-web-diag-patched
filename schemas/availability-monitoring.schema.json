@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pixelkiez.local/schemas/availability-monitoring.schema.json",
+  "title": "Pixelkiez Provider-Neutral Availability Monitoring",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "target_url", "state", "period", "samples", "incidents", "provider", "evidence_class"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "target_url": {"type": "string", "pattern": "^https?://"},
+    "state": {"enum": ["AVAILABLE", "UNAVAILABLE", "NOT_CONFIGURED", "ERROR"]},
+    "period": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["start", "end", "interval_seconds"],
+      "properties": {
+        "start": {"type": "string"},
+        "end": {"type": "string"},
+        "interval_seconds": {"type": "integer", "minimum": 60}
+      }
+    },
+    "samples": {"type": "array", "items": {"type": "object"}},
+    "incidents": {"type": "array", "items": {"type": "object"}},
+    "provider": {"type": "string"},
+    "evidence_class": {"enum": ["CONTINUOUS_MONITORING", "NOT_ASSESSED"]}
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Pixelkiez approved template V05_RANKING_POSITION: Rankingposition",
+  "usermeta": {
+    "template_id": "V05_RANKING_POSITION",
+    "name": "Rankingposition",
+    "purpose": "Querygebundene SERP-Positionen",
+    "brand_contract": "pixelkiez-v1"
+  },
+  "width": 620,
+  "height": 310,
+  "data": {
+    "values": [
+      {
+        "query": "baumpflege potsdam",
+        "position": 7
+      },
+      {
+        "query": "baumfällung potsdam",
+        "position": 16
+      },
+      {
+        "query": "baumpflege berlin",
+        "position": 28
+      }
+    ]
+  },
+  "mark": {
+    "type": "point",
+    "filled": true,
+    "size": 180,
+    "color": "#EC5E43"
+  },
+  "encoding": {
+    "y": {
+      "field": "query",
+      "type": "nominal",
+      "axis": {
+        "title": null
+      }
+    },
+    "x": {
+      "field": "position",
+      "type": "quantitative",
+      "scale": {
+        "reverse": true
+      },
+      "axis": {
+        "title": "Position (kleiner ist besser)"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "query"
+      },
+      {
+        "field": "position"
+      }
+    ]
+  },
+  "config": {
+    "background": "#FFFFFF",
+    "font": "Schibsted Grotesk",
+    "title": {
+      "font": "Schibsted Grotesk",
+      "fontSize": 18,
+      "fontWeight": 700,
+      "color": "#0E1414",
+      "anchor": "start"
+    },
+    "axis": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 11,
+      "titleFont": "Schibsted Grotesk",
+      "titleFontSize": 12,
+      "labelColor": "#0E1414",
+      "titleColor": "#0E1414",
+      "gridColor": "#C6D4D1",
+      "domainColor": "#566360",
+      "tickColor": "#566360"
+    },
+    "legend": {
+      "labelFont": "Schibsted Grotesk",
+      "labelFontSize": 11,
+      "titleFont": "Schibsted Grotesk",
+      "titleFontSize": 12,
+      "labelColor": "#0E1414",
+      "titleColor": "#0E1414"
+    },
+    "view": {
+      "stroke": null
+    }
+  }
+}

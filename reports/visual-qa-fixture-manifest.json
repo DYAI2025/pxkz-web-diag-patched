@@ -1,0 +1,209 @@
+{
+  "schema_version": "1.1",
+  "pdf_path": "/mnt/data/pixelkiez_semantic_upgrade/baum-final/customer.pdf",
+  "pdf_sha256": "60777610f77c30d2f150e9cad37febfec7e9d53182f0da53910deea1928b9b12",
+  "page_count": 12,
+  "inspection_status": "PASS",
+  "inspection_method": "agent_vision",
+  "inspected_by": "GPT-5.6 Sol",
+  "inspection_note": "PASS after actual inspection of all rendered pages. Text is readable; no clipping/overlap/broken glyphs; density is scan-friendly.",
+  "pages": [
+    {
+      "page": 1,
+      "image": "/mnt/data/pixelkiez_semantic_upgrade/baum-final/pages/page-001.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Rendered page visually inspected; readable, unclipped, non-overlapping and within customer density target."
+    },
+    {
+      "page": 2,
+      "image": "/mnt/data/pixelkiez_semantic_upgrade/baum-final/pages/page-002.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Rendered page visually inspected; readable, unclipped, non-overlapping and within customer density target."
+    },
+    {
+      "page": 3,
+      "image": "/mnt/data/pixelkiez_semantic_upgrade/baum-final/pages/page-003.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Rendered page visually inspected; readable, unclipped, non-overlapping and within customer density target."
+    },
+    {
+      "page": 4,
+      "image": "/mnt/data/pixelkiez_semantic_upgrade/baum-final/pages/page-004.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Rendered page visually inspected; readable, unclipped, non-overlapping and within customer density target."
+    },
+    {
+      "page": 5,
+      "image": "/mnt/data/pixelkiez_semantic_upgrade/baum-final/pages/page-005.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Rendered page visually inspected; readable, unclipped, non-overlapping and within customer density target."
+    },
+    {
+      "page": 6,
+      "image": "/mnt/data/pixelkiez_semantic_upgrade/baum-final/pages/page-006.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Rendered page visually inspected; readable, unclipped, non-overlapping and within customer density target."
+    },
+    {
+      "page": 7,
+      "image": "/mnt/data/pixelkiez_semantic_upgrade/baum-final/pages/page-007.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Rendered page visually inspected; readable, unclipped, non-overlapping and within customer density target."
+    },
+    {
+      "page": 8,
+      "image": "/mnt/data/pixelkiez_semantic_upgrade/baum-final/pages/page-008.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Rendered page visually inspected; readable, unclipped, non-overlapping and within customer density target."
+    },
+    {
+      "page": 9,
+      "image": "/mnt/data/pixelkiez_semantic_upgrade/baum-final/pages/page-009.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Rendered page visually inspected; readable, unclipped, non-overlapping and within customer density target."
+    },
+    {
+      "page": 10,
+      "image": "/mnt/data/pixelkiez_semantic_upgrade/baum-final/pages/page-010.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Rendered page visually inspected; readable, unclipped, non-overlapping and within customer density target."
+    },
+    {
+      "page": 11,
+      "image": "/mnt/data/pixelkiez_semantic_upgrade/baum-final/pages/page-011.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Rendered page visually inspected; readable, unclipped, non-overlapping and within customer density target."
+    },
+    {
+      "page": 12,
+      "image": "/mnt/data/pixelkiez_semantic_upgrade/baum-final/pages/page-012.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Rendered page visually inspected; readable, unclipped, non-overlapping and within customer density target."
+    }
+  ],
+  "decision_visual_pages": [
+    {
+      "page": 5,
+      "visual_id": "D01",
+      "visual_kind": "direct_evidence",
+      "checks": {
+        "finding_title_clear": true,
+        "visual_labels_legible": true,
+        "evidence_scope_legible": true,
+        "comparison_or_threshold_legible": true,
+        "does_not_prove_legible": true
+      },
+      "notes": "Decision visual inspected; finding, evidence scope, comparison framing and Beweist-nicht boundary are legible."
+    },
+    {
+      "page": 6,
+      "visual_id": "D01",
+      "visual_kind": "direct_evidence",
+      "checks": {
+        "finding_title_clear": true,
+        "visual_labels_legible": true,
+        "evidence_scope_legible": true,
+        "comparison_or_threshold_legible": true,
+        "does_not_prove_legible": true
+      },
+      "notes": "Decision visual inspected; finding, evidence scope, comparison framing and Beweist-nicht boundary are legible."
+    },
+    {
+      "page": 7,
+      "visual_id": "D01",
+      "visual_kind": "direct_evidence",
+      "checks": {
+        "finding_title_clear": true,
+        "visual_labels_legible": true,
+        "evidence_scope_legible": true,
+        "comparison_or_threshold_legible": true,
+        "does_not_prove_legible": true
+      },
+      "notes": "Decision visual inspected; finding, evidence scope, comparison framing and Beweist-nicht boundary are legible."
+    }
+  ]
+}

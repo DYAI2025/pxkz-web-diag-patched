@@ -1,0 +1,4 @@
+PASS: full coverage=92 status=FULL_SCORE label=Pixelkiez Score
+PASS: partial coverage=72 status=PARTIAL_SCORE label=Pixelkiez Teilscore
+PASS: hidden coverage=34 status=NO_SCORE label=Score nicht belastbar
+PASS: score coverage gates

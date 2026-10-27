@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "artifact_digest": "9f1ce88027c785069dcd1048f7f7f14143801ab781a570db7903e332eba2cb04",
+  "metric_count": 48,
+  "weighted_contributions": "RECONCILED",
+  "category_results": "RECONCILED",
+  "overall_result": "RECONCILED",
+  "analysis_report_sha256": "3bdd2e71e19d54ea2928c1dd40342b4b3709497f6b347429496099ac1bb1971f",
+  "scored_report_sha256": "de915b6f43e26dfbd8198b36738bb6202f5f6bd4576462fcddca936ed1542c34",
+  "customer_internal_leakage": "NONE_DETECTED_IN_CLIENT_MODEL"
+}

@@ -1,0 +1,59 @@
+:root{
+  --font-sans:"Schibsted Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --font-display:var(--font-sans);
+  --font-body:var(--font-sans);
+  --font-data:var(--font-mono);
+  --font-label:var(--font-mono);
+
+  --weight-regular:400;
+  --weight-medium:500;
+  --weight-semibold:600;
+  --weight-bold:700;
+
+  /* Web scale — measured off the pixelkiez.de capture (2688px @2×). */
+  --web-h1-size:44px;  --web-h1-line:52px;
+  --web-h2-size:40px;  --web-h2-line:48px;
+  --web-h3-size:30px;  --web-h3-line:38px;
+  --web-h4-size:24px;  --web-h4-line:32px;
+  --web-body-size:19px;--web-body-line:30px;
+  --web-small-size:16px;--web-small-line:24px;
+
+  /* Document scale — the Standardwerk hierarchy in pt, 1pt = 1.3333px. */
+  --text-h1-size:48px;   --text-h1-line:58.67px;
+  --text-h2-size:37.33px;--text-h2-line:48px;
+  --text-h3-size:29.33px;--text-h3-line:37.33px;
+  --text-h4-size:24px;   --text-h4-line:32px;
+  --text-body-size:21.33px;--text-body-line:32px;
+  --text-quote-size:24px;--text-quote-line:37.33px;
+  --text-note-size:16px; --text-note-line:24px;
+
+  /* UI scale */
+  --ui-2xl:32px; --ui-2xl-line:40px;
+  --ui-xl:24px;  --ui-xl-line:32px;
+  --ui-lg:20px;  --ui-lg-line:28px;
+  --ui-md:16px;  --ui-md-line:24px;
+  --ui-sm:14px;  --ui-sm-line:20px;
+  --ui-xs:12px;  --ui-xs-line:16px;
+
+  /* Slide scale — 1280×720 stage, body never below 24px */
+  --slide-title:64px;  --slide-title-line:70px;
+  --slide-h2:44px;     --slide-h2-line:52px;
+  --slide-h3:30px;     --slide-h3-line:38px;
+  --slide-body:24px;   --slide-body-line:34px;
+  --slide-caption:18px;--slide-caption-line:24px;
+  --slide-metric:76px; --slide-metric-line:76px;
+
+  --tracking-tight:-0.02em;
+  --tracking-normal:0;
+  --tracking-eyebrow:0.14em;
+
+  /* THE LABEL STYLE. On this site every label, section number, tagline and
+     feature-strip item is uppercase letterspaced MONOSPACE. It carries as much
+     brand recognition as the orange does — do not set labels in the sans. */
+  --label-font:var(--font-mono);
+  --label-size:13px;
+  --label-weight:var(--weight-medium);
+  --label-tracking:var(--tracking-eyebrow);
+  --label-transform:uppercase; /* @kind other */
+}

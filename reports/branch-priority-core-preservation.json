@@ -1,0 +1,48 @@
+{
+  "all_protected_exact": true,
+  "core_metric_count": 48,
+  "default_client_model_exact": true,
+  "notes": "This is local snapshot parity, not proof of live audit or commercial outcomes.",
+  "protected_files": {
+    "assets/capability-registry.json": {
+      "byte_identical": true,
+      "new_sha256": "0616474e57be73ccaa9cd330d788167557f6874861b21a1660cd63d0d0d9c1b9",
+      "old_sha256": "0616474e57be73ccaa9cd330d788167557f6874861b21a1660cd63d0d0d9c1b9"
+    },
+    "assets/core-evidence-bindings.active.v1.json": {
+      "byte_identical": true,
+      "new_sha256": "09a3b2e2ce8d6b264347af53e9423df87c367d4c475a97940cc24fb415927f09",
+      "old_sha256": "09a3b2e2ce8d6b264347af53e9423df87c367d4c475a97940cc24fb415927f09"
+    },
+    "assets/enrichment-metric-registry.json": {
+      "byte_identical": true,
+      "new_sha256": "ff44fa183feca1fefec3e62556b0f0528756b3eb425818e554fddb84b18210d3",
+      "old_sha256": "ff44fa183feca1fefec3e62556b0f0528756b3eb425818e554fddb84b18210d3"
+    },
+    "assets/measurement-registry.json": {
+      "byte_identical": true,
+      "new_sha256": "b527f71f397b2f95194ec35f2b85e6ff68024ab90ed25c65d2eccc255a93acac",
+      "old_sha256": "b527f71f397b2f95194ec35f2b85e6ff68024ab90ed25c65d2eccc255a93acac"
+    },
+    "contracts/pixelkiez-elevenlabs-batch-contract-v1.3.json": {
+      "byte_identical": true,
+      "new_sha256": "ed9924084c479c3627ceb2648ef301162d5b99bbfddfe3fefe265c7cec915d38",
+      "old_sha256": "ed9924084c479c3627ceb2648ef301162d5b99bbfddfe3fefe265c7cec915d38"
+    },
+    "evals/output_evals.json": {
+      "byte_identical": true,
+      "new_sha256": "b18a84316df9a7979b16015591794bbb8fcd6636468959a0b4373c85549320b7",
+      "old_sha256": "b18a84316df9a7979b16015591794bbb8fcd6636468959a0b4373c85549320b7"
+    },
+    "evals/trigger_queries.json": {
+      "byte_identical": true,
+      "new_sha256": "f184cd4a37a5964227695040a0889b20ae4757d630197bf10ff04c225f72a324",
+      "old_sha256": "f184cd4a37a5964227695040a0889b20ae4757d630197bf10ff04c225f72a324"
+    },
+    "scripts/compute_score.py": {
+      "byte_identical": true,
+      "new_sha256": "1df90b548be6ec0af857a932c43c2d9b30442ccd993420a00b62acc2ad6c56c6",
+      "old_sha256": "1df90b548be6ec0af857a932c43c2d9b30442ccd993420a00b62acc2ad6c56c6"
+    }
+  }
+}

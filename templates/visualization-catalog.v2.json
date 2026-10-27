@@ -1,0 +1,29 @@
+{
+  "library_version": "2.0.0",
+  "canonical_engine": "VEGA_LITE",
+  "pdf_renderer": "WEASYPRINT",
+  "optional_engine": "MERMAID",
+  "template_ids": [
+    "V01_OVERALL_SCORE",
+    "V02_CATEGORY_BARS",
+    "V03_TOP_LEVERS",
+    "V04_FINDABILITY_BENCHMARK",
+    "V05_RANKING_POSITION",
+    "V06_QUERY_COVERAGE",
+    "V07_PERFORMANCE_THRESHOLD",
+    "V08_AI_ANSWERABILITY",
+    "V09_AGENT_READINESS",
+    "V10_TRUST_MATRIX",
+    "V11_SEVERITY_DISTRIBUTION",
+    "V12_AUDIT_COVERAGE",
+    "V13_IMPACT_EFFORT",
+    "V14_REPEAT_AUDIT",
+    "D01_PROCESS_FLOW"
+  ],
+  "template_count": 15,
+  "customer_min_visuals": 4,
+  "arbitrary_specs_allowed": false,
+  "external_runtime_required": false,
+  "fallback_backend": "PIXELKIEZ_SVG_FALLBACK",
+  "customer_max_visuals": 7
+}

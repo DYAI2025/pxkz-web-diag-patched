@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "checks": 9,
+  "check_ids": [
+    "schema_fixture",
+    "schema_unavailable",
+    "protected_baseline",
+    "third_party_no_copy",
+    "optional_contracts",
+    "normalization",
+    "collector_fixture",
+    "offline_degradation",
+    "48_core_unchanged"
+  ],
+  "live_gateway_network": "NOT_ASSESSED_BY_FIXTURE_SUITE",
+  "scoring_policy": "NON_SCORING_ENRICHMENT",
+  "core_metric_count": 48
+}

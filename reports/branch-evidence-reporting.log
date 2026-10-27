@@ -1,0 +1,1 @@
+PASS: visual/reporting architecture E2E (3 outputs, 5-7 visuals, WeasyPrint, no fake benchmarks, fail-closed fonts/QA/SVG)

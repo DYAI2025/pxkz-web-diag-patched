@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "suite": "visualization-template-gallery",
+  "vega_lite_templates": 14,
+  "mermaid_or_fallback_templates": 1,
+  "rendered_count": 15,
+  "vega_lite_schema": "assets/vega-lite-schema-v6.4.3.json",
+  "backend_under_test": "PIXELKIEZ_SVG_FALLBACK",
+  "does_not_prove": [
+    "external Vega or Mermaid runtime availability",
+    "customer data quality",
+    "commercial outcome"
+  ]
+}

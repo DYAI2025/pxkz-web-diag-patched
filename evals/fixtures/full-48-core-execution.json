@@ -1,0 +1,1741 @@
+{
+  "schema_version": "1.0",
+  "binding_contract_version": "1.0.0",
+  "target_url": "https://example.test/",
+  "execution_run_id": "fixture-full-48-active-v1",
+  "mode": "FIXTURE",
+  "generated_at": "2026-09-07T21:36:00Z",
+  "evidence_catalog": [
+    {
+      "id": "E-1001",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "target_url": "https://example.test/",
+      "status": "MEASURED",
+      "evidence_grade": "E4",
+      "digest": "7d162fb2b94d042d98edeee89dc4f145fbc839b14a8e2dfd9c8ab0939b23d9ec",
+      "reference": "fixture://full-48/FIND-01",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1002",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "target_url": "https://example.test/",
+      "status": "MEASURED",
+      "evidence_grade": "E4",
+      "digest": "30ecb7fc2d3c7dd703cf39af44702f503189a0364606c7251394b5f950aa0149",
+      "reference": "fixture://full-48/FIND-02",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1003",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E4",
+      "digest": "7cfcfbc8feee3b24e0e72c7e786ccb07e13491ca14692e1e9decef15ac5f8fdb",
+      "reference": "fixture://full-48/FIND-03",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1004",
+      "source_family": "SEARCH_INDEXING_SERP",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E5",
+      "digest": "cafbe4925e68b6157664ff9fc7328e581d872e5df7e8bc575f7600679f0d59a7",
+      "reference": "fixture://full-48/FIND-04",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1005",
+      "source_family": "SEARCH_INDEXING_SERP",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E5",
+      "digest": "73b83319067d46d93a91991f5c4a22e8c96340e00dcdbf5853486c312f9d3dc1",
+      "reference": "fixture://full-48/FIND-05",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1006",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E4",
+      "digest": "f0bb05a013e3cc7d1bd4a44d57abf28fb86d768e6a5ab861f9616bc43c32bc8f",
+      "reference": "fixture://full-48/FIND-06",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1007",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E4",
+      "digest": "7d9208c0b1d79e747c55442a14df2aefd96983a6b4e2e01b60c9f1bb8593d2da",
+      "reference": "fixture://full-48/FIND-07",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1008",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "target_url": "https://example.test/",
+      "status": "MEASURED",
+      "evidence_grade": "E4",
+      "digest": "39b5386927dbf4d22b91269bdb244365a92351e9563959335975929dfd89485d",
+      "reference": "fixture://full-48/FIND-08",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1009",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E4",
+      "digest": "2a51dbcad34bba7b3a52dccb0689c3fb04ecc3f33e446668cf7f63c5b406448a",
+      "reference": "fixture://full-48/FIND-09",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1010",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E4",
+      "digest": "1ed1098309785146e8301e549f7c54eb6f5a3e2e5261ea0e16d04bb48489323f",
+      "reference": "fixture://full-48/FIND-10",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1011",
+      "source_family": "PERFORMANCE_CWV_LAB",
+      "target_url": "https://example.test/",
+      "status": "MEASURED",
+      "evidence_grade": "E2",
+      "digest": "1ff3ed141fb2109f9ad267b0e9fc26c2335972f575c5b07720a238d36e0f10c8",
+      "reference": "fixture://full-48/PERF-01",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1012",
+      "source_family": "PERFORMANCE_CWV_LAB",
+      "target_url": "https://example.test/",
+      "status": "MEASURED",
+      "evidence_grade": "E2",
+      "digest": "0ad62f2af9235ab00cf92dec95629f2e23aaa7ed40c639e1abd03693d6b89cab",
+      "reference": "fixture://full-48/PERF-02",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1013",
+      "source_family": "PERFORMANCE_CWV_LAB",
+      "target_url": "https://example.test/",
+      "status": "MEASURED",
+      "evidence_grade": "E2",
+      "digest": "e3983e6bcf7dd82203fcf08b0e47dd3f623dc48319c488d2636532fe41f33a46",
+      "reference": "fixture://full-48/PERF-03",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1014",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "target_url": "https://example.test/",
+      "status": "MEASURED",
+      "evidence_grade": "E4",
+      "digest": "7b052791c514cc7413292b29fc622b3473284ad991711788ac1983eda8a1f284",
+      "reference": "fixture://full-48/PERF-04",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1015",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "target_url": "https://example.test/",
+      "status": "MEASURED",
+      "evidence_grade": "E4",
+      "digest": "d1a5d5bb0fab110d73d53be47544b14fd8e8884dc5dc36d3400baec5249f971f",
+      "reference": "fixture://full-48/PERF-05",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1016",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "target_url": "https://example.test/",
+      "status": "MEASURED",
+      "evidence_grade": "E4",
+      "digest": "726384fc47c989a18412d62aaf6cf844502f13edc14d22e261a84dc9180b7052",
+      "reference": "fixture://full-48/PERF-06",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1017",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "target_url": "https://example.test/",
+      "status": "MEASURED",
+      "evidence_grade": "E4",
+      "digest": "43207cdfec28de32cdf599eedf7ed7218cf5dfbd67b467a63288261f8fb2cc5d",
+      "reference": "fixture://full-48/PERF-07",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1018",
+      "source_family": "BROWSER_RENDERING",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E4",
+      "digest": "0c47fa89d2e7335cae4e9ce0966a23fb40285310936f60520365bc642bdd22d1",
+      "reference": "fixture://full-48/PERF-08",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1019",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E5",
+      "digest": "f234c53d8c01ee9c89f6a2b833364f756d71d550ae984a34339e80be93a82a11",
+      "reference": "fixture://full-48/PERF-09",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1020",
+      "source_family": "BROWSER_RENDERING",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E6",
+      "digest": "35e0e0b08c654c0ccf23041f44999398dff23f97adc27cc0e03b2b77f459a877",
+      "reference": "fixture://full-48/UX-01",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1021",
+      "source_family": "BROWSER_RENDERING",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E6",
+      "digest": "9ea25f971c86d8f12aca00636ef65f494400469601750f8ae42063580671cd25",
+      "reference": "fixture://full-48/UX-02",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1022",
+      "source_family": "BROWSER_RENDERING",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E6",
+      "digest": "2a16c410f0966713905b8004a5ffbf32a9390ff42f0e67b53ba2525e5d46f807",
+      "reference": "fixture://full-48/UX-03",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1023",
+      "source_family": "BROWSER_RENDERING",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E6",
+      "digest": "e49bdc1e0bb8937f412054ca714ddaee0c2b735ef8e91d28e2c17601149c168f",
+      "reference": "fixture://full-48/UX-04",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1024",
+      "source_family": "BROWSER_RENDERING",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E6",
+      "digest": "1a3ee20f85229ff2c1abb2e11dabcaf770e40862501cc43a5e48d5c3a3194264",
+      "reference": "fixture://full-48/UX-05",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1025",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E6",
+      "digest": "14d65fd8d9e1ec2dc6c7425b745770461c899ce21590db91caae9f419ac6f253",
+      "reference": "fixture://full-48/UX-06",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1026",
+      "source_family": "BROWSER_RENDERING",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E6",
+      "digest": "a42febe436a66009281c08e4e9949ad439b28b7097217dd004c10af9256a77bc",
+      "reference": "fixture://full-48/UX-07",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1027",
+      "source_family": "BROWSER_RENDERING",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E6",
+      "digest": "0e6bc9f44c858ee39798a874b6542ff241514966c6da99c9285f68c9419696e6",
+      "reference": "fixture://full-48/UX-08",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1028",
+      "source_family": "MANUAL_OR_NON_AUTOMATABLE",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E4",
+      "digest": "a2d64d80b30a1fb551f40661d582e7bc304b2f150c33d89d45408a92fd96ca04",
+      "reference": "fixture://full-48/A11Y-01",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1029",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E4",
+      "digest": "15f8304e8d6d9df20f3792eb255c4e4db14c8ad4aad000bdfff5046fd0c03a1b",
+      "reference": "fixture://full-48/A11Y-02",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1030",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E4",
+      "digest": "1045d53757bfb09adb45f1e340360c634a5188091d5860e4aa3e51815ce8109f",
+      "reference": "fixture://full-48/A11Y-03",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1031",
+      "source_family": "MANUAL_OR_NON_AUTOMATABLE",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E4",
+      "digest": "6278fca78185b5b719b8978e063203dc84dae7d7a3fec6b3a5d025ae435749a8",
+      "reference": "fixture://full-48/A11Y-04",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1032",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E4",
+      "digest": "b0748bd540197842f37e7e8a0f7378294a71d7de3a33c7abe6ba0b2f7445d6ac",
+      "reference": "fixture://full-48/A11Y-05",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1033",
+      "source_family": "BROWSER_RENDERING",
+      "target_url": "https://example.test/",
+      "status": "MEASURED",
+      "evidence_grade": "E5",
+      "digest": "5f38e4a52cd8b10ec9116dce1b363dfc05572563ff546878edf18ec609d129ba",
+      "reference": "fixture://full-48/A11Y-06",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1034",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E4",
+      "digest": "2cd94dcb4d31b8a17bfe8eae85bc159dbe7f5f435d74194e8e3fc55c4869b4ce",
+      "reference": "fixture://full-48/TRUST-01",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1035",
+      "source_family": "BROWSER_RENDERING",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E4",
+      "digest": "7d8e933e6f5dda8b3c9a320411f53d2f2d32d454cc649201473dcdde52601a86",
+      "reference": "fixture://full-48/TRUST-02",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1036",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "target_url": "https://example.test/",
+      "status": "MEASURED",
+      "evidence_grade": "E4",
+      "digest": "9ddb338435bf3e3c9aad0582d29cf639f8e4fb6b495e97a29208a76d42d82a85",
+      "reference": "fixture://full-48/TRUST-03",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1037",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E4",
+      "digest": "a583d02640e2ccad6ff75c2817d9c9472a6309119fdb006aeb7ab163b3f9578d",
+      "reference": "fixture://full-48/TRUST-04",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1038",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E6",
+      "digest": "68fd3db8d4a551f3a565a8910026d0f5a401107f411af5cb3374b4851caf6db8",
+      "reference": "fixture://full-48/TRUST-05",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1039",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E6",
+      "digest": "a67706f4d2898a9e373973246160b3ccc0bf1b4cbc6fc48d0ab130b5977f38b5",
+      "reference": "fixture://full-48/TRUST-06",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1040",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E4",
+      "digest": "4f6ca5021c4e00fadc6256292800ab833c8f250f740731c9f7c69681ae20c31f",
+      "reference": "fixture://full-48/TRUST-07",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1041",
+      "source_family": "ANALYTICS_SEARCH_CONSOLE",
+      "target_url": "https://example.test/",
+      "status": "MEASURED",
+      "evidence_grade": "E5",
+      "digest": "8672932199ef386028bac9f4a8ef6d580b5ec39e19f6bb3b36bbba368be5fda2",
+      "reference": "fixture://full-48/TRUST-08",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1042",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E6",
+      "digest": "70b3f963ff8a3f0525a0a1682582769a813bcafc85d70ee6f26d6c16c619a707",
+      "reference": "fixture://full-48/AI-01",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1043",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E6",
+      "digest": "68997e5b94084ca51c0131f9c40e75bbfb3baf56251304ab00c07a089544f105",
+      "reference": "fixture://full-48/AI-02",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1044",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E6",
+      "digest": "2b26d686840effc9182f2a3002d0f4ba4ab340cb9a506841bfa808c6ac5abe49",
+      "reference": "fixture://full-48/AI-03",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1045",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E5",
+      "digest": "73d9eabab166b6ad484db4ca245a77d6535a684458c225b55786b72df3ea948e",
+      "reference": "fixture://full-48/AI-04",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1046",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E6",
+      "digest": "b7b289bc02ce8e9a3b05d0b2401006f5694b6430e9ed1d4a2b265bfdf9795193",
+      "reference": "fixture://full-48/AI-05",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1047",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E6",
+      "digest": "62342cd8843591a93ae09160059c1374bc25d1e6fd26d373db209e6091cc96a0",
+      "reference": "fixture://full-48/AI-06",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    },
+    {
+      "id": "E-1048",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "target_url": "https://example.test/",
+      "status": "OBSERVED",
+      "evidence_grade": "E6",
+      "digest": "c53b235ffec7e4b1dddcc8990af839543b691837f704edd936fc89a592829e8d",
+      "reference": "fixture://full-48/AI-07",
+      "claim_boundary": "Synthetic fixture proves the execution-to-score contract only; it is not live website evidence.",
+      "raw_provider_payload_present": false
+    }
+  ],
+  "results": [
+    {
+      "metric_id": "FIND-01",
+      "target_url": "https://example.test/",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "execution_state": "MEASURED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "FIND-01",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1001"
+      ],
+      "source_or_method": "Fetch canonical public URL and record status/final URL.",
+      "limitation": "Reachability does not prove indexation or search demand.",
+      "product_status": "strong",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "FIND-02",
+      "target_url": "https://example.test/",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "execution_state": "MEASURED",
+      "evidence_grade": "E4",
+      "value": {
+        "robots_present": false,
+        "sitemap_present": false,
+        "fixture": true
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1002"
+      ],
+      "source_or_method": "Fetch robots.txt and sitemap locations when public.",
+      "limitation": "Presence does not prove complete crawl coverage or indexation.",
+      "product_status": "minor_gaps",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "FIND-03",
+      "target_url": "https://example.test/",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "FIND-03",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1003"
+      ],
+      "source_or_method": "Inspect index directives, canonical tags and redirect behavior on sampled templates.",
+      "limitation": "Sampled directives do not prove full-domain index state.",
+      "product_status": "mixed",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "FIND-04",
+      "target_url": "https://example.test/",
+      "source_family": "SEARCH_INDEXING_SERP",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E5",
+      "value": {
+        "metric_id": "FIND-04",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1004"
+      ],
+      "source_or_method": "Run dated brand query and record visible result/snippet evidence.",
+      "limitation": "One query snapshot does not prove stable visibility share.",
+      "product_status": "weak",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "FIND-05",
+      "target_url": "https://example.test/",
+      "source_family": "SEARCH_INDEXING_SERP",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E5",
+      "value": {
+        "metric_id": "FIND-05",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1005"
+      ],
+      "source_or_method": "Run at least three dated non-brand intent queries relevant to visible offer/market.",
+      "limitation": "Sampled queries do not prove complete keyword coverage or business performance.",
+      "product_status": "blocking",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "FIND-06",
+      "target_url": "https://example.test/",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "FIND-06",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1006"
+      ],
+      "source_or_method": "Inspect sampled titles, descriptions, H1/H2 structure and intent alignment.",
+      "limitation": "Sample quality does not prove rankings.",
+      "product_status": "strong",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "FIND-07",
+      "target_url": "https://example.test/",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "FIND-07",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1007"
+      ],
+      "source_or_method": "Inspect public structured data for syntax, entity fit and visible-content consistency.",
+      "limitation": "Markup presence does not guarantee rich results.",
+      "product_status": "minor_gaps",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "FIND-08",
+      "target_url": "https://example.test/",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "execution_state": "MEASURED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "FIND-08",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1008"
+      ],
+      "source_or_method": "Inspect navigation depth, contextual links, descriptive anchors, breadcrumbs and orphan-risk patterns in bounded sample.",
+      "limitation": "Bounded crawl does not prove complete link graph.",
+      "product_status": "mixed",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "FIND-09",
+      "target_url": "https://example.test/",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "FIND-09",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1009"
+      ],
+      "source_or_method": "Inspect sampled image alt text, context, filenames and responsive image delivery.",
+      "limitation": "Sample does not prove image-search performance.",
+      "product_status": "weak",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "FIND-10",
+      "target_url": "https://example.test/",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "FIND-10",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1010"
+      ],
+      "source_or_method": "Inspect applicable local entity and language-alternate signals.",
+      "limitation": "Signals do not prove local rankings or international targeting success.",
+      "product_status": "blocking",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "PERF-01",
+      "target_url": "https://example.test/",
+      "source_family": "PERFORMANCE_CWV_LAB",
+      "execution_state": "MEASURED",
+      "evidence_grade": "E2",
+      "value": {
+        "metric_id": "PERF-01",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1011"
+      ],
+      "source_or_method": "Use current public/user-authorized real-user field metrics for URL/origin when available.",
+      "limitation": "Field sample does not prove every visit or business outcome.",
+      "product_status": "strong",
+      "threshold_source": "fixture://threshold/PERF-01",
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "PERF-02",
+      "target_url": "https://example.test/",
+      "source_family": "PERFORMANCE_CWV_LAB",
+      "execution_state": "MEASURED",
+      "evidence_grade": "E2",
+      "value": {
+        "metric_id": "PERF-02",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1012"
+      ],
+      "source_or_method": "Run controlled mobile lab measurement and retain tool/date/config.",
+      "limitation": "Lab result is not real-user field performance.",
+      "product_status": "minor_gaps",
+      "threshold_source": "fixture://threshold/PERF-02",
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "PERF-03",
+      "target_url": "https://example.test/",
+      "source_family": "PERFORMANCE_CWV_LAB",
+      "execution_state": "MEASURED",
+      "evidence_grade": "E2",
+      "value": {
+        "metric_id": "PERF-03",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1013"
+      ],
+      "source_or_method": "Run controlled desktop lab measurement and retain tool/date/config.",
+      "limitation": "Lab result is not real-user field performance.",
+      "product_status": "mixed",
+      "threshold_source": "fixture://threshold/PERF-03",
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "PERF-04",
+      "target_url": "https://example.test/",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "execution_state": "MEASURED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "PERF-04",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1014"
+      ],
+      "source_or_method": "Measure sampled transfer/resource weight and identify dominant resource classes.",
+      "limitation": "Asset weight alone does not prove user-perceived speed.",
+      "product_status": "weak",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "PERF-05",
+      "target_url": "https://example.test/",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "execution_state": "MEASURED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "PERF-05",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1015"
+      ],
+      "source_or_method": "Inspect formats, responsive images, lazy loading and media delivery on sampled templates.",
+      "limitation": "Observed media pipeline does not prove field performance.",
+      "product_status": "blocking",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "PERF-06",
+      "target_url": "https://example.test/",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "execution_state": "MEASURED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "PERF-06",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1016"
+      ],
+      "source_or_method": "Inspect public caching/compression headers or reproducible response behavior.",
+      "limitation": "Headers alone do not prove end-to-end caching effectiveness.",
+      "product_status": "strong",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "PERF-07",
+      "target_url": "https://example.test/",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "execution_state": "MEASURED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "PERF-07",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1017"
+      ],
+      "source_or_method": "Inspect sampled blocking CSS/JS/resource dependencies with available lab or page tooling.",
+      "limitation": "Static inspection does not prove exact blocking time.",
+      "product_status": "minor_gaps",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "PERF-08",
+      "target_url": "https://example.test/",
+      "source_family": "BROWSER_RENDERING",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "PERF-08",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1018"
+      ],
+      "source_or_method": "Inspect responsive rendering and delivery on representative mobile/desktop viewports.",
+      "limitation": "Viewport sample does not cover every device.",
+      "product_status": "mixed",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "PERF-09",
+      "target_url": "https://example.test/",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E5",
+      "value": {
+        "metric_id": "PERF-09",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1019"
+      ],
+      "source_or_method": "Record observable delivery/CMS/framework hints without asserting private architecture.",
+      "limitation": "Public hints do not prove repository, backend or deployment quality.",
+      "product_status": "weak",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "UX-01",
+      "target_url": "https://example.test/",
+      "source_family": "BROWSER_RENDERING",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E6",
+      "value": {
+        "metric_id": "UX-01",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1020"
+      ],
+      "source_or_method": "Inspect whether first screen states entity/offer/audience/value clearly.",
+      "limitation": "Heuristic clarity does not measure conversion.",
+      "product_status": "blocking",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "UX-02",
+      "target_url": "https://example.test/",
+      "source_family": "BROWSER_RENDERING",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E6",
+      "value": {
+        "metric_id": "UX-02",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1021"
+      ],
+      "source_or_method": "Inspect prominence and clarity of the primary next action.",
+      "limitation": "CTA clarity does not measure conversion uplift.",
+      "product_status": "strong",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "UX-03",
+      "target_url": "https://example.test/",
+      "source_family": "BROWSER_RENDERING",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E6",
+      "value": {
+        "metric_id": "UX-03",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1022"
+      ],
+      "source_or_method": "Inspect labels, navigation paths, orientation and information scent.",
+      "limitation": "Sampled navigation does not prove task success for all users.",
+      "product_status": "minor_gaps",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "UX-04",
+      "target_url": "https://example.test/",
+      "source_family": "BROWSER_RENDERING",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E6",
+      "value": {
+        "metric_id": "UX-04",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1023"
+      ],
+      "source_or_method": "Inspect mobile text hierarchy, spacing, tap targets and content order in sample viewport.",
+      "limitation": "Viewport review is not full device testing.",
+      "product_status": "mixed",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "UX-05",
+      "target_url": "https://example.test/",
+      "source_family": "BROWSER_RENDERING",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E6",
+      "value": {
+        "metric_id": "UX-05",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1024"
+      ],
+      "source_or_method": "Inspect public contact/form path for field burden, clarity and visible friction without submitting.",
+      "limitation": "Form-surface review does not measure completion rate.",
+      "product_status": "weak",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "UX-06",
+      "target_url": "https://example.test/",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E6",
+      "value": {
+        "metric_id": "UX-06",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1025"
+      ],
+      "source_or_method": "Inspect trust cues located near decision/contact moments.",
+      "limitation": "Visible proof cues do not establish claim truth.",
+      "product_status": "blocking",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "UX-07",
+      "target_url": "https://example.test/",
+      "source_family": "BROWSER_RENDERING",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E6",
+      "value": {
+        "metric_id": "UX-07",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1026"
+      ],
+      "source_or_method": "Inspect visual/content hierarchy and scanability on representative templates.",
+      "limitation": "Heuristic hierarchy does not replace user testing.",
+      "product_status": "strong",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "UX-08",
+      "target_url": "https://example.test/",
+      "source_family": "BROWSER_RENDERING",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E6",
+      "value": {
+        "metric_id": "UX-08",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1027"
+      ],
+      "source_or_method": "Inspect visible validation/error/feedback states only when safely observable without submission.",
+      "limitation": "Untriggered states may remain not assessed.",
+      "product_status": "minor_gaps",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "A11Y-01",
+      "target_url": "https://example.test/",
+      "source_family": "MANUAL_OR_NON_AUTOMATABLE",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "A11Y-01",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1028"
+      ],
+      "source_or_method": "Keyboard-sample navigation and visible focus on representative interactive elements.",
+      "limitation": "Sample does not establish WCAG conformance.",
+      "product_status": "mixed",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "A11Y-02",
+      "target_url": "https://example.test/",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "A11Y-02",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1029"
+      ],
+      "source_or_method": "Inspect landmarks, headings, labels and semantic structure in sampled HTML.",
+      "limitation": "Sample does not establish WCAG conformance.",
+      "product_status": "weak",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "A11Y-03",
+      "target_url": "https://example.test/",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "A11Y-03",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1030"
+      ],
+      "source_or_method": "Inspect representative informative/decorative image alternatives.",
+      "limitation": "Sample does not establish complete alternative-text quality.",
+      "product_status": "blocking",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "A11Y-04",
+      "target_url": "https://example.test/",
+      "source_family": "MANUAL_OR_NON_AUTOMATABLE",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "A11Y-04",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1031"
+      ],
+      "source_or_method": "Measure or inspect representative text/background contrast with a reproducible method.",
+      "limitation": "Sample does not establish full WCAG conformance.",
+      "product_status": "strong",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "A11Y-05",
+      "target_url": "https://example.test/",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "A11Y-05",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1032"
+      ],
+      "source_or_method": "Inspect public form labels/names/instructions without submission.",
+      "limitation": "Sample does not establish complete accessible form behavior.",
+      "product_status": "minor_gaps",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "A11Y-06",
+      "target_url": "https://example.test/",
+      "source_family": "BROWSER_RENDERING",
+      "execution_state": "MEASURED",
+      "evidence_grade": "E5",
+      "value": {
+        "metric_id": "A11Y-06",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1033"
+      ],
+      "source_or_method": "Run automated accessibility snapshot and retain tool/version/page scope.",
+      "limitation": "Automation alone does not establish WCAG conformance.",
+      "product_status": "mixed",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "TRUST-01",
+      "target_url": "https://example.test/",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "TRUST-01",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1034"
+      ],
+      "source_or_method": "Check visible imprint/legal surface presence and accessibility.",
+      "limitation": "Presence does not establish legal compliance.",
+      "product_status": "weak",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "TRUST-02",
+      "target_url": "https://example.test/",
+      "source_family": "BROWSER_RENDERING",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "TRUST-02",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1035"
+      ],
+      "source_or_method": "Inspect visible privacy/consent surface and consistency with observed public behavior where possible.",
+      "limitation": "Surface review is not legal advice or compliance proof.",
+      "product_status": "blocking",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "TRUST-03",
+      "target_url": "https://example.test/",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "execution_state": "MEASURED",
+      "evidence_grade": "E4",
+      "value": {
+        "https_final": true,
+        "tls_verified": true,
+        "security_headers_present_count": 0,
+        "fixture": true
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1036"
+      ],
+      "source_or_method": "Check HTTPS and selected public security headers without active exploitation.",
+      "limitation": "Header presence/absence does not prove security posture.",
+      "product_status": "strong",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "TRUST-04",
+      "target_url": "https://example.test/",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "TRUST-04",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1037"
+      ],
+      "source_or_method": "Compare entity, contact, service and location facts across sampled public surfaces.",
+      "limitation": "Consistency does not prove factual accuracy beyond public evidence.",
+      "product_status": "minor_gaps",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "TRUST-05",
+      "target_url": "https://example.test/",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E6",
+      "value": {
+        "metric_id": "TRUST-05",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1038"
+      ],
+      "source_or_method": "Inspect visible dates, team/service/project recency and stale references.",
+      "limitation": "Visible freshness does not prove operational freshness.",
+      "product_status": "mixed",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "TRUST-06",
+      "target_url": "https://example.test/",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E6",
+      "value": {
+        "metric_id": "TRUST-06",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1039"
+      ],
+      "source_or_method": "Inspect references, testimonials, credentials, cases and proof-to-claim proximity.",
+      "limitation": "Presence of proof points does not independently verify every claim.",
+      "product_status": "weak",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "TRUST-07",
+      "target_url": "https://example.test/",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E4",
+      "value": {
+        "metric_id": "TRUST-07",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1040"
+      ],
+      "source_or_method": "Inspect public contact identity, channels and location transparency.",
+      "limitation": "Transparency does not prove responsiveness or service quality.",
+      "product_status": "blocking",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "TRUST-08",
+      "target_url": "https://example.test/",
+      "source_family": "ANALYTICS_SEARCH_CONSOLE",
+      "execution_state": "MEASURED",
+      "evidence_grade": "E5",
+      "value": {
+        "metric_id": "TRUST-08",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1041"
+      ],
+      "source_or_method": "Inspect user-authorized analytics/search measurement readiness or public tag evidence only within permission.",
+      "limitation": "Tag presence does not prove data quality or business attribution.",
+      "product_status": "strong",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "AI-01",
+      "target_url": "https://example.test/",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E6",
+      "value": {
+        "metric_id": "AI-01",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1042"
+      ],
+      "source_or_method": "Check whether the entity can be explicitly identified from visible content and structured data.",
+      "limitation": "Extractability does not prove AI citation.",
+      "product_status": "minor_gaps",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "AI-02",
+      "target_url": "https://example.test/",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E6",
+      "value": {
+        "metric_id": "AI-02",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1043"
+      ],
+      "source_or_method": "Check explicit service, audience, location and applicability statements.",
+      "limitation": "Clarity does not prove AI visibility.",
+      "product_status": "mixed",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "AI-03",
+      "target_url": "https://example.test/",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E6",
+      "value": {
+        "metric_id": "AI-03",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1044"
+      ],
+      "source_or_method": "Check direct answer sections, FAQs and question-to-answer structure.",
+      "limitation": "Answerability does not prove chatbot inclusion.",
+      "product_status": "weak",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "AI-04",
+      "target_url": "https://example.test/",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E5",
+      "value": {
+        "metric_id": "AI-04",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1045"
+      ],
+      "source_or_method": "Inspect summaries, schema and machine-readable organization of key facts.",
+      "limitation": "Structure does not guarantee AI or search presentation.",
+      "product_status": "blocking",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "AI-05",
+      "target_url": "https://example.test/",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E6",
+      "value": {
+        "metric_id": "AI-05",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1046"
+      ],
+      "source_or_method": "Inspect whether material claims are near attributable proof/cases/references.",
+      "limitation": "Visible evidence mapping does not certify claim truth.",
+      "product_status": "strong",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "AI-06",
+      "target_url": "https://example.test/",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E6",
+      "value": {
+        "metric_id": "AI-06",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1047"
+      ],
+      "source_or_method": "Compare key entity/service/location facts across sampled pages and structured surfaces.",
+      "limitation": "Sampled consistency does not prove whole-site consistency.",
+      "product_status": "minor_gaps",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    },
+    {
+      "metric_id": "AI-07",
+      "target_url": "https://example.test/",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "execution_state": "OBSERVED",
+      "evidence_grade": "E6",
+      "value": {
+        "metric_id": "AI-07",
+        "fixture": true,
+        "observation": "synthetic execution-path proof only"
+      },
+      "unit": null,
+      "evidence_refs": [
+        "E-1048"
+      ],
+      "source_or_method": "Inspect topical depth and coverage of likely user questions across sampled content.",
+      "limitation": "Depth does not prove topical authority or AI visibility.",
+      "product_status": "mixed",
+      "threshold_source": null,
+      "confidence": 4,
+      "observed_at": "2026-09-07T21:36:00Z",
+      "reason_codes": [],
+      "note": "FIXTURE_ONLY_NOT_LIVE_EVIDENCE",
+      "raw_provider_payload_present": false
+    }
+  ]
+}

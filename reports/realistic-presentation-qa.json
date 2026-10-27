@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "fixture": "synthetic 48-core + impressum-compliance integration proof",
+  "customer": "Meyer & Sohn Bau GmbH",
+  "release_mode": "proof",
+  "candidate_artifact_digest": "1f4fe8356420f494020fcb23d40b5b221e743cd41d636a5a8dd8fd288643fe0b",
+  "revalidated_at": "2026-09-08T18:43:44.369490+00:00",
+  "page_count": 11,
+  "selected_visual_count": 6,
+  "selected_template_ids": [
+    "V02_CATEGORY_BARS",
+    "V03_TOP_LEVERS",
+    "V07_PERFORMANCE_THRESHOLD",
+    "V08_AI_ANSWERABILITY",
+    "V10_TRUST_MATRIX",
+    "V11_SEVERITY_DISTRIBUTION"
+  ],
+  "top_lever_count": 4,
+  "internal_metric_count": 48,
+  "legal_enabled": true,
+  "impressum_compliance_sha256": "544bc8cf94eec70f37dafcbc90d77fba69cfff2e08ea1dd06d5affab3d58c2d3",
+  "internal_json": "PASS",
+  "internal_markdown": "PASS",
+  "visual_qa": "PASS",
+  "semantic_qa": "PASS",
+  "closing_page_role": "PASS",
+  "weasyprint_renderer": "PASS",
+  "renderer": "WEASYPRINT",
+  "minimum_rendered_text_size_pt": 8.499755859375,
+  "font_status": "PARTIAL_EXACT_APPROVED_FALLBACK",
+  "exact_font_status": {
+    "display": false,
+    "data": true
+  },
+  "customer_release_ready": false,
+  "strict_customer_release": "BLOCKED_EXTERNAL_FONT",
+  "customer_language_firewall": "PASS",
+  "customer_output_guardrails": "PASS",
+  "strategic_relevance": "PASS",
+  "measurement_platform_preservation": "PASS",
+  "pdf_sha256": "80d41c51e50f862bea37004bc448226f74594fadf442d45a4c8eb840f486d03f",
+  "analysis_json_sha256": "416399da56acb8c4c11c4a958982b91e8fd261087b638d593b51c3db308e8e80",
+  "analysis_markdown_sha256": "d9ce627609b16d3bf9e8d68f109585f57d68d6a8f8c71d1fd579f6c25b75e968",
+  "visualization_plan_sha256": "f8cfa44813b11b1bbfac252f4be86e2fba771128bb312584032fa02218a41c77",
+  "inspection_method": "agent_vision + deterministic validators",
+  "inspection_notes": [
+    "All 11 final pages were individually inspected from the final rendered PDF pages.",
+    "No clipping, overlap, broken glyphs, unreadable chart labels, or cross-page sentence splits were observed.",
+    "Customer/legal guardrails passed; ILES, applicability internals, expected-penalty language, and definitive legal overclaims were not exposed.",
+    "V01 overall score and V12 audit coverage are not selected as customer chart pages."
+  ],
+  "does_not_prove": [
+    "live customer measurements",
+    "provider credential availability",
+    "full WCAG conformance",
+    "legal compliance",
+    "exact production typeface parity",
+    "commercial outcome"
+  ]
+}

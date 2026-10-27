@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "catalog_version",
+    "run_id",
+    "page_url",
+    "sample_complete",
+    "source_sha256",
+    "source_authority",
+    "observed_at",
+    "families",
+    "metrics",
+    "evidence",
+    "score_effect",
+    "customer_findings",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "catalog_version": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "page_url": {
+      "type": "string",
+      "pattern": "^https?://"
+    },
+    "sample_complete": {
+      "type": "boolean"
+    },
+    "source_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "source_authority": {
+      "enum": [
+        "STANDALONE_OFFLINE",
+        "PXAPI_CANONICAL"
+      ]
+    },
+    "observed_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "families": {
+      "type": "object"
+    },
+    "metrics": {
+      "type": "array",
+      "minItems": 20,
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": [
+          "metric_id",
+          "check_id",
+          "type",
+          "status",
+          "value",
+          "reason",
+          "run_id",
+          "page_url",
+          "observed_at",
+          "collector_version",
+          "method",
+          "evidence_ref",
+          "claim_boundary",
+          "manual_review_required",
+          "customer_eligible"
+        ],
+        "properties": {
+          "metric_id": {
+            "type": "string"
+          },
+          "check_id": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "BOOLEAN",
+              "INTEGER",
+              "TEXT",
+              "URL"
+            ]
+          },
+          "status": {
+            "enum": [
+              "OBSERVED",
+              "NOT_ASSESSED"
+            ]
+          },
+          "value": {},
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "run_id": {
+            "type": "string"
+          },
+          "page_url": {
+            "type": "string"
+          },
+          "observed_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "collector_version": {
+            "type": "string"
+          },
+          "method": {
+            "type": "string"
+          },
+          "evidence_ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "claim_boundary": {
+            "type": "string"
+          },
+          "manual_review_required": {
+            "type": "boolean"
+          },
+          "customer_eligible": {
+            "const": false
+          },
+          "scenario": {}
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "score_effect": {
+      "const": "NONE"
+    },
+    "customer_findings": {
+      "type": "array",
+      "maxItems": 0
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

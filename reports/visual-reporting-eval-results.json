@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "suite": "visualization-reporting-architecture",
+  "mandatory_product_outputs": [
+    "analysis_report.json",
+    "analysis_report.md",
+    "customer_presentation.pdf"
+  ],
+  "metric_count": 48,
+  "selected_visual_count": 6,
+  "selected_template_ids": [
+    "V02_CATEGORY_BARS",
+    "V03_TOP_LEVERS",
+    "V07_PERFORMANCE_THRESHOLD",
+    "V08_AI_ANSWERABILITY",
+    "V10_TRUST_MATRIX",
+    "V11_SEVERITY_DISTRIBUTION"
+  ],
+  "top_lever_count": 4,
+  "renderer": "WEASYPRINT",
+  "brand_font_status": "PARTIAL_EXACT_APPROVED_FALLBACK",
+  "visual_qa_initial_status": "PENDING",
+  "semantic_qa_initial_status": "PENDING",
+  "quality_gate_initial_status": "PENDING_QA",
+  "customer_release_ready_before_qa": false,
+  "benchmark_without_context": "BLOCKED",
+  "ranking_without_context": "BLOCKED",
+  "unsafe_svg": "REJECTED",
+  "does_not_prove": [
+    "exact Schibsted availability",
+    "live benchmark data",
+    "customer approval",
+    "commercial outcome"
+  ]
+}

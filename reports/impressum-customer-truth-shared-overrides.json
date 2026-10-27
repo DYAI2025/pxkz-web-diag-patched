@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "patch_id": "IMPRESSUM_CUSTOMER_TRUTH_PATCH",
+  "authorization_basis": "Explicit user authorization on 2026-09-09 to implement the P0 customer-truth patch for mandatory Impressum risk surfacing.",
+  "scope_note": "Only these hash-bound customer-reporting files may diverge from the protected Measurement Platform baseline. Core measurement registry, score weights and compute_score.py remain unchanged.",
+  "overrides": [
+    {
+      "path": "assets/presentation.css",
+      "baseline_sha256": "ffd55bb7baa0b458de6db423792842f2bd4c0ee6e061003f53823ef588955a23",
+      "previous_sha256": "8bdca58dc66e84780a79bf0d914dc1625f5700d881703b6dc953fba8e2ae9332",
+      "current_sha256": "4ede1e7f15d895c247dfe0aef2f3d443048d2b7ad2f896edc559429a225e846a",
+      "reason": "IMPRESSUM_CUSTOMER_TRUTH_PATCH"
+    },
+    {
+      "path": "scripts/build_audit_deliverables.py",
+      "baseline_sha256": "b8d3ba5536a2054d2545c17ef2868950597a2fdf7c01bf9dae2a4adf1bae203b",
+      "previous_sha256": "58589b5fd21b4a9646b9a1cea4103203f96be173da10fe4d33df52d6026386bf",
+      "current_sha256": "9f2377910e17d918dde2827b060fce218f7aef71647f61a0d2853746d86f07e3",
+      "reason": "IMPRESSUM_CUSTOMER_TRUTH_PATCH"
+    },
+    {
+      "path": "scripts/build_client_report_model.py",
+      "baseline_sha256": "433a909ec9bb38b29a4864f468d2cdf66a4a83b1beef0fdada2f6db8716a538e",
+      "previous_sha256": "40a52f92a870070c977eee0d75ea91b6b315fcf67ed6e23b21b35c129e73b9f9",
+      "current_sha256": "5a3c1c8a1a78cb2134aea3608fe0e17b9e5a1bac1cfd320d975d6b100edabce9",
+      "reason": "IMPRESSUM_CUSTOMER_TRUTH_PATCH"
+    },
+    {
+      "path": "scripts/client_story.py",
+      "baseline_sha256": "3798a2babca162db109ce7750b324b7e1c993eb1ba48f1ab0afe4bebba230b2d",
+      "previous_sha256": "b0b835f2ef49fbb83ca0d9fab8e58074b66f5d30b6c6b65b1f1cf0786ab637e1",
+      "current_sha256": "d732f8a2ba9d091b8dbe176d865fc4bcce093797422e6ac1012551e200835f5c",
+      "reason": "IMPRESSUM_CUSTOMER_TRUTH_PATCH"
+    },
+    {
+      "path": "templates/presentation.html.j2",
+      "baseline_sha256": "71c4af5c66c59e9db107fc1f903e7527c93a3a4101d0693e33df9a9e6287fb02",
+      "previous_sha256": "91ba7cfbf55e2d6b996f19f47f41aaf7dc86b796845b78d4a8cdacc4b195d7ae",
+      "current_sha256": "d375b0df2818297bf1372f38d3080a73fb7fda798f24b614f21d004f48e20737",
+      "reason": "IMPRESSUM_CUSTOMER_TRUTH_PATCH"
+    }
+  ]
+}

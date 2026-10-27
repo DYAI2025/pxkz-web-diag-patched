@@ -1,0 +1,26 @@
+{
+  "contract_version": "1.0.0",
+  "status": "APPROVED_PROFILES_REGISTERED",
+  "purpose": "SYNTHETIC rank-regression fixture; NOT empirical sector weights",
+  "profiles": [
+    {
+      "profile_id": "SYNTHETIC_SAMPLE_01",
+      "industry_id": "sample_professional_service",
+      "business_model_id": "sample_inquiry",
+      "status": "APPROVED",
+      "effective_from": "2026-01-01",
+      "effective_until": "2026-12-31",
+      "source_ref": "EVAL_SYNTHETIC_NOT_APPROVED_IN_PRODUCTION",
+      "basis": "PIXELKIEZ_PRODUCT_POLICY",
+      "approved_by": "SYNTHETIC_TEST_ONLY",
+      "category_weights": {
+        "findability_seo": 8,
+        "performance_technology": 8,
+        "ux_conversion": 8,
+        "accessibility": 8,
+        "trust_privacy_content": 8,
+        "ai_readiness": 60
+      }
+    }
+  ]
+}

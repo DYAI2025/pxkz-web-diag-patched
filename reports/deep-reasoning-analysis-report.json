@@ -1,0 +1,27 @@
+{
+  "analysis_id": "pxk-measurement-enrichment-2026-08-30",
+  "status": "PASS_WITH_ASSUMPTIONS",
+  "selected_architecture": "optional provenance-bearing measurement enrichment -> canonical analysis/business interpretation -> existing four-lever customer projection",
+  "preserve": [
+    "48-metric scored core",
+    "truth discipline",
+    "four-lever selection",
+    "v1.3 96-field ElevenLabs wire contract",
+    "customer-language firewall",
+    "WeasyPrint chart-led PDF architecture"
+  ],
+  "new_metric_families": ["search_visibility", "performance_lab_field", "audience_funnel", "accessibility", "privacy_consent"],
+  "customer_statuses": ["CLEAR", "IMPROVEMENT", "ACTION_REQUIRED", "NOT_RELIABLY_ASSESSED"],
+  "hard_boundaries": [
+    "no single domain Google rank",
+    "Search Console average position is not a current SERP rank",
+    "Lighthouse lab is not CrUX field data",
+    "click is not lead",
+    "automated accessibility is not WCAG certification",
+    "privacy technical observation is not a legal determination",
+    "no secret may be serialized or bundled"
+  ],
+  "runtime_unverified": ["Google Search Console live auth", "GA4 live auth", "CrUX live key", "PageSpeed live key/quota", "DataForSEO live credentials", "axe runtime"],
+  "locally_verifiable": ["fixture parsers", "fail-closed credential behavior", "customer status semantics", "browser public-state probe with system Chromium", "PDF rendering and visual QA"],
+  "architecture_gate": "PASS_WITH_ASSUMPTIONS"
+}

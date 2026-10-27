@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "model": "PIXELKIEZ_INTERNAL_IMPRESSUM_EXPOSURE",
+  "pixelkiez_score_impact": "NONE_DIRECT",
+  "applicability_statuses": ["APPLICABLE","LIKELY_APPLICABLE","CONDITIONAL","NOT_APPLICABLE","UNKNOWN"],
+  "jurisdiction_statuses": ["CONFIRMED","LIKELY","UNRESOLVED","CONFLICT"],
+  "result_states": ["ASSESSED_NO_DEFECT","ASSESSED_DEFECT","POSSIBLE_LEGAL_REVIEW","NOT_APPLICABLE","NOT_ASSESSED","CONFLICT"],
+  "defect_types": ["ABSENT","INCOMPLETE","INCORRECT","CONTRADICTORY","UNVERIFIABLE","INACCESSIBLE","NOT_CONTINUOUSLY_AVAILABLE","UNTIMELY"],
+  "audience_scopes": ["B2B","B2C","MIXED","UNKNOWN"],
+  "distance_contract_statuses": ["CONFIRMED","LIKELY","NOT_PRESENT","UNKNOWN"],
+  "business_context_flags": ["service_provider","regulated_profession","licensed_activity","financial_service","journalistic_editorial","audiovisual_media_service","online_marketplace","personal_family_only"],
+  "iles_dimensions": {
+    "identity": 20,
+    "geographic_address": 20,
+    "contactability": 15,
+    "legal_form_rep": 10,
+    "registry": 10,
+    "regulatory_profession": 10,
+    "accessibility": 10,
+    "conditional_ids": 5
+  },
+  "iles_bands": [{"min":0,"max":9,"band":"LOW"},{"min":10,"max":24,"band":"MEDIUM"},{"min":25,"max":49,"band":"HIGH"},{"min":50,"max":100,"band":"CRITICAL"}],
+  "submetrics": [
+    {"id":"LEGAL-IMP-01","dimension":null,"weight":0,"kind":"aggregator","label":"Anbieterkennzeichnung gesamt"},
+    {"id":"LEGAL-IMP-02","dimension":"identity","weight":20,"kind":"base","label":"Betreiberidentität","critical_candidate":true},
+    {"id":"LEGAL-IMP-03","dimension":"geographic_address","weight":20,"kind":"base","label":"Geografische Niederlassungsanschrift","critical_candidate":true},
+    {"id":"LEGAL-IMP-04","dimension":"contactability","weight":15,"kind":"base","label":"Elektronische Kontaktierbarkeit"},
+    {"id":"LEGAL-IMP-05","dimension":"legal_form_rep","weight":10,"kind":"base","label":"Rechtsform und Vertretung"},
+    {"id":"LEGAL-IMP-06","dimension":"registry","weight":10,"kind":"base","label":"Register und Verifikation"},
+    {"id":"LEGAL-IMP-07","dimension":"regulatory_profession","weight":10,"kind":"base","label":"Aufsicht und Berufsrecht"},
+    {"id":"LEGAL-IMP-08","dimension":"conditional_ids","weight":5,"kind":"base","label":"Konditionale Identifikationsnummern"},
+    {"id":"LEGAL-IMP-09","dimension":"accessibility","weight":10,"kind":"base","label":"Auffindbarkeit und Verfügbarkeit"},
+    {"id":"LEGAL-IMP-10","dimension":null,"weight":0,"kind":"modifier","label":"Falsch oder widersprüchlich"},
+    {"id":"LEGAL-IMP-11","dimension":null,"weight":0,"kind":"modifier","label":"Zeitpunkt und Kontext"}
+  ],
+  "rules": [
+    {"rule_id":"EU-ECOM-2000-31-ART5","jurisdiction":"EU","regime":"ecommerce_baseline","scope":"general service-provider information baseline","source_class":"primary","source_url":"https://eur-lex.europa.eu/eli/dir/2000/31/oj/eng","verified_at":"2026-09-08","enabled":true,"source_status":"VERIFIED"},
+    {"rule_id":"DE-DDG-5","jurisdiction":"DE","regime":"ddg","scope":"geschäftsmäßige, in der Regel gegen Entgelt angebotene digitale Dienste","source_class":"primary","source_url":"https://www.gesetze-im-internet.de/ddg/__5.html","verified_at":"2026-09-08","enabled":true,"source_status":"VERIFIED"},
+    {"rule_id":"DE-DDG-33","jurisdiction":"DE","regime":"ddg_enforcement","scope":"enforcement exposure only; no expected-penalty prediction","source_class":"primary","source_url":"https://www.gesetze-im-internet.de/ddg/__33.html","verified_at":"2026-09-08","enabled":true,"source_status":"VERIFIED","enforcement_only":true,"statutory_maximum_eur":50000},
+    {"rule_id":"DE-EGBGB-246A-1","jurisdiction":"DE","regime":"b2c_distance_contract","scope":"consumer distance/off-premises pre-contract information","source_class":"primary","source_url":"https://www.gesetze-im-internet.de/bgbeg/art_246a__1.html","verified_at":"2026-09-08","enabled":true,"source_status":"VERIFIED"},
+    {"rule_id":"DE-UWG-5A-5B","jurisdiction":"DE","regime":"consumer_commercial_practice","scope":"essential consumer information where statutory applicability conditions are evidenced","source_class":"primary","source_url":"https://www.gesetze-im-internet.de/uwg_2004/__5a.html","verified_at":"2026-09-08","enabled":true,"source_status":"VERIFIED"},
+    {"rule_id":"DE-DLINFO-2","jurisdiction":"DE","regime":"services_information","scope":"service-provider information within DL-InfoV applicability","source_class":"primary","source_url":"https://www.gesetze-im-internet.de/dlinfov/__2.html","verified_at":"2026-09-08","enabled":true,"source_status":"VERIFIED"},
+    {"rule_id":"DE-EGBGB-246B-1","jurisdiction":"DE","regime":"financial_services_distance_contract","scope":"consumer pre-contract information for covered financial-services contracts","source_class":"primary","source_url":"https://www.gesetze-im-internet.de/bgbeg/art_246b__1.html","verified_at":"2026-09-08","enabled":true,"source_status":"VERIFIED"},
+    {"rule_id":"DE-VSBG-36","jurisdiction":"DE","regime":"consumer_dispute_resolution","scope":"website/AGB information subject to participation status and employee-count exception","source_class":"primary","source_url":"https://www.gesetze-im-internet.de/vsbg/__36.html","verified_at":"2026-09-08","enabled":true,"source_status":"VERIFIED"},
+    {"rule_id":"DE-MSTV-18","jurisdiction":"DE","regime":"media_information","scope":"telemedia information duties; editorial responsibility only when journalistic-editorial applicability is evidenced","source_class":"primary","source_url":"https://www.die-medienanstalten.de/fileadmin/user_upload/Rechtsgrundlagen/Gesetze_Staatsvertraege/Medienstaatsvertrag_MStV.pdf","verified_at":"2026-09-08","enabled":true,"source_status":"VERIFIED"},
+    {"rule_id":"AT-COUNTRY-ADAPTER","jurisdiction":"AT","regime":"country_adapter","scope":"not implemented in release 1","source_class":"uncertain","source_url":null,"verified_at":null,"enabled":false,"source_status":"SOURCE_NEEDED"},
+    {"rule_id":"FR-COUNTRY-ADAPTER","jurisdiction":"FR","regime":"country_adapter","scope":"not implemented in release 1","source_class":"uncertain","source_url":null,"verified_at":null,"enabled":false,"source_status":"SOURCE_NEEDED"},
+    {"rule_id":"ES-COUNTRY-ADAPTER","jurisdiction":"ES","regime":"country_adapter","scope":"not implemented in release 1","source_class":"uncertain","source_url":null,"verified_at":null,"enabled":false,"source_status":"SOURCE_NEEDED"},
+    {"rule_id":"NL-COUNTRY-ADAPTER","jurisdiction":"NL","regime":"country_adapter","scope":"not implemented in release 1","source_class":"uncertain","source_url":null,"verified_at":null,"enabled":false,"source_status":"SOURCE_NEEDED"},
+    {"rule_id":"DE-SECTOR-PROFESSION-DETAIL","jurisdiction":"DE","regime":"sector_adapter","scope":"profession-specific chamber/state-law details outside release-1 generic DDG/MStV rules","source_class":"uncertain","source_url":null,"verified_at":null,"enabled":false,"source_status":"SOURCE_NEEDED"},
+    {"rule_id":"DE-FINANCIAL-REGULATOR-DETAIL","jurisdiction":"DE","regime":"sector_adapter","scope":"complete financial-supervision detail outside release-1 generic pre-contract model","source_class":"uncertain","source_url":null,"verified_at":null,"enabled":false,"source_status":"SOURCE_NEEDED"}
+  ]
+}

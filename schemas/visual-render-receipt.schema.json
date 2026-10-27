@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pixelkiez.local/schemas/visual-render-receipt.schema.json",
+  "title": "Pixelkiez Visual Render Receipt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "plan_sha256", "rendered_count", "visuals", "capabilities"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "status": {"enum": ["PASS", "FAIL"]},
+    "plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "rendered_count": {"type": "integer", "minimum": 0},
+    "visuals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "template_id", "backend", "spec_path", "spec_sha256", "svg_path", "svg_sha256", "status"],
+        "properties": {
+          "id": {"type": "string"},
+          "template_id": {"type": "string"},
+          "backend": {"enum": ["VEGA_LITE_VL_CONVERT", "VEGA_LITE_CLI", "MERMAID_CLI", "PIXELKIEZ_SVG_FALLBACK"]},
+          "spec_path": {"type": "string"},
+          "spec_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "svg_path": {"type": "string"},
+          "svg_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "status": {"const": "PASS"}
+        }
+      }
+    },
+    "capabilities": {"type": "object"}
+  }
+}

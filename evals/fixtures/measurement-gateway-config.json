@@ -1,0 +1,6 @@
+{
+  "measurement_gateway": {
+    "enabled": true,
+    "timeout_seconds": 5
+  }
+}

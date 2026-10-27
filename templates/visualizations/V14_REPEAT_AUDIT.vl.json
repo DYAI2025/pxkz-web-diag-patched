@@ -1,0 +1,110 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Pixelkiez approved template V14_REPEAT_AUDIT: Vorher/Nachher",
+  "usermeta": {
+    "template_id": "V14_REPEAT_AUDIT",
+    "name": "Vorher/Nachher",
+    "purpose": "Verlauf wiederholter Audits",
+    "brand_contract": "pixelkiez-v1"
+  },
+  "width": 620,
+  "height": 310,
+  "data": {
+    "values": [
+      {
+        "category": "Technik",
+        "time": "Vorher",
+        "value": 52
+      },
+      {
+        "category": "Technik",
+        "time": "Nachher",
+        "value": 76
+      },
+      {
+        "category": "Auffindbarkeit",
+        "time": "Vorher",
+        "value": 41
+      },
+      {
+        "category": "Auffindbarkeit",
+        "time": "Nachher",
+        "value": 63
+      }
+    ]
+  },
+  "mark": {
+    "type": "line",
+    "point": {
+      "filled": true,
+      "size": 90
+    },
+    "strokeWidth": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "time",
+      "type": "ordinal",
+      "axis": {
+        "title": null
+      }
+    },
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          0,
+          100
+        ]
+      },
+      "axis": {
+        "title": "Score"
+      }
+    },
+    "color": {
+      "field": "category",
+      "type": "nominal",
+      "scale": {
+        "range": [
+          "#EC5E43",
+          "#0E1414",
+          "#566360"
+        ]
+      }
+    }
+  },
+  "config": {
+    "background": "#FFFFFF",
+    "font": "Schibsted Grotesk",
+    "title": {
+      "font": "Schibsted Grotesk",
+      "fontSize": 18,
+      "fontWeight": 700,
+      "color": "#0E1414",
+      "anchor": "start"
+    },
+    "axis": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 11,
+      "titleFont": "Schibsted Grotesk",
+      "titleFontSize": 12,
+      "labelColor": "#0E1414",
+      "titleColor": "#0E1414",
+      "gridColor": "#C6D4D1",
+      "domainColor": "#566360",
+      "tickColor": "#566360"
+    },
+    "legend": {
+      "labelFont": "Schibsted Grotesk",
+      "labelFontSize": 11,
+      "titleFont": "Schibsted Grotesk",
+      "titleFontSize": 12,
+      "labelColor": "#0E1414",
+      "titleColor": "#0E1414"
+    },
+    "view": {
+      "stroke": null
+    }
+  }
+}

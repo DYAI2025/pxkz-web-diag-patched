@@ -1,0 +1,152 @@
+{
+  "library_version": "1.0",
+  "source_asset": "assets/PXK_web_audit_template.pdf",
+  "source_date": "2026-08-27",
+  "source_sha256": "1fcde5007f6ef92967dd7caa740bec86df8f9f7239909a23aac5c06259205e8c",
+  "global_rules": {
+    "palette": [
+      "orange_measurement",
+      "ink_comparison",
+      "sage_context"
+    ],
+    "numbers": "mono_tabular_german_format",
+    "status": "fill_not_text_color",
+    "population_required": true,
+    "five_zones": [
+      "mono_label",
+      "finding_title",
+      "chart",
+      "evidence_bar",
+      "does_not_prove"
+    ],
+    "threshold_without_source": "NONE_OFFICIAL",
+    "chart_only_when_decision_relevant": true,
+    "no_thirteenth_chart_without_new_data_form": true,
+    "prohibited": [
+      "sankey",
+      "heatmap",
+      "word_cloud",
+      "3d"
+    ]
+  },
+  "templates": {
+    "V01": {
+      "name": "Verlaufskurve",
+      "data_form": "one_value_over_time",
+      "contract": {
+        "series": "4-12 label/value points",
+        "threshold": "optional value + source",
+        "population": "required",
+        "tool": "required"
+      },
+      "fallback": null
+    },
+    "V02": {
+      "name": "Schwellenband",
+      "data_form": "value_against_threshold_over_time",
+      "contract": {
+        "series": "4-24 label/value points",
+        "bands": "exactly 3 boundary/label/status/source records",
+        "threshold_source": "required"
+      },
+      "fallback": "V01"
+    },
+    "V03": {
+      "name": "Säulen gruppiert",
+      "data_form": "groups_comparison",
+      "contract": {
+        "groups": "3-6 labels",
+        "series": "2-3 named numeric series with one value per group",
+        "unit": "single shared unit"
+      },
+      "fallback": null
+    },
+    "V04": {
+      "name": "Balken-Rangfolge",
+      "data_form": "ranking_over_objects",
+      "contract": {
+        "rows": "4-8 label/value rows sorted descending"
+      },
+      "fallback": null
+    },
+    "V05": {
+      "name": "Stapelbalken 100%",
+      "data_form": "shares_of_whole",
+      "contract": {
+        "rows": "1-4 labels",
+        "classes": "2-4 class names/statuses",
+        "row_percentages": "each row sums to 100"
+      },
+      "fallback": null
+    },
+    "V06": {
+      "name": "Donut",
+      "data_form": "composition",
+      "contract": {
+        "parts": "2-4 label/value parts",
+        "sum": "required center total + unit",
+        "more_than_4_parts": "use V05"
+      },
+      "fallback": "V05"
+    },
+    "V07": {
+      "name": "Score-Ring und Kacheln",
+      "data_form": "fixed_scale_value",
+      "contract": {
+        "value": "0-100 or percent",
+        "scale": "min/max/source required",
+        "tiles": "2-3 value/label tiles"
+      },
+      "fallback": null
+    },
+    "V08": {
+      "name": "Bubble",
+      "data_form": "three_sizes_at_once",
+      "contract": {
+        "points": "3-8 label/x/y/r points",
+        "axes": "x/y names + units",
+        "radius_legend": "required"
+      },
+      "fallback": null
+    },
+    "V09": {
+      "name": "Radar",
+      "data_form": "profile_over_categories",
+      "contract": {
+        "axes": "5-8 label/value axes",
+        "scale": "defined equal scale",
+        "nets": "at most 2"
+      },
+      "fallback": null
+    },
+    "V10": {
+      "name": "Delta-Vergleich",
+      "data_form": "delta_comparison",
+      "contract": {
+        "rows": "3-6 label/value_a/value_b/unit rows",
+        "comparison": "definition and n required when cohort"
+      },
+      "fallback": null
+    },
+    "V11": {
+      "name": "Verteilung",
+      "data_form": "distribution",
+      "contract": {
+        "classes": "5-10 boundary/count classes",
+        "total_n": "required",
+        "median": "required",
+        "last_class": "may be open e.g. 6+"
+      },
+      "fallback": null
+    },
+    "V12": {
+      "name": "Erhebungstabelle",
+      "data_form": "status_per_object",
+      "contract": {
+        "rows": "1-8 metric/value/threshold_origin/evidence/does_not_prove rows"
+      },
+      "fallback": null
+    }
+  },
+  "m_id_mapping_note": "The supplied PDF contains mappings for M001-M138/C01-C54. The installed skill registry currently uses FIND/PERF/UX/A11Y/TRUST/AI identifiers. Do not invent a crosswalk. If M/C identifiers are present in a future canonical registry, use the PDF mapping; otherwise select V01-V12 by data form."
+}

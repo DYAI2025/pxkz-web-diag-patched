@@ -1,0 +1,91 @@
+{
+  "status": "PASS",
+  "eval_count": 17,
+  "results": [
+    {
+      "eval": "contract_migration_v1_82_v1_1_83_v1_2_96_v1_3_96",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "eval": "v1_3_five_class_partition_exact",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "eval": "default_v1_3_export_is_structural_even_without_phone",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "eval": "missing_email_and_unknown_prospect_do_not_block_upload",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "eval": "all_observed_agent_variables_materialized_by_required_or_defaulted_classes",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "eval": "production_gate_is_separate_from_upload_readiness",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "eval": "authoritative_production_fields_can_pass_separate_prerequisite_gate",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "eval": "missing_runtime_required_phone_blocks_upload_ready_gate",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "eval": "blank_runtime_defaulted_field_blocks_upload_ready_gate",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "eval": "blank_optional_customer_email_never_blocks_upload_ready_gate",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "eval": "literal_null_remains_forbidden_even_for_optional_fields",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "eval": "auto_detect_96_column_shape_resolves_to_latest_v1_3",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "eval": "explicit_v1_2_96_regression",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "eval": "explicit_v1_1_83_regression",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "eval": "explicit_v1_82_regression",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "eval": "all_versioned_simulation_fixtures_validate",
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    {
+      "eval": "cross_skill_v1_3_same_digest",
+      "status": "PASS",
+      "detail": "NOT_EXECUTED_SIBLING_V1_3_NOT_PRESENT"
+    }
+  ]
+}

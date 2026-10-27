@@ -1,0 +1,68 @@
+{
+  "status": "PASS",
+  "baseline_release": "3.2.1-measurement-platform-integration",
+  "baseline_tree_digest": "f9663c8c616f1c6ea1be95098eb6c27065f2018e4f8fe47499059cca93e637f6",
+  "overrides": [
+    {
+      "path": "assets/presentation.css",
+      "baseline_sha256": "ffd55bb7baa0b458de6db423792842f2bd4c0ee6e061003f53823ef588955a23",
+      "current_sha256": "8bdca58dc66e84780a79bf0d914dc1625f5700d881703b6dc953fba8e2ae9332",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE"
+    },
+    {
+      "path": "schemas/client-report.schema.json",
+      "baseline_sha256": "91b48b4c8795149219d4e35cc9999467cbfe793dcaad3c76e89f67b3879ce875",
+      "current_sha256": "6b33b55c3b985ced5d5c38d9ff17e2f5bf07f415743ee943e5e11095e2ad1ce8",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE"
+    },
+    {
+      "path": "scripts/build_audit_deliverables.py",
+      "baseline_sha256": "b8d3ba5536a2054d2545c17ef2868950597a2fdf7c01bf9dae2a4adf1bae203b",
+      "current_sha256": "99e4518c3ec255206f5fb93e2815816f8a544bdf314b989ffadc1e15fc6605bc",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE"
+    },
+    {
+      "path": "scripts/build_client_report_model.py",
+      "baseline_sha256": "433a909ec9bb38b29a4864f468d2cdf66a4a83b1beef0fdada2f6db8716a538e",
+      "current_sha256": "40a52f92a870070c977eee0d75ea91b6b315fcf67ed6e23b21b35c129e73b9f9",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE"
+    },
+    {
+      "path": "scripts/build_visualization_plan.py",
+      "baseline_sha256": "baf5d85df264a812165d4ba0fb534619e0ab5b9f3a601b8011955164358be954",
+      "current_sha256": "49065426ff29f12c54572ee5004374b472b94e4dc820eaf6cd3b01267a74b655",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE"
+    },
+    {
+      "path": "scripts/client_story.py",
+      "baseline_sha256": "3798a2babca162db109ce7750b324b7e1c993eb1ba48f1ab0afe4bebba230b2d",
+      "current_sha256": "b0b835f2ef49fbb83ca0d9fab8e58074b66f5d30b6c6b65b1f1cf0786ab637e1",
+      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS"
+    },
+    {
+      "path": "scripts/svg_chart_renderer.py",
+      "baseline_sha256": "35d0ee5acb12d7d798d41e50ab9e9b0593ebca18f66e9fd1dbbe40e38befba89",
+      "current_sha256": "56346daa17f50190bc5a824e38958a25d125db85a3f50f7f9f670c220e1da113",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE"
+    },
+    {
+      "path": "templates/client-report-template.json",
+      "baseline_sha256": "ccbfa129538a29167b63a7ac0d82d269563046174c5179fe430510540f954100",
+      "current_sha256": "52e7ce3377d6925d138f12b938ed17656d05260d9cc406ba8dfaaa89eaca05c8",
+      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS"
+    },
+    {
+      "path": "templates/presentation.html.j2",
+      "baseline_sha256": "71c4af5c66c59e9db107fc1f903e7527c93a3a4101d0693e33df9a9e6287fb02",
+      "current_sha256": "91ba7cfbf55e2d6b996f19f47f41aaf7dc86b796845b78d4a8cdacc4b195d7ae",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE"
+    },
+    {
+      "path": "templates/visualizations/V03_TOP_LEVERS.vl.json",
+      "baseline_sha256": "8701b93ab87e44dc04d0525f9900e9b2497117745911cc5d863d034be3b1754a",
+      "current_sha256": "2bfa16906ae484fd505f172445543d0b33ebea9c4b94ac34ed239244b16cb809",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE"
+    }
+  ],
+  "patch_scope_note": "Only listed hash-bound shared customer-output files may diverge from the protected Measurement Platform baseline; all other protected files remain byte-identical."
+}

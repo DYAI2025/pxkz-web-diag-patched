@@ -1,0 +1,21 @@
+{
+  "registry_version": "1.0.0",
+  "status": "RUNTIME_CAPABILITY_CONTRACT",
+  "note": "Capabilities describe required evidence mechanisms. They do not assert that a runtime actually provides them.",
+  "capabilities": [
+    {"id":"public_http_fetch","label":"Public HTTP fetch","permission":"public_read_only","evidence":"measured_or_observed","unavailable_behavior":"not_assessed"},
+    {"id":"public_page_render","label":"Public page/browser render","permission":"public_read_only","evidence":"observed","unavailable_behavior":"not_assessed"},
+    {"id":"html_inspection","label":"Fetched HTML inspection","permission":"public_read_only","evidence":"observed","unavailable_behavior":"not_assessed"},
+    {"id":"crawl_sample","label":"Bounded public crawl sample","permission":"public_read_only","evidence":"measured_or_observed","unavailable_behavior":"not_assessed"},
+    {"id":"search_sample","label":"Dated public search sample","permission":"public_read_only","evidence":"observed","unavailable_behavior":"not_assessed"},
+    {"id":"structured_data_inspection","label":"Structured-data inspection","permission":"public_read_only","evidence":"observed","unavailable_behavior":"not_assessed"},
+    {"id":"performance_field","label":"Public field-performance evidence","permission":"public_or_user_authorized","evidence":"measured","unavailable_behavior":"not_assessed"},
+    {"id":"performance_lab","label":"Controlled lab-performance runner","permission":"public_read_only","evidence":"measured","unavailable_behavior":"not_assessed"},
+    {"id":"asset_inspection","label":"Page asset/media inspection","permission":"public_read_only","evidence":"measured_or_observed","unavailable_behavior":"not_assessed"},
+    {"id":"header_inspection","label":"Public response-header inspection","permission":"public_read_only","evidence":"measured","unavailable_behavior":"not_assessed"},
+    {"id":"accessibility_manual_sample","label":"Bounded manual accessibility sample","permission":"public_read_only","evidence":"observed","unavailable_behavior":"not_assessed"},
+    {"id":"accessibility_automation","label":"Automated accessibility snapshot","permission":"public_read_only","evidence":"measured","unavailable_behavior":"not_assessed"},
+    {"id":"content_inspection","label":"Visible content/entity/trust inspection","permission":"public_read_only","evidence":"observed","unavailable_behavior":"not_assessed"},
+    {"id":"private_measurement_export","label":"User-authorized private analytics/search/CRM export","permission":"user_authorized_private","evidence":"measured","unavailable_behavior":"not_assessed"}
+  ]
+}

@@ -1,0 +1,13 @@
+interface:
+  display_name: Pixelkiez Website Diagnosis
+  short_description: Evidence-first Website-Audit mit branded PDF, vollständigem JSON/Markdown-Analysebericht,
+    Visualisierungen und v1.3 ElevenLabs Batch-CSV.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

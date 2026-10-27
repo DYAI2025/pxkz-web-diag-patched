@@ -1,0 +1,13 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://pixelkiez.example/schemas/impressum-evidence.schema.json",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["context","discovery_scope","observations"],
+  "properties":{
+    "context":{"type":"object"},
+    "discovery_scope":{"type":"object","required":["complete","locations"],"properties":{"complete":{"type":"boolean"},"locations":{"type":"array","items":{"type":"string"}}}},
+    "observations":{"type":"object","additionalProperties":{"$ref":"#/$defs/observation"}}
+  },
+  "$defs":{"observation":{"type":"object","additionalProperties":true,"required":["status","measurement_class","evidence_grade"],"properties":{"status":{"enum":["PRESENT","ABSENT","INCOMPLETE","INCORRECT","CONTRADICTORY","UNVERIFIABLE","INACCESSIBLE","NOT_CONTINUOUSLY_AVAILABLE","UNTIMELY","UNKNOWN"]},"measurement_class":{"enum":["measured","observed","inferred_risk","not_assessed"]},"evidence_grade":{"enum":["E1","E2","E3","E4","E5","E6","E7","E8"]},"url":{"type":["string","null"]},"method":{"type":["string","null"]},"timestamp":{"type":["string","null"]},"evidence_ref":{"type":["string","null"]},"defect_supported":{"type":"boolean"},"unresolved_conflict":{"type":"boolean"}}}}
+}

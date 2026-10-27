@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "status": "PASS",
+  "golden_case": "LEG-GOLD-BFL",
+  "checks": [
+    "bo_feng_lin_mandatory_projection",
+    "core_score_coverage_delta_zero",
+    "mandatory_legal_risk_rank1_cover_roadmap_closing",
+    "mandatory_legal_risk_visible_in_rendered_pdf",
+    "omission_fails_closed",
+    "cover_warning_required",
+    "roadmap_action_required",
+    "anti_overclaim_preserved"
+  ],
+  "expected_customer_priority": "MANDATORY_CRITICAL",
+  "expected_claim_state": "POSSIBLE_LEGAL_REVIEW",
+  "pixelkiez_score_impact": "NONE_DIRECT"
+}

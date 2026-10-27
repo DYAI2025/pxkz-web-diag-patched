@@ -1,0 +1,76 @@
+research_bag_output:
+  capability_discovery_needed: no
+  source_inventory:
+    - source_id: S001
+      title: Ristorante Brescia first-pass session evidence
+      type: user_provided
+      location: current conversation/session
+      purpose: identify observable customer-presentation failure modes
+      reliability: high for what was visibly produced in this session; not external website truth
+      limitations: one audit episode; cannot alone prove universal recurrence
+      confidence_default: 5
+      recommended_use: rule
+    - source_id: S002
+      title: Ristorante Brescia repaired second-pass session evidence
+      type: user_provided
+      location: current conversation/session
+      purpose: contrast the render-inspect-repair-rerender trajectory with the failed first pass
+      reliability: high for the observable repair sequence and final rendered artifact
+      limitations: contrast supports contribution, not universal causal sufficiency
+      confidence_default: 5
+      recommended_use: rule
+    - source_id: S003
+      title: Installed Pixelkiez Website Diagnosis contracts and validators
+      type: primary
+      location: current pixelkiez-website-diagnosis skill package
+      purpose: preserve existing scoring, visual, QA, renderer, strategic-relevance, batch and release contracts
+      reliability: authoritative for the target skill behavior
+      limitations: internal product policy, not an external standard
+      confidence_default: 5
+      recommended_use: rule
+  knowledge_model:
+    core_terms:
+      - term: final customer presentation quality
+        definition: non-compensatory PASS across artifact binding, score projection, cover integrity, four-lever completeness, sentence integrity, business-impact visibility, privacy scope, no synthetic magnitude, page budget, customer language, visual QA and semantic QA
+        confidence: 5
+      - term: draft state
+        definition: a rendered PDF with PENDING visual/semantic QA; existence of the file is not completion evidence
+        confidence: 5
+    operational_rules:
+      - rule: first render remains PENDING_QA and must never be presented as final
+        source_ids: [S001, S002, S003]
+        confidence: 5
+      - rule: any repair invalidates prior QA and requires rerender plus reinspection of the exact new digest
+        source_ids: [S002, S003]
+        confidence: 5
+      - rule: PARTIAL_SCORE stays internal as Pixelkiez Teilscore but projects customer-side as Pixelkiez Bewertungsstand without coverage/confidence
+        source_ids: [S001, S003]
+        confidence: 5
+      - rule: customer visuals may rank levers ordinally but must not invent numeric magnitude
+        source_ids: [S001, S003]
+        confidence: 5
+    assumptions: []
+    missing: []
+    source_needed: []
+  capability_candidates:
+    - id: C001
+      type: validator
+      description: one final non-compensatory customer-presentation quality validator composed over existing deterministic and vision/human QA evidence
+      evidence: [S001, S002, S003]
+      recommended_destination: scripts
+      confidence: 5
+    - id: C002
+      type: eval
+      description: negative regression cases reproducing the observable first-pass failure classes plus a rendered repair-loop proof
+      evidence: [S001, S002]
+      recommended_destination: evals
+      confidence: 5
+  browser_act_candidates: []
+  eval_requirements:
+    trigger_evals_required: true
+    output_evals_required: true
+    mcp_evals_required: false
+    browser_capability_tests_required: false
+  build_recommendation:
+    status: proceed
+    reason: Patch existing quality orchestration and validators; no new external capability is needed.

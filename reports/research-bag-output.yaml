@@ -1,0 +1,76 @@
+research_bag_output:
+  capability_discovery_needed: no
+  source_inventory:
+    - source_id: S001
+      title: Pixelkiez Website Diagnosis current package
+      type: primary
+      location: current skill source tree
+      purpose: identify the existing legal-sidecar, customer projection, scoring and release contracts
+      reliability: direct source repository inspection
+      limitations: describes current implementation, not legal advice
+      confidence_default: 5
+      recommended_use: rule
+    - source_id: S002
+      title: Impressum legal source map release 1
+      type: primary
+      location: references/impressum-legal-source-map.md and assets/impressum-compliance-registry.v1.json
+      purpose: preserve existing current legal rule authorities and scope boundaries
+      reliability: existing primary-source-bound legal registry
+      limitations: country and sector adapters marked SOURCE_NEEDED remain disabled
+      confidence_default: 5
+      recommended_use: rule
+    - source_id: S003
+      title: User-authorized P0 customer-truth requirement
+      type: user_provided
+      location: conversation authorization 2026-09-09
+      purpose: require explicit surfacing of material possible/obvious Impressum risk in customer presentation
+      reliability: authoritative product requirement, not external legal authority
+      limitations: must not lower the evidentiary threshold for asserting a legal violation
+      confidence_default: 5
+      recommended_use: rule
+  knowledge_model:
+    core_terms:
+      - term: legal truth lane
+        definition: applicability and defect classification that may assert only evidence-supported legal states
+        confidence: 5
+      - term: customer risk priority
+        definition: independent decision about whether a supported risk must be visible to the business owner
+        confidence: 5
+      - term: mandatory legal risk
+        definition: MANDATORY_CRITICAL or MANDATORY_HIGH customer priority that cannot be omitted from the top-four customer story
+        confidence: 5
+    operational_rules:
+      - rule: Unresolved jurisdiction changes legal claim wording, not mandatory visibility of strongly observed provider opacity.
+        source_ids: [S001, S003]
+        confidence: 5
+      - rule: LEGAL-IMP remains outside the 48-metric Core score and cannot change score, coverage, weights or anchors.
+        source_ids: [S001, S002]
+        confidence: 5
+      - rule: Mandatory provider-identity risk must be lever rank 1 and visible on cover, roadmap, closing and final PDF.
+        source_ids: [S003]
+        confidence: 5
+    assumptions: []
+    missing: []
+    source_needed: []
+  capability_candidates:
+    - id: C001
+      type: script
+      description: deterministic legal customer projection resolver and omission validator
+      evidence: [S001, S003]
+      recommended_destination: scripts
+      confidence: 5
+    - id: C002
+      type: eval
+      description: Bo Feng Lin golden regression and anti-overclaim/omission tests
+      evidence: [S003]
+      recommended_destination: evals
+      confidence: 5
+  browser_act_candidates: []
+  eval_requirements:
+    trigger_evals_required: true
+    output_evals_required: true
+    mcp_evals_required: false
+    browser_capability_tests_required: false
+  build_recommendation:
+    status: proceed
+    reason: The patch is fully local and deterministic; no new external capability is required.

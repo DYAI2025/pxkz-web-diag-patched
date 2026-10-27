@@ -1,0 +1,154 @@
+{
+  "measurement_gateway": {
+    "schema_version": "1.0",
+    "gateway_version": "0.1.0",
+    "run_id": "fixture-gateway-001",
+    "target_url": "https://example.com/",
+    "execution_mode": "FIXTURE",
+    "status": "COMPLETE",
+    "started_at": "2026-08-30T12:00:00Z",
+    "completed_at": "2026-08-30T12:00:01Z",
+    "observations": [
+      {
+        "id": "HTTP_STATUS_CODE",
+        "adapter": "public-web",
+        "status": "OBSERVED",
+        "value": 200,
+        "unit": "status",
+        "observed_at": "2026-08-30T12:00:00Z",
+        "url": "https://example.com/",
+        "evidence_ref": "GW-HTTP_STATUS_CODE",
+        "claim_boundary": "Ein HTTP-Status ist eine Momentaufnahme und beweist keine dauerhafte Verfügbarkeit.",
+        "context": {}
+      },
+      {
+        "id": "REDIRECT_COUNT",
+        "adapter": "public-web",
+        "status": "OBSERVED",
+        "value": 0,
+        "unit": "count",
+        "observed_at": "2026-08-30T12:00:00Z",
+        "url": "https://example.com/",
+        "evidence_ref": "GW-REDIRECT_COUNT",
+        "claim_boundary": "Redirect-Anzahl bewertet weder SEO-Wirkung noch Nutzererfolg allein.",
+        "context": {}
+      },
+      {
+        "id": "HTTPS_FINAL",
+        "adapter": "public-web",
+        "status": "OBSERVED",
+        "value": true,
+        "unit": "boolean",
+        "observed_at": "2026-08-30T12:00:00Z",
+        "url": "https://example.com/",
+        "evidence_ref": "GW-HTTPS_FINAL",
+        "claim_boundary": "HTTPS-Nutzung allein beweist keine umfassende Sicherheit.",
+        "context": {}
+      },
+      {
+        "id": "TLS_VERIFIED",
+        "adapter": "public-web",
+        "status": "OBSERVED",
+        "value": true,
+        "unit": "boolean",
+        "observed_at": "2026-08-30T12:00:00Z",
+        "url": "https://example.com/",
+        "evidence_ref": "GW-TLS_VERIFIED",
+        "claim_boundary": "Erfolgreiche TLS-Prüfung dieser Verbindung ist kein vollständiger Transport-Security-Audit.",
+        "context": {
+          "cert_not_after": "Dec 31 23:59:59 2030 GMT"
+        }
+      },
+      {
+        "id": "SECURITY_HEADERS_PRESENT_COUNT",
+        "adapter": "public-web",
+        "status": "OBSERVED",
+        "value": 4,
+        "unit": "count",
+        "observed_at": "2026-08-30T12:00:00Z",
+        "url": "https://example.com/",
+        "evidence_ref": "GW-SECURITY_HEADERS_PRESENT_COUNT",
+        "claim_boundary": "Header-Anzahl ist kein Sicherheits- oder Compliance-Score.",
+        "context": {
+          "present": [
+            "strict-transport-security",
+            "content-security-policy",
+            "x-content-type-options",
+            "referrer-policy"
+          ]
+        }
+      },
+      {
+        "id": "CSP_PRESENT",
+        "adapter": "public-web",
+        "status": "OBSERVED",
+        "value": true,
+        "unit": "boolean",
+        "observed_at": "2026-08-30T12:00:00Z",
+        "url": "https://example.com/",
+        "evidence_ref": "GW-CSP_PRESENT",
+        "claim_boundary": "CSP-Präsenz allein beweist keine wirksame oder vollständige Sicherheitsrichtlinie.",
+        "context": {}
+      },
+      {
+        "id": "CSP_RISK_COUNT",
+        "adapter": "public-web",
+        "status": "OBSERVED",
+        "value": 0,
+        "unit": "count",
+        "observed_at": "2026-08-30T12:00:00Z",
+        "url": "https://example.com/",
+        "evidence_ref": "GW-CSP_RISK_COUNT",
+        "claim_boundary": "Die CSP-Heuristik ist eine eng begrenzte Konfigurationsdiagnose, kein Penetrationstest oder Compliance-Nachweis.",
+        "context": {
+          "risk_tokens": [],
+          "missing_baseline_directives": []
+        }
+      },
+      {
+        "id": "ROBOTS_PRESENT",
+        "adapter": "public-web",
+        "status": "OBSERVED",
+        "value": true,
+        "unit": "boolean",
+        "observed_at": "2026-08-30T12:00:00Z",
+        "url": "https://example.com/robots.txt",
+        "evidence_ref": "GW-ROBOTS_PRESENT",
+        "claim_boundary": "robots.txt-Präsenz beweist weder vollständige Crawlability noch Rankingfähigkeit.",
+        "context": {
+          "status_code": 200
+        }
+      },
+      {
+        "id": "SITEMAP_PRESENT",
+        "adapter": "public-web",
+        "status": "OBSERVED",
+        "value": true,
+        "unit": "boolean",
+        "observed_at": "2026-08-30T12:00:00Z",
+        "url": "https://example.com/sitemap.xml",
+        "evidence_ref": "GW-SITEMAP_PRESENT",
+        "claim_boundary": "Eine erreichbare Sitemap beweist weder Indexierung noch Suchsichtbarkeit.",
+        "context": {
+          "checked": [
+            {
+              "url": "https://example.com/sitemap.xml",
+              "status": 200,
+              "present": true
+            }
+          ]
+        }
+      }
+    ],
+    "errors": [],
+    "provenance": {
+      "source": "pixelkiez-measurement-gateway",
+      "request_policy_version": "1.0",
+      "response_digests": [
+        "25eef5b9d7921abca4c783433315f33606ff953bcf4f4e0552a2f9644553d3cc",
+        "5759f360b95713c1d681d28f0c58c7cd659c4b1d04807aae2f800e0cbaef30ca",
+        "8e32b7d522ca0e7edadf60f0cee7ccee772c649f25f69ad0df00bf31853b29a2"
+      ]
+    }
+  }
+}

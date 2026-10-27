@@ -1,0 +1,30 @@
+PASS: batch contracts v1=82 v1.1=83 v1.2=96 v1.3=96 five_class={'INTERNAL_RECORD': 48, 'EL_RUNTIME_REQUIRED': 3, 'EL_RUNTIME_DEFAULTED': 18, 'OPTIONAL': 14, 'PRODUCTION_GATE_ONLY': 13} sha=ed9924084c479c3627ceb2648ef301162d5b99bbfddfe3fefe265c7cec915d38
+PASS: contract_migration_v1_82_v1_1_83_v1_2_96_v1_3_96 (PASS)
+PASS: v1_3_five_class_partition_exact (PASS)
+PASS: score=65 coverage=92% status=FULL_SCORE confidence=HIGH
+PASS: wrote /tmp/pxk-batch-v13-ezi8wcka/default-v13-no-context.csv fields=96 export=AUDIT_EXPORT_COMPLETE upload=EL_UPLOAD_BLOCKED production_gate=BLOCKED contract=ed9924084c479c3627ceb2648ef301162d5b99bbfddfe3fefe265c7cec915d38
+MISSING_REQUIRED: phone_number, recipient_number
+PASS: default_v1_3_export_is_structural_even_without_phone (PASS)
+PASS: wrote /tmp/pxk-batch-v13-ezi8wcka/upload-ready-v13.csv fields=96 export=AUDIT_EXPORT_COMPLETE upload=EL_UPLOAD_READY production_gate=BLOCKED contract=ed9924084c479c3627ceb2648ef301162d5b99bbfddfe3fefe265c7cec915d38
+PASS: missing_email_and_unknown_prospect_do_not_block_upload (PASS)
+PASS: all_observed_agent_variables_materialized_by_required_or_defaulted_classes (PASS)
+PASS: production_gate_is_separate_from_upload_readiness (PASS)
+PASS: wrote /tmp/pxk-batch-v13-ezi8wcka/production-ready-v13.csv fields=96 export=AUDIT_EXPORT_COMPLETE upload=EL_UPLOAD_READY production_gate=PASS contract=ed9924084c479c3627ceb2648ef301162d5b99bbfddfe3fefe265c7cec915d38
+PASS: authoritative_production_fields_can_pass_separate_prerequisite_gate (PASS)
+PASS: missing_runtime_required_phone_blocks_upload_ready_gate (PASS)
+PASS: blank_runtime_defaulted_field_blocks_upload_ready_gate (PASS)
+PASS: blank_optional_customer_email_never_blocks_upload_ready_gate (PASS)
+PASS: literal_null_remains_forbidden_even_for_optional_fields (PASS)
+PASS: auto_detect_96_column_shape_resolves_to_latest_v1_3 (PASS)
+PASS: wrote /tmp/pxk-batch-v13-ezi8wcka/compat-v1.2.csv fields=96 export=AUDIT_EXPORT_COMPLETE upload=EL_UPLOAD_BLOCKED production_gate=BLOCKED contract=798864ba5998d0e7784137749d8bf857c7d1f7747c996e0c9bc58e7ae8962f76
+MISSING_REQUIRED: phone_number, recipient_number, campaign_id, customer_language, website_role, primary_customer_type, lead_source_current, compliance_status, do_not_contact, jurisdiction, contact_type, ai_disclosure_required, recording_status, meeting_offer, meeting_timezone
+PASS: explicit_v1_2_96_regression (PASS)
+PASS: wrote /tmp/pxk-batch-v13-ezi8wcka/compat-v1.1.csv fields=83 export=AUDIT_EXPORT_COMPLETE upload=EL_UPLOAD_BLOCKED production_gate=BLOCKED contract=ab5570bac1066d4c999a0e8f9b674a9ebfb13eccfabbb1cd0fd049400f0cec5a
+MISSING_REQUIRED: phone_number, recipient_number, campaign_id, customer_language, website_role, primary_customer_type, lead_source_current, compliance_status, do_not_contact, jurisdiction, contact_type, ai_disclosure_required, recording_status, meeting_offer, meeting_timezone
+PASS: explicit_v1_1_83_regression (PASS)
+PASS: wrote /tmp/pxk-batch-v13-ezi8wcka/compat-v1.csv fields=82 export=AUDIT_EXPORT_COMPLETE upload=EL_UPLOAD_BLOCKED production_gate=BLOCKED contract=66018327ad7480c44e17cf071e6e864105f7d9185d4965cafbd76f9c168edfe5
+MISSING_REQUIRED: phone_number, recipient_number, campaign_id, customer_language, website_role, primary_customer_type, lead_source_current, compliance_status, do_not_contact, jurisdiction, contact_type, ai_disclosure_required, recording_status, meeting_offer, meeting_timezone
+PASS: explicit_v1_82_regression (PASS)
+PASS: all_versioned_simulation_fixtures_validate (PASS)
+PASS: cross_skill_v1_3_same_digest (NOT_EXECUTED_SIBLING_V1_3_NOT_PRESENT)
+PASS: batch contract acceptance evals (17)

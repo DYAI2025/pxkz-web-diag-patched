@@ -1,0 +1,6 @@
+{
+  "contract_version": "1.0.0",
+  "status": "NO_APPROVED_PROFILES_REGISTERED",
+  "purpose": "Optional approved industry-specific weights for customer lever selection only; never canonical Pixelkiez scoring.",
+  "profiles": []
+}

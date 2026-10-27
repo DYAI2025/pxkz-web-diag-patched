@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "artifact_digest": "1a9c862edfce24d6193273049eebed12e0fa87312d98497bb835ebb4245f1e91",
+  "validated_at_basis": "2026-09-07 Europe/Berlin session",
+  "structural": {
+    "quick_validate": "PASS_266_REQUIRED_FILES",
+    "schema": "PASS_48_METRICS_14_CAPABILITIES",
+    "source_map": "PASS",
+    "evals": "PASS_21_TRIGGERS_25_OUTPUTS",
+    "security_scan": "PASS"
+  },
+  "active_core": {
+    "full_48_contract": "PASS",
+    "metrics": 48,
+    "checks": 33,
+    "mutations": 20,
+    "fixture_only": true,
+    "protected_core_unchanged": true
+  },
+  "regressions": {
+    "score_gate": "PASS_FULL_92_PARTIAL_72_NO_SCORE_34",
+    "measurement_gateway": "PASS_9_NON_SCORING_ENRICHMENT",
+    "core_parity": "PASS",
+    "batch_contract": "PASS_17_V1_3_96_FIELDS",
+    "strategic_relevance": "PASS_5",
+    "truth_discipline": "PASS_8",
+    "business_first_reporting": "PASS",
+    "customer_presentation_quality": "PASS_5",
+    "visualization_gallery": "PASS_15_OUTPUTS",
+    "v321_preservation": "PASS_BASELINE_238_MODIFIED_43_ADDED_23_DELETED_0",
+    "agent_agnostic": "PASS",
+    "installability": "PASS"
+  },
+  "report_proof": {
+    "active_fixture_pdf_render": "PASS",
+    "pdf_pages": 11,
+    "selected_visuals": 6,
+    "deliverable_bundle_build_complete": true,
+    "customer_release_ready": false,
+    "visual_qa": "PENDING",
+    "semantic_qa": "PENDING",
+    "full_monolithic_visual_harness": "UNVERIFIED_RUNTIME_TIMEOUT_NOT_RELABELED_PASS"
+  },
+  "release_gate": "PASS",
+  "enterprise_evaluator": "PASS",
+  "notes": [
+    "Fixture proof demonstrates contract execution-to-score integrity, not 48 live measurements.",
+    "Gateway/enrichment native layer remains NON_SCORING_ENRICHMENT."
+  ]
+}

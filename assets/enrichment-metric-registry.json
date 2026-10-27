@@ -1,0 +1,350 @@
+{
+  "registry_version": "1.1.0",
+  "status": "production-contract",
+  "scoring_policy": "NON_SCORING_ENRICHMENT",
+  "note": "Optional measured/observed evidence that enriches the audit without changing the 48-metric Pixelkiez score; includes the optional read-only Measurement Gateway public-probe slice.",
+  "metrics": [
+    {
+      "id": "SERP_CURRENT_POSITION",
+      "family": "search_visibility",
+      "label_de": "Aktuelle organische Position je Suchanfrage",
+      "unit": "position",
+      "source": "DataForSEO or compatible SERP provider",
+      "customer_eligible": true,
+      "does_not_prove": "Keine dauerhafte oder personalisierte Google-Position; gilt nur für dokumentierte Query-, Orts-, Geräte- und Zeitparameter."
+    },
+    {
+      "id": "SERP_CURRENT_PAGE",
+      "family": "search_visibility",
+      "label_de": "Explizit gemeldete Ergebnisseite",
+      "unit": "page",
+      "source": "SERP provider explicit page field only",
+      "customer_eligible": true,
+      "does_not_prove": "Eine Ergebnisseite darf nur gezeigt werden, wenn der Provider sie explizit liefert; sie wird nicht aus der Positionszahl erfunden."
+    },
+    {
+      "id": "GSC_AVG_POSITION",
+      "family": "search_visibility",
+      "label_de": "Google Search Console Durchschnittsposition",
+      "unit": "position",
+      "source": "Google Search Console Search Analytics",
+      "customer_eligible": true,
+      "does_not_prove": "Durchschnittsposition im Zeitraum ist kein aktueller Live-Rang."
+    },
+    {
+      "id": "GSC_IMPRESSIONS",
+      "family": "search_visibility",
+      "label_de": "Google-Impressionen",
+      "unit": "count",
+      "source": "Google Search Console Search Analytics",
+      "customer_eligible": true,
+      "does_not_prove": "Impressionen beweisen weder Klicks noch Anfragen."
+    },
+    {
+      "id": "GSC_CLICKS",
+      "family": "search_visibility",
+      "label_de": "Google-Klicks",
+      "unit": "count",
+      "source": "Google Search Console Search Analytics",
+      "customer_eligible": true,
+      "does_not_prove": "Klicks beweisen keine qualifizierten Leads oder Umsätze."
+    },
+    {
+      "id": "GSC_CTR",
+      "family": "search_visibility",
+      "label_de": "Google CTR",
+      "unit": "ratio",
+      "source": "Google Search Console Search Analytics",
+      "customer_eligible": true,
+      "does_not_prove": "CTR ist kontextabhängig und keine Conversion-Rate."
+    },
+    {
+      "id": "GSC_INDEX_VERDICT",
+      "family": "search_readiness",
+      "label_de": "Google Index-Verdict",
+      "unit": "state",
+      "source": "Google Search Console URL Inspection",
+      "customer_eligible": true,
+      "does_not_prove": "URL Inspection beschreibt den Google-Indexstatus der bekannten Version und garantiert keine zukünftige Indexierung oder Platzierung."
+    },
+    {
+      "id": "GSC_CANONICAL_ALIGNMENT",
+      "family": "search_readiness",
+      "label_de": "Google-/User-Canonical-Abgleich",
+      "unit": "state",
+      "source": "Google Search Console URL Inspection",
+      "customer_eligible": true,
+      "does_not_prove": "Canonical-Übereinstimmung garantiert weder Indexierung noch Ranking."
+    },
+    {
+      "id": "PSI_PERFORMANCE_SCORE",
+      "family": "performance_lab",
+      "label_de": "Lighthouse Performance Score",
+      "unit": "score_0_100",
+      "source": "PageSpeed Insights API / Lighthouse",
+      "customer_eligible": true,
+      "does_not_prove": "Labormessung ist keine reale Nutzerperformance."
+    },
+    {
+      "id": "PSI_LCP_LAB_MS",
+      "family": "performance_lab",
+      "label_de": "LCP Labormessung",
+      "unit": "ms",
+      "source": "PageSpeed Insights API / Lighthouse",
+      "customer_eligible": true,
+      "does_not_prove": "Ein Lab-LCP ist kein CrUX-Feldwert und keine Garantie für reale Nutzererfahrung."
+    },
+    {
+      "id": "PSI_CLS_LAB",
+      "family": "performance_lab",
+      "label_de": "CLS Labormessung",
+      "unit": "score",
+      "source": "PageSpeed Insights API / Lighthouse",
+      "customer_eligible": true,
+      "does_not_prove": "Ein Lab-CLS ist kein CrUX-Feldwert."
+    },
+    {
+      "id": "CRUX_LCP_P75_MS",
+      "family": "performance_field",
+      "label_de": "Realer LCP p75",
+      "unit": "ms",
+      "source": "Chrome UX Report API",
+      "customer_eligible": true,
+      "does_not_prove": "CrUX repräsentiert qualifizierte Chrome-Felddaten und nicht jeden Besucher oder jedes Gerät."
+    },
+    {
+      "id": "CRUX_INP_P75_MS",
+      "family": "performance_field",
+      "label_de": "Realer INP p75",
+      "unit": "ms",
+      "source": "Chrome UX Report API",
+      "customer_eligible": true,
+      "does_not_prove": "CrUX repräsentiert qualifizierte Chrome-Felddaten und nicht jeden Besucher oder jedes Gerät."
+    },
+    {
+      "id": "CRUX_CLS_P75",
+      "family": "performance_field",
+      "label_de": "Realer CLS p75",
+      "unit": "score",
+      "source": "Chrome UX Report API",
+      "customer_eligible": true,
+      "does_not_prove": "CrUX repräsentiert qualifizierte Chrome-Felddaten und nicht jeden Besucher oder jedes Gerät."
+    },
+    {
+      "id": "GA4_ACTIVE_USERS",
+      "family": "audience",
+      "label_de": "Aktive Nutzer",
+      "unit": "count",
+      "source": "Google Analytics Data API",
+      "customer_eligible": true,
+      "does_not_prove": "Aktive Nutzer sind keine Anfragen oder Kunden."
+    },
+    {
+      "id": "GA4_SESSIONS",
+      "family": "audience",
+      "label_de": "Sessions",
+      "unit": "count",
+      "source": "Google Analytics Data API",
+      "customer_eligible": true,
+      "does_not_prove": "Sessions sind keine eindeutigen Personen und keine Anfragen."
+    },
+    {
+      "id": "GA4_PRIMARY_CTA_CLICKS",
+      "family": "funnel",
+      "label_de": "Primäre CTA-Klicks",
+      "unit": "count",
+      "source": "Google Analytics Data API configured event",
+      "customer_eligible": true,
+      "does_not_prove": "CTA-Klicks sind keine abgesendeten Anfragen."
+    },
+    {
+      "id": "GA4_FORM_STARTS",
+      "family": "funnel",
+      "label_de": "Formularstarts",
+      "unit": "count",
+      "source": "Google Analytics Data API configured event",
+      "customer_eligible": true,
+      "does_not_prove": "Formularstarts sind keine abgesendeten Anfragen."
+    },
+    {
+      "id": "GA4_FORM_SUBMITS",
+      "family": "funnel",
+      "label_de": "Formularabsendungen",
+      "unit": "count",
+      "source": "Google Analytics Data API configured event",
+      "customer_eligible": true,
+      "does_not_prove": "Formularabsendungen beweisen keine qualifizierten Leads, Termine oder Umsätze."
+    },
+    {
+      "id": "GA4_PHONE_CLICKS",
+      "family": "funnel",
+      "label_de": "Telefon-Klicks",
+      "unit": "count",
+      "source": "Google Analytics Data API configured event",
+      "customer_eligible": true,
+      "does_not_prove": "Ein Telefon-Klick beweist weder einen Anruf noch einen qualifizierten Lead."
+    },
+    {
+      "id": "A11Y_UNNAMED_CONTROLS",
+      "family": "accessibility",
+      "label_de": "Bedienelemente ohne belastbaren Namen",
+      "unit": "count",
+      "source": "Playwright/Chromium DOM observation",
+      "customer_eligible": true,
+      "does_not_prove": "Automatisierte/DOM-basierte Prüfung ist keine vollständige WCAG-Konformitätsprüfung."
+    },
+    {
+      "id": "A11Y_KEYBOARD_FOCUS_TARGETS",
+      "family": "accessibility",
+      "label_de": "Erreichte Fokusziele im Tastatur-Sample",
+      "unit": "count",
+      "source": "Playwright/Chromium keyboard sample",
+      "customer_eligible": false,
+      "does_not_prove": "Ein Fokus-Sample beweist keine vollständige Tastaturbedienbarkeit."
+    },
+    {
+      "id": "A11Y_CRITICAL_SERIOUS_AUTOMATED",
+      "family": "accessibility",
+      "label_de": "Kritische/ernste automatisierte Barrieren",
+      "unit": "count",
+      "source": "Optional supplied axe-core runtime",
+      "customer_eligible": true,
+      "does_not_prove": "Automatisierte Findings sind keine vollständige WCAG-Prüfung oder Zertifizierung."
+    },
+    {
+      "id": "MOBILE_HORIZONTAL_OVERFLOW_PX",
+      "family": "accessibility",
+      "label_de": "Horizontaler Überlauf im Mobile-Sample",
+      "unit": "px",
+      "source": "Playwright/Chromium viewport observation",
+      "customer_eligible": true,
+      "does_not_prove": "Ein Viewport-Sample beweist keine vollständige Responsive- oder Accessibility-Konformität."
+    },
+    {
+      "id": "PRIVACY_THIRD_PARTY_REQUESTS_PRECHOICE",
+      "family": "privacy_consent",
+      "label_de": "Drittanbieter-Requests vor Auswahl",
+      "unit": "count",
+      "source": "Playwright/Chromium network observation",
+      "customer_eligible": true,
+      "does_not_prove": "Drittanbieter-Requests allein beweisen keine Einwilligungspflicht oder Rechtswidrigkeit."
+    },
+    {
+      "id": "PRIVACY_COOKIES_PRECHOICE",
+      "family": "privacy_consent",
+      "label_de": "Cookies vor Auswahl",
+      "unit": "count",
+      "source": "Playwright/Chromium browser context",
+      "customer_eligible": true,
+      "does_not_prove": "Cookies allein beweisen keine Einwilligungspflicht oder Rechtswidrigkeit."
+    },
+    {
+      "id": "PRIVACY_STORAGE_ITEMS_PRECHOICE",
+      "family": "privacy_consent",
+      "label_de": "Storage-Einträge vor Auswahl",
+      "unit": "count",
+      "source": "Playwright/Chromium storage observation",
+      "customer_eligible": true,
+      "does_not_prove": "Storage-Nutzung allein beweist keine Einwilligungspflicht oder Rechtswidrigkeit."
+    },
+    {
+      "id": "CONSENT_ACCEPT_CONTROL_FOUND",
+      "family": "privacy_consent",
+      "label_de": "Akzeptieren-Steuerung gefunden",
+      "unit": "boolean",
+      "source": "Playwright/Chromium visible control observation",
+      "customer_eligible": false,
+      "does_not_prove": "Das Vorhandensein einer Steuerung beweist keine technische oder rechtliche Wirksamkeit."
+    },
+    {
+      "id": "CONSENT_REJECT_CONTROL_FOUND",
+      "family": "privacy_consent",
+      "label_de": "Ablehnen-Steuerung gefunden",
+      "unit": "boolean",
+      "source": "Playwright/Chromium visible control observation",
+      "customer_eligible": false,
+      "does_not_prove": "Das Vorhandensein einer Steuerung beweist keine technische oder rechtliche Wirksamkeit."
+    },
+    {
+      "id": "PUBLIC_HTTP_STATUS_CODE",
+      "family": "public_transport",
+      "label_de": "HTTP-Status beim öffentlichen Abruf",
+      "unit": "status",
+      "source": "Pixelkiez Measurement Gateway",
+      "customer_eligible": false,
+      "does_not_prove": "Ein HTTP-Status ist eine Momentaufnahme und beweist keine dauerhafte Verfügbarkeit."
+    },
+    {
+      "id": "PUBLIC_REDIRECT_COUNT",
+      "family": "public_transport",
+      "label_de": "Redirects bis zur Zielseite",
+      "unit": "count",
+      "source": "Pixelkiez Measurement Gateway",
+      "customer_eligible": false,
+      "does_not_prove": "Die Redirect-Anzahl beweist weder SEO-Wirkung noch Nutzererfolg allein."
+    },
+    {
+      "id": "PUBLIC_HTTPS_FINAL",
+      "family": "public_transport",
+      "label_de": "Finale Zielseite nutzt HTTPS",
+      "unit": "boolean",
+      "source": "Pixelkiez Measurement Gateway",
+      "customer_eligible": false,
+      "does_not_prove": "HTTPS-Nutzung allein beweist keine umfassende Sicherheit."
+    },
+    {
+      "id": "PUBLIC_TLS_VERIFIED",
+      "family": "public_transport",
+      "label_de": "TLS-Verbindung im Probe verifiziert",
+      "unit": "boolean",
+      "source": "Pixelkiez Measurement Gateway",
+      "customer_eligible": false,
+      "does_not_prove": "Eine verifizierte TLS-Verbindung ist kein vollständiger Transport-Security-Audit."
+    },
+    {
+      "id": "PUBLIC_ROBOTS_PRESENT",
+      "family": "crawl_access",
+      "label_de": "robots.txt öffentlich erreichbar",
+      "unit": "boolean",
+      "source": "Pixelkiez Measurement Gateway",
+      "customer_eligible": false,
+      "does_not_prove": "robots.txt-Präsenz beweist weder vollständige Crawlability noch Rankingfähigkeit."
+    },
+    {
+      "id": "PUBLIC_SITEMAP_PRESENT",
+      "family": "crawl_access",
+      "label_de": "Sitemap öffentlich erreichbar",
+      "unit": "boolean",
+      "source": "Pixelkiez Measurement Gateway",
+      "customer_eligible": false,
+      "does_not_prove": "Eine erreichbare Sitemap beweist weder Indexierung noch Suchsichtbarkeit."
+    },
+    {
+      "id": "PUBLIC_CSP_PRESENT",
+      "family": "security_headers",
+      "label_de": "Content-Security-Policy vorhanden",
+      "unit": "boolean",
+      "source": "Pixelkiez Measurement Gateway",
+      "customer_eligible": false,
+      "does_not_prove": "CSP-Präsenz allein beweist keine wirksame oder vollständige Sicherheitsrichtlinie."
+    },
+    {
+      "id": "PUBLIC_CSP_RISK_COUNT",
+      "family": "security_headers",
+      "label_de": "CSP-Konfigurationshinweise",
+      "unit": "count",
+      "source": "Pixelkiez Measurement Gateway",
+      "customer_eligible": false,
+      "does_not_prove": "Die CSP-Heuristik ist eine begrenzte Konfigurationsdiagnose, kein Penetrationstest oder Compliance-Nachweis."
+    },
+    {
+      "id": "PUBLIC_SECURITY_HEADERS_PRESENT_COUNT",
+      "family": "security_headers",
+      "label_de": "Ausgewählte Security-Header vorhanden",
+      "unit": "count",
+      "source": "Pixelkiez Measurement Gateway",
+      "customer_eligible": false,
+      "does_not_prove": "Die Anzahl vorhandener Header ist kein Sicherheits- oder Compliance-Score."
+    }
+  ]
+}

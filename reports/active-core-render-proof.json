@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "fixture_only": true,
+  "artifact_digest": "1a9c862edfce24d6193273049eebed12e0fa87312d98497bb835ebb4245f1e91",
+  "binding_digest": "09a3b2e2ce8d6b264347af53e9423df87c367d4c475a97940cc24fb415927f09",
+  "measurement_registry_digest": "b527f71f397b2f95194ec35f2b85e6ff68024ab90ed25c65d2eccc255a93acac",
+  "execution_semantic_digest": "fa0f763b6c98703fe3c5114498105517dc0ee71c65e0a93ec000e464e91ed90f",
+  "score_admitted": 48,
+  "release_state": "FULL_48_ACTIVE_PASS",
+  "pdf_sha256": "9f78d61ccf0d9d2806ff1bdab7bee69a820467fd3bc32022dacb6028c81120c1",
+  "analysis_report_sha256": "cbdd77ae114ed1a2eb753f4548bbc86444ac2c4e23cf2c06b72d14a4420cbf20",
+  "html_sha256": "3e0fa5dc01953980b3ad55689fd66ee0b57c2a97e6542a0dc14360e4ed24de31",
+  "renderer": "WEASYPRINT",
+  "page_count": 11,
+  "embedded_visual_count": 6,
+  "brand_font_status": "PARTIAL_EXACT_APPROVED_FALLBACK",
+  "validators": [
+    "validate_core_score_admission",
+    "validate_analysis_report_completeness",
+    "validate_pdf_output",
+    "validate_presentation_brand",
+    "validate_customer_business_language",
+    "validate_customer_output_guardrails"
+  ],
+  "full_visual_architecture_harness": "UNVERIFIED_RUNTIME_TIMEOUT",
+  "does_not_prove": [
+    "live website measurement",
+    "human visual approval",
+    "exact-font customer release readiness"
+  ],
+  "deliverable_bundle_status": "PASS",
+  "deliverable_build_complete": true,
+  "customer_release_ready": false,
+  "visual_qa_status": "PENDING",
+  "semantic_qa_status": "PENDING",
+  "quality_gate_status": "PENDING_QA",
+  "full_bundle_decomposed_regression": "PASS: active path build_complete=true; QA remains deliberately PENDING for fixture proof."
+}

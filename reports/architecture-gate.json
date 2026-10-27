@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "selected_architecture": "Separate legal-truth and customer-risk axes. A single legal_customer_projection resolver consumes the validated Impressum sidecar and drives consolidated finding creation, Strategic Relevance eligibility, mandatory top-four ordering, cover warning, roadmap/closing persistence and final omission validation.",
+  "smallest_robust_slice": "No new external capability. Add one resolver, one end-to-end projection validator, one optional finding.customer_risk schema field, bounded customer copy, and regression coverage. Keep the 48-metric score core unchanged.",
+  "options_considered": [
+    {
+      "option": "Map LEGAL-IMP into the 48-metric Core",
+      "decision": "REJECT",
+      "reason": "would change score semantics, coverage comparability and the existing legal score firewall"
+    },
+    {
+      "option": "Set every possible legal issue to severity=critical",
+      "decision": "REJECT",
+      "reason": "would conflate customer urgency with legal certainty and indirectly alter blocker_present semantics"
+    },
+    {
+      "option": "Separate customer-risk priority from legal claim state",
+      "decision": "ADOPT",
+      "reason": "preserves strict legal assertions while preventing omission of material business risk"
+    }
+  ],
+  "strongest_counterargument": "Higher warning sensitivity can alarm customers when jurisdiction is unresolved. The mitigation is to keep the claim state POSSIBLE_LEGAL_REVIEW and use explicit review wording while still making the observed operator-opacity risk visible.",
+  "failure_mode_chain": "sidecar detects provider opacity -> severity/metric-link routing loses signal -> legal finding is not eligible or is displaced -> customer PDF appears green -> customer infers no material issue. Controls: customer_risk priority, legal evidence route, rank-1 mandatory selection, cover warning and legal_risk_projection_completeness hard gate.",
+  "security_boundary": "No new network, browser, API or private-data capability. Existing public read-only audit and legal-source boundaries remain unchanged.",
+  "runtime_assumptions": [
+    "Exact production font availability remains external to this patch; proof builds may use the existing approved fallback policy."
+  ],
+  "build_decision": "proceed",
+  "capability_discovery_needed": false
+}

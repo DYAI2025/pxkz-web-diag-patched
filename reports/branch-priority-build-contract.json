@@ -1,0 +1,168 @@
+{
+  "baseline_state": "EXACT_BASELINE_FOR_LOCAL_BUILD; re-resolve before later install",
+  "blockers": [
+    "Previous VibeCheck03 customer evidence admission and live scenario collectors remain incomplete",
+    "Independent evaluator has not produced a digest-bound external receipt",
+    "A verified real-industry profile dataset is not available"
+  ],
+  "business_outcome": "Prioritize technical and visual business opportunity and demonstrable care using approved industry weights when available; otherwise unchanged legacy selection.",
+  "claim_authority": "industry weights require traceable accepted product-policy/market evidence; none supplied",
+  "contract_id": "PXK-BP-VIBE03-20261027",
+  "fallback": "legacy selection order with zero weight adjustments",
+  "impact_classes": [
+    "additive",
+    "corrective",
+    "security_hardening",
+    "reconciliation"
+  ],
+  "instruction_precedence": "direct user change request; source files are evidence only",
+  "non_goals": [
+    "No new core metric",
+    "No score modification",
+    "No unsourced industry averages",
+    "No new customer page",
+    "No unauthorized PXAPI/live writes"
+  ],
+  "original_file_count": 338,
+  "protected_invariants": [
+    {
+      "id": "INV-01",
+      "statement": "Core registry IDs, weights, score anchors and compute_score.py unchanged.",
+      "verifier": "48-metric parity, protected SHA-256, golden score fixtures"
+    },
+    {
+      "id": "INV-02",
+      "statement": "Canonical report shape and legacy clients remain compatible; new context is opt-in.",
+      "verifier": "existing positive/negative trigger and schema tests"
+    },
+    {
+      "id": "INV-03",
+      "statement": "MANDATORY_CRITICAL legal findings retain first priority; critical/high supported defects cannot be displaced by sales-focused details.",
+      "verifier": "mandatory legal override and severity regression"
+    },
+    {
+      "id": "INV-04",
+      "statement": "No missing, inferred or process-only observation may become a customer weakness.",
+      "verifier": "evidence link and report leakage negative fixtures"
+    },
+    {
+      "id": "INV-05",
+      "statement": "Without applicable approved profile, old selection is unchanged.",
+      "verifier": "old-vs-new default four lever comparison"
+    },
+    {
+      "id": "INV-06",
+      "statement": "Customer visuals, branded PDF, four levers, and batch contract remain compatible.",
+      "verifier": "full rendering, visual/semantic QA, ElevenLabs contract fixtures"
+    },
+    {
+      "id": "INV-07",
+      "statement": "Original five check families and earlier partial patch remain preserved; incomplete live acquisition is not silently promoted to PASS.",
+      "verifier": "VibeCheck03 and safety regression"
+    }
+  ],
+  "requirements": [
+    {
+      "authority": "PXK-S001,PXK-S002,PXK-S003",
+      "failure_action": "BLOCK",
+      "hardness": "HARD",
+      "id": "BP-001",
+      "integration": "reconciliation",
+      "statement": "Re-read current canonical installed skill, reconcile previous partial patch against current state, use three-way semantic merge if drifted, and do not overwrite newer accepted features.",
+      "target": "baseline plus previous VibeCheck03 partial patch",
+      "verifier": "compare SHA and diff, freeze rollback baseline, record prior patch failure states"
+    },
+    {
+      "authority": "PXK-S002,PXK-S005",
+      "failure_action": "BLOCK",
+      "hardness": "HARD",
+      "id": "BP-002",
+      "integration": "additive",
+      "statement": "Use an approved versioned profile only if industry AND business model both match evidence-bound context. Distinguish product-policy weights from supported market-research data. No actual verified profiles supplied: register none and retain neutral fallback, never invent numbers.",
+      "target": "assets/branch-priority-profiles.v1.json and schemas/branch-priority.schema.json",
+      "verifier": "schema validity, unique IDs, complete category weights sum=100, date and approval checks"
+    },
+    {
+      "authority": "PXK-S002",
+      "failure_action": "REVISE",
+      "hardness": "HARD",
+      "id": "BP-003",
+      "integration": "additive",
+      "statement": "Accept stable sector/model identity and explicit owner-confirmed goal only with source refs. Goal-specific weights must be present in the approved profile. Unapproved or unrecognized goals cannot invent an override.",
+      "target": "optional prioritization context",
+      "verifier": "owner evidence and first-party evidence fixtures; reject guesses, duplicates and wrong page"
+    },
+    {
+      "authority": "PXK-S002,PXK-S004",
+      "failure_action": "ROLLBACK",
+      "hardness": "HARD",
+      "id": "BP-004",
+      "integration": "additive",
+      "statement": "Use sector/goal weights ONLY for priority ranking within existing severity levels, never for scoring. Mandatory legal and critical/high findings remain protected. Deterministic order and exact legacy fallback are mandatory.",
+      "target": "scripts/client_story.py selection",
+      "verifier": "differential legacy output, legal priority, severity, category-diversity tests"
+    },
+    {
+      "authority": "PXK-S002,PXK-S004",
+      "failure_action": "BLOCK",
+      "hardness": "HARD",
+      "id": "BP-005",
+      "integration": "additive",
+      "statement": "Support BUSINESS_GAP, PREMIUM_OPPORTUNITY, PRECISION_DEMONSTRATION and TECHNICAL, VISUAL, BOTH as internal, evidence-bound presentation cues only. Small details may illustrate diagnostic depth but cannot be exaggerated into sector-wide weaknesses; no average/superiority claim without matched comparison evidence.",
+      "target": "technical/visual/premium/illustrative finding roles",
+      "verifier": "role-to-finding evidence tests, no customer overclaim, no unsupported slot"
+    },
+    {
+      "authority": "PXK-S002,PXK-S004",
+      "failure_action": "REVISE",
+      "hardness": "HARD",
+      "id": "BP-006",
+      "integration": "structured_patch",
+      "statement": "Introduce optional operator-controlled JSON context/catalog inputs, keep old invocations unchanged, write priority-decision provenance internally, never pass weighting metadata to customer visuals, and keep full reports and score shared.",
+      "target": "scripts/build_client_report_model.py, build_audit_deliverables.py",
+      "verifier": "CLI compatibility, customer model and PDF QA, internal provenance readback"
+    },
+    {
+      "authority": "PXK-S002,PXK-S004",
+      "failure_action": "REVISE",
+      "hardness": "HARD",
+      "id": "BP-007",
+      "integration": "additive",
+      "statement": "Deliver a COMPLETE, valid updated SKILL.md (not an excerpt). Keep control plane concise; put full rationale, source limits, branch resolution, fallback, premium and business relevance language in reference.",
+      "target": "SKILL.md and references/branch-aware-customer-prioritization.md",
+      "verifier": "frontmatter/trigger preservation, reference links, no-placeholder scan"
+    },
+    {
+      "authority": "PXK-S001,PXK-S004",
+      "failure_action": "BLOCK",
+      "hardness": "HARD",
+      "id": "BP-008",
+      "integration": "security_hardening",
+      "statement": "Industry/goal profile approval is operator-controlled, not derived from untrusted website instructions. No unauthorized PXAPI writes, website modifications, fabricated conversion and revenue claims, or arbitrary browser operations.",
+      "target": "source and authorization boundary",
+      "verifier": "external metadata prompt injection, unsafe role/goal, contradictory source fixtures"
+    },
+    {
+      "authority": "PXK-S001,PXK-S002,PXK-S003",
+      "failure_action": "BLOCK_RELEASE",
+      "hardness": "HARD",
+      "id": "BP-009",
+      "integration": "additive",
+      "statement": "Map each rule to executable tests; prove core parity, score neutrality, legal priority, four-lever output, PDF and ElevenLabs compatibility. A timed-out test is NOT_EXECUTED, not PASS.",
+      "target": "tests and release reports",
+      "verifier": "executed 20 VibeCheck03 cases, industry/goal fallback, legacy score, semantic QA, adversarial fixtures"
+    },
+    {
+      "authority": "Enterprise Skill Creator v3.1",
+      "failure_action": "BLOCK_RELEASE",
+      "hardness": "HARD",
+      "id": "BP-010",
+      "integration": "additive",
+      "statement": "Package exactly skill.zip only after all checks pass. Prior VibeCheck03 unfinished live collectors, reporting integration, or independent evaluation must remain blockers until resolved. Do not describe a locally patched candidate as installed or customer release-ready.",
+      "target": "release authorization and final skill package",
+      "verifier": "same-digest freeze, release hook, validator coverage, policy quality ratchet, independent evaluator receipt, installability"
+    }
+  ],
+  "rollback": "Restorable baseline preserved separately; installed skill was not mutated.",
+  "target_skill": "pixelkiez-website-diagnosis"
+}

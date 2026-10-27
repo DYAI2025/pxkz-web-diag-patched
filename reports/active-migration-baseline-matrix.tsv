@@ -1,0 +1,7 @@
+check	status
+quick_validate	FAIL
+validate_schema	PASS
+gateway_evals	PASS
+score_gate_evals	PASS
+core_parity	PASS
+batch_contract	PASS

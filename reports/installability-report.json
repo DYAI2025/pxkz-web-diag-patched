@@ -1,0 +1,23 @@
+{
+  "artifact_name": null,
+  "chatgpt_install_ready": false,
+  "frontend_install_suggestion_status": "prepared",
+  "not_controlled_by_skill": [
+    "client UI rendering",
+    "workspace installation permissions",
+    "plan or feature availability",
+    "runtime browser/search/performance capabilities",
+    "runtime PDF/font availability outside the validated environment",
+    "third-party platform acceptance",
+    "ChatGPT upload scan result",
+    "workspace skill upload/install permissions",
+    "exact Schibsted Grotesk availability in the execution runtime",
+    "optional companion measurement-gateway deployment and egress policy outside the skill package",
+    "live public gateway network reachability in the execution runtime"
+  ],
+  "blocking_issues": [
+    "Candidate release not authorized; previous VibeCheck03 scope remains incomplete and independent evaluator receipt missing."
+  ],
+  "user_action": "Upload skill.zip via Skills > Create > Upload from your computer. If installation is disabled, a workspace admin must enable skill upload/install permissions.",
+  "legacy_installability_data_historical": true
+}

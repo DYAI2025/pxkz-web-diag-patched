@@ -1,0 +1,443 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pixelkiez.local/schemas/client-report.schema.json",
+  "title": "Pixelkiez Client Report Model",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "template_version",
+    "brand",
+    "meta",
+    "cover",
+    "executive",
+    "categories",
+    "client_story",
+    "semantic_story",
+    "visualizations",
+    "findings",
+    "roadmap",
+    "recommendation",
+    "closing"
+  ],
+  "properties": {
+    "template_version": {
+      "const": "8.0"
+    },
+    "brand": {
+      "const": "Pixelkiez"
+    },
+    "meta": {
+      "type": "object"
+    },
+    "cover": {
+      "type": "object",
+      "required": [
+        "eyebrow",
+        "title",
+        "customer",
+        "url",
+        "date",
+        "score_label",
+        "score",
+        "verdict",
+        "blocker_note"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "eyebrow": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "customer": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "score_label": {
+          "type": "string"
+        },
+        "score": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "verdict": {
+          "type": "string"
+        },
+        "blocker_note": {
+          "type": "string"
+        }
+      }
+    },
+    "executive": {
+      "type": "object",
+      "required": [
+        "takeaway",
+        "strengths",
+        "priorities",
+        "recommended_route"
+      ],
+      "properties": {
+        "takeaway": {
+          "type": "string",
+          "maxLength": 135
+        },
+        "strengths": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "string",
+            "maxLength": 110
+          }
+        },
+        "priorities": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "string",
+            "maxLength": 110
+          }
+        },
+        "recommended_route": {
+          "type": "string"
+        }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": [
+          "category",
+          "label",
+          "score",
+          "summary"
+        ],
+        "properties": {
+          "category": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "score": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 110
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "client_story": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "selected_lever_ids",
+        "max_levers",
+        "real_chart_count",
+        "target_real_charts",
+        "quantitative_opportunities",
+        "visual_story_status",
+        "technical_appendix_rendered",
+        "max_customer_pages",
+        "semantic_candidate_chart_count",
+        "visualization_plan_is_canonical",
+        "visualization_plan_source"
+      ],
+      "properties": {
+        "mode": {
+          "const": "marketing_summary"
+        },
+        "selected_lever_ids": {
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "type": "string"
+          }
+        },
+        "max_levers": {
+          "const": 4
+        },
+        "real_chart_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "target_real_charts": {
+          "enum": [
+            "2-3",
+            "4-7"
+          ]
+        },
+        "quantitative_opportunities": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "visual_story_status": {
+          "const": "PASS"
+        },
+        "technical_appendix_rendered": {
+          "const": false
+        },
+        "max_customer_pages": {
+          "const": 12
+        },
+        "semantic_candidate_chart_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "visualization_plan_is_canonical": {
+          "type": "boolean"
+        },
+        "visualization_plan_source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "visualizations": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": [
+          "template_id"
+        ],
+        "properties": {
+          "template_id": {
+            "enum": [
+              "V01",
+              "V02",
+              "V03",
+              "V04",
+              "V05",
+              "V06",
+              "V07",
+              "V08",
+              "V09",
+              "V10",
+              "V11"
+            ]
+          }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "severity",
+          "category",
+          "headline",
+          "observation",
+          "impact",
+          "action",
+          "evidence_refs",
+          "visual_asset",
+          "presentation_mode",
+          "numeric_signal",
+          "specificity_basis"
+        ],
+        "properties": {
+          "headline": {
+            "type": "string",
+            "maxLength": 110
+          },
+          "observation": {
+            "type": "string",
+            "maxLength": 130
+          },
+          "impact": {
+            "type": "string",
+            "maxLength": 135
+          },
+          "action": {
+            "type": "string",
+            "maxLength": 125
+          },
+          "presentation_mode": {
+            "enum": [
+              "NUMBER_FIRST",
+              "EVIDENCE_VISUAL",
+              "SHORT_TEXT"
+            ]
+          },
+          "specificity_basis": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 6,
+            "items": {
+              "type": "string"
+            }
+          },
+          "numeric_signal": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "roadmap": {
+      "type": "object",
+      "required": [
+        "now",
+        "next_30_days",
+        "next_quarter"
+      ]
+    },
+    "recommendation": {
+      "type": "object",
+      "required": [
+        "route",
+        "reason",
+        "next_step"
+      ]
+    },
+    "semantic_story": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policy_version",
+        "status",
+        "finding_count",
+        "presentation_mode_counts",
+        "quantitative_signal_count",
+        "scan_first_limits",
+        "errors"
+      ],
+      "properties": {
+        "policy_version": {
+          "const": "1.0"
+        },
+        "status": {
+          "enum": [
+            "PASS",
+            "FAIL"
+          ]
+        },
+        "finding_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "presentation_mode_counts": {
+          "type": "object"
+        },
+        "quantitative_signal_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "scan_first_limits": {
+          "type": "object"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "closing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eyebrow",
+        "title",
+        "summary",
+        "actions",
+        "cta",
+        "next_step",
+        "measurement_highlights"
+      ],
+      "properties": {
+        "eyebrow": {
+          "type": "string",
+          "maxLength": 45
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 90
+        },
+        "summary": {
+          "type": "string",
+          "maxLength": 220
+        },
+        "actions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "type": "string",
+            "maxLength": 125
+          }
+        },
+        "cta": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "next_step": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "measurement_highlights": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "value",
+              "context"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "maxLength": 60
+              },
+              "value": {
+                "type": "string",
+                "maxLength": 50
+              },
+              "context": {
+                "type": "string",
+                "maxLength": 100
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

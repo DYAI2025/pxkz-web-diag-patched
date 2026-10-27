@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pixelkiez.local/schemas/presentation-render-receipt.schema.json",
+  "title": "Pixelkiez Presentation Render Receipt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "status", "renderer", "renderer_version", "model_sha256",
+    "visualization_plan_sha256", "visual_render_receipt_sha256", "css_sha256", "template_sha256",
+    "html_path", "html_sha256", "pdf_sha256", "page_count", "page_format", "orientation",
+    "available_visual_count", "embedded_visual_count", "omitted_visual_ids", "brand_font_status",
+    "font_resolution", "pdf_fonts", "minimum_rendered_text_size_pt", "body_text_size_pt",
+    "chart_label_minimum_pt", "brand_palette", "local_only_resources",
+    "legacy_reportlab_default", "limitations"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "status": {"const": "PASS"},
+    "renderer": {"const": "WEASYPRINT"},
+    "renderer_version": {"type": "string", "minLength": 1},
+    "model_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "visualization_plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "visual_render_receipt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "css_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "template_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "html_path": {"type": "string", "minLength": 1},
+    "html_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "pdf_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "page_count": {"type": "integer", "minimum": 8, "maximum": 12},
+    "page_format": {"const": "A4"},
+    "orientation": {"const": "landscape"},
+    "available_visual_count": {"type": "integer", "minimum": 4, "maximum": 7},
+    "embedded_visual_count": {"type": "integer", "minimum": 4, "maximum": 7},
+    "omitted_visual_ids": {"type": "array", "items": {"type": "string"}},
+    "brand_font_status": {"enum": ["EXACT", "PARTIAL_EXACT_APPROVED_FALLBACK", "APPROVED_FALLBACK"]},
+    "font_resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested", "resolved", "exact", "customer_release_ready", "font_file_sha256"],
+      "properties": {
+        "requested": {"type": "object"},
+        "resolved": {"type": "object"},
+        "exact": {"type": "object"},
+        "customer_release_ready": {"type": "boolean"},
+        "font_file_sha256": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+      }
+    },
+    "pdf_fonts": {"type": "array", "minItems": 2, "items": {"type": "string"}},
+    "minimum_rendered_text_size_pt": {"type": "number", "minimum": 8.45},
+    "body_text_size_pt": {"type": "number", "minimum": 12},
+    "chart_label_minimum_pt": {"type": "number", "minimum": 10},
+    "brand_palette": {"type": "array", "minItems": 6, "items": {"type": "string", "pattern": "^#[0-9A-Fa-f]{6}$"}},
+    "local_only_resources": {"const": true},
+    "legacy_reportlab_default": {"const": false},
+    "limitations": {"type": "array", "items": {"type": "string"}}
+  }
+}

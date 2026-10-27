@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "policy_version": "1.0",
+  "semantic_bundle_sha256": "d97bb37a4838f7fd5e63233e718cdc1af911445b022cb0e1c670ecd573e4d761",
+  "fixture": "evals/fixtures/baumdienst-renner-reflection-regression.json",
+  "fixture_sha256": "c6f5b2bb0b7b9e88b08b66387e374a2077ee6f77fbbf1f04bb194f9121ce37ca",
+  "customer": "Baumdienst Renner",
+  "page_count": 12,
+  "decision_visual_count": 3,
+  "inspection_method": "agent_vision",
+  "inspected_by": "GPT-5.6 Sol",
+  "semantic_qa_validation": "PASS",
+  "visual_qa_validation": "PASS",
+  "pdf_sha256": "60777610f77c30d2f150e9cad37febfec7e9d53182f0da53910deea1928b9b12",
+  "client_model_sha256": "ee932b422c4d579dba472ad6390ce0889323a1335ec0d84dea2f07cd110c8d6e",
+  "scored_report_sha256": "46a0916e0c2667bf5790fd460cffdc2541e2381a21ce9b084543bd71d5b386b5",
+  "overall_checks": {
+    "customer_specificity": "PASS",
+    "plain_language_comprehension": "PASS",
+    "scan_first_story": "PASS",
+    "evidence_fidelity": "PASS",
+    "priority_quality": "PASS",
+    "quantitative_content_visualized": "PASS",
+    "cross_page_coherence": "PASS",
+    "actionability": "PASS",
+    "no_generic_agency_copy": "PASS",
+    "no_unsupported_business_claims": "PASS"
+  },
+  "observed_quality": {
+    "executive_summary": "single customer-specific main lever plus strengths/priorities",
+    "decision_visuals": "three direct evidence visuals tied to concrete Baumdienst Renner findings",
+    "findings": "four prioritized findings with short observation/impact/action copy",
+    "roadmap": "scan-first customer actions instead of technical implementation prose",
+    "measurement_limits": "four plain-language boundaries plus four open evidence items"
+  },
+  "does_not_prove": [
+    "commercial conversion or revenue improvement",
+    "semantic quality for every future website without per-output rendered QA",
+    "ElevenLabs provider upload, live telephony, or legal outbound approval"
+  ]
+}

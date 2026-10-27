@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "gateway_version": "0.1.0",
+  "run_id": "fixture-unavailable-001",
+  "target_url": "https://example.com/",
+  "execution_mode": "FIXTURE",
+  "status": "UNAVAILABLE",
+  "started_at": "2026-08-30T12:00:00Z",
+  "completed_at": "2026-08-30T12:00:00Z",
+  "observations": [],
+  "errors": [
+    {
+      "adapter": "gateway",
+      "code": "RUNTIME_UNAVAILABLE",
+      "message": "fixture unavailable state",
+      "retryable": false
+    }
+  ],
+  "provenance": {
+    "source": "pixelkiez-measurement-gateway",
+    "request_policy_version": "1.0",
+    "response_digests": []
+  }
+}

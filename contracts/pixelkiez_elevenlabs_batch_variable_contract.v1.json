@@ -1,0 +1,835 @@
+{
+  "version": "2026-08-27",
+  "transport_required_by_current_elevenlabs_docs": "phone_number",
+  "pixelkiez_required_mirror": "recipient_number",
+  "delimiter": ",",
+  "encoding": "utf-8-sig",
+  "variables": [
+    {
+      "name": "phone_number",
+      "required": "YES",
+      "type": "String",
+      "source": "ElevenLabs transport",
+      "placeholder": "",
+      "description": "Official ElevenLabs batch upload destination-number column. Use E.164 format.",
+      "example": "+493012345678",
+      "notes": "Current ElevenLabs docs require this exact header for dashboard CSV/XLS upload."
+    },
+    {
+      "name": "recipient_number",
+      "required": "YES*",
+      "type": "String",
+      "source": "Internal / dynamic variable",
+      "placeholder": "{{recipient_number}}",
+      "description": "Mirror of phone_number for the Pixelkiez data contract requested by the user.",
+      "example": "+493012345678",
+      "notes": "Keep identical to phone_number. ElevenLabs currently uses phone_number for dialing."
+    },
+    {
+      "name": "campaign_id",
+      "required": "YES",
+      "type": "String",
+      "source": "Campaign",
+      "placeholder": "{{campaign_id}}",
+      "description": "Stable ID of the outbound campaign.",
+      "example": "PK-BERLIN-RESTAURANTS-01",
+      "notes": ""
+    },
+    {
+      "name": "lead_id",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "CRM / lead pipeline",
+      "placeholder": "{{lead_id}}",
+      "description": "Stable lead identifier for traceability.",
+      "example": "LEAD-000123",
+      "notes": "Do not use secret/internal auth tokens."
+    },
+    {
+      "name": "customer_name",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Lead record",
+      "placeholder": "{{customer_name}}",
+      "description": "Verified human contact name used for personal address. Leave blank if unknown.",
+      "example": "Frau Yilmaz",
+      "notes": "Never invent a person name from the restaurant name."
+    },
+    {
+      "name": "customer_salutation",
+      "required": "OPTIONAL",
+      "type": "String",
+      "source": "Lead record",
+      "placeholder": "{{customer_salutation}}",
+      "description": "Optional verified salutation or preferred form of address.",
+      "example": "Frau Yilmaz",
+      "notes": "Leave blank if not verified."
+    },
+    {
+      "name": "customer_website",
+      "required": "YES",
+      "type": "String",
+      "source": "Lead/audit input",
+      "placeholder": "{{customer_website}}",
+      "description": "Website belonging to the restaurant.",
+      "example": "https://example-restaurant.de",
+      "notes": ""
+    },
+    {
+      "name": "website_language",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Website audit",
+      "placeholder": "{{website_language}}",
+      "description": "Observed primary website language.",
+      "example": "de",
+      "notes": "Observation about website; not automatically the person's preferred spoken language."
+    },
+    {
+      "name": "customer_language",
+      "required": "YES",
+      "type": "String",
+      "source": "Campaign/lead approval",
+      "placeholder": "{{customer_language}}",
+      "description": "Language the agent should use for the call.",
+      "example": "de",
+      "notes": "Use a known/approved language or campaign default."
+    },
+    {
+      "name": "customer_locale",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Campaign/lead",
+      "placeholder": "{{customer_locale}}",
+      "description": "Locale for wording/date conventions.",
+      "example": "de-DE",
+      "notes": ""
+    },
+    {
+      "name": "restaurant_name",
+      "required": "YES",
+      "type": "String",
+      "source": "Lead record",
+      "placeholder": "{{restaurant_name}}",
+      "description": "Official/display name of the restaurant or business.",
+      "example": "Restaurant Beispiel Berlin",
+      "notes": ""
+    },
+    {
+      "name": "customer_role",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Lead record",
+      "placeholder": "{{customer_role}}",
+      "description": "Role of the contacted person if known.",
+      "example": "Inhaber",
+      "notes": "Leave blank if unknown."
+    },
+    {
+      "name": "city",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Lead record",
+      "placeholder": "{{city}}",
+      "description": "City of the restaurant.",
+      "example": "Berlin",
+      "notes": ""
+    },
+    {
+      "name": "district",
+      "required": "OPTIONAL",
+      "type": "String",
+      "source": "Lead record",
+      "placeholder": "{{district}}",
+      "description": "District/neighbourhood.",
+      "example": "Kreuzberg",
+      "notes": ""
+    },
+    {
+      "name": "restaurant_category",
+      "required": "OPTIONAL",
+      "type": "String",
+      "source": "Lead/audit",
+      "placeholder": "{{restaurant_category}}",
+      "description": "Business category, e.g. restaurant, cafe, bar.",
+      "example": "Restaurant",
+      "notes": ""
+    },
+    {
+      "name": "cuisine_type",
+      "required": "OPTIONAL",
+      "type": "String",
+      "source": "Lead/audit",
+      "placeholder": "{{cuisine_type}}",
+      "description": "Cuisine only when reliably known.",
+      "example": "Italienisch",
+      "notes": "Do not infer from names alone."
+    },
+    {
+      "name": "prospect_company",
+      "required": "YES",
+      "type": "String",
+      "source": "Alias / build compatibility",
+      "placeholder": "{{prospect_company}}",
+      "description": "Alias for restaurant_name used by the current compiler contract.",
+      "example": "Restaurant Beispiel Berlin",
+      "notes": "Set equal to restaurant_name."
+    },
+    {
+      "name": "prospect_role",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Alias / build compatibility",
+      "placeholder": "{{prospect_role}}",
+      "description": "Alias for customer_role used by current build.",
+      "example": "Inhaber",
+      "notes": "Set equal to customer_role when known."
+    },
+    {
+      "name": "prospect_locale",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Alias / build compatibility",
+      "placeholder": "{{prospect_locale}}",
+      "description": "Alias for customer_locale used by current build.",
+      "example": "de-DE",
+      "notes": "Set equal to customer_locale."
+    },
+    {
+      "name": "website_role",
+      "required": "YES",
+      "type": "String",
+      "source": "Campaign context",
+      "placeholder": "{{website_role}}",
+      "description": "Business role assigned to the website for this campaign.",
+      "example": "Auffindbarkeit, Speisekarte, Kontakt und direkter Reservierungsweg",
+      "notes": "Campaign-controlled context, not a measured fact about a specific restaurant."
+    },
+    {
+      "name": "primary_customer_type",
+      "required": "YES",
+      "type": "String",
+      "source": "Campaign context",
+      "placeholder": "{{primary_customer_type}}",
+      "description": "Customer/business context used by the conversation policy.",
+      "example": "B2C-Gaeste; Gespraechspartner ist ein B2B-Restaurantbetrieb",
+      "notes": ""
+    },
+    {
+      "name": "lead_source_current",
+      "required": "YES",
+      "type": "String",
+      "source": "Compliance input",
+      "placeholder": "{{lead_source_current}}",
+      "description": "Externally approved lead-source reference.",
+      "example": "approved-source-2026-08",
+      "notes": "Must be externally governed."
+    },
+    {
+      "name": "compliance_status",
+      "required": "YES",
+      "type": "String",
+      "source": "Compliance owner",
+      "placeholder": "{{compliance_status}}",
+      "description": "External call eligibility status.",
+      "example": "APPROVED",
+      "notes": "Allowed values per skill: APPROVED, BLOCKED, LEGAL_REVIEW_REQUIRED. Only APPROVED rows may proceed to live calling."
+    },
+    {
+      "name": "do_not_contact",
+      "required": "YES",
+      "type": "Boolean",
+      "source": "Compliance/CRM",
+      "placeholder": "{{do_not_contact}}",
+      "description": "Do-not-contact suppression state.",
+      "example": "false",
+      "notes": "If true, the row must not be called."
+    },
+    {
+      "name": "jurisdiction",
+      "required": "YES",
+      "type": "String",
+      "source": "Compliance",
+      "placeholder": "{{jurisdiction}}",
+      "description": "Jurisdiction for the campaign/lead.",
+      "example": "DE",
+      "notes": ""
+    },
+    {
+      "name": "contact_type",
+      "required": "YES",
+      "type": "String",
+      "source": "Compliance",
+      "placeholder": "{{contact_type}}",
+      "description": "Contact type.",
+      "example": "B2B",
+      "notes": "Current campaign contract is B2B."
+    },
+    {
+      "name": "ai_disclosure_required",
+      "required": "YES",
+      "type": "Boolean",
+      "source": "Policy",
+      "placeholder": "{{ai_disclosure_required}}",
+      "description": "Whether explicit AI disclosure is required by campaign policy.",
+      "example": "true",
+      "notes": "Pixelkiez architecture adopts explicit AI disclosure."
+    },
+    {
+      "name": "recording_status",
+      "required": "YES",
+      "type": "String",
+      "source": "Compliance",
+      "placeholder": "{{recording_status}}",
+      "description": "Recording approval status.",
+      "example": "OFF",
+      "notes": "Use OFF, APPROVED, or LEGAL_REVIEW_REQUIRED according to external approval."
+    },
+    {
+      "name": "audit_id",
+      "required": "YES",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_id}}",
+      "description": "ID of the validated restaurant website audit packet.",
+      "example": "AUD-REST-000123",
+      "notes": ""
+    },
+    {
+      "name": "audit_date",
+      "required": "YES",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_date}}",
+      "description": "Date of the audit, ISO 8601.",
+      "example": "2026-08-26",
+      "notes": ""
+    },
+    {
+      "name": "audit_method_scope",
+      "required": "YES",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_method_scope}}",
+      "description": "Short semicolon-separated description of what was actually checked.",
+      "example": "Homepage; Navigation; Mobile reservation path",
+      "notes": "Do not imply analytics/ranking checks that were not performed."
+    },
+    {
+      "name": "audit_overall_score",
+      "required": "OPTIONAL",
+      "type": "Number",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_overall_score}}",
+      "description": "Overall score only when an approved score method was used.",
+      "example": "72",
+      "notes": "Leave blank if score method not approved/not used."
+    },
+    {
+      "name": "audit_score_scale",
+      "required": "OPTIONAL",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_score_scale}}",
+      "description": "Score scale.",
+      "example": "0-100",
+      "notes": "Leave blank if no approved score."
+    },
+    {
+      "name": "audit_score_status",
+      "required": "YES",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_score_status}}",
+      "description": "Status of score method.",
+      "example": "NOT_USED",
+      "notes": "Use approved contract values, e.g. APPROVED_INTERNAL / NOT_USED."
+    },
+    {
+      "name": "audit_limitations",
+      "required": "YES",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_limitations}}",
+      "description": "Concise semicolon-separated audit limitations.",
+      "example": "Keine Analytics; keine Search Console; keine Conversiondaten",
+      "notes": "Important guardrail against overclaiming."
+    },
+    {
+      "name": "audit_strength_1_observation",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_strength_1_observation}}",
+      "description": "One positive verified observation to keep the call balanced when useful.",
+      "example": "Oeffnungszeiten und Adresse sind direkt sichtbar.",
+      "notes": ""
+    },
+    {
+      "name": "audit_strength_1_evidence_pointer",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_strength_1_evidence_pointer}}",
+      "description": "Evidence pointer for the positive observation.",
+      "example": "homepage/contact-block",
+      "notes": ""
+    },
+    {
+      "name": "audit_strength_1_confidence",
+      "required": "RECOMMENDED",
+      "type": "Number",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_strength_1_confidence}}",
+      "description": "Confidence from 0 to 1.",
+      "example": "0.95",
+      "notes": ""
+    },
+    {
+      "name": "audit_hook_1_id",
+      "required": "YES",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_1_id}}",
+      "description": "Finding ID for audit hook 1.",
+      "example": "F1",
+      "notes": ""
+    },
+    {
+      "name": "audit_hook_1_dimension",
+      "required": "YES",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_1_dimension}}",
+      "description": "Dimension/category of audit hook 1.",
+      "example": "conversion",
+      "notes": ""
+    },
+    {
+      "name": "audit_hook_1_priority",
+      "required": "YES",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_1_priority}}",
+      "description": "Priority of audit hook 1.",
+      "example": "HIGH",
+      "notes": ""
+    },
+    {
+      "name": "audit_hook_1_evidence_class",
+      "required": "YES",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_1_evidence_class}}",
+      "description": "Evidence class for hook 1.",
+      "example": "VERIFIED_FACT",
+      "notes": "Allowed: VERIFIED_FACT, SUPPORTED_INFERENCE, HYPOTHESIS, UNKNOWN. UNKNOWN must never be spoken as a claim."
+    },
+    {
+      "name": "audit_hook_1_observation",
+      "required": "YES",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_1_observation}}",
+      "description": "Exact bounded observation for hook 1.",
+      "example": "Reservierungsweg ist im ersten sichtbaren Bereich nicht direkt erkennbar.",
+      "notes": "Must be grounded in the validated audit packet."
+    },
+    {
+      "name": "audit_hook_1_evidence_pointer",
+      "required": "YES",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_1_evidence_pointer}}",
+      "description": "Where the evidence for hook 1 can be found.",
+      "example": "homepage/first-viewport",
+      "notes": ""
+    },
+    {
+      "name": "audit_hook_1_confidence",
+      "required": "YES",
+      "type": "Number",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_1_confidence}}",
+      "description": "Confidence 0..1 for hook 1.",
+      "example": "0.95",
+      "notes": ""
+    },
+    {
+      "name": "audit_hook_1_spoken",
+      "required": "YES",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_1_spoken}}",
+      "description": "Pre-approved spoken wording for hook 1.",
+      "example": "Bei unserem Website-Check ist uns aufgefallen, dass der Reservierungsweg nicht direkt sichtbar ist. Ist das fuer Sie relevant?",
+      "notes": "Preferred field for the agent to verbalize; avoids improvising unsupported claims."
+    },
+    {
+      "name": "audit_hook_1_possible_relevance",
+      "required": "YES",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_1_possible_relevance}}",
+      "description": "Cautious possible relevance for hook 1.",
+      "example": "Direkte Reservierungswege koennen relevant sein, wenn eigene Reservierungen fuer den Betrieb wichtig sind.",
+      "notes": "Must not be phrased as guaranteed business impact."
+    },
+    {
+      "name": "audit_hook_1_prohibited_claims",
+      "required": "YES",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_1_prohibited_claims}}",
+      "description": "Pipe-separated claims the agent must not make for hook 1.",
+      "example": "Dadurch verlieren Sie Reservierungen|Das kostet Sie Umsatz",
+      "notes": "Use | as separator inside one CSV cell."
+    },
+    {
+      "name": "audit_hook_1_selector_score",
+      "required": "OPTIONAL",
+      "type": "Number",
+      "source": "Compiler output",
+      "placeholder": "{{audit_hook_1_selector_score}}",
+      "description": "Internal hook selector score for hook 1.",
+      "example": "0.93",
+      "notes": "Internal ranking aid; not a customer-facing website score."
+    },
+    {
+      "name": "audit_hook_2_id",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_2_id}}",
+      "description": "Finding ID for audit hook 2.",
+      "example": "F2",
+      "notes": ""
+    },
+    {
+      "name": "audit_hook_2_dimension",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_2_dimension}}",
+      "description": "Dimension/category of audit hook 2.",
+      "example": "comprehension",
+      "notes": ""
+    },
+    {
+      "name": "audit_hook_2_priority",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_2_priority}}",
+      "description": "Priority of audit hook 2.",
+      "example": "MEDIUM",
+      "notes": ""
+    },
+    {
+      "name": "audit_hook_2_evidence_class",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_2_evidence_class}}",
+      "description": "Evidence class for hook 2.",
+      "example": "VERIFIED_FACT",
+      "notes": "Allowed: VERIFIED_FACT, SUPPORTED_INFERENCE, HYPOTHESIS, UNKNOWN. UNKNOWN must never be spoken as a claim."
+    },
+    {
+      "name": "audit_hook_2_observation",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_2_observation}}",
+      "description": "Exact bounded observation for hook 2.",
+      "example": "Speisekarte ist nur als PDF verlinkt.",
+      "notes": "Must be grounded in the validated audit packet."
+    },
+    {
+      "name": "audit_hook_2_evidence_pointer",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_2_evidence_pointer}}",
+      "description": "Where the evidence for hook 2 can be found.",
+      "example": "menu-link",
+      "notes": ""
+    },
+    {
+      "name": "audit_hook_2_confidence",
+      "required": "RECOMMENDED",
+      "type": "Number",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_2_confidence}}",
+      "description": "Confidence 0..1 for hook 2.",
+      "example": "0.95",
+      "notes": ""
+    },
+    {
+      "name": "audit_hook_2_spoken",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_2_spoken}}",
+      "description": "Pre-approved spoken wording for hook 2.",
+      "example": "Ein zweiter Punkt betrifft die Speisekarte: Sie ist in unserem Check nur als PDF verlinkt. Waere eine direkt lesbare Web-Speisekarte fuer Sie relevant?",
+      "notes": "Preferred field for the agent to verbalize; avoids improvising unsupported claims."
+    },
+    {
+      "name": "audit_hook_2_possible_relevance",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_2_possible_relevance}}",
+      "description": "Cautious possible relevance for hook 2.",
+      "example": "Direkt lesbare Menues koennen fuer mobile Nutzung und maschinelle Lesbarkeit relevant sein.",
+      "notes": "Must not be phrased as guaranteed business impact."
+    },
+    {
+      "name": "audit_hook_2_prohibited_claims",
+      "required": "RECOMMENDED",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_2_prohibited_claims}}",
+      "description": "Pipe-separated claims the agent must not make for hook 2.",
+      "example": "Google kann Ihr PDF nicht lesen|Sie ranken deshalb schlechter",
+      "notes": "Use | as separator inside one CSV cell."
+    },
+    {
+      "name": "audit_hook_2_selector_score",
+      "required": "OPTIONAL",
+      "type": "Number",
+      "source": "Compiler output",
+      "placeholder": "{{audit_hook_2_selector_score}}",
+      "description": "Internal hook selector score for hook 2.",
+      "example": "0.8675",
+      "notes": "Internal ranking aid; not a customer-facing website score."
+    },
+    {
+      "name": "audit_hook_3_id",
+      "required": "OPTIONAL",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_3_id}}",
+      "description": "Finding ID for audit hook 3.",
+      "example": "F3",
+      "notes": "Hook 1 primary; hook 2 optional; hook 3 only for genuine prospect demand."
+    },
+    {
+      "name": "audit_hook_3_dimension",
+      "required": "OPTIONAL",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_3_dimension}}",
+      "description": "Dimension/category of audit hook 3.",
+      "example": "local-discoverability",
+      "notes": ""
+    },
+    {
+      "name": "audit_hook_3_priority",
+      "required": "OPTIONAL",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_3_priority}}",
+      "description": "Priority of audit hook 3.",
+      "example": "LOW",
+      "notes": ""
+    },
+    {
+      "name": "audit_hook_3_evidence_class",
+      "required": "OPTIONAL",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_3_evidence_class}}",
+      "description": "Evidence class for hook 3.",
+      "example": "HYPOTHESIS",
+      "notes": "Allowed: VERIFIED_FACT, SUPPORTED_INFERENCE, HYPOTHESIS, UNKNOWN. UNKNOWN must never be spoken as a claim."
+    },
+    {
+      "name": "audit_hook_3_observation",
+      "required": "OPTIONAL",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_3_observation}}",
+      "description": "Exact bounded observation for hook 3.",
+      "example": "Lokale Sichtbarkeit wurde nicht gemessen.",
+      "notes": "Must be grounded in the validated audit packet."
+    },
+    {
+      "name": "audit_hook_3_evidence_pointer",
+      "required": "OPTIONAL",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_3_evidence_pointer}}",
+      "description": "Where the evidence for hook 3 can be found.",
+      "example": "not-measured",
+      "notes": ""
+    },
+    {
+      "name": "audit_hook_3_confidence",
+      "required": "OPTIONAL",
+      "type": "Number",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_3_confidence}}",
+      "description": "Confidence 0..1 for hook 3.",
+      "example": "0.2",
+      "notes": ""
+    },
+    {
+      "name": "audit_hook_3_spoken",
+      "required": "OPTIONAL",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_3_spoken}}",
+      "description": "Pre-approved spoken wording for hook 3.",
+      "example": "Wir haben die lokale Sichtbarkeit nicht belastbar gemessen. Waere das grundsaetzlich ein Thema fuer Sie?",
+      "notes": "Preferred field for the agent to verbalize; avoids improvising unsupported claims."
+    },
+    {
+      "name": "audit_hook_3_possible_relevance",
+      "required": "OPTIONAL",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_3_possible_relevance}}",
+      "description": "Cautious possible relevance for hook 3.",
+      "example": "Lokale Auffindbarkeit kann fuer Restaurants relevant sein, wurde hier aber nicht gemessen.",
+      "notes": "Must not be phrased as guaranteed business impact."
+    },
+    {
+      "name": "audit_hook_3_prohibited_claims",
+      "required": "OPTIONAL",
+      "type": "String",
+      "source": "Validated audit packet",
+      "placeholder": "{{audit_hook_3_prohibited_claims}}",
+      "description": "Pipe-separated claims the agent must not make for hook 3.",
+      "example": "Sie werden bei Google schlecht gefunden|ChatGPT empfiehlt Ihre Konkurrenz",
+      "notes": "Use | as separator inside one CSV cell."
+    },
+    {
+      "name": "audit_hook_3_selector_score",
+      "required": "OPTIONAL",
+      "type": "Number",
+      "source": "Compiler output",
+      "placeholder": "{{audit_hook_3_selector_score}}",
+      "description": "Internal hook selector score for hook 3.",
+      "example": "",
+      "notes": "Internal ranking aid; not a customer-facing website score."
+    },
+    {
+      "name": "call_stage",
+      "required": "YES",
+      "type": "String",
+      "source": "Conversation state",
+      "placeholder": "{{call_stage}}",
+      "description": "Initial state of the call state machine.",
+      "example": "PRECALL_GATE",
+      "notes": "Can be updated by ElevenLabs Update State tool."
+    },
+    {
+      "name": "interest_level",
+      "required": "YES",
+      "type": "String",
+      "source": "Conversation state",
+      "placeholder": "{{interest_level}}",
+      "description": "Initial interest state.",
+      "example": "unknown",
+      "notes": "Update during conversation."
+    },
+    {
+      "name": "confirmed_relevance",
+      "required": "YES",
+      "type": "Boolean",
+      "source": "Conversation state",
+      "placeholder": "{{confirmed_relevance}}",
+      "description": "Whether prospect has confirmed relevance of the discussed topic.",
+      "example": "false",
+      "notes": "Update during conversation."
+    },
+    {
+      "name": "meeting_readiness",
+      "required": "YES",
+      "type": "String",
+      "source": "Conversation state",
+      "placeholder": "{{meeting_readiness}}",
+      "description": "Initial meeting-readiness state.",
+      "example": "unknown",
+      "notes": "Do not derive from turn count."
+    },
+    {
+      "name": "preferred_followup_time",
+      "required": "OPTIONAL",
+      "type": "String",
+      "source": "Conversation state",
+      "placeholder": "{{preferred_followup_time}}",
+      "description": "Known/preferred callback time if already available.",
+      "example": "",
+      "notes": "Usually blank initially; may be set in-call."
+    },
+    {
+      "name": "opt_out",
+      "required": "YES",
+      "type": "Boolean",
+      "source": "Conversation state",
+      "placeholder": "{{opt_out}}",
+      "description": "Conversation opt-out state.",
+      "example": "false",
+      "notes": "Set true immediately after hard no/do-not-call."
+    },
+    {
+      "name": "needs_human",
+      "required": "YES",
+      "type": "Boolean",
+      "source": "Conversation state",
+      "placeholder": "{{needs_human}}",
+      "description": "Whether human follow-up/escalation is needed.",
+      "example": "false",
+      "notes": "Update during conversation."
+    },
+    {
+      "name": "meeting_offer",
+      "required": "YES",
+      "type": "String",
+      "source": "Campaign/meeting contract",
+      "placeholder": "{{meeting_offer}}",
+      "description": "Approved label for the human handoff/meeting offer.",
+      "example": "Website-Analyse mit einem Pixelkiez-Berater",
+      "notes": "Do not promise a booked meeting without tool success."
+    },
+    {
+      "name": "meeting_timezone",
+      "required": "YES",
+      "type": "String",
+      "source": "Campaign/meeting contract",
+      "placeholder": "{{meeting_timezone}}",
+      "description": "Timezone for meeting references.",
+      "example": "Europe/Berlin",
+      "notes": ""
+    },
+    {
+      "name": "consultant_id",
+      "required": "OPTIONAL",
+      "type": "String",
+      "source": "Meeting contract",
+      "placeholder": "{{consultant_id}}",
+      "description": "Approved consultant/resource identifier if applicable.",
+      "example": "",
+      "notes": "Leave blank until approved."
+    },
+    {
+      "name": "meeting_duration_minutes",
+      "required": "OPTIONAL",
+      "type": "Number",
+      "source": "Meeting contract",
+      "placeholder": "{{meeting_duration_minutes}}",
+      "description": "Approved meeting duration.",
+      "example": "",
+      "notes": "Leave blank until approved."
+    }
+  ],
+  "special_overrides_excluded_from_standard_template": [
+    "language",
+    "first_message",
+    "system_prompt",
+    "voice_id"
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Pixelkiez approved template V07_PERFORMANCE_THRESHOLD: Performance gegen Schwelle",
+  "usermeta": {
+    "template_id": "V07_PERFORMANCE_THRESHOLD",
+    "name": "Performance gegen Schwelle",
+    "purpose": "Istwert mit Ziel- und Warnbereich",
+    "brand_contract": "pixelkiez-v1"
+  },
+  "width": 620,
+  "height": 310,
+  "data": {
+    "values": [
+      {
+        "label": "LCP mobil",
+        "value": 3.8,
+        "good": 2.5,
+        "warn": 4.0
+      }
+    ]
+  },
+  "config": {
+    "background": "#FFFFFF",
+    "font": "Schibsted Grotesk",
+    "title": {
+      "font": "Schibsted Grotesk",
+      "fontSize": 18,
+      "fontWeight": 700,
+      "color": "#0E1414",
+      "anchor": "start"
+    },
+    "axis": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 11,
+      "titleFont": "Schibsted Grotesk",
+      "titleFontSize": 12,
+      "labelColor": "#0E1414",
+      "titleColor": "#0E1414",
+      "gridColor": "#C6D4D1",
+      "domainColor": "#566360",
+      "tickColor": "#566360"
+    },
+    "legend": {
+      "labelFont": "Schibsted Grotesk",
+      "labelFontSize": 11,
+      "titleFont": "Schibsted Grotesk",
+      "titleFontSize": 12,
+      "labelColor": "#0E1414",
+      "titleColor": "#0E1414"
+    },
+    "view": {
+      "stroke": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "color": "#E4F4EB"
+      },
+      "encoding": {
+        "x": {
+          "datum": 0
+        },
+        "x2": {
+          "field": "good"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rect",
+        "color": "#FBF0DC"
+      },
+      "encoding": {
+        "x": {
+          "field": "good"
+        },
+        "x2": {
+          "field": "warn"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "bar",
+        "color": "#EC5E43",
+        "size": 44,
+        "cornerRadiusEnd": 4
+      },
+      "encoding": {
+        "x": {
+          "field": "value",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dx": 8,
+        "align": "left",
+        "font": "IBM Plex Mono",
+        "fontSize": 16,
+        "fontWeight": 700
+      },
+      "encoding": {
+        "x": {
+          "field": "value"
+        },
+        "text": {
+          "field": "value",
+          "format": ".1f"
+        }
+      }
+    }
+  ]
+}

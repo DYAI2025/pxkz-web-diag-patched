@@ -1,0 +1,1289 @@
+{
+  "meta": {
+    "report_title": "Website-Analyse Low-Coverage Marketing Regression",
+    "customer_name": "Compass Frameworks UG",
+    "audited_url": "https://compassfw.de/",
+    "audit_date": "27.08.2026",
+    "timezone": "Europe/Berlin",
+    "language": "de",
+    "auditor": "Pixelkiez",
+    "audit_mode": "public_surface",
+    "scope_summary": "Synthetischer Regressionstest fuer den bekannten 40-Prozent-Coverage-Fall ohne Gesamtscore."
+  },
+  "coverage": {
+    "sampled_pages": [
+      {
+        "page_type": "Startseite",
+        "url": "https://compassfw.de/",
+        "accessed_at": "2026-08-27T20:00:00+02:00"
+      },
+      {
+        "page_type": "Leistung/Angebot",
+        "url": "https://compassfw.de/compass",
+        "accessed_at": "2026-08-27T20:01:00+02:00"
+      },
+      {
+        "page_type": "Kontakt",
+        "url": "https://compassfw.de/contact",
+        "accessed_at": "2026-08-27T20:02:00+02:00"
+      },
+      {
+        "page_type": "Impressum",
+        "url": "https://compassfw.de/impressum",
+        "accessed_at": "2026-08-27T20:03:00+02:00"
+      },
+      {
+        "page_type": "Datenschutz",
+        "url": "https://compassfw.de/datenschutz",
+        "accessed_at": "2026-08-27T20:04:00+02:00"
+      }
+    ],
+    "not_tested": [
+      "robots.txt / sitemap.xml nicht direkt geprueft",
+      "Indexierungs- und Sprachsignale im Seitenquelltext",
+      "strukturierte Daten",
+      "reale Lade- und Reaktionswerte",
+      "technischer Ladezeit-Test mobil und desktop",
+      "Seitendateien, Zwischenspeicherung und Sicherheitsangaben"
+    ],
+    "tools_available": [
+      "oeffentlicher Seitenabruf",
+      "HTML-Stichprobe",
+      "oeffentlicher Suchtest"
+    ],
+    "tools_unavailable": [
+      "Felddaten",
+      "Labormessung",
+      "vollstaendiger Accessibility-Test",
+      "private Analytics"
+    ],
+    "capabilities": [
+      {
+        "id": "public_http_fetch",
+        "status": "available",
+        "note": "Synthetic low-coverage regression capability state; no live external measurement asserted."
+      },
+      {
+        "id": "public_page_render",
+        "status": "available",
+        "note": "Synthetic low-coverage regression capability state; no live external measurement asserted."
+      },
+      {
+        "id": "html_inspection",
+        "status": "available",
+        "note": "Synthetic low-coverage regression capability state; no live external measurement asserted."
+      },
+      {
+        "id": "crawl_sample",
+        "status": "available",
+        "note": "Synthetic low-coverage regression capability state; no live external measurement asserted."
+      },
+      {
+        "id": "search_sample",
+        "status": "available",
+        "note": "Synthetic low-coverage regression capability state; no live external measurement asserted."
+      },
+      {
+        "id": "structured_data_inspection",
+        "status": "unavailable",
+        "note": "Synthetic low-coverage regression capability state; no live external measurement asserted."
+      },
+      {
+        "id": "performance_field",
+        "status": "unavailable",
+        "note": "Synthetic low-coverage regression capability state; no live external measurement asserted."
+      },
+      {
+        "id": "performance_lab",
+        "status": "unavailable",
+        "note": "Synthetic low-coverage regression capability state; no live external measurement asserted."
+      },
+      {
+        "id": "asset_inspection",
+        "status": "unavailable",
+        "note": "Synthetic low-coverage regression capability state; no live external measurement asserted."
+      },
+      {
+        "id": "header_inspection",
+        "status": "unavailable",
+        "note": "Synthetic low-coverage regression capability state; no live external measurement asserted."
+      },
+      {
+        "id": "accessibility_manual_sample",
+        "status": "unavailable",
+        "note": "Synthetic low-coverage regression capability state; no live external measurement asserted."
+      },
+      {
+        "id": "accessibility_automation",
+        "status": "unavailable",
+        "note": "Synthetic low-coverage regression capability state; no live external measurement asserted."
+      },
+      {
+        "id": "content_inspection",
+        "status": "available",
+        "note": "Synthetic low-coverage regression capability state; no live external measurement asserted."
+      },
+      {
+        "id": "private_measurement_export",
+        "status": "unavailable",
+        "note": "Synthetic low-coverage regression capability state; no live external measurement asserted."
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "id": "FIND-01",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "strong",
+      "value": "Startseite und zentrale Seiten waren im Test erreichbar.",
+      "unit": null,
+      "score": 100,
+      "confidence": 5,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "FIND-02",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "FIND-03",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "FIND-04",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E5",
+      "status": "weak",
+      "value": "Im Suchtest mit Firmennamen erschien die eigene Website nicht im sichtbaren Ergebnisfenster.",
+      "unit": null,
+      "score": 25,
+      "confidence": 3,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "FIND-05",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E5",
+      "status": "weak",
+      "value": "In drei wichtigen Suchanfragen ohne Firmennamen erschien die eigene Website nicht im sichtbaren Ergebnisfenster.",
+      "unit": null,
+      "score": 25,
+      "confidence": 3,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "FIND-06",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "mixed",
+      "value": "Seitentitel und Hauptueberschriften erklaeren das Angebot teilweise erst spaet.",
+      "unit": null,
+      "score": 50,
+      "confidence": 4,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "FIND-07",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "FIND-08",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Kernseiten sind verlinkt, die Leistungszuordnung kann klarer werden.",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "FIND-09",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Die gepruefte Bildstichprobe enthaelt beschreibende Alternativtexte.",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "FIND-10",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Standort und Sprachsignale sind im geprueften Umfang sichtbar.",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "PERF-01",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "PERF-02",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "PERF-03",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "PERF-04",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "PERF-05",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "PERF-06",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "PERF-07",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "PERF-08",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "PERF-09",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "UX-01",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "UX-02",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "UX-03",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "UX-04",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "UX-05",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "UX-06",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "mixed",
+      "value": "Vertrauenssignale sind vorhanden, aber nur teilweise direkt an Leistungen gebunden.",
+      "unit": null,
+      "score": 50,
+      "confidence": 4,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "UX-07",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "UX-08",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "A11Y-01",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "A11Y-02",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "mixed",
+      "value": "Semantische Struktur ist teilweise nachvollziehbar.",
+      "unit": null,
+      "score": 50,
+      "confidence": 4,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "A11Y-03",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Die gepruefte Bildstichprobe besitzt beschreibende Alternativtexte.",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "A11Y-04",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "A11Y-05",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "A11Y-06",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "TRUST-01",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "strong",
+      "value": "Ein Impressum ist oeffentlich erreichbar.",
+      "unit": null,
+      "score": 100,
+      "confidence": 5,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "TRUST-02",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "TRUST-03",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "TRUST-04",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "weak",
+      "value": "Footer, Impressum und Datenschutz zeigen unterschiedliche Firmen- oder Adressdaten.",
+      "unit": null,
+      "score": 25,
+      "confidence": 5,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "TRUST-05",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "mixed",
+      "value": "Rechtstexte enthalten sichtbar aeltere Verweise.",
+      "unit": null,
+      "score": 50,
+      "confidence": 5,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "TRUST-06",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "weak",
+      "value": "Im geprueften Kernbereich fehlen konkrete Fallbeispiele mit Ergebnisbezug.",
+      "unit": null,
+      "score": 25,
+      "confidence": 4,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "TRUST-07",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E4",
+      "status": "minor_gaps",
+      "value": "Kontaktweg, Discovery Call und Geschaeftszeiten sind sichtbar.",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "TRUST-08",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "AI-01",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "strong",
+      "value": "Unternehmen und Leistungsfeld sind im geprueften Inhalt erkennbar.",
+      "unit": null,
+      "score": 100,
+      "confidence": 4,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "AI-02",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Leistung, Zielgruppe und Standort sind weitgehend explizit.",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "AI-03",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Die Angebotsseite beantwortet zentrale Kundenfragen strukturiert.",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "AI-04",
+      "applicable": true,
+      "measurement_class": "not_assessed",
+      "evidence_grade": "E8",
+      "status": "not_assessed",
+      "value": null,
+      "unit": null,
+      "score": null,
+      "confidence": 1,
+      "source_or_method": "Low-coverage regression fixture: capability or data intentionally unavailable.",
+      "threshold_source": null,
+      "evidence_refs": [],
+      "does_not_prove": "Nicht geprueft; daraus folgt kein Qualitaetsurteil.",
+      "note": "Intentional regression gap."
+    },
+    {
+      "id": "AI-05",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "weak",
+      "value": "Nutzenversprechen sind nur selten direkt mit Fallbelegen verbunden.",
+      "unit": null,
+      "score": 25,
+      "confidence": 4,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "AI-06",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "weak",
+      "value": "Firmen- und Adressangaben sind zwischen geprueften Seiten nicht konsistent.",
+      "unit": null,
+      "score": 25,
+      "confidence": 5,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    },
+    {
+      "id": "AI-07",
+      "applicable": true,
+      "measurement_class": "observed",
+      "evidence_grade": "E6",
+      "status": "minor_gaps",
+      "value": "Das Angebot besitzt thematische Tiefe im geprueften Umfang.",
+      "unit": null,
+      "score": 75,
+      "confidence": 4,
+      "source_or_method": "Low-coverage marketing regression fixture based on the failed customer-output pattern.",
+      "threshold_source": "Pixelkiez product rubric v1",
+      "evidence_refs": [],
+      "does_not_prove": "Regression fixture only; no real ranking, revenue, legal, accessibility or conversion outcome is asserted.",
+      "note": "Synthetic regression input; not customer evidence."
+    }
+  ],
+  "score_summary": {
+    "label": "Score nicht belastbar",
+    "score": null,
+    "display_status": "NO_SCORE",
+    "coverage_percent": 0,
+    "confidence": "LOW",
+    "interpretation": "wird durch compute_score.py ersetzt",
+    "blocker_present": false,
+    "category_scores": [],
+    "does_not_prove": [
+      "keine universelle Website-Qualität",
+      "kein Ranking-, Umsatz- oder Conversion-Nachweis"
+    ],
+    "policy_version": "2.0.0",
+    "registry_version": "1.0.0"
+  },
+  "executive_summary": {
+    "decision": "Die oeffentliche Basis ist fachlich klar genug fuer gezielte Modernisierung. Zuerst Stammdaten synchronisieren, Auffindbarkeit technisch verifizieren und Proof Points ergaenzen.",
+    "recommended_route": "targeted_modernization",
+    "top_strengths": [
+      "Leistungen, Preise und Workshop-Formate sind konkret und transparent.",
+      "Why/Whom/How/What/Pricing macht die Angebotsseite gut beantwortbar.",
+      "Deutsch/Englisch, Standort und Discovery-Call sind klar signalisiert."
+    ],
+    "top_risks": [
+      "Firmen-, Adress- und Registerdaten sind nicht konsistent.",
+      "Im Brand-/Non-Brand-Suchsample fehlt die First-Party-Domain.",
+      "Nutzen-Claims sind im Kernsample kaum mit Cases oder Proof Points belegt."
+    ],
+    "overall_status": "needs_action"
+  },
+  "pillar_summary": [],
+  "findings": [
+    {
+      "id": "F-901",
+      "category": "trust_privacy_content",
+      "title": "Unternehmensdaten sind auf der Website nicht synchron",
+      "severity": "high",
+      "observation": "Footer, Impressum und Datenschutz zeigen unterschiedliche Firmen- und Adressdaten.",
+      "evidence": [
+        {
+          "id": "E-901",
+          "type": "regression_observation",
+          "detail": "Footer, Impressum und Datenschutz zeigen unterschiedliche Firmen- und Adressdaten.",
+          "url": "https://compassfw.de/impressum",
+          "observed_at": "2026-08-27T20:10:00+02:00",
+          "method": "synthetic regression fixture",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Uneinheitliche Firmendaten koennen Zweifel an Aktualitaet und Identitaet erzeugen."
+      },
+      "client_observation": "Footer, Impressum und Datenschutz zeigen unterschiedliche Firmen- und Adressdaten.",
+      "client_impact": "Uneinheitliche Firmendaten koennen Zweifel an Aktualitaet und Identitaet erzeugen.",
+      "client_action": "Amtlichen Registerstand pruefen und Firmendaten in Footer, Impressum und Datenschutz angleichen.",
+      "recommendation": {
+        "action": "Amtlichen Registerstand pruefen und Firmendaten in Footer, Impressum und Datenschutz angleichen.",
+        "owner": "Website-Team",
+        "horizon": "0_30_days",
+        "acceptance_test": "Die gepruefte Stelle ist nach der Aenderung konsistent und erneut nachvollziehbar."
+      },
+      "confidence": 5,
+      "visual_asset": null,
+      "metric_refs": [
+        "TRUST-04",
+        "AI-06"
+      ]
+    },
+    {
+      "id": "F-902",
+      "category": "findability_seo",
+      "title": "Das oeffentliche Suchsample zeigt geringe sichtbare Praesenz",
+      "severity": "high",
+      "observation": "Im Brand- und Non-Brand-Suchsample tauchte compassfw.de im sichtbaren Ergebnisfenster nicht auf.",
+      "evidence": [
+        {
+          "id": "E-902",
+          "type": "regression_observation",
+          "detail": "Im Brand- und Non-Brand-Suchsample tauchte compassfw.de im sichtbaren Ergebnisfenster nicht auf.",
+          "url": "https://compassfw.de/",
+          "observed_at": "2026-08-27T20:10:00+02:00",
+          "method": "synthetic regression fixture",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Das ist ein Warnsignal fuer Auffindbarkeit, aber kein Nachweis dauerhaft schlechter Rankings."
+      },
+      "client_observation": "Im Brand- und Non-Brand-Suchsample tauchte compassfw.de im sichtbaren Ergebnisfenster nicht auf.",
+      "client_impact": "Das ist ein Warnsignal fuer Auffindbarkeit, aber kein Nachweis dauerhaft schlechter Rankings.",
+      "client_action": "Indexierung pruefen und fuer Kernintents klar benannte Leistungsseiten mit eindeutigen Titles und H1 erstellen.",
+      "recommendation": {
+        "action": "Indexierung pruefen und fuer Kernintents klar benannte Leistungsseiten mit eindeutigen Titles und H1 erstellen.",
+        "owner": "Website-Team",
+        "horizon": "0_30_days",
+        "acceptance_test": "Die gepruefte Stelle ist nach der Aenderung konsistent und erneut nachvollziehbar."
+      },
+      "confidence": 3,
+      "visual_asset": null,
+      "metric_refs": [
+        "FIND-04",
+        "FIND-05"
+      ]
+    },
+    {
+      "id": "F-903",
+      "category": "trust_privacy_content",
+      "title": "Rechtstexte enthalten sichtbar aeltere gesetzliche Verweise",
+      "severity": "medium",
+      "observation": "Im Impressum stehen sichtbar aeltere Rechtsverweise.",
+      "evidence": [
+        {
+          "id": "E-903",
+          "type": "regression_observation",
+          "detail": "Im Impressum stehen sichtbar aeltere Rechtsverweise.",
+          "url": "https://compassfw.de/impressum",
+          "observed_at": "2026-08-27T20:10:00+02:00",
+          "method": "synthetic regression fixture",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Aeltere Rechtsverweise wirken ungepflegt und sollten fachlich geprueft werden."
+      },
+      "client_observation": "Im Impressum stehen sichtbar aeltere Rechtsverweise.",
+      "client_impact": "Aeltere Rechtsverweise wirken ungepflegt und sollten fachlich geprueft werden.",
+      "client_action": "Rechtstexte auf aktuelle Firmendaten und Rechtsverweise pruefen und aktualisieren lassen.",
+      "recommendation": {
+        "action": "Rechtstexte auf aktuelle Firmendaten und Rechtsverweise pruefen und aktualisieren lassen.",
+        "owner": "Website-Team",
+        "horizon": "31_90_days",
+        "acceptance_test": "Die gepruefte Stelle ist nach der Aenderung konsistent und erneut nachvollziehbar."
+      },
+      "confidence": 5,
+      "visual_asset": null,
+      "metric_refs": [
+        "TRUST-05"
+      ]
+    },
+    {
+      "id": "F-904",
+      "category": "ai_readiness",
+      "title": "Die Marke ist stark, aber zentrale Ueberschriften erklaeren das Angebot spaet",
+      "severity": "medium",
+      "observation": "Die Markenmetapher ist einpraegsam, die Hauptueberschriften nennen die konkrete Leistung aber erst spaeter.",
+      "evidence": [
+        {
+          "id": "E-904",
+          "type": "regression_observation",
+          "detail": "Die Markenmetapher ist einpraegsam, die Hauptueberschriften nennen die konkrete Leistung aber erst spaeter.",
+          "url": "https://compassfw.de/",
+          "observed_at": "2026-08-27T20:10:00+02:00",
+          "method": "synthetic regression fixture",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Menschen und Such- oder KI-Systeme muessen erst interpretieren, bevor Angebot und Zielgruppe klar werden."
+      },
+      "client_observation": "Die Markenmetapher ist einpraegsam, die Hauptueberschriften nennen die konkrete Leistung aber erst spaeter.",
+      "client_impact": "Menschen und Such- oder KI-Systeme muessen erst interpretieren, bevor Angebot und Zielgruppe klar werden.",
+      "client_action": "Metapher behalten und direkt daneben Leistung, Zielgruppe und Ergebnis klar benennen.",
+      "recommendation": {
+        "action": "Metapher behalten und direkt daneben Leistung, Zielgruppe und Ergebnis klar benennen.",
+        "owner": "Website-Team",
+        "horizon": "31_90_days",
+        "acceptance_test": "Die gepruefte Stelle ist nach der Aenderung konsistent und erneut nachvollziehbar."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "FIND-06",
+        "AI-02"
+      ]
+    },
+    {
+      "id": "F-905",
+      "category": "trust_privacy_content",
+      "title": "Das Angebot ist konkret, die Belege dafuer sind noch duenn",
+      "severity": "medium",
+      "observation": "Leistungen und Preise sind konkret. Sichtbare Proof Points oder Fallbeispiele fehlen im geprueften Kernbereich.",
+      "evidence": [
+        {
+          "id": "E-905",
+          "type": "regression_observation",
+          "detail": "Leistungen und Preise sind konkret. Sichtbare Proof Points oder Fallbeispiele fehlen im geprueften Kernbereich.",
+          "url": "https://compassfw.de/compass",
+          "observed_at": "2026-08-27T20:10:00+02:00",
+          "method": "synthetic regression fixture",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Das Angebot ist verstaendlich, die versprochene Wirkung muss aber weitgehend aus der Beschreibung abgeleitet werden."
+      },
+      "client_observation": "Leistungen und Preise sind konkret. Sichtbare Proof Points oder Fallbeispiele fehlen im geprueften Kernbereich.",
+      "client_impact": "Das Angebot ist verstaendlich, die versprochene Wirkung muss aber weitgehend aus der Beschreibung abgeleitet werden.",
+      "client_action": "Zwei bis drei freigegebene Cases mit Ausgangslage, Vorgehen, Ergebnis und Quelle ergaenzen.",
+      "recommendation": {
+        "action": "Zwei bis drei freigegebene Cases mit Ausgangslage, Vorgehen, Ergebnis und Quelle ergaenzen.",
+        "owner": "Website-Team",
+        "horizon": "31_90_days",
+        "acceptance_test": "Die gepruefte Stelle ist nach der Aenderung konsistent und erneut nachvollziehbar."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "TRUST-06",
+        "AI-05"
+      ]
+    },
+    {
+      "id": "F-906",
+      "category": "ai_readiness",
+      "title": "Leistungen und Preise sind konkret benannt",
+      "severity": "positive",
+      "observation": "Leistungen, Preise und Workshop-Formate sind konkret beschrieben.",
+      "evidence": [
+        {
+          "id": "E-906",
+          "type": "regression_observation",
+          "detail": "Leistungen, Preise und Workshop-Formate sind konkret beschrieben.",
+          "url": "https://compassfw.de/compass",
+          "observed_at": "2026-08-27T20:10:00+02:00",
+          "method": "synthetic regression fixture",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "fact",
+        "text": "Die gepruefte Angebotsseite ist in diesem Punkt konkret."
+      },
+      "client_observation": "Leistungen, Preise und Workshop-Formate sind konkret und transparent.",
+      "client_impact": "Interessenten koennen das Angebot schneller einordnen.",
+      "client_action": "Diese Klarheit beibehalten.",
+      "recommendation": {
+        "action": "Klarheit beibehalten.",
+        "owner": "Website-Team",
+        "horizon": "monitor",
+        "acceptance_test": "Leistungen und Preise bleiben direkt auffindbar."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "AI-02",
+        "AI-03"
+      ]
+    }
+  ],
+  "scenario_horizons": [
+    {
+      "years": 2,
+      "paths": [
+        {
+          "scenario": "inaction",
+          "outcome": "Bestehende Reibung kann sichtbar bleiben.",
+          "assumptions": [
+            "keine strukturellen Änderungen"
+          ],
+          "leading_indicators": [
+            "stabile öffentliche Oberfläche"
+          ],
+          "counterfactors": [
+            "größere Neupositionierung"
+          ]
+        }
+      ]
+    },
+    {
+      "years": 5,
+      "paths": [
+        {
+          "scenario": "targeted_modernization",
+          "outcome": "Die Website kann schrittweise auf neue Anforderungen angepasst werden.",
+          "assumptions": [
+            "regelmäßige Pflege"
+          ],
+          "leading_indicators": [
+            "wiederholte Messungen"
+          ],
+          "counterfactors": [
+            "grundlegender Strategiewechsel"
+          ]
+        }
+      ]
+    }
+  ],
+  "options": [
+    {
+      "route": "monitor",
+      "evidence_basis": [
+        "F-006",
+        "F-007"
+      ]
+    },
+    {
+      "route": "maintenance",
+      "evidence_basis": [
+        "F-006",
+        "F-007"
+      ]
+    },
+    {
+      "route": "targeted_modernization",
+      "evidence_basis": [
+        "F-001",
+        "F-003",
+        "F-004",
+        "F-005"
+      ]
+    },
+    {
+      "route": "redesign",
+      "evidence_basis": [
+        "F-001",
+        "F-004"
+      ]
+    }
+  ],
+  "roadmap": [
+    {
+      "priority": "P1",
+      "horizon": "now",
+      "action": "Firmendaten amtlich pruefen und Footer/Rechtstexte synchronisieren.",
+      "owner": "Website-Team",
+      "evidence_basis": [
+        "F-901"
+      ]
+    },
+    {
+      "priority": "P1",
+      "horizon": "0_30_days",
+      "action": "Indexierung pruefen und klare Intent-Seiten fuer Kernleistungen aufbauen.",
+      "owner": "SEO und Content",
+      "evidence_basis": [
+        "F-902"
+      ]
+    },
+    {
+      "priority": "P2",
+      "horizon": "31_90_days",
+      "action": "Zwei bis drei belegte Cases/Proof Points auf Leistungsseiten ergaenzen.",
+      "owner": "Content",
+      "evidence_basis": [
+        "F-905"
+      ]
+    },
+    {
+      "priority": "P2",
+      "horizon": "31_90_days",
+      "action": "Performance, Header, Mobile-UX und Accessibility mit echten Messwerkzeugen pruefen.",
+      "owner": "Technik",
+      "evidence_basis": [
+        "F-904"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S901",
+      "type": "derived",
+      "title": "Low-coverage marketing regression fixture",
+      "location": "evals/fixtures/low-coverage-marketing-report.json",
+      "purpose": "Regression test only; not live customer evidence"
+    }
+  ],
+  "limitations": [
+    "Public-Surface-Stichprobe ohne private Analytics oder Backendzugriff.",
+    "Keine aktuellen Felddaten oder reproduzierbaren Labormesswerte.",
+    "Keine vollstaendige Accessibility-Pruefung und keine Rechtsberatung.",
+    "Suchtests sind Momentaufnahmen und keine stabilen Rankinganteile."
+  ],
+  "missing": [
+    "Amtlich bestaetigter aktueller Registerstand",
+    "Search Console Index- und Query-Daten",
+    "Analytics- oder Conversion-Daten",
+    "Felddaten oder reproduzierbarer Ladezeit-Test"
+  ],
+  "source_needed": [],
+  "visualizations": []
+}

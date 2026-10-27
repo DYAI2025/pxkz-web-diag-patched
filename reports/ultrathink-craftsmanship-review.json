@@ -1,0 +1,40 @@
+{
+  "triage": "Deep",
+  "status": "PASS_WITH_CORRECTIONS_APPLIED",
+  "options_considered": [
+    {
+      "option": "score-registry expansion",
+      "decision": "REJECT",
+      "reason": "credential/provider availability would destabilize score comparability"
+    },
+    {
+      "option": "second audit engine",
+      "decision": "REJECT",
+      "reason": "duplicates evidence/story/PDF truth and creates reconciliation drift"
+    },
+    {
+      "option": "optional enrichment layer",
+      "decision": "ADOPT",
+      "reason": "smallest reversible slice that increases measurement power while preserving core score"
+    }
+  ],
+  "strongest_counterargument": "If enrichment metrics never affect the score, the headline score may underrepresent newly measured search/user/performance evidence. This is accepted for this release because scoring semantics require a separate versioned calibration exercise; immediately weighting provider metrics would be less truthful than keeping them decision-supporting and visible without score impact.",
+  "failure_mode_chain": "new API data -> wrong semantic mapping -> polished customer visual -> false certainty -> bad action. Controls: source-specific metric IDs, provenance schema, fail-closed availability states, claim boundaries, customer-language validator and fixture/live separation.",
+  "bias_review": {
+    "sales_pressure_bias": "controlled: red/X only from evidenced assessed weakness, never to create urgency artificially",
+    "tool_bias": "controlled: adapters optional and provider-independent at the canonical contract",
+    "completion_bias": "controlled: live auth remains UNVERIFIED_RUNTIME rather than claimed PASS",
+    "precision_bias": "controlled: average position/current rank and lab/field data remain separate"
+  },
+  "corrections_applied_to_plan": [
+    "kept new measurements outside scored core",
+    "made DataForSEO page number provider-explicit only",
+    "made axe optional rather than package dependency",
+    "kept privacy/accessibility legal/manual review boundaries internal",
+    "made customer closing schema-required instead of copy-only convention",
+    "required deterministic browser contract tests plus explicit BLOCKED_RUNTIME_POLICY when host navigation is prohibited",
+    "required PDF visual inspection independently of browser measurement runtime availability"
+  ],
+  "decision": "PROCEED",
+  "runtime_truth": "Browser module is implemented and statically/contract tested; live Chromium navigation could not be executed in this host because the environment returns ERR_BLOCKED_BY_ADMINISTRATOR."
+}

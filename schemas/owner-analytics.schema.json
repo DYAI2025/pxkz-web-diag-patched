@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pixelkiez.local/schemas/owner-analytics.schema.json",
+  "title": "Pixelkiez Provider-Neutral Owner Analytics",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "target_url", "state", "provider", "date_range", "metrics", "instrumentation_state", "permission_state"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "target_url": {"type": "string", "pattern": "^https?://"},
+    "state": {"enum": ["AVAILABLE", "UNAVAILABLE", "NOT_CONFIGURED", "ERROR"]},
+    "provider": {"type": "string"},
+    "date_range": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {"start": {"type": "string"}, "end": {"type": "string"}}
+    },
+    "metrics": {"type": "array", "items": {"type": "object"}},
+    "instrumentation_state": {"enum": ["TRACKED", "PARTIAL", "NOT_INSTRUMENTED", "UNKNOWN"]},
+    "permission_state": {"enum": ["OWNER_AUTHORIZED", "NOT_AUTHORIZED", "NOT_REQUIRED"]}
+  }
+}

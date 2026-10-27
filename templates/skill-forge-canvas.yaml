@@ -1,0 +1,39 @@
+skill:
+  name: pixelkiez-website-diagnosis
+  business_goal: Produce truthful, professional client website diagnosis PDFs that support evidence-led maintenance, modernization, or redesign decisions.
+  target_users:
+    - Pixelkiez agency owner
+    - sales and discovery staff
+    - website strategy and delivery staff
+  target_runtimes:
+    - ChatGPT Work
+    - Codex-compatible runtime with public web access and local PDF tools
+outputs:
+  - structured diagnosis JSON
+  - Pixelkiez-branded PDF
+  - concise handoff summary
+security:
+  data_classification: public_by_default
+  forbidden_behaviors:
+    - authentication or CAPTCHA bypass
+    - active exploitation or aggressive scanning
+    - form submission or website changes
+    - legal, security, ranking, revenue, or AI-citation guarantees
+    - personal data or secrets in reports
+capabilities:
+  public_browser_extraction: read_only_bounded
+  local_pdf_generation: required
+  website_write_access: prohibited
+success_criteria:
+  - Every adverse finding is traceable to evidence.
+  - Field and lab performance data are distinguished.
+  - Two-year and five-year sections are conditional scenarios.
+  - Four intervention paths are compared fairly.
+  - The PDF uses the verified Pixelkiez name, palette, and logo.
+  - Deterministic input, PDF, source, eval, release, installability, portability, and packaging checks pass.
+definition_of_done:
+  - synthetic fixture passes and renders without visual defects
+  - release_gate.status is PASS
+  - allowed_to_package is true
+  - skill.zip contains exactly one skill folder
+

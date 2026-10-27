@@ -1,0 +1,49 @@
+/* ── The Pixelkiez recognition devices ───────────────────────────────────────
+   All five are observed on pixelkiez.de, not invented. Together they are what
+   makes a document read as Pixelkiez.
+
+   1. BAND RHYTHM — full-bleed sections alternate sage → orange → sage → black.
+      Large saturated fields are the brand, not an exception to it.
+   2. CARD COLOUR ROTATION — a set of cards cycles the four values: white,
+      sage (the only one with a hairline border), orange, ink.
+   3. PIXEL METER — a 6×3 grid of squares, filled ink against the ground, with
+      more cells filled as the value rises. The site's only "icon" of its own.
+   4. ARROW AFFORDANCE — every action carries ↗: filled orange pill buttons and
+      bordered circular icon buttons.
+   5. MONO LABELS — uppercase letterspaced monospace for every number, tagline
+      and label, opened by a full-width hairline rule. */
+:root{
+  /* Card rotation, in order */
+  --card-fill-1:var(--pk-white);
+  --card-fill-2:var(--pk-sage);
+  --card-fill-3:var(--pk-orange);
+  --card-fill-4:var(--pk-ink);
+
+  /* Pixel meter */
+  --meter-columns:6; /* @kind other */
+  --meter-rows:3; /* @kind other */
+  --meter-cell:22px;
+  --meter-gap:4px;
+  --meter-radius:2px;
+  --meter-on:var(--pk-ink);
+  --meter-off-on-orange:var(--pk-orange-hover);
+  --meter-off-on-sage:var(--pk-sage-raised);
+  --meter-off-on-ink:var(--pk-ink-soft);
+
+  /* Section opener: hairline above a mono number */
+  --opener-rule:1px solid var(--pk-ink);
+  --opener-rule-on-dark:1px solid var(--pk-ink-soft);
+  --opener-gap:20px;
+
+  /* Arrow affordance */
+  --arrow-glyph:"↗"; /* @kind other */
+  --icon-button-size:40px;
+  --icon-button-border:1px solid currentColor; /* @kind other */
+
+  /* Figure fields — a headline number sits on a white card against the sage
+     ground; on orange or ink bands it sits directly on the band. */
+  --figure-field:var(--pk-white);
+  --figure-field-strong:var(--pk-sage-raised);
+  --figure-field-border:var(--pk-sage-line);
+  --table-header-field:var(--pk-sage-raised);
+}

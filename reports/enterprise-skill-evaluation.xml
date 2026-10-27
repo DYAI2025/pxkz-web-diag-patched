@@ -1,0 +1,6 @@
+<enterprise_skill_evaluation>
+  <scores><spec_compliance>4</spec_compliance><research_quality>4</research_quality><enterprise_readiness>3</enterprise_readiness><architecture_quality>4</architecture_quality><release_gate_integrity>1</release_gate_integrity></scores>
+  <blocking_issues><item>Previous VibeCheck03 live and customer finding admission unfinished.</item><item>Frozen candidate has no independently obtained evaluator receipt.</item></blocking_issues>
+  <required_revisions><item>Complete earlier VibeCheck03 collectors/admission and verify PDF/semantic QA on actual customer run.</item><item>Obtain independent evaluator against exact candidate digest; release gate must then be rerun.</item></required_revisions>
+  <decision>BLOCKED</decision><reason>Self-review only; this file is not an independent evaluator receipt and cannot authorize packaging.</reason>
+</enterprise_skill_evaluation>

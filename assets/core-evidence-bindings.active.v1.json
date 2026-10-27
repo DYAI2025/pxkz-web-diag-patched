@@ -1,0 +1,2934 @@
+{
+  "contract_version": "1.0.0",
+  "activation_mode": "ACTIVE_CORE_ADMISSION",
+  "measurement_registry_version": "1.0.0",
+  "score_anchor_source": "assets/measurement-registry.json#metric_score_scale",
+  "metrics": [
+    {
+      "metric_id": "FIND-01",
+      "category": "findability_seo",
+      "metric_weight": 10,
+      "category_weight": 25,
+      "score_mode": "binary_or_graded",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Fetch canonical public URL and record status/final URL.",
+      "capability_id": "public_http_fetch",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "accepted_source_families": [
+        "PUBLIC_DETERMINISTIC_TECHNICAL",
+        "MEASUREMENT_GATEWAY"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED",
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PUBLIC_REPRODUCIBLE"
+    },
+    {
+      "metric_id": "FIND-02",
+      "category": "findability_seo",
+      "metric_weight": 10,
+      "category_weight": 25,
+      "score_mode": "binary_or_graded",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Fetch robots.txt and sitemap locations when public.",
+      "capability_id": "public_http_fetch",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "accepted_source_families": [
+        "PUBLIC_DETERMINISTIC_TECHNICAL",
+        "MEASUREMENT_GATEWAY"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED",
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PUBLIC_REPRODUCIBLE"
+    },
+    {
+      "metric_id": "FIND-03",
+      "category": "findability_seo",
+      "metric_weight": 10,
+      "category_weight": 25,
+      "score_mode": "binary_or_graded",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect index directives, canonical tags and redirect behavior on sampled templates.",
+      "capability_id": "html_inspection",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "accepted_source_families": [
+        "STRUCTURED_CONTENT_DOM_METADATA",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PUBLIC_REPRODUCIBLE"
+    },
+    {
+      "metric_id": "FIND-04",
+      "category": "findability_seo",
+      "metric_weight": 10,
+      "category_weight": 25,
+      "score_mode": "search_sample",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Run dated brand query and record visible result/snippet evidence.",
+      "capability_id": "search_sample",
+      "source_family": "SEARCH_INDEXING_SERP",
+      "accepted_source_families": [
+        "SEARCH_INDEXING_SERP"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E5",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PUBLIC_SEARCH_SAMPLE"
+    },
+    {
+      "metric_id": "FIND-05",
+      "category": "findability_seo",
+      "metric_weight": 15,
+      "category_weight": 25,
+      "score_mode": "search_sample",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Run at least three dated non-brand intent queries relevant to visible offer/market.",
+      "capability_id": "search_sample",
+      "source_family": "SEARCH_INDEXING_SERP",
+      "accepted_source_families": [
+        "SEARCH_INDEXING_SERP"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E5",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PUBLIC_SEARCH_SAMPLE"
+    },
+    {
+      "metric_id": "FIND-06",
+      "category": "findability_seo",
+      "metric_weight": 10,
+      "category_weight": 25,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect sampled titles, descriptions, H1/H2 structure and intent alignment.",
+      "capability_id": "html_inspection",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "accepted_source_families": [
+        "STRUCTURED_CONTENT_DOM_METADATA",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "FIND-07",
+      "category": "findability_seo",
+      "metric_weight": 10,
+      "category_weight": 25,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect public structured data for syntax, entity fit and visible-content consistency.",
+      "capability_id": "structured_data_inspection",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "accepted_source_families": [
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+    },
+    {
+      "metric_id": "FIND-08",
+      "category": "findability_seo",
+      "metric_weight": 15,
+      "category_weight": 25,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect navigation depth, contextual links, descriptive anchors, breadcrumbs and orphan-risk patterns in bounded sample.",
+      "capability_id": "crawl_sample",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "accepted_source_families": [
+        "PUBLIC_DETERMINISTIC_TECHNICAL",
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED",
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "FIND-09",
+      "category": "findability_seo",
+      "metric_weight": 5,
+      "category_weight": 25,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect sampled image alt text, context, filenames and responsive image delivery.",
+      "capability_id": "html_inspection",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "accepted_source_families": [
+        "STRUCTURED_CONTENT_DOM_METADATA",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+    },
+    {
+      "metric_id": "FIND-10",
+      "category": "findability_seo",
+      "metric_weight": 5,
+      "category_weight": 25,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect applicable local entity and language-alternate signals.",
+      "capability_id": "html_inspection",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "accepted_source_families": [
+        "STRUCTURED_CONTENT_DOM_METADATA",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+    },
+    {
+      "metric_id": "PERF-01",
+      "category": "performance_technology",
+      "metric_weight": 20,
+      "category_weight": 20,
+      "score_mode": "external_threshold",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": true,
+      "defined_test_method": "Use current public/user-authorized real-user field metrics for URL/origin when available.",
+      "capability_id": "performance_field",
+      "source_family": "PERFORMANCE_CWV_LAB",
+      "accepted_source_families": [
+        "PERFORMANCE_CWV_LAB"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E2",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+    },
+    {
+      "metric_id": "PERF-02",
+      "category": "performance_technology",
+      "metric_weight": 15,
+      "category_weight": 20,
+      "score_mode": "external_threshold",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": true,
+      "defined_test_method": "Run controlled mobile lab measurement and retain tool/date/config.",
+      "capability_id": "performance_lab",
+      "source_family": "PERFORMANCE_CWV_LAB",
+      "accepted_source_families": [
+        "PERFORMANCE_CWV_LAB"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E2",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+    },
+    {
+      "metric_id": "PERF-03",
+      "category": "performance_technology",
+      "metric_weight": 10,
+      "category_weight": 20,
+      "score_mode": "external_threshold",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": true,
+      "defined_test_method": "Run controlled desktop lab measurement and retain tool/date/config.",
+      "capability_id": "performance_lab",
+      "source_family": "PERFORMANCE_CWV_LAB",
+      "accepted_source_families": [
+        "PERFORMANCE_CWV_LAB"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E2",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+    },
+    {
+      "metric_id": "PERF-04",
+      "category": "performance_technology",
+      "metric_weight": 10,
+      "category_weight": 20,
+      "score_mode": "graded_measurement",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Measure sampled transfer/resource weight and identify dominant resource classes.",
+      "capability_id": "asset_inspection",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "accepted_source_families": [
+        "PUBLIC_DETERMINISTIC_TECHNICAL",
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED",
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PUBLIC_REPRODUCIBLE"
+    },
+    {
+      "metric_id": "PERF-05",
+      "category": "performance_technology",
+      "metric_weight": 10,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect formats, responsive images, lazy loading and media delivery on sampled templates.",
+      "capability_id": "asset_inspection",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "accepted_source_families": [
+        "PUBLIC_DETERMINISTIC_TECHNICAL",
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED",
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "PERF-06",
+      "category": "performance_technology",
+      "metric_weight": 10,
+      "category_weight": 20,
+      "score_mode": "graded_measurement",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect public caching/compression headers or reproducible response behavior.",
+      "capability_id": "header_inspection",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "accepted_source_families": [
+        "PUBLIC_DETERMINISTIC_TECHNICAL",
+        "MEASUREMENT_GATEWAY"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PUBLIC_REPRODUCIBLE"
+    },
+    {
+      "metric_id": "PERF-07",
+      "category": "performance_technology",
+      "metric_weight": 10,
+      "category_weight": 20,
+      "score_mode": "graded_measurement",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect sampled blocking CSS/JS/resource dependencies with available lab or page tooling.",
+      "capability_id": "asset_inspection",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "accepted_source_families": [
+        "PUBLIC_DETERMINISTIC_TECHNICAL",
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED",
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PUBLIC_REPRODUCIBLE"
+    },
+    {
+      "metric_id": "PERF-08",
+      "category": "performance_technology",
+      "metric_weight": 5,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect responsive rendering and delivery on representative mobile/desktop viewports.",
+      "capability_id": "public_page_render",
+      "source_family": "BROWSER_RENDERING",
+      "accepted_source_families": [
+        "BROWSER_RENDERING",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "PERF-09",
+      "category": "performance_technology",
+      "metric_weight": 10,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Record observable delivery/CMS/framework hints without asserting private architecture.",
+      "capability_id": "html_inspection",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "accepted_source_families": [
+        "STRUCTURED_CONTENT_DOM_METADATA",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E5",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "UX-01",
+      "category": "ux_conversion",
+      "metric_weight": 15,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect whether first screen states entity/offer/audience/value clearly.",
+      "capability_id": "public_page_render",
+      "source_family": "BROWSER_RENDERING",
+      "accepted_source_families": [
+        "BROWSER_RENDERING",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "UX-02",
+      "category": "ux_conversion",
+      "metric_weight": 15,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect prominence and clarity of the primary next action.",
+      "capability_id": "public_page_render",
+      "source_family": "BROWSER_RENDERING",
+      "accepted_source_families": [
+        "BROWSER_RENDERING",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "UX-03",
+      "category": "ux_conversion",
+      "metric_weight": 15,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect labels, navigation paths, orientation and information scent.",
+      "capability_id": "public_page_render",
+      "source_family": "BROWSER_RENDERING",
+      "accepted_source_families": [
+        "BROWSER_RENDERING",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "UX-04",
+      "category": "ux_conversion",
+      "metric_weight": 15,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect mobile text hierarchy, spacing, tap targets and content order in sample viewport.",
+      "capability_id": "public_page_render",
+      "source_family": "BROWSER_RENDERING",
+      "accepted_source_families": [
+        "BROWSER_RENDERING",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "UX-05",
+      "category": "ux_conversion",
+      "metric_weight": 15,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect public contact/form path for field burden, clarity and visible friction without submitting.",
+      "capability_id": "public_page_render",
+      "source_family": "BROWSER_RENDERING",
+      "accepted_source_families": [
+        "BROWSER_RENDERING",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "UX-06",
+      "category": "ux_conversion",
+      "metric_weight": 10,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect trust cues located near decision/contact moments.",
+      "capability_id": "content_inspection",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "accepted_source_families": [
+        "RULE_BASED_QUALITATIVE_OBSERVATION",
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "UX-07",
+      "category": "ux_conversion",
+      "metric_weight": 10,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect visual/content hierarchy and scanability on representative templates.",
+      "capability_id": "public_page_render",
+      "source_family": "BROWSER_RENDERING",
+      "accepted_source_families": [
+        "BROWSER_RENDERING",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "UX-08",
+      "category": "ux_conversion",
+      "metric_weight": 5,
+      "category_weight": 20,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect visible validation/error/feedback states only when safely observable without submission.",
+      "capability_id": "public_page_render",
+      "source_family": "BROWSER_RENDERING",
+      "accepted_source_families": [
+        "BROWSER_RENDERING",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "A11Y-01",
+      "category": "accessibility",
+      "metric_weight": 20,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Keyboard-sample navigation and visible focus on representative interactive elements.",
+      "capability_id": "accessibility_manual_sample",
+      "source_family": "MANUAL_OR_NON_AUTOMATABLE",
+      "accepted_source_families": [
+        "MANUAL_OR_NON_AUTOMATABLE",
+        "BROWSER_RENDERING"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+    },
+    {
+      "metric_id": "A11Y-02",
+      "category": "accessibility",
+      "metric_weight": 20,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect landmarks, headings, labels and semantic structure in sampled HTML.",
+      "capability_id": "html_inspection",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "accepted_source_families": [
+        "STRUCTURED_CONTENT_DOM_METADATA",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+    },
+    {
+      "metric_id": "A11Y-03",
+      "category": "accessibility",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect representative informative/decorative image alternatives.",
+      "capability_id": "html_inspection",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "accepted_source_families": [
+        "STRUCTURED_CONTENT_DOM_METADATA",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+    },
+    {
+      "metric_id": "A11Y-04",
+      "category": "accessibility",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_measurement",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Measure or inspect representative text/background contrast with a reproducible method.",
+      "capability_id": "accessibility_manual_sample",
+      "source_family": "MANUAL_OR_NON_AUTOMATABLE",
+      "accepted_source_families": [
+        "MANUAL_OR_NON_AUTOMATABLE",
+        "BROWSER_RENDERING"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+    },
+    {
+      "metric_id": "A11Y-05",
+      "category": "accessibility",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect public form labels/names/instructions without submission.",
+      "capability_id": "html_inspection",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "accepted_source_families": [
+        "STRUCTURED_CONTENT_DOM_METADATA",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "CURRENT_PRIMARY_SOURCE_AT_RUNTIME"
+    },
+    {
+      "metric_id": "A11Y-06",
+      "category": "accessibility",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_measurement",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Run automated accessibility snapshot and retain tool/version/page scope.",
+      "capability_id": "accessibility_automation",
+      "source_family": "BROWSER_RENDERING",
+      "accepted_source_families": [
+        "BROWSER_RENDERING"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E5",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "VENDOR_TOOL_SIGNAL"
+    },
+    {
+      "metric_id": "TRUST-01",
+      "category": "trust_privacy_content",
+      "metric_weight": 10,
+      "category_weight": 15,
+      "score_mode": "presence_only",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Check visible imprint/legal surface presence and accessibility.",
+      "capability_id": "content_inspection",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "accepted_source_families": [
+        "RULE_BASED_QUALITATIVE_OBSERVATION",
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PRESENCE_CHECK_ONLY"
+    },
+    {
+      "metric_id": "TRUST-02",
+      "category": "trust_privacy_content",
+      "metric_weight": 15,
+      "category_weight": 15,
+      "score_mode": "presence_only",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect visible privacy/consent surface and consistency with observed public behavior where possible.",
+      "capability_id": "public_page_render",
+      "source_family": "BROWSER_RENDERING",
+      "accepted_source_families": [
+        "BROWSER_RENDERING",
+        "RULE_BASED_QUALITATIVE_OBSERVATION"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PRESENCE_CHECK_ONLY"
+    },
+    {
+      "metric_id": "TRUST-03",
+      "category": "trust_privacy_content",
+      "metric_weight": 15,
+      "category_weight": 15,
+      "score_mode": "graded_measurement",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Check HTTPS and selected public security headers without active exploitation.",
+      "capability_id": "header_inspection",
+      "source_family": "PUBLIC_DETERMINISTIC_TECHNICAL",
+      "accepted_source_families": [
+        "PUBLIC_DETERMINISTIC_TECHNICAL",
+        "MEASUREMENT_GATEWAY"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PUBLIC_REPRODUCIBLE"
+    },
+    {
+      "metric_id": "TRUST-04",
+      "category": "trust_privacy_content",
+      "metric_weight": 10,
+      "category_weight": 15,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Compare entity, contact, service and location facts across sampled public surfaces.",
+      "capability_id": "content_inspection",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "accepted_source_families": [
+        "RULE_BASED_QUALITATIVE_OBSERVATION",
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "TRUST-05",
+      "category": "trust_privacy_content",
+      "metric_weight": 15,
+      "category_weight": 15,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect visible dates, team/service/project recency and stale references.",
+      "capability_id": "content_inspection",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "accepted_source_families": [
+        "RULE_BASED_QUALITATIVE_OBSERVATION",
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "TRUST-06",
+      "category": "trust_privacy_content",
+      "metric_weight": 15,
+      "category_weight": 15,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect references, testimonials, credentials, cases and proof-to-claim proximity.",
+      "capability_id": "content_inspection",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "accepted_source_families": [
+        "RULE_BASED_QUALITATIVE_OBSERVATION",
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "TRUST-07",
+      "category": "trust_privacy_content",
+      "metric_weight": 10,
+      "category_weight": 15,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect public contact identity, channels and location transparency.",
+      "capability_id": "content_inspection",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "accepted_source_families": [
+        "RULE_BASED_QUALITATIVE_OBSERVATION",
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E4",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "TRUST-08",
+      "category": "trust_privacy_content",
+      "metric_weight": 10,
+      "category_weight": 15,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect user-authorized analytics/search measurement readiness or public tag evidence only within permission.",
+      "capability_id": "private_measurement_export",
+      "source_family": "ANALYTICS_SEARCH_CONSOLE",
+      "accepted_source_families": [
+        "ANALYTICS_SEARCH_CONSOLE",
+        "MANUAL_OR_NON_AUTOMATABLE"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "MEASURED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E5",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "AI-01",
+      "category": "ai_readiness",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Check whether the entity can be explicitly identified from visible content and structured data.",
+      "capability_id": "content_inspection",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "accepted_source_families": [
+        "RULE_BASED_QUALITATIVE_OBSERVATION",
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "AI-02",
+      "category": "ai_readiness",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Check explicit service, audience, location and applicability statements.",
+      "capability_id": "content_inspection",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "accepted_source_families": [
+        "RULE_BASED_QUALITATIVE_OBSERVATION",
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "AI-03",
+      "category": "ai_readiness",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Check direct answer sections, FAQs and question-to-answer structure.",
+      "capability_id": "content_inspection",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "accepted_source_families": [
+        "RULE_BASED_QUALITATIVE_OBSERVATION",
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "AI-04",
+      "category": "ai_readiness",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect summaries, schema and machine-readable organization of key facts.",
+      "capability_id": "structured_data_inspection",
+      "source_family": "STRUCTURED_CONTENT_DOM_METADATA",
+      "accepted_source_families": [
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E5",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "AI-05",
+      "category": "ai_readiness",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect whether material claims are near attributable proof/cases/references.",
+      "capability_id": "content_inspection",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "accepted_source_families": [
+        "RULE_BASED_QUALITATIVE_OBSERVATION",
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "AI-06",
+      "category": "ai_readiness",
+      "metric_weight": 15,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Compare key entity/service/location facts across sampled pages and structured surfaces.",
+      "capability_id": "content_inspection",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "accepted_source_families": [
+        "RULE_BASED_QUALITATIVE_OBSERVATION",
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    },
+    {
+      "metric_id": "AI-07",
+      "category": "ai_readiness",
+      "metric_weight": 10,
+      "category_weight": 10,
+      "score_mode": "graded_observation",
+      "allowed_score_statuses": [
+        "strong",
+        "minor_gaps",
+        "mixed",
+        "weak",
+        "blocking"
+      ],
+      "threshold_source_required": false,
+      "defined_test_method": "Inspect topical depth and coverage of likely user questions across sampled content.",
+      "capability_id": "content_inspection",
+      "source_family": "RULE_BASED_QUALITATIVE_OBSERVATION",
+      "accepted_source_families": [
+        "RULE_BASED_QUALITATIVE_OBSERVATION",
+        "STRUCTURED_CONTENT_DOM_METADATA"
+      ],
+      "required_evidence": {
+        "scoreable_execution_states": [
+          "OBSERVED"
+        ],
+        "minimum_evidence_refs": 1,
+        "missing_evidence_behavior": "NOT_SCORE_ADMITTED"
+      },
+      "maximum_evidence_grade": "E6",
+      "expected_value_type": "object",
+      "target_binding_policy": "SAME_AUDIT_TARGET",
+      "normalization_path": "CORE_EXECUTION_BUNDLE_V1_TO_DIAGNOSIS_METRIC",
+      "score_admission_requirements": [
+        "AUTHORIZED_METRIC_ID",
+        "SAME_AUDIT_TARGET",
+        "SUCCESSFUL_EXECUTION_STATE",
+        "EVIDENCE_REFERENCE_PRESENT",
+        "EVIDENCE_GRADE_ALLOWED",
+        "VALUE_TYPE_MATCH",
+        "METHOD_PRESENT",
+        "LIMITATION_PRESENT",
+        "AUTHORIZED_CONTROL_BASIS",
+        "AUTHORIZED_PRODUCT_STATUS",
+        "AUTHORIZED_SCORE_ANCHOR",
+        "THRESHOLD_SOURCE_WHEN_REQUIRED",
+        "NO_CONFLICTING_EVIDENCE",
+        "NO_RAW_PROVIDER_PAYLOAD"
+      ],
+      "non_execution_reason_codes": [
+        "EVIDENCE_UNAVAILABLE",
+        "EXECUTION_ERROR",
+        "EVIDENCE_CONFLICT",
+        "TARGET_MISMATCH",
+        "NOT_APPLICABLE",
+        "THRESHOLD_SOURCE_MISSING",
+        "EVIDENCE_GRADE_TOO_WEAK",
+        "VALUE_TYPE_INVALID",
+        "RAW_PROVIDER_EVIDENCE_REJECTED"
+      ],
+      "control_basis": "PIXELKIEZ_PRODUCT_RUBRIC"
+    }
+  ]
+}

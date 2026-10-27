@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "policy": "NO_THIRD_PARTY_SOURCE_CODE_REUSE_IN_MEASUREMENT_PLATFORM_PATCH",
+  "repositories": [
+    {
+      "repo_id": "open-web-analytics",
+      "snapshot_file": "Open-Web-Analytics-master.zip",
+      "snapshot_sha256": "571f715574424acdfcf44f45ab062df2ce3474650d3f9e1427e799af54ad187c",
+      "license_observed_in_snapshot": "GNU GPL 2.0 or later (README statement)",
+      "reuse_mode": "REFERENCE_ONLY",
+      "source_code_copied": false,
+      "notes": "First-party analytics concepts only; no OWA application code bundled."
+    },
+    {
+      "repo_id": "statping",
+      "snapshot_file": "statping-dev.zip",
+      "snapshot_sha256": "9a2f50bd8808a6c1302ad5c77e1f420c5955bbd8151ec212c45e63290c8c3195",
+      "license_observed_in_snapshot": "GNU GPL v3 (LICENSE)",
+      "reuse_mode": "REFERENCE_ONLY",
+      "source_code_copied": false,
+      "notes": "Continuous-monitoring concept only; no Statping runtime or code bundled."
+    },
+    {
+      "repo_id": "csp-auditor",
+      "snapshot_file": "csp-auditor-master.zip",
+      "snapshot_sha256": "44ce761a942beb292a00d12fe889b81a453d9d6e66e650f4caa6bcf83a73a4d6",
+      "license_observed_in_snapshot": "MISSING_ROOT_LICENSE_IN_INSPECTED_SNAPSHOT",
+      "reuse_mode": "REIMPLEMENT_CONCEPT",
+      "source_code_copied": false,
+      "notes": "Only generic CSP concepts were independently implemented; unresolved license status blocks code reuse."
+    },
+    {
+      "repo_id": "web-check",
+      "snapshot_file": "web-check-master.zip",
+      "snapshot_sha256": "e16cf04e84d4e9045948bb213b3997e894fb00e94aa16c1c8fb205a9e5d13f88",
+      "license_observed_in_snapshot": "MIT (LICENSE)",
+      "reuse_mode": "REIMPLEMENT_CONCEPT",
+      "source_code_copied": false,
+      "notes": "Selected public-probe concepts independently implemented; no Web-Check source copied."
+    }
+  ]
+}

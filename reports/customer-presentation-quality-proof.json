@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "status": "PASS",
+  "fixture_kind": "SYNTHETIC_REGRESSION_FIXTURE",
+  "external_website_truth_authority": false,
+  "goal": "Prove the draft -> inspect -> repair -> rerender -> digest-bound QA -> quality PASS workflow.",
+  "initial_state": {
+    "quality_status": "PENDING_QA",
+    "passed_hard_gates": 9,
+    "pending_gates": [
+      "cover_integrity",
+      "visual_qa",
+      "semantic_qa"
+    ],
+    "delivery_allowed": false
+  },
+  "observed_repair_loop": {
+    "first_visual_issue": "Cover key message was clipped in the first rendered proof layout.",
+    "repair_applied": "Cover score/message band layout changed and the PDF was rerendered.",
+    "rerender_required": true,
+    "all_pages_reinspected_after_repair": true
+  },
+  "final_state": {
+    "quality_status": "PASS",
+    "hard_gate_count": 13,
+    "passed_hard_gates": 13,
+    "failed_gates": [],
+    "pending_gates": [],
+    "visual_qa": "PASS",
+    "semantic_qa": "PASS",
+    "page_count": 11,
+    "pdf_sha256": "80d41c51e50f862bea37004bc448226f74594fadf442d45a4c8eb840f486d03f",
+    "score_projection": "FULL_SCORE -> Pixelkiez Score",
+    "synthetic_priority_magnitude": "ABSENT",
+    "four_lever_business_impact": "VISIBLE",
+    "closing_action_sentence_integrity": "PASS"
+  },
+  "release_boundary": {
+    "customer_presentation_quality": "PASS",
+    "strict_customer_release_ready": false,
+    "remaining_blocker": "Exact Schibsted Grotesk runtime font is not present in this proof runtime; this blocks strict customer PDF release, not skill packaging.",
+    "does_not_prove": [
+      "external website truth",
+      "legal compliance",
+      "WCAG conformance",
+      "production font availability"
+    ]
+  },
+  "candidate_artifact_digest": "1f4fe8356420f494020fcb23d40b5b221e743cd41d636a5a8dd8fd288643fe0b",
+  "revalidated_at": "2026-09-08T18:43:44.369490+00:00",
+  "proof_reuse_basis": "The current deterministic final PDF SHA-256 exactly matches the previously repaired/reinspected final artifact, and current visual+semantic QA was rerun on all 11 pages."
+}

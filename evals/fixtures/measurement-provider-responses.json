@@ -1,0 +1,32 @@
+{
+  "pagespeed": {
+    "mobile": {"lighthouseResult":{"fetchTime":"2026-08-30T00:00:00Z","categories":{"performance":{"score":0.61}},"audits":{"largest-contentful-paint":{"numericValue":4150},"cumulative-layout-shift":{"numericValue":0.16}}}},
+    "desktop": {"lighthouseResult":{"fetchTime":"2026-08-30T00:01:00Z","categories":{"performance":{"score":0.88}},"audits":{"largest-contentful-paint":{"numericValue":1850},"cumulative-layout-shift":{"numericValue":0.04}}}}
+  },
+  "crux": {
+    "PHONE": {"record":{"collectionPeriod":{"firstDate":{"year":2026,"month":8,"day":2},"lastDate":{"year":2026,"month":8,"day":29}},"metrics":{"largest_contentful_paint":{"percentiles":{"p75":"3200"}},"interaction_to_next_paint":{"percentiles":{"p75":"240"}},"cumulative_layout_shift":{"percentiles":{"p75":"0.12"}}}}},
+    "DESKTOP": {"record":{"collectionPeriod":{"firstDate":{"year":2026,"month":8,"day":2},"lastDate":{"year":2026,"month":8,"day":29}},"metrics":{"largest_contentful_paint":{"percentiles":{"p75":"1900"}},"interaction_to_next_paint":{"percentiles":{"p75":"145"}},"cumulative_layout_shift":{"percentiles":{"p75":"0.05"}}}}}
+  },
+  "search_console": {
+    "queries": {
+      "blitzschutz ludwigsfelde": {"rows":[{"keys":["blitzschutz ludwigsfelde"],"clicks":8,"impressions":294,"ctr":0.02721,"position":16.7}]},
+      "blitzschutz berlin": {"rows":[{"keys":["blitzschutz berlin"],"clicks":23,"impressions":418,"ctr":0.05502,"position":11.2}]}
+    },
+    "inspection": {"inspectionResult":{"indexStatusResult":{"verdict":"PASS","coverageState":"Submitted and indexed","googleCanonical":"https://example.com/","userCanonical":"https://example.com/","lastCrawlTime":"2026-08-29T05:00:00Z","robotsTxtState":"ALLOWED","indexingState":"INDEXING_ALLOWED","pageFetchState":"SUCCESSFUL"}}}
+  },
+  "ga4": {
+    "summary": {"rows":[{"metricValues":[{"value":"1240"},{"value":"1610"}]}],"metadata":{}},
+    "events": {
+      "primary_cta_click": {"rows":[{"metricValues":[{"value":"143"}]}]},
+      "form_start": {"rows":[{"metricValues":[{"value":"41"}]}]},
+      "form_submit": {"rows":[{"metricValues":[{"value":"12"}]}]},
+      "phone_click": {"rows":[{"metricValues":[{"value":"27"}]}]}
+    }
+  },
+  "dataforseo": {
+    "queries": {
+      "blitzschutz ludwigsfelde": {"tasks":[{"result":[{"items":[{"type":"organic","rank_group":18,"rank_absolute":22,"page":2,"url":"https://example.com/blitzschutz/","domain":"example.com"}]}]}]},
+      "blitzschutz berlin": {"tasks":[{"result":[{"items":[{"type":"organic","rank_group":9,"rank_absolute":13,"page":1,"url":"https://example.com/blitzschutz-berlin/","domain":"example.com"}]}]}]}
+    }
+  }
+}

@@ -1,0 +1,212 @@
+#!/usr/bin/env python3
+"""Build all Pixelkiez audit deliverables atomically from one canonical scored report."""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+
+def sha(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def run(args: list[str]) -> None:
+    """Run one deterministic build step with a bounded retry instead of hanging forever."""
+    last_timeout: subprocess.TimeoutExpired | None = None
+    for attempt in (1, 2):
+        try:
+            proc = subprocess.run(args, text=True, capture_output=True, timeout=120)
+        except subprocess.TimeoutExpired as exc:
+            last_timeout = exc
+            print(f"WARN: build step timeout attempt={attempt}/2: {' '.join(args)}", file=sys.stderr)
+            continue
+        if proc.stdout:
+            print(proc.stdout.strip())
+        if proc.returncode:
+            if proc.stderr:
+                print(proc.stderr.strip(), file=sys.stderr)
+            raise RuntimeError("command failed: " + " ".join(args))
+        return
+    raise RuntimeError("build step timed out twice: " + " ".join(args)) from last_timeout
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("scored_report")
+    parser.add_argument("output_dir")
+    parser.add_argument("--force-svg-fallback", action="store_true")
+    parser.add_argument("--require-exact-fonts", action="store_true", help="Legacy alias for --release-mode customer")
+    parser.add_argument("--release-mode", choices=["proof", "customer"], default="proof")
+    parser.add_argument("--priority-context", default=None, help="Optional customer-story industry/goal context, separate from score")
+    parser.add_argument("--priority-catalog", default=None, help="Approved industry-priority catalog")
+    parser.add_argument("--priority-catalog-sha256", default=None, help="Exact SHA-256 of external industry catalog")
+    parser.add_argument("--impressum-compliance", default=None, help="Optional validated internal legal sidecar; if supplied it becomes a strict digest-bound artifact")
+    args = parser.parse_args()
+    src = Path(args.scored_report).resolve()
+    destination = Path(args.output_dir).resolve()
+    root = Path(__file__).resolve().parents[1]
+    py = sys.executable
+    require_exact = bool(args.require_exact_fonts or args.release_mode == "customer")
+    stage_root: Path | None = None
+    try:
+        if not src.is_file():
+            raise ValueError(f"scored report missing: {src}")
+        font_proc = subprocess.run([py, str(root / "scripts/check_brand_fonts.py"), str(root), "--json"], text=True, capture_output=True)
+        if font_proc.returncode != 0:
+            raise ValueError(font_proc.stderr.strip() or "brand font resolution failed")
+        font_state = json.loads(font_proc.stdout)
+        if require_exact and font_state.get("status") != "EXACT":
+            raise ValueError(
+                "BRAND_FONT_EXACT_REQUIRED: install Schibsted Grotesk and IBM Plex Mono in the runtime; "
+                f"current status={font_state.get('status')} resolved={font_state.get('resolved')}"
+            )
+
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        stage_root = Path(tempfile.mkdtemp(prefix=f".{destination.name}.stage-", dir=str(destination.parent)))
+        out = stage_root / destination.name
+        out.mkdir(parents=True, exist_ok=True)
+        canonical = out / "diagnosis-report.json"
+        shutil.copy2(src, canonical)
+        legal_sidecar = None
+        legal_projection = None
+        if args.impressum_compliance:
+            legal_src = Path(args.impressum_compliance).resolve()
+            if not legal_src.is_file():
+                raise ValueError(f"impressum compliance sidecar missing: {legal_src}")
+            legal_sidecar = out / "impressum-compliance.json"
+            shutil.copy2(legal_src, legal_sidecar)
+            run([py, str(root / "scripts/validate_impressum_compliance.py"), str(root), str(legal_sidecar)])
+            legal_projection = out / "legal-customer-projection.json"
+            run([py, str(root / "scripts/legal_customer_projection.py"), str(legal_sidecar), str(legal_projection)])
+            run([py, str(root / "scripts/validate_impressum_projection.py"), str(legal_sidecar), str(canonical)])
+        analysis = out / "analysis_report.json"
+        markdown = out / "analysis_report.md"
+        model = out / "client-report-model.json"
+        plan = out / "visualization-plan.json"
+        visuals = out / "visuals"
+        vreceipt = out / "visualization-render-receipt.json"
+        html = out / "customer_presentation.html"
+        pdf = out / "customer_presentation.pdf"
+        preceipt = out / "presentation-render-receipt.json"
+
+        run([py, str(root / "scripts/validate_report_input.py"), str(canonical)])
+        run([py, str(root / "scripts/validate_measurement_enrichment.py"), str(canonical)])
+        run([py, str(root / "scripts/build_internal_analysis_report.py"), str(canonical), str(analysis)])
+        run([py, str(root / "scripts/render_internal_analysis_markdown.py"), str(analysis), str(markdown)])
+        run([py, str(root / "scripts/validate_internal_analysis_report.py"), str(analysis), str(canonical), str(markdown)])
+        run([py, str(root / "scripts/validate_analysis_report_completeness.py"), str(analysis), str(markdown), str(canonical)])
+        run([py, str(root / "scripts/build_visualization_plan.py"), str(canonical), str(plan)])
+        run([py, str(root / "scripts/validate_visualization_plan.py"), str(plan), str(canonical)])
+        customer_cmd = [py, str(root / "scripts/build_client_report_model.py"), str(canonical), str(model), "--visual-plan", str(plan)]
+        if args.priority_context:
+            customer_cmd.extend(["--priority-context", str(Path(args.priority_context).resolve())])
+            if args.priority_catalog:
+                customer_cmd.extend(["--priority-catalog", str(Path(args.priority_catalog).resolve())])
+                if args.priority_catalog_sha256:
+                    customer_cmd.extend(["--priority-catalog-sha256", args.priority_catalog_sha256])
+            customer_cmd.extend(["--priority-decision-out", str(out / "prioritization-decision.json")])
+        elif args.priority_catalog:
+            raise ValueError("industry catalog without a priority context cannot be applied")
+        run(customer_cmd)
+        run([py, str(root / "scripts/validate_client_report_model.py"), str(model)])
+        if legal_sidecar is not None:
+            run([py, str(root / "scripts/validate_impressum_projection.py"), str(legal_sidecar), str(canonical), str(model)])
+        run([py, str(root / "scripts/validate_client_semantics.py"), str(model)])
+        run([py, str(root / "scripts/validate_customer_business_language.py"), str(model)])
+        command = [py, str(root / "scripts/render_visualizations.py"), str(plan), str(visuals), "--receipt", str(vreceipt)]
+        if args.force_svg_fallback:
+            command.append("--force-fallback")
+        run(command)
+        run([py, str(root / "scripts/validate_visualization_assets.py"), str(plan), str(vreceipt), str(visuals)])
+        command = [
+            py, str(root / "scripts/render_diagnosis_pdf.py"), str(model), str(pdf),
+            "--visual-plan", str(plan), "--visual-receipt", str(vreceipt), "--visual-dir", str(visuals),
+            "--render-receipt", str(preceipt), "--html-out", str(html),
+        ]
+        if require_exact:
+            command.append("--require-exact-fonts")
+        run(command)
+        run([py, str(root / "scripts/validate_pdf_output.py"), str(pdf), str(model)])
+        if legal_sidecar is not None:
+            run([py, str(root / "scripts/validate_impressum_projection.py"), str(legal_sidecar), str(canonical), str(model), str(pdf)])
+        run([py, str(root / "scripts/validate_customer_business_language.py"), str(model), str(pdf)])
+        run([py, str(root / "scripts/validate_customer_output_guardrails.py"), str(model), str(html), str(pdf), str(visuals)])
+        run([py, str(root / "scripts/validate_pdf_brand.py"), str(pdf), str(preceipt), str(root / "assets/brand-tokens.json")])
+        pages = out / "rendered-pages"
+        run([py, str(root / "scripts/render_pdf_pages.py"), str(pdf), str(pages)])
+        visual_qa = out / "customer_presentation.visual-qa.json"
+        semantic_qa = out / "customer_presentation.semantic-qa.json"
+        run([py, str(root / "scripts/create_pdf_visual_qa_manifest.py"), str(pdf), str(pages), str(visual_qa), "--visualization-plan", str(plan)])
+        run([py, str(root / "scripts/create_customer_semantic_qa_manifest.py"), str(pdf), str(model), str(canonical), str(semantic_qa)])
+        quality_report = out / "customer-presentation-quality-report.json"
+        run([py, str(root / "scripts/validate_customer_presentation_quality.py"), str(out), "--allow-pending", "--json-out", str(quality_report)])
+
+        required = [canonical, analysis, markdown, model, plan, vreceipt, html, preceipt, pdf, visual_qa, semantic_qa, quality_report]
+        if legal_sidecar is not None:
+            required.append(legal_sidecar)
+        if legal_projection is not None:
+            required.append(legal_projection)
+        manifest = {
+            "schema_version": "1.0",
+            "status": "BUILT_PENDING_QA",
+            "release_mode": args.release_mode,
+            "source_input_sha256": sha(src),
+            "source_report_sha256": sha(canonical),
+            "required_artifacts": [
+                {"path": str(path.relative_to(out)), "sha256": sha(path), "bytes": path.stat().st_size}
+                for path in required
+            ],
+            "visual_files": [
+                {"path": str(path.relative_to(out)), "sha256": sha(path)} for path in sorted(visuals.glob("*.svg"))
+            ],
+            "font_resolution": {
+                "status": font_state.get("status"),
+                "requested": font_state.get("requested"),
+                "resolved": font_state.get("resolved"),
+                "customer_release_ready": font_state.get("customer_release_ready"),
+            },
+            "qa_status": {"visual": "PENDING_ACTUAL_INSPECTION", "semantic": "PENDING_ACTUAL_INSPECTION"},
+            "quality_gate_status": "PENDING_QA",
+            "customer_release_ready": False,
+            "legal_enabled": legal_sidecar is not None,
+            "impressum_compliance_sha256": sha(legal_sidecar) if legal_sidecar is not None else None,
+            "legal_customer_projection_sha256": sha(legal_projection) if legal_projection is not None else None,
+            "does_not_prove": [
+                "customer approval",
+                "commercial outcome",
+                "exact production font parity when font status is not EXACT",
+                "live provider or telephony behavior",
+            ],
+        }
+        (out / "deliverable-manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        run([
+            py, str(root / "scripts/validate_deliverable_bundle.py"), str(out),
+            "--json-out", str(out / "deliverable-bundle-validation.json"),
+        ])
+
+        if destination.exists():
+            shutil.rmtree(destination)
+        os.replace(out, destination)
+        shutil.rmtree(stage_root, ignore_errors=True)
+        stage_root = None
+        print(
+            f"PASS: deliverable suite built atomically visuals={len(manifest['visual_files'])} "
+            f"status=BUILT_PENDING_QA font={font_state.get('status')}"
+        )
+        return 0
+    except Exception as exc:
+        if stage_root is not None:
+            shutil.rmtree(stage_root, ignore_errors=True)
+        print(f"FAIL: {exc}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

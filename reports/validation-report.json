@@ -1,0 +1,31 @@
+{
+  "validated_at": "2026-09-09T01:34:00+02:00",
+  "runtime": "OpenAI container runtime",
+  "artifact_digest": "959ea94775c147ca3d6c197a4cc62f4e603557b53ec6bf8ca236a67ffabee13b",
+  "status": "PASS",
+  "results": {
+    "quick_validate": "PASS_280_REQUIRED_FILES_14_VEGA_TEMPLATES",
+    "source_map": "PASS",
+    "eval_files": "PASS_22_TRIGGERS_26_OUTPUTS",
+    "schemas": "PASS_48_CORE_11_LEGAL",
+    "security": "PASS",
+    "installability": "PASS",
+    "agent_compatibility": "PASS",
+    "impressum_compliance": "PASS_31",
+    "legal_customer_projection": "PASS_8_CHECKS",
+    "strategic_relevance": "PASS_6",
+    "customer_presentation_quality": "PASS",
+    "truth_discipline": "PASS_8",
+    "business_first_reporting": "PASS",
+    "customer_semantics": "PASS",
+    "score_coverage_gates": "PASS_FULL_PARTIAL_HIDDEN",
+    "active_core": "PASS_48_33_CHECKS_20_MUTATIONS",
+    "reporting_bundle": "PASS",
+    "measurement_platform_baseline": "PASS_36_EXACT_11_OVERRIDES_5_CHAINED_3_REPORTS"
+  },
+  "known_runtime_limits": [
+    "Exact Schibsted Grotesk remains unavailable in the current runtime; strict customer PDF release remains font-gated.",
+    "Live external provider/browser measurements are separate runtime capabilities and are not fabricated."
+  ],
+  "pixelkiez_score_impact": "NONE_DIRECT"
+}

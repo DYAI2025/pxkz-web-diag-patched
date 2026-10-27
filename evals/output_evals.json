@@ -1,0 +1,461 @@
+[
+  {
+    "id": "OUT-001",
+    "prompt": "Audit a public local-business website and create the German Pixelkiez client report.",
+    "expected_properties": [
+      "diagnosis-report.json is the canonical evidence model",
+      "client-report-model.json validates against the fixed template",
+      "one branded Pixelkiez PDF is generated and no PowerPoint is generated",
+      "customer cover shows FULL_SCORE as `Pixelkiez Score`, PARTIAL_SCORE as `Pixelkiez Bewertungsstand`, and hides NO_SCORE; coverage/confidence remain internal",
+      "coverage, confidence, evidence grade, measurement class, QA, runtime and tool/process metadata are absent from customer-visible output",
+      "executive page contains at most three strengths and three priorities in plain business language",
+      "pixelkiez-website-analysis.visual-qa.json is bound to the final PDF digest and passes only after page-by-page visual inspection",
+      "customer-presentation-quality-report.json reaches PASS only after digest-bound visual and semantic QA; PENDING_QA is never final"
+    ],
+    "failure_modes": [
+      "returns a PPTX",
+      "claims full-domain coverage without evidence",
+      "score is presented as universal website quality",
+      "partial-score, coverage, confidence, QA, runtime or test-process metadata leaks into customer-visible output",
+      "technical detail overwhelms the first pages",
+      "strengths are omitted to make the site look worse",
+      "customer PDF is called complete while visual-QA status is PENDING or unvalidated",
+      "synthetic ranking magnitude is visualized as if measured"
+    ]
+  },
+  {
+    "id": "OUT-002",
+    "prompt": "The audit has only 43 percent weighted coverage. Produce the client report.",
+    "expected_properties": [
+      "overall numeric score is hidden",
+      "customer cover does not explain audit coverage or low-coverage reliability; it leads with the strongest strategically relevant supported lever",
+      "43 percent audit coverage remains internal in canonical evidence and internal reports only",
+      "missing capabilities and not_assessed metrics remain internal and never become customer problems or website penalties"
+    ],
+    "failure_modes": [
+      "shows an overall number despite coverage below 50 percent",
+      "shows audit coverage, confidence, not_assessed or missing-capability process information to the customer",
+      "treats unassessed metrics as zero quality",
+      "invented values are used to raise coverage"
+    ]
+  },
+  {
+    "id": "OUT-003",
+    "prompt": "The audit has 67 percent weighted coverage with valid direct evidence. Produce the client report.",
+    "expected_properties": [
+      "internal scoring remains PARTIAL_SCORE for reliability and traceability",
+      "customer cover shows the numeric value as Pixelkiez Bewertungsstand, never Pixelkiez Teilscore, and does not expose 67 percent coverage/confidence",
+      "customer story is built from strategically relevant supported findings only",
+      "does_not_prove and method caveats remain traceable internally but are not rendered as customer boilerplate"
+    ],
+    "failure_modes": [
+      "shows Pixelkiez Teilscore or 67 percent coverage/confidence in customer-visible output",
+      "labels the result as a full Pixelkiez Score",
+      "hides an otherwise valid partial numeric value despite the resolved score policy",
+      "turns missing measurement capability into a customer weakness",
+      "calls the score certified or objective"
+    ]
+  },
+  {
+    "id": "OUT-004",
+    "prompt": "Audit search visibility, internal linking and information architecture on a public service website.",
+    "expected_properties": [
+      "crawlability/indexability is kept separate from public search visibility",
+      "brand query and at least three non-brand intents are attempted when search tooling exists",
+      "internal links, anchor quality, navigation paths, breadcrumbs and orphan risk are sampled",
+      "public SERP samples are labeled as dated snapshots"
+    ],
+    "failure_modes": [
+      "equates indexability with actual search visibility",
+      "claims complete site graph from a small sample",
+      "claims stable ranking share from one search snapshot"
+    ]
+  },
+  {
+    "id": "OUT-005",
+    "prompt": "Audit AI readiness and tell the owner whether the website will appear in AI answers.",
+    "expected_properties": [
+      "scores machine extractability and answerability only",
+      "checks entity, service, location, target group, proof, FAQ and consistency signals",
+      "actual AI visibility or citation is kept separate unless reproducibly measured",
+      "no inclusion guarantee is made"
+    ],
+    "failure_modes": [
+      "guarantees AI citations",
+      "uses a single chatbot answer as stable visibility evidence",
+      "presents AI readiness as an official search metric"
+    ]
+  },
+  {
+    "id": "OUT-006",
+    "prompt": "A prior audit says the site scores 92/100, but the current public evidence is weaker. Reconcile the reports.",
+    "expected_properties": [
+      "prior methodology, evidence and score are extracted",
+      "current direct evidence is preferred over unsupported historical claims",
+      "scores from incompatible methods are not averaged blindly",
+      "differences are explained with confidence and limitations"
+    ],
+    "failure_modes": [
+      "copies the old score",
+      "averages unrelated scoring systems",
+      "ignores contradictory current evidence"
+    ]
+  },
+  {
+    "id": "OUT-007",
+    "prompt": "Run accessibility, privacy/security surface and UX checks on a public website.",
+    "expected_properties": [
+      "accessibility findings state sampled scope and do not certify WCAG conformance",
+      "privacy/security observations remain surface-level and do not become legal or penetration-test conclusions",
+      "UX clarity can be scored as observation but actual conversion uplift remains unverified",
+      "unsupported business outcomes are marked SOURCE_NEEDED"
+    ],
+    "failure_modes": [
+      "declares legal compliance",
+      "claims WCAG AA from automation",
+      "claims conversion increase from heuristic observation",
+      "performs active exploitation"
+    ]
+  },
+  {
+    "id": "OUT-008",
+    "prompt": "Generate the final Pixelkiez report from validated audit data containing long technical notes.",
+    "expected_properties": [
+      "client copy is semantically rewritten into observation impact and action fields",
+      "template text budgets are respected instead of shrinking type",
+      "technical notes, evidence IDs, raw sources and not_assessed metrics remain in canonical JSON/model artifacts and are not rendered into the default customer PDF",
+      "default customer PDF contains two to three V01-V11 charts and at most four prioritized lever findings",
+      "PDF follows Pixelkiez color, spacing, cards, mono labels and pixel-meter devices consistently",
+      "default customer PDF contains at most twelve pages"
+    ],
+    "failure_modes": [
+      "raw JSON or full metric tables are placed on customer pages",
+      "font is reduced to fit walls of text",
+      "technical appendix or raw source ledger is rendered into the default customer PDF",
+      "V12 is used as a substitute for real customer charts",
+      "brand colors or layout drift between pages"
+    ]
+  },
+  {
+    "id": "OUT-009",
+    "prompt": "Complete a website audit without campaign/CRM/compliance context.",
+    "expected_properties": [
+      "existing diagnosis JSON, client model and branded PDF remain produced",
+      "pixelkiez_elevenlabs_batch.csv defaults to exactly 96 v1.3 columns with the exact same case-sensitive header and order as v1.2",
+      "all 96 fields are classified exactly once into the five v1.3 classes",
+      "blank OPTIONAL customer_email and an unverified prospect do not block ElevenLabs upload readiness",
+      "the current 13 observed agent variables remain non-empty through EL_RUNTIME_REQUIRED or EL_RUNTIME_DEFAULTED rules",
+      "validation sidecar separates elevenlabs_upload_status, production_prerequisite_gate, outreach policy, and live-call readiness"
+    ],
+    "failure_modes": [
+      "optional email or unverified human contact blocks upload readiness",
+      "a person, lead source or compliance approval is fabricated",
+      "PRODUCTION_GATE_ONLY fields are treated as provider-upload requirements",
+      "v1.2/v1.1/v1 compatibility is silently broken",
+      "upload readiness is described as legal or live-call authorization"
+    ]
+  },
+  {
+    "id": "OUT-010",
+    "prompt": "Complete the same audit with a schema-valid authoritative batch_context.",
+    "expected_properties": [
+      "same selected-contract builder is used; default new export is v1.3 with 96 fields",
+      "phone_number is E.164 and recipient_number mirrors exactly",
+      "EL_RUNTIME_REQUIRED and EL_RUNTIME_DEFAULTED completeness independently determines ElevenLabs upload readiness",
+      "authoritative PRODUCTION_GATE_ONLY context is checked separately by production_prerequisite_gate",
+      "call_compliance_status mirrors externally authorized compliance_status when supplied and otherwise fails closed",
+      "live_call_production_status remains NOT_ASSESSED"
+    ],
+    "failure_modes": [
+      "separate field list or reordered/case-drifted header",
+      "website language silently becomes personal call language",
+      "production-only absence blocks otherwise valid provider upload readiness",
+      "production-prerequisite PASS is described as legal or live-call authorization",
+      "special overrides are added to the standard CSV"
+    ]
+  },
+  {
+    "id": "OUT-011",
+    "prompt": "Generate voice-relevant audit hooks from the validated website findings.",
+    "expected_properties": [
+      "hook 1 is evidence-bound and bounded for speech",
+      "UNKNOWN is not emitted as spoken fact",
+      "HYPOTHESIS retains explicit uncertainty",
+      "possible_relevance avoids guaranteed-impact wording",
+      "prohibited_claims are preserved",
+      "selector scores are copied only when supplied by approved upstream logic"
+    ],
+    "failure_modes": [
+      "UNKNOWN becomes a spoken claim",
+      "revenue or ranking damage is invented",
+      "a new hook-ranking score is synthesized",
+      "raw scrape or CRM text is copied as policy truth"
+    ]
+  },
+  {
+    "id": "OUT-PDF-TEMPLATE-001",
+    "prompt": "Run a website diagnosis with a decision-relevant time-series metric and render the customer PDF.",
+    "expected_properties": [
+      "selects an approved customer template from data form and strategic relevance rather than visual preference",
+      "V01_OVERALL_SCORE is not selected as a duplicate customer chart page and V12_AUDIT_COVERAGE is internal-only",
+      "V02 category bars are selected only for FULL_SCORE customer output; threshold visuals are used only when sourced",
+      "population, method, evidence boundary and does_not_prove remain traceable in the internal visualization plan/receipt but are not rendered as customer-facing boilerplate",
+      "PDF is rendered to images and visually inspected for clipping, overlap and human readability"
+    ],
+    "failure_modes": [
+      "invented threshold or cohort",
+      "wrong V-template for data shape or customer eligibility",
+      "audit coverage, tool, method, test-run, QA or Beweist nicht boilerplate appears on the customer chart page",
+      "V01 or V12 is selected as a customer chart page",
+      "structural validation passes but chart is visually unreadable"
+    ]
+  },
+  {
+    "id": "OUT-PDF-QA-002",
+    "prompt": "A Hermes or cloud agent can build the validated audit JSON and PDF but has no image/vision inspection capability. Complete the website diagnosis.",
+    "expected_properties": [
+      "the agent may render or hand off validated JSON/client model but does not self-certify visual readability",
+      "visual-QA manifest remains PENDING until a vision-capable agent or human actually inspects every page",
+      "the final PDF is not declared complete without a PASS visual-QA report bound to its digest",
+      "handoff preserves the same V01-V12 chart/data contract across runtimes"
+    ],
+    "failure_modes": [
+      "sets visual-QA PASS without seeing rendered pages",
+      "claims agent-agnostic compatibility means identical runtime capabilities",
+      "drops evidence/threshold/does-not-prove requirements because the renderer differs"
+    ]
+  },
+  {
+    "id": "OUT-PDF-MARKETING-003",
+    "prompt": "The audit has 40 percent coverage, no overall score, three scoreable categories, many not_assessed metrics, and several high/medium customer findings. Produce the final customer PDF.",
+    "expected_properties": [
+      "overall numeric score remains hidden and Score nicht belastbar is visible",
+      "two to three V01-V11 charts are generated automatically from truthful direct or already-scored evidence",
+      "V12 does not count and is absent from the default customer PDF",
+      "at most four improvement levers are shown",
+      "technical metric tables, raw source-ledger pages and not_assessed rows are absent from the customer PDF",
+      "full metric/source trace remains in canonical JSON/model artifacts",
+      "customer PDF is at most twelve pages"
+    ],
+    "failure_modes": [
+      "empty visualizations array passes because overall score is hidden",
+      "customer PDF contains the full 48-metric appendix",
+      "derived score gap is described as revenue, ranking or conversion uplift",
+      "missing values or thresholds are invented to satisfy the chart minimum"
+    ]
+  },
+  {
+    "id": "OUT-PDF-LANGUAGE-004",
+    "prompt": "The canonical findings contain First-Party, Non-Brand, Kernintent, Proof Points, Conversion, Raw DOM and JSON-LD terminology. Build the German customer report.",
+    "expected_properties": [
+      "customer-facing copy is rewritten into normal German",
+      "technical source terms may remain only in canonical internal evidence artifacts",
+      "finding cards contain no raw evidence IDs",
+      "client-language validator fails if protected jargon remains visible"
+    ],
+    "failure_modes": [
+      "customer PDF shows unexplained First-Party or Non-Brand terminology",
+      "technical jargon is preserved merely because it exists in the canonical audit",
+      "semantic rewriting changes the underlying evidence or invents stronger claims"
+    ]
+  },
+  {
+    "id": "OUT-016",
+    "prompt": "ElevenLabs rejects the batch because company_name, company_website, prospect_name, prospect_salutation, call_compliance_status, call_compliance_note, lead_source, consultant_name, meeting_description, offer_process, website_analysis_report, agency_name and verified_finding are missing.",
+    "expected_properties": [
+      "default export is v1.3 with the exact same 96 case-sensitive headers and order as v1.2",
+      "all 96 fields are classified exactly once into INTERNAL_RECORD, EL_RUNTIME_REQUIRED, EL_RUNTIME_DEFAULTED, OPTIONAL or PRODUCTION_GATE_ONLY",
+      "all 13 observed current-agent variables remain non-empty because they are runtime-required or compiler-defaulted",
+      "prospect_name may use non-spoken NICHT_VERIFIZIERT; call_compliance_status fails closed to LEGAL_REVIEW_REQUIRED; no legal/person fact is invented",
+      "customer_email is OPTIONAL and blank email never blocks ElevenLabs upload readiness",
+      "elevenlabs_upload_status is independent from production_prerequisite_gate and live_call_production_status remains NOT_ASSESSED"
+    ],
+    "failure_modes": [
+      "one of the 96 fields is unclassified or multiply classified",
+      "optional email or unknown human name becomes a source-required field",
+      "missing PRODUCTION_GATE_ONLY data marks the CSV structurally invalid for upload",
+      "safe defaults self-authorize compliance or invent a person/lead source",
+      "v1.2 96-field wire header is renamed or reordered"
+    ]
+  },
+  {
+    "id": "OUT-BATCH-V13-017",
+    "prompt": "Build the v1.3 96-field batch with only a valid phone number plus a completed website audit. Email, verified prospect name and all production-only Campaign/Compliance fields are missing.",
+    "expected_properties": [
+      "CSV still contains all 96 v1.3 columns",
+      "phone_number, company_name and company_website satisfy EL_RUNTIME_REQUIRED",
+      "prospect_name, prospect_salutation, compliance alias/note, lead_source, consultant/meeting/process/report/agency/finding and conversation-state fields are populated through EL_RUNTIME_DEFAULTED rules",
+      "customer_email remains blank because it is OPTIONAL",
+      "elevenlabs_upload_status is EL_UPLOAD_READY",
+      "production_prerequisite_gate is BLOCKED with the 13 missing PRODUCTION_GATE_ONLY fields listed",
+      "live_call_production_status remains NOT_ASSESSED"
+    ],
+    "failure_modes": [
+      "missing customer_email blocks upload readiness",
+      "unknown prospect name blocks upload readiness rather than using the non-spoken sentinel",
+      "production-only fields are fabricated to force PASS",
+      "production prerequisite status is confused with provider upload readiness or live call authorization"
+    ]
+  },
+  {
+    "id": "OUT-VISUAL-ARCH-018",
+    "prompt": "Run a complete scored Website Diagnosis and build the final reporting bundle.",
+    "expected_properties": [
+      "analysis_report.json contains every canonical metric exactly once with value/status, evidence, method, interpretation, recommendation/action state and does_not_prove",
+      "analysis_report.md is generated from the internal JSON and contains exactly one stable section anchor per metric",
+      "customer_presentation.pdf is rendered through WeasyPrint HTML/CSS and embeds four to seven approved SVG visuals",
+      "visualization-plan.json selects exactly four supported customer levers and only catalog template IDs",
+      "receipts bind report, plan, SVG, HTML, CSS, fonts and PDF by digest"
+    ],
+    "failure_modes": [
+      "PDF is present but JSON or Markdown is missing",
+      "metric omitted or duplicated in internal reports",
+      "ReportLab silently becomes the default renderer",
+      "selected visual missing from the PDF",
+      "free-form model-generated chart template bypasses the catalog"
+    ]
+  },
+  {
+    "id": "OUT-VISUAL-INTEGRITY-019",
+    "prompt": "The audit has no measured competitor benchmark and no query/location/device/timestamp-bound ranking data. Build the presentation.",
+    "expected_properties": [
+      "V04 benchmark and V05 ranking templates are excluded with explicit missing-context reasons",
+      "no remembered industry average, fabricated competitor, ranking position or Google page number appears",
+      "other supported visuals still render so the PDF is not chartless"
+    ],
+    "failure_modes": [
+      "synthetic benchmark displayed as fact",
+      "one global Google ranking is invented",
+      "missing benchmark causes all visual rendering to disappear"
+    ]
+  },
+  {
+    "id": "OUT-BRAND-FONT-020",
+    "prompt": "Render a proof report on a runtime without Schibsted Grotesk, then attempt a customer-release render.",
+    "expected_properties": [
+      "proof render uses a named approved fallback and records degraded/partial font status",
+      "customer-release mode fails closed with BRAND_FONT_EXACT_REQUIRED",
+      "no font binary is bundled or returned in skill.zip",
+      "font fallback is never described as exact Pixelkiez parity"
+    ],
+    "failure_modes": [
+      "silent DejaVu fallback claimed as brand exact",
+      "customer release passes without exact requested families",
+      "font files are included in the delivered skill package"
+    ]
+  },
+  {
+    "id": "OUT-VISUAL-GALLERY-021",
+    "prompt": "Validate the complete approved Pixelkiez visualization template library.",
+    "expected_properties": [
+      "all 14 Vega-Lite templates validate against the bundled upstream schema",
+      "D01 Mermaid source renders through Mermaid when available or the deterministic safe fallback otherwise",
+      "all 15 outputs are safe SVGs with no scripts, foreignObject, event handlers or remote references",
+      "the receipt states the actual renderer backend without source laundering"
+    ],
+    "failure_modes": [
+      "template fails schema validation",
+      "SVG contains executable or external content",
+      "fallback output is labeled as executed Vega or Mermaid CLI"
+    ]
+  },
+  {
+    "id": "OUT-BUSINESS-FIRST-001",
+    "prompt": "Erzeuge die vollständige Pixelkiez Websiteanalyse und die Kunden-PDF aus einem Audit mit gemessenen Zahlen, offenen Metriken und vier priorisierbaren Findings.",
+    "expected_properties": [
+      "analysis_report.json und analysis_report.md enthalten jede kanonische Metrik",
+      "Kundenmodell und PDF enthalten keine Coverage-, Evidence-Grade-, Measurement-Class-, Validator-, QA- oder Tool-Sprache",
+      "genau vier Business-Hebel",
+      "numerische Hauptbefunde erhalten eine explizite Visual-Entscheidung",
+      "V12_AUDIT_COVERAGE ist nicht customer-selected"
+    ],
+    "failure_modes": [
+      "Messabdeckung oder Confidence erscheint im Kunden-PDF",
+      "eine Metrik fehlt im Markdown",
+      "Benchmark oder Ranking wird ohne dokumentierte Vergleichsdaten erfunden",
+      "mehr als vier Business-Hebel"
+    ]
+  },
+  {
+    "id": "OUT-MEASUREMENT-ENRICHMENT-022",
+    "prompt": "Erweitere eine vollständige Pixelkiez Website Diagnosis um echte Google-/Performance-/Nutzungsdaten und erzeuge die Kundenpräsentation.",
+    "expected_properties": [
+      "die 48 kanonischen Core-IDs und Registry-Gewichte bleiben unverändert; Enrichment-Records sind selbst nicht-scorend und dürfen nur über den separaten Core-Execution-/Admission-Pfad zu einer kanonischen Core-Zeile beitragen",
+      "Live-SERP-Position und Search-Console-Durchschnittsposition bleiben intern getrennte Messwerte mit Query-/Zeit-/Geräte-/Ortskontext",
+      "eine Suchergebnisseite wird nur als Kundenbefund genutzt, wenn die nötige Query-/Zeit-/Orts-/Geräte-Evidenz vorliegt; Provider-Jargon wird nicht in den Kundenoutput übernommen",
+      "Performance-Quellen und Feld-/Laborklassen bleiben intern korrekt getrennt; der Kundenoutput formuliert nur den strategisch relevanten Websitebefund in Geschäftssprache",
+      "Nutzungsereignisse wie phone_click/form_submit werden nicht zu Telefonat/qualifiziertem Lead/Kunde hochgerechnet",
+      "Privacy/Accessibility zeigen Handlungsbedarf nur bei belegtem Befund; nicht bewertete Zustände bleiben intern neutral",
+      "die letzte PDF-Seite ist eine positive Umsetzungs-/CTA-Seite und keine Liste von Analysegrenzen",
+      "fehlende Credentials, Sparse Data oder Browser-Runtime erzeugen intern einen expliziten UNAVAILABLE/BLOCKED-Status statt erfundener Werte und werden nicht als Kundenproblem dargestellt"
+    ],
+    "failure_modes": [
+      "ein globaler Google-Rang ohne Query-Kontext wird erfunden",
+      "Search Console average position wird als Live-Rank ausgegeben",
+      "Provider-, Tool-, Runtime-, Test- oder Coverage-Sprache sickert in die Kundenpräsentation",
+      "fehlende Daten werden rot oder mit Nullwert gewertet",
+      "automatisierter Accessibility-Scan wird als vollständige WCAG-Konformität behauptet",
+      "technischer Consent-Befund wird ohne separate Rechtsprüfung als Rechtsverstoß bezeichnet",
+      "Credentials oder Tokens werden in Artefakte geschrieben",
+      "die Schlussseite endet erneut mit Was wir nicht können"
+    ]
+  },
+  {
+    "id": "OUT-MEASUREMENT-GATEWAY-024",
+    "prompt": "Run the optional Measurement Gateway with no live runtime available and complete the Website Diagnosis.",
+    "expected_properties": [
+      "gateway state is unavailable/not configured rather than numeric zero",
+      "Gateway-Enrichment bleibt als Provider-/Enrichment-Layer nicht-scorend; ohne expliziten Core-Execution-/Admission-Record bleiben 48 Core-Metriken und Score unverändert",
+      "existing PageSpeed/CrUX/GSC/GA4/SERP/browser enrichment remains available independently",
+      "customer PDF/renderer/visual catalog/closing behavior remains unchanged",
+      "no raw gateway payload, provider jargon, secrets or third-party application code enters the customer artifact"
+    ],
+    "failure_modes": [
+      "missing gateway becomes a negative score",
+      "gateway replaces or renames a core metric",
+      "CSV v1.3 header or customer closing changes as a side effect",
+      "unsafe private target is fetched",
+      "fixture evidence is presented as live measurement"
+    ]
+  },
+  {
+    "id": "OUT-ACTIVE-CORE-025",
+    "prompt": "Run the Active Core Measurement path for a complete 48-metric fixture and prove score/report integrity without changing canonical weights.",
+    "expected_properties": [
+      "exactly 48 authorized registry metric IDs are bound and executed once each",
+      "false booleans and numeric zero remain valid measured evidence while UNAVAILABLE/ERROR/CONFLICT are never score-admitted",
+      "numeric scores are materialized only from the existing registry anchors after evidence admission",
+      "metric and category weights are byte/semantically unchanged and independent recomputation equals compute_score.py",
+      "analysis_report traces metric weight, weighted contribution, category aggregation and overall result for all 48 metrics",
+      "raw provider payloads and unknown source families are rejected",
+      "fixture proof remains explicitly non-live and customer output contains no internal execution/weight/debug leakage"
+    ],
+    "failure_modes": [
+      "49th or missing core metric is accepted",
+      "missing evidence becomes zero/weak/blocking",
+      "a provider row bypasses normalization/admission into score",
+      "weight or product anchor changes to preserve an expected score",
+      "input ordering changes semantic digest or final score",
+      "internal admission/debug fields leak into the customer presentation",
+      "synthetic evidence is represented as live website measurement"
+    ]
+  },
+  {
+    "id": "OUT-IMP-001",
+    "prompt": "Run a full Pixelkiez website diagnosis with Impressum/provider-identification assessment for a German commercial website.",
+    "expected_properties": [
+      "LEGAL-IMP-01..11 remain outside the 48-metric registry",
+      "applicability precedes defect classification",
+      "uncertain or stale legal rules receive zero ILES",
+      "customer output avoids legal certification and penalty prediction",
+      "LEGAL findings are excluded from automatic voice hooks"
+    ],
+    "failure_modes": [
+      "legal sidecar mutates core score or coverage",
+      "weak .de/language signal confirms establishment",
+      "ILES leaks to customer charts",
+      "missing phone is treated as universal DDG violation",
+      "legal finding becomes automatic cold-call hook"
+    ]
+  }
+]

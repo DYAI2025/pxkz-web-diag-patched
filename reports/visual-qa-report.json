@@ -1,0 +1,37 @@
+{
+  "validated_at": "2026-08-27T23:05:46Z",
+  "artifact_digest": "3802c4e129661ee1e68eadd2d867b202a8305bab713149905614caa213febc78",
+  "sample_pdf": "/mnt/data/pxk-marketing-regression/pixelkiez-customer-regression.pdf",
+  "sample_type": "synthetic low-coverage customer-marketing regression",
+  "pages": 11,
+  "chart_pages": 2,
+  "bytes": 87594,
+  "sha256": "00cd9ce858bb31ccb73fb18816d795aedf3ab2c877a59f89f336ffcf02d3e61e",
+  "rendered_directory": "/mnt/data/pxk-marketing-renders",
+  "contact_sheet": "/mnt/data/pxk-marketing-regression/final-contact-sheet.png",
+  "inspection_method": "agent_vision",
+  "inspection": "All 11 rendered pages were reviewed on the final contact sheet after deterministic PDF validation. The review checked the marketing-only flow, two chart pages, four finding cards, roadmap, recommendation and one concise limits page.",
+  "checks": {
+    "landscape_page_geometry": "PASS",
+    "brand_consistency": "PASS",
+    "no_clipping": "PASS",
+    "no_overlap": "PASS",
+    "no_broken_glyphs": "PASS",
+    "plain_language_customer_flow": "PASS",
+    "customer_density": "PASS",
+    "two_customer_charts_present": "PASS",
+    "v12_absent_from_customer_pdf": "PASS",
+    "chart_labels_legible": "PASS",
+    "population_and_evidence_visible": "PASS",
+    "threshold_or_none_official_visible": "PASS",
+    "does_not_prove_visible": "PASS",
+    "technical_metric_appendix_absent": "PASS",
+    "raw_source_ledger_absent": "PASS",
+    "hard_page_limit_12": "PASS"
+  },
+  "limitations": [
+    "This visual QA proves the synthetic regression artifact, not every future live audit output.",
+    "Each real customer PDF still requires its own digest-bound page-by-page visual inspection under the runtime PDF QA contract."
+  ],
+  "status": "PASS"
+}

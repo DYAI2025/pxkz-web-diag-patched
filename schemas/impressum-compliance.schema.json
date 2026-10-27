@@ -1,0 +1,21 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://pixelkiez.example/schemas/impressum-compliance.schema.json",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schema_version","jurisdiction","business_context","applicable_regimes","results","iles","overrides","enforcement_exposure","source_needed","limitations","pixelkiez_score_impact"],
+  "properties":{
+    "schema_version":{"const":"1.0"},
+    "jurisdiction":{"type":"object","required":["status","country"],"properties":{"status":{"enum":["CONFIRMED","LIKELY","UNRESOLVED","CONFLICT"]},"country":{"type":["string","null"]}}},
+    "business_context":{"type":"object"},
+    "applicable_regimes":{"type":"array","items":{"type":"string"}},
+    "results":{"type":"array","items":{"$ref":"#/$defs/result"}},
+    "iles":{"type":"object","required":["points","band","dimensions"],"properties":{"points":{"type":"integer","minimum":0,"maximum":100},"band":{"enum":["LOW","MEDIUM","HIGH","CRITICAL"]},"dimensions":{"type":"object"}}},
+    "overrides":{"type":"object","required":["iles_critical_override","audit_priority_critical"],"properties":{"iles_critical_override":{"type":"boolean"},"audit_priority_critical":{"type":"boolean"}}},
+    "enforcement_exposure":{"type":"object"},
+    "source_needed":{"type":"array","items":{"type":"string"}},
+    "limitations":{"type":"array","items":{"type":"string"}},
+    "pixelkiez_score_impact":{"const":"NONE_DIRECT"}
+  },
+  "$defs":{"result":{"type":"object","additionalProperties":true,"required":["metric_id","applicability_status","result_state","iles_points"],"properties":{"metric_id":{"pattern":"^LEGAL-IMP-(0[1-9]|1[01])$"},"applicability_status":{"enum":["APPLICABLE","LIKELY_APPLICABLE","CONDITIONAL","NOT_APPLICABLE","UNKNOWN"]},"result_state":{"enum":["ASSESSED_NO_DEFECT","ASSESSED_DEFECT","POSSIBLE_LEGAL_REVIEW","NOT_APPLICABLE","NOT_ASSESSED","CONFLICT"]},"defect_type":{"type":["string","null"],"enum":["ABSENT","INCOMPLETE","INCORRECT","CONTRADICTORY","UNVERIFIABLE","INACCESSIBLE","NOT_CONTINUOUSLY_AVAILABLE","UNTIMELY",null]},"iles_points":{"type":"integer","minimum":0,"maximum":100},"severity":{"enum":["low","medium","high","critical","review"]}}}}
+}

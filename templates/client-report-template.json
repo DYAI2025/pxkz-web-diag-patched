@@ -1,0 +1,201 @@
+{
+  "template_version": "8.0",
+  "brand": "Pixelkiez",
+  "output": "pdf",
+  "geometry": "A4 landscape",
+  "strict_section_order": true,
+  "customer_page_budget": {
+    "target": "9-11",
+    "hard_max": 12
+  },
+  "page_flow": [
+    {
+      "id": "cover",
+      "purpose": "instant customer orientation",
+      "required_slots": [
+        "score_or_score_state",
+        "verdict"
+      ]
+    },
+    {
+      "id": "executive",
+      "purpose": "non-technical decision summary",
+      "required_slots": [
+        "takeaway",
+        "strengths_max_3",
+        "priorities_max_3"
+      ]
+    },
+    {
+      "id": "visualizations",
+      "purpose": "four to seven strongest evidence-bound data visuals from the approved visualization catalog",
+      "repeatable": true,
+      "min_pages": 4,
+      "max_pages": 7,
+      "required_slots": [
+        "approved_template_id",
+        "population",
+        "method",
+        "does_not_prove",
+        "render_receipt"
+      ]
+    },
+    {
+      "id": "findings",
+      "purpose": "exactly four prioritized customer levers with one concise next step each",
+      "max_total_findings": 4,
+      "max_pages": 1
+    },
+    {
+      "id": "roadmap",
+      "purpose": "sequence the few recommended actions",
+      "required_slots": [
+        "now",
+        "next_30_days",
+        "next_quarter"
+      ]
+    },
+    {
+      "id": "closing",
+      "purpose": "end with action, implementation confidence and a simple next step",
+      "required_slots": [
+        "four_actions_max",
+        "cta",
+        "next_step"
+      ],
+      "prohibited_slots": [
+        "limitations_list",
+        "open_evidence_list",
+        "technical_scope_dump"
+      ]
+    }
+  ],
+  "text_budgets": {
+    "cover_verdict": 140,
+    "executive_takeaway": 135,
+    "executive_strength": 110,
+    "executive_priority": 110,
+    "category_summary": 110,
+    "finding_headline": 110,
+    "finding_observation": 130,
+    "finding_impact": 135,
+    "finding_action": 125,
+    "roadmap_action": 125,
+    "recommendation_reason": 135,
+    "recommendation_next_step": 125
+  },
+  "semantic_rule": "Problems are explained briefly in natural language. Direct numbers are rendered through approved chart templates. The customer PDF carries exactly four levers and four to seven data visuals; the complete metric/evidence/action trace is mandatory in analysis_report.json and analysis_report.md.",
+  "brand_devices": [
+    "sage_orange_sage_ink_band_rhythm",
+    "white_sage_orange_ink_card_rotation",
+    "six_by_three_pixel_meter",
+    "mono_uppercase_eyebrow_with_hairline",
+    "text_wordmark"
+  ],
+  "prohibited": [
+    "PowerPoint generation",
+    "free-form section insertion",
+    "font shrinking to fit excess prose",
+    "raw JSON on client pages",
+    "emoji",
+    "universal score claims",
+    "unsourced thresholds",
+    "customer chart that lacks internal population/evidence trace in visualization-plan.json or receipt",
+    "customer chart that renders internal does_not_prove or Beweist nicht boilerplate",
+    "technical metric appendix in default customer PDF",
+    "raw source ledger in default customer PDF",
+    "more than 12 customer PDF pages",
+    "chartless customer PDF",
+    "truncated chart labels or ellipsis",
+    "serif fallback in customer presentation",
+    "benchmark or ranking chart without query/location/time/device/method context",
+    "customer PDF without analysis_report.json and analysis_report.md",
+    "unapproved free-form Vega-Lite or Mermaid template",
+    "coverage or measurement coverage in customer PDF",
+    "confidence/evidence grade/measurement class in customer PDF",
+    "internal QA/validator/tool terminology in customer PDF",
+    "negative limitations page as final customer page",
+    "open-evidence list as final customer page"
+  ],
+  "chart_template": {
+    "source_asset": "assets/PXK_web_audit_template.pdf",
+    "legacy_contract": "templates/chart-library.v1.json",
+    "approved_catalog": "templates/visualization-catalog.v2.json",
+    "selection": "data_shape_plus_evidence_eligibility",
+    "visual_qa_required": true,
+    "semantic_qa_required": true
+  },
+  "visual_story_gate": {
+    "completed_customer_pdf_min_real_charts": 4,
+    "completed_customer_pdf_max_real_charts": 7,
+    "approved_template_catalog": "templates/visualization-catalog.v2.json",
+    "vega_lite_schema": "assets/vega-lite-schema-v6.4.3.json",
+    "direct_measured_or_observed_data_first": true,
+    "no_benchmark_without_context": true,
+    "no_chartless_customer_pdf": true,
+    "business_uplift_without_evidence": "prohibited",
+    "plain_language_reference": "references/client-storytelling-contract.md"
+  },
+  "visual_architecture": {
+    "version": "1.0",
+    "external_plan": "visualization-plan.json",
+    "min_generated_visuals": 4,
+    "max_embedded_visuals": 7,
+    "primary_spec_grammar": "VEGA_LITE",
+    "primary_document_renderer": "WEASYPRINT",
+    "optional_structure_renderer": "MERMAID_CLI",
+    "deterministic_no_runtime_fallback": "PIXELKIEZ_SVG_FALLBACK",
+    "legacy_reportlab_customer_default": false,
+    "render_receipt_required": true,
+    "references": [
+      "references/visualization-and-reporting-architecture-v1.md",
+      "references/visualization-template-catalog-v2.md",
+      "references/brand-rendering-contract-v2.md"
+    ]
+  },
+  "semantic_story_gate": {
+    "policy_version": "1.0",
+    "presentation_modes": [
+      "NUMBER_FIRST",
+      "EVIDENCE_VISUAL",
+      "SHORT_TEXT"
+    ],
+    "direct_numeric_evidence_first": true,
+    "generic_agency_copy": "prohibited",
+    "final_semantic_qa_required": true,
+    "semantic_qa_reference": "references/semantic-customer-story-policy.md"
+  },
+  "internal_analysis_report": {
+    "json": "analysis_report.json",
+    "markdown": "analysis_report.md",
+    "every_canonical_metric_exactly_once": true,
+    "per_metric_required": [
+      "value",
+      "measurement_class",
+      "evidence_grade",
+      "interpretation",
+      "recommendation",
+      "does_not_prove"
+    ],
+    "reference": "references/internal-analysis-report-contract.md"
+  },
+  "brand_rendering_gate": {
+    "geometry": "A4 landscape",
+    "body_min_pt": 12,
+    "note_min_pt": 8.5,
+    "chart_label_min_pt": 10,
+    "approved_palette": [
+      "#EC5E43",
+      "#0E1414",
+      "#B6C7C4",
+      "#C6D4D1",
+      "#566360",
+      "#FFFFFF"
+    ],
+    "requested_sans": "Schibsted Grotesk",
+    "requested_mono": "IBM Plex Mono",
+    "exact_font_mode": "fail_closed_when_requested",
+    "fallback_mode": "BRAND_FONT_DEGRADED_with_explicit_receipt",
+    "serif_fonts": "prohibited"
+  }
+}

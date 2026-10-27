@@ -1,0 +1,266 @@
+{
+  "schema_version": "1.0",
+  "status": "PASS",
+  "case_count": 31,
+  "pass_count": 31,
+  "integration_checks": [
+    {
+      "id": "determinism",
+      "status": "PASS"
+    },
+    {
+      "id": "voice_isolation",
+      "status": "PASS"
+    },
+    {
+      "id": "projection_firewall_core_score_delta_zero",
+      "status": "PASS",
+      "score": 65,
+      "coverage_percent": 92,
+      "blocker_present": true
+    },
+    {
+      "id": "customer_legal_guardrails",
+      "status": "PASS"
+    }
+  ],
+  "failures": [],
+  "results": [
+    {
+      "id": "LEG-P01",
+      "status": "PASS",
+      "iles": 20,
+      "metrics": [
+        "LEGAL-IMP-02"
+      ]
+    },
+    {
+      "id": "LEG-P02",
+      "status": "PASS",
+      "iles": 20,
+      "metrics": [
+        "LEGAL-IMP-03"
+      ]
+    },
+    {
+      "id": "LEG-P03",
+      "status": "PASS",
+      "iles": 15,
+      "metrics": [
+        "LEGAL-IMP-04"
+      ]
+    },
+    {
+      "id": "LEG-P04",
+      "status": "PASS",
+      "iles": 10,
+      "metrics": [
+        "LEGAL-IMP-05"
+      ]
+    },
+    {
+      "id": "LEG-P05",
+      "status": "PASS",
+      "iles": 10,
+      "metrics": [
+        "LEGAL-IMP-06"
+      ]
+    },
+    {
+      "id": "LEG-P06",
+      "status": "PASS",
+      "iles": 10,
+      "metrics": [
+        "LEGAL-IMP-07"
+      ]
+    },
+    {
+      "id": "LEG-P07",
+      "status": "PASS",
+      "iles": 5,
+      "metrics": [
+        "LEGAL-IMP-08"
+      ]
+    },
+    {
+      "id": "LEG-P08",
+      "status": "PASS",
+      "iles": 10,
+      "metrics": [
+        "LEGAL-IMP-09"
+      ]
+    },
+    {
+      "id": "LEG-P09",
+      "status": "PASS",
+      "iles": 10,
+      "metrics": [
+        "LEGAL-IMP-06",
+        "LEGAL-IMP-10"
+      ]
+    },
+    {
+      "id": "LEG-P10",
+      "status": "PASS",
+      "iles": 15,
+      "metrics": [
+        "LEGAL-IMP-04",
+        "LEGAL-IMP-11"
+      ]
+    },
+    {
+      "id": "LEG-P11",
+      "status": "PASS",
+      "iles": 20,
+      "metrics": [
+        "LEGAL-IMP-02",
+        "LEGAL-IMP-11"
+      ]
+    },
+    {
+      "id": "LEG-P12",
+      "status": "PASS",
+      "iles": 65,
+      "metrics": [
+        "LEGAL-IMP-01",
+        "LEGAL-IMP-02",
+        "LEGAL-IMP-03",
+        "LEGAL-IMP-04",
+        "LEGAL-IMP-09"
+      ]
+    },
+    {
+      "id": "LEG-N01",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": []
+    },
+    {
+      "id": "LEG-N02",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": [
+        "LEGAL-IMP-02"
+      ]
+    },
+    {
+      "id": "LEG-N03",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": [
+        "LEGAL-IMP-02"
+      ]
+    },
+    {
+      "id": "LEG-N04",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": []
+    },
+    {
+      "id": "LEG-N05",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": []
+    },
+    {
+      "id": "LEG-N06",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": []
+    },
+    {
+      "id": "LEG-N07",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": [
+        "LEGAL-IMP-08"
+      ]
+    },
+    {
+      "id": "LEG-N08",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": [
+        "LEGAL-IMP-07"
+      ]
+    },
+    {
+      "id": "LEG-N09",
+      "status": "PASS",
+      "iles": 20,
+      "metrics": [
+        "LEGAL-IMP-02"
+      ]
+    },
+    {
+      "id": "LEG-N10",
+      "status": "PASS",
+      "iles": 20,
+      "metrics": [
+        "LEGAL-IMP-02"
+      ]
+    },
+    {
+      "id": "LEG-N11",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": [
+        "LEGAL-IMP-02"
+      ]
+    },
+    {
+      "id": "LEG-N12",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": [
+        "LEGAL-IMP-02"
+      ]
+    },
+    {
+      "id": "LEG-C01",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": []
+    },
+    {
+      "id": "LEG-C02",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": []
+    },
+    {
+      "id": "LEG-C03",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": []
+    },
+    {
+      "id": "LEG-C04",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": []
+    },
+    {
+      "id": "LEG-C05",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": []
+    },
+    {
+      "id": "LEG-C06",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": []
+    },
+    {
+      "id": "LEG-GOLD-BFL",
+      "status": "PASS",
+      "iles": 0,
+      "metrics": [
+        "LEGAL-IMP-02",
+        "LEGAL-IMP-03"
+      ]
+    }
+  ]
+}

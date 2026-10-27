@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Pixelkiez">
+<meta name="description" content="Kundenpräsentation zur Pixelkiez Website-Analyse">
+<title>Pixelkiez Website-Analyse – {{ model.meta.customer }}</title>
+<style>{{ css|safe }}</style>
+</head>
+<body>
+<section class="page orange">
+  <div class="header"><div class="brand">Pixelkiez.<small>WEB DESIGN BERLIN</small></div><div class="eyebrow">Website-Analyse</div></div>
+  <div class="cover-main">
+    <div class="eyebrow">01 · ENTSCHEIDUNGSGRUNDLAGE</div>
+    <h1 class="cover-title">{{ model.cover.title }}</h1>
+    <div class="cover-customer">{{ model.meta.customer }}</div>
+    <div class="cover-url">{{ model.meta.url }}</div>
+  </div>
+  <div class="cover-band {{ 'with-score' if model.cover.score is not none else 'no-score' }}">
+    {% if model.cover.score is not none %}<div><span class="label">{{ model.cover.score_label }}</span><strong>{{ model.cover.score }}</strong><span>Pixelkiez Gesamtbild</span></div>{% endif %}
+    <div class="cover-message"><span class="label">Kernaussage</span>{% if model.cover.blocker_note %}<span class="cover-warning">{{ model.cover.blocker_note }}</span>{% endif %}<strong class="cover-verdict">{{ model.cover.verdict }}</strong><span>Die wichtigste Entscheidung für die Website.</span></div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="header"><div class="brand">Pixelkiez.</div><div class="eyebrow">02 · AUF EINEN BLICK</div></div>
+  <div class="section-title"><h2>Was heute trägt – und was zuerst zählt.</h2></div>
+  <div class="executive-grid">
+    <div class="score-card">
+      {% if model.cover.score is not none %}<div><div class="label">{{ model.cover.score_label }}</div><div class="score">{{ model.cover.score }}<span>/100</span></div></div>
+      {% else %}<div><div class="label">Wichtigster Hebel</div><div class="takeaway">{{ model.executive.takeaway }}</div></div>{% endif %}
+      <p>{{ model.cover.verdict }}</p>
+    </div>
+    <div class="summary-card">
+      <p class="takeaway">{{ model.executive.takeaway }}</p>
+      <div class="summary-columns">
+        <div><div class="label">Stärken</div><ul class="summary-list">{% for item in model.executive.strengths[:3] %}<li>{{ item }}</li>{% endfor %}</ul></div>
+        <div><div class="label">Prioritäten</div><ul class="summary-list">{% for item in model.executive.priorities[:3] %}<li>{{ item }}</li>{% endfor %}</ul></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>{{ model.meta.customer }} · {{ model.meta.date }}</span><span>02</span></div>
+</section>
+
+{% for visual in visuals %}
+<section class="page {{ 'white' if loop.index is odd else '' }}">
+  <div class="header"><div class="brand">Pixelkiez.</div><div class="eyebrow">{{ '%02d'|format(loop.index + 2) }} · WEBSITE-BEFUND</div></div>
+  <div class="chart-frame">{{ visual.svg|safe }}</div>
+  <div class="footer"><span>{{ model.meta.customer }} · Website-Analyse</span><span>{{ '%02d'|format(loop.index + 2) }}</span></div>
+</section>
+{% endfor %}
+
+<section class="page orange">
+  <div class="header"><div class="brand">Pixelkiez.</div><div class="eyebrow">{{ '%02d'|format(visuals|length + 3) }} · VIER HEBEL</div></div>
+  <div class="section-title"><h2>Vier konkrete Hebel – jeweils mit nächstem Schritt.</h2><p>Vier priorisierte Geschäftshebel mit konkretem nächsten Schritt.</p></div>
+  <div class="lever-grid">
+    {% for finding in findings %}<div class="lever severity-{{ finding.severity }}"><div class="number">{{ '%02d'|format(loop.index) }} · {{ {'critical':'KRITISCH','high':'HOCH','medium':'MITTEL','low':'NIEDRIG','positive':'STÄRKE'}.get(finding.severity, finding.severity|upper) }}</div><h3>{{ finding.headline }}</h3><p class="observation">{{ finding.observation }}</p><p class="impact"><strong>Warum das zählt:</strong> {{ finding.impact }}</p><p class="action">Nächster Schritt: {{ finding.action }}</p></div>{% endfor %}
+  </div>
+  <div class="footer"><span>{{ model.meta.customer }} · priorisierte Befunde</span><span>{{ '%02d'|format(visuals|length + 3) }}</span></div>
+</section>
+
+<section class="page ink">
+  <div class="header"><div class="brand">Pixelkiez.</div><div class="eyebrow">{{ '%02d'|format(visuals|length + 4) }} · ROADMAP</div></div>
+  <div class="section-title"><h2>Vom Befund zur überprüfbaren Verbesserung.</h2><p>{{ model.recommendation.route }} · {{ model.recommendation.reason }}</p></div>
+  <div class="roadmap">
+    {% for key,label in [('now','Jetzt'),('next_30_days','In 30 Tagen'),('next_quarter','Danach')] %}<div class="roadmap-col"><h3>{{ label }}</h3>{% for item in model.roadmap[key] %}<div class="roadmap-item"><strong>{{ item.priority }} · {{ item.owner }}</strong><p>{{ item.action }}</p></div>{% endfor %}</div>{% endfor %}
+  </div>
+  <div class="footer"><span>{{ model.meta.customer }} · {{ model.recommendation.next_step }}</span><span>{{ '%02d'|format(visuals|length + 4) }}</span></div>
+</section>
+
+<section class="page closing-page">
+  <div class="header"><div class="brand">Pixelkiez.</div><div class="eyebrow">{{ '%02d'|format(visuals|length + 5) }} · {{ model.closing.eyebrow }}</div></div>
+  <div class="section-title"><h2>{{ model.closing.title }}</h2><p>{{ model.closing.summary }}</p></div>
+  {% if model.closing.measurement_highlights %}<div class="measurement-highlights">{% for item in model.closing.measurement_highlights %}<div class="measurement-highlight"><span>{{ item.label }}</span><strong>{{ item.value }}</strong><small>{{ item.context }}</small></div>{% endfor %}</div>{% endif %}
+  <div class="closing-grid">
+    <div class="closing-actions"><div class="label">WAS WIR JETZT TUN</div>{% for item in model.closing.actions %}<div class="closing-action"><b>{{ '%02d'|format(loop.index) }}</b><span>{{ item }}</span></div>{% endfor %}</div>
+    <div class="closing-cta"><div class="label">NÄCHSTER SCHRITT</div><h3>{{ model.closing.cta }}</h3><p>{{ model.closing.next_step }}</p></div>
+  </div>
+  <div class="footer"><span>{{ model.meta.customer }} · Pixelkiez Umsetzungspfad</span><span>{{ '%02d'|format(visuals|length + 5) }}</span></div>
+</section>
+</body>
+</html>

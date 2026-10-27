@@ -1,0 +1,107 @@
+{
+  "status": "PASS",
+  "artifact_digest": "9f1ce88027c785069dcd1048f7f7f14143801ab781a570db7903e332eba2cb04",
+  "detected": 20,
+  "mutations": [
+    {
+      "mutation": "BIND-002",
+      "status": "DETECTED",
+      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-nk2dpret/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:FAIL: binding must contain exactly 48 unique metric IDs\n"
+    },
+    {
+      "mutation": "BIND-003",
+      "status": "DETECTED",
+      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-agorm45l/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:FAIL: binding/registry ID mismatch missing=['AI-07'] extra=['FAKE-99']\n"
+    },
+    {
+      "mutation": "EXEC-005",
+      "status": "DETECTED",
+      "detail": "FIND-01: TARGET_MISMATCH"
+    },
+    {
+      "mutation": "EXEC-007",
+      "status": "DETECTED",
+      "detail": "False was expected\n\nFailed validating 'const' in schema['properties']['results']['items']['properties']['raw_provider_payload_present']:\n    {'const': False}\n\nOn instance['results'][0]['raw_provider_payload_present']:\n    True"
+    },
+    {
+      "mutation": "SCORE-002",
+      "status": "DETECTED",
+      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-tnb7zv_3/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:FAIL: FIND-01 metric weight drift\n"
+    },
+    {
+      "mutation": "SCORE-003",
+      "status": "DETECTED",
+      "detail": "[] should be non-empty\n\nFailed validating 'minItems' in schema['properties']['results']['items']['allOf'][0]['then']['properties']['evidence_refs']:\n    {'minItems': 1}\n\nOn instance['results'][0]['evidence_refs']:\n    []"
+    },
+    {
+      "mutation": "SCORE-004",
+      "status": "DETECTED",
+      "detail": "PERF-01: THRESHOLD_SOURCE_MISSING"
+    },
+    {
+      "mutation": "MUT-REGISTRY-REMOVE",
+      "status": "DETECTED",
+      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-kk03jeei/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:              'EVIDENCE_GRADE_TOO_WEAK',\n                                     'VALUE_TYPE_INVALID',\n                                     'RAW_PROVIDER_EVIDENCE_REJECTED'],\n      'control_basis': 'PIXELKIEZ_PRODUCT_RUBRIC'},\n     {'metric_id': 'AI-06',\n      'category': 'ai_readiness',\n  "
+    },
+    {
+      "mutation": "MUT-REGISTRY-49TH",
+      "status": "DETECTED",
+      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-nk3apm1j/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:                              'EVIDENCE_GRADE_TOO_WEAK',\n                                     'VALUE_TYPE_INVALID',\n                                     'RAW_PROVIDER_EVIDENCE_REJECTED'],\n      'control_basis': 'PIXELKIEZ_PRODUCT_RUBRIC'},\n     {'metric_id': 'FAKE-49',\n      'category': "
+    },
+    {
+      "mutation": "MUT-CATEGORY-WEIGHT",
+      "status": "DETECTED",
+      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-lm_h5p_d/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:FAIL: FIND-01 category weight drift\n"
+    },
+    {
+      "mutation": "MUT-EVIDENCE-REMOVE",
+      "status": "DETECTED",
+      "detail": "FIND-01: unknown evidence ref E-1001"
+    },
+    {
+      "mutation": "MUT-EVIDENCE-TYPE",
+      "status": "DETECTED",
+      "detail": "'wrong' is not of type 'object', 'null'\n\nFailed validating 'type' in schema['properties']['results']['items']['properties']['value']:\n    {'type': ['object', 'null']}\n\nOn instance['results'][0]['value']:\n    'wrong'"
+    },
+    {
+      "mutation": "MUT-EVIDENCE-SOURCE",
+      "status": "DETECTED",
+      "detail": "FIND-01: evidence source-family conflict"
+    },
+    {
+      "mutation": "MUT-RAW-PROVIDER",
+      "status": "DETECTED",
+      "detail": "False was expected\n\nFailed validating 'const' in schema['properties']['evidence_catalog']['items']['properties']['raw_provider_payload_present']:\n    {'const': False}\n\nOn instance['evidence_catalog'][0]['raw_provider_payload_present']:\n    True"
+    },
+    {
+      "mutation": "MUT-DUPLICATE-EVIDENCE",
+      "status": "DETECTED",
+      "detail": "conflicting duplicate evidence id"
+    },
+    {
+      "mutation": "MUT-SCORE-WITHOUT-ADMISSION",
+      "status": "DETECTED",
+      "detail": "Additional properties are not allowed ('score' was unexpected)\n\nFailed validating 'additionalProperties' in schema['properties']['results']['items']:\n    {'type': 'object',\n     'additionalProperties': False,\n     'required': ['metric_id',\n                  'target_url',\n                  'source_family',\n                  'execution_state',\n                  'evidence_grade',\n                  'value',\n                  'unit',\n                  'evidence_refs',\n                  'source_or_met"
+    },
+    {
+      "mutation": "MUT-ANCHOR-OUTSIDE",
+      "status": "DETECTED",
+      "detail": "'excellent' is not one of ['strong', 'minor_gaps', 'mixed', 'weak', 'blocking', None]\n\nFailed validating 'enum' in schema['properties']['results']['items']['properties']['product_status']:\n    {'type': ['string', 'null'],\n     'enum': ['strong', 'minor_gaps', 'mixed', 'weak', 'blocking', None]}\n\nOn instance['results'][0]['product_status']:\n    'excellent'"
+    },
+    {
+      "mutation": "MUT-THRESHOLD-REMOVE",
+      "status": "DETECTED",
+      "detail": "PERF-02: THRESHOLD_SOURCE_MISSING"
+    },
+    {
+      "mutation": "MUT-ANALYSIS-METRIC-REMOVE",
+      "status": "DETECTED",
+      "detail": "['REPORT-001 metric ID parity']"
+    },
+    {
+      "mutation": "MUT-WEIGHTED-CONTRIBUTION",
+      "status": "DETECTED",
+      "detail": "['FIND-01 weighted_contribution']"
+    }
+  ]
+}

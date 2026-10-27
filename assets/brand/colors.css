@@ -1,0 +1,140 @@
+:root{
+  /* ══ THE PIXELKIEZ PALETTE ══════════════════════════════════════════════
+     Sampled pixel-by-pixel from a full-page capture of pixelkiez.de/en
+     (26 Aug 2026). The whole site runs on FOUR values plus white. There is no
+     fifth brand colour, no gradient and no secondary accent.
+
+     This replaces the palette in the Standardwerk, which that document itself
+     labelled hypothetical. Two of its assumptions were wrong: the ground is not
+     white but sage, and the accent is not blue but orange. */
+
+  /* Orange — THE brand colour. Full-bleed bands, cards, buttons, emphasis. */
+  --pk-orange:#EC5E43;        /* measured: every orange surface on the site */
+  --pk-orange-hover:#D5553E;  /* measured: pressed/darker cells in the pixel meter */
+  --pk-orange-deep:#8F250F;   /* measured: dark orange used on tinted cards */
+  --pk-orange-tint:#EF7059;   /* measured: lighter orange fill */
+
+  /* Ink — near-black with a cool cast, matched to the sage family. */
+  --pk-ink:#0E1414;           /* measured: all body text, black bands, black cards */
+  --pk-ink-soft:#2B3634;      /* measured: hairlines and dividers on dark */
+
+  /* Sage — the PAGE GROUND, not an accent. This is the site's theme-color. */
+  --pk-sage:#B6C7C4;          /* measured: default section ground */
+  --pk-sage-raised:#C6D4D1;   /* measured: hero band and raised panels */
+  --pk-sage-muted:#93A29E;    /* measured: secondary text on dark bands */
+  --pk-sage-dim:#7E918D;      /* measured: tertiary / disabled on dark */
+  --pk-sage-line:#566360;     /* measured: hairline on sage */
+  --pk-white:#FFFFFF;         /* measured: card fill only, never a page ground */
+
+  /* State values from the Pixelkiez concept sheet (table …09f (3).csv).
+     These fill real gaps — hover, active, borders — and are close approximations
+     of the measured values, so they are adopted verbatim. */
+  --pk-sage-light:#D4E0D8;    /* hover states, light cards */
+  --pk-sage-dark:#A8B8AC;     /* borders, dividers */
+  --pk-orange-light:#F07A5E;  /* button hover */
+  --pk-orange-dark:#D04528;   /* active state */
+  --pk-grey-line:#E5E5E5;     /* subtle dividers on white */
+
+  /* ── Semantic: surfaces ──
+     The site alternates FULL-BLEED bands: sage → orange → sage → black →
+     sage → orange → sage → black. Large colour fields are the point. */
+  --surface-page:var(--pk-sage);
+  --surface-raised:var(--pk-sage-raised);
+  --surface-muted:var(--pk-sage-raised);
+  --surface-card:var(--pk-white);
+  --surface-brand:var(--pk-orange);
+  --surface-brand-soft:var(--pk-orange-tint);
+  --surface-inverse:var(--pk-ink);
+  --surface-inverse-deep:var(--pk-ink);
+
+  /* ── Semantic: text ──
+     One ink for everything on light AND on orange. Black on orange is the
+     site's own choice and it measures 4.6:1. */
+  --text-heading:var(--pk-ink);
+  --text-body:var(--pk-ink);
+  --text-secondary:var(--pk-ink);
+  --text-muted:#475350;
+  --text-on-dark:var(--pk-sage-raised);
+  --text-on-dark-muted:var(--pk-sage-muted);
+  --text-on-brand:var(--pk-ink);
+  --text-accent:var(--pk-orange);
+  --text-accent-on-dark:var(--pk-orange);
+  --text-accent-on-tint:var(--pk-orange-deep);
+  --text-link:var(--pk-orange);
+  --text-link-active:var(--pk-orange-deep);
+
+  /* ── Semantic: lines ── */
+  --border-subtle:var(--pk-sage-line);
+  --border-strong:var(--pk-ink);
+  --border-inverse:var(--pk-ink-soft);
+  --rule-hairline:1px solid var(--pk-ink);
+
+  /* ── Status ──
+     No status palette was observable on the marketing site; these serve the
+     analysis-report deliverable only. Orange stays reserved for the brand, so
+     "attention" uses amber rather than the brand colour.
+     The bare values are FILLS. Never set them as `color` — use -text. */
+  --status-good:#0F9D58;
+  --status-good-surface:#E4F4EB;
+  --status-good-text:#0A7A43;
+  --status-warn:#F59E0B;
+  --status-warn-surface:#FBF0DC;
+  --status-warn-text:#8A5A08;
+  --status-bad:var(--pk-orange);
+  --status-bad-surface:#FBE3DE;
+  --status-bad-text:var(--pk-orange-deep);
+  --status-info:var(--pk-ink);
+  --status-info-surface:var(--pk-sage-raised);
+  --status-info-text:var(--pk-ink);
+
+  /* ── Severity (Critical / High / Medium / Low) ── */
+  --severity-critical:var(--pk-orange);
+  --severity-critical-surface:#FBE3DE;
+  --severity-critical-text:var(--pk-orange-deep);
+  --severity-high:var(--status-warn);
+  --severity-high-surface:var(--status-warn-surface);
+  --severity-high-text:var(--status-warn-text);
+  --severity-medium:var(--pk-sage-line);
+  --severity-medium-surface:var(--pk-sage-raised);
+  --severity-medium-text:var(--pk-ink);
+  --severity-low:var(--pk-sage-muted);
+  --severity-low-surface:var(--pk-sage-raised);
+  --severity-low-text:#475350;
+
+  /* ── Data visualisation ──
+     Orange first, then ink, then sage steps. No third hue. */
+  --chart-1:var(--pk-orange);
+  --chart-2:var(--pk-ink);
+  --chart-3:var(--pk-sage-line);
+  --chart-4:var(--pk-sage-muted);
+  --chart-5:var(--pk-sage-raised);
+  --chart-track:var(--pk-sage-raised);
+}
+
+/* ── Evidence classes E1–E8 ─────────────────────────────────────────────────
+   From the Enterprise Website Audit Measurement Catalog. Every finding in a
+   Pixelkiez audit report carries exactly one. The scale runs from standardised
+   (E1) to unvalidated (E8); it is a CONFIDENCE ladder, not a severity scale, so
+   it is expressed as ink weight plus the pixel meter — never as red/green. */
+:root{
+  --evidence-strong:var(--pk-ink);          /* E1–E2 standards, platform-official */
+  --evidence-solid:#2F3D3A;                 /* E3–E4 research, reproducible industry */
+  --evidence-weak:#4A4A4A;                  /* E5–E6 vendor, plausible proxy — dark enough for the sage-light record header */
+  --evidence-fragile:var(--pk-orange-dark); /* E7–E8 heuristic, unvalidated */
+  --evidence-surface:var(--pk-white);
+  --evidence-rule:var(--pk-sage-dark);
+
+  /* Scoring eligibility — the catalog forbids a universal composite score.
+     These are TEXT values and are checked against both white and sage grounds;
+     --pk-sage-dark is a line colour ("Borders, Trennlinien") and must never be
+     used for type. */
+  --scoring-eligible:var(--pk-ink);
+  --scoring-context:#475350;
+  --scoring-diagnostic:#475350;
+  --scoring-forbidden:var(--pk-orange-dark);
+
+  /* 60 / 30 / 10 composition rule (concept sheet) */
+  --ratio-ground:60; /* @kind other */
+  --ratio-content:30; /* @kind other */
+  --ratio-accent:10; /* @kind other */
+}

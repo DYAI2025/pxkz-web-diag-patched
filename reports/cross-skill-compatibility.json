@@ -1,0 +1,22 @@
+{
+  "status": "BLOCKED_DEPENDENCY_NON_PACKAGE_BLOCKING",
+  "website_skill_side_status": "PASS",
+  "voice_architect_side_status": "NOT_UPDATED_OR_NOT_PRESENT_FOR_V1_3",
+  "website_default_contract_version": "1.3.0",
+  "website_default_contract_sha256": "ed9924084c479c3627ceb2648ef301162d5b99bbfddfe3fefe265c7cec915d38",
+  "website_export_field_count": 96,
+  "v1_2_wire_header_compatibility": "PASS_IDENTICAL_96_COLUMNS",
+  "v1_2_contract_sha256": "798864ba5998d0e7784137749d8bf857c7d1f7747c996e0c9bc58e7ae8962f76",
+  "v1_1_preserved": true,
+  "legacy_v1_preserved": true,
+  "current_observed_agent_variable_count": 13,
+  "v1_3_exact_cross_skill_digest_parity": "NOT_EXECUTED_SIBLING_V1_3_NOT_PRESENT",
+  "simulation_fixture": "evals/fixtures/pixelkiez_elevenlabs_batch_example_v1.3_SIMULATION.csv",
+  "does_not_prove": [
+    "downstream Voice Architect v1.3 digest acceptance",
+    "future ElevenLabs provider upload success after agent configuration changes",
+    "legal call eligibility",
+    "behavioral conversation quality",
+    "live calling authorization"
+  ]
+}

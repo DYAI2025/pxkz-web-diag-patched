@@ -1,0 +1,88 @@
+{
+  "token_version": "3.0.0",
+  "source_resolution": "USER_PROVIDED_PIXELKIEZ_DESIGN_SYSTEM",
+  "palette": {
+    "orange": "#EC5E43",
+    "orange_hover": "#D5553E",
+    "orange_deep": "#8F250F",
+    "orange_tint": "#EF7059",
+    "ink": "#0E1414",
+    "ink_soft": "#2B3634",
+    "sage": "#B6C7C4",
+    "sage_raised": "#C6D4D1",
+    "sage_muted": "#93A29E",
+    "sage_dim": "#7E918D",
+    "sage_line": "#566360",
+    "white": "#FFFFFF"
+  },
+  "status": {
+    "good": "#0F9D58",
+    "good_surface": "#E4F4EB",
+    "warn": "#F59E0B",
+    "warn_surface": "#FBF0DC",
+    "bad": "#EC5E43",
+    "bad_surface": "#FBE3DE"
+  },
+  "typography": {
+    "document_h1_pt": 36,
+    "document_h2_pt": 28,
+    "document_h3_pt": 22,
+    "body_pt": 12,
+    "note_pt": 9,
+    "metric_pt": 38,
+    "label_pt": 8.5,
+    "label_style": "uppercase_letterspaced_mono",
+    "font_binary_status": "RUNTIME_SUPPLIED_NOT_BUNDLED",
+    "display_requested": "Schibsted Grotesk",
+    "data_requested": "IBM Plex Mono",
+    "customer_release_font_policy": "EXACT_BOTH_FAMILIES_REQUIRED",
+    "proof_display_fallbacks": [
+      "IBM Plex Sans",
+      "Noto Sans",
+      "DejaVu Sans"
+    ],
+    "proof_data_fallbacks": [
+      "Noto Sans Mono",
+      "DejaVu Sans Mono"
+    ],
+    "body_min_pt": 12,
+    "chart_label_min_pt": 10,
+    "note_min_pt": 8.5
+  },
+  "spacing": {
+    "base_px": 8,
+    "scale_px": [
+      4,
+      8,
+      16,
+      24,
+      32,
+      48,
+      64,
+      96,
+      128
+    ],
+    "grid_columns": 12,
+    "gutter_px": 24
+  },
+  "brand_devices": {
+    "band_rhythm": [
+      "sage",
+      "orange",
+      "sage",
+      "ink"
+    ],
+    "card_rotation": [
+      "white",
+      "sage",
+      "orange",
+      "ink"
+    ],
+    "pixel_meter": {
+      "columns": 6,
+      "rows": 3
+    },
+    "section_opener": "hairline_plus_numbered_mono_label",
+    "arrow_affordance": "north_east_arrow"
+  }
+}

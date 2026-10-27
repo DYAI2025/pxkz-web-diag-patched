@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pixelkiez.local/schemas/visualization-plan.schema.json",
+  "title": "Pixelkiez Visualization Plan v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_report_sha256",
+    "brand_token_sha256",
+    "top_levers",
+    "visuals",
+    "excluded_candidates"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "source_report_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "brand_token_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "top_levers": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "visuals": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "template_id",
+          "engine",
+          "status",
+          "title",
+          "subtitle",
+          "metric_refs",
+          "finding_refs",
+          "evidence_class",
+          "population",
+          "method",
+          "does_not_prove",
+          "data"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^VIZ-[0-9]{3}$"
+          },
+          "template_id": {
+            "type": "string",
+            "pattern": "^(V[0-9]{2}_[A-Z0-9_]+|D[0-9]{2}_[A-Z0-9_]+)$"
+          },
+          "engine": {
+            "enum": [
+              "VEGA_LITE",
+              "MERMAID"
+            ]
+          },
+          "status": {
+            "enum": [
+              "SELECTED",
+              "NOT_RENDERED"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "subtitle": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "metric_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "finding_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidence_class": {
+            "type": "string"
+          },
+          "population": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "method": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "does_not_prove": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 190
+          },
+          "data": {
+            "type": [
+              "object",
+              "array"
+            ]
+          },
+          "not_rendered_reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "excluded_candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "template_id",
+          "reason"
+        ]
+      }
+    }
+  }
+}

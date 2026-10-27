@@ -1,0 +1,21 @@
+:root{
+  /* Print / letterhead geometry for the Anschreiben (DIN A4, German business letter) */
+  --doc-page-width:210mm; /* @kind spacing */
+  --doc-page-height:297mm; /* @kind spacing */
+  --doc-margin-left:25mm; /* @kind spacing */
+  --doc-margin-right:20mm; /* @kind spacing */
+  --doc-margin-top:20mm; /* @kind spacing */
+  --doc-margin-bottom:20mm; /* @kind spacing */
+  --doc-header-height:38mm; /* @kind spacing */
+  --doc-footer-height:20mm; /* @kind spacing */
+  --doc-address-block-top:45mm; /* @kind spacing */
+  --doc-body-size:11pt; /* @kind font */
+  --doc-body-line:16.5pt; /* @kind font */
+  --doc-small-size:8.5pt; /* @kind font */
+
+  /* Slide stage */
+  --slide-width:1280px; /* @kind spacing */
+  --slide-height:720px; /* @kind spacing */
+  --slide-margin:72px; /* @kind spacing */
+  --slide-gutter:32px; /* @kind spacing */
+}

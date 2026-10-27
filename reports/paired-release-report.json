@@ -1,0 +1,164 @@
+{
+  "status": "BLOCKED_DEPENDENCY_CURRENT_INSTALLATION",
+  "paired_release_version": "1.1",
+  "execution_mode": "DIRECT_CONSTITUENT_CHECKS_WITH_PERSISTED_OUTPUT_RECOVERY_FOR_WRAPPER_TIMEOUT",
+  "website_skill_dir": "/mnt/data/pixelkiez_visual_architecture_v1/work/pixelkiez-website-diagnosis",
+  "consumer_skill_dir": "/home/oai/skills/pixelkiez-adaptive-elevenlabs-appointment-agent-architect",
+  "website_skill_side_status": "PASS",
+  "voice_architect_side_status": "CURRENT_INSTALLATION_V1_3_CONTRACT_MISSING",
+  "contract": {
+    "version": "1.3.0",
+    "sha256": "145e1a66c292573bf49eff792610106b0fff043df62cd894149f1b63d5b6c008",
+    "field_count": 96,
+    "custom_dynamic_variable_count": 95
+  },
+  "provider_neutral_packet_e2e": "HISTORICAL_PASS_NOT_CURRENT_RELEASE_AUTHORITY",
+  "truth_attack_e2e": "HISTORICAL_PASS_NOT_CURRENT_RELEASE_AUTHORITY",
+  "voice_release_harness": {
+    "status": "PASS",
+    "passed": 27,
+    "failed": 0
+  },
+  "wrapper_timeout_observed": true,
+  "wrapper_timeout_recovery": "voice_compile_truth_packet produced a complete package; validate_agent_package and explicit truth assertions passed after process exit",
+  "live_calling": "NOT_AUTHORIZED_BY_THIS_PROOF",
+  "does_not_prove": [
+    "ElevenLabs dashboard upload success",
+    "legal authorization for a real campaign",
+    "live telephony behavior or conversion outcome"
+  ],
+  "steps": [
+    {
+      "id": "website_contract",
+      "status": "PASS",
+      "exit_code": 0,
+      "mode": "DIRECT_CONSTITUENT_CHECK",
+      "stdout_sha256": "363989c3d3e23125321afbd04bdf8af82f0f66a04443217a8f3a1ab3346ad5ae",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "website_truth",
+      "status": "PASS",
+      "exit_code": 0,
+      "mode": "DIRECT_CONSTITUENT_CHECK",
+      "stdout_sha256": "03341f60a8434cc22600ba7c11c2bfa58a2442a725cd7a35aa2a07808a013c51",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "website_batch_evals",
+      "status": "PASS",
+      "exit_code": 0,
+      "mode": "DIRECT_CONSTITUENT_CHECK",
+      "stdout_sha256": "fb88656229937f7a2a32eb696a14f93fc9743a877fb4714c698441b68545f809",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "cross_skill_contract",
+      "status": "PASS",
+      "exit_code": 0,
+      "mode": "DIRECT_CONSTITUENT_CHECK",
+      "stdout_sha256": "d3147bc548902591013d7bd6494890970402d2ca12500c04bf73f4a9e399daf0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "voice_contract_package",
+      "status": "PASS",
+      "exit_code": 0,
+      "mode": "DIRECT_CONSTITUENT_CHECK",
+      "stdout_sha256": "32f0ddecfb15ecb0e3a393e23168a23a58b63e49996294dac24e08db795ed6eb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "voice_schemas",
+      "status": "PASS",
+      "exit_code": 0,
+      "mode": "DIRECT_CONSTITUENT_CHECK",
+      "stdout_sha256": "389dabb76849380cb301009d0be0699b8347afe9019ab240457eed4700ec36f7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "voice_evals",
+      "status": "PASS",
+      "exit_code": 0,
+      "mode": "DIRECT_CONSTITUENT_CHECK",
+      "stdout_sha256": "c5c6b3ff8bcb9608ef730bca8cc328131d75c87131210fee9e95a8eb45becd5f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "score_fixture",
+      "status": "PASS",
+      "exit_code": 0,
+      "mode": "DIRECT_CONSTITUENT_CHECK",
+      "stdout_sha256": "8e4e9aa5fa5210c673967349f7b1bdf841c2d1988e4dd9bfb784047788cdb548",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "build_provider_packet",
+      "status": "PASS",
+      "exit_code": 0,
+      "mode": "DIRECT_CONSTITUENT_CHECK",
+      "stdout_sha256": "575214650332a49402b3119343507dd3ab41c7c7ca57ed18932518e6f9814a5e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "voice_validate_provider_packet",
+      "status": "PASS",
+      "exit_code": 0,
+      "mode": "DIRECT_CONSTITUENT_CHECK",
+      "stdout_sha256": "af3bb76f1a84a18cf8d3ec794b36f26186f047d46d4b56ea52866365031ebdb5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "voice_compile_provider_packet",
+      "status": "PASS",
+      "exit_code": 0,
+      "mode": "DIRECT_CONSTITUENT_CHECK",
+      "stdout_sha256": "0744446b8d0e96d1239ff5f0b81a8587bd854e7aba63767b4001942310be961c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "voice_validate_provider_compile",
+      "status": "PASS",
+      "exit_code": 0,
+      "mode": "DIRECT_CONSTITUENT_CHECK",
+      "stdout_sha256": "977b5665fd9040f2249341adf89144d4a7dfd8708f7effa3a74272f09a8c9c53",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "build_truth_attack_packet",
+      "status": "PASS",
+      "exit_code": 0,
+      "mode": "DIRECT_CONSTITUENT_CHECK",
+      "stdout_sha256": "f3f5430b895a41fd474fb24608c4cfad816483a22852eb9be98d351f47d30cfd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "voice_validate_truth_packet",
+      "status": "PASS",
+      "exit_code": 0,
+      "mode": "DIRECT_CONSTITUENT_CHECK",
+      "stdout_sha256": "af3bb76f1a84a18cf8d3ec794b36f26186f047d46d4b56ea52866365031ebdb5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "voice_compile_truth_packet",
+      "status": "PASS",
+      "exit_code": 0,
+      "mode": "PERSISTED_COMPLETE_OUTPUT_VALIDATED_AFTER_WRAPPER_TIMEOUT",
+      "stdout_sha256": "0cd66d5ee80d33da70861c6edc46e5c3a32813adbed5469d50810c7d253d5d26",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "voice_release_harness",
+      "status": "PASS",
+      "exit_code": 0,
+      "mode": "REUSED_COMPLETE_REPORT",
+      "passed": 27,
+      "failed": 0
+    }
+  ],
+  "website_artifact_digest": "6b4b3cf9610cd8abc07d736f6f28c68bb957607dd367856da3f8c8e153b0e288",
+  "voice_artifact_digest": "e9bc195fd6adc2bf0a4872ddb0c1ee99a66343ed59673550d000fb28d4ec79e3",
+  "evidence_epoch": "INSTALLABILITY_FIX_2026-08-29",
+  "current_boundary": "Paired release requires reinstall/update of the Voice Architect v1.3 consumer; Website Diagnosis package installation remains independently permitted."
+}

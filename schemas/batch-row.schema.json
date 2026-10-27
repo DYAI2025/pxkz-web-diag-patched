@@ -1,0 +1,984 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pixelkiez ElevenLabs Batch Row v1.3",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "phone_number": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "ElevenLabs transport",
+      "x-v1.3-classification": "EL_RUNTIME_REQUIRED"
+    },
+    "recipient_number": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES*",
+      "x-source": "Internal / dynamic variable",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "campaign_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Campaign",
+      "x-v1.3-classification": "PRODUCTION_GATE_ONLY"
+    },
+    "lead_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "CRM / lead pipeline",
+      "x-v1.3-classification": "OPTIONAL"
+    },
+    "customer_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Lead record",
+      "x-v1.3-classification": "OPTIONAL"
+    },
+    "customer_salutation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Lead record",
+      "x-v1.3-classification": "OPTIONAL"
+    },
+    "customer_website": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Lead/audit input",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "website_language": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Website audit",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "customer_language": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Campaign/lead approval",
+      "x-v1.3-classification": "PRODUCTION_GATE_ONLY"
+    },
+    "customer_locale": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Campaign/lead",
+      "x-v1.3-classification": "OPTIONAL"
+    },
+    "restaurant_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Lead record",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "customer_role": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Lead record",
+      "x-v1.3-classification": "OPTIONAL"
+    },
+    "city": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Lead record",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "district": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Lead record",
+      "x-v1.3-classification": "OPTIONAL"
+    },
+    "restaurant_category": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Lead/audit",
+      "x-v1.3-classification": "OPTIONAL"
+    },
+    "cuisine_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Lead/audit",
+      "x-v1.3-classification": "OPTIONAL"
+    },
+    "prospect_company": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Alias / build compatibility",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "prospect_role": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Alias / build compatibility",
+      "x-v1.3-classification": "OPTIONAL"
+    },
+    "prospect_locale": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Alias / build compatibility",
+      "x-v1.3-classification": "OPTIONAL"
+    },
+    "website_role": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Campaign context",
+      "x-v1.3-classification": "PRODUCTION_GATE_ONLY"
+    },
+    "primary_customer_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Campaign context",
+      "x-v1.3-classification": "PRODUCTION_GATE_ONLY"
+    },
+    "lead_source_current": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Compliance input",
+      "x-v1.3-classification": "PRODUCTION_GATE_ONLY"
+    },
+    "compliance_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Compliance owner",
+      "x-v1.3-classification": "PRODUCTION_GATE_ONLY"
+    },
+    "do_not_contact": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Compliance/CRM",
+      "x-v1.3-classification": "PRODUCTION_GATE_ONLY"
+    },
+    "jurisdiction": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Compliance",
+      "x-v1.3-classification": "PRODUCTION_GATE_ONLY"
+    },
+    "contact_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Compliance",
+      "x-v1.3-classification": "PRODUCTION_GATE_ONLY"
+    },
+    "ai_disclosure_required": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Policy",
+      "x-v1.3-classification": "PRODUCTION_GATE_ONLY"
+    },
+    "recording_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Compliance",
+      "x-v1.3-classification": "PRODUCTION_GATE_ONLY"
+    },
+    "audit_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_method_scope": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_overall_score": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_score_scale": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_score_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_limitations": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_strength_1_observation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_strength_1_evidence_pointer": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_strength_1_confidence": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_1_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_1_dimension": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_1_priority": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_1_evidence_class": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_1_observation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_1_evidence_pointer": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_1_confidence": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_1_spoken": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_1_possible_relevance": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_1_prohibited_claims": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_1_selector_score": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Compiler output",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_2_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_2_dimension": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_2_priority": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_2_evidence_class": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_2_observation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_2_evidence_pointer": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_2_confidence": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_2_spoken": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_2_possible_relevance": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_2_prohibited_claims": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_2_selector_score": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Compiler output",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_3_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_3_dimension": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_3_priority": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_3_evidence_class": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_3_observation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_3_evidence_pointer": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_3_confidence": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_3_spoken": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_3_possible_relevance": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_3_prohibited_claims": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "audit_hook_3_selector_score": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Compiler output",
+      "x-v1.3-classification": "INTERNAL_RECORD"
+    },
+    "call_stage": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Conversation state",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "interest_level": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Conversation state",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "confirmed_relevance": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Conversation state",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "meeting_readiness": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Conversation state",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "preferred_followup_time": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Conversation state",
+      "x-v1.3-classification": "OPTIONAL"
+    },
+    "opt_out": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Conversation state",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "needs_human": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Conversation state",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "meeting_offer": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Campaign/meeting contract",
+      "x-v1.3-classification": "PRODUCTION_GATE_ONLY"
+    },
+    "meeting_timezone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Campaign/meeting contract",
+      "x-v1.3-classification": "PRODUCTION_GATE_ONLY"
+    },
+    "consultant_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Meeting contract",
+      "x-v1.3-classification": "OPTIONAL"
+    },
+    "meeting_duration_minutes": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Meeting contract",
+      "x-v1.3-classification": "OPTIONAL"
+    },
+    "customer_email": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "CRM or verified prospect contact; never inferred from website/domain",
+      "x-v1.3-classification": "OPTIONAL"
+    },
+    "company_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "EL_RUNTIME_REQUIRED"
+    },
+    "company_website": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "EL_RUNTIME_REQUIRED"
+    },
+    "prospect_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "CRM / verified public business contact / safe sentinel",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "prospect_salutation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Verified lead/contact or deterministic safe fallback",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "call_compliance_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Compliance owner or fail-closed compatibility default",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "call_compliance_note": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Compliance context or deterministic audit limitation",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "lead_source": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Compliance/CRM lead source or safe sentinel",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "consultant_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Approved meeting contract or deterministic Pixelkiez role fallback",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "meeting_description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Campaign/meeting contract or approved Pixelkiez fallback",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "offer_process": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Approved Pixelkiez company/process knowledge",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "website_analysis_report": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "agency_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Approved Pixelkiez company knowledge",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    },
+    "verified_finding": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet",
+      "x-v1.3-classification": "EL_RUNTIME_DEFAULTED"
+    }
+  },
+  "required": [
+    "phone_number",
+    "recipient_number",
+    "campaign_id",
+    "lead_id",
+    "customer_name",
+    "customer_salutation",
+    "customer_website",
+    "website_language",
+    "customer_language",
+    "customer_locale",
+    "restaurant_name",
+    "customer_role",
+    "city",
+    "district",
+    "restaurant_category",
+    "cuisine_type",
+    "prospect_company",
+    "prospect_role",
+    "prospect_locale",
+    "website_role",
+    "primary_customer_type",
+    "lead_source_current",
+    "compliance_status",
+    "do_not_contact",
+    "jurisdiction",
+    "contact_type",
+    "ai_disclosure_required",
+    "recording_status",
+    "audit_id",
+    "audit_date",
+    "audit_method_scope",
+    "audit_overall_score",
+    "audit_score_scale",
+    "audit_score_status",
+    "audit_limitations",
+    "audit_strength_1_observation",
+    "audit_strength_1_evidence_pointer",
+    "audit_strength_1_confidence",
+    "audit_hook_1_id",
+    "audit_hook_1_dimension",
+    "audit_hook_1_priority",
+    "audit_hook_1_evidence_class",
+    "audit_hook_1_observation",
+    "audit_hook_1_evidence_pointer",
+    "audit_hook_1_confidence",
+    "audit_hook_1_spoken",
+    "audit_hook_1_possible_relevance",
+    "audit_hook_1_prohibited_claims",
+    "audit_hook_1_selector_score",
+    "audit_hook_2_id",
+    "audit_hook_2_dimension",
+    "audit_hook_2_priority",
+    "audit_hook_2_evidence_class",
+    "audit_hook_2_observation",
+    "audit_hook_2_evidence_pointer",
+    "audit_hook_2_confidence",
+    "audit_hook_2_spoken",
+    "audit_hook_2_possible_relevance",
+    "audit_hook_2_prohibited_claims",
+    "audit_hook_2_selector_score",
+    "audit_hook_3_id",
+    "audit_hook_3_dimension",
+    "audit_hook_3_priority",
+    "audit_hook_3_evidence_class",
+    "audit_hook_3_observation",
+    "audit_hook_3_evidence_pointer",
+    "audit_hook_3_confidence",
+    "audit_hook_3_spoken",
+    "audit_hook_3_possible_relevance",
+    "audit_hook_3_prohibited_claims",
+    "audit_hook_3_selector_score",
+    "call_stage",
+    "interest_level",
+    "confirmed_relevance",
+    "meeting_readiness",
+    "preferred_followup_time",
+    "opt_out",
+    "needs_human",
+    "meeting_offer",
+    "meeting_timezone",
+    "consultant_id",
+    "meeting_duration_minutes",
+    "customer_email",
+    "company_name",
+    "company_website",
+    "prospect_name",
+    "prospect_salutation",
+    "call_compliance_status",
+    "call_compliance_note",
+    "lead_source",
+    "consultant_name",
+    "meeting_description",
+    "offer_process",
+    "website_analysis_report",
+    "agency_name",
+    "verified_finding"
+  ],
+  "x-contract-version": "1.3.0",
+  "x-generated-from-contract-sha256": "ed9924084c479c3627ceb2648ef301162d5b99bbfddfe3fefe265c7cec915d38",
+  "x-csv-serialization": {
+    "encoding": "utf-8-sig",
+    "delimiter": ","
+  },
+  "x-readiness-model": "v1.3-five-class-readiness",
+  "x-classification-counts": {
+    "INTERNAL_RECORD": 48,
+    "EL_RUNTIME_REQUIRED": 3,
+    "EL_RUNTIME_DEFAULTED": 18,
+    "OPTIONAL": 14,
+    "PRODUCTION_GATE_ONLY": 13
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "status": "PASS",
+  "suite": "FULL_48_ACTIVE",
+  "artifact_digest": "9f1ce88027c785069dcd1048f7f7f14143801ab781a570db7903e332eba2cb04",
+  "checks": [
+    {
+      "id": "BIND-001",
+      "status": "PASS",
+      "detail": "exact 48/48 registry equality"
+    },
+    {
+      "id": "BIND-002",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "BIND-003",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "EXEC-001",
+      "status": "PASS",
+      "detail": "48 execution outputs and 48 admissions"
+    },
+    {
+      "id": "EXEC-002",
+      "status": "PASS",
+      "detail": "UNAVAILABLE remains non-score-admitted"
+    },
+    {
+      "id": "EXEC-003",
+      "status": "PASS",
+      "detail": "false boolean remains measured evidence"
+    },
+    {
+      "id": "EXEC-004",
+      "status": "PASS",
+      "detail": "numeric zero remains measured evidence"
+    },
+    {
+      "id": "EXEC-005",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "EXEC-006",
+      "status": "PASS",
+      "detail": "CONFLICT classified and not score-admitted"
+    },
+    {
+      "id": "EXEC-007",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "EXEC-008",
+      "status": "PASS",
+      "detail": "semantic ordering/timestamps do not change digest"
+    },
+    {
+      "id": "SCORE-001",
+      "status": "PASS",
+      "detail": "exact registry weights used"
+    },
+    {
+      "id": "SCORE-002",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "SCORE-003",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "SCORE-004",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "SCORE-005",
+      "status": "PASS",
+      "detail": "golden score 52 matches independent recomputation"
+    },
+    {
+      "id": "SCORE-006",
+      "status": "PASS",
+      "detail": "shuffled semantic input yields byte-identical scored report"
+    },
+    {
+      "id": "REPORT-001",
+      "status": "PASS",
+      "detail": "all scored metrics reconcile to analysis_report"
+    },
+    {
+      "id": "REPORT-002",
+      "status": "PASS",
+      "detail": "metric weighted contributions reconcile to categories"
+    },
+    {
+      "id": "REPORT-003",
+      "status": "PASS",
+      "detail": "category results reconcile to overall result"
+    },
+    {
+      "id": "REPORT-004",
+      "status": "PASS",
+      "detail": "no phantom or missing metric"
+    },
+    {
+      "id": "REPORT-005",
+      "status": "PASS",
+      "detail": "customer model contains no active-core debug/weight leakage"
+    },
+    {
+      "id": "MUT-REGISTRY-REMOVE",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "MUT-REGISTRY-49TH",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "MUT-CATEGORY-WEIGHT",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "MUT-EVIDENCE-REMOVE",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "MUT-EVIDENCE-TYPE",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "MUT-EVIDENCE-SOURCE",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "MUT-RAW-PROVIDER",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "MUT-DUPLICATE-EVIDENCE",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "MUT-SCORE-WITHOUT-ADMISSION",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "MUT-ANCHOR-OUTSIDE",
+      "status": "PASS",
+      "detail": "negative control detected"
+    },
+    {
+      "id": "MUT-THRESHOLD-REMOVE",
+      "status": "PASS",
+      "detail": "negative control detected"
+    }
+  ],
+  "required_check_count": 22,
+  "mutation_count": 20,
+  "total_registry_metrics": 48,
+  "execution_ready": 48,
+  "evidence_ready": 48,
+  "score_admitted": 48,
+  "report_reconciled": 48,
+  "fixture_boundary": "FULL_48_ACTIVE proves the architecture on synthetic evidence; it is not live-site measurement proof."
+}

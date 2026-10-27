@@ -1,0 +1,754 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pixelkiez ElevenLabs Batch Row v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "phone_number": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "ElevenLabs transport"
+    },
+    "recipient_number": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES*",
+      "x-source": "Internal / dynamic variable"
+    },
+    "campaign_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Campaign"
+    },
+    "lead_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "CRM / lead pipeline"
+    },
+    "customer_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Lead record"
+    },
+    "customer_salutation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Lead record"
+    },
+    "customer_website": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Lead/audit input"
+    },
+    "website_language": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Website audit"
+    },
+    "customer_language": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Campaign/lead approval"
+    },
+    "customer_locale": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Campaign/lead"
+    },
+    "restaurant_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Lead record"
+    },
+    "customer_role": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Lead record"
+    },
+    "city": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Lead record"
+    },
+    "district": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Lead record"
+    },
+    "restaurant_category": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Lead/audit"
+    },
+    "cuisine_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Lead/audit"
+    },
+    "prospect_company": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Alias / build compatibility"
+    },
+    "prospect_role": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Alias / build compatibility"
+    },
+    "prospect_locale": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Alias / build compatibility"
+    },
+    "website_role": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Campaign context"
+    },
+    "primary_customer_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Campaign context"
+    },
+    "lead_source_current": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Compliance input"
+    },
+    "compliance_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Compliance owner"
+    },
+    "do_not_contact": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Compliance/CRM"
+    },
+    "jurisdiction": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Compliance"
+    },
+    "contact_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Compliance"
+    },
+    "ai_disclosure_required": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Policy"
+    },
+    "recording_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Compliance"
+    },
+    "audit_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet"
+    },
+    "audit_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet"
+    },
+    "audit_method_scope": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet"
+    },
+    "audit_overall_score": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet"
+    },
+    "audit_score_scale": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet"
+    },
+    "audit_score_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet"
+    },
+    "audit_limitations": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet"
+    },
+    "audit_strength_1_observation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet"
+    },
+    "audit_strength_1_evidence_pointer": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet"
+    },
+    "audit_strength_1_confidence": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_1_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_1_dimension": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_1_priority": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_1_evidence_class": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_1_observation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_1_evidence_pointer": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_1_confidence": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_1_spoken": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_1_possible_relevance": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_1_prohibited_claims": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_1_selector_score": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Compiler output"
+    },
+    "audit_hook_2_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_2_dimension": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_2_priority": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_2_evidence_class": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_2_observation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_2_evidence_pointer": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_2_confidence": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_2_spoken": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_2_possible_relevance": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_2_prohibited_claims": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "RECOMMENDED",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_2_selector_score": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Compiler output"
+    },
+    "audit_hook_3_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_3_dimension": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_3_priority": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_3_evidence_class": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_3_observation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_3_evidence_pointer": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_3_confidence": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_3_spoken": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_3_possible_relevance": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_3_prohibited_claims": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Validated audit packet"
+    },
+    "audit_hook_3_selector_score": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Compiler output"
+    },
+    "call_stage": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Conversation state"
+    },
+    "interest_level": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Conversation state"
+    },
+    "confirmed_relevance": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Conversation state"
+    },
+    "meeting_readiness": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Conversation state"
+    },
+    "preferred_followup_time": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Conversation state"
+    },
+    "opt_out": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Conversation state"
+    },
+    "needs_human": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Conversation state"
+    },
+    "meeting_offer": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Campaign/meeting contract"
+    },
+    "meeting_timezone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "YES",
+      "x-source": "Campaign/meeting contract"
+    },
+    "consultant_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Meeting contract"
+    },
+    "meeting_duration_minutes": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-requiredness": "OPTIONAL",
+      "x-source": "Meeting contract"
+    }
+  },
+  "required": [
+    "phone_number",
+    "recipient_number",
+    "campaign_id",
+    "lead_id",
+    "customer_name",
+    "customer_salutation",
+    "customer_website",
+    "website_language",
+    "customer_language",
+    "customer_locale",
+    "restaurant_name",
+    "customer_role",
+    "city",
+    "district",
+    "restaurant_category",
+    "cuisine_type",
+    "prospect_company",
+    "prospect_role",
+    "prospect_locale",
+    "website_role",
+    "primary_customer_type",
+    "lead_source_current",
+    "compliance_status",
+    "do_not_contact",
+    "jurisdiction",
+    "contact_type",
+    "ai_disclosure_required",
+    "recording_status",
+    "audit_id",
+    "audit_date",
+    "audit_method_scope",
+    "audit_overall_score",
+    "audit_score_scale",
+    "audit_score_status",
+    "audit_limitations",
+    "audit_strength_1_observation",
+    "audit_strength_1_evidence_pointer",
+    "audit_strength_1_confidence",
+    "audit_hook_1_id",
+    "audit_hook_1_dimension",
+    "audit_hook_1_priority",
+    "audit_hook_1_evidence_class",
+    "audit_hook_1_observation",
+    "audit_hook_1_evidence_pointer",
+    "audit_hook_1_confidence",
+    "audit_hook_1_spoken",
+    "audit_hook_1_possible_relevance",
+    "audit_hook_1_prohibited_claims",
+    "audit_hook_1_selector_score",
+    "audit_hook_2_id",
+    "audit_hook_2_dimension",
+    "audit_hook_2_priority",
+    "audit_hook_2_evidence_class",
+    "audit_hook_2_observation",
+    "audit_hook_2_evidence_pointer",
+    "audit_hook_2_confidence",
+    "audit_hook_2_spoken",
+    "audit_hook_2_possible_relevance",
+    "audit_hook_2_prohibited_claims",
+    "audit_hook_2_selector_score",
+    "audit_hook_3_id",
+    "audit_hook_3_dimension",
+    "audit_hook_3_priority",
+    "audit_hook_3_evidence_class",
+    "audit_hook_3_observation",
+    "audit_hook_3_evidence_pointer",
+    "audit_hook_3_confidence",
+    "audit_hook_3_spoken",
+    "audit_hook_3_possible_relevance",
+    "audit_hook_3_prohibited_claims",
+    "audit_hook_3_selector_score",
+    "call_stage",
+    "interest_level",
+    "confirmed_relevance",
+    "meeting_readiness",
+    "preferred_followup_time",
+    "opt_out",
+    "needs_human",
+    "meeting_offer",
+    "meeting_timezone",
+    "consultant_id",
+    "meeting_duration_minutes"
+  ],
+  "x-contract-version": "2026-08-27",
+  "x-generated-from-contract-sha256": "66018327ad7480c44e17cf071e6e864105f7d9185d4965cafbd76f9c168edfe5",
+  "x-csv-serialization": {
+    "encoding": "utf-8-sig",
+    "delimiter": ","
+  }
+}

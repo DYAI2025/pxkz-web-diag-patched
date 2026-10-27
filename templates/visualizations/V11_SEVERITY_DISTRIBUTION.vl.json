@@ -1,0 +1,101 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Pixelkiez approved template V11_SEVERITY_DISTRIBUTION: Befunde nach Schwere",
+  "usermeta": {
+    "template_id": "V11_SEVERITY_DISTRIBUTION",
+    "name": "Befunde nach Schwere",
+    "purpose": "Gestapelte Anzahl kritischer Befunde",
+    "brand_contract": "pixelkiez-v1"
+  },
+  "width": 620,
+  "height": 310,
+  "data": {
+    "values": [
+      {
+        "group": "Befunde",
+        "severity": "kritisch",
+        "count": 1
+      },
+      {
+        "group": "Befunde",
+        "severity": "hoch",
+        "count": 2
+      },
+      {
+        "group": "Befunde",
+        "severity": "mittel",
+        "count": 3
+      }
+    ]
+  },
+  "mark": {
+    "type": "bar",
+    "cornerRadius": 2
+  },
+  "encoding": {
+    "y": {
+      "field": "group",
+      "type": "nominal",
+      "axis": null
+    },
+    "x": {
+      "field": "count",
+      "type": "quantitative",
+      "stack": "zero",
+      "axis": {
+        "title": "Anzahl"
+      }
+    },
+    "color": {
+      "field": "severity",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "kritisch",
+          "hoch",
+          "mittel",
+          "niedrig"
+        ],
+        "range": [
+          "#EC5E43",
+          "#F59E0B",
+          "#566360",
+          "#93A29E"
+        ]
+      }
+    }
+  },
+  "config": {
+    "background": "#FFFFFF",
+    "font": "Schibsted Grotesk",
+    "title": {
+      "font": "Schibsted Grotesk",
+      "fontSize": 18,
+      "fontWeight": 700,
+      "color": "#0E1414",
+      "anchor": "start"
+    },
+    "axis": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 11,
+      "titleFont": "Schibsted Grotesk",
+      "titleFontSize": 12,
+      "labelColor": "#0E1414",
+      "titleColor": "#0E1414",
+      "gridColor": "#C6D4D1",
+      "domainColor": "#566360",
+      "tickColor": "#566360"
+    },
+    "legend": {
+      "labelFont": "Schibsted Grotesk",
+      "labelFontSize": 11,
+      "titleFont": "Schibsted Grotesk",
+      "titleFontSize": 12,
+      "labelColor": "#0E1414",
+      "titleColor": "#0E1414"
+    },
+    "view": {
+      "stroke": null
+    }
+  }
+}

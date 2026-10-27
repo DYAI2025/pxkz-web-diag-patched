@@ -1,0 +1,59 @@
+{
+  "brand_name": "Pixelkiez",
+  "tagline": "WEB DESIGN BERLIN",
+  "brand_source_status": "USER_PROVIDED_DESIGN_SYSTEM",
+  "source_snapshot": "Pixelkiez Design System (6).zip, supplied 2026-08-26",
+  "wordmark_mode": "text",
+  "logo_path_optional": "pixelkiez-logo.webp",
+  "colors": {
+    "orange": "#EC5E43",
+    "orange_hover": "#D5553E",
+    "orange_deep": "#8F250F",
+    "ink": "#0E1414",
+    "ink_soft": "#2B3634",
+    "sage": "#B6C7C4",
+    "sage_raised": "#C6D4D1",
+    "sage_muted": "#93A29E",
+    "sage_line": "#566360",
+    "white": "#FFFFFF",
+    "good": "#0F9D58",
+    "good_surface": "#E4F4EB",
+    "warn": "#F59E0B",
+    "warn_surface": "#FBF0DC",
+    "bad": "#EC5E43",
+    "bad_surface": "#FBE3DE"
+  },
+  "fonts": {
+    "display_requested": "Schibsted Grotesk",
+    "data_requested": "IBM Plex Mono",
+    "binary_status": "RUNTIME_SUPPLIED_NOT_BUNDLED",
+    "customer_release_requirement": "EXACT_BOTH_FAMILIES",
+    "proof_display_fallbacks": [
+      "IBM Plex Sans",
+      "Noto Sans",
+      "DejaVu Sans"
+    ],
+    "proof_data_fallbacks": [
+      "Noto Sans Mono",
+      "DejaVu Sans Mono"
+    ],
+    "fallback_claim_policy": "A fallback must be labeled and never described as exact Pixelkiez typeface parity."
+  },
+  "recognition_devices": [
+    "full_bleed_band_rhythm",
+    "card_color_rotation",
+    "six_by_three_pixel_meter",
+    "mono_uppercase_labels",
+    "arrow_affordance"
+  ],
+  "report_geometry": {
+    "format": "A4 landscape",
+    "page_margin_mm": 14,
+    "grid_columns": 12,
+    "gutter_mm": 6,
+    "base_spacing_mm": 2,
+    "minimum_body_pt": 12,
+    "minimum_chart_label_pt": 10,
+    "minimum_note_pt": 8.5
+  }
+}

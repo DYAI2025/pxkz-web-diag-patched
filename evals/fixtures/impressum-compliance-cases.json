@@ -1,0 +1,912 @@
+{
+  "schema_version": "1.0",
+  "cases": [
+    {
+      "id": "LEG-P01",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "operator_identity": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E1",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "metrics": [
+          "LEGAL-IMP-02"
+        ],
+        "iles": 20,
+        "iles_critical_override": true
+      }
+    },
+    {
+      "id": "LEG-P02",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "geographic_address": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E1",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "metrics": [
+          "LEGAL-IMP-03"
+        ],
+        "iles": 20,
+        "iles_critical_override": true
+      }
+    },
+    {
+      "id": "LEG-P03",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "email": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E1",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "metrics": [
+          "LEGAL-IMP-04"
+        ],
+        "iles": 15,
+        "severity": "high"
+      }
+    },
+    {
+      "id": "LEG-P04",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "legal_form": "GmbH",
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "legal_form_rep": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E1",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "metrics": [
+          "LEGAL-IMP-05"
+        ],
+        "iles": 10
+      }
+    },
+    {
+      "id": "LEG-P05",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "registry_status": "CONFIRMED",
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "registry": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E1",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "metrics": [
+          "LEGAL-IMP-06"
+        ],
+        "iles": 10
+      }
+    },
+    {
+      "id": "LEG-P06",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider",
+          "regulated_profession"
+        ],
+        "regulated_profession_status": "CONFIRMED",
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "regulatory_profession": {
+          "status": "INCOMPLETE",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "metrics": [
+          "LEGAL-IMP-07"
+        ],
+        "iles": 10
+      }
+    },
+    {
+      "id": "LEG-P07",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "conditional_id_status": "CONFIRMED",
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "conditional_ids": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "metrics": [
+          "LEGAL-IMP-08"
+        ],
+        "iles": 5
+      }
+    },
+    {
+      "id": "LEG-P08",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "accessibility": {
+          "status": "INACCESSIBLE",
+          "measurement_class": "measured",
+          "evidence_grade": "E2",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "metrics": [
+          "LEGAL-IMP-09"
+        ],
+        "iles": 10
+      }
+    },
+    {
+      "id": "LEG-P09",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "registry_status": "CONFIRMED",
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "registry": {
+          "status": "INCORRECT",
+          "measurement_class": "observed",
+          "evidence_grade": "E1",
+          "defect_supported": true,
+          "authoritative_counterevidence": true
+        }
+      },
+      "expect": {
+        "metrics": [
+          "LEGAL-IMP-06",
+          "LEGAL-IMP-10"
+        ],
+        "iles": 10
+      }
+    },
+    {
+      "id": "LEG-P10",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2C",
+        "distance_contract_status": "CONFIRMED"
+      },
+      "observations": {
+        "phone": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true
+        },
+        "timing": {
+          "status": "UNTIMELY",
+          "base_dimension": "contactability",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "metrics": [
+          "LEGAL-IMP-04",
+          "LEGAL-IMP-11"
+        ],
+        "iles": 15
+      }
+    },
+    {
+      "id": "LEG-P11",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2C",
+        "distance_contract_status": "CONFIRMED"
+      },
+      "observations": {
+        "operator_identity": {
+          "status": "UNTIMELY",
+          "measurement_class": "observed",
+          "evidence_grade": "E1",
+          "defect_supported": true,
+          "pre_contract_flow_observed": true
+        }
+      },
+      "expect": {
+        "metrics": [
+          "LEGAL-IMP-02",
+          "LEGAL-IMP-11"
+        ],
+        "iles": 20,
+        "iles_critical_override": true
+      }
+    },
+    {
+      "id": "LEG-P12",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "operator_identity": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E1",
+          "defect_supported": true
+        },
+        "geographic_address": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E1",
+          "defect_supported": true
+        },
+        "email": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E1",
+          "defect_supported": true
+        },
+        "accessibility": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "metrics": [
+          "LEGAL-IMP-01",
+          "LEGAL-IMP-02",
+          "LEGAL-IMP-03",
+          "LEGAL-IMP-04",
+          "LEGAL-IMP-09"
+        ],
+        "iles": 65,
+        "iles_critical_override": true
+      }
+    },
+    {
+      "id": "LEG-N01",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "phone": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "metrics": [],
+        "iles": 0
+      }
+    },
+    {
+      "id": "LEG-N02",
+      "context": {
+        "signals": {
+          "language": "de"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "UNKNOWN"
+      },
+      "observations": {
+        "operator_identity": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "jurisdiction_status": "UNRESOLVED",
+        "iles": 0
+      }
+    },
+    {
+      "id": "LEG-N03",
+      "context": {
+        "signals": {
+          "tld": ".de"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "UNKNOWN"
+      },
+      "observations": {
+        "operator_identity": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "jurisdiction_status": "UNRESOLVED",
+        "iles": 0
+      }
+    },
+    {
+      "id": "LEG-N04",
+      "context": {
+        "signals": {
+          "whois_hidden": true
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "UNKNOWN"
+      },
+      "observations": {},
+      "expect": {
+        "metrics": [],
+        "iles": 0
+      }
+    },
+    {
+      "id": "LEG-N05",
+      "context": {
+        "signals": {
+          "returns_country": "DE"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "UNKNOWN"
+      },
+      "observations": {},
+      "expect": {
+        "jurisdiction_status": "UNRESOLVED",
+        "iles": 0
+      }
+    },
+    {
+      "id": "LEG-N06",
+      "context": {
+        "signals": {
+          "payment_logos": [
+            "Stripe",
+            "PayPal"
+          ]
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "UNKNOWN"
+      },
+      "observations": {},
+      "expect": {
+        "metrics": [],
+        "iles": 0
+      }
+    },
+    {
+      "id": "LEG-N07",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "conditional_id_status": "UNKNOWN",
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "conditional_ids": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "iles": 0,
+        "result_state": "POSSIBLE_LEGAL_REVIEW"
+      }
+    },
+    {
+      "id": "LEG-N08",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "regulated_profession_status": "UNKNOWN",
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "regulatory_profession": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "iles": 0,
+        "result_state": "POSSIBLE_LEGAL_REVIEW"
+      }
+    },
+    {
+      "id": "LEG-N09",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "operator_identity": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E1",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "forbid_text": "DSGVO-Verstoß"
+      }
+    },
+    {
+      "id": "LEG-N10",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "operator_identity": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E1",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "expected_penalty": null
+      }
+    },
+    {
+      "id": "LEG-N11",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "operator_identity": {
+          "status": "ABSENT",
+          "measurement_class": "inferred_risk",
+          "evidence_grade": "E5",
+          "defect_supported": false
+        }
+      },
+      "expect": {
+        "iles": 0
+      }
+    },
+    {
+      "id": "LEG-N12",
+      "context": {
+        "operator_establishment": {
+          "country": "AT",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "operator_identity": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E1",
+          "defect_supported": true
+        }
+      },
+      "expect": {
+        "iles": 0,
+        "source_needed": true
+      }
+    },
+    {
+      "id": "LEG-C01",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "operator_identity": {
+          "status": "CONTRADICTORY",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true,
+          "unresolved_conflict": true,
+          "conflict_pair": "impressum_privacy"
+        }
+      },
+      "expect": {
+        "defect": "CONTRADICTORY",
+        "iles": 0
+      }
+    },
+    {
+      "id": "LEG-C02",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "operator_identity": {
+          "status": "CONTRADICTORY",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true,
+          "unresolved_conflict": true,
+          "conflict_pair": "impressum_terms"
+        }
+      },
+      "expect": {
+        "defect": "CONTRADICTORY",
+        "iles": 0
+      }
+    },
+    {
+      "id": "LEG-C03",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "registry_status": "CONFIRMED",
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "registry": {
+          "status": "CONTRADICTORY",
+          "measurement_class": "observed",
+          "evidence_grade": "E1",
+          "defect_supported": true,
+          "unresolved_conflict": true,
+          "conflict_pair": "impressum_register"
+        }
+      },
+      "expect": {
+        "defect": "CONTRADICTORY",
+        "iles": 0
+      }
+    },
+    {
+      "id": "LEG-C04",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2C",
+        "distance_contract_status": "CONFIRMED"
+      },
+      "observations": {
+        "operator_identity": {
+          "status": "CONTRADICTORY",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true,
+          "unresolved_conflict": true,
+          "conflict_pair": "checkout_impressum"
+        }
+      },
+      "expect": {
+        "defect": "CONTRADICTORY",
+        "iles": 0
+      }
+    },
+    {
+      "id": "LEG-C05",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "operator_identity": {
+          "status": "CONTRADICTORY",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true,
+          "unresolved_conflict": true,
+          "conflict_pair": "old_new_company"
+        }
+      },
+      "expect": {
+        "defect": "CONTRADICTORY",
+        "iles": 0
+      }
+    },
+    {
+      "id": "LEG-C06",
+      "context": {
+        "operator_establishment": {
+          "country": "DE",
+          "confidence": "HIGH",
+          "evidence_grade": "E1"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2B",
+        "distance_contract_status": "NOT_PRESENT"
+      },
+      "observations": {
+        "geographic_address": {
+          "status": "CONTRADICTORY",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true,
+          "unresolved_conflict": true,
+          "conflict_pair": "address_a_b"
+        }
+      },
+      "expect": {
+        "defect": "CONTRADICTORY",
+        "iles": 0
+      }
+    },
+    {
+      "id": "LEG-GOLD-BFL",
+      "context": {
+        "signals": {
+          "language": "en",
+          "domain": "bofenglin.com"
+        },
+        "business_flags": [
+          "service_provider"
+        ],
+        "audience_scope": "B2C",
+        "distance_contract_status": "CONFIRMED"
+      },
+      "observations": {
+        "operator_identity": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true
+        },
+        "geographic_address": {
+          "status": "ABSENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": true
+        },
+        "email": {
+          "status": "PRESENT",
+          "measurement_class": "observed",
+          "evidence_grade": "E2",
+          "defect_supported": false
+        }
+      },
+      "expect": {
+        "metrics": [
+          "LEGAL-IMP-02",
+          "LEGAL-IMP-03"
+        ],
+        "iles": 0,
+        "jurisdiction_status": "UNRESOLVED",
+        "result_state": "POSSIBLE_LEGAL_REVIEW",
+        "audit_priority_critical": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,396 @@
+{
+  "schema_version": "1.0",
+  "candidate_artifact_digest": "1f4fe8356420f494020fcb23d40b5b221e743cd41d636a5a8dd8fd288643fe0b",
+  "baseline_zip_sha256": "45ce977d1410b81ccb900e1377916e461c752b11d4b90a08991f06796b0e84cd",
+  "status": "PASS",
+  "canonical_status": {
+    "plan": "READY_FOR_IMPLEMENTATION",
+    "architecture": "PASS",
+    "implementation": "COMPLETE",
+    "validation": "PASS",
+    "release_gate": "PASS",
+    "packaging": "COMPLETED",
+    "release": "NOT_RELEASED"
+  },
+  "watcher_patch": {
+    "status": "PASS",
+    "validator_sha256": "7b2c73d8ddc5e02739fb716b7b90e3330eae5fffa50beadc922bff10223dc521",
+    "override_report": "reports/impressum-compliance-shared-overrides.json",
+    "override_report_sha256": "c8fda58497561a1ca363cece38a9369dc8030c68fc40055d21e0114e59e91e83",
+    "allowed_reason": "IMPRESSUM_COMPLIANCE_PATCH",
+    "allowed_paths": [
+      "scripts/build_audit_deliverables.py",
+      "scripts/build_elevenlabs_batch_csv.py"
+    ],
+    "negative_controls": [
+      "compute_score.py mutation rejected",
+      "wrong override reason rejected",
+      "broken previous hash chain rejected"
+    ]
+  },
+  "legal_source_validation": {
+    "status": "PASS",
+    "verified_at": "2026-09-08",
+    "enabled_rules": [
+      "EU-ECOM-2000-31-ART5",
+      "DE-DDG-5",
+      "DE-DDG-33",
+      "DE-EGBGB-246A-1",
+      "DE-UWG-5A-5B",
+      "DE-DLINFO-2",
+      "DE-EGBGB-246B-1",
+      "DE-VSBG-36",
+      "DE-MSTV-18"
+    ],
+    "disabled_source_needed": [
+      "AT-COUNTRY-ADAPTER",
+      "FR-COUNTRY-ADAPTER",
+      "ES-COUNTRY-ADAPTER",
+      "NL-COUNTRY-ADAPTER",
+      "DE-SECTOR-PROFESSION-DETAIL",
+      "DE-FINANCIAL-REGULATOR-DETAIL"
+    ],
+    "errors": []
+  },
+  "core_preservation": {
+    "status": "PASS",
+    "core_metric_count": 48,
+    "protected_patch_check": "31/31 byte-identical",
+    "pixelkiez_score_impact": "NONE_DIRECT",
+    "core_score_delta": 0,
+    "v1_3_field_count": 96,
+    "compute_score_sha256": "1df90b548be6ec0af857a932c43c2d9b30442ccd993420a00b62acc2ad6c56c6"
+  },
+  "change_manifest": {
+    "product_created": [
+      "assets/impressum-compliance-registry.v1.json",
+      "evals/fixtures/impressum-compliance-cases.json",
+      "references/impressum-compliance-method.md",
+      "references/impressum-legal-source-map.md",
+      "schemas/impressum-compliance.schema.json",
+      "schemas/impressum-evidence.schema.json",
+      "scripts/attach_impressum_findings.py",
+      "scripts/impressum_compliance.py",
+      "scripts/run_impressum_compliance_evals.py",
+      "scripts/validate_impressum_compliance.py",
+      "scripts/validate_impressum_legal_sources.py"
+    ],
+    "product_modified": [
+      "SKILL.md",
+      "evals/output_evals.json",
+      "evals/trigger_queries.json",
+      "references/audit-method.md",
+      "references/customer-warning-semiotics.md",
+      "references/eval-design.md",
+      "references/internal-analysis-report-contract.md",
+      "references/measurement-contract.md",
+      "references/scoring-policy.md",
+      "references/source-map.md",
+      "references/source-policy.md",
+      "references/strategic-relevance-customer-output-contract.md",
+      "scripts/build_audit_deliverables.py",
+      "scripts/build_elevenlabs_batch_csv.py",
+      "scripts/finalize_deliverable_manifest.py",
+      "scripts/quick_validate.py",
+      "scripts/validate_client_semantics.py",
+      "scripts/validate_customer_output_guardrails.py",
+      "scripts/validate_customer_presentation_quality.py",
+      "scripts/validate_deliverable_bundle.py",
+      "scripts/validate_measurement_platform_baseline.py",
+      "scripts/validate_release_gate.py",
+      "scripts/validate_schema.py"
+    ],
+    "deleted": [],
+    "unexpected_product_changes": [],
+    "counts": {
+      "product_created": 11,
+      "product_modified": 23,
+      "deleted": 0
+    }
+  },
+  "validation_matrix": [
+    {
+      "index": "1",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "1",
+      "command": "python scripts/quick_validate.py ."
+    },
+    {
+      "index": "2",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "1",
+      "command": "python scripts/validate_schema.py ."
+    },
+    {
+      "index": "3",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "1",
+      "command": "python scripts/validate_source_map.py ."
+    },
+    {
+      "index": "4",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "1",
+      "command": "python scripts/validate_impressum_legal_sources.py ."
+    },
+    {
+      "index": "5",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "3",
+      "command": "python scripts/validate_impressum_compliance.py ."
+    },
+    {
+      "index": "6",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "7",
+      "command": "python scripts/run_impressum_compliance_evals.py ."
+    },
+    {
+      "index": "7",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "2",
+      "command": "python scripts/validate_core_evidence_bindings.py ."
+    },
+    {
+      "index": "8",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "ASYNC",
+      "command": "python scripts/run_full_48_active_evals.py ."
+    },
+    {
+      "index": "9",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "4",
+      "command": "python scripts/validate_full_48_active.py ."
+    },
+    {
+      "index": "10",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "1",
+      "command": "python scripts/validate_core_parity.py ."
+    },
+    {
+      "index": "11",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "5",
+      "command": "python scripts/run_truth_discipline_evals.py ."
+    },
+    {
+      "index": "12",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "8",
+      "command": "python scripts/run_strategic_relevance_evals.py ."
+    },
+    {
+      "index": "13",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "6",
+      "command": "python scripts/run_customer_presentation_quality_evals.py ."
+    },
+    {
+      "index": "14",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "64",
+      "command": "python scripts/run_reporting_bundle_evals.py ."
+    },
+    {
+      "index": "15",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "1",
+      "command": "python scripts/run_batch_contract_evals.py ."
+    },
+    {
+      "index": "16",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "1",
+      "command": "python scripts/validate_measurement_platform_baseline.py ."
+    },
+    {
+      "index": "17",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "1",
+      "command": "python scripts/validate_strategic_relevance_v321_preservation.py ."
+    },
+    {
+      "index": "18",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "1",
+      "command": "python scripts/validate_evals.py ."
+    },
+    {
+      "index": "19",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "1",
+      "command": "python scripts/validate_no_font_binaries.py ."
+    },
+    {
+      "index": "20",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "2",
+      "command": "python scripts/validate_third_party_license_ledger.py ."
+    },
+    {
+      "index": "21",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "2",
+      "command": "python scripts/validate_gateway_optional_contracts.py ."
+    },
+    {
+      "index": "22",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "1",
+      "command": "python scripts/validate_security_patterns.py ."
+    },
+    {
+      "index": "23",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "1",
+      "command": "python scripts/validate_no_placeholders.py ."
+    },
+    {
+      "index": "24",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "23",
+      "command": "python scripts/run_score_gate_evals.py ."
+    },
+    {
+      "index": "25",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "14",
+      "command": "python scripts/run_measurement_gateway_evals.py ."
+    },
+    {
+      "index": "26",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "14",
+      "command": "python scripts/run_measurement_enrichment_evals.py ."
+    },
+    {
+      "index": "27",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "17",
+      "command": "python scripts/run_business_first_reporting_evals.py ."
+    },
+    {
+      "index": "28",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "15",
+      "command": "python scripts/run_visualization_gallery_evals.py ."
+    },
+    {
+      "index": "29",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "1",
+      "command": "python scripts/validate_installability.py ."
+    },
+    {
+      "index": "30",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "1",
+      "command": "python scripts/validate_agent_agnostic.py ."
+    },
+    {
+      "index": "31",
+      "status": "PASS",
+      "exit_code": "0",
+      "duration_seconds": "3",
+      "command": "python scripts/validate_release_gate.py ."
+    }
+  ],
+  "fresh_customer_proof_matrix": [
+    {
+      "index": "1",
+      "status": "PASS",
+      "exit_code": "0",
+      "command": "python scripts/validate_pdf_visual_qa.py '/mnt/data/pxk_release_proof/deliverables/customer_presentation.pdf' '/mnt/data/pxk_release_proof/deliverables/customer_presentation.visual-qa.json'"
+    },
+    {
+      "index": "2",
+      "status": "PASS",
+      "exit_code": "0",
+      "command": "python scripts/validate_customer_semantic_qa.py '/mnt/data/pxk_release_proof/deliverables/customer_presentation.pdf' '/mnt/data/pxk_release_proof/deliverables/client-report-model.json' '/mnt/data/pxk_release_proof/deliverables/diagnosis-report.json' '/mnt/data/pxk_release_proof/deliverables/customer_presentation.semantic-qa.json'"
+    },
+    {
+      "index": "3",
+      "status": "PASS",
+      "exit_code": "0",
+      "command": "python scripts/validate_customer_presentation_quality.py '/mnt/data/pxk_release_proof/deliverables'"
+    },
+    {
+      "index": "4",
+      "status": "PASS",
+      "exit_code": "0",
+      "command": "python scripts/validate_customer_business_language.py '/mnt/data/pxk_release_proof/deliverables/client-report-model.json' '/mnt/data/pxk_release_proof/deliverables/customer_presentation.pdf'"
+    },
+    {
+      "index": "5",
+      "status": "PASS",
+      "exit_code": "0",
+      "command": "python scripts/validate_customer_output_guardrails.py '/mnt/data/pxk_release_proof/deliverables/client-report-model.json' '/mnt/data/pxk_release_proof/deliverables/customer_presentation.html' '/mnt/data/pxk_release_proof/deliverables/customer_presentation.pdf' '/mnt/data/pxk_release_proof/deliverables/visuals'"
+    },
+    {
+      "index": "6",
+      "status": "PASS",
+      "exit_code": "0",
+      "command": "python scripts/validate_analysis_report_completeness.py '/mnt/data/pxk_release_proof/deliverables/analysis_report.json' '/mnt/data/pxk_release_proof/deliverables/analysis_report.md' '/mnt/data/pxk_release_proof/deliverables/diagnosis-report.json'"
+    },
+    {
+      "index": "7",
+      "status": "PASS",
+      "exit_code": "0",
+      "command": "python scripts/validate_deliverable_bundle.py '/mnt/data/pxk_release_proof/deliverables'"
+    }
+  ],
+  "enterprise_evaluator": {
+    "status": "PASS",
+    "path": "reports/enterprise-skill-evaluation.xml"
+  },
+  "pipeline_ledger": {
+    "status": "PASS",
+    "events": 9,
+    "run_id": "pxk-impressum-release1-final-20260908"
+  },
+  "runtime_boundaries": {
+    "live_browser_runtime": "BLOCKED_RUNTIME_POLICY_NON_PACKAGE_BLOCKING",
+    "strict_customer_pdf_exact_font": "BLOCKED_EXTERNAL_FONT_NON_PACKAGE_BLOCKING",
+    "skill_packaging_effect": "NONE"
+  },
+  "release_truth": "Packaging may proceed for this exact candidate digest; production release/deployment has not occurred.",
+  "packaging": {
+    "status": "COMPLETED",
+    "artifact_name": "skill.zip",
+    "candidate_artifact_digest": "1f4fe8356420f494020fcb23d40b5b221e743cd41d636a5a8dd8fd288643fe0b",
+    "staging_package_verification": "PASS",
+    "final_package_verification": "PASS_SAME_CANDIDATE_ARCHIVE_STRUCTURE_AND_GATES"
+  }
+}

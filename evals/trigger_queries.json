@@ -1,0 +1,113 @@
+[
+  {
+    "query": "Analysiere https://kunde.de und erstelle einen klaren Pixelkiez Website-Analysebericht als PDF mit Score, Stärken, Schwächen und Maßnahmen.",
+    "should_trigger": true,
+    "reason": "direct public website diagnosis with required branded PDF"
+  },
+  {
+    "query": "Prüfe die Website für SEO, interne Verlinkung, Performance, UX, Barrierefreiheit und KI-Verständlichkeit und zeige mir einen belastbaren Teilscore, falls nicht alles messbar ist.",
+    "should_trigger": true,
+    "reason": "core multi-category audit plus coverage-gated score"
+  },
+  {
+    "query": "Hier ist ein alter Website-Audit als PDF. Prüfe die Aussagen erneut gegen die aktuelle öffentliche Website und erstelle den Pixelkiez Bericht neu.",
+    "should_trigger": true,
+    "reason": "parallel-audit reconciliation"
+  },
+  {
+    "query": "Wir haben nur öffentlichen Zugriff. Analysiere trotzdem so weit möglich und kennzeichne klar, was nicht geprüft werden konnte.",
+    "should_trigger": true,
+    "reason": "public-surface audit with not_assessed and coverage transparency"
+  },
+  {
+    "query": "Vergleiche für diese Website Wartung, gezielte Modernisierung und Relaunch und gib eine nachvollziehbare Empfehlung im PDF.",
+    "should_trigger": true,
+    "reason": "smallest-intervention recommendation is preserved"
+  },
+  {
+    "query": "Wie sichtbar ist diese Website für Brand- und Non-Brand-Suchen und wie gut kann ein LLM Leistungen, Zielgruppe und Belege extrahieren?",
+    "should_trigger": true,
+    "reason": "WIA-derived search sample and AI extractability scope"
+  },
+  {
+    "query": "Implementiere die neue Startseite direkt im GitHub-Repository.",
+    "should_trigger": false,
+    "reason": "implementation work is outside website diagnosis"
+  },
+  {
+    "query": "Erstelle mir aus diesen Zahlen eine PowerPoint-Präsentation im Pixelkiez-Design.",
+    "should_trigger": false,
+    "reason": "presentation authoring belongs to a separate slides workflow; this skill is PDF-only"
+  },
+  {
+    "query": "Führe einen Penetrationstest gegen diese Domain durch und finde Exploits.",
+    "should_trigger": false,
+    "reason": "active offensive security testing is outside scope"
+  },
+  {
+    "query": "Bestätige rechtsverbindlich, dass diese Website DSGVO- und BFSG-konform ist.",
+    "should_trigger": false,
+    "reason": "legal certification is prohibited"
+  },
+  {
+    "query": "Erstelle ein neues Logo für Pixelkiez.",
+    "should_trigger": false,
+    "reason": "brand design is not a website diagnosis"
+  },
+  {
+    "query": "Welche Webdesign-Trends werden in fünf Jahren wichtig sein?",
+    "should_trigger": false,
+    "reason": "generic trend research without a target website"
+  },
+  {
+    "query": "Analysiere diese Website vollständig und liefere neben dem Pixelkiez PDF auch die ElevenLabs Batch-CSV für unseren CRM-Handoff.",
+    "should_trigger": true,
+    "reason": "website diagnosis with mandatory audit-to-batch artifact"
+  },
+  {
+    "query": "Hier sind Campaign-, Compliance- und Meeting-Daten als batch_context. Führe den Website-Audit aus und prüfe, ob der 96-Felder-v1.3-Datensatz ElevenLabs-upload-ready und ob der separate Production-Gate PASS ist ist.",
+    "should_trigger": true,
+    "reason": "website audit plus authoritative batch context and v1.3 split readiness validation"
+  },
+  {
+    "query": "Kompiliere aus dieser bestehenden CSV einen ElevenLabs Voice Agent und ändere seinen Systemprompt.",
+    "should_trigger": false,
+    "reason": "voice-agent compilation belongs to the separate Pixelkiez appointment-agent architect"
+  },
+  {
+    "query": "ElevenLabs lehnt den Batch ab und meldet fehlende Variablen company_name, company_website, prospect_name, prospect_salutation, call_compliance_status, call_compliance_note, lead_source, consultant_name, meeting_description, offer_process, website_analysis_report, agency_name, verified_finding. Aktualisiere den Export ohne Fakten zu erfinden.",
+    "should_trigger": true,
+    "reason": "current provider binding plus v1.3 runtime-required/defaulted classification prevents missing optional source data from blocking upload"
+  },
+  {
+    "query": "Unsere 96-Feld-CSV soll hochladbar bleiben, auch wenn customer_email oder ein verifizierter Ansprechpartner fehlen. Ordne die Felder im v1.3-Contract in INTERNAL_RECORD, EL_RUNTIME_REQUIRED, EL_RUNTIME_DEFAULTED, OPTIONAL und PRODUCTION_GATE_ONLY ein.",
+    "should_trigger": true,
+    "reason": "explicit v1.3 batch-readiness contract update for Website Diagnosis"
+  },
+  {
+    "query": "Analysiere diese Website vollständig. Ich brauche eine visuelle Kunden-PDF mit vier Hebeln und Charts sowie intern den vollständigen JSON- und Markdown-Analysebericht mit jeder Metrik.",
+    "should_trigger": true,
+    "reason": "direct full Website Diagnosis request with the mandatory three reporting artifacts and chart-led presentation"
+  },
+  {
+    "query": "Zeige im Website-Audit das Google-Ranking und einen Branchenvergleich, obwohl keine Suchanfragen, Messorte, Zeitpunkte oder Wettbewerberdaten vorliegen.",
+    "should_trigger": true,
+    "reason": "Website Diagnosis must trigger but exclude unsupported ranking/benchmark visuals instead of inventing values"
+  },
+  {
+    "query": "Erstelle aus diesen Zahlen nur ein beliebiges interaktives Flutter-Dashboard.",
+    "should_trigger": false,
+    "reason": "generic Flutter dashboard creation is outside the website-diagnosis reporting skill"
+  },
+  {
+    "id": "TRIGGER-MEASUREMENT-GATEWAY-021",
+    "query": "Erweitere die Website-Diagnose um einen sicheren read-only Measurement Gateway für öffentliche HTTP/TLS/CSP/robots/sitemap Messungen.",
+    "should_trigger": true,
+    "reason": "Measurement Gateway is an additive website-diagnosis measurement capability."
+  },
+  {
+    "query": "Prüfe die Anbieterkennzeichnung und Impressumsrisiken evidenzgebunden, ohne den Pixelkiez-Core-Score zu verändern.",
+    "should_trigger": true,
+    "reason": "full website diagnosis with non-core provider-identification compliance sidecar"
+  }
+]
