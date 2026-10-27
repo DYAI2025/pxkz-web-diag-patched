@@ -157,6 +157,10 @@ class Vc03AdmissionTests(unittest.TestCase):
         with self.assertRaisesRegex(Vc03AttachError, "VC03_BLOCK_PAGE_NOT_AUDITED_SITE"):
             attach(self.base, observe(vc03_input(page_url="https://example.com:8443/")))
 
+    def test_port_zero_is_not_default_port(self):
+        with self.assertRaisesRegex(Vc03AttachError, "VC03_BLOCK_PAGE_NOT_AUDITED_SITE"):
+            attach(self.base, observe(vc03_input(page_url="https://example.com:0/")))
+
     def test_unsampled_page_rejected_at_attach(self):
         with self.assertRaisesRegex(Vc03AttachError, "VC03_BLOCK_PAGE_NOT_AUDITED_SITE"):
             attach(self.base, observe(vc03_input(page_url="https://example.com/some/other/page?x=1")))

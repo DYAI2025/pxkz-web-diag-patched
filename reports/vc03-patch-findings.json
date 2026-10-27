@@ -157,5 +157,26 @@
       }
     ],
     "canaries": "Each new guard disabled in a scratch copy turned its test red (type, unbound, page x3, lte, legal precedence, derived-finding)."
+  },
+  "independent_review_round_2": {
+    "reviewed_commit": "aa7ab67f68ffea20089b12280d4e771f62d80d62",
+    "reviewed_tree_digest": "bc8e80589c9b62e217c4496b3e2c9baf6d49bb57df7b1dc89c4b1c75a461a738",
+    "result": "R1-R3 and R5 no longer reproduce (reviewer probes rerun); R4 closed by code reading; fuzz 0/20000 violations; 92 passed.",
+    "findings": [
+      {
+        "id": "N1",
+        "severity": "low",
+        "summary": "Port :0 normalized to default port.",
+        "fix": "port is None check; test_port_zero_is_not_default_port (red-first).",
+        "status": "CLOSED"
+      },
+      {
+        "id": "N2",
+        "severity": "low",
+        "summary": "_legal_route trusts customer_risk + legal_sidecar-typed evidence without cross-checking an actual Impressum sidecar; with legal precedence a VC03 finding carrying such a forgery skips VC03 checks.",
+        "fix": "None in this patch: the same forgery is eligible without any VC03 evidence (pre-existing legal-route weakness, out of brief scope). Reviewer could not build a schema-valid forgery end to end.",
+        "status": "OPEN_PRE_EXISTING"
+      }
+    ]
   }
 }

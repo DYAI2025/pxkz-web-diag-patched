@@ -49,7 +49,7 @@ def page_key(url: str) -> tuple[str, str, int | None, str, str] | None:
     scheme, host = parts.scheme.lower(), (parts.hostname or "").lower().rstrip(".")
     if not scheme or not host:
         return None
-    return scheme, host, port or DEFAULT_PORTS.get(scheme), parts.path or "/", parts.query
+    return scheme, host, port if port is not None else DEFAULT_PORTS.get(scheme), parts.path or "/", parts.query
 
 
 def audited_pages(report: dict[str, Any]) -> set[tuple[str, str, int | None, str, str]]:
