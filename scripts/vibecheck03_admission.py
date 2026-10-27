@@ -18,6 +18,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 RULES_PATH = ROOT / "assets" / "vibecheck03-customer-admission-rules.v1.json"
+CATALOG_PATH = ROOT / "assets" / "vibecheck03.check-catalog.v1.json"
 EVIDENCE_TYPE = "vibecheck03_diagnostic"
 ROUTE = "VC03_DIAGNOSTIC"
 SOURCE_AUTHORITY = "STANDALONE_OFFLINE"
@@ -35,9 +36,40 @@ def load_rules() -> dict[str, Any]:
     return json.loads(RULES_PATH.read_text(encoding="utf-8"))
 
 
-def _origin(url: str) -> tuple[str, str]:
-    parts = urlsplit(str(url or ""))
-    return parts.scheme.lower(), (parts.hostname or "").lower().rstrip(".")
+DEFAULT_PORTS = {"http": 80, "https": 443}
+
+
+def page_key(url: str) -> tuple[str, str, int | None, str, str] | None:
+    """Exact page identity: scheme, host, effective port, path, query (fragment ignored)."""
+    try:
+        parts = urlsplit(str(url or ""))
+        port = parts.port
+    except ValueError:
+        return None
+    scheme, host = parts.scheme.lower(), (parts.hostname or "").lower().rstrip(".")
+    if not scheme or not host:
+        return None
+    return scheme, host, port or DEFAULT_PORTS.get(scheme), parts.path or "/", parts.query
+
+
+def audited_pages(report: dict[str, Any]) -> set[tuple[str, str, int | None, str, str]]:
+    meta = report.get("meta", {}) if isinstance(report.get("meta"), dict) else {}
+    coverage = report.get("coverage", {}) if isinstance(report.get("coverage"), dict) else {}
+    urls = [meta.get("audited_url")] + [p.get("url") for p in coverage.get("sampled_pages", []) if isinstance(p, dict)]
+    return {k for k in map(page_key, urls) if k}
+
+
+def metric_types() -> dict[str, str]:
+    catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
+    return {m["metric_id"]: m["type"] for c in catalog["checks"] for m in c["metrics"]}
+
+
+def value_matches_type(value: Any, kind: str) -> bool:
+    if kind == "BOOLEAN":
+        return type(value) is bool
+    if kind == "INTEGER":
+        return type(value) is int and value >= 0
+    return False
 
 
 def is_vc03_finding(finding: dict[str, Any]) -> bool:
@@ -68,6 +100,9 @@ def condition_holds(condition: dict[str, Any], values: dict[str, Any]) -> bool:
             return type(value) is int and value in term["in"]
         if "gt" in term:
             return type(value) is int and value > term["gt"]
+        if "lte_metric" in term:
+            other = values.get(term["lte_metric"])
+            return type(value) is int and type(other) is int and value <= other
         return False
 
     if "all" in condition:
@@ -85,11 +120,19 @@ def block_errors(report: dict[str, Any], block: Any) -> list[str]:
     if block.get("source_authority") != SOURCE_AUTHORITY or block.get("score_effect") != "NONE":
         errors.append("VC03_BLOCK_AUTHORITY")
     meta = report.get("meta", {}) if isinstance(report.get("meta"), dict) else {}
-    audited, page = _origin(meta.get("audited_url", "")), _origin(block.get("page_url", ""))
-    if not audited[1] or audited != page:
+    # The page must be one the analysis itself audited (same port, path and query).
+    if page_key(block.get("page_url", "")) not in audited_pages(report):
         errors.append("VC03_BLOCK_PAGE_NOT_AUDITED_SITE")
-    if meta.get("audit_id") and meta.get("audit_id") != block.get("run_id"):
+    # Without an analysis run id there is nothing to bind the VC03 run to: fail closed.
+    if not meta.get("audit_id"):
+        errors.append("VC03_RUN_UNBOUND")
+    elif meta.get("audit_id") != block.get("run_id"):
         errors.append("VC03_RUN_MISMATCH")
+    types = metric_types()
+    for m in block.get("metrics", []):
+        if isinstance(m, dict) and m.get("status") == "OBSERVED" and not value_matches_type(m.get("value"), types.get(str(m.get("metric_id")), "")):
+            errors.append("VC03_VALUE_TYPE_INVALID")
+            break
     metric_ids = [m.get("metric_id") for m in block.get("metrics", []) if isinstance(m, dict)]
     evidence_ids = [e.get("id") for e in block.get("evidence", []) if isinstance(e, dict)]
     if len(metric_ids) != len(set(metric_ids)) or len(evidence_ids) != len(set(evidence_ids)):

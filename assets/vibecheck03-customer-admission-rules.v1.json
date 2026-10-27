@@ -192,6 +192,10 @@
           {
             "metric": "IMG_ALT_MISSING_COUNT",
             "gt": 0
+          },
+          {
+            "metric": "IMG_ALT_MISSING_COUNT",
+            "lte_metric": "IMG_ELEMENT_COUNT"
           }
         ]
       },

@@ -95,5 +95,67 @@
       "status": "OPEN_OUT_OF_SCOPE"
     }
   ],
-  "batch_csv": "Attaching VC03 changes only digest-derived columns audit_id and website_analysis_report; pinned by test_batch_csv_only_digest_columns_change."
+  "batch_csv": "Attaching VC03 changes only digest-derived columns audit_id and website_analysis_report; pinned by test_batch_csv_only_digest_columns_change.",
+  "independent_review": {
+    "round": 1,
+    "reviewed_commit": "08373a7b8e52a2c85c3bba23f3a1209497b83fe8",
+    "reviewed_tree_digest": "f338361a90efc32f0843fadd6f91de41835434f948a7f547457cdf666a0b1544",
+    "reviewer": "separate read-only agent, not the implementer",
+    "constraints_not_refuted": [
+      "core score unchanged",
+      "profile only orders genuine ties (20000-case fuzz, 0 violations)",
+      "no internal tokens in PDF",
+      "squash cannot pass an absent headline"
+    ],
+    "findings": [
+      {
+        "id": "R1",
+        "severity": "medium-high",
+        "summary": "Template inserted unchecked observation values; a non-numeric IMG_ELEMENT_COUNT ('<i>HACK</i>') reached customer PDF text; 0 total images still admitted '2 von 0'.",
+        "fix": "OBSERVED values must match catalog type (VC03_VALUE_TYPE_INVALID, fail closed at attach); _fill accepts only bool/int; ALT rule requires missing <= total (lte_metric).",
+        "status": "CLOSED",
+        "probe": "test_mistyped_observed_value_rejected_at_attach, test_inconsistent_counts_create_no_alt_finding; reviewer probe3 now rejected"
+      },
+      {
+        "id": "R2",
+        "severity": "medium",
+        "summary": "Run binding skipped when meta.audit_id absent; any run_id bound.",
+        "fix": "VC03_RUN_UNBOUND: no analysis run id, no attach.",
+        "status": "CLOSED",
+        "probe": "test_unbound_run_rejected_at_attach"
+      },
+      {
+        "id": "R3",
+        "severity": "medium",
+        "summary": "Page binding compared scheme+host only; other port or unsampled path accepted.",
+        "fix": "Exact page identity (scheme, host, effective port, path, query) against meta.audited_url and coverage.sampled_pages.",
+        "status": "CLOSED",
+        "probe": "test_other_port_rejected_at_attach, test_unsampled_page_rejected_at_attach, test_sampled_subpage_with_default_port_accepted; reviewer probe1 now rejected"
+      },
+      {
+        "id": "R4",
+        "severity": "low",
+        "summary": "A valid legal finding carrying stray VC03 evidence would be removed on attach or forced onto the VC03 route.",
+        "fix": "Valid legal sidecar route keeps precedence; attach removes only derived findings.",
+        "status": "CLOSED",
+        "probe": "test_valid_legal_finding_with_stray_vc03_evidence_keeps_legal_route"
+      },
+      {
+        "id": "R5",
+        "severity": "low",
+        "summary": "Pre-existing: PDF headline check probed only the first 36 chars and skipped empty headlines.",
+        "fix": "Full squashed headline required; empty headline fails.",
+        "status": "CLOSED",
+        "probe": "canary suffix/empty headline -> FAIL; four kept case PDFs PASS"
+      },
+      {
+        "id": "R6",
+        "severity": "low",
+        "summary": "Pre-existing design: client-report-model.json carries evidence_refs/specificity_basis; none reach the PDF.",
+        "fix": "None (model is an internal artifact; PDF leak check covers customer surface).",
+        "status": "ACCEPTED_PRE_EXISTING"
+      }
+    ],
+    "canaries": "Each new guard disabled in a scratch copy turned its test red (type, unbound, page x3, lte, legal precedence, derived-finding)."
+  }
 }

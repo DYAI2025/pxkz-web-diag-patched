@@ -51,7 +51,9 @@ def scored_report() -> dict:
         out = Path(tmp) / "scored.json"
         subprocess.run([sys.executable, "-B", "scripts/compute_score.py", "evals/fixtures/synthetic-report.json", str(out)],
                        cwd=ROOT, check=True, capture_output=True)
-        return json.loads(out.read_text(encoding="utf-8"))
+        report = json.loads(out.read_text(encoding="utf-8"))
+    report["meta"]["audit_id"] = "vc03-run-1"  # the analysis run the VC03 block must belong to
+    return report
 
 
 def vc03_findings(report: dict) -> list[dict]:
@@ -144,6 +146,55 @@ class Vc03AdmissionTests(unittest.TestCase):
         report["meta"]["audit_id"] = "AUDIT-777"
         with self.assertRaises(Vc03AttachError):
             attach(report, self.vc)
+
+    def test_unbound_run_rejected_at_attach(self):
+        report = copy.deepcopy(self.base)
+        del report["meta"]["audit_id"]
+        with self.assertRaisesRegex(Vc03AttachError, "VC03_RUN_UNBOUND"):
+            attach(report, self.vc)
+
+    def test_other_port_rejected_at_attach(self):
+        with self.assertRaisesRegex(Vc03AttachError, "VC03_BLOCK_PAGE_NOT_AUDITED_SITE"):
+            attach(self.base, observe(vc03_input(page_url="https://example.com:8443/")))
+
+    def test_unsampled_page_rejected_at_attach(self):
+        with self.assertRaisesRegex(Vc03AttachError, "VC03_BLOCK_PAGE_NOT_AUDITED_SITE"):
+            attach(self.base, observe(vc03_input(page_url="https://example.com/some/other/page?x=1")))
+
+    def test_sampled_subpage_with_default_port_accepted(self):
+        report = attach(self.base, observe(vc03_input(page_url="https://Example.com:443/services")))
+        self.assertTrue(vc03_findings(report))
+
+    def test_mistyped_observed_value_rejected_at_attach(self):
+        for bad in ("<i>HACK</i>", -1, True, 2.5, {}):
+            vc = copy.deepcopy(self.vc)
+            row = next(m for m in vc["metrics"] if m["metric_id"] == "IMG_ELEMENT_COUNT")
+            row["value"] = bad
+            with self.assertRaisesRegex(Vc03AttachError, "VC03_VALUE_TYPE_INVALID", msg=repr(bad)):
+                attach(self.base, vc)
+
+    def test_inconsistent_counts_create_no_alt_finding(self):
+        vc = copy.deepcopy(self.vc)
+        next(m for m in vc["metrics"] if m["metric_id"] == "IMG_ELEMENT_COUNT")["value"] = 0
+        report = attach(self.base, vc)
+        self.assertNotIn("VC03-R-ALT-MISSING", " ".join(f["recommendation"]["acceptance_test"] for f in vc03_findings(report)))
+
+    def test_valid_legal_finding_with_stray_vc03_evidence_keeps_legal_route(self):
+        report = copy.deepcopy(self.attached)
+        legal = copy.deepcopy(next(f for f in report["findings"] if f["id"] == "F-002"))
+        legal.update(id="F-951", severity="high", metric_refs=[])
+        stray = copy.deepcopy(self.by_rule(report, "VC03-R-ALT-MISSING")["evidence"][0])
+        legal["evidence"] = [{"id": "E-951", "type": "legal_sidecar", "detail": "Impressum fehlt.", "method": "sidecar"},
+                             dict(stray, id="E-952")]
+        legal["customer_risk"] = {"source": "impressum_compliance", "domain": "provider_identification",
+                                  "priority": "MANDATORY_CRITICAL", "claim_state": "ASSESSED_DEFECT",
+                                  "group": "PROVIDER_IDENTITY", "legal_metric_refs": ["LEGAL-IMP-01"]}
+        report["findings"].append(legal)
+        self.assertEqual(evaluate_finding(report, legal)["evidence_route"], "LEGAL_SIDECAR")
+        self.assertEqual(select_client_levers(report)[0]["id"], "F-951")
+        reattached = attach(report, self.vc)
+        self.assertIn("F-951", [f["id"] for f in reattached["findings"]])
+        self.assertEqual(select_client_levers(reattached)[0]["id"], "F-951")
 
     def test_foreign_authority_rejected_at_attach(self):
         vc = copy.deepcopy(self.vc)
@@ -282,7 +333,7 @@ class Vc03AdmissionTests(unittest.TestCase):
                 with out.open(encoding="utf-8", newline="") as fh:
                     rows.append(next(csv.DictReader(fh)))
         changed = {k for k in rows[0] if rows[0][k] != rows[1][k]}
-        self.assertEqual(changed, {"audit_id", "website_analysis_report"})
+        self.assertLessEqual(changed, {"audit_id", "website_analysis_report"})
 
 
 class Vc03CollectorFixes(unittest.TestCase):

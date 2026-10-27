@@ -41,12 +41,21 @@ def _next_id(prefix: str, taken: set[str], start: int) -> tuple[str, int]:
     return f"{prefix}-{n:03d}", n + 1
 
 
+def _derived(finding: dict[str, Any]) -> bool:
+    """A finding this step produced earlier: only VC03 evidence and no legal risk."""
+    evidence = [e for e in finding.get("evidence", []) or [] if isinstance(e, dict)]
+    return bool(evidence) and is_vc03_finding(finding) and not finding.get("customer_risk") \
+        and all(e.get("type") == EVIDENCE_TYPE for e in evidence)
+
+
 def _fill(template: str, values: dict[str, Any], page_url: str) -> str:
     # Tokens: {page_url} and {value:METRIC_ID}; only observed numbers/booleans are inserted.
     def sub(match: re.Match[str]) -> str:
         if match.group(0) == "{page_url}":
             return page_url
         value = values[match.group(1)]
+        if type(value) not in (bool, int):
+            raise Vc03AttachError(f"VC03_VALUE_TYPE_INVALID: {match.group(1)}")
         return str(value).lower() if isinstance(value, bool) else str(value)
 
     return re.sub(r"\{page_url\}|\{value:([A-Z0-9_]+)\}", sub, template)
@@ -62,7 +71,7 @@ def attach(report: dict[str, Any], vc03: dict[str, Any]) -> dict[str, Any]:
 
     out = copy.deepcopy(report)
     out["vibecheck03"] = copy.deepcopy(vc03)
-    kept = [f for f in out.get("findings", []) if not (isinstance(f, dict) and is_vc03_finding(f))]
+    kept = [f for f in out.get("findings", []) if not (isinstance(f, dict) and _derived(f))]
     taken_f = {str(f.get("id")) for f in kept if isinstance(f, dict)}
     taken_e = {str(e.get("id")) for f in kept if isinstance(f, dict) for e in f.get("evidence", []) if isinstance(e, dict)}
     fid_n = eid_n = FIRST_ID

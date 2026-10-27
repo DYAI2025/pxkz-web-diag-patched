@@ -34,9 +34,8 @@ def main(argv):
   return re.sub(r"-\s+", "-", re.sub(r"\s+([,.;:!?])", r"\1", re.sub(r"\s+", " ", str(value)))).casefold()
  normalized = squash(text)
  for finding in model.get('findings',[])[:4]:
-  headline = squash(finding.get('headline',''))
-  probe = headline[:36].rstrip()
-  if probe and probe not in normalized:return fail('lever headline missing: '+str(finding.get('id')))
+  probe = squash(finding.get('headline','')).strip()
+  if not probe or probe not in normalized:return fail('lever headline missing: '+str(finding.get('id')))
  meta=reader.metadata or {}
  if 'Pixelkiez' not in str(meta.get('/Author','')):return fail('PDF author metadata must contain Pixelkiez')
  print(f"PASS: chart-led customer PDF pages={len(reader.pages)} embedded_visuals={receipt['embedded_visual_count']} levers=4")

@@ -124,6 +124,7 @@ def main() -> int:
         for f in c["findings"]:
             if f["id"] in {"F-002", "F-005"}:
                 f["category"] = "ux_conversion"
+        c["meta"]["audit_id"] = "vc03-eval-c"  # VC03 binds only to an identified analysis run
         vc = observe({"run_id": "vc03-eval-c", "page_url": c["meta"]["audited_url"], "html": VC03_HTML,
                       "html_complete": True, "observed_at": "2026-10-27T10:00:00+01:00",
                       "asset_results": {"https://example.com/icon.png": False}})

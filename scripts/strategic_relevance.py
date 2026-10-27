@@ -66,8 +66,9 @@ def evaluate_finding(report: dict[str, Any], finding: dict[str, Any]) -> dict[st
     metrics = _metrics(report)
     linked = [metrics[x] for x in refs if x in metrics]
     legal_ok, legal_refs = _legal_route(finding, evidence)
-    # Non-scoring VC03 diagnostics have their own route and may not borrow a core metric link.
-    vc03 = evaluate_vc03_route(report, finding) if is_vc03_finding(finding) else None
+    # Non-scoring VC03 diagnostics have their own route and may not borrow a core metric link;
+    # only a fully valid legal sidecar route keeps precedence over it.
+    vc03 = evaluate_vc03_route(report, finding) if is_vc03_finding(finding) and not legal_ok else None
 
     reasons: list[str] = []
     if not obs:
