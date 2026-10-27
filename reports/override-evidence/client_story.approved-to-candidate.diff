@@ -1,0 +1,34 @@
+--- approved/scripts/client_story.py
++++ candidate/scripts/client_story.py
+@@ -7,6 +7,7 @@
+ from typing import Any
+ 
+ from strategic_relevance import evaluate_finding
++from branch_priority import preferred_order
+ 
+ REAL_CHARTS = {f"V{i:02d}" for i in range(1, 12)}
+ SEVERITY_RANK = {"critical": 0, "high": 1, "medium": 2, "low": 3, "positive": 4}
+@@ -238,7 +239,11 @@
+     return CONFIDENCE_DE.get(str(value).upper(), str(value).lower() if value else "niedrig")
+ 
+ 
+-def select_client_levers(report: dict[str, Any], max_levers: int = 4) -> list[dict[str, Any]]:
++def select_client_levers(
++    report: dict[str, Any], max_levers: int = 4, *,
++    branch_weights: dict[str, int] | None = None,
++    branch_roles: dict[str, dict[str, Any]] | None = None,
++) -> list[dict[str, Any]]:
+     findings = [
+         f for f in report.get("findings", [])
+         if isinstance(f, dict)
+@@ -246,6 +251,10 @@
+         and evaluate_finding(report, f)["eligible"]
+     ]
+     findings.sort(key=lambda f: (SEVERITY_RANK.get(str(f.get("severity")), 9), -int(f.get("confidence", 0)), str(f.get("id", ""))))
++    # Approved industry priorities reorder only existing evidence-admitted findings
++    # within the same severity band. No profile => legacy byte-for-byte order.
++    if branch_weights is not None:
++        findings = preferred_order(findings, branch_weights, branch_roles or {})
+     selected: list[dict[str, Any]] = []
+     seen_categories: set[str] = set()
+ 

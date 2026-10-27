@@ -1,0 +1,53 @@
+--- approved/scripts/build_client_report_model.py
++++ candidate/scripts/build_client_report_model.py
+@@ -10,6 +10,7 @@
+ 
+ from client_story import clientize, confidence_de, plan_visual_story, select_client_levers
+ from customer_story_semantics import presentation_metadata, semantic_story_summary
++from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority, selection_provenance
+ 
+ SKILL_DIR = Path(__file__).resolve().parent.parent
+ REGISTRY_PATH = SKILL_DIR / "assets" / "measurement-registry.json"
+@@ -133,12 +134,20 @@
+     parser.add_argument("report")
+     parser.add_argument("output")
+     parser.add_argument("--visual-plan")
++    add_priority_arguments(parser)
++    parser.add_argument("--priority-decision-out", help="Internal-only selection provenance, not customer PDF")
+     try:
+         args = parser.parse_args(argv[1:])
+         report = load(Path(args.report))
+         registry = load(REGISTRY_PATH)
+         template = load(TEMPLATE_PATH)
+         external_visual_plan = load(Path(args.visual_plan)) if args.visual_plan else None
++        priority_context, priority_catalog = load_priority_inputs(
++            args.priority_context, args.priority_catalog, args.priority_catalog_sha256
++        )
++        branch_weights, branch_roles, priority_decision = resolve_priority(
++            report, priority_context, priority_catalog, allow_synthetic=args.priority_allow_synthetic
++        )
+     except Exception as exc:
+         return fail(str(exc))
+ 
+@@ -156,7 +165,20 @@
+         [f for f in findings if f.get("severity") == "positive"],
+         key=lambda f: (-int(f.get("confidence", 0)), str(f.get("id", ""))),
+     )
+-    selected_levers = select_client_levers(report, max_levers=4)
++    selected_levers = select_client_levers(
++        report, max_levers=4, branch_weights=branch_weights, branch_roles=branch_roles
++    )
++    selected_ids = [str(f.get("id")) for f in selected_levers]
++    if external_visual_plan is not None and external_visual_plan.get("top_levers", selected_ids) != selected_ids:
++        return fail(
++            "visual plan top_levers differ from customer lever selection: "
++            f"{external_visual_plan.get('top_levers')} != {selected_ids}; build the plan with the same priority inputs"
++        )
++    if args.priority_decision_out:
++        provenance = selection_provenance(report, selected_levers, branch_weights, branch_roles, priority_decision)
++        Path(args.priority_decision_out).write_text(
++            json.dumps(provenance, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
++        )
+ 
+     strengths = [clientize(x, budget("executive_strength", 110)) for x in executive.get("top_strengths", []) if str(x).strip()][:3]
+     if len(strengths) < 3:

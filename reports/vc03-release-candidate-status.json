@@ -68,7 +68,7 @@
       "id": "F4",
       "type": "HUMAN_DECISION",
       "summary": "validate_measurement_platform_baseline invalid_override on 4 protected files; activation needs a new ALLOWED_REASON_PATHS reason",
-      "proposal": "reports/branch-priority-vc03-shared-overrides.PROPOSED.json (canaried in scratch copy: PASS when activated, FAIL on further edit)"
+      "proposal": "reports/branch-priority-vc03-shared-overrides.json (canaried in scratch copy: PASS when activated, FAIL on further edit)"
     },
     {
       "type": "PRE_EXISTING",

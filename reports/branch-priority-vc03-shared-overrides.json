@@ -1,13 +1,7 @@
 {
-  "status": "PENDING_HUMAN_AUTHORIZATION",
+  "status": "PASS",
   "patch_id": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE_PATCH",
-  "authorization_basis": "Execution brief CLAUDE_CODE_PATCH_AUFTRAG.md (TASK-003/004/005) requests these behaviour changes; it does not explicitly authorize extending ALLOWED_REASON_PATHS. A human must approve before this becomes active.",
-  "activation_steps": [
-    "Add 'BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE_PATCH': {scripts/client_story.py, scripts/build_client_report_model.py, scripts/build_visualization_plan.py, scripts/build_audit_deliverables.py} to ALLOWED_REASON_PATHS in scripts/validate_measurement_platform_baseline.py",
-    "Append 'reports/branch-priority-vc03-shared-overrides.json' to OVERRIDE_REPORTS (newest last)",
-    "Rename this file to reports/branch-priority-vc03-shared-overrides.json and set status PASS",
-    "Re-run scripts/validate_measurement_platform_baseline.py; any later edit of these four files invalidates current_sha256"
-  ],
+  "authorization_basis": "Explicit user authorization on 2026-10-28 (answer 'Freigeben (4 Dateien)') after review of reports/override-evidence/override-evidence.json and the per-file diffs against the approved ROLLBACK-BASELINE versions.",
   "scope_note": "Only selection plumbing changes: opt-in priority flags forwarded to plan and model, plan/model top_levers equality check, genuine-tie ordering key (severity, -confidence, -weight). Default output byte-identical (tests/test_legacy_oracles.py). Core registry, weights, anchors and compute_score.py unchanged.",
   "previous_sha256_semantics": "previous_sha256 = last effective approved digest from the three existing override reports; scripts/client_story.py, build_client_report_model.py and build_audit_deliverables.py already diverged from it in commit 236861d (branch-priority candidate), so this entry also covers that unapproved earlier edit.",
   "overrides": [
@@ -39,5 +33,6 @@
       "current_sha256": "d31c18aff27c006fbf8a60ebeba4356d1e154879f70eb5796fd0e506e941df2a",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE_PATCH"
     }
-  ]
+  ],
+  "evidence": "reports/override-evidence/override-evidence.json"
 }

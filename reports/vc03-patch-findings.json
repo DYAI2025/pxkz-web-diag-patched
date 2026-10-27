@@ -50,7 +50,7 @@
       "id": "F4",
       "class": "policy_gate",
       "summary": "Protected baseline reports invalid_override for client_story, build_client_report_model, build_visualization_plan, build_audit_deliverables.",
-      "fix": "Hash-bound proposal reports/branch-priority-vc03-shared-overrides.PROPOSED.json; activation needs human authorization of a new ALLOWED_REASON_PATHS reason.",
+      "fix": "Hash-bound proposal reports/branch-priority-vc03-shared-overrides.json; activation needs human authorization of a new ALLOWED_REASON_PATHS reason.",
       "probe": "scripts/validate_measurement_platform_baseline.py .",
       "status": "OPEN_HUMAN_DECISION"
     },

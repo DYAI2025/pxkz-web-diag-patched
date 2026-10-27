@@ -1,0 +1,117 @@
+{
+  "schema": "pixelkiez.override-evidence.v1",
+  "purpose": "Verifiable diff and hash evidence for the four protected-file overrides proposed in reports/branch-priority-vc03-shared-overrides.json. Evidence only; override NOT activated.",
+  "approved_source": {
+    "artifact": "pixelkiez-website-diagnosis-ROLLBACK-BASELINE.zip",
+    "sha256": "0ba0bc673b1bb681483e9195098a07f116dce5edcd238c8387ed83ff372982aa",
+    "relation": "installed skill baseline (reports/patch-lineage.json prior_candidates[0]); its four files equal the last effective approved digests of the existing override chain"
+  },
+  "approved_definition": "previous_sha256 = digest after applying strategic-relevance, impressum-compliance and impressum-customer-truth override reports in order",
+  "files": [
+    {
+      "path": "scripts/build_visualization_plan.py",
+      "baseline_sha256": "baf5d85df264a812165d4ba0fb534619e0ab5b9f3a601b8011955164358be954",
+      "approved_sha256": "49065426ff29f12c54572ee5004374b472b94e4dc820eaf6cd3b01267a74b655",
+      "commit_236861d_sha256": "49065426ff29f12c54572ee5004374b472b94e4dc820eaf6cd3b01267a74b655",
+      "candidate_sha256": "0a7446a230cd7955a245e0609b39ca2fd6137fea82ecca59a234af90c86cf4bc",
+      "diff_files": {
+        "approved-to-candidate": "reports/override-evidence/build_visualization_plan.approved-to-candidate.diff",
+        "approved-to-236861d": "reports/override-evidence/build_visualization_plan.approved-to-236861d.diff",
+        "236861d-to-candidate": "reports/override-evidence/build_visualization_plan.236861d-to-candidate.diff"
+      },
+      "lines_added_removed": {
+        "approved-to-candidate": [
+          9,
+          1
+        ],
+        "approved-to-236861d": [
+          0,
+          0
+        ],
+        "236861d-to-candidate": [
+          9,
+          1
+        ]
+      }
+    },
+    {
+      "path": "scripts/build_audit_deliverables.py",
+      "baseline_sha256": "b8d3ba5536a2054d2545c17ef2868950597a2fdf7c01bf9dae2a4adf1bae203b",
+      "approved_sha256": "9f2377910e17d918dde2827b060fce218f7aef71647f61a0d2853746d86f07e3",
+      "commit_236861d_sha256": "090e25f2f144b7540abf6d49e2bcd0f8d4f76f2c8e9fa389e1c25d877872634d",
+      "candidate_sha256": "c283fef4e559a42a553cd0122eafed8f55bef81d97248ad7475935491d011713",
+      "diff_files": {
+        "approved-to-candidate": "reports/override-evidence/build_audit_deliverables.approved-to-candidate.diff",
+        "approved-to-236861d": "reports/override-evidence/build_audit_deliverables.approved-to-236861d.diff",
+        "236861d-to-candidate": "reports/override-evidence/build_audit_deliverables.236861d-to-candidate.diff"
+      },
+      "lines_added_removed": {
+        "approved-to-candidate": [
+          23,
+          2
+        ],
+        "approved-to-236861d": [
+          14,
+          1
+        ],
+        "236861d-to-candidate": [
+          15,
+          7
+        ]
+      }
+    },
+    {
+      "path": "scripts/client_story.py",
+      "baseline_sha256": "3798a2babca162db109ce7750b324b7e1c993eb1ba48f1ab0afe4bebba230b2d",
+      "approved_sha256": "d732f8a2ba9d091b8dbe176d865fc4bcce093797422e6ac1012551e200835f5c",
+      "commit_236861d_sha256": "30d766f3e5a98441c2b3e0224a37ae308377f14cf8eff89f15ecaadba6d47939",
+      "candidate_sha256": "30d766f3e5a98441c2b3e0224a37ae308377f14cf8eff89f15ecaadba6d47939",
+      "diff_files": {
+        "approved-to-candidate": "reports/override-evidence/client_story.approved-to-candidate.diff",
+        "approved-to-236861d": "reports/override-evidence/client_story.approved-to-236861d.diff",
+        "236861d-to-candidate": "reports/override-evidence/client_story.236861d-to-candidate.diff"
+      },
+      "lines_added_removed": {
+        "approved-to-candidate": [
+          10,
+          1
+        ],
+        "approved-to-236861d": [
+          10,
+          1
+        ],
+        "236861d-to-candidate": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "path": "scripts/build_client_report_model.py",
+      "baseline_sha256": "433a909ec9bb38b29a4864f468d2cdf66a4a83b1beef0fdada2f6db8716a538e",
+      "approved_sha256": "5a3c1c8a1a78cb2134aea3608fe0e17b9e5a1bac1cfd320d975d6b100edabce9",
+      "commit_236861d_sha256": "8dcf72eaa382fe59064c5f8265ac42ebecebeca18d63f1d017cac9a673664b17",
+      "candidate_sha256": "d31c18aff27c006fbf8a60ebeba4356d1e154879f70eb5796fd0e506e941df2a",
+      "diff_files": {
+        "approved-to-candidate": "reports/override-evidence/build_client_report_model.approved-to-candidate.diff",
+        "approved-to-236861d": "reports/override-evidence/build_client_report_model.approved-to-236861d.diff",
+        "236861d-to-candidate": "reports/override-evidence/build_client_report_model.236861d-to-candidate.diff"
+      },
+      "lines_added_removed": {
+        "approved-to-candidate": [
+          23,
+          1
+        ],
+        "approved-to-236861d": [
+          30,
+          1
+        ],
+        "236861d-to-candidate": [
+          16,
+          23
+        ]
+      }
+    }
+  ],
+  "reproduce": "for each file: unzip -p pixelkiez-website-diagnosis-ROLLBACK-BASELINE.zip pixelkiez-website-diagnosis/<path> | shasum -a 256  (must equal approved_sha256); git show 236861d:<path>; diff -u against the candidate file"
+}
