@@ -9,7 +9,8 @@ from __future__ import annotations
 import hashlib, json, sys
 from pathlib import Path
 
-EXCLUDED_PREFIXES = ("reports/", "dist/")
+# Same boundary as pipeline_ledger.digest: whole path components, plus compiled caches.
+EXCLUDED_DIRS = {"reports", "dist", "__pycache__", ".git", ".pytest_cache"}
 
 def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -19,10 +20,10 @@ def controlled(root: Path) -> dict[str, str]:
     for path in root.rglob("*"):
         if not path.is_file():
             continue
-        rel = path.relative_to(root).as_posix()
-        if rel.startswith(EXCLUDED_PREFIXES) or "__pycache__" in rel or rel.endswith((".pyc", ".pyo")):
+        rel = path.relative_to(root)
+        if set(rel.parts) & EXCLUDED_DIRS or path.suffix in {".pyc", ".pyo"}:
             continue
-        out[rel] = sha(path)
+        out[rel.as_posix()] = sha(path)
     return out
 
 def fail(message: str) -> int:
