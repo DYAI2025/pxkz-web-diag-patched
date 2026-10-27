@@ -1,0 +1,285 @@
+{
+  "schema": "pixelkiez.patch-lineage.v1",
+  "task": "TASK-001",
+  "observed_at": "2026-10-27",
+  "brief": {
+    "path": "CLAUDE_CODE_PATCH_AUFTRAG.md",
+    "sha256": "9d6b02beb7e3fdf40e8a894e63c656c75a6521ea65da8f9c2b145dec6f14ee4f",
+    "tracked": false
+  },
+  "baseline": {
+    "git_commit": "236861d9a89d29dd8f8f8350795befc9572cc750",
+    "git_tag": "baseline/pre-vc03-customer-report",
+    "branch": "feature/pixelkiez-vc03-customer-report-release",
+    "tracked_file_count": 367,
+    "pipeline_ledger_tree_digest_including_untracked": "796eaf0ae7dc0cbda7dc7e9ce8fd85bf0f5b2aac5e74786c3c269c860d208d1d",
+    "note": "digest_tree includes untracked files (.DS_Store, CLAUDE.md, brief, PRODUCT_ROADMAP.md, 'README Kopie.md', inputs/); value is volatile until those are excluded or removed from the candidate tree."
+  },
+  "input_digests": {
+    "inputs/ENTERPRISE_SKILL_CREATOR_VC03_PATCH_ORDER.txt": "b4ed34120908b74782a1f610c91668a2711158e8f17b78e50971a22a810fe232",
+    "inputs/PXAPI_VibeCheck03_Integration_Proposal.zip": "46f0822fe5d196b898ec8e840a73881c4574fcd47f1fa3176e0c572befd509a5",
+    "enterprise-skill-patch-order-branch-priority.xml": "dcb5d7a3177b5f6fab57f3f5d25b6e96e0728976dccf1e13630157e9b363fa71"
+  },
+  "prior_candidates": [
+    {
+      "artifact": "pixelkiez-website-diagnosis-ROLLBACK-BASELINE.zip",
+      "sha256": "0ba0bc673b1bb681483e9195098a07f116dce5edcd238c8387ed83ff372982aa",
+      "file_count": 338,
+      "relation": "equals installed skill engine manifest (338/338 files matched)",
+      "status": "INSTALLED_BASELINE"
+    },
+    {
+      "artifact": "pixelkiez-vibecheck03-PARTIAL-PATCH.zip",
+      "sha256": "a63fd4f31dbb2b9ec141fc35ad07266c7daa462c1d95ee95a22e499948ce9912",
+      "file_count": 19,
+      "relation": "all files identical to HEAD except SKILL.md (merged in HEAD)",
+      "status": "PATCH_PARTIALLY_IMPLEMENTED",
+      "release_gate": "BLOCKED"
+    },
+    {
+      "artifact": "pixelkiez-website-diagnosis-BRANCH-PRIORITY-CANDIDATE.zip",
+      "sha256": "a04d41989ed3725bfac1d937f79543b69f134f9df507964dbb530abbb48d1b13",
+      "file_count": 366,
+      "relation": "HEAD == candidate + enterprise-skill-patch-order-branch-priority.xml",
+      "status": "CANDIDATE_NOT_RELEASED"
+    },
+    {
+      "artifact": "pixelkiez_claude_handoff_2026-10-27.zip",
+      "sha256": "c68bbfd6124b552a7d4a2c9dc6e88e63dab8d26ecf20f25a97c395d81a898713",
+      "status": "HANDOFF_CONTEXT_ONLY"
+    }
+  ],
+  "missing_previous_candidate": false,
+  "protected_component_sha256_at_baseline": {
+    "assets/measurement-registry.json": "b527f71f397b2f95194ec35f2b85e6ff68024ab90ed25c65d2eccc255a93acac",
+    "assets/capability-registry.json": "0616474e57be73ccaa9cd330d788167557f6874861b21a1660cd63d0d0d9c1b9",
+    "assets/core-evidence-bindings.active.v1.json": "09a3b2e2ce8d6b264347af53e9423df87c367d4c475a97940cc24fb415927f09",
+    "scripts/compute_score.py": "1df90b548be6ec0af857a932c43c2d9b30442ccd993420a00b62acc2ad6c56c6",
+    "scripts/materialize_core_metrics.py": "d184f6c42571ab38d3112af2c0c7b7f4b1021001813b8daf3229639ec884e509",
+    "scripts/validate_core_score_admission.py": "f0e1b7d9268640386b187a2101f53005851bb2dfb75d3f10f43444c41c78f7d9",
+    "scripts/core_active_measurement.py": "7ec37e9eaf7420c5b5c64adfdc548d44840de13ff946c495e7f343a0c8f33d84",
+    "scripts/strategic_relevance.py": "d8204aad515a2097a34623e53b7474f46e8bef836a8fb7b46b2448fd6c514669",
+    "scripts/render_diagnosis_pdf.py": "411d7adfe8952de7b5dd60f566b0384ccfc3ceda8b7b4b5c83378b471f474ea1",
+    "templates/presentation.html.j2": "d375b0df2818297bf1372f38d3080a73fb7fda798f24b614f21d004f48e20737",
+    "scripts/build_elevenlabs_batch_csv.py": "1523a159116efb278a6e244b8ef57739da4623c0d27bc880dd2d7bfc8056ad63",
+    "scripts/batch_contract.py": "591da086ba48c72abd943e72bdf0ed2b42d62176f429bf13c9e256d9ba699c69",
+    "contracts/pixelkiez-elevenlabs-batch-contract-v1.3.json": "ed9924084c479c3627ceb2648ef301162d5b99bbfddfe3fefe265c7cec915d38",
+    "scripts/client_story.py": "30d766f3e5a98441c2b3e0224a37ae308377f14cf8eff89f15ecaadba6d47939",
+    "scripts/build_client_report_model.py": "8dcf72eaa382fe59064c5f8265ac42ebecebeca18d63f1d017cac9a673664b17",
+    "scripts/build_internal_analysis_report.py": "95acd0171e2713cc3ea8f89f62c51e9e756e79b55f09e74e4f2ff3db64012843",
+    "scripts/build_audit_deliverables.py": "090e25f2f144b7540abf6d49e2bcd0f8d4f76f2c8e9fa389e1c25d877872634d",
+    "scripts/build_visualization_plan.py": "49065426ff29f12c54572ee5004374b472b94e4dc820eaf6cd3b01267a74b655",
+    "schemas/diagnosis-report.schema.json": "3af3c246749698ba428e1817a34610d8bbf9099c0e14a026c128d73fe0378884",
+    "schemas/analysis-report.schema.json": "4013ff69e3d329985d651182c310489333484609cc056d084a32017ca95bfca0",
+    "SKILL.md": "f9ac4291252b7b8378545bc03c2ef5a78def21bbac29daa506756034614814aa",
+    "scripts/branch_priority.py": "60ec09d9e37c87169afbf937c8f173ee03f26b342f7b88c92d62a210b8816290",
+    "scripts/vibecheck03.py": "c6b35310282238fb63fedff3c437991ef18ce64a782437c173ed39691087d8e4"
+  },
+  "requirements": {
+    "BP-001": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "PARTIAL",
+      "evidence": "lineage diffs reproduced; this file closes the record"
+    },
+    "BP-002": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "IMPLEMENTED",
+      "evidence": "branch_priority.validate_structured + tests; catalog NO_APPROVED_PROFILES_REGISTERED"
+    },
+    "BP-003": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "PARTIAL",
+      "evidence": "FIRST_PARTY_PUBLIC host-bound; OWNER_CONFIRMED/goal evidence_ref unresolved free string"
+    },
+    "BP-004": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "PARTIAL",
+      "evidence": "preferred_order sorts weight before confidence: profile can reorder non-ties"
+    },
+    "BP-005": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "PARTIAL",
+      "evidence": "roles axis/business_mechanism schema-only, no reader"
+    },
+    "BP-006": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "BROKEN",
+      "evidence": "plan top_levers computed without weights; render_diagnosis_pdf requires identical 4 -> build fails with --priority-context"
+    },
+    "BP-007": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "IMPLEMENTED_UNVERIFIED",
+      "evidence": "SKILL.md + references/branch-aware-customer-prioritization.md present"
+    },
+    "BP-008": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "IMPLEMENTED",
+      "evidence": "test_untrusted_website_text_cannot_activate_profile"
+    },
+    "BP-009": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "PARTIAL",
+      "evidence": "no e2e priority eval, no PDF cases"
+    },
+    "BP-010": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "BLOCKED",
+      "evidence": "no independent evaluator receipt; release gate BLOCKED"
+    },
+    "PATCH-REQ-001": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "PARTIAL"
+    },
+    "PATCH-REQ-002": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "PARTIAL",
+      "evidence": "no unit/sample_scope/denominator per row"
+    },
+    "PATCH-REQ-003": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "PARTIAL",
+      "evidence": "FIND-06 reuse declared only"
+    },
+    "PATCH-REQ-004": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "PARTIAL",
+      "evidence": "head-only parser false negative"
+    },
+    "PATCH-REQ-005": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "PARTIAL",
+      "evidence": "offline fixture only; no live probe (out of scope for this patch)"
+    },
+    "PATCH-REQ-006": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "PARTIAL",
+      "evidence": "alt_markup_coverage_pct not computed"
+    },
+    "PATCH-REQ-007": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "PARTIAL",
+      "evidence": "offline scenario input only"
+    },
+    "PATCH-REQ-008": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "PARTIAL"
+    },
+    "PATCH-REQ-009": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "IMPLEMENTED",
+      "evidence": "score_effect NONE; customer_eligible const false"
+    },
+    "PATCH-REQ-010": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "MISSING",
+      "evidence": "no attach step, no customer admission route"
+    },
+    "PATCH-REQ-011": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "PARTIAL",
+      "evidence": "STANDALONE_OFFLINE only; PXAPI adapter raises"
+    },
+    "PATCH-REQ-012": {
+      "PRIOR_PATCH_STATUS_AT_BASELINE": "PARTIAL",
+      "evidence": "no source-map / BASE_REQUIRED entries"
+    }
+  },
+  "conflicts": [
+    {
+      "id": "C1",
+      "what": "protected baseline invalid_override",
+      "paths": [
+        "scripts/build_audit_deliverables.py",
+        "scripts/client_story.py",
+        "scripts/build_client_report_model.py"
+      ],
+      "cause": "BP candidate edited pinned files without override report; no ALLOWED_REASON_PATHS reason exists"
+    },
+    {
+      "id": "C2",
+      "what": "plan/model lever divergence under priority context",
+      "paths": [
+        "scripts/build_visualization_plan.py:109",
+        "scripts/render_diagnosis_pdf.py:125-129"
+      ]
+    },
+    {
+      "id": "C3",
+      "what": "release-gate-report.json self-contradiction (status BLOCKED vs final_decision PACKAGE_AUTHORIZED)",
+      "paths": [
+        "reports/release-gate-report.json"
+      ]
+    },
+    {
+      "id": "C4",
+      "what": "brief says ~7 pages; template yields N+5 = 9-12; release gate expects platform proof page_count 12",
+      "paths": [
+        "templates/presentation.html.j2"
+      ]
+    },
+    {
+      "id": "C5",
+      "what": "stale evidence: PASS_16 branch tests vs 18 defs; quick_validate PASS recorded for differently named dir",
+      "paths": [
+        "reports/branch-priority-validation.json"
+      ]
+    }
+  ],
+  "gate_baseline_sweep": {
+    "env": "python3.12 venv, weasyprint 68, EXACT Schibsted Grotesk + IBM Plex Mono via PIXELKIEZ_FONT_DIR (scratch, not committed), playwright chromium",
+    "head_vs_rollback_nonzero": {
+      "validate_measurement_platform_baseline": [
+        1,
+        0
+      ],
+      "validate_installability": [
+        1,
+        0
+      ],
+      "validate_pipeline_ledger": [
+        1,
+        0
+      ],
+      "validate_release_gate": [
+        1,
+        0
+      ],
+      "run_measurement_gateway_evals": [
+        1,
+        0
+      ],
+      "validate_full_48_active": [
+        1,
+        1
+      ],
+      "validate_strategic_relevance_v321_preservation": [
+        1,
+        1
+      ],
+      "run_release_gate_mutation_evals": [
+        1,
+        1
+      ]
+    },
+    "classification": {
+      "regression_from_bp_candidate": [
+        "validate_measurement_platform_baseline",
+        "run_measurement_gateway_evals",
+        "validate_installability",
+        "validate_pipeline_ledger",
+        "validate_release_gate"
+      ],
+      "pre_existing": [
+        "validate_full_48_active (stale digests)",
+        "validate_strategic_relevance_v321_preservation",
+        "run_release_gate_mutation_evals (ImportError validate_reports)"
+      ]
+    },
+    "all_other_gates": "rc 0 at HEAD incl. run_fixture_eval, run_reporting_bundle_evals, run_client_marketing_evals, run_browser_measurement_evals, unittest 36 passed"
+  },
+  "accepted_artifacts": [
+    "scripts/vibecheck03.py",
+    "scripts/branch_priority.py",
+    "assets/vibecheck03.*",
+    "schemas/vibecheck03-diagnostics.schema.json",
+    "schemas/branch-priority.schema.json",
+    "assets/branch-priority-profiles.v1.json",
+    "tests/test_vibecheck03.py",
+    "tests/test_branch_priority.py"
+  ],
+  "missing_artifacts": [
+    "VC03 attach step",
+    "VC03 customer admission route",
+    "e2e priority eval",
+    "differentiated PDF cases",
+    "branch-priority shared-override report",
+    "independent evaluator receipt"
+  ],
+  "open_findings": [
+    "F1 plan/model mismatch (C2)",
+    "F2 weight-before-confidence",
+    "F3 VC03 route + core-metric reuse bypass",
+    "F4 invalid_override (C1)",
+    "F5 parser head-only false negative",
+    "F6 validated_roles raises without applicable profile"
+  ]
+}

@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority  # noqa: E402
 from client_story import clientize, select_client_levers  # noqa: E402
 from strategic_relevance import eligible_findings  # noqa: E402
 from visualization_policy import apply_customer_visual_budget, CUSTOMER_MIN_VISUALS  # noqa: E402
@@ -95,6 +96,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("report")
     ap.add_argument("output")
+    add_priority_arguments(ap)
     args = ap.parse_args()
     report_path, output = Path(args.report).resolve(), Path(args.output).resolve()
     root = Path(__file__).resolve().parents[1]
@@ -106,7 +108,13 @@ def main() -> int:
         metrics = [x for x in report.get("metrics", []) if isinstance(x, dict)]
         metric_by_id = {str(x.get("id")): x for x in metrics}
         findings = eligible_findings(report)
-        levers = select_client_levers(report, 4)
+        priority_context, priority_catalog = load_priority_inputs(
+            args.priority_context, args.priority_catalog, args.priority_catalog_sha256
+        )
+        branch_weights, branch_roles, _ = resolve_priority(
+            report, priority_context, priority_catalog, allow_synthetic=args.priority_allow_synthetic
+        )
+        levers = select_client_levers(report, 4, branch_weights=branch_weights, branch_roles=branch_roles)
         if len(levers) != 4:
             raise ValueError("exactly four strategically relevant customer levers are required")
         visuals: list[dict[str, Any]] = []

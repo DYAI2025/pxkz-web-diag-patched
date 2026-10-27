@@ -1,6 +1,6 @@
 # Vibe-Check #03 — bounded, non-scoring diagnostic contract
 
-This extension is **offline/fixture-capable, not a complete live-browser or live-probe implementation**. It reads pre-acquired permitted page HTML and optional separately verified external asset, 404 or isolated UI scenario observations. It performs **zero network requests**, writes only a requested output file, and does not create customer findings. A dynamic runtime/secure HTTP acquisition adapter and customer evidence-admission integration require additional work and test evidence before release.
+This extension is **offline/fixture-capable, not a complete live-browser or live-probe implementation**. It reads pre-acquired permitted page HTML and optional separately verified external asset, 404 or isolated UI scenario observations. It performs **zero network requests**, writes only a requested output file, and never creates customer findings itself. A dynamic runtime/secure HTTP acquisition adapter is still not implemented. Customer admission is a separate, opt-in attach step (see *Customer projection*).
 
 ## Families and interpretation
 
@@ -18,9 +18,29 @@ Input requires `run_id`, `page_url`, `html`, `html_complete` (full selected-page
 
 Output has 20 stable metrics, one authority and run/page binding, unique evidence refs, `OBSERVED`/`NOT_ASSESSED`, no score effect, and no admitted customer findings. Existing 48 Core metric IDs and score processing remain immutable.
 
-## Customer projection
+Parser note: `<link>`/`<meta>` count when inside `<head>` or before the first body element (HTML5 implied head); metadata inside the body does not count. The input key is `ui_scenario` (one object); the plural `ui_scenarios` is rejected instead of silently ignored.
 
-Do not add a customer finding from these rows automatically. Required future adapter: validate evidence id/run/page, directly observed status, business mechanism, proportionate action and retest; then route through existing Strategic Relevance and legal priority, retaining four levers. Without this integration the extension is internal-only, and customer release is blocked.
+## Customer projection (route `VC03_DIAGNOSTIC`, opt-in)
+
+`python scripts/attach_vibecheck03_findings.py scored-report.json diagnostics.json attached-report.json`
+
+The attach step embeds the validated block as `report.vibecheck03` and derives candidate findings only from the versioned rule table `assets/vibecheck03-customer-admission-rules.v1.json`. It refuses a block whose page is not on the audited origin, whose `run_id` differs from `meta.audit_id` (when present), or whose authority is not `STANDALONE_OFFLINE`. Metrics, score and categories stay byte-identical; re-running is idempotent.
+
+Customer-candidate rules (severity `low`, confidence 3, no `metric_refs`, no `customer_risk`):
+
+| Rule | Defect condition (all cited rows `OBSERVED`) | Category |
+|---|---|---|
+| `VC03-R-ICON-UNAVAILABLE` | `SITE_ICON_FETCH_OK = false` | trust_privacy_content |
+| `VC03-R-PREVIEW-INCOMPLETE` | any of og:title/type/url/image `= false` (complete sample) | findability_seo |
+| `VC03-R-PREVIEW-IMAGE-UNAVAILABLE` | og:image declared, `OG_IMAGE_FETCH_OK = false` | findability_seo |
+| `VC03-R-ERROR-PAGE-NO-HOME` | authorized unknown route HTTP 404/410 and no home link | ux_conversion |
+| `VC03-R-ALT-MISSING` | `IMG_ALT_MISSING_COUNT > 0` (complete sample) | accessibility |
+
+Internal only: HTTP 200 on an unknown route (`SOFT_404_HYPOTHESIS_INTERNAL_ONLY`), UI scenario observations (`MANUAL_REVIEW_REQUIRED`), missing contact link alone, empty alt attributes, every `NOT_ASSESSED` row.
+
+`strategic_relevance.evaluate_finding` routes any finding with `vibecheck03_diagnostic` evidence exclusively through `VC03_DIAGNOSTIC` (a core-metric link cannot be borrowed). Rejection reasons: `VC03_BLOCK_MISSING`, `VC03_BLOCK_AUTHORITY`, `VC03_BLOCK_PAGE_NOT_AUDITED_SITE`, `VC03_RUN_MISMATCH`, `VC03_BLOCK_CONFLICT`, `VC03_EVIDENCE_UNRESOLVED`, `VC03_PAGE_MISMATCH`, `VC03_VALUE_CONFLICT`, `VC03_NO_MATCHING_RULE`, `VC03_RULE_NOT_SATISFIED`, `VC03_SOURCE_CONFLICT` (same metric from a second source, never merged), `VC03_DUPLICATE_OBSERVATION`, `VC03_CORE_METRIC_REFS_FORBIDDEN`, `VC03_CUSTOMER_RISK_FORBIDDEN`, `VC03_SEVERITY_CAP`, `VC03_NO_RETEST`, `VC03_NO_BUSINESS_MECHANISM`, `VC03_FORBIDDEN_CLAIM` (percentages, revenue, conversion, legal certainty, platform/ranking claims).
+
+Eligible VC03 findings then compete in the unchanged lever selection: legal mandatory and critical/high findings stay ahead, at most four levers. Customer copy comes from fixed German templates and observed counts only; page text is never copied. The internal report records `vibecheck03_admission` (eligible, rejected with reasons, internal-only, not assessed; `not_assessed_is_negative: false`). End-to-end proof: `scripts/run_vc03_customer_release_evals.py`.
 
 ## PXAPI migration
 

@@ -131,8 +131,19 @@ def main() -> int:
         lines += ["## Vibe-Check #03 (nicht scorewirksam)", ""]
         if vc:
             lines += [f"- Run: {text(vc.get('run_id'))}", f"- URL: {text(vc.get('page_url'))}", ""]
+            lines += [f"- Quelle: {text(vc.get('source_authority'))} | Stichprobe vollständig: {text(vc.get('sample_complete'))} | Score-Wirkung: {text(vc.get('score_effect'))}", ""]
             for row in vc.get('metrics',[]):
-                if isinstance(row,dict): lines.append(f"- `{text(row.get('metric_id'))}`: {text(row.get('status'))} / {text(row.get('value'))} / {text(row.get('reason'))} / {text(row.get('evidence_ref'))}")
+                if isinstance(row,dict): lines.append(f"- `{text(row.get('metric_id'))}`: {text(row.get('status'))} / {text(row.get('value'))} / {text(row.get('reason'))} / {text(row.get('evidence_ref'))} | {text(row.get('method'))} {text(row.get('collector_version'))} | {text(row.get('observed_at'))} | Review: {text(row.get('manual_review_required'))} | Szenario: {text(row.get('scenario'))}")
+            if vc.get('metrics'):
+                lines += ["", f"- Grenze: {text(vc['metrics'][0].get('claim_boundary'))}"]
+            adm=data.get("vibecheck03_admission") if isinstance(data.get("vibecheck03_admission"),dict) else None
+            if adm:
+                lines += ["", "### Kundenzulassung VC03 (Route VC03_DIAGNOSTIC)", "", f"- Regelversion: {text(adm.get('rules_version'))} | Bindungsfehler: {text(', '.join(adm.get('binding_errors') or []) or 'keine')}"]
+                for rule in adm.get("rules", []):
+                    detail = "; ".join(f"{text(x.get('finding_id'))}: {text(', '.join(x.get('reasons') or []) or 'zulässig')}{' (Kundenhebel)' if x.get('selected_in_default_customer_levers') else ' (nicht unter den vier Hebeln)'}" for x in rule.get("findings", []))
+                    missing = ", ".join(rule.get("not_assessed_metrics") or [])
+                    lines.append(f"- `{text(rule.get('rule_id'))}`: {text(rule.get('status'))}" + (f" | {detail}" if detail else "") + (f" | nicht bewertet: {missing}" if missing else ""))
+                lines.append("- Nicht bewertete Signale gelten nicht als Schwäche.")
         else: lines.append("- Keine Vibe-Check-03-Diagnostik angefügt.")
         lines.append("")
         lines += ["## Quellen und Methoden", ""]

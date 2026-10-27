@@ -29,9 +29,12 @@ def main(argv):
  if hits:return fail('internal material leaked: '+', '.join(hits))
  m=JARGON.search(text)
  if m:return fail('customer jargon leaked: '+m.group(0))
- normalized = re.sub(r"\s+", " ", text).casefold()
+ # pypdf can emit kerning gaps before punctuation ("lesbar , aber") and after hyphens ("browser- tab").
+ def squash(value):
+  return re.sub(r"-\s+", "-", re.sub(r"\s+([,.;:!?])", r"\1", re.sub(r"\s+", " ", str(value)))).casefold()
+ normalized = squash(text)
  for finding in model.get('findings',[])[:4]:
-  headline = re.sub(r"\s+", " ", str(finding.get('headline',''))).casefold()
+  headline = squash(finding.get('headline',''))
   probe = headline[:36].rstrip()
   if probe and probe not in normalized:return fail('lever headline missing: '+str(finding.get('id')))
  meta=reader.metadata or {}

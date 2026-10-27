@@ -11,6 +11,10 @@ from __future__ import annotations
 import re
 from typing import Any
 
+from vibecheck03_admission import ROUTE as VC03_ROUTE
+from vibecheck03_admission import evaluate_route as evaluate_vc03_route
+from vibecheck03_admission import is_vc03_finding
+
 STRATEGIC_QUESTION = (
     "H\u00e4tte ein Unternehmer, der mit dieser Website oder dem beworbenen Produkt/Service Geld verdient, "
     "einen strategischen Vorteil, wenn er diese Information kennt?"
@@ -62,6 +66,8 @@ def evaluate_finding(report: dict[str, Any], finding: dict[str, Any]) -> dict[st
     metrics = _metrics(report)
     linked = [metrics[x] for x in refs if x in metrics]
     legal_ok, legal_refs = _legal_route(finding, evidence)
+    # Non-scoring VC03 diagnostics have their own route and may not borrow a core metric link.
+    vc03 = evaluate_vc03_route(report, finding) if is_vc03_finding(finding) else None
 
     reasons: list[str] = []
     if not obs:
@@ -73,7 +79,9 @@ def evaluate_finding(report: dict[str, Any], finding: dict[str, Any]) -> dict[st
     if not evidence:
         reasons.append("NO_EVIDENCE")
 
-    if legal_ok:
+    if vc03 is not None:
+        reasons.extend(vc03["reasons"])
+    elif legal_ok:
         pass
     elif not refs or not linked:
         reasons.append("NO_WEBSITE_OR_LEGAL_EVIDENCE_LINK")
@@ -83,16 +91,20 @@ def evaluate_finding(report: dict[str, Any], finding: dict[str, Any]) -> dict[st
     process_surface = " ".join([title, obs, impact])
     if PROCESS_ONLY_RX.search(process_surface):
         reasons.append("INTERNAL_PROCESS_INFORMATION")
-    return {
+    result = {
         "eligible": not reasons,
         "question": STRATEGIC_QUESTION,
         "reasons": reasons or ["STRATEGIC_RELEVANCE_CONFIRMED"],
         "linked_assessed_metrics": [
             str(m.get("id")) for m in linked if str(m.get("measurement_class")) != "not_assessed"
-        ],
-        "linked_legal_refs": legal_refs if legal_ok else [],
-        "evidence_route": "LEGAL_SIDECAR" if legal_ok else "CORE_METRIC",
+        ] if vc03 is None else [],
+        "linked_legal_refs": legal_refs if legal_ok and vc03 is None else [],
+        "evidence_route": VC03_ROUTE if vc03 is not None else "LEGAL_SIDECAR" if legal_ok else "CORE_METRIC",
     }
+    if vc03 is not None:
+        result["linked_vc03_refs"] = vc03["vc03_refs"]
+        result["vc03_rule_id"] = vc03["rule_id"]
+    return result
 
 
 def eligible_findings(report: dict[str, Any], *, include_positive: bool = False) -> list[dict[str, Any]]:

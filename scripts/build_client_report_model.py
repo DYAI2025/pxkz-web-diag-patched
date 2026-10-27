@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import sys
 from pathlib import Path
@@ -11,7 +10,7 @@ from typing import Any
 
 from client_story import clientize, confidence_de, plan_visual_story, select_client_levers
 from customer_story_semantics import presentation_metadata, semantic_story_summary
-from branch_priority import choose_priority, validated_roles, load_json as load_priority_json
+from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority, selection_provenance
 
 SKILL_DIR = Path(__file__).resolve().parent.parent
 REGISTRY_PATH = SKILL_DIR / "assets" / "measurement-registry.json"
@@ -135,9 +134,7 @@ def main(argv: list[str]) -> int:
     parser.add_argument("report")
     parser.add_argument("output")
     parser.add_argument("--visual-plan")
-    parser.add_argument("--priority-context", help="Optional sourced sector/business-model context JSON")
-    parser.add_argument("--priority-catalog", help="Optional approved industry weights catalog; no default estimates")
-    parser.add_argument("--priority-catalog-sha256", help="Required exact SHA-256 for any external priority catalog")
+    add_priority_arguments(parser)
     parser.add_argument("--priority-decision-out", help="Internal-only selection provenance, not customer PDF")
     try:
         args = parser.parse_args(argv[1:])
@@ -145,19 +142,12 @@ def main(argv: list[str]) -> int:
         registry = load(REGISTRY_PATH)
         template = load(TEMPLATE_PATH)
         external_visual_plan = load(Path(args.visual_plan)) if args.visual_plan else None
-        priority_context = load_priority_json(Path(args.priority_context)) if args.priority_context else None
-        if args.priority_catalog:
-            candidate = Path(args.priority_catalog)
-            observed_sha = hashlib.sha256(candidate.read_bytes()).hexdigest()
-            if not args.priority_catalog_sha256 or observed_sha != args.priority_catalog_sha256.lower():
-                raise ValueError("external industry catalog requires matching --priority-catalog-sha256")
-            priority_catalog = load_priority_json(candidate)
-        elif args.priority_catalog_sha256:
-            raise ValueError("priority catalog digest supplied without catalog")
-        else:
-            priority_catalog = None
-        branch_weights, priority_decision = choose_priority(report, priority_context, priority_catalog)
-        branch_roles = validated_roles(report, priority_context)
+        priority_context, priority_catalog = load_priority_inputs(
+            args.priority_context, args.priority_catalog, args.priority_catalog_sha256
+        )
+        branch_weights, branch_roles, priority_decision = resolve_priority(
+            report, priority_context, priority_catalog, allow_synthetic=args.priority_allow_synthetic
+        )
     except Exception as exc:
         return fail(str(exc))
 
@@ -178,13 +168,16 @@ def main(argv: list[str]) -> int:
     selected_levers = select_client_levers(
         report, max_levers=4, branch_weights=branch_weights, branch_roles=branch_roles
     )
+    selected_ids = [str(f.get("id")) for f in selected_levers]
+    if external_visual_plan is not None and external_visual_plan.get("top_levers", selected_ids) != selected_ids:
+        return fail(
+            "visual plan top_levers differ from customer lever selection: "
+            f"{external_visual_plan.get('top_levers')} != {selected_ids}; build the plan with the same priority inputs"
+        )
     if args.priority_decision_out:
-        priority_decision["selected_lever_ids"] = [str(f.get("id")) for f in selected_levers]
-        priority_decision["candidate_role_ids"] = sorted(branch_roles)
-        priority_decision["customer_pdf_contains_priority_metadata"] = False
-        priority_decision["canonical_core_score_unchanged"] = True
+        provenance = selection_provenance(report, selected_levers, branch_weights, branch_roles, priority_decision)
         Path(args.priority_decision_out).write_text(
-            json.dumps(priority_decision, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+            json.dumps(provenance, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
         )
 
     strengths = [clientize(x, budget("executive_strength", 110)) for x in executive.get("top_strengths", []) if str(x).strip()][:3]

@@ -499,3 +499,11 @@ sources:
 - `S-BP-002` — Canonical installed skill, `scripts/client_story.py`, `references/strategic-relevance-customer-output-contract.md`, 48-metric registry. `type: primary` for current target behavior; inspected and frozen locally; confidence 5 for observed code.
 - `S-BP-003` — VibeCheck03 partial patch and associated provided patch order. `type: user_provided / derived`; suitable for intended check coverage and prior implementation state, not proof of production release; confidence 4 for stated requirements, 2 for unverified live status.
 - `S-BP-004` — Industry weight availability. `type: uncertain`; `SOURCE_NEEDED`: no verified, approved sector-weight source was found in the inspected installed selection/registry artifacts; default profile catalog is intentionally empty. Never call the six canonical score-category weights sector benchmarks.
+
+## VC03 customer admission and genuine-tie prioritization patch sources (27 October 2026)
+
+- `S-VC03-001` — Execution brief `CLAUDE_CODE_PATCH_AUFTRAG.md` (TASK-001…006). `type: user_provided`; authority for scope, admission conditions and tie semantics; not evidence of implementation.
+- `S-VC03-002` — `inputs/ENTERPRISE_SKILL_CREATOR_VC03_PATCH_ORDER.txt` (SHA-256 `b4ed3412…`) and `inputs/PXAPI_VibeCheck03_Integration_Proposal.zip` (SHA-256 `46f0822f…`). `type: user_provided`; five check families, 20 signals, acceptance cases T01–T20.
+- `S-VC03-003` — `assets/vibecheck03-customer-admission-rules.v1.json`. `type: derived` product policy (Pixelkiez); defect rules and German copy templates; no outcome, benchmark or legal claim; confidence 3 per admitted finding.
+- `S-VC03-004` — Synthetic fixtures `evals/fixtures/branch-priority-*.SYNTHETIC.json`. `type: synthetic test data`; never a sector weight source; honored only in test mode.
+

@@ -10,7 +10,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from branch_priority import (BranchPriorityError, choose_priority, load_json,
-                             preferred_order, validated_roles)
+                             preferred_order, resolve_priority, selection_provenance,
+                             validated_roles)
 from client_story import select_client_levers
 
 CATS = ("findability_seo", "performance_technology", "ux_conversion", "accessibility", "trust_privacy_content", "ai_readiness")
@@ -201,6 +202,100 @@ class BranchPriorityTests(unittest.TestCase):
         self.assertEqual(out1, out2)
         self.assertEqual(orig, report)
         self.assertFalse("score_summary" in report)
+
+
+def ids(levers: list[dict]) -> list[str]:
+    return [x["id"] for x in levers]
+
+
+class GenuineTieAndFallbackTests(unittest.TestCase):
+    """TASK-004: profiles differentiate only genuine ties; bad profiles are ignored, not fatal."""
+
+    def test_profile_never_overrides_confidence(self):
+        report, ctx, catalog = data()
+        report["findings"][0]["confidence"] = 5  # F-100 findability, low goal weight
+        report["findings"][1]["confidence"] = 3  # F-200 ux, goal weight 60
+        w, _ = choose_priority(report, ctx, catalog)
+        self.assertEqual(ids(select_client_levers(report, branch_weights=w))[0], "F-100")
+
+    def test_profile_breaks_genuine_tie(self):
+        report, ctx, catalog = data()
+        w, roles, d = resolve_priority(report, ctx, catalog, allow_synthetic=True)
+        self.assertEqual(d["mode"], "APPROVED_OWNER_GOAL_PROFILE")
+        self.assertEqual(ids(select_client_levers(report, branch_weights=w, branch_roles=roles))[0], "F-200")
+
+    def test_invalid_profiles_ignored_and_recorded(self):
+        def wrong_sum(r, c, k): k["profiles"][0]["category_weights"]["findability_seo"] = 50
+        def duplicate(r, c, k): k["profiles"].append(copy.deepcopy(k["profiles"][0]))
+        def ambiguous(r, c, k):
+            clone = copy.deepcopy(k["profiles"][0]); clone["profile_id"] = "SIM-RETAIL-02"; k["profiles"].append(clone)
+        def guessed_goal(r, c, k): c["goal"]["source"] = "MODEL_GUESS"
+        def wrong_identity(r, c, k): c["identity"]["evidence_ref"] = "DOES-NOT-EXIST"
+        def foreign_host(r, c, k): r["sources"][0]["location"] = "https://other.example.net/about"
+        def role_mismatch(r, c, k): c["roles"][0]["evidence_refs"] = ["EV-UNRELATED"]
+        for mutate in (wrong_sum, duplicate, ambiguous, guessed_goal, wrong_identity, foreign_host, role_mismatch):
+            with self.subTest(mutate.__name__):
+                report, ctx, catalog = data()
+                legacy = ids(select_client_levers(report))
+                mutate(report, ctx, catalog)
+                w, roles, d = resolve_priority(report, ctx, catalog, allow_synthetic=True)
+                self.assertIsNone(w)
+                self.assertEqual(roles, {})
+                self.assertEqual(d["mode"], "LEGACY_PRIORITY")
+                self.assertTrue(d["uncertainty"])
+                self.assertEqual(ids(select_client_levers(report, branch_weights=w, branch_roles=roles)), legacy)
+
+    def test_synthetic_profile_ignored_outside_test_mode(self):
+        report, ctx, catalog = data()
+        w, roles, d = resolve_priority(report, ctx, catalog)
+        self.assertIsNone(w)
+        self.assertIn("SYNTHETIC_PROFILE_NOT_FOR_CUSTOMER_USE", json.dumps(d["uncertainty"]))
+        w2, _, d2 = resolve_priority(report, ctx, catalog, allow_synthetic=True)
+        self.assertIsNotNone(w2)
+        self.assertTrue(d2["synthetic_test_profile"])
+
+    def test_roles_without_applicable_profile_do_not_break_legacy(self):
+        report, ctx, catalog = data()
+        ctx["industry_id"] = "another_sector"
+        ctx["roles"][0]["evidence_refs"] = ["EV-UNRELATED"]
+        w, roles, d = resolve_priority(report, ctx, catalog, allow_synthetic=True)
+        self.assertIsNone(w)
+        self.assertEqual(roles, {})
+        self.assertEqual(d["reason"], "NO_APPROVED_APPLICABLE_PROFILE")
+
+    def test_no_context_is_exact_legacy(self):
+        report, _, catalog = data()
+        w, roles, d = resolve_priority(report, None, catalog)
+        self.assertEqual((w, roles, d["mode"], d.get("uncertainty", [])), (None, {}, "LEGACY_PRIORITY", []))
+
+    def test_deviation_has_machine_readable_reason_and_profile(self):
+        report, ctx, catalog = data()
+        w, roles, d = resolve_priority(report, ctx, catalog, allow_synthetic=True)
+        selected = select_client_levers(report, branch_weights=w, branch_roles=roles)
+        prov = selection_provenance(report, selected, w, roles, d)
+        self.assertEqual(prov["legacy_selected_ids"], ids(select_client_levers(report)))
+        self.assertEqual(prov["selected_lever_ids"], ids(selected))
+        self.assertTrue(prov["deviations"])
+        for dev in prov["deviations"]:
+            self.assertEqual(dev["profile_id"], "SIM-RETAIL-01")
+            self.assertEqual(dev["reason"], "APPROVED_PROFILE_GENUINE_TIE_ORDER")
+            self.assertIn("legacy_rank", dev)
+            self.assertIn("selected_rank", dev)
+
+    def test_no_deviation_without_profile(self):
+        report, _, catalog = data()
+        selected = select_client_levers(report)
+        prov = selection_provenance(report, selected, None, {}, choose_priority(report, None, catalog)[1])
+        self.assertEqual(prov["deviations"], [])
+
+    def test_four_lever_cap_and_score_neutral(self):
+        report, ctx, catalog = data()
+        for n in range(4):
+            report["findings"].append(finding(f"F-4{n}0", "ux_conversion", "UX-02"))
+        before = copy.deepcopy(report)
+        w, roles, _ = resolve_priority(report, ctx, catalog, allow_synthetic=True)
+        self.assertEqual(len(select_client_levers(report, branch_weights=w, branch_roles=roles)), 4)
+        self.assertEqual(before, report)
 
 
 if __name__ == "__main__":

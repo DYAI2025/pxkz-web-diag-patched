@@ -157,9 +157,9 @@ A SERP sample is a dated snapshot, not proof of stable ranking share.
 
 When measurement enrichment is requested or available, keep two ranking truths separate: a query/location/device/timestamp-bound current SERP observation and Search Console's authorized historical average position. Never invent one global website rank. A customer-visible Google result-page number is permitted only when the SERP source explicitly returns the page field.
 
-## Vibe-Check #03 (candidate / internal-only)
+## Vibe-Check #03 (candidate, non-scoring)
 
-For five supplementary site-quality families (favicon, Open Graph, optional 404 navigation, image alt markup, and isolated UI feedback), read `references/vibecheck03-diagnostics.md`. `scripts/vibecheck03.py` produces 20 **non-scoring**, page-bound diagnostic signals from already acquired evidence. Live probe/browser collectors and customer finding admission are not released; do not claim them. Core 48 scoring and four customer levers remain unchanged.
+For five supplementary site-quality families (favicon, Open Graph, optional 404 navigation, image alt markup, and isolated UI feedback), read `references/vibecheck03-diagnostics.md`. `scripts/vibecheck03.py` produces 20 **non-scoring**, page-bound diagnostic signals from already acquired evidence. Optional customer admission: `scripts/attach_vibecheck03_findings.py` adds rule-derived low-severity findings that pass only the `VC03_DIAGNOSTIC` evidence route (same run/page, observed values, retest); `NOT_ASSESSED` is never a weakness. Live probe/browser collectors are not implemented; do not claim them. Core 48 scoring is unchanged and the four-lever limit and legal priority stay protected.
 
 ## Measurement enrichment
 

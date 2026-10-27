@@ -1,0 +1,99 @@
+{
+  "schema": "pixelkiez.patch-findings.v1",
+  "work_item": "CLAUDE_CODE_PATCH_AUFTRAG VC03 customer report release",
+  "observed_at": "2026-10-27",
+  "red_first": {
+    "description": "New tests ran before implementation and failed for the expected reason.",
+    "collection_errors": [
+      "tests/test_branch_priority.py: ImportError resolve_priority",
+      "tests/test_vibecheck03_admission.py: ModuleNotFoundError attach_vibecheck03_findings"
+    ],
+    "failed": [
+      "test_priority_pipeline::test_model_refuses_plan_with_other_levers",
+      "test_priority_pipeline::test_non_tie_keeps_legacy_order",
+      "test_priority_pipeline::test_plan_and_model_agree_under_profile",
+      "test_priority_pipeline::test_synthetic_catalog_ignored_without_test_flag"
+    ],
+    "canaries": [
+      "legacy oracle: SEVERITY_RANK swap -> 3 failures, restored -> green",
+      "VC03 route reasons disabled -> 10 failures, restored -> green",
+      "validate_pdf_output with foreign headline -> FAIL lever headline missing",
+      "proposed baseline override activated in scratch copy -> PASS; one further byte in client_story.py -> FAIL invalid_override"
+    ]
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "class": "regression_in_candidate",
+      "summary": "Plan and model chose levers independently; with a priority context the plan ignored weights and render_diagnosis_pdf could render other levers than the model.",
+      "fix": "Both builders receive identical priority args; model fails closed when plan.top_levers differ.",
+      "probe": "tests/test_priority_pipeline.py; run_vc03_customer_release_evals case B",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F2",
+      "class": "regression_in_candidate",
+      "summary": "preferred_order sorted category weight before confidence, so a profile could overtake a higher-confidence finding.",
+      "fix": "Key (severity, -confidence, -weight, role, id): profiles only order genuine ties.",
+      "probe": "test_branch_priority::GenuineTieAndFallbackTests.test_profile_never_overrides_confidence",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F3",
+      "class": "missing_feature_and_bypass",
+      "summary": "VC03 had no customer route; a VC03 finding could borrow a core metric_ref and pass the CORE_METRIC route.",
+      "fix": "VC03_DIAGNOSTIC route; VC03 evidence forces that route and forbids metric_refs.",
+      "probe": "tests/test_vibecheck03_admission.py (34 tests)",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F4",
+      "class": "policy_gate",
+      "summary": "Protected baseline reports invalid_override for client_story, build_client_report_model, build_visualization_plan, build_audit_deliverables.",
+      "fix": "Hash-bound proposal reports/branch-priority-vc03-shared-overrides.PROPOSED.json; activation needs human authorization of a new ALLOWED_REASON_PATHS reason.",
+      "probe": "scripts/validate_measurement_platform_baseline.py .",
+      "status": "OPEN_HUMAN_DECISION"
+    },
+    {
+      "id": "F5",
+      "class": "collector_false_negative",
+      "summary": "vibecheck03 parser ignored link/meta outside an explicit <head>; plural ui_scenarios key silently dropped.",
+      "fix": "Implied-head handling; plural key rejected.",
+      "probe": "tests/test_vibecheck03_admission.py::Vc03CollectorFixes",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F6",
+      "class": "regression_in_candidate",
+      "summary": "validated_roles raised even when no profile applied, breaking legacy fallback.",
+      "fix": "resolve_priority returns exact legacy plus recorded uncertainty.",
+      "probe": "test_roles_without_applicable_profile_do_not_break_legacy",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F7",
+      "class": "validator_false_negative",
+      "summary": "validate_pdf_output compared headlines against pypdf text that inserts kerning gaps ('lesbar , aber', 'browser- tab'); any reordered lever with such text failed.",
+      "fix": "Normalize whitespace before punctuation and after hyphens on both sides.",
+      "probe": "run_vc03_customer_release_evals cases B/C; foreign-headline canary still FAIL",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F8",
+      "class": "copy_budget",
+      "summary": "VC03 observation copy (120 chars) was truncated in the 110-char category summary.",
+      "fix": "All VC03 observations <= 110 chars; test asserts it.",
+      "probe": "test_no_internal_tokens_in_customer_fields",
+      "status": "CLOSED"
+    },
+    {
+      "id": "F9",
+      "class": "pre_existing_layout",
+      "summary": "Page 9 card 3 bottom line overlaps the page footer; identical in the legacy baseline PDF.",
+      "fix": "None in this patch (presentation template is protected; no layout redesign in scope).",
+      "probe": "rendered page-009.png legacy vs case C",
+      "status": "OPEN_OUT_OF_SCOPE"
+    }
+  ],
+  "batch_csv": "Attaching VC03 changes only digest-derived columns audit_id and website_analysis_report; pinned by test_batch_csv_only_digest_columns_change."
+}

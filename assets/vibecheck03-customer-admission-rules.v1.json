@@ -1,0 +1,263 @@
+{
+  "rules_id": "PXK_VC03_CUSTOMER_ADMISSION",
+  "version": "1.0.0",
+  "status": "ACTIVE_OPT_IN",
+  "policy": {
+    "score_effect": "NONE",
+    "max_severity": "low",
+    "route": "VC03_DIAGNOSTIC",
+    "admission_requires": [
+      "same run and page as report.vibecheck03",
+      "every evidence metric OBSERVED with evidence_ref",
+      "rule condition re-evaluated on block values",
+      "business mechanism, action and retest present",
+      "single source authority STANDALONE_OFFLINE"
+    ],
+    "never_customer": [
+      "NOT_ASSESSED rows",
+      "soft-404 hypothesis",
+      "UI scenarios without manual review",
+      "contact-link absence alone",
+      "empty alt attributes"
+    ],
+    "copy_source": "fixed German templates; page content never copied into customer text"
+  },
+  "rules": [
+    {
+      "rule_id": "VC03-R-ICON-UNAVAILABLE",
+      "check_id": "VC03-01",
+      "customer_admission": true,
+      "category": "trust_privacy_content",
+      "severity": "low",
+      "confidence": 3,
+      "evidence_metrics": [
+        "SITE_ICON_DECLARED",
+        "SITE_ICON_FETCH_OK"
+      ],
+      "condition": {
+        "all": [
+          {
+            "metric": "SITE_ICON_FETCH_OK",
+            "eq": false
+          }
+        ]
+      },
+      "copy": {
+        "title": "Kein eigenes Website-Symbol im Browser-Tab",
+        "client_observation": "Für die untersuchte Seite ließ sich kein eigenes Website-Symbol für Browser-Tab und Lesezeichen abrufen.",
+        "client_impact": "Zwischen vielen offenen Tabs ist die Seite schwerer wiederzufinden.",
+        "client_action": "Ein eigenes Website-Symbol hinterlegen und im Browser-Tab sichtbar kontrollieren.",
+        "observation": "Vibe-Check #03: SITE_ICON_FETCH_OK observed false for {page_url} (declared={value:SITE_ICON_DECLARED}).",
+        "business_relevance": "Ein fehlendes Website-Symbol kann die Wiedererkennung im Browser erschweren; eine Wirkung auf Anfragen ist damit nicht belegt.",
+        "recommendation_action": "Favicon und Apple-Touch-Icon bereitstellen, im Head deklarieren und öffentlich abrufbar halten.",
+        "owner": "Frontend",
+        "horizon": "0_30_days"
+      },
+      "acceptance_test": "Retest VC03-R-ICON-UNAVAILABLE: erneuter Vibe-Check-#03-Lauf auf {page_url} mit verifiziertem Asset-Abruf ergibt SITE_ICON_FETCH_OK = true."
+    },
+    {
+      "rule_id": "VC03-R-PREVIEW-INCOMPLETE",
+      "check_id": "VC03-02",
+      "customer_admission": true,
+      "category": "findability_seo",
+      "severity": "low",
+      "confidence": 3,
+      "evidence_metrics": [
+        "OG_TITLE_PRESENT",
+        "OG_TYPE_PRESENT",
+        "OG_URL_PRESENT",
+        "OG_IMAGE_PRESENT"
+      ],
+      "condition": {
+        "any": [
+          {
+            "metric": "OG_TITLE_PRESENT",
+            "eq": false
+          },
+          {
+            "metric": "OG_TYPE_PRESENT",
+            "eq": false
+          },
+          {
+            "metric": "OG_URL_PRESENT",
+            "eq": false
+          },
+          {
+            "metric": "OG_IMAGE_PRESENT",
+            "eq": false
+          }
+        ]
+      },
+      "copy": {
+        "title": "Für geteilte Links fehlen Vorschau-Angaben",
+        "client_observation": "Auf der untersuchten Seite fehlen Angaben, die Titel, Bild, Typ oder Adresse einer Link-Vorschau festlegen.",
+        "client_impact": "Geteilte Links können ohne passendes Bild oder Titel erscheinen und wirken weniger einladend.",
+        "client_action": "Titel, Bild, Typ und Adresse für die Link-Vorschau hinterlegen und die Vorschau erneut aufrufen.",
+        "observation": "Vibe-Check #03: required Open Graph properties on {page_url}: og:title={value:OG_TITLE_PRESENT}, og:type={value:OG_TYPE_PRESENT}, og:url={value:OG_URL_PRESENT}, og:image={value:OG_IMAGE_PRESENT}.",
+        "business_relevance": "Unvollständige Vorschau-Angaben können geteilte Links weniger aussagekräftig darstellen; die Darstellung einzelner Plattformen ist damit nicht belegt.",
+        "recommendation_action": "og:title, og:type, og:url und og:image im Head hinterlegen; og:description optional ergänzen.",
+        "owner": "Frontend & Inhalt",
+        "horizon": "0_30_days"
+      },
+      "acceptance_test": "Retest VC03-R-PREVIEW-INCOMPLETE: erneuter Vibe-Check-#03-Lauf auf {page_url} mit vollständigem HTML ergibt alle vier Pflicht-Properties = true."
+    },
+    {
+      "rule_id": "VC03-R-PREVIEW-IMAGE-UNAVAILABLE",
+      "check_id": "VC03-02",
+      "customer_admission": true,
+      "category": "findability_seo",
+      "severity": "low",
+      "confidence": 3,
+      "evidence_metrics": [
+        "OG_IMAGE_PRESENT",
+        "OG_IMAGE_FETCH_OK"
+      ],
+      "condition": {
+        "all": [
+          {
+            "metric": "OG_IMAGE_PRESENT",
+            "eq": true
+          },
+          {
+            "metric": "OG_IMAGE_FETCH_OK",
+            "eq": false
+          }
+        ]
+      },
+      "copy": {
+        "title": "Das Vorschaubild geteilter Links ist nicht abrufbar",
+        "client_observation": "Die Seite nennt ein Vorschaubild für geteilte Links, das Bild selbst ließ sich jedoch nicht abrufen.",
+        "client_impact": "Geteilte Links können ohne passendes Bild oder Titel erscheinen und wirken weniger einladend.",
+        "client_action": "Das Vorschaubild öffentlich erreichbar machen und die Link-Vorschau erneut aufrufen.",
+        "observation": "Vibe-Check #03: og:image declared on {page_url}, OG_IMAGE_FETCH_OK observed false.",
+        "business_relevance": "Ein nicht abrufbares Vorschaubild kann geteilte Links ohne Bild erscheinen lassen; die Darstellung einzelner Plattformen ist damit nicht belegt.",
+        "recommendation_action": "Bild-URL in og:image prüfen und öffentlich ohne Anmeldung ausliefern.",
+        "owner": "Frontend & Betrieb",
+        "horizon": "0_30_days"
+      },
+      "acceptance_test": "Retest VC03-R-PREVIEW-IMAGE-UNAVAILABLE: erneuter Vibe-Check-#03-Lauf auf {page_url} mit verifiziertem Asset-Abruf ergibt OG_IMAGE_FETCH_OK = true."
+    },
+    {
+      "rule_id": "VC03-R-ERROR-PAGE-NO-HOME",
+      "check_id": "VC03-03",
+      "customer_admission": true,
+      "category": "ux_conversion",
+      "severity": "low",
+      "confidence": 3,
+      "evidence_metrics": [
+        "UNKNOWN_ROUTE_HTTP_STATUS",
+        "ERROR_PAGE_HOME_LINK_PRESENT"
+      ],
+      "condition": {
+        "all": [
+          {
+            "metric": "UNKNOWN_ROUTE_HTTP_STATUS",
+            "in": [
+              404,
+              410
+            ]
+          },
+          {
+            "metric": "ERROR_PAGE_HOME_LINK_PRESENT",
+            "eq": false
+          }
+        ]
+      },
+      "copy": {
+        "title": "Die Fehlerseite führt nicht zur Startseite zurück",
+        "client_observation": "Eine nicht vorhandene Adresse zeigt eine Fehlerseite ohne sichtbaren Weg zurück zur Startseite.",
+        "client_impact": "Wer über einen veralteten Link kommt, kann dort abbrechen, statt weiter zu suchen.",
+        "client_action": "Auf der Fehlerseite Links zur Startseite und zum Kontakt ergänzen und erneut aufrufen.",
+        "observation": "Vibe-Check #03: authorized unknown-route scenario on {page_url} returned HTTP {value:UNKNOWN_ROUTE_HTTP_STATUS}; home link present={value:ERROR_PAGE_HOME_LINK_PRESENT}.",
+        "business_relevance": "Eine Fehlerseite ohne Rückweg kann Besucher an dieser Stelle zum Abbruch bringen; wie oft das geschieht, ist damit nicht belegt.",
+        "recommendation_action": "Fehlerseite mit Link zur Startseite, Kontakt und Suche ausstatten; Statuscode 404/410 beibehalten.",
+        "owner": "Frontend",
+        "horizon": "0_30_days"
+      },
+      "acceptance_test": "Retest VC03-R-ERROR-PAGE-NO-HOME: erneutes autorisiertes Unknown-Route-Szenario auf demselben Host ergibt HTTP 404/410 und ERROR_PAGE_HOME_LINK_PRESENT = true."
+    },
+    {
+      "rule_id": "VC03-R-ALT-MISSING",
+      "check_id": "VC03-04",
+      "customer_admission": true,
+      "category": "accessibility",
+      "severity": "low",
+      "confidence": 3,
+      "evidence_metrics": [
+        "IMG_ELEMENT_COUNT",
+        "IMG_ALT_MISSING_COUNT"
+      ],
+      "condition": {
+        "all": [
+          {
+            "metric": "IMG_ALT_MISSING_COUNT",
+            "gt": 0
+          }
+        ]
+      },
+      "copy": {
+        "title": "Bilder ohne hinterlegte Textbeschreibung",
+        "client_observation": "{value:IMG_ALT_MISSING_COUNT} von {value:IMG_ELEMENT_COUNT} Bildern auf der untersuchten Seite haben im Seitencode keine hinterlegte Textbeschreibung.",
+        "client_impact": "Wer sich die Seite vorlesen lässt, erfährt bei diesen Bildern nicht, was sie zeigen.",
+        "client_action": "Inhaltliche Bilder kurz beschreiben, Schmuckbilder leer kennzeichnen und danach erneut zählen.",
+        "observation": "Vibe-Check #03: {value:IMG_ALT_MISSING_COUNT} of {value:IMG_ELEMENT_COUNT} img elements on {page_url} have no alt attribute (markup count, not semantic alt quality).",
+        "business_relevance": "Fehlende Bildbeschreibungen erschweren die Nutzung mit Vorlesefunktion; die inhaltliche Qualität vorhandener Beschreibungen ist damit nicht bewertet.",
+        "recommendation_action": "alt-Attribute ergänzen: inhaltliche Bilder beschreiben, dekorative Bilder mit alt=\"\" kennzeichnen.",
+        "owner": "Frontend & Inhalt",
+        "horizon": "0_30_days"
+      },
+      "acceptance_test": "Retest VC03-R-ALT-MISSING: erneuter Vibe-Check-#03-Lauf auf {page_url} mit vollständigem HTML ergibt IMG_ALT_MISSING_COUNT = 0; Beschreibungsqualität separat manuell prüfen."
+    },
+    {
+      "rule_id": "VC03-R-SOFT-404",
+      "check_id": "VC03-03",
+      "customer_admission": false,
+      "internal_reason": "SOFT_404_HYPOTHESIS_INTERNAL_ONLY",
+      "evidence_metrics": [
+        "UNKNOWN_ROUTE_HTTP_STATUS"
+      ],
+      "condition": {
+        "all": [
+          {
+            "metric": "UNKNOWN_ROUTE_HTTP_STATUS",
+            "in": [
+              200
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "rule_id": "VC03-R-UI-FEEDBACK",
+      "check_id": "VC03-05",
+      "customer_admission": false,
+      "internal_reason": "MANUAL_REVIEW_REQUIRED",
+      "evidence_metrics": [
+        "UI_LOADING_FEEDBACK_OBSERVED",
+        "UI_ERROR_FEEDBACK_OBSERVED",
+        "UI_ERROR_RECOVERY_OBSERVED",
+        "UI_STATUS_ANNOUNCED_TO_A11Y_API"
+      ],
+      "condition": {
+        "any": [
+          {
+            "metric": "UI_LOADING_FEEDBACK_OBSERVED",
+            "eq": false
+          },
+          {
+            "metric": "UI_ERROR_FEEDBACK_OBSERVED",
+            "eq": false
+          },
+          {
+            "metric": "UI_ERROR_RECOVERY_OBSERVED",
+            "eq": false
+          },
+          {
+            "metric": "UI_STATUS_ANNOUNCED_TO_A11Y_API",
+            "eq": false
+          }
+        ]
+      }
+    }
+  ]
+}
