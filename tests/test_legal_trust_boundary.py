@@ -1,0 +1,84 @@
+"""Legal customer-risk findings are admitted only as the exact projection of a supplied sidecar."""
+from __future__ import annotations
+
+import copy
+import json
+import subprocess
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from attach_impressum_findings import finding_from  # noqa: E402
+from impressum_compliance import assess_case  # noqa: E402
+from legal_customer_projection import resolve_projection  # noqa: E402
+from validate_impressum_projection import validate  # noqa: E402
+
+CASES = json.loads((ROOT / "evals/fixtures/impressum-compliance-cases.json").read_text(encoding="utf-8"))["cases"]
+GOLDEN = next(c for c in CASES if c.get("id") == "LEG-GOLD-BFL")
+
+
+def golden_sidecar() -> dict:
+    return assess_case(GOLDEN["context"], GOLDEN["observations"], root=ROOT, discovery_scope={"complete": True})
+
+
+def report_with(finding: dict) -> dict:
+    report = json.loads((ROOT / "evals/fixtures/synthetic-report.json").read_text(encoding="utf-8"))
+    report["findings"].append(finding)
+    return report
+
+
+class ProjectionValidatorTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.sidecar = golden_sidecar()
+        self.finding = finding_from(self.sidecar, 99)
+
+    def test_genuine_projection_passes(self) -> None:
+        self.assertEqual(validate(self.sidecar, report_with(self.finding)), [])
+
+    def test_internal_only_sidecar_rejects_any_legal_finding(self) -> None:
+        empty = {"results": []}
+        self.assertEqual(resolve_projection(empty)["priority"], "INTERNAL_ONLY")
+        errors = validate(empty, report_with(self.finding))
+        self.assertTrue(any("INTERNAL_ONLY" in e for e in errors), errors)
+
+    def test_group_must_match_resolver(self) -> None:
+        forged = copy.deepcopy(self.finding)
+        forged["customer_risk"]["group"] = "PROVIDER_INFORMATION" if forged["customer_risk"]["group"] == "PROVIDER_IDENTITY" else "PROVIDER_IDENTITY"
+        self.assertIn("customer_risk group does not match resolver", validate(self.sidecar, report_with(forged)))
+
+    def test_legal_refs_must_equal_resolver(self) -> None:
+        forged = copy.deepcopy(self.finding)
+        forged["customer_risk"]["legal_metric_refs"] = forged["customer_risk"]["legal_metric_refs"] + ["LEGAL-IMP-11"]
+        forged["metric_refs"] = forged["metric_refs"] + ["LEGAL-IMP-11"]
+        self.assertIn("customer_risk legal_metric_refs do not match resolver", validate(self.sidecar, report_with(forged)))
+
+    def test_second_legal_finding_is_rejected(self) -> None:
+        stray = copy.deepcopy(self.finding)
+        stray["id"] = "F-930"
+        report = report_with(self.finding)
+        report["findings"].append(stray)
+        self.assertTrue(any("exactly one" in e for e in validate(self.sidecar, report)))
+
+
+class BuilderRequiresSidecarTest(unittest.TestCase):
+    def test_legal_claim_without_sidecar_fails_closed(self) -> None:
+        finding = finding_from(golden_sidecar(), 99)
+        with tempfile.TemporaryDirectory(prefix="pxk-legal-boundary-") as td:
+            t = Path(td)
+            src = t / "report.json"
+            src.write_text(json.dumps(report_with(finding), ensure_ascii=False), encoding="utf-8")
+            scored = t / "scored.json"
+            subprocess.run([sys.executable, "-B", str(ROOT / "scripts/compute_score.py"), str(src), str(scored)], check=True, capture_output=True)
+            proc = subprocess.run(
+                [sys.executable, "-B", str(ROOT / "scripts/build_audit_deliverables.py"), str(scored), str(t / "out"), "--release-mode", "proof"],
+                capture_output=True, text=True, timeout=300,
+            )
+        self.assertNotEqual(proc.returncode, 0, proc.stdout[-500:])
+        self.assertIn("LEGAL_SIDECAR_REQUIRED", proc.stderr + proc.stdout)
+
+
+if __name__ == "__main__":
+    unittest.main()

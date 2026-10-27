@@ -1,0 +1,13 @@
+diff --git a/templates/presentation.html.j2 b/templates/presentation.html.j2
+index fc20f81..0053b17 100644
+--- a/templates/presentation.html.j2
++++ b/templates/presentation.html.j2
+@@ -50,7 +50,7 @@
+ </section>
+ {% endfor %}
+ 
+-<section class="page orange">
++<section class="page orange levers">
+   <div class="header"><div class="brand">Pixelkiez.</div><div class="eyebrow">{{ '%02d'|format(visuals|length + 3) }} · VIER HEBEL</div></div>
+   <div class="section-title"><h2>Vier konkrete Hebel – jeweils mit nächstem Schritt.</h2><p>Vier priorisierte Geschäftshebel mit konkretem nächsten Schritt.</p></div>
+   <div class="lever-grid">
