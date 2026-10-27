@@ -2,10 +2,13 @@
 """Validate the Pixelkiez Website Diagnosis release gate for the visual/reporting architecture."""
 from __future__ import annotations
 
+import hashlib
 import json
 import subprocess
 import sys
 from pathlib import Path
+
+from semantic_release_evidence import semantic_bundle_digest
 
 
 def fail(message: str) -> int:
@@ -18,6 +21,60 @@ def tree_digest(root: Path) -> str:
         [sys.executable, str(root / "scripts" / "pipeline_ledger.py"), "digest", str(root)],
         text=True,
     ).strip()
+
+
+def _contract(root: Path) -> tuple[str, dict]:
+    path = root / "contracts" / "pixelkiez-elevenlabs-batch-contract-v1.3.json"
+    return hashlib.sha256(path.read_bytes()).hexdigest(), json.loads(path.read_text(encoding="utf-8"))
+
+
+def validate_reports(root: Path, report: dict, paired: dict, semantic: dict) -> list[str]:
+    """Cross-skill, paired-release and customer-semantic evidence binding (fail closed).
+
+    A claimed PASS must be backed by digest-consistent paired evidence; a blocked
+    dependency is accepted only when it is declared non-package-blocking and the
+    website side passed. Customer-semantic evidence must be PASS and bound to the
+    current semantic control bundle.
+    """
+    errors: list[str] = []
+    digest, contract = _contract(root)
+    version = str(contract.get("version", ""))
+    cross = report.get("cross_skill_dependency") or {}
+    status = cross.get("status")
+    if cross.get("website_skill_side_status") != "PASS":
+        errors.append("website side of batch contract not validated")
+    if status == "PASS":
+        if cross.get("voice_architect_side_status") != "PASS":
+            errors.append("cross-skill PASS without voice-architect side PASS")
+        if cross.get("shared_v1_3_sha256") != digest:
+            errors.append("cross-skill shared contract digest mismatch")
+        if cross.get("shared_contract_version") != version:
+            errors.append("cross-skill shared contract version mismatch")
+        if cross.get("website_fields") != cross.get("voice_fields"):
+            errors.append("cross-skill field count mismatch")
+        pc = paired.get("contract") or {}
+        if paired.get("status") != "PASS":
+            errors.append("paired release evidence is not PASS")
+        if pc.get("sha256") != digest or pc.get("version") != version:
+            errors.append("paired release evidence stale against current contract")
+        if (paired.get("voice_release_harness") or {}).get("status") != "PASS":
+            errors.append("paired voice harness evidence missing")
+        if paired.get("truth_attack_e2e") != "PASS" or paired.get("provider_neutral_packet_e2e") != "PASS":
+            errors.append("paired cross-skill E2E evidence incomplete")
+    elif status != "BLOCKED_DEPENDENCY_NON_PACKAGE_BLOCKING":
+        errors.append("cross-skill dependency status invalid")
+
+    gate = report.get("customer_semantic_gate") or {}
+    current = semantic_bundle_digest(root)
+    if gate.get("status") != "PASS":
+        errors.append("customer semantic gate is not PASS")
+    if gate.get("semantic_bundle_sha256") != current:
+        errors.append("customer semantic gate bound to a different semantic bundle")
+    if semantic.get("status") != "PASS" or semantic.get("semantic_qa_validation") != "PASS" or semantic.get("visual_qa_validation") != "PASS":
+        errors.append("customer semantic QA evidence is not PASS")
+    if semantic.get("semantic_bundle_sha256") != current:
+        errors.append("customer semantic QA evidence stale against current semantic bundle")
+    return errors
 
 
 def main(argv: list[str]) -> int:
@@ -48,6 +105,8 @@ def main(argv: list[str]) -> int:
         legal_sources = json.loads((root / "reports/impressum-legal-source-validation.json").read_text(encoding="utf-8"))
         legal_evals = json.loads((root / "reports/impressum-compliance-eval-results.json").read_text(encoding="utf-8"))
         legal_customer = json.loads((root / "reports/legal-customer-projection-eval-results.json").read_text(encoding="utf-8"))
+        paired = json.loads((root / "reports/paired-release-report.json").read_text(encoding="utf-8"))
+        semantic = json.loads((root / "reports/semantic-customer-qa-eval-report.json").read_text(encoding="utf-8"))
     except Exception as exc:
         return fail(f"invalid or missing release evidence: {exc}")
 
@@ -215,9 +274,10 @@ def main(argv: list[str]) -> int:
     if live.get("package_blocking") is not False:
         errors.append("optional live gateway verification must be explicitly non-package-blocking")
 
-    cross = report.get("cross_skill_dependency", {})
-    if cross.get("status") not in {"PASS", "BLOCKED_DEPENDENCY_NON_PACKAGE_BLOCKING"}: errors.append("cross-skill dependency status invalid")
-    if cross.get("website_skill_side_status") != "PASS": errors.append("website side of batch contract not validated")
+    try:
+        errors.extend(validate_reports(root, report, paired, semantic))
+    except Exception as exc:
+        errors.append(f"cross-skill/semantic evidence unavailable: {exc}")
 
     try:
         current = tree_digest(root)
