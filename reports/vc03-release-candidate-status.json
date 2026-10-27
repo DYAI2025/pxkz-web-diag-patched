@@ -1,0 +1,104 @@
+{
+  "schema": "pixelkiez.release-candidate-status.v1",
+  "final_status": "PARTIAL",
+  "release_ready": false,
+  "candidate": {
+    "commit": "7a91df32711876c58ec6d22805ce4360d5c73829",
+    "branch": "feature/pixelkiez-vc03-customer-report-release",
+    "baseline_commit": "236861d9a89d29dd8f8f8350795befc9572cc750",
+    "tree_digest": "79353c25696fada99998e435c8b88eeadb371150dbcca121da9105d574479819",
+    "digest_tool": "scripts/pipeline_ledger.py digest (git archive of the commit)"
+  },
+  "tasks": {
+    "TASK-001": "DONE reports/patch-lineage.json",
+    "TASK-002": "DONE legacy oracles frozen, negative tests red-first (reports/vc03-patch-findings.json)",
+    "TASK-003": "DONE VC03_DIAGNOSTIC route + opt-in attach; no new collectors",
+    "TASK-004": "DONE genuine-tie-only profiles, fallback with uncertainty, deviation provenance; no approved real profiles exist (catalog empty)",
+    "TASK-005": "PARTIAL proof-mode PDFs for 3 cases + legacy pass automated checks, lever pages inspected; customer-mode build with exact fonts succeeds; visual/semantic QA manifests remain PENDING (no PASS set)",
+    "TASK-006": "PARTIAL regression no new reds vs baseline; independent review 3 rounds, final NO_NEW_FINDINGS on this digest; release gate blocked"
+  },
+  "tests": "93 passed, 27 subtests",
+  "gate_sweep": {
+    "green": 39,
+    "total": 47,
+    "red": {
+      "validate_measurement_platform_baseline": {
+        "rc": 1,
+        "baseline_rc": 1
+      },
+      "validate_strategic_relevance_v321_preservation": {
+        "rc": 1,
+        "baseline_rc": 1
+      },
+      "validate_installability": {
+        "rc": 1,
+        "baseline_rc": 1
+      },
+      "validate_full_48_active": {
+        "rc": 1,
+        "baseline_rc": 1
+      },
+      "validate_release_gate": {
+        "rc": 1,
+        "baseline_rc": 1
+      },
+      "validate_pipeline_ledger": {
+        "rc": 1,
+        "baseline_rc": 1
+      },
+      "run_measurement_gateway_evals": {
+        "rc": 1,
+        "baseline_rc": 1
+      },
+      "run_release_gate_mutation_evals": {
+        "rc": 1,
+        "baseline_rc": 1
+      }
+    },
+    "new_red_vs_baseline": []
+  },
+  "independent_review": {
+    "rounds": 3,
+    "final_verdict": "NO_NEW_FINDINGS",
+    "reviewed_tree_digest": "79353c25696fada99998e435c8b88eeadb371150dbcca121da9105d574479819",
+    "reviewer": "separate read-only agent"
+  },
+  "blockers": [
+    {
+      "id": "F4",
+      "type": "HUMAN_DECISION",
+      "summary": "validate_measurement_platform_baseline invalid_override on 4 protected files; activation needs a new ALLOWED_REASON_PATHS reason",
+      "proposal": "reports/branch-priority-vc03-shared-overrides.PROPOSED.json (canaried in scratch copy: PASS when activated, FAIL on further edit)"
+    },
+    {
+      "type": "PRE_EXISTING",
+      "summary": "stale release evidence digests (full_48_active, pipeline_ledger, release_gate), validate_installability needs skill.zip, run_release_gate_mutation_evals ImportError validate_reports, v321 preservation hash mismatches"
+    },
+    {
+      "type": "QA",
+      "summary": "visual and semantic QA manifests PENDING; customer PDF not released"
+    }
+  ],
+  "open_findings": [
+    "F4 OPEN_HUMAN_DECISION",
+    "F9 OPEN_OUT_OF_SCOPE page-9 card/footer overlap (pre-existing)",
+    "N2 OPEN_PRE_EXISTING legal-route forgery trust",
+    "R6 ACCEPTED_PRE_EXISTING evidence refs in internal model"
+  ],
+  "artifacts": {
+    "skill_zip": null,
+    "candidate_archive": {
+      "path": "dist/pixelkiez-website-diagnosis-CANDIDATE_NOT_RELEASED-7a91df3.zip",
+      "sha256": "e1ff4ba11d7ff429c866f0a176040e5bf0b7d2e8c2289528e2bc4a532b4bdc30",
+      "source": "git archive 7a91df3",
+      "note": "Not a release; not committed."
+    }
+  },
+  "not_done": [
+    "push",
+    "merge",
+    "deploy",
+    "PXAPI/Jira/Confluence changes",
+    "skill.zip"
+  ]
+}
