@@ -13,3 +13,10 @@ Runtime: `~/.venvs/pxkz-ebc` (uv, CPython 3.12, `requirements.txt` + pytest), `D
 | release gate (venv) | `$PY -B scripts/validate_release_gate.py .` | 1 | FAIL: release status not PASS; semantic gate not PASS (no font error) |
 | full suite (venv) | `$PY -B -m pytest tests -q` | 0 | 186 passed, 69 subtests passed |
 | defect lines | rg fingerprints | 0 | client_story.py:20-22,28-30,36,60; build_visualization_plan.py:230; build_client_report_model.py:186; finalize_deliverable_manifest.py:91 |
+
+## Task 2 — red suite
+| check | command | rc | value |
+|---|---|---|---|
+| red suite | `$PY -B -m unittest tests.test_evidence_bound_claims -v` | 1 | Ran 14; failures=10 errors=3 (KeyError evidence_method/metric_ref/context_label); Case7 canary ok |
+
+Deviations from plan: `clientize(text, limit)` has a required limit → tests pass 200. PDF byte change is already caught by receipt digest, so Case 8 targets the real gaps: READY without PASS QA, tampered required artifact not in receipt. Strength rule tightened to `customer_status == CLEAR` (a `minor_gaps` metric is shown as "Verbesserung sinnvoll" in V10; a strength on it would contradict the visual).
