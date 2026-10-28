@@ -30,3 +30,11 @@ Deviations from plan: `clientize(text, limit)` has a required limit → tests pa
 | method classifier spot check | `evidence_method(...)` | 0 | Lighthouse+field-limitation→LAB, CrUX→FIELD, Synthetic→SYNTHETIC, mode FIELD→FIELD |
 
 Deviation: no sentence-capitalisation pass (would change unrelated outputs); sentence-initial case kept by `_keep_case` callables instead. Compound rule `Lighthouse/PageSpeed-Labortest` moved before the generic `Labortest` rule so it can fire. Golden pair for `Kernsample` dropped: the existing rule yields ungrammatical "Das geprüften Seiten" and is not a method/scope rule.
+
+## Task 4 — claims bound to scored metrics
+| check | command | rc | value |
+|---|---|---|---|
+| cases 3, 5 (+ validator negative) | `$PY -B -m unittest …Case3SampleScopeStaysVisible …Case5NoOppositeStrength` | 0 | Ran 3, OK |
+| full suite | `$PY -B -m pytest tests -q` | 1 | 195 passed; 9 failed = 7 Task-5/6 targets + 2 known oracle drifts (synthetic-report plan, model); legacy lever_ids unchanged |
+
+Rule as implemented: a strength is admitted only from a positive finding whose every metric_ref is assessed, reads "Klar" under `customer_status` and is not contested by a legal/identity risk; AI-06-only claims get whole-site wording rewritten to "auf den geprüften Seiten", other whole-site wording is refused. Free-text `top_strengths` are recorded as `NO_FINDING_LINK`. Levers on the core-metric route whose every linked assessed metric reads "Klar" are not selectable. Critical and MANDATORY_CRITICAL levers go to roadmap "now". Sidecar `customer-claim-bindings.json` is a required bundle artifact, validated in the build and in `validate_deliverable_bundle.py`.

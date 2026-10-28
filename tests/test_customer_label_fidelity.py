@@ -103,13 +103,15 @@ class LegalSurfaceStrengthTests(unittest.TestCase):
 
     def test_projected_legal_risk_drops_legal_surface_strength(self) -> None:
         strengths = self.strengths(legal_risk=True)
-        self.assertFalse([s for s in strengths if "Rechts" in s or "Impressum" in s], strengths)
-        # No refill from positive findings: they restate the audit's own strengths (here sitemap/canonicals twice).
-        self.assertEqual(strengths, ["Sitemap und eindeutige Hauptadressen bilden eine brauchbare technische Basis.",
-                                     "Das Leistungsangebot ist textlich klar genug, um die Entität zu erkennen."])
+        self.assertFalse([s for s in strengths if "Rechts" in s or "Impressum" in s or "Kontakt" in s], strengths)
+        # Strengths are bound to positive findings whose metrics read "Klar" (evidence-bound claims patch).
+        # F-006 (TRUST-01/02/03/07) is contested by the projected legal risk; F-007 (FIND-02/03 at 75,
+        # "Verbesserung sinnvoll") does not read "Klar". Free-text top_strengths have no metric link.
+        self.assertEqual(strengths, [])
 
     def test_without_legal_risk_the_strength_stays(self) -> None:
-        self.assertIn("HTTPS und wichtige Rechts-/Kontaktflächen sind gut erreichbar.", self.strengths(legal_risk=False))
+        self.assertEqual(self.strengths(legal_risk=False),
+                         ["Kontakt, Impressum und Datenschutz sind gut erreichbar und die Website läuft über HTTPS."])
 
 
 if __name__ == "__main__":

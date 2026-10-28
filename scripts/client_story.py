@@ -8,6 +8,7 @@ from typing import Any
 
 from strategic_relevance import evaluate_finding
 from branch_priority import preferred_order
+from customer_status import customer_status
 
 REAL_CHARTS = {f"V{i:02d}" for i in range(1, 12)}
 SEVERITY_RANK = {"critical": 0, "high": 1, "medium": 2, "low": 3, "positive": 4}
@@ -250,6 +251,19 @@ def confidence_de(value: object) -> str:
     return CONFIDENCE_DE.get(str(value).upper(), str(value).lower() if value else "niedrig")
 
 
+def contradicted_by_clear_metrics(report: dict[str, Any], finding: dict[str, Any]) -> bool:
+    """A core-metric lever whose every linked assessed metric reads "Klar" would contradict the visuals.
+
+    Legal-sidecar and VibeCheck03 routes keep their own evidence and are never suppressed here.
+    """
+    verdict = evaluate_finding(report, finding)
+    if verdict.get("evidence_route") != "CORE_METRIC":
+        return False
+    metrics = {str(m.get("id")): m for m in report.get("metrics", []) if isinstance(m, dict)}
+    linked = [metrics[x] for x in verdict.get("linked_assessed_metrics", []) if x in metrics]
+    return bool(linked) and all(customer_status(m)["key"] == "CLEAR" for m in linked)
+
+
 def select_client_levers(
     report: dict[str, Any], max_levers: int = 4, *,
     branch_weights: dict[str, int] | None = None,
@@ -260,6 +274,7 @@ def select_client_levers(
         if isinstance(f, dict)
         and f.get("severity") != "positive"
         and evaluate_finding(report, f)["eligible"]
+        and not contradicted_by_clear_metrics(report, f)
     ]
     findings.sort(key=lambda f: (SEVERITY_RANK.get(str(f.get("severity")), 9), -int(f.get("confidence", 0)), str(f.get("id", ""))))
     # Approved industry priorities reorder only existing evidence-admitted findings

@@ -130,11 +130,20 @@ def main() -> int:
             raise ValueError("industry catalog without a priority context cannot be applied")
         run([py, str(root / "scripts/build_visualization_plan.py"), str(canonical), str(plan), *priority_args])
         run([py, str(root / "scripts/validate_visualization_plan.py"), str(plan), str(canonical)])
-        customer_cmd = [py, str(root / "scripts/build_client_report_model.py"), str(canonical), str(model), "--visual-plan", str(plan), *priority_args]
+        if args.release_mode == "customer":
+            # Example/fixture data stays recognizable: it may appear in proof bundles, never in a customer release.
+            synthetic = [str(v.get("template_id")) for v in json.loads(plan.read_text(encoding="utf-8")).get("visuals", [])
+                         if isinstance(v, dict) and v.get("status") == "SELECTED" and v.get("evidence_method") == "SYNTHETIC"]
+            if synthetic:
+                raise ValueError("CUSTOMER_RELEASE_BLOCKED: SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT " + ",".join(synthetic))
+        claim_bindings = out / "customer-claim-bindings.json"
+        customer_cmd = [py, str(root / "scripts/build_client_report_model.py"), str(canonical), str(model), "--visual-plan", str(plan),
+                        "--claim-bindings-out", str(claim_bindings), *priority_args]
         if args.priority_context:
             customer_cmd.extend(["--priority-decision-out", str(out / "prioritization-decision.json")])
         run(customer_cmd)
         run([py, str(root / "scripts/validate_client_report_model.py"), str(model)])
+        run([py, str(root / "scripts/validate_customer_claim_bindings.py"), str(canonical), str(model), str(claim_bindings)])
         if legal_sidecar is not None:
             run([py, str(root / "scripts/validate_impressum_projection.py"), str(legal_sidecar), str(canonical), str(model)])
         run([py, str(root / "scripts/validate_client_semantics.py"), str(model)])
@@ -170,7 +179,7 @@ def main() -> int:
         quality_report = out / "customer-presentation-quality-report.json"
         run([py, str(root / "scripts/validate_customer_presentation_quality.py"), str(out), "--allow-pending", "--json-out", str(quality_report)])
 
-        required = [canonical, analysis, markdown, model, plan, vreceipt, html, preceipt, pdf, visual_qa, semantic_qa, quality_report]
+        required = [canonical, analysis, markdown, model, claim_bindings, plan, vreceipt, html, preceipt, pdf, visual_qa, semantic_qa, quality_report]
         if legal_sidecar is not None:
             required.append(legal_sidecar)
         if legal_projection is not None:

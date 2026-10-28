@@ -3,14 +3,17 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
 
 from client_story import clientize, confidence_de, plan_visual_story, select_client_levers
 from customer_story_semantics import presentation_metadata, semantic_story_summary
-from legal_customer_projection import vouches_for_contested_legal_surface
+from customer_status import customer_status
+from legal_customer_projection import contested_identity_surface, contested_legal_surface, vouches_for_contested_legal_surface
 from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority, selection_provenance
 
 SKILL_DIR = Path(__file__).resolve().parent.parent
@@ -24,6 +27,68 @@ ROUTE_DE = {
     "redesign": "Neu aufsetzen",
     "evidence_first": "Zuerst Messl\u00fccken schlie\u00dfen",
 }
+
+
+WHOLE_SITE_RX = re.compile(r"(?:auf\s+)?(?:der\s+)?gesamten?\s+(?:Website|Webseite|Seite|Auftritt)|\balle[nr]?\s+Seiten\b|\bsite-?wide\b|\büberall\b", re.I)
+SAMPLE_SCOPED_METRICS = {"AI-06"}
+UNASSESSED_CLASSES = {None, "", "not_assessed", "inferred_risk"}
+
+
+def bound_strengths(report: dict[str, Any], limit: int) -> tuple[list[str], list[dict[str, Any]]]:
+    """Customer strengths come only from positive findings whose linked metrics all read "Klar".
+
+    One status scale: a metric the visuals label "Verbesserung sinnvoll" or worse cannot back a strength.
+    Free-text executive_summary.top_strengths have no metric link and are recorded as not admitted.
+    """
+    metrics = {str(m.get("id")): m for m in report.get("metrics", []) if isinstance(m, dict)}
+    contested = set(contested_legal_surface(report)) | set(contested_identity_surface(report))
+    positives = sorted(
+        [f for f in report.get("findings", []) if isinstance(f, dict) and f.get("severity") == "positive"],
+        key=lambda f: (-int(f.get("confidence", 0)), str(f.get("id", ""))),
+    )
+    claims: list[dict[str, Any]] = []
+    strengths: list[str] = []
+    for f in positives:
+        refs = [str(x) for x in f.get("metric_refs", []) if str(x).strip()]
+        raw = str(f.get("client_observation") or f.get("title") or "")
+        reasons: list[str] = []
+        if not refs:
+            reasons.append("NO_METRIC_REFS")
+        for ref in refs:
+            m = metrics.get(ref)
+            if m is None or m.get("measurement_class") in UNASSESSED_CLASSES:
+                reasons.append(f"METRIC_NOT_ASSESSED:{ref}")
+            elif customer_status(m)["key"] != "CLEAR":
+                reasons.append(f"METRIC_NOT_CLEAR:{ref}")
+            if ref in contested:
+                reasons.append(f"METRIC_CONTESTED:{ref}")
+        if WHOLE_SITE_RX.search(raw):
+            if refs and set(refs) <= SAMPLE_SCOPED_METRICS:
+                raw = WHOLE_SITE_RX.sub("auf den geprüften Seiten", raw)
+            else:
+                reasons.append("WHOLE_SITE_WORDING")
+        text = clientize(raw, limit)
+        if vouches_for_contested_legal_surface(report, text):
+            reasons.append("LEGAL_SURFACE_CONTESTED")
+        if not text:
+            reasons.append("EMPTY_TEXT")
+        admitted = not reasons and text not in strengths and len(strengths) < 3
+        if not reasons and not admitted:
+            reasons.append("DUPLICATE_OR_LIMIT")
+        claims.append({"text": text, "finding_ref": str(f.get("id")), "metric_refs": refs,
+                       "evidence_refs": [str(e.get("id")) for e in f.get("evidence", []) if isinstance(e, dict) and e.get("id")],
+                       "admitted": admitted, "reasons": reasons or ["BOUND_TO_CLEAR_METRICS"]})
+        if admitted:
+            strengths.append(text)
+    executive = report.get("executive_summary") if isinstance(report.get("executive_summary"), dict) else {}
+    known = {c["text"] for c in claims}
+    for raw in executive.get("top_strengths", []) or []:
+        text = clientize(raw, limit)
+        if text and text not in known:
+            claims.append({"text": text, "finding_ref": None, "metric_refs": [], "evidence_refs": [],
+                           "admitted": False, "reasons": ["NO_FINDING_LINK"]})
+            known.add(text)
+    return strengths, claims
 
 
 def fail(msg: str) -> int:
@@ -137,6 +202,7 @@ def main(argv: list[str]) -> int:
     parser.add_argument("--visual-plan")
     add_priority_arguments(parser)
     parser.add_argument("--priority-decision-out", help="Internal-only selection provenance, not customer PDF")
+    parser.add_argument("--claim-bindings-out", help="Internal-only strength-to-metric bindings, not customer PDF")
     try:
         args = parser.parse_args(argv[1:])
         report = load(Path(args.report))
@@ -162,10 +228,6 @@ def main(argv: list[str]) -> int:
     score = report.get("score_summary", {})
     executive = report.get("executive_summary", {})
     findings = [f for f in report.get("findings", []) if isinstance(f, dict)]
-    positive = sorted(
-        [f for f in findings if f.get("severity") == "positive"],
-        key=lambda f: (-int(f.get("confidence", 0)), str(f.get("id", ""))),
-    )
     selected_levers = select_client_levers(
         report, max_levers=4, branch_weights=branch_weights, branch_roles=branch_roles
     )
@@ -181,18 +243,8 @@ def main(argv: list[str]) -> int:
             json.dumps(provenance, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
         )
 
-    # A strength must not vouch for the legal/contact surface that a projected legal risk contests. A strength
-    # dropped for that reason leaves its slot empty: positive findings mirror the audit's own strengths.
-    supplied = [x for x in executive.get("top_strengths", []) if str(x).strip()]
-    strengths = [clientize(x, budget("executive_strength", 110)) for x in supplied
-                 if not vouches_for_contested_legal_surface(report, x)][:3]
-    if len(supplied) < 3:
-        for f in positive:
-            candidate = clientize(f.get("client_observation") or f.get("title"), budget("executive_strength", 110))
-            if candidate and candidate not in strengths and not vouches_for_contested_legal_surface(report, candidate):
-                strengths.append(candidate)
-            if len(strengths) == 3:
-                break
+    # Strengths are bound to positive findings whose metrics read "Klar"; see bound_strengths.
+    strengths, claim_bindings = bound_strengths(report, budget("executive_strength", 110))
 
     priorities: list[str] = []
     for f in selected_levers:
@@ -274,7 +326,11 @@ def main(argv: list[str]) -> int:
         if not action:
             continue
         horizon = rec.get("horizon")
-        if horizon == "now":
+        mandatory_critical = isinstance(f.get("customer_risk"), dict) and f["customer_risk"].get("priority") == "MANDATORY_CRITICAL"
+        if f.get("severity") == "critical" or mandatory_critical:
+            # A critical finding is never scheduled behind "Jetzt".
+            bucket = "now"
+        elif horizon == "now":
             bucket = "now"
         elif horizon == "0_30_days":
             bucket = "next_30_days"
@@ -368,6 +424,16 @@ def main(argv: list[str]) -> int:
     }
 
     Path(args.output).write_text(json.dumps(model, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if args.claim_bindings_out:
+        bindings = {
+            "schema_version": "1.0",
+            "audited_url": str(meta.get("audited_url") or ""),
+            "scored_report_sha256": hashlib.sha256(Path(args.report).read_bytes()).hexdigest(),
+            "client_model_sha256": hashlib.sha256(Path(args.output).read_bytes()).hexdigest(),
+            "rule": "strength admitted only from a positive finding whose metric_refs all read Klar and are uncontested",
+            "claims": claim_bindings,
+        }
+        Path(args.claim_bindings_out).write_text(json.dumps(bindings, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(
         f"PASS: client model with {len(categories)} categories, {len(finding_models)} levers, "
         f"{len(visualizations)} customer charts, visual_story={story_plan['visual_story_status']}"

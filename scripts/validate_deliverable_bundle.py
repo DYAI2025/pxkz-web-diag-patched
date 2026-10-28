@@ -58,6 +58,7 @@ def main() -> int:
             "analysis_report.json",
             "analysis_report.md",
             "client-report-model.json",
+            "customer-claim-bindings.json",
             "visualization-plan.json",
             "visualization-render-receipt.json",
             "customer_presentation.html",
@@ -117,6 +118,11 @@ def main() -> int:
             return fail("presentation receipt PDF digest mismatch", report_path, payload)
         if receipt.get("html_sha256") != sha(out_dir / "customer_presentation.html"):
             return fail("presentation receipt HTML digest mismatch", report_path, payload)
+        code, stdout, stderr = run([py, str(root / "scripts/validate_customer_claim_bindings.py"), str(out_dir / "diagnosis-report.json"),
+                                    str(out_dir / "client-report-model.json"), str(out_dir / "customer-claim-bindings.json")])
+        payload["checks"].append({"id": "customer_claim_bindings", "status": "PASS" if code == 0 else "FAIL", "stdout": stdout.strip()})
+        if code != 0:
+            return fail("customer claim bindings failed: " + stdout.strip()[-500:], report_path, payload)
         payload["checks"].append({"id": "cross_artifact_digests", "status": "PASS"})
 
         selected = [x for x in plan.get("visuals", []) if isinstance(x, dict) and x.get("status") == "SELECTED"]
