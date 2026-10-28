@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from validate_full_48_active import ALLOWED_PROTECTED_CHANGES, apply_protected_changes  # noqa: E402
 from validate_strategic_relevance_v321_preservation import controlled  # noqa: E402
+from pipeline_ledger import digest_tree  # noqa: E402
 
 SCHEMA = "schemas/diagnosis-report.schema.json"
 A, B, C = "a" * 64, "b" * 64, "c" * 64
@@ -35,6 +36,23 @@ class V321BoundaryTest(unittest.TestCase):
             "dist/skill.zip": "z",
         })
         self.assertEqual(set(controlled(root)), {"SKILL.md"})
+
+    def test_nested_reports_or_dist_dirs_are_controlled(self) -> None:
+        # Only the top-level reports/ and dist/ are evidence/output; a nested one ships with the package.
+        root = self.tree({"SKILL.md": "x", "scripts/reports/payload.py": "p", "assets/dist/a.json": "{}"})
+        self.assertEqual(set(controlled(root)), {"SKILL.md", "scripts/reports/payload.py", "assets/dist/a.json"})
+
+    def test_build_digest_sees_nested_reports_dir(self) -> None:
+        root = self.tree({"SKILL.md": "x"})
+        before = digest_tree(root)
+        (root / "scripts/reports").mkdir(parents=True)
+        (root / "scripts/reports/payload.py").write_text("p", encoding="utf-8")
+        self.assertNotEqual(digest_tree(root), before)
+        (root / "reports").mkdir()
+        (root / "reports/r.json").write_text("{}", encoding="utf-8")
+        after_nested = digest_tree(root)
+        (root / "reports/r.json").write_text('{"x": 1}', encoding="utf-8")
+        self.assertEqual(digest_tree(root), after_nested)
 
     def test_ordinary_dotfiles_and_nested_names_stay_inside(self) -> None:
         # Only whole path components are excluded; look-alike names are still controlled.

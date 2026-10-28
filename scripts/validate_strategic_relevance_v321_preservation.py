@@ -9,8 +9,14 @@ from __future__ import annotations
 import hashlib, json, sys
 from pathlib import Path
 
-# Same boundary as pipeline_ledger.digest: whole path components, plus compiled caches.
-EXCLUDED_DIRS = {"reports", "dist", "__pycache__", ".git", ".pytest_cache"}
+# Same boundary as pipeline_ledger.digest_tree: reports/ and dist/ only at the skill root, caches and VCS
+# metadata at any depth, plus compiled files.
+EXCLUDED_TOP_LEVEL = {"reports", "dist"}
+EXCLUDED_DIRS = {"__pycache__", ".git", ".pytest_cache"}
+
+
+def excluded(rel: Path) -> bool:
+    return rel.parts[0] in EXCLUDED_TOP_LEVEL or bool(set(rel.parts) & EXCLUDED_DIRS) or rel.suffix in {".pyc", ".pyo"}
 
 def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -21,7 +27,7 @@ def controlled(root: Path) -> dict[str, str]:
         if not path.is_file():
             continue
         rel = path.relative_to(root)
-        if set(rel.parts) & EXCLUDED_DIRS or path.suffix in {".pyc", ".pyo"}:
+        if excluded(rel):
             continue
         out[rel.as_posix()] = sha(path)
     return out

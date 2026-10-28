@@ -11,7 +11,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-EXCLUDE_DIRS = {"reports", "dist", "__pycache__", ".git", ".pytest_cache"}
+# reports/ and dist/ are excluded only at the skill root (evidence and build output); a nested directory with
+# those names is package content. Caches and VCS metadata are excluded at any depth.
+EXCLUDE_TOP_LEVEL = {"reports", "dist"}
+EXCLUDE_DIRS = {"__pycache__", ".git", ".pytest_cache"}
 EXCLUDE_SUFFIXES = {".pyc", ".pyo"}
 STAGES = [
     "INTAKE_COMPLETED",
@@ -36,7 +39,7 @@ def digest_tree(root: Path) -> str:
         if not path.is_file():
             continue
         rel = path.relative_to(root)
-        if set(rel.parts) & EXCLUDE_DIRS or path.suffix in EXCLUDE_SUFFIXES:
+        if rel.parts[0] in EXCLUDE_TOP_LEVEL or set(rel.parts) & EXCLUDE_DIRS or path.suffix in EXCLUDE_SUFFIXES:
             continue
         h.update(str(rel).replace(os.sep, "/").encode("utf-8"))
         h.update(b"\0")

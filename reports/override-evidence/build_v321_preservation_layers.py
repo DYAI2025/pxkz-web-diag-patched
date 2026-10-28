@@ -35,7 +35,7 @@ def main(argv: list[str]) -> int:
         if name.endswith("/") or "/" not in name:
             continue
         rel = Path(name.split("/", 1)[1])
-        if set(rel.parts) & v321.EXCLUDED_DIRS or rel.suffix in {".pyc", ".pyo"}:
+        if v321.excluded(rel):
             continue
         inst[rel.as_posix()] = hashlib.sha256(zf.read(name)).hexdigest()
 
