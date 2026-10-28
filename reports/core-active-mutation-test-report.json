@@ -1,17 +1,17 @@
 {
   "status": "PASS",
-  "artifact_digest": "9f1ce88027c785069dcd1048f7f7f14143801ab781a570db7903e332eba2cb04",
+  "artifact_digest": "3b442603b519158d158c924e9d65e19e3a30aca4ade5fcfe3307c7fb94be7196",
   "detected": 20,
   "mutations": [
     {
       "mutation": "BIND-002",
       "status": "DETECTED",
-      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-nk2dpret/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:FAIL: binding must contain exactly 48 unique metric IDs\n"
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py /var/folders/03/bszf3mg504zgzrtyccc8nbch0000gn/T/pxk-binding-mutation-2k0a5z2e/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:FA"
     },
     {
       "mutation": "BIND-003",
       "status": "DETECTED",
-      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-agorm45l/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:FAIL: binding/registry ID mismatch missing=['AI-07'] extra=['FAKE-99']\n"
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py /var/folders/03/bszf3mg504zgzrtyccc8nbch0000gn/T/pxk-binding-mutation-9fx4h01y/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:FA"
     },
     {
       "mutation": "EXEC-005",
@@ -26,7 +26,7 @@
     {
       "mutation": "SCORE-002",
       "status": "DETECTED",
-      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-tnb7zv_3/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:FAIL: FIND-01 metric weight drift\n"
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py /var/folders/03/bszf3mg504zgzrtyccc8nbch0000gn/T/pxk-binding-mutation-yj9152uj/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:FA"
     },
     {
       "mutation": "SCORE-003",
@@ -41,17 +41,17 @@
     {
       "mutation": "MUT-REGISTRY-REMOVE",
       "status": "DETECTED",
-      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-kk03jeei/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:              'EVIDENCE_GRADE_TOO_WEAK',\n                                     'VALUE_TYPE_INVALID',\n                                     'RAW_PROVIDER_EVIDENCE_REJECTED'],\n      'control_basis': 'PIXELKIEZ_PRODUCT_RUBRIC'},\n     {'metric_id': 'AI-06',\n      'category': 'ai_readiness',\n  "
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py /var/folders/03/bszf3mg504zgzrtyccc8nbch0000gn/T/pxk-binding-mutation-2rggzjup/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:  "
     },
     {
       "mutation": "MUT-REGISTRY-49TH",
       "status": "DETECTED",
-      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-nk3apm1j/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:                              'EVIDENCE_GRADE_TOO_WEAK',\n                                     'VALUE_TYPE_INVALID',\n                                     'RAW_PROVIDER_EVIDENCE_REJECTED'],\n      'control_basis': 'PIXELKIEZ_PRODUCT_RUBRIC'},\n     {'metric_id': 'FAKE-49',\n      'category': "
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py /var/folders/03/bszf3mg504zgzrtyccc8nbch0000gn/T/pxk-binding-mutation-qb9g2dhz/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:  "
     },
     {
       "mutation": "MUT-CATEGORY-WEIGHT",
       "status": "DETECTED",
-      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-lm_h5p_d/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:FAIL: FIND-01 category weight drift\n"
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py /var/folders/03/bszf3mg504zgzrtyccc8nbch0000gn/T/pxk-binding-mutation-f7rgx6xo/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:FA"
     },
     {
       "mutation": "MUT-EVIDENCE-REMOVE",

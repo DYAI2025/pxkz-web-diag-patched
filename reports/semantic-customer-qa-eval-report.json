@@ -1,19 +1,21 @@
 {
   "status": "PASS",
   "policy_version": "1.0",
-  "semantic_bundle_sha256": "d97bb37a4838f7fd5e63233e718cdc1af911445b022cb0e1c670ecd573e4d761",
+  "semantic_bundle_sha256": "082325992478c88b16c7f2b8c67372e065473ba8e469c78cdae6cf7e37903041",
   "fixture": "evals/fixtures/baumdienst-renner-reflection-regression.json",
   "fixture_sha256": "c6f5b2bb0b7b9e88b08b66387e374a2077ee6f77fbbf1f04bb194f9121ce37ca",
   "customer": "Baumdienst Renner",
-  "page_count": 12,
-  "decision_visual_count": 3,
+  "page_count": 9,
+  "decision_visual_count": 4,
   "inspection_method": "agent_vision",
-  "inspected_by": "GPT-5.6 Sol",
+  "inspected_by": "Claude Opus 5.5 (2026-10-28)",
   "semantic_qa_validation": "PASS",
   "visual_qa_validation": "PASS",
-  "pdf_sha256": "60777610f77c30d2f150e9cad37febfec7e9d53182f0da53910deea1928b9b12",
-  "client_model_sha256": "ee932b422c4d579dba472ad6390ce0889323a1335ec0d84dea2f07cd110c8d6e",
-  "scored_report_sha256": "46a0916e0c2667bf5790fd460cffdc2541e2381a21ce9b084543bd71d5b386b5",
+  "pdf_sha256": "b679724004495f2999f3598c811c06ea77fd7b2a87ae04ed7d7daceed1324003",
+  "client_model_sha256": "8e60555fe46235f15afffb895989b2136f1264354c1a6a0fe2c6c6ad28e05def",
+  "scored_report_sha256": "8af6f625c2d980f59166b36ea994701a9471f87553fc5fbbb51d146d01abaada",
+  "release_mode": "customer",
+  "font_status": "EXACT",
   "overall_checks": {
     "customer_specificity": "PASS",
     "plain_language_comprehension": "PASS",
@@ -24,18 +26,30 @@
     "cross_page_coherence": "PASS",
     "actionability": "PASS",
     "no_generic_agency_copy": "PASS",
-    "no_unsupported_business_claims": "PASS"
+    "no_unsupported_business_claims": "PASS",
+    "cover_message_complete": "PASS",
+    "score_projection_correct": "PASS",
+    "lever_business_impact_complete": "PASS",
+    "privacy_claim_scope_correct": "PASS",
+    "no_synthetic_metric_visuals": "PASS"
   },
+  "page_evidence": "reports/customer-pdf-qa-2026-10-28/baumdienst-renner.semantic-qa.json",
   "observed_quality": {
-    "executive_summary": "single customer-specific main lever plus strengths/priorities",
-    "decision_visuals": "three direct evidence visuals tied to concrete Baumdienst Renner findings",
-    "findings": "four prioritized findings with short observation/impact/action copy",
-    "roadmap": "scan-first customer actions instead of technical implementation prose",
-    "measurement_limits": "four plain-language boundaries plus four open evidence items"
+    "executive_summary": "single customer-specific main lever (address consistency) plus three strengths and priorities",
+    "decision_visuals": "four approved visuals (levers list, AI clarity, trust matrix, severity) tied to the scored audit",
+    "findings": "four prioritized lever cards with observation, business impact and next step, above the footer band",
+    "roadmap": "scan-first owner actions; 'Danach' empty (O-2)",
+    "closing": "four actions in lever order"
   },
+  "open_observations": [
+    "O-1",
+    "O-2",
+    "O-4"
+  ],
   "does_not_prove": [
     "commercial conversion or revenue improvement",
     "semantic quality for every future website without per-output rendered QA",
     "ElevenLabs provider upload, live telephony, or legal outbound approval"
-  ]
+  ],
+  "superseded": "previous evidence (12 pages, inspected by GPT-5.6 Sol, pdf 60777610...) belonged to an older semantic bundle"
 }

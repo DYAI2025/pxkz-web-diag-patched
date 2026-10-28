@@ -27,7 +27,7 @@
   "unsafe_svg": "REJECTED_BY_DEDICATED_VALIDATOR",
   "customer_release_ready_before_qa": false,
   "artifact_examples": {
-    "analysis_sha256": "f43eb0d8eec8b603ee64a53c46db1744c4e18c29a92d7c66330636913ae022d9",
+    "analysis_sha256": "ad959b518725d1f882470dd2fa435d089ffe52ea600ab8588d3fc68dae5928bf",
     "model_sha256": "f6163365844786cb018014f5d3ec5e33b134f5ad3fcebdecef06f27a6d0e5254"
   },
   "does_not_prove": [

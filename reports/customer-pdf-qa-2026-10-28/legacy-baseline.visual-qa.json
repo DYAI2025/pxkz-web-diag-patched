@@ -1,0 +1,236 @@
+{
+  "schema_version": "1.2",
+  "pdf_path": "customer_presentation.pdf",
+  "pdf_sha256": "077343bdb0acb08666473343f0c94e0ab711e4f04e9606aa8ce01dcb4d8624d6",
+  "visualization_plan_path": "visualization-plan.json",
+  "visualization_plan_sha256": "632c425cb197089fa5bcb56fe8f33f6d324af569b47b5e79141b913f3bc0f1ba",
+  "page_count": 11,
+  "inspection_status": "PASS",
+  "inspection_method": "agent_vision",
+  "inspected_by": "Claude Opus 5.5 (agent_vision, 2026-10-28; renders bound by pdf_sha256)",
+  "inspection_note": "Set PASS only after every rendered page and every planned chart page has actually been visually inspected.",
+  "pages": [
+    {
+      "page": 1,
+      "image": "rendered-pages/page-001.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Cover: title, customer, URL, Pixelkiez score 65 and complete two-line core message visible in the bottom band; no split."
+    },
+    {
+      "page": 2,
+      "image": "rendered-pages/page-002.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Executive: 65/100, main lever, three strengths and three priorities, all legible."
+    },
+    {
+      "page": 3,
+      "image": "rendered-pages/page-003.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "V02 category bars, six categories with values; labels legible."
+    },
+    {
+      "page": 4,
+      "image": "rendered-pages/page-004.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "V03 four levers list, numbered 1-4, matches lever page order."
+    },
+    {
+      "page": 5,
+      "image": "rendered-pages/page-005.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "V07 mobile load 3.8 s against target 2.5 / warning 4; value and thresholds clear."
+    },
+    {
+      "page": 6,
+      "image": "rendered-pages/page-006.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "V08 AI clarity matrix, seven rows klar/teilweise; legible."
+    },
+    {
+      "page": 7,
+      "image": "rendered-pages/page-007.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "V10 trust matrix, seven four-state rows; legible."
+    },
+    {
+      "page": 8,
+      "image": "rendered-pages/page-008.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "V11 3 hoch / 2 mittel, consistent with levers."
+    },
+    {
+      "page": 9,
+      "image": "rendered-pages/page-009.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Four lever cards, each with observation, 'Warum das zählt' and 'Nächster Schritt'; all cards end above the footer band. O-4: lever-page subtitle and footer are grey on orange (low contrast, legible at print size)."
+    },
+    {
+      "page": 10,
+      "image": "rendered-pages/page-010.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Roadmap: lever 2 in Jetzt, lever 1 in 30 Tagen (O-2: roadmap columns follow report roadmap data, not lever rank; legacy behaviour)."
+    },
+    {
+      "page": 11,
+      "image": "rendered-pages/page-011.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Closing: four actions in lever order and next-step box; no clipping."
+    }
+  ],
+  "cover_checks": {
+    "full_takeaway_visible": true,
+    "score_projection_visible_when_required": true,
+    "no_cross_page_sentence_split": true
+  },
+  "chart_pages": [
+    {
+      "page": 3,
+      "template_id": "V02_CATEGORY_BARS",
+      "checks": {
+        "finding_title_clear": true,
+        "chart_labels_legible": true,
+        "business_message_clear": true,
+        "threshold_or_reference_clear_when_applicable": true,
+        "no_internal_method_or_evidence_boilerplate": true
+      },
+      "notes": "V02_CATEGORY_BARS inspected on page 3: V02 category bars, six categories with values; labels legible."
+    },
+    {
+      "page": 4,
+      "template_id": "V03_TOP_LEVERS",
+      "checks": {
+        "finding_title_clear": true,
+        "chart_labels_legible": true,
+        "business_message_clear": true,
+        "threshold_or_reference_clear_when_applicable": true,
+        "no_internal_method_or_evidence_boilerplate": true
+      },
+      "notes": "V03_TOP_LEVERS inspected on page 4: V03 four levers list, numbered 1-4, matches lever page order."
+    },
+    {
+      "page": 5,
+      "template_id": "V07_PERFORMANCE_THRESHOLD",
+      "checks": {
+        "finding_title_clear": true,
+        "chart_labels_legible": true,
+        "business_message_clear": true,
+        "threshold_or_reference_clear_when_applicable": true,
+        "no_internal_method_or_evidence_boilerplate": true
+      },
+      "notes": "V07_PERFORMANCE_THRESHOLD inspected on page 5: V07 mobile load 3.8 s against target 2.5 / warning 4; value and thresholds clear."
+    },
+    {
+      "page": 6,
+      "template_id": "V08_AI_ANSWERABILITY",
+      "checks": {
+        "finding_title_clear": true,
+        "chart_labels_legible": true,
+        "business_message_clear": true,
+        "threshold_or_reference_clear_when_applicable": true,
+        "no_internal_method_or_evidence_boilerplate": true
+      },
+      "notes": "V08_AI_ANSWERABILITY inspected on page 6: V08 AI clarity matrix, seven rows klar/teilweise; legible."
+    },
+    {
+      "page": 7,
+      "template_id": "V10_TRUST_MATRIX",
+      "checks": {
+        "finding_title_clear": true,
+        "chart_labels_legible": true,
+        "business_message_clear": true,
+        "threshold_or_reference_clear_when_applicable": true,
+        "no_internal_method_or_evidence_boilerplate": true
+      },
+      "notes": "V10_TRUST_MATRIX inspected on page 7: V10 trust matrix, seven four-state rows; legible."
+    },
+    {
+      "page": 8,
+      "template_id": "V11_SEVERITY_DISTRIBUTION",
+      "checks": {
+        "finding_title_clear": true,
+        "chart_labels_legible": true,
+        "business_message_clear": true,
+        "threshold_or_reference_clear_when_applicable": true,
+        "no_internal_method_or_evidence_boilerplate": true
+      },
+      "notes": "V11_SEVERITY_DISTRIBUTION inspected on page 8: V11 3 hoch / 2 mittel, consistent with levers."
+    }
+  ]
+}

@@ -1,12 +1,12 @@
 {
   "skill_name": "pixelkiez-website-diagnosis",
-  "draft_version": "vibecheck03-branch-priority-candidate-2026-10-27",
+  "draft_version": "vibecheck03-branch-priority-candidate-2026-10-28",
   "release_scope": "website-diagnosis-package",
   "release_gate": {
     "status": "BLOCKED",
     "allowed_to_package": false,
-    "blocking_reason": "Previous VibeCheck03 implementation is incomplete; independent frozen candidate evaluation absent. Historical gate statuses below do not authorize this candidate.",
-    "authorization_basis": "Explicit user authorization on 2026-09-09 for the P0 Impressum Customer-Truth patch; protected shared-path changes are hash-bound under IMPRESSUM_CUSTOMER_TRUTH_PATCH."
+    "blocking_reason": "Candidate frozen at artifact digest 3b442603b519158d158c924e9d65e19e3a30aca4ade5fcfe3307c7fb94be7196; release requires the full gate sweep on this digest, an independent evaluator receipt on the same digest and explicit user release authorization. Historical gate statuses below are superseded only where candidate_gate_results records a result for this digest.",
+    "authorization_basis": "User instruction 2026-10-28: no merge, deployment or skill.zip while release gates are not passed; no automatic release."
   },
   "craftsmanship_gate": {
     "status": "PASS",
@@ -240,8 +240,8 @@
     "added Bo Feng Lin Golden Regression with unresolved jurisdiction, absent operator identity/address, ILES=0 and mandatory customer visibility",
     "preserved anti-overclaim controls and zero Core score/coverage delta"
   ],
-  "final_decision": "PACKAGE_AUTHORIZED",
-  "artifact_digest": "959ea94775c147ca3d6c197a4cc62f4e603557b53ec6bf8ca236a67ffabee13b",
+  "final_decision": "BLOCKED_PENDING_RELEASE_AUTHORIZATION",
+  "artifact_digest": "3b442603b519158d158c924e9d65e19e3a30aca4ade5fcfe3307c7fb94be7196",
   "internal_report_gate": {
     "status": "PASS",
     "json": "analysis_report.json",
@@ -537,7 +537,7 @@
     "core_score_delta": 0,
     "golden_case": "LEG-GOLD-BFL"
   },
-  "candidate_artifact_digest": "959ea94775c147ca3d6c197a4cc62f4e603557b53ec6bf8ca236a67ffabee13b",
+  "candidate_artifact_digest": "3b442603b519158d158c924e9d65e19e3a30aca4ade5fcfe3307c7fb94be7196",
   "fresh_reporting_gate": {
     "status": "PASS",
     "entrypoint": "scripts/run_reporting_bundle_evals.py",
@@ -610,5 +610,82 @@
     "independent_evaluator": "NOT_EXECUTED",
     "industry_profiles_approved": 0,
     "installable_skill_zip_authorized": false
+  },
+  "customer_semantic_gate": {
+    "status": "PASS",
+    "semantic_bundle_sha256": "082325992478c88b16c7f2b8c67372e065473ba8e469c78cdae6cf7e37903041",
+    "evidence": [
+      "reports/semantic-customer-qa-eval-report.json",
+      "reports/customer-pdf-qa-2026-10-28.json"
+    ],
+    "inspected_pdfs": 6,
+    "inspected_pages": 64,
+    "fixed_during_qa": [
+      "F-QA-1 legal surface status (dee40a4)"
+    ],
+    "open_observations_non_blocking": [
+      "O-1",
+      "O-2",
+      "O-3",
+      "O-4",
+      "O-5"
+    ]
+  },
+  "candidate_gate_results": {
+    "artifact_digest": "3b442603b519158d158c924e9d65e19e3a30aca4ade5fcfe3307c7fb94be7196",
+    "candidate_commit": "456c226",
+    "run": "2026-10-28 full gate sweep on a git-archive extraction of the candidate commit",
+    "pass": [
+      "unittest",
+      "quick_validate",
+      "validate_schema",
+      "validate_source_map",
+      "validate_evals",
+      "validate_no_font_binaries",
+      "validate_measurement_platform_baseline",
+      "validate_strategic_relevance_v321_preservation",
+      "validate_third_party_license_ledger",
+      "validate_gateway_optional_contracts",
+      "validate_core_parity",
+      "validate_agent_agnostic",
+      "validate_batch_contract",
+      "validate_security_patterns",
+      "validate_no_placeholders",
+      "validate_asset_integrity",
+      "validate_core_evidence_bindings",
+      "validate_full_48_active",
+      "validate_enterprise_skill_evaluation",
+      "run_strategic_relevance_evals",
+      "run_batch_contract_evals",
+      "run_branch_priority_evals",
+      "run_browser_measurement_evals",
+      "run_business_first_reporting_evals",
+      "run_chart_template_evals",
+      "run_client_marketing_evals",
+      "run_customer_presentation_quality_evals",
+      "run_customer_semantic_evals",
+      "run_full_48_active_evals",
+      "run_impressum_compliance_evals",
+      "run_legal_customer_projection_evals",
+      "run_measurement_enrichment_evals",
+      "run_measurement_gateway_evals",
+      "run_reflection_improvement_evals",
+      "run_release_gate_mutation_evals",
+      "run_reporting_bundle_evals",
+      "run_score_gate_evals",
+      "run_truth_discipline_evals",
+      "run_vc03_customer_release_evals",
+      "run_visual_architecture_evals",
+      "run_visual_reporting_evals",
+      "run_visual_template_gallery_evals",
+      "run_visualization_gallery_evals",
+      "run_fixture_eval"
+    ],
+    "fail": {
+      "validate_installability": "artifact must be skill.zip (no package built before authorization)",
+      "validate_release_gate": "release status is not PASS; allowed_to_package must be true (pending release authorization)",
+      "validate_pipeline_ledger": "STALE_ARTIFACT_DIGEST (no ledger run recorded for this digest before authorization)"
+    },
+    "independent_evaluation": "PENDING"
   }
 }

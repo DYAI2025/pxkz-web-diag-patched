@@ -1,0 +1,236 @@
+{
+  "schema_version": "1.0",
+  "target_url": "http://container.local/local-fixture",
+  "generated_at": "2026-10-28T00:19:08Z",
+  "mode": "FIXTURE",
+  "sources": [
+    {
+      "id": "browser",
+      "provider": "Chromium/Playwright local fixture",
+      "status": "AVAILABLE",
+      "note": "deterministic local browser eval"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "A11Y_UNNAMED_CONTROLS",
+      "family": "accessibility",
+      "label": "Bedienelemente ohne belastbaren Namen",
+      "status": "MEASURED",
+      "measurement_class": "measured",
+      "value": 1,
+      "unit": "count",
+      "source_type": "PUBLIC_BROWSER",
+      "source_provider": "Chromium/Playwright DOM observation",
+      "observed_at": "2026-10-28T00:19:08Z",
+      "date_range": null,
+      "url": "http://192.168.2.65:50098/index.html",
+      "query": null,
+      "market": null,
+      "location": null,
+      "device": null,
+      "evidence_ref": "BROWSER-a11y-unnamed",
+      "claim_boundary": "Automatisierte/DOM-basierte Prüfung ist keine vollständige WCAG-Konformitätsprüfung.",
+      "manual_review_required": true,
+      "legal_review_required": false,
+      "context": {
+        "interactive_count": 5,
+        "sample": [
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "unnamed-input"
+          }
+        ],
+        "images_missing_alt_attribute": 0
+      }
+    },
+    {
+      "id": "A11Y_KEYBOARD_FOCUS_TARGETS",
+      "family": "accessibility",
+      "label": "Erreichte Fokusziele im Tastatur-Sample",
+      "status": "OBSERVED",
+      "measurement_class": "observed",
+      "value": 6,
+      "unit": "count",
+      "source_type": "PUBLIC_BROWSER",
+      "source_provider": "Chromium/Playwright keyboard sample",
+      "observed_at": "2026-10-28T00:19:08Z",
+      "date_range": null,
+      "url": "http://192.168.2.65:50098/index.html",
+      "query": null,
+      "market": null,
+      "location": null,
+      "device": null,
+      "evidence_ref": "BROWSER-a11y-focus",
+      "claim_boundary": "Ein Fokus-Sample beweist keine vollständige Tastaturbedienbarkeit.",
+      "manual_review_required": true,
+      "legal_review_required": false,
+      "context": {
+        "sample": [
+          "button|accept|||Alle akzeptieren",
+          "button|reject|||Alle ablehnen",
+          "a||||Kontakt",
+          "input|unnamed-input|||",
+          "button||||Absenden",
+          "body||||Alle akzeptierenAlle ablehnen\nKontakt\nAbsenden"
+        ]
+      }
+    },
+    {
+      "id": "MOBILE_HORIZONTAL_OVERFLOW_PX",
+      "family": "accessibility",
+      "label": "Horizontaler Überlauf im Mobile-Sample",
+      "status": "MEASURED",
+      "measurement_class": "measured",
+      "value": 318,
+      "unit": "px",
+      "source_type": "PUBLIC_BROWSER",
+      "source_provider": "Chromium/Playwright mobile viewport",
+      "observed_at": "2026-10-28T00:19:08Z",
+      "date_range": null,
+      "url": "http://192.168.2.65:50098/index.html",
+      "query": null,
+      "market": null,
+      "location": null,
+      "device": "390x844",
+      "evidence_ref": "BROWSER-mobile-overflow",
+      "claim_boundary": "Ein Viewport-Sample beweist keine vollständige Responsive- oder Accessibility-Konformität.",
+      "manual_review_required": true,
+      "legal_review_required": false,
+      "context": {}
+    },
+    {
+      "id": "PRIVACY_THIRD_PARTY_REQUESTS_PRECHOICE",
+      "family": "privacy_consent",
+      "label": "Drittanbieter-Requests vor Auswahl",
+      "status": "MEASURED",
+      "measurement_class": "measured",
+      "value": 1,
+      "unit": "count",
+      "source_type": "PUBLIC_BROWSER",
+      "source_provider": "Chromium/Playwright network observation",
+      "observed_at": "2026-10-28T00:19:08Z",
+      "date_range": null,
+      "url": "http://192.168.2.65:50098/index.html",
+      "query": null,
+      "market": null,
+      "location": null,
+      "device": null,
+      "evidence_ref": "BROWSER-privacy-third-party",
+      "claim_boundary": "Drittanbieter-Requests allein beweisen keine Einwilligungspflicht oder Rechtswidrigkeit.",
+      "manual_review_required": false,
+      "legal_review_required": true,
+      "context": {
+        "hosts": [
+          "thirdparty.invalid"
+        ]
+      }
+    },
+    {
+      "id": "PRIVACY_COOKIES_PRECHOICE",
+      "family": "privacy_consent",
+      "label": "Cookies vor Auswahl",
+      "status": "MEASURED",
+      "measurement_class": "measured",
+      "value": 1,
+      "unit": "count",
+      "source_type": "PUBLIC_BROWSER",
+      "source_provider": "Chromium/Playwright browser context",
+      "observed_at": "2026-10-28T00:19:08Z",
+      "date_range": null,
+      "url": "http://192.168.2.65:50098/index.html",
+      "query": null,
+      "market": null,
+      "location": null,
+      "device": null,
+      "evidence_ref": "BROWSER-privacy-cookies",
+      "claim_boundary": "Cookies allein beweisen keine Einwilligungspflicht oder Rechtswidrigkeit.",
+      "manual_review_required": false,
+      "legal_review_required": true,
+      "context": {
+        "cookie_names": [
+          "fixture_prechoice"
+        ]
+      }
+    },
+    {
+      "id": "PRIVACY_STORAGE_ITEMS_PRECHOICE",
+      "family": "privacy_consent",
+      "label": "Storage-Einträge vor Auswahl",
+      "status": "MEASURED",
+      "measurement_class": "measured",
+      "value": 1,
+      "unit": "count",
+      "source_type": "PUBLIC_BROWSER",
+      "source_provider": "Chromium/Playwright storage observation",
+      "observed_at": "2026-10-28T00:19:08Z",
+      "date_range": null,
+      "url": "http://192.168.2.65:50098/index.html",
+      "query": null,
+      "market": null,
+      "location": null,
+      "device": null,
+      "evidence_ref": "BROWSER-privacy-storage",
+      "claim_boundary": "Storage-Nutzung allein beweist keine Einwilligungspflicht oder Rechtswidrigkeit.",
+      "manual_review_required": false,
+      "legal_review_required": true,
+      "context": {
+        "storage": {
+          "local": 1,
+          "session": 0
+        }
+      }
+    },
+    {
+      "id": "CONSENT_ACCEPT_CONTROL_FOUND",
+      "family": "privacy_consent",
+      "label": "Akzeptieren-Steuerung gefunden",
+      "status": "OBSERVED",
+      "measurement_class": "observed",
+      "value": true,
+      "unit": "boolean",
+      "source_type": "PUBLIC_BROWSER",
+      "source_provider": "Chromium/Playwright visible control observation",
+      "observed_at": "2026-10-28T00:19:08Z",
+      "date_range": null,
+      "url": "http://192.168.2.65:50098/index.html",
+      "query": null,
+      "market": null,
+      "location": null,
+      "device": null,
+      "evidence_ref": "BROWSER-consent-accept",
+      "claim_boundary": "Das Vorhandensein einer Steuerung beweist keine technische oder rechtliche Wirksamkeit.",
+      "manual_review_required": false,
+      "legal_review_required": true,
+      "context": {
+        "clicked": true
+      }
+    },
+    {
+      "id": "CONSENT_REJECT_CONTROL_FOUND",
+      "family": "privacy_consent",
+      "label": "Ablehnen-Steuerung gefunden",
+      "status": "OBSERVED",
+      "measurement_class": "observed",
+      "value": true,
+      "unit": "boolean",
+      "source_type": "PUBLIC_BROWSER",
+      "source_provider": "Chromium/Playwright visible control observation",
+      "observed_at": "2026-10-28T00:19:08Z",
+      "date_range": null,
+      "url": "http://192.168.2.65:50098/index.html",
+      "query": null,
+      "market": null,
+      "location": null,
+      "device": null,
+      "evidence_ref": "BROWSER-consent-reject",
+      "claim_boundary": "Das Vorhandensein einer Steuerung beweist keine technische oder rechtliche Wirksamkeit.",
+      "manual_review_required": false,
+      "legal_review_required": true,
+      "context": {
+        "clicked": true
+      }
+    }
+  ]
+}
