@@ -134,6 +134,19 @@ def main(argv: list[str]) -> int:
             errors.append(f"measurement platform preservation live check failed: {detail}")
     except Exception as exc:
         errors.append(f"measurement platform preservation live check unavailable: {exc}")
+    # Same for the v3.2.1 preservation manifest: a stored PASS cannot vouch for code that changed afterwards.
+    try:
+        preservation = subprocess.run(
+            [sys.executable, str(root / "scripts" / "validate_strategic_relevance_v321_preservation.py"), str(root)],
+            text=True,
+            capture_output=True,
+            timeout=60,
+        )
+        if preservation.returncode != 0:
+            detail = (preservation.stderr or preservation.stdout).strip()
+            errors.append(f"v3.2.1 preservation live check failed: {detail}")
+    except Exception as exc:
+        errors.append(f"v3.2.1 preservation live check unavailable: {exc}")
     if report.get("release_scope") != "website-diagnosis-package": errors.append("release scope drift")
     if report.get("release_gate", {}).get("status") != "PASS": errors.append("release status is not PASS")
     if report.get("release_gate", {}).get("allowed_to_package") is not True: errors.append("allowed_to_package must be true")
