@@ -6,12 +6,12 @@
     {
       "mutation": "BIND-002",
       "status": "DETECTED",
-      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py /var/folders/03/bszf3mg504zgzrtyccc8nbch0000gn/T/pxk-binding-mutation-dzq3b_7a/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:F"
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>/pxk-binding-mutation-dzq3b_7a/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:F"
     },
     {
       "mutation": "BIND-003",
       "status": "DETECTED",
-      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py /var/folders/03/bszf3mg504zgzrtyccc8nbch0000gn/T/pxk-binding-mutation-ummlgcxv/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:F"
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>/pxk-binding-mutation-ummlgcxv/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:F"
     },
     {
       "mutation": "EXEC-005",
@@ -26,7 +26,7 @@
     {
       "mutation": "SCORE-002",
       "status": "DETECTED",
-      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py /var/folders/03/bszf3mg504zgzrtyccc8nbch0000gn/T/pxk-binding-mutation-ojxngl2v/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:F"
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>/pxk-binding-mutation-ojxngl2v/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:F"
     },
     {
       "mutation": "SCORE-003",
@@ -41,17 +41,17 @@
     {
       "mutation": "MUT-REGISTRY-REMOVE",
       "status": "DETECTED",
-      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py /var/folders/03/bszf3mg504zgzrtyccc8nbch0000gn/T/pxk-binding-mutation-0az8tgm2/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR: "
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>/pxk-binding-mutation-0az8tgm2/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR: "
     },
     {
       "mutation": "MUT-REGISTRY-49TH",
       "status": "DETECTED",
-      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py /var/folders/03/bszf3mg504zgzrtyccc8nbch0000gn/T/pxk-binding-mutation-06k9a_fj/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR: "
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>/pxk-binding-mutation-06k9a_fj/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR: "
     },
     {
       "mutation": "MUT-CATEGORY-WEIGHT",
       "status": "DETECTED",
-      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py /var/folders/03/bszf3mg504zgzrtyccc8nbch0000gn/T/pxk-binding-mutation-7zz5k8se/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:F"
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>/pxk-binding-mutation-7zz5k8se/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:F"
     },
     {
       "mutation": "MUT-EVIDENCE-REMOVE",
