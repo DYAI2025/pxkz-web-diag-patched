@@ -22,15 +22,16 @@ def squash(value: object) -> str:
     return re.sub(r"\s+", "", str(value)).casefold()
 
 
-def pdf(pages: list[list[tuple[str, float]]], card_bottom_mm: float | None = None) -> Path:
+def pdf(pages: list[list[tuple[str, float]]], card_bottom_mm: float | None = None, footer: bool = True) -> Path:
     """Each page: list of (text, baseline y in mm); template-like footer (customer text + page number) at 203mm."""
     doc = fitz.open()
     for lines in pages:
         page = doc.new_page(width=W, height=H)
         for text, y in lines:
             page.insert_text((20 * MM, y * MM), text, fontsize=9)
-        page.insert_text((20 * MM, 203 * MM), "Kunde · Website-Analyse", fontsize=8)
-        page.insert_text((270 * MM, 203 * MM), f"{doc.page_count:02d}", fontsize=8)
+        if footer:
+            page.insert_text((20 * MM, 203 * MM), "Kunde · Website-Analyse", fontsize=8)
+            page.insert_text((270 * MM, 203 * MM), f"{doc.page_count:02d}", fontsize=8)
         if card_bottom_mm is not None:
             page.draw_rect(fitz.Rect(20 * MM, 150 * MM, 140 * MM, card_bottom_mm * MM), color=(0, 0, 0))
     path = Path(tempfile.mkdtemp(prefix="pxk-layout-")) / "p.pdf"
@@ -59,6 +60,15 @@ class FooterClearanceTest(unittest.TestCase):
 
     def test_text_running_into_footer_fails(self) -> None:
         self.assertTrue(layout_errors(pdf([[("Letzte Zeile der Karte", 201.5)]])))
+
+
+class FooterlessPageTest(unittest.TestCase):
+    # Cover-like pages carry no footer; their bottom band is design, so only running off the page counts.
+    def test_text_low_on_footerless_page_passes(self) -> None:
+        self.assertEqual(layout_errors(pdf([[("Kernaussage unten im Band", 200.0)]], footer=False)), [])
+
+    def test_text_running_off_footerless_page_fails(self) -> None:
+        self.assertTrue(layout_errors(pdf([[("Abgeschnittene Zeile", 208.0)]], footer=False)))
 
 
 class LeverPageTest(unittest.TestCase):

@@ -18,9 +18,10 @@ def layout_errors(pdf):
   h,w=page.rect.height,page.rect.width
   spans=[s for b in page.get_text('dict')['blocks'] for l in b.get('lines',[]) for s in l['spans'] if s['text'].strip()]
   marks=[s['bbox'][1] for s in spans if s['text'].strip()==f'{no:02d}' and s['bbox'][1]>h-15*MM]
-  ftop=min(marks) if marks else h-10*MM
+  # With a footer: keep 1.5mm clear of it. Without one (cover-like pages with full-bleed bands): stay 5mm inside the page.
+  ftop=min(marks) if marks else h
   body=[s['bbox'][3] for s in spans if abs(s['bbox'][1]-ftop)>0.5*MM or not marks]
-  limit=ftop-1.5*MM
+  limit=ftop-1.5*MM if marks else h-5*MM
   shapes=[d['rect'].y1 for d in page.get_drawings() if d['rect'].y0<limit and d['rect'].height<h*0.9 and d['rect'].width<w*0.95]
   low=max(body+shapes,default=0)
   if low>limit:errors.append(f'page {no}: content ends at {low/MM:.1f}mm, footer clearance limit {limit/MM:.1f}mm')
