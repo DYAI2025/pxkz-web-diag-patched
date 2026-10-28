@@ -1,7 +1,7 @@
 {
   "status": "PASS",
   "fixture_only": true,
-  "artifact_digest": "0c301226f6eefcb1feba012293ebdd356bc1a8cc5cabeb99cab50ea2ae3f4162",
+  "artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
   "compute_score_changed": false,
   "registry_weights_unchanged": true,
   "independent_recompute": {

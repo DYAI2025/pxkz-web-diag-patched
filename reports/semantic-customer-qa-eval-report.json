@@ -1,19 +1,19 @@
 {
   "status": "PASS",
   "policy_version": "1.0",
-  "semantic_bundle_sha256": "082325992478c88b16c7f2b8c67372e065473ba8e469c78cdae6cf7e37903041",
-  "fixture": "evals/fixtures/baumdienst-renner-reflection-regression.json",
-  "fixture_sha256": "c6f5b2bb0b7b9e88b08b66387e374a2077ee6f77fbbf1f04bb194f9121ce37ca",
-  "customer": "Baumdienst Renner",
-  "page_count": 9,
-  "decision_visual_count": 4,
+  "semantic_bundle_sha256": "560dfdb223060cb8cfb2dd3588425cf375c31954b9eab67c3477c7c44d0551c8",
+  "fixture": "evals/fixtures/synthetic-report.json (legacy-baseline, customer mode)",
+  "fixture_sha256": "5ab6b2268783bceccc58eb5a2aed542cb49c8f9ac0454016d12c34e1421db07a",
+  "customer": "Meyer & Sohn Bau GmbH",
+  "page_count": 10,
+  "decision_visual_count": 5,
   "inspection_method": "agent_vision",
-  "inspected_by": "Claude Opus 5.5 (2026-10-28)",
+  "inspected_by": "Claude Opus 5.5 (main session, 2026-10-28; same session that authored the release-completion patch, so not independent)",
   "semantic_qa_validation": "PASS",
   "visual_qa_validation": "PASS",
-  "pdf_sha256": "1cdb5b7f32c795a2cb89ab4dce1c4f50c5a485de3ab9812776e5237a97379a14",
-  "client_model_sha256": "8e60555fe46235f15afffb895989b2136f1264354c1a6a0fe2c6c6ad28e05def",
-  "scored_report_sha256": "8af6f625c2d980f59166b36ea994701a9471f87553fc5fbbb51d146d01abaada",
+  "pdf_sha256": "de27843d7798299cb891ee937a7deb3a000cb2860006fc755a21f34e439df597",
+  "client_model_sha256": "d4ee5c61ba08787166e1188c5ea52fbfd5e10ffb8b057d8f31966b7aa312c3c7",
+  "scored_report_sha256": "22a535a85bc3464132ffe42a3141c651b993d683cd50b45eaa94ed8e473e1931",
   "release_mode": "customer",
   "font_status": "EXACT",
   "overall_checks": {
@@ -33,25 +33,66 @@
     "privacy_claim_scope_correct": "PASS",
     "no_synthetic_metric_visuals": "PASS"
   },
-  "page_evidence": "reports/customer-pdf-qa-2026-10-28/baumdienst-renner.semantic-qa.json",
+  "page_evidence": "reports/customer-pdf-qa-release-badaf71/legacy-baseline.semantic-qa.json",
+  "all_cases": "reports/customer-pdf-qa-release-badaf71.json",
+  "case_verdicts": {
+    "legacy-baseline": {
+      "visual": "PASS",
+      "semantic": "PASS"
+    },
+    "legal-golden": {
+      "visual": "PASS",
+      "semantic": "PASS"
+    },
+    "case-a-critical": {
+      "visual": "PASS",
+      "semantic": "PASS"
+    },
+    "case-b-equal-rank-profile": {
+      "visual": "PASS",
+      "semantic": "PASS"
+    },
+    "case-c-vc03-detail": {
+      "visual": "PASS",
+      "semantic": "PASS"
+    },
+    "active-positive": {
+      "visual": "PASS",
+      "semantic": "FAIL"
+    },
+    "proof-realistic": {
+      "visual": "PASS",
+      "semantic": "PASS"
+    },
+    "proof-strategic": {
+      "visual": "PASS",
+      "semantic": "PASS"
+    },
+    "proof-measurement-gateway": {
+      "visual": "PASS",
+      "semantic": "PASS"
+    }
+  },
   "observed_quality": {
-    "executive_summary": "single customer-specific main lever (address consistency) plus three strengths and priorities",
-    "decision_visuals": "four approved visuals (levers list, AI clarity, trust matrix, severity) tied to the scored audit",
+    "executive_summary": "single main lever (mobile next step), three strengths and priorities, dated scope sentence",
+    "decision_visuals": "five approved visuals (category bars, levers list, mobile load threshold, answerability matrix, trust matrix) tied to the scored audit",
     "findings": "four prioritized lever cards with observation, business impact and next step, above the footer band",
-    "roadmap": "scan-first owner actions; 'Danach' empty (O-2)",
+    "roadmap": "Jetzt / In 30 Tagen / Danach owner actions (O-2)",
     "closing": "four actions in lever order"
   },
   "open_observations": [
     "O-2",
     "O-4",
-    "O-6"
+    "O-7",
+    "O-8"
   ],
+  "recorded_fail": "active-positive semantic QA FAIL (narrative vs. measured trust/legal values); not deliverable; open risk by user decision 2026-10-28",
   "does_not_prove": [
     "commercial conversion or revenue improvement",
     "semantic quality for every future website without per-output rendered QA",
     "ElevenLabs provider upload, live telephony, or legal outbound approval"
   ],
-  "superseded": "previous evidence (12 pages, inspected by GPT-5.6 Sol, pdf 60777610...) belonged to an older semantic bundle",
-  "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
-  "candidate_commit": "e4a0cb6"
+  "superseded": "Baumdienst Renner evidence (9 pages, pdf 1cdb5b7f...) no longer applies: that fixture now fails closed with fewer than four admissible visuals.",
+  "artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
+  "candidate_commit": "badaf71"
 }

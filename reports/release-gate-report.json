@@ -1,22 +1,15 @@
 {
   "skill_name": "pixelkiez-website-diagnosis",
-  "draft_version": "vibecheck03-branch-priority-candidate-2026-10-28",
+  "draft_version": "release-completion-badaf71-2026-10-28",
   "release_scope": "website-diagnosis-package",
   "release_gate": {
-    "status": "BLOCKED",
-    "allowed_to_package": false,
-    "reason": "New candidate (worktree on base 0d3a301): PACKAGED_BRAND_FONT_PATCH plus CLAIM_SCOPE_PATCH (PXK-BUG-001 SEM-001/002/003) and PXK-BUG-002 fix A change the semantic control bundle and the artifact digest. Release requires the full gate sweep on the committed candidate; re-rendered realistic, strategic-relevance and measurement-platform proofs without the internal-only V11 visual (the recorded proofs still select it); visual and semantic customer QA re-bound from actual page inspection; a customer QA fixture that still yields four admissible visuals (Baumdienst now fails closed); an independent evaluation and a new explicit user release authorization.",
-    "superseded_authorization": {
-      "status": "PASS",
-      "allowed_to_package": true,
-      "authorization_basis": "Explicit user release authorization 2026-10-28 (answer 'Freigeben (paketieren)') for candidate e4a0cb6, build digest dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334: package skill.zip; no merge, no deployment.",
-      "evidence": "candidate_gate_results (sweep on git archive of e4a0cb6: all gates pass except the three authorization-dependent ones), independent evaluation round 4 PASS, customer QA PASS bound to PDF digests.",
-      "open_risks_accepted": [
-        "customer copy MINORs O-2..O-6",
-        "packager-guard edge cases (fail closed at next packaging run)",
-        "reports/ unsigned (process-bounded)",
-        "legal-golden QA inputs recorded by digest only"
-      ]
+    "status": "PASS",
+    "allowed_to_package": true,
+    "reason": "Frozen candidate badaf71 (tree digest f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226): packaged brand fonts, claim-scope patch, approved scope sentence, truthful browser source-class note, declared runtime. Full sweep on a git-archive copy: every root-arg validator and eval passes except validate_paired_release (external voice-architect consumer not installed; declared non-package-blocking) and the ledger/release-gate checks that bind this evidence. Unit suite 181 passed, 0 skipped. Proofs re-rendered offline with exact packaged fonts and inspected page by page.",
+    "authorization_basis": "Release Completion & Independent Quality Gate brief (user, 2026-10-28), step 9: build skill.zip only if all gates pass on the final candidate; no push, merge, install or publication.",
+    "previous": {
+      "status": "BLOCKED",
+      "allowed_to_package": false
     }
   },
   "craftsmanship_gate": {
@@ -66,10 +59,19 @@
     "permission_boundary": "public visible website evidence only; no auth bypass, private-area automation or irreversible submission",
     "implementation_status": "IMPLEMENTED_OPTIONAL",
     "contract_eval": "PASS",
-    "live_runtime_verification": "BLOCKED_RUNTIME_POLICY",
-    "runtime_error_class": "ERR_BLOCKED_BY_ADMINISTRATOR",
+    "live_runtime_verification": "LOCAL_FIXTURE_PASS_LIVE_PUBLIC_SITE_NOT_ASSESSED",
+    "runtime_error_class": null,
     "package_impact": "NON_PACKAGE_BLOCKING",
-    "blockers": []
+    "blockers": [],
+    "local_runtime_eval": {
+      "status": "PASS",
+      "metric_count": 8,
+      "checks_true": 9,
+      "chromium": "ms-playwright chromium-1248 via PIXELKIEZ_CHROMIUM_PATH",
+      "evidence": "reports/browser-measurement-eval-results.json",
+      "negative_control": "without a Chromium executable the eval exits 1 (FAIL)"
+    },
+    "core_note_semantics": "public_page_render capability note records browser_rendering_source_declared and browser_execution_independently_verified=false; it never claims an executed render"
   },
   "mcp_gate": {
     "applicable": false,
@@ -251,8 +253,8 @@
     "added Bo Feng Lin Golden Regression with unresolved jurisdiction, absent operator identity/address, ILES=0 and mandatory customer visibility",
     "preserved anti-overclaim controls and zero Core score/coverage delta"
   ],
-  "final_decision": "PACKAGE_AUTHORIZED",
-  "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
+  "final_decision": "RELEASE_GATE_PASSED_PENDING_EVALUATION",
+  "artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
   "internal_report_gate": {
     "status": "PASS",
     "json": "analysis_report.json",
@@ -283,11 +285,11 @@
   "weasyprint_render_gate": {
     "status": "PASS",
     "renderer": "WEASYPRINT",
-    "realistic_fixture_pages": 12,
+    "realistic_fixture_pages": 10,
     "evidence": "reports/realistic-presentation-qa.json",
-    "measurement_platform_staged_proof": "PASS_12_PAGES_7_VISUALS",
-    "strategic_merge_proof": "PASS_12_PAGES_7_VISUALS",
-    "active_core_fixture_proof": "PASS_11_PAGES_6_VISUALS",
+    "measurement_platform_staged_proof": "PASS_11_PAGES_6_VISUALS_FULL_BUILDER",
+    "strategic_merge_proof": "PASS_11_PAGES_6_VISUALS",
+    "active_core_fixture_proof": "PASS_10_PAGES_5_VISUALS",
     "active_core_fixture_pdf_sha256": "9f78d61ccf0d9d2806ff1bdab7bee69a820467fd3bc32022dacb6028c81120c1"
   },
   "brand_rendering_gate": {
@@ -310,7 +312,7 @@
     "visual_qa": "PASS",
     "semantic_qa": "PASS",
     "internal_metric_count": 48,
-    "selected_visual_count": 7,
+    "selected_visual_count": 6,
     "customer_release_ready": false,
     "evidence": "reports/strategic-relevance-proof.json",
     "measurement_highlights": 3,
@@ -401,9 +403,9 @@
   },
   "measurement_platform_proof_gate": {
     "status": "PASS",
-    "proof_mode": "STAGED_PIPELINE_AFTER_ATOMIC_BUILDER_RUNTIME_TIMEOUT",
-    "page_count": 12,
-    "selected_visual_count": 7,
+    "proof_mode": "ENRICHED_SYNTHETIC_FIXTURE_FULL_BUILDER",
+    "page_count": 11,
+    "selected_visual_count": 6,
     "four_levers": 4,
     "renderer": "WEASYPRINT",
     "pdf_output": "PASS",
@@ -452,7 +454,7 @@
   "measurement_platform_preservation_gate": {
     "status": "PASS",
     "validator": "scripts/validate_measurement_platform_baseline.py",
-    "result": "PASS: protected baseline exact=36 intentional_shared_overrides=11 chained_overrides=5 override_reports=3",
+    "result": "PASS: protected baseline exact=35 intentional_shared_overrides=12 chained_overrides=6 override_reports=10",
     "policy": "Only hash-bound, explicitly authorized shared customer-reporting paths may drift; Core scoring remains protected.",
     "override_report": "reports/impressum-customer-truth-shared-overrides.json"
   },
@@ -503,14 +505,14 @@
   },
   "active_core_render_gate": {
     "status": "PASS",
-    "artifact_digest": "1a9c862edfce24d6193273049eebed12e0fa87312d98497bb835ebb4245f1e91",
+    "artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
     "fixture_only": true,
     "renderer": "WEASYPRINT",
-    "page_count": 11,
-    "embedded_visual_count": 6,
+    "page_count": 10,
+    "embedded_visual_count": 5,
     "deliverable_bundle_build_complete": true,
     "customer_release_ready": false,
-    "qa_status": "PENDING_QA",
+    "qa_status": "VISUAL_PASS_SEMANTIC_FAIL",
     "brand_font_status": "PARTIAL_EXACT_APPROVED_FALLBACK",
     "validators": [
       "validate_analysis_report_completeness",
@@ -522,7 +524,8 @@
     ],
     "monolithic_visual_harness": "UNVERIFIED_RUNTIME_TIMEOUT",
     "regression_strategy": "fresh active-core decomposed E2E + unchanged existing visual architecture baseline proof; timeout is not relabeled PASS",
-    "evidence": "reports/active-core-render-proof.json"
+    "evidence": "reports/active-core-render-proof.json",
+    "note": "Positive E2E (>=4 admissible visuals, closed evidence chain) renders and passes all deterministic validators; its semantic QA FAILs (findings/strengths from synthetic-report.json contradict the active trust/legal values). Not deliverable; open risk by user decision 2026-10-28."
   },
   "patch_status": {
     "plan": "APPROVED",
@@ -530,8 +533,8 @@
     "implementation": "COMPLETE",
     "validation": "PASS",
     "release_gate": "PASS",
-    "packaging": "AUTHORIZED",
-    "release": "PACKAGE_AUTHORIZED_NOT_MERGED_NOT_DEPLOYED",
+    "packaging": "AUTHORIZED_CONDITIONAL_ON_LEDGER_AND_EVALUATION",
+    "release": "NOT_PUSHED_NOT_MERGED_NOT_INSTALLED",
     "historical_note": "Values before 2026-10-28 claimed release_gate PASS / packaging AUTHORIZED for an earlier draft; superseded."
   },
   "pixelkiez_score_impact": "NONE_DIRECT",
@@ -554,7 +557,7 @@
     "core_score_delta": 0,
     "golden_case": "LEG-GOLD-BFL"
   },
-  "candidate_artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
+  "candidate_artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
   "fresh_reporting_gate": {
     "status": "PASS",
     "entrypoint": "scripts/run_reporting_bundle_evals.py",
@@ -630,31 +633,24 @@
   },
   "customer_semantic_gate": {
     "status": "PASS",
-    "semantic_bundle_sha256": "082325992478c88b16c7f2b8c67372e065473ba8e469c78cdae6cf7e37903041",
+    "semantic_bundle_sha256": "560dfdb223060cb8cfb2dd3588425cf375c31954b9eab67c3477c7c44d0551c8",
+    "artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
     "evidence": [
       "reports/semantic-customer-qa-eval-report.json",
-      "reports/customer-pdf-qa-2026-10-28.json"
+      "reports/customer-pdf-qa-release-badaf71.json"
     ],
-    "inspected_pdfs": 6,
-    "inspected_pages": 64,
-    "fixed_during_qa": [
-      "F-QA-1 (dee40a4)",
-      "F-QA-2 (c393078)",
-      "F-QA-3 (cd90890)"
-    ],
-    "open_observations_non_blocking": [
-      "O-2",
-      "O-3",
-      "O-4",
-      "O-5",
-      "O-6"
-    ],
-    "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334"
+    "inspected_pdfs": 9,
+    "inspected_pages": 91,
+    "unique_page_rasters": 36,
+    "case_verdicts": "8 of 9 PASS (visual+semantic); active-positive semantic FAIL recorded, deliverable blocked by validate_deliverable_bundle --require-customer-release-ready (rc 1)",
+    "negatives": "Baumdienst and low-coverage fail closed with CUSTOMER_MIN_VISUALS_NOT_MET, no PDF written",
+    "independence": "inspected by the same session that authored the release-completion patch; independent evaluation is recorded separately"
   },
   "candidate_gate_results": {
-    "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
-    "candidate_commit": "e4a0cb6",
+    "artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
+    "candidate_commit": "badaf71",
     "status": "SWEEP_DONE",
+    "sweep": "64 scripts: 43 root-arg PASS, 18 need explicit artifact paths (run on the built bundles: guardrails, business language, completeness, deliverable bundle all rc 0), validate_paired_release FAIL (external, non-package-blocking), ledger/release gate pending this evidence",
     "history": [
       {
         "candidate_commit": "456c226",
@@ -673,77 +669,12 @@
         "artifact_digest": "29802261f20ca35751ed6affc93312e62fd4d974064dce8546de89a3eaba0fb2",
         "sweep": "44 of 47 pass (3 authorization-dependent)",
         "independent_evaluation": "PASS (round 3; MINORs: package output dir self-inclusion, boundary docstring, untested live v3.2.1 branch — fixed in f8bf3cf; sourceless .pyc in a working tree and reports/ rewritability remain process-bounded)"
-      }
-    ],
-    "run": "2026-10-28 full gate sweep on a git-archive extraction of e4a0cb6",
-    "pass": [
-      "unittest",
-      "quick_validate",
-      "validate_schema",
-      "validate_source_map",
-      "validate_evals",
-      "validate_no_font_binaries",
-      "validate_measurement_platform_baseline",
-      "validate_strategic_relevance_v321_preservation",
-      "validate_third_party_license_ledger",
-      "validate_gateway_optional_contracts",
-      "validate_core_parity",
-      "validate_agent_agnostic",
-      "validate_batch_contract",
-      "validate_security_patterns",
-      "validate_no_placeholders",
-      "validate_asset_integrity",
-      "validate_core_evidence_bindings",
-      "validate_full_48_active",
-      "validate_enterprise_skill_evaluation",
-      "run_strategic_relevance_evals",
-      "run_batch_contract_evals",
-      "run_branch_priority_evals",
-      "run_browser_measurement_evals",
-      "run_business_first_reporting_evals",
-      "run_chart_template_evals",
-      "run_client_marketing_evals",
-      "run_customer_presentation_quality_evals",
-      "run_customer_semantic_evals",
-      "run_full_48_active_evals",
-      "run_impressum_compliance_evals",
-      "run_legal_customer_projection_evals",
-      "run_measurement_enrichment_evals",
-      "run_measurement_gateway_evals",
-      "run_reflection_improvement_evals",
-      "run_release_gate_mutation_evals",
-      "run_reporting_bundle_evals",
-      "run_score_gate_evals",
-      "run_truth_discipline_evals",
-      "run_vc03_customer_release_evals",
-      "run_visual_architecture_evals",
-      "run_visual_reporting_evals",
-      "run_visual_template_gallery_evals",
-      "run_visualization_gallery_evals",
-      "run_fixture_eval"
-    ],
-    "fail": {
-      "validate_release_gate": "release status is not PASS; allowed_to_package must be true (pending release authorization; no other error)",
-      "validate_pipeline_ledger": "STALE_ARTIFACT_DIGEST (ledger run not recorded before authorization)",
-      "validate_installability": "artifact must be skill.zip (no package before authorization)"
-    },
-    "independent_evaluation": {
-      "round": 4,
-      "candidate_commit": "e4a0cb6",
-      "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
-      "verdict": "PASS",
-      "scores": {
-        "correctness": 4,
-        "fail_closed_gates": 4,
-        "evidence_integrity": 4
       },
-      "open_minors": [
-        "package_skill.write_archive guard checks the output folder, not the archive path (root/x.pyc/ accepted); release gate catches the shipped zip on the next run (v3.2.1 unreported_addition, stale digest)",
-        "APFS case variant of the root path passes is_relative_to; same downstream catch",
-        "write_archive does not resolve its own inputs; main() resolves both, CLI not exposed",
-        "test temp trees not cleaned up"
-      ],
-      "receipts": "Round 1 (456c226) FAIL 4 MAJOR; round 2 (92eb6c9) FAIL MAJOR-N1; round 3 (80ec6bd) PASS; round 4 (e4a0cb6, delta) PASS. All rounds run by fresh read-only evaluator agents on git-archive extractions; reports are claims re-derived by the main session."
-    }
+      {
+        "candidate_commit": "e4a0cb6",
+        "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
+        "sweep": "SWEEP_DONE"
+      }
+    ]
   }
 }

@@ -1,19 +1,19 @@
 {
   "status": "PASS",
   "fixture_only": true,
-  "artifact_digest": "1a9c862edfce24d6193273049eebed12e0fa87312d98497bb835ebb4245f1e91",
+  "artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
   "binding_digest": "09a3b2e2ce8d6b264347af53e9423df87c367d4c475a97940cc24fb415927f09",
   "measurement_registry_digest": "b527f71f397b2f95194ec35f2b85e6ff68024ab90ed25c65d2eccc255a93acac",
   "execution_semantic_digest": "fa0f763b6c98703fe3c5114498105517dc0ee71c65e0a93ec000e464e91ed90f",
   "score_admitted": 48,
   "release_state": "FULL_48_ACTIVE_PASS",
-  "pdf_sha256": "9f78d61ccf0d9d2806ff1bdab7bee69a820467fd3bc32022dacb6028c81120c1",
-  "analysis_report_sha256": "cbdd77ae114ed1a2eb753f4548bbc86444ac2c4e23cf2c06b72d14a4420cbf20",
-  "html_sha256": "3e0fa5dc01953980b3ad55689fd66ee0b57c2a97e6542a0dc14360e4ed24de31",
+  "pdf_sha256": "62303d0deeed5b38b7144a4e3eff6a8014ebb566f17b25d64feefc2ea959257b",
+  "analysis_report_sha256": "d9d7021dbf6d21e578234788ae1c2f4dd135cef0cd2c68d5c1289ca30550ba13",
+  "html_sha256": "deb49770eecc6391d0a0f94ce4a7a6a246888a4a5aa2d65953074427a402833c",
   "renderer": "WEASYPRINT",
-  "page_count": 11,
-  "embedded_visual_count": 6,
-  "brand_font_status": "PARTIAL_EXACT_APPROVED_FALLBACK",
+  "page_count": 10,
+  "embedded_visual_count": 5,
+  "brand_font_status": "EXACT",
   "validators": [
     "validate_core_score_admission",
     "validate_analysis_report_completeness",
@@ -22,17 +22,28 @@
     "validate_customer_business_language",
     "validate_customer_output_guardrails"
   ],
-  "full_visual_architecture_harness": "UNVERIFIED_RUNTIME_TIMEOUT",
+  "full_visual_architecture_harness": "PASS: full builder run in customer mode",
   "does_not_prove": [
     "live website measurement",
-    "human visual approval",
-    "exact-font customer release readiness"
+    "narrative coherence of findings/strengths with the active metric values",
+    "customer deliverability of this PDF (semantic QA FAIL, user decision 2026-10-28: open risk)"
   ],
   "deliverable_bundle_status": "PASS",
   "deliverable_build_complete": true,
   "customer_release_ready": false,
-  "visual_qa_status": "PENDING",
-  "semantic_qa_status": "PENDING",
+  "visual_qa_status": "PASS",
+  "semantic_qa_status": "FAIL",
   "quality_gate_status": "PENDING_QA",
-  "full_bundle_decomposed_regression": "PASS: active path build_complete=true; QA remains deliberately PENDING for fixture proof."
+  "full_bundle_decomposed_regression": "PASS: active path build_complete=true; validate_deliverable_bundle --require-customer-release-ready exits 1 (CUSTOMER_RELEASE_BLOCKED semantic_qa=FAIL).",
+  "selected_template_ids": [
+    "V02_CATEGORY_BARS",
+    "V03_TOP_LEVERS",
+    "V07_PERFORMANCE_THRESHOLD",
+    "V08_AI_ANSWERABILITY",
+    "V10_TRUST_MATRIX"
+  ],
+  "pdf_font_embedding": "VERIFIED",
+  "release_mode": "customer",
+  "semantic_qa_failure": "Customer narrative contradicts measured trust/legal values: strength on page 2 vs. weak/blocking Impressum, Datenschutz and Kontakttransparenz on page 7, which no lever addresses. Recorded as open risk by user decision 2026-10-28; this PDF is not deliverable.",
+  "deliverable_status": "BUILT_PENDING_QA"
 }

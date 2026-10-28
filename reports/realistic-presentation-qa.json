@@ -1,24 +1,24 @@
 {
   "status": "PASS",
-  "fixture": "synthetic 48-core + impressum-compliance integration proof",
+  "fixture": "synthetic 48-core + impressum-compliance integration proof (LEG-GOLD-BFL sidecar)",
   "customer": "Meyer & Sohn Bau GmbH",
   "release_mode": "proof",
-  "candidate_artifact_digest": "1f4fe8356420f494020fcb23d40b5b221e743cd41d636a5a8dd8fd288643fe0b",
-  "revalidated_at": "2026-09-08T18:43:44.369490+00:00",
-  "page_count": 11,
-  "selected_visual_count": 6,
+  "candidate_commit": "badaf71",
+  "candidate_artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
+  "revalidated_at": "2026-10-28",
+  "page_count": 10,
+  "selected_visual_count": 5,
   "selected_template_ids": [
     "V02_CATEGORY_BARS",
     "V03_TOP_LEVERS",
     "V07_PERFORMANCE_THRESHOLD",
     "V08_AI_ANSWERABILITY",
-    "V10_TRUST_MATRIX",
-    "V11_SEVERITY_DISTRIBUTION"
+    "V10_TRUST_MATRIX"
   ],
   "top_lever_count": 4,
   "internal_metric_count": 48,
   "legal_enabled": true,
-  "impressum_compliance_sha256": "544bc8cf94eec70f37dafcbc90d77fba69cfff2e08ea1dd06d5affab3d58c2d3",
+  "impressum_compliance_sha256": "44be2d89da6d93529e9215cdac29cdc1e7f344ca3270693d00a9470034493717",
   "internal_json": "PASS",
   "internal_markdown": "PASS",
   "visual_qa": "PASS",
@@ -26,35 +26,81 @@
   "closing_page_role": "PASS",
   "weasyprint_renderer": "PASS",
   "renderer": "WEASYPRINT",
-  "minimum_rendered_text_size_pt": 8.499755859375,
-  "font_status": "PARTIAL_EXACT_APPROVED_FALLBACK",
+  "minimum_rendered_text_size_pt": 8.5,
+  "font_status": "EXACT",
   "exact_font_status": {
-    "display": false,
+    "display": true,
     "data": true
   },
+  "pdf_font_embedding": "VERIFIED",
   "customer_release_ready": false,
-  "strict_customer_release": "BLOCKED_EXTERNAL_FONT",
+  "strict_customer_release": "PROOF_MODE_ONLY_NOT_A_CUSTOMER_RELEASE",
   "customer_language_firewall": "PASS",
   "customer_output_guardrails": "PASS",
   "strategic_relevance": "PASS",
   "measurement_platform_preservation": "PASS",
-  "pdf_sha256": "80d41c51e50f862bea37004bc448226f74594fadf442d45a4c8eb840f486d03f",
-  "analysis_json_sha256": "416399da56acb8c4c11c4a958982b91e8fd261087b638d593b51c3db308e8e80",
-  "analysis_markdown_sha256": "d9ce627609b16d3bf9e8d68f109585f57d68d6a8f8c71d1fd579f6c25b75e968",
-  "visualization_plan_sha256": "f8cfa44813b11b1bbfac252f4be86e2fba771128bb312584032fa02218a41c77",
-  "inspection_method": "agent_vision + deterministic validators",
-  "inspection_notes": [
-    "All 11 final pages were individually inspected from the final rendered PDF pages.",
-    "No clipping, overlap, broken glyphs, unreadable chart labels, or cross-page sentence splits were observed.",
-    "Customer/legal guardrails passed; ILES, applicability internals, expected-penalty language, and definitive legal overclaims were not exposed.",
-    "V01 overall score and V12 audit coverage are not selected as customer chart pages."
+  "pdf_sha256": "e3f50dac1267eda44c8b98b5cd601027c96105495d528e75f6a5c4b9ffa53dbd",
+  "analysis_json_sha256": "12eba8ad10df530a214b58504336acc36131ff9157a454d8eccafc24fcde2fc7",
+  "analysis_markdown_sha256": "7fbab874ccc066c8ec553f93d08d8173b85874e36837545b256d1af403300147",
+  "visualization_plan_sha256": "331c54f9ad5cb1a364e1f4c6423e1cf1accadd340e18375431d53efff1ef77c6",
+  "client_model_sha256": "97c1c1be7798249da8e673401d773024c7963a954a7d85828dd780466bf4a4e2",
+  "rendered_page_sha256": [
+    {
+      "page": 1,
+      "sha256": "d960b4eef61dff5fe9e2b14f6842e357ad7044b64ded219cb31ba22253b8a927"
+    },
+    {
+      "page": 2,
+      "sha256": "2ec3cb7906d97cd71fe39cf1c510fe3b5848cfe10a32a97b603b190622ed8fc3"
+    },
+    {
+      "page": 3,
+      "sha256": "68ae56ab38d31350fdad9824557144207c4f9d7885b1fa516cd1eb36377291e2"
+    },
+    {
+      "page": 4,
+      "sha256": "08180acfe1386d053f84e4a9278d815088920b2bd4dee85507de336e134a2a84"
+    },
+    {
+      "page": 5,
+      "sha256": "3e157a96c84516c0f8946ee074b2b22fc553a437ef1d878ff099c65c12697d10"
+    },
+    {
+      "page": 6,
+      "sha256": "7e8849889c839a7bcd260e5412fd162242509cabe3c7184975f3ecf29f4ad3f1"
+    },
+    {
+      "page": 7,
+      "sha256": "da4a45201f79e3d46e4a5a20de4811f4e731aea6395366397700d995c070fbde"
+    },
+    {
+      "page": 8,
+      "sha256": "b4946c9180dbd0fdb5a6eefa70fac96a2ff0c01eeabf1860de214896582e42ec"
+    },
+    {
+      "page": 9,
+      "sha256": "a4fe7a75a1299665f5d8faf69778f172c1ec3b6a4ec69ed7357f9876743ed8c0"
+    },
+    {
+      "page": 10,
+      "sha256": "dc2c073472bcb71bbacd242213ae45f902685c6b30f41090cff1a1b5d8c84732"
+    }
   ],
+  "inspection_method": "agent_vision + deterministic validators",
+  "render_basis": "Built offline from git archive of badaf71 (tree digest f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226) in a network-denied sandbox with no system fonts and no PIXELKIEZ_FONT_DIR; packaged brand fonts resolved EXACT and embedding VERIFIED. All 9 PDFs are byte-identical to the inspected probe renders (sha256 9/9, page rasters 91/91).",
+  "inspection_notes": [
+    "All 10 pages inspected from the rendered page images; no clipping, overlap, broken glyphs or cross-page sentence splits.",
+    "Legal provider-identity risk is lever 1 with review wording ('rechtlich prüfen'), no claim of a legal violation; V10 shows Impressum X Handlungsbedarf consistent with it.",
+    "V11 severity distribution is no longer selected (internal-only, SEM-003); five admissible visuals remain.",
+    "Overview page carries the dated scope sentence; no AI-visibility claim beyond answerability wording.",
+    "O-5 (recorded): the strength 'Rechts-/Kontaktflächen gut erreichbar' concerns reachability next to the identity risk."
+  ],
+  "supersedes": "11-page/6-visual proof with V11 and PARTIAL_EXACT fallback fonts (pdf 80d41c51...)",
   "does_not_prove": [
     "live customer measurements",
     "provider credential availability",
     "full WCAG conformance",
     "legal compliance",
-    "exact production typeface parity",
     "commercial outcome"
   ]
 }
