@@ -18,7 +18,7 @@
     },
     "low-coverage-marketing-report": {
       "scored": "615b5cd3b12599044e0e9baeac731f6055509522247236e73576a628da44389d",
-      "plan": "0a1450c1ae714a36bbd105590fc3887384bd0e0d4616d8bbdd724f8c393b3fd8",
+      "plan": "e752bf9da9348d54d382358a8d0ad132a6b887f9d0a014fad61251860d2ea35a",
       "model": "3e5d9f3968952f4d6245e855ac0def01e3c9186bbfe7dc5167d5cbb28ea34987",
       "batch_csv": "108f39d18dda66df4bf23f5cf93f2ab3ab6f8dadebae6190963bd11224169a10",
       "internal": "c81037b6309aaa9454ef39828bde387c4a6f1a61c0c460d3e0fd19e863427645",
@@ -39,7 +39,7 @@
     },
     "baumdienst-renner-reflection-regression": {
       "scored": "8af6f625c2d980f59166b36ea994701a9471f87553fc5fbbb51d146d01abaada",
-      "plan": "912c407b092b22818d2cb20cd6ba97cd6643ec2a6d1062f6426bfac935820095",
+      "plan": "96387c6b99e14568a21ce8b6e7bbdb94f1a5abb35e4e8240c6d359394eff7383",
       "model": "5712dad4d8ea5410c2b4b4792fcad7393d1eb2436bcf7f9b5d63b958a55bcd4c",
       "batch_csv": "74775f62576b7e99a8dad2c4e2389b0d0ade2eda523dbfb24e5a60707acc18a6",
       "internal": "41ef24868edf1b93b9252a6a56b5f3f6feb0b392bacf32eecc806f5150a8f49e",
@@ -50,5 +50,31 @@
         "F-002"
       ]
     }
-  }
+  },
+  "amendments": [
+    {
+      "date": "2026-10-28",
+      "patch_id": "CUSTOMER_STATUS_COHERENCE_PATCH",
+      "authorization": "Explicit user approval 2026-10-28 (Regel A/B), accepting a legacy output change where a status row contradicted a customer-visible problem finding.",
+      "changes": [
+        {
+          "fixture": "low-coverage-marketing-report",
+          "output": "plan",
+          "previous_sha256": "0a1450c1ae714a36bbd105590fc3887384bd0e0d4616d8bbdd724f8c393b3fd8",
+          "current_sha256": "e752bf9da9348d54d382358a8d0ad132a6b887f9d0a014fad61251860d2ea35a"
+        },
+        {
+          "fixture": "baumdienst-renner-reflection-regression",
+          "output": "plan",
+          "previous_sha256": "912c407b092b22818d2cb20cd6ba97cd6643ec2a6d1062f6426bfac935820095",
+          "current_sha256": "96387c6b99e14568a21ce8b6e7bbdb94f1a5abb35e4e8240c6d359394eff7383"
+        }
+      ],
+      "status_deltas": {
+        "baumdienst-renner-reflection-regression": "V10 'Impressum und rechtliche Angaben' Klar -> Verbesserung sinnvoll (TRUST-01 cited by F-002)",
+        "low-coverage-marketing-report": "V08 'Leistung, Zielgruppe und Standort' klar -> teilweise (AI-02 cited by F-904)"
+      },
+      "unchanged": "All scored, model, batch_csv and internal hashes and all lever_ids; synthetic-report and truth-discipline-inferred-risk entirely."
+    }
+  ]
 }

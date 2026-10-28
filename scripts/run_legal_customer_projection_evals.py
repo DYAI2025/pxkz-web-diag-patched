@@ -89,6 +89,12 @@ def main() -> int:
         if trust is not None and (not legal_rows or any(r.get("status") != "Handlungsbedarf" for r in legal_rows)):
             raise RuntimeError("trust matrix shows the legal surface as clear while a legal customer risk is projected")
         checks.append("legal_surface_status_reconciled")
+        identity = {"Eindeutige Unternehmensdarstellung", "Fakten überall gleich", "Kontakttransparenz", "Firmendaten auf allen Seiten"}
+        clear_identity = [r for v in plan.get("visuals", []) if v.get("template_id") in {"V08_AI_ANSWERABILITY", "V10_TRUST_MATRIX"}
+                          for r in v.get("data", []) if (r.get("question") or r.get("signal")) in identity and str(r.get("status")).casefold() == "klar"]
+        if clear_identity:
+            raise RuntimeError("identity rows read as clear next to a provider-identity risk: " + str(clear_identity))
+        checks.append("identity_surface_not_clear")
 
         visuals = t / "visuals"
         vreceipt = t / "visualization-render-receipt.json"

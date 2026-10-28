@@ -105,5 +105,34 @@ class LegalSurfaceStatusTest(unittest.TestCase):
         self.assertEqual(self.trust_row(report_with(finding_from(golden_sidecar(), 99)))["status"], "Handlungsbedarf")
 
 
+class CitedMetricNotClearTest(unittest.TestCase):
+    """A metric cited by a customer-visible problem finding must not read as clear in the status matrices."""
+
+    def rows(self, report: dict) -> dict[str, str]:
+        with tempfile.TemporaryDirectory(prefix="pxk-cited-") as td:
+            t = Path(td)
+            src, scored, plan = t / "report.json", t / "scored.json", t / "plan.json"
+            src.write_text(json.dumps(report, ensure_ascii=False), encoding="utf-8")
+            subprocess.run([sys.executable, "-B", str(ROOT / "scripts/compute_score.py"), str(src), str(scored)], check=True, capture_output=True)
+            subprocess.run([sys.executable, "-B", str(ROOT / "scripts/build_visualization_plan.py"), str(scored), str(plan)], check=True, capture_output=True)
+            data = json.loads(plan.read_text(encoding="utf-8"))
+        return {(r.get("signal") or r.get("question")): r["status"] for v in data["visuals"]
+                if v["template_id"] in {"V08_AI_ANSWERABILITY", "V10_TRUST_MATRIX"} for r in v["data"]}
+
+    def test_problem_finding_caps_cited_metric(self) -> None:
+        base = json.loads((ROOT / "evals/fixtures/synthetic-report.json").read_text(encoding="utf-8"))
+        self.assertEqual(self.rows(base)["Kontakttransparenz"], "Klar")
+        cited = copy.deepcopy(base)
+        cited["findings"].append({**copy.deepcopy(next(f for f in base["findings"] if f.get("severity") == "medium")),
+                                  "id": "F-940", "metric_refs": ["TRUST-07"]})
+        self.assertEqual(self.rows(cited)["Kontakttransparenz"], "Verbesserung sinnvoll")
+
+    def test_identity_rows_not_clear_next_to_identity_risk(self) -> None:
+        rows = self.rows(report_with(finding_from(golden_sidecar(), 99)))
+        for label in ("Eindeutige Unternehmensdarstellung", "Fakten überall gleich", "Kontakttransparenz"):
+            self.assertNotIn(rows[label], {"Klar", "klar"}, label)
+        self.assertEqual(rows["Impressum und rechtliche Angaben"], "Handlungsbedarf")
+
+
 if __name__ == "__main__":
     unittest.main()
