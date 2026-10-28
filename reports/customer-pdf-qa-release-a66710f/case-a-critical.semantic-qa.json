@@ -8,17 +8,17 @@
   "scored_report_sha256": "cde90133a103b19e4937acc97600d9e96308cad317f9f04270697948a636c3f9",
   "customer": "Meyer & Sohn Bau GmbH",
   "page_count": 10,
-  "inspection_status": "PASS",
+  "inspection_status": "FAIL",
   "inspection_method": "agent_vision",
   "inspected_by": "Claude Opus 5.5 (main session, 2026-10-28; same session that authored the release-completion and label-fidelity patches, so not independent; cross-checked by an independent read-only reviewer on candidate fa791c3)",
   "overall_checks": {
     "customer_specificity": true,
     "plain_language_comprehension": true,
     "scan_first_story": true,
-    "evidence_fidelity": true,
-    "priority_quality": true,
+    "evidence_fidelity": false,
+    "priority_quality": false,
     "quantitative_content_visualized": true,
-    "cross_page_coherence": true,
+    "cross_page_coherence": false,
     "actionability": true,
     "no_generic_agency_copy": true,
     "no_unsupported_business_claims": true,
@@ -76,10 +76,10 @@
         "main_message_clear": true,
         "scan_in_seconds": true,
         "plain_language": true,
-        "evidence_faithful": true,
+        "evidence_faithful": false,
         "visual_semantic_fit": true
       },
-      "notes": "V03 four levers 1-4, same order as the lever page. (raster identical to inspected legacy-baseline page)"
+      "notes": "V03 four levers 1-4, same order as the lever page. (raster identical to inspected legacy-baseline page) SEMANTIC FAIL (round-2 review, re-derived): Lab measurement presented as the real mobile experience: 'auf Mobilgeräten' / 'mobile Hauptdarstellung ist zu langsam' comes from client_story.py rewriting 'im mobilen Labortest' (PERF-02 is a synthetic lab value)."
     },
     {
       "page": 5,
@@ -89,10 +89,10 @@
         "main_message_clear": true,
         "scan_in_seconds": true,
         "plain_language": true,
-        "evidence_faithful": true,
+        "evidence_faithful": false,
         "visual_semantic_fit": true
       },
-      "notes": "V07 mobile load 3.8 against target 2.5 / warning 4; value and thresholds clear. O-12: value and thresholds carry no unit and an English decimal point. (raster identical to inspected legacy-baseline page)"
+      "notes": "V07 mobile load 3.8 against target 2.5 / warning 4; value and thresholds clear. O-12: value and thresholds carry no unit and an English decimal point. (raster identical to inspected legacy-baseline page) SEMANTIC FAIL (round-2 review, re-derived): Lab measurement presented as the real mobile experience: 'auf Mobilgeräten' / 'mobile Hauptdarstellung ist zu langsam' comes from client_story.py rewriting 'im mobilen Labortest' (PERF-02 is a synthetic lab value)."
     },
     {
       "page": 6,
@@ -102,10 +102,10 @@
         "main_message_clear": true,
         "scan_in_seconds": true,
         "plain_language": true,
-        "evidence_faithful": true,
+        "evidence_faithful": false,
         "visual_semantic_fit": true
       },
-      "notes": "V08 answerability matrix klar/teilweise; title frames answerability, not AI answers. (raster identical to inspected legacy-baseline page)"
+      "notes": "V08 answerability matrix klar/teilweise; title frames answerability, not AI answers. (raster identical to inspected legacy-baseline page) SEMANTIC FAIL (round-2 review, re-derived): V08 shows minor-gap rows (value 0.75) as 'klar', overstating them; V10 calls the same 75 'Verbesserung sinnvoll'."
     },
     {
       "page": 7,
@@ -128,10 +128,10 @@
         "main_message_clear": true,
         "scan_in_seconds": true,
         "plain_language": true,
-        "evidence_faithful": true,
+        "evidence_faithful": false,
         "visual_semantic_fit": true
       },
-      "notes": "Lever cards 01-02 KRITISCH, 03 HOCH, 04 MITTEL; critical findings lead."
+      "notes": "Lever cards 01-02 KRITISCH, 03 HOCH, 04 MITTEL; critical findings lead. SEMANTIC FAIL (round-2 review, re-derived): Lab measurement presented as the real mobile experience: 'auf Mobilgeräten' / 'mobile Hauptdarstellung ist zu langsam' comes from client_story.py rewriting 'im mobilen Labortest' (PERF-02 is a synthetic lab value)."
     },
     {
       "page": 9,
@@ -171,5 +171,6 @@
     "Zeigt jeder der vier Hebel Befund, geschäftliche Wirkung und nächsten Schritt?"
   ],
   "inspection_note": "Set PASS only after actual rendered-page review against both the client model and canonical scored audit. This file must not self-certify.",
-  "review_answers": "All eight review questions answered yes"
+  "review_answers": "Evidence fidelity / coherence answered no (see failure_summary)",
+  "failure_summary": "Round-2 independent review of 9ba024d, re-derived from PDF text and plan data: Lab measurement presented as the real mobile experience: 'auf Mobilgeräten' / 'mobile Hauptdarstellung ist zu langsam' comes from client_story.py rewriting 'im mobilen Labortest' (PERF-02 is a synthetic lab value). V08 shows minor-gap rows (value 0.75) as 'klar', overstating them; V10 calls the same 75 'Verbesserung sinnvoll'. Same defect class as the earlier claim-scope and label-fidelity fixes (customer text not bound to measurement/evidence class); user decision 2026-10-28: close the slice BLOCKED, no further instance fixes."
 }

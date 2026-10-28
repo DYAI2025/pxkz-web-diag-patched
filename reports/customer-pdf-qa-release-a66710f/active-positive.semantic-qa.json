@@ -76,10 +76,10 @@
         "main_message_clear": true,
         "scan_in_seconds": true,
         "plain_language": true,
-        "evidence_faithful": true,
+        "evidence_faithful": false,
         "visual_semantic_fit": true
       },
-      "notes": "V03 four levers 1-4, same order as the lever page. (raster identical to inspected legacy-baseline page)"
+      "notes": "V03 four levers 1-4, same order as the lever page. (raster identical to inspected legacy-baseline page) SEMANTIC FAIL (round-2 review, re-derived): Lab measurement presented as the real mobile experience: 'auf Mobilgeräten' / 'mobile Hauptdarstellung ist zu langsam' comes from client_story.py rewriting 'im mobilen Labortest' (PERF-02 is a synthetic lab value)."
     },
     {
       "page": 5,
@@ -92,7 +92,7 @@
         "evidence_faithful": false,
         "visual_semantic_fit": true
       },
-      "notes": "V07 mobile load 3.8 against target 2.5 / warning 4; value and thresholds clear. O-12: value and thresholds carry no unit and an English decimal point. (raster identical to inspected legacy-baseline page) SEMANTIC FAIL in this case: V07 shows 3.8 from the report's legacy visualization; active PERF-02 is minor_gaps 75 with no numeric value."
+      "notes": "V07 mobile load 3.8 against target 2.5 / warning 4; value and thresholds clear. O-12: value and thresholds carry no unit and an English decimal point. (raster identical to inspected legacy-baseline page) SEMANTIC FAIL (round-2 review, re-derived): Lab measurement presented as the real mobile experience: 'auf Mobilgeräten' / 'mobile Hauptdarstellung ist zu langsam' comes from client_story.py rewriting 'im mobilen Labortest' (PERF-02 is a synthetic lab value). SEMANTIC FAIL in this case: V07 shows 3.8 from the report's legacy visualization; active PERF-02 is minor_gaps 75 with no numeric value."
     },
     {
       "page": 6,
@@ -105,7 +105,7 @@
         "evidence_faithful": false,
         "visual_semantic_fit": true
       },
-      "notes": "V08 matrix klar/teilweise/offen; legible. SEMANTIC FAIL in this case: V08 shows 'Belege für Nutzenversprechen' as teilweise although AI-05 is strong (100)."
+      "notes": "V08 matrix klar/teilweise/offen; legible. SEMANTIC FAIL (round-2 review, re-derived): V08 shows minor-gap rows (value 0.75) as 'klar', overstating them; V10 calls the same 75 'Verbesserung sinnvoll'. SEMANTIC FAIL in this case: V08 shows 'Belege für Nutzenversprechen' as teilweise although AI-05 is strong (100)."
     },
     {
       "page": 7,
@@ -131,7 +131,7 @@
         "evidence_faithful": false,
         "visual_semantic_fit": true
       },
-      "notes": "Four lever cards (3 hoch, 1 mittel) with observation, 'Warum das zählt' and 'Nächster Schritt', all above the footer. O-4: subtitle/footer grey on orange, low contrast but legible. (raster identical to inspected legacy-baseline page) SEMANTIC FAIL in this case: Lever 1 'Der nächste Schritt ist mobil nicht klar genug' cites UX-02, which is strong (100) in the active values."
+      "notes": "Four lever cards (3 hoch, 1 mittel) with observation, 'Warum das zählt' and 'Nächster Schritt', all above the footer. O-4: subtitle/footer grey on orange, low contrast but legible. (raster identical to inspected legacy-baseline page) SEMANTIC FAIL (round-2 review, re-derived): Lab measurement presented as the real mobile experience: 'auf Mobilgeräten' / 'mobile Hauptdarstellung ist zu langsam' comes from client_story.py rewriting 'im mobilen Labortest' (PERF-02 is a synthetic lab value). SEMANTIC FAIL in this case: Lever 1 'Der nächste Schritt ist mobil nicht klar genug' cites UX-02, which is strong (100) in the active values."
     },
     {
       "page": 9,
@@ -172,5 +172,5 @@
   ],
   "inspection_note": "Set PASS only after actual rendered-page review against both the client model and canonical scored audit. This file must not self-certify.",
   "failure_summary": "Customer narrative contradicts measured trust/legal values: strength on page 2 vs. weak/blocking Impressum, Datenschutz and Kontakttransparenz on page 7, which no lever addresses. Recorded as open risk by user decision 2026-10-28; this PDF is not deliverable. Independent review (fa791c3) adds: lever 1 'Der nächste Schritt ist mobil nicht klar genug' cites UX-02 (strong, 100); strength 'Sitemap ... brauchbare technische Basis' vs FIND-02 robots/sitemap false; V08 shows AI-05 (strong, 100) as 'teilweise'; V07 3.8 comes from the report's legacy visualization while PERF-02 holds no number. Root cause for all: findings, strengths and visuals come unchanged from synthetic-report.json, written for different values.",
-  "review_answers": "Questions 4 and 5 answered no (see failure_summary)"
+  "review_answers": "Evidence fidelity / coherence answered no (see failure_summary)"
 }

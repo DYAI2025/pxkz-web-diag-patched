@@ -1,6 +1,23 @@
 <enterprise_skill_evaluation>
-  <scores><spec_compliance>4</spec_compliance><research_quality>4</research_quality><enterprise_readiness>4</enterprise_readiness><architecture_quality>4</architecture_quality><release_gate_integrity>4</release_gate_integrity></scores>
-  <blocking_issues></blocking_issues>
-  <required_revisions><item>Customer copy MINORs O-2..O-6 (grammar, labels, units, roadmap priorities, contrast).</item><item>package_skill output guard: check the archive path, compare paths by inode, resolve inputs inside write_archive.</item></required_revisions>
-  <decision>PASS_WITH_MINOR_REVISIONS</decision><reason>Independent read-only evaluator agents on git-archive extractions: round 1 (456c226) FAIL, round 2 (92eb6c9) FAIL, round 3 (80ec6bd) PASS, round 4 (e4a0cb6, build digest dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334) PASS with MINORs; evaluator scores correctness 4, fail_closed_gates 4, evidence_integrity 4, customer_output_quality 4. The five score tags above are the main session's mapping of those scores, not the evaluator's own tags.</reason>
+  <scores><spec_compliance>3</spec_compliance><research_quality>4</research_quality><enterprise_readiness>3</enterprise_readiness><architecture_quality>4</architecture_quality><release_gate_integrity>3</release_gate_integrity></scores>
+  <blocking_issues>
+    <item>Customer copy states a lab measurement as the real mobile experience: scripts/client_story.py:20 rewrites 'im mobilen Labortest' to 'auf Mobilgeräten'. It appears in every case, including the default legacy-baseline output, and violates references/client-storytelling-contract.md ('Customer wording stays inside the measured scope').</item>
+    <item>V08 shows minor-gap rows (value 0.75) as 'klar', while V10 calls the same 75 'Verbesserung sinnvoll'.</item>
+    <item>All 9 rendered cases are semantic QA FAIL; validate_deliverable_bundle --require-customer-release-ready exits 1 for each, and validate_release_gate exits 1.</item>
+  </blocking_issues>
+  <required_revisions>
+    <item>Follow-up patch 'evidence-bound customer claims': keep the lab/field evidence class in customer copy; use one status scale for V08 and V10; bind strengths and chart suppression to metric ids instead of LEGAL_SURFACE_STRENGTH_TERMS keywords; add a deterministic validator for evidence-class and status consistency. This changes the default customer output and needs its own approval.</item>
+    <item>finalize_deliverable_manifest.py must downgrade a previously CUSTOMER_RELEASE_READY manifest when QA turns FAIL.</item>
+    <item>Page-level semantic QA must not be signed off by the authoring session alone; an independent reviewer is needed before PASS.</item>
+  </required_revisions>
+  <decision>BLOCKED</decision>
+  <reason>Two read-only evaluator agents ran on git-archive copies of candidate 9ba024d (code a66710f, tree digest bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d). Neither authored the patch, but the same main session dispatched them and supplied the paths, so independence is limited to authorship and context.
+
+(1) Rubric evaluator: PASS_WITH_MINOR_REVISIONS with 4/4/4/4/4. Every hash it rebuilt reproduced: the legal PDF c43027aa and the legacy PDF de27843d. Its one MAJOR: the legal-strength filter is a keyword heuristic.
+
+(2) Adversarial PDF reviewer: it disagreed with 5 of 6 PASS manifests. The main session re-derived its central findings from code and PDF text: the lab-to-device rewrite on pages 4/5/8(9) of every case, and V08 'klar' for 0.75.
+
+The five score tags are the main session's synthesis of both reports, not either evaluator's own tags. The decision is BLOCKED because the release gate fails. This is the third review round of the same defect class after CLAIM_SCOPE_PATCH and CUSTOMER_LABEL_FIDELITY_PATCH. The user decided on 2026-10-28 to close the slice BLOCKED instead of patching further instances.
+
+The earlier round on fa791c3 (REVISE) led to a66710f, which fixed three confirmed instances.</reason>
 </enterprise_skill_evaluation>

@@ -3,10 +3,11 @@
   "draft_version": "release-completion-a66710f-2026-10-28",
   "release_scope": "website-diagnosis-package",
   "release_gate": {
-    "status": "PASS",
-    "allowed_to_package": true,
-    "reason": "Frozen candidate a66710f (tree digest bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d): badaf71 plus CUSTOMER_LABEL_FIDELITY_PATCH, which fixes the three customer-visible defects the independent evaluation of fa791c3 confirmed (V05 device label, VC03 website-symbol wording, legal-surface strength). Sweep on a git-archive copy: 64 root-arg scripts run, 43 rc 0. Non-zero: 15 usage errors (need explicit artifact paths; 8 of them run inside build_audit_deliverables/validate_deliverable_bundle on all 9 builds, not run standalone: validate_batch_context.py, validate_chart_payloads.py, validate_core_score_admission.py, validate_elevenlabs_batch_csv.py, validate_visual_assets.py, validate_visual_story.py, validate_website_audit_packet.py); validate_full_48_active.py, validate_strategic_relevance_v321_preservation.py failed only because the sweep's own validate_customer_presentation_quality.py wrote its report into the root and changed the digest - rc 0 after removing that file; validate_pipeline_ledger/validate_release_gate bind this evidence (run after it); validate_paired_release + run_paired_release need the external voice-architect consumer (not installed, non-package-blocking). Unit suite 186 passed, 0 skipped.",
-    "authorization_basis": "Release Completion & Independent Quality Gate brief (user, 2026-10-28), step 9; user answers 'Fix + re-evaluate' and 'Narrow fix' (2026-10-28). Packaging only after a fresh independent evaluation of this candidate; no push, merge, install or publication."
+    "status": "BLOCKED",
+    "allowed_to_package": false,
+    "reason": "Round-2 independent evaluation of 9ba024d: the adversarial PDF reviewer found, and the main session re-derived from code and PDF text, that scripts/client_story.py:20 rewrites 'im mobilen Labortest' to 'auf Mobilgeräten' (a 4-run lab value reads as the real mobile experience) in every case including the default legacy-baseline output, and that V08 shows minor-gap rows as 'klar'. All 9 cases are semantic QA FAIL; validate_deliverable_bundle --require-customer-release-ready exits 1 for each. This is the third review round of the same defect class (customer text not bound to measurement/evidence class) after CLAIM_SCOPE_PATCH and CUSTOMER_LABEL_FIDELITY_PATCH; instance fixes do not converge.",
+    "decision_basis": "User decision 2026-10-28 ('Close BLOCKED (Recommended)'): no further code change in this slice; follow-up patch 'evidence-bound customer claims' needs its own approval.",
+    "rubric_evaluator_round_2": "PASS_WITH_MINOR_REVISIONS (4/4/4/4/4); MAJOR: LEGAL_SURFACE_STRENGTH_TERMS keyword heuristic misses other legal/contact wordings"
   },
   "craftsmanship_gate": {
     "status": "PASS",
@@ -170,7 +171,7 @@
   },
   "reliability_gate": {
     "status": "PASS",
-    "pipeline_trace_status": "PENDING_LEDGER_WRITE",
+    "pipeline_trace_status": "NOT_WRITTEN_RELEASE_BLOCKED",
     "frozen_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
     "core_regression_status": "PASS",
     "validator": "scripts/validate_pipeline_ledger.py",
@@ -249,7 +250,7 @@
     "bundled four manifest-pinned OFL brand fonts (assets/fonts); validate_no_font_binaries allows exactly these, fail-closed without fontTools",
     "fixed V05 ranking subtitle, VC03 website-symbol wording and legal-surface strength (CUSTOMER_LABEL_FIDELITY_PATCH) after independent evaluation"
   ],
-  "final_decision": "RELEASE_GATE_PASSED_PENDING_EVALUATION",
+  "final_decision": "BLOCKED",
   "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
   "internal_report_gate": {
     "status": "PASS",
@@ -529,9 +530,9 @@
     "plan": "APPROVED",
     "architecture": "PASS",
     "implementation": "COMPLETE",
-    "validation": "PASS",
-    "release_gate": "PASS",
-    "packaging": "PENDING_INDEPENDENT_EVALUATION",
+    "validation": "FAIL_SEMANTIC_QA",
+    "release_gate": "BLOCKED",
+    "packaging": "NOT_AUTHORIZED",
     "release": "NOT_PUSHED_NOT_MERGED_NOT_INSTALLED",
     "historical_note": "Values before 2026-10-28 claimed release_gate PASS / packaging AUTHORIZED for an earlier draft; superseded."
   },
@@ -584,10 +585,10 @@
     ]
   },
   "packaging_evidence": {
-    "status": "PENDING_INDEPENDENT_EVALUATION",
+    "status": "NOT_AUTHORIZED",
     "artifact_name": "skill.zip",
     "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
-    "archive_structure_requirement": "ONE_SKILL_ROOT (checked by package_skill.py and on the extracted zip)"
+    "reason": "release gate BLOCKED; no skill.zip built"
   },
   "impressum_customer_projection_gate": {
     "status": "PASS",
@@ -629,7 +630,7 @@
     "installable_skill_zip_authorized": "SUPERSEDED: see release_gate.authorization_basis for candidate a66710f"
   },
   "customer_semantic_gate": {
-    "status": "PASS",
+    "status": "FAIL",
     "semantic_bundle_sha256": "9fd973c94e7493e804ccd923b60abfc42a66a8ef3e1c8bbd9dc9bb78939abfeb",
     "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
     "evidence": [
@@ -639,17 +640,17 @@
     "cases": 9,
     "distinct_pdfs": 7,
     "case_verdicts": {
-      "legacy-baseline": "PASS",
-      "legal-golden": "PASS",
-      "case-a-critical": "PASS",
-      "case-b-equal-rank-profile": "PASS",
-      "case-c-vc03-detail": "PASS",
+      "legacy-baseline": "FAIL",
+      "legal-golden": "FAIL",
+      "case-a-critical": "FAIL",
+      "case-b-equal-rank-profile": "FAIL",
+      "case-c-vc03-detail": "FAIL",
       "active-positive": "FAIL",
-      "proof-realistic": "PASS",
-      "proof-strategic": "PASS",
-      "proof-measurement-gateway": "PASS"
+      "proof-realistic": "FAIL",
+      "proof-strategic": "FAIL",
+      "proof-measurement-gateway": "FAIL"
     },
-    "recorded_fail": "active-positive semantic FAIL; validate_deliverable_bundle --require-customer-release-ready exits 1 (CUSTOMER_RELEASE_BLOCKED)",
+    "recorded_fail": "all 9 cases semantic FAIL (round-2 review, re-derived); validate_deliverable_bundle rc 1 for all",
     "negatives": "Baumdienst and low-coverage fail closed with CUSTOMER_MIN_VISUALS_NOT_MET, no PDF written",
     "independence": "page verdicts by the authoring session; an independent read-only reviewer re-checked fa791c3 and its confirmed findings are fixed or recorded (independent_review in the QA report)"
   },

@@ -1,5 +1,5 @@
 {
-  "status": "PASS_WITH_ONE_RECORDED_FAIL",
+  "status": "FAIL_ALL_CASES_SEMANTIC",
   "inspected_at": "2026-10-28",
   "distinct_pdfs": 7,
   "distinct_pdf_note": "9 cases render 7 distinct PDFs: proof-realistic is byte-identical to legal-golden and proof-measurement-gateway to legacy-baseline (the gateway enrichment selects no customer visual).",
@@ -31,8 +31,8 @@
       "client_model_sha256": "d4ee5c61ba08787166e1188c5ea52fbfd5e10ffb8b057d8f31966b7aa312c3c7",
       "scored_report_sha256": "22a535a85bc3464132ffe42a3141c651b993d683cd50b45eaa94ed8e473e1931",
       "visual_qa": "PASS",
-      "semantic_qa": "PASS",
-      "deliverable_status": "CUSTOMER_RELEASE_READY",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
       "rendered_page_sha256": [
         {
           "page": 1,
@@ -74,7 +74,8 @@
           "page": 10,
           "sha256": "e197f564452d7a121f59465023c6a4269f1651de356b99c2e02c402859389725"
         }
-      ]
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
     },
     {
       "case": "legal-golden",
@@ -97,8 +98,8 @@
       "client_model_sha256": "c943a3bf68fbb92dc6c882db656a267d1097a60f252d17d998dbd84b0a00b431",
       "scored_report_sha256": "fc83e9dd9a8b1bc7af4d8ed48211762892b0c77093a8ca3767c3280f89a626bf",
       "visual_qa": "PASS",
-      "semantic_qa": "PASS",
-      "deliverable_status": "CUSTOMER_RELEASE_READY",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
       "rendered_page_sha256": [
         {
           "page": 1,
@@ -140,7 +141,8 @@
           "page": 10,
           "sha256": "dc2c073472bcb71bbacd242213ae45f902685c6b30f41090cff1a1b5d8c84732"
         }
-      ]
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
     },
     {
       "case": "case-a-critical",
@@ -163,8 +165,8 @@
       "client_model_sha256": "b887ceb0b1faec42eb1d4fd1f08413551c5d662df53de561d2f9bde36a5580b9",
       "scored_report_sha256": "cde90133a103b19e4937acc97600d9e96308cad317f9f04270697948a636c3f9",
       "visual_qa": "PASS",
-      "semantic_qa": "PASS",
-      "deliverable_status": "CUSTOMER_RELEASE_READY",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
       "rendered_page_sha256": [
         {
           "page": 1,
@@ -206,7 +208,8 @@
           "page": 10,
           "sha256": "e197f564452d7a121f59465023c6a4269f1651de356b99c2e02c402859389725"
         }
-      ]
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
     },
     {
       "case": "case-b-equal-rank-profile",
@@ -229,8 +232,8 @@
       "client_model_sha256": "793c0e9c02998691c26f85229ed386ed3d4faed1709a9a9ee0f1ae048da6806e",
       "scored_report_sha256": "cb59ebc3d1d9ecd40670b7fa6a0e29c096e55a5c91f7516e7927e5d876040afa",
       "visual_qa": "PASS",
-      "semantic_qa": "PASS",
-      "deliverable_status": "CUSTOMER_RELEASE_READY",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
       "rendered_page_sha256": [
         {
           "page": 1,
@@ -272,7 +275,8 @@
           "page": 10,
           "sha256": "706da66a5aefc2501906ec89163efc253f73e106e2696d45bdba751fc9969994"
         }
-      ]
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
     },
     {
       "case": "case-c-vc03-detail",
@@ -295,8 +299,8 @@
       "client_model_sha256": "3632b28b054936e4e2123a1a6712018d28cfdb26f80e76e6de73c385a6d48b50",
       "scored_report_sha256": "5e9aaac6b09d4290e7e695773944e50001f4dd0d09ecb8bebfc2f8c3b43c549c",
       "visual_qa": "PASS",
-      "semantic_qa": "PASS",
-      "deliverable_status": "CUSTOMER_RELEASE_READY",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
       "rendered_page_sha256": [
         {
           "page": 1,
@@ -338,7 +342,8 @@
           "page": 10,
           "sha256": "6c20012db0b654a708973b31ee9816f3c180077806136a49d11bddc6b2304111"
         }
-      ]
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
     },
     {
       "case": "active-positive",
@@ -362,7 +367,7 @@
       "scored_report_sha256": "de27e873f05dfb862c387203381a203b78d585c8ec93c902a85914078b1ec6d1",
       "visual_qa": "PASS",
       "semantic_qa": "FAIL",
-      "deliverable_status": "BUILT_PENDING_QA",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
       "rendered_page_sha256": [
         {
           "page": 1,
@@ -404,7 +409,8 @@
           "page": 10,
           "sha256": "e197f564452d7a121f59465023c6a4269f1651de356b99c2e02c402859389725"
         }
-      ]
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
     },
     {
       "case": "proof-realistic",
@@ -427,8 +433,8 @@
       "client_model_sha256": "c943a3bf68fbb92dc6c882db656a267d1097a60f252d17d998dbd84b0a00b431",
       "scored_report_sha256": "fc83e9dd9a8b1bc7af4d8ed48211762892b0c77093a8ca3767c3280f89a626bf",
       "visual_qa": "PASS",
-      "semantic_qa": "PASS",
-      "deliverable_status": "CUSTOMER_RELEASE_READY",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
       "rendered_page_sha256": [
         {
           "page": 1,
@@ -470,7 +476,8 @@
           "page": 10,
           "sha256": "dc2c073472bcb71bbacd242213ae45f902685c6b30f41090cff1a1b5d8c84732"
         }
-      ]
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
     },
     {
       "case": "proof-strategic",
@@ -494,8 +501,8 @@
       "client_model_sha256": "978ba38edf172d851eb3b1ba37d98e7e195f26a92f0ae8208d5ce3d3c160eece",
       "scored_report_sha256": "e3389634a8f26f3fefaecb5e1eaebeaa24e2626ae01b9b38aee76b40e60f7b31",
       "visual_qa": "PASS",
-      "semantic_qa": "PASS",
-      "deliverable_status": "CUSTOMER_RELEASE_READY",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
       "rendered_page_sha256": [
         {
           "page": 1,
@@ -541,7 +548,8 @@
           "page": 11,
           "sha256": "366958ffb10be21b508d38a3f56f4b4f40fc141d5ff8e1c7648451d6893de29b"
         }
-      ]
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
     },
     {
       "case": "proof-measurement-gateway",
@@ -564,8 +572,8 @@
       "client_model_sha256": "d4ee5c61ba08787166e1188c5ea52fbfd5e10ffb8b057d8f31966b7aa312c3c7",
       "scored_report_sha256": "5bc06cab34f26aa454da915bde425c86e21d940d7df0d6502107ab0f688d7b84",
       "visual_qa": "PASS",
-      "semantic_qa": "PASS",
-      "deliverable_status": "CUSTOMER_RELEASE_READY",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
       "rendered_page_sha256": [
         {
           "page": 1,
@@ -607,7 +615,8 @@
           "page": 10,
           "sha256": "e197f564452d7a121f59465023c6a4269f1651de356b99c2e02c402859389725"
         }
-      ]
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
     }
   ],
   "negatives": [
@@ -626,11 +635,6 @@
       "expected": "CUSTOMER_RELEASE_BLOCKED: CUSTOMER_MIN_VISUALS_NOT_MET"
     }
   ],
-  "recorded_fail": {
-    "case": "active-positive",
-    "decision": "user 2026-10-28: 'Open risk + QA FAIL'",
-    "summary": "Customer narrative contradicts measured trust/legal values: strength on page 2 vs. weak/blocking Impressum, Datenschutz and Kontakttransparenz on page 7, which no lever addresses. Recorded as open risk by user decision 2026-10-28; this PDF is not deliverable. Independent review (fa791c3) adds: lever 1 'Der nächste Schritt ist mobil nicht klar genug' cites UX-02 (strong, 100); strength 'Sitemap ... brauchbare technische Basis' vs FIND-02 robots/sitemap false; V08 shows AI-05 (strong, 100) as 'teilweise'; V07 3.8 comes from the report's legacy visualization while PERF-02 holds no number. Root cause for all: findings, strengths and visuals come unchanged from synthetic-report.json, written for different values."
-  },
   "open_observations_non_blocking": {
     "O-2": "roadmap columns follow report roadmap data, not lever rank",
     "O-3": "case C admits a low-severity technical detail as lever 4 by category diversity (rule-conform)",
@@ -667,11 +671,31 @@
       "O-14"
     ]
   },
-  "superseded_badaf71": "reports/customer-pdf-qa-release-badaf71.json (same cases on candidate badaf71; legal-golden and case C were wrongly passed there) is kept as history.",
+  "superseded_badaf71": "reports/customer-pdf-qa-release-badaf71.json (same cases on candidate badaf71) is kept as history only: its PASS verdicts do not hold; the lab-to-device rewrite and V08 'klar' found in round 2 were already present there, and legal-golden and case C had further defects fixed in a66710f.",
   "superseded": "reports/customer-pdf-qa-2026-10-28.json (six cases incl. Baumdienst on 9-11 page renders with V11) is kept as history; Baumdienst and low-coverage are now fail-closed negatives.",
   "does_not_prove": [
     "quality of PDFs for other customers without per-output rendered QA",
     "commercial effect",
     "legal compliance"
+  ],
+  "round_2_review": {
+    "candidate": "9ba024d",
+    "result": "semantic FAIL in all 9 cases",
+    "why": "Round-2 independent review of 9ba024d, re-derived from PDF text and plan data: client_story.py rewrites 'im mobilen Labortest' to 'auf Mobilgeräten' (lab value shown as real mobile experience) in every case, and V08 shows minor-gap rows as 'klar'. User decision 2026-10-28: close BLOCKED; follow-up patch 'evidence-bound customer claims'.",
+    "confirmed_by_main_session": [
+      "scripts/client_story.py:20 maps 'im mobilen Labortest' -> 'auf Mobilgeräten'",
+      "V08 rows with value 0.75 carry status 'klar'"
+    ],
+    "reviewer_findings_not_individually_adjudicated": [
+      "legal-golden 'Entität' strength and trust bar 89 next to the identity risk",
+      "proof-strategic lab 3.8 vs field p75 3,2 s without explanation",
+      "V05 'Mobil und Desktop' without per-row device",
+      "case-c lever-4 ordering vs evidence strength",
+      "case-a KRITISCH lever scheduled 'In 30 Tagen'"
+    ],
+    "rubric_evaluator_major": "LEGAL_SURFACE_STRENGTH_TERMS is a keyword heuristic that misses other contact/legal wordings"
+  },
+  "limitations": [
+    "finalize_deliverable_manifest.py exits 1 on semantic FAIL but leaves a previously written CUSTOMER_RELEASE_READY status in deliverable-manifest.json; validate_deliverable_bundle --require-customer-release-ready is the authoritative check and exits 1."
   ]
 }

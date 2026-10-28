@@ -1,5 +1,5 @@
 {
-  "status": "PASS",
+  "status": "FAIL",
   "fixture": "synthetic 48-core + impressum-compliance integration proof (LEG-GOLD-BFL sidecar)",
   "customer": "Meyer & Sohn Bau GmbH",
   "release_mode": "proof",
@@ -22,7 +22,7 @@
   "internal_json": "PASS",
   "internal_markdown": "PASS",
   "visual_qa": "PASS",
-  "semantic_qa": "PASS",
+  "semantic_qa": "FAIL",
   "closing_page_role": "PASS",
   "weasyprint_renderer": "PASS",
   "renderer": "WEASYPRINT",
@@ -104,5 +104,6 @@
     "full WCAG conformance",
     "legal compliance",
     "commercial outcome"
-  ]
+  ],
+  "round_2_review": "Round-2 independent review of 9ba024d, re-derived from PDF text and plan data: client_story.py rewrites 'im mobilen Labortest' to 'auf Mobilgeräten' (lab value shown as real mobile experience) in every case, and V08 shows minor-gap rows as 'klar'. User decision 2026-10-28: close BLOCKED; follow-up patch 'evidence-bound customer claims'."
 }

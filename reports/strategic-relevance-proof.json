@@ -30,7 +30,7 @@
   "batch_contract": "PASS",
   "core_score": "PASS",
   "visual_qa": "PASS",
-  "semantic_qa": "PASS",
+  "semantic_qa": "FAIL",
   "customer_business_language": "PASS",
   "pdf_output": "PASS",
   "pdf_brand": "PASS",
@@ -107,5 +107,6 @@
   ],
   "candidate_commit": "a66710f",
   "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
-  "render_basis": "Built offline from git archive of a66710f (tree digest bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d) in a network-denied sandbox with no system fonts and no PIXELKIEZ_FONT_DIR; packaged brand fonts resolved EXACT and embedding VERIFIED. Versus candidate badaf71, six page rasters changed (legal-golden/proof-realistic p2, proof-strategic p8, case-c p8-p10) and were re-inspected; every other raster is byte-identical to an inspected badaf71 raster."
+  "render_basis": "Built offline from git archive of a66710f (tree digest bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d) in a network-denied sandbox with no system fonts and no PIXELKIEZ_FONT_DIR; packaged brand fonts resolved EXACT and embedding VERIFIED. Versus candidate badaf71, six page rasters changed (legal-golden/proof-realistic p2, proof-strategic p8, case-c p8-p10) and were re-inspected; every other raster is byte-identical to an inspected badaf71 raster.",
+  "round_2_review": "Round-2 independent review of 9ba024d, re-derived from PDF text and plan data: client_story.py rewrites 'im mobilen Labortest' to 'auf Mobilgeräten' (lab value shown as real mobile experience) in every case, and V08 shows minor-gap rows as 'klar'. User decision 2026-10-28: close BLOCKED; follow-up patch 'evidence-bound customer claims'."
 }

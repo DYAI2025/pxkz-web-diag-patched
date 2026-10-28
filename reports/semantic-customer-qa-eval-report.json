@@ -1,5 +1,5 @@
 {
-  "status": "PASS",
+  "status": "FAIL",
   "policy_version": "1.0",
   "semantic_bundle_sha256": "9fd973c94e7493e804ccd923b60abfc42a66a8ef3e1c8bbd9dc9bb78939abfeb",
   "fixture": "evals/fixtures/synthetic-report.json (legacy-baseline, customer mode)",
@@ -9,7 +9,7 @@
   "decision_visual_count": 5,
   "inspection_method": "agent_vision",
   "inspected_by": "Claude Opus 5.5 (main session, 2026-10-28; same session that authored the release-completion and label-fidelity patches, so not independent; cross-checked by an independent read-only reviewer on candidate fa791c3)",
-  "semantic_qa_validation": "PASS",
+  "semantic_qa_validation": "FAIL",
   "visual_qa_validation": "PASS",
   "pdf_sha256": "de27843d7798299cb891ee937a7deb3a000cb2860006fc755a21f34e439df597",
   "client_model_sha256": "d4ee5c61ba08787166e1188c5ea52fbfd5e10ffb8b057d8f31966b7aa312c3c7",
@@ -20,10 +20,10 @@
     "customer_specificity": "PASS",
     "plain_language_comprehension": "PASS",
     "scan_first_story": "PASS",
-    "evidence_fidelity": "PASS",
-    "priority_quality": "PASS",
+    "evidence_fidelity": "FAIL",
+    "priority_quality": "FAIL",
     "quantitative_content_visualized": "PASS",
-    "cross_page_coherence": "PASS",
+    "cross_page_coherence": "FAIL",
     "actionability": "PASS",
     "no_generic_agency_copy": "PASS",
     "no_unsupported_business_claims": "PASS",
@@ -38,23 +38,23 @@
   "case_verdicts": {
     "legacy-baseline": {
       "visual": "PASS",
-      "semantic": "PASS"
+      "semantic": "FAIL"
     },
     "legal-golden": {
       "visual": "PASS",
-      "semantic": "PASS"
+      "semantic": "FAIL"
     },
     "case-a-critical": {
       "visual": "PASS",
-      "semantic": "PASS"
+      "semantic": "FAIL"
     },
     "case-b-equal-rank-profile": {
       "visual": "PASS",
-      "semantic": "PASS"
+      "semantic": "FAIL"
     },
     "case-c-vc03-detail": {
       "visual": "PASS",
-      "semantic": "PASS"
+      "semantic": "FAIL"
     },
     "active-positive": {
       "visual": "PASS",
@@ -62,15 +62,15 @@
     },
     "proof-realistic": {
       "visual": "PASS",
-      "semantic": "PASS"
+      "semantic": "FAIL"
     },
     "proof-strategic": {
       "visual": "PASS",
-      "semantic": "PASS"
+      "semantic": "FAIL"
     },
     "proof-measurement-gateway": {
       "visual": "PASS",
-      "semantic": "PASS"
+      "semantic": "FAIL"
     }
   },
   "observed_quality": {
@@ -90,7 +90,6 @@
     "O-13",
     "O-14"
   ],
-  "recorded_fail": "active-positive semantic QA FAIL (narrative vs. measured trust/legal values); not deliverable; open risk by user decision 2026-10-28",
   "does_not_prove": [
     "commercial conversion or revenue improvement",
     "semantic quality for every future website without per-output rendered QA",
@@ -98,5 +97,6 @@
   ],
   "superseded": "Baumdienst Renner evidence (9 pages, pdf 1cdb5b7f...) no longer applies: that fixture now fails closed with fewer than four admissible visuals.",
   "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
-  "candidate_commit": "a66710f"
+  "candidate_commit": "a66710f",
+  "round_2_review": "Round-2 independent review of 9ba024d, re-derived from PDF text and plan data: client_story.py rewrites 'im mobilen Labortest' to 'auf Mobilgeräten' (lab value shown as real mobile experience) in every case, and V08 shows minor-gap rows as 'klar'. User decision 2026-10-28: close BLOCKED; follow-up patch 'evidence-bound customer claims'."
 }
