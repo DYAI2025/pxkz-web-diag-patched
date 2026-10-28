@@ -1148,7 +1148,7 @@
       "path": "scripts/package_skill.py",
       "baseline_sha256": "2c216ff3cd1beee9ee7877a746348d09c2d3167c8f74d1e65629c6b1ad2a23f0",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "3c02f99936867375be7edec2f52dbafce6c27071c809c0ea1fc844c27044a30e"
+      "current_sha256": "41e96c7b64f53be10d63766079f080fd8d4693136f2f0a1e029ad5ff18f1a00c"
     },
     {
       "path": "scripts/pipeline_ledger.py",
@@ -1442,7 +1442,7 @@
     {
       "path": "scripts/build_boundary.py",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "cced142ced2fb8f924ee509c447ebd89e2eadbfa2f295c0fa681558520b86880"
+      "current_sha256": "7bc19c64662d1f79a8b1919ba3a038fb93c55225e86198327888a87f09294fa3"
     },
     {
       "path": "scripts/build_core_execution_matrix.py",
@@ -1597,7 +1597,7 @@
     {
       "path": "tests/test_release_evidence_boundaries.py",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "7dd098af237c30f08b696558de8ba9a3439c06fe0f4bbe945d43e03c91a86357"
+      "current_sha256": "bf65f6edbe952389f5d4b0126ee9d986d53156501859759e3331ea2ff890e347"
     },
     {
       "path": "tests/test_vibecheck03.py",
@@ -1900,7 +1900,7 @@
         {
           "path": "scripts/build_boundary.py",
           "previous_sha256": null,
-          "current_sha256": "cced142ced2fb8f924ee509c447ebd89e2eadbfa2f295c0fa681558520b86880"
+          "current_sha256": "7bc19c64662d1f79a8b1919ba3a038fb93c55225e86198327888a87f09294fa3"
         },
         {
           "path": "scripts/build_client_report_model.py",
@@ -1930,7 +1930,7 @@
         {
           "path": "scripts/package_skill.py",
           "previous_sha256": "2c216ff3cd1beee9ee7877a746348d09c2d3167c8f74d1e65629c6b1ad2a23f0",
-          "current_sha256": "3c02f99936867375be7edec2f52dbafce6c27071c809c0ea1fc844c27044a30e"
+          "current_sha256": "41e96c7b64f53be10d63766079f080fd8d4693136f2f0a1e029ad5ff18f1a00c"
         },
         {
           "path": "scripts/pipeline_ledger.py",
@@ -2045,7 +2045,7 @@
         {
           "path": "tests/test_release_evidence_boundaries.py",
           "previous_sha256": null,
-          "current_sha256": "7dd098af237c30f08b696558de8ba9a3439c06fe0f4bbe945d43e03c91a86357"
+          "current_sha256": "bf65f6edbe952389f5d4b0126ee9d986d53156501859759e3331ea2ff890e347"
         },
         {
           "path": "tests/test_vibecheck03.py",
