@@ -1,0 +1,39 @@
+diff --git a/scripts/build_visualization_plan.py b/scripts/build_visualization_plan.py
+index c9f5fe2..5cfc440 100644
+--- a/scripts/build_visualization_plan.py
++++ b/scripts/build_visualization_plan.py
+@@ -10,13 +10,14 @@ import sys
+ from collections import Counter
+ from datetime import datetime
+ 
+-from customer_status import customer_status
++from customer_status import STATUS_META, customer_status
+ from pathlib import Path
+ from typing import Any
+ 
+ sys.path.insert(0, str(Path(__file__).resolve().parent))
+ from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority  # noqa: E402
+ from client_story import clientize, select_client_levers  # noqa: E402
++from legal_customer_projection import contested_legal_surface  # noqa: E402
+ from strategic_relevance import eligible_findings  # noqa: E402
+ from visualization_policy import apply_customer_visual_budget, CUSTOMER_MIN_VISUALS  # noqa: E402
+ 
+@@ -199,6 +200,8 @@ def main() -> int:
+ 
+         excluded.append({"template_id": "V12_AUDIT_COVERAGE", "reason": "INTERNAL_ONLY_NOT_CUSTOMER_VISIBLE"})
+ 
++        contested = contested_legal_surface(report)
++
+         def category_matrix(category: str, template: str, title: str, label_name: str, *, four_state: bool = False) -> None:
+             nonlocal vid
+             rows = []
+@@ -210,7 +213,8 @@ def main() -> int:
+                 if m.get("measurement_class") == "not_assessed":
+                     continue
+                 if four_state:
+-                    state = customer_status(m)
++                    # A projected legal customer risk outranks the presence-only core status on the customer label.
++                    state = {"key": "ACTION", **STATUS_META["ACTION"]} if mid in contested else customer_status(m)
+                     rows.append({label_name: metric_label(defs, m), "status": state["label"], "symbol": state["symbol"], "tone": state["tone"], "value": state["value"]})
+                     refs.append(mid)
+                     continue

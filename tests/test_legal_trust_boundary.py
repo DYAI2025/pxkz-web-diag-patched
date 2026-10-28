@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from attach_impressum_findings import finding_from  # noqa: E402
 from impressum_compliance import assess_case  # noqa: E402
-from legal_customer_projection import resolve_projection  # noqa: E402
+from legal_customer_projection import contested_legal_surface, resolve_projection  # noqa: E402
 from validate_impressum_projection import validate  # noqa: E402
 
 CASES = json.loads((ROOT / "evals/fixtures/impressum-compliance-cases.json").read_text(encoding="utf-8"))["cases"]
@@ -78,6 +78,31 @@ class BuilderRequiresSidecarTest(unittest.TestCase):
             )
         self.assertNotEqual(proc.returncode, 0, proc.stdout[-500:])
         self.assertIn("LEGAL_SIDECAR_REQUIRED", proc.stderr + proc.stdout)
+
+
+class LegalSurfaceStatusTest(unittest.TestCase):
+    """A projected legal customer risk must not sit next to a 'Klar' legal-surface row in the trust matrix."""
+
+    def trust_row(self, report: dict) -> dict:
+        with tempfile.TemporaryDirectory(prefix="pxk-legal-surface-") as td:
+            t = Path(td)
+            src, scored, plan = t / "report.json", t / "scored.json", t / "plan.json"
+            src.write_text(json.dumps(report, ensure_ascii=False), encoding="utf-8")
+            subprocess.run([sys.executable, "-B", str(ROOT / "scripts/compute_score.py"), str(src), str(scored)], check=True, capture_output=True)
+            subprocess.run([sys.executable, "-B", str(ROOT / "scripts/build_visualization_plan.py"), str(scored), str(plan)], check=True, capture_output=True)
+            data = json.loads(plan.read_text(encoding="utf-8"))
+        trust = next(v for v in data["visuals"] if v["template_id"] == "V10_TRUST_MATRIX")
+        return next(r for r in trust["data"] if "impressum" in r["signal"].casefold())
+
+    def test_helper_only_reacts_to_projected_risk(self) -> None:
+        self.assertEqual(contested_legal_surface({"findings": [{"id": "F-1"}]}), frozenset())
+        self.assertEqual(contested_legal_surface({"findings": [{"id": "F-1", "customer_risk": {}}]}), frozenset())
+        self.assertEqual(contested_legal_surface(report_with(finding_from(golden_sidecar(), 99))), frozenset({"TRUST-01"}))
+
+    def test_trust_row_follows_legal_risk(self) -> None:
+        base = json.loads((ROOT / "evals/fixtures/synthetic-report.json").read_text(encoding="utf-8"))
+        self.assertEqual(self.trust_row(base)["status"], "Klar")
+        self.assertEqual(self.trust_row(report_with(finding_from(golden_sidecar(), 99)))["status"], "Handlungsbedarf")
 
 
 if __name__ == "__main__":
