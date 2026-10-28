@@ -1145,15 +1145,21 @@
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE"
     },
     {
+      "path": "scripts/package_skill.py",
+      "baseline_sha256": "2c216ff3cd1beee9ee7877a746348d09c2d3167c8f74d1e65629c6b1ad2a23f0",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "3c02f99936867375be7edec2f52dbafce6c27071c809c0ea1fc844c27044a30e"
+    },
+    {
       "path": "scripts/pipeline_ledger.py",
       "baseline_sha256": "80a04013fdcad476e51560eb47f8aec03cf93417c6717c0c790c5bc61e52ae89",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "4011978dc8f70ab7b4cb3e10c0993493bb83e0a276adef73416cb5a2a6d3221f"
+      "current_sha256": "1a350bc6d2fd0a5ff6f4db2202436167c142c6cee177f7c2073556bb3092ad9f"
     },
     {
       "path": "scripts/quick_validate.py",
       "baseline_sha256": "5b64359b1f387aa7ca3dcac89812783b98b3313256d950f958bc675a358084eb",
-      "current_sha256": "e179d5c954791627c2ab6f117014badd8eacf04f0d797d9bbed2de6425acdfc4",
+      "current_sha256": "66c12aed45ae1cdf7eefaf3310c6dae20c5a6d377b7c6c9bb1abdfd05b5abba6",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1237,7 +1243,7 @@
     {
       "path": "scripts/validate_release_gate.py",
       "baseline_sha256": "4be8ea6b3782d72476621c95d25bda2930593c9d43a12c37552b4186b50b2de2",
-      "current_sha256": "4c42a8b5307822cb24913186c1cd8d996cb85cba053d0232ce7c6de7649a7c90",
+      "current_sha256": "d94368077bcf6d357d2c68c537d306d0d573ed0778775812c2a2e92440b3d31a",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1434,6 +1440,11 @@
       "current_sha256": "20cf1e2a473f213a27d697d617ee41005c2d05208933c137a6ea9df0fcb79022"
     },
     {
+      "path": "scripts/build_boundary.py",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "cced142ced2fb8f924ee509c447ebd89e2eadbfa2f295c0fa681558520b86880"
+    },
+    {
       "path": "scripts/build_core_execution_matrix.py",
       "current_sha256": "8cab80a9da5fb377eb8794730cb3059aa6645794f4787e4587aa62fd1e314bec",
       "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION"
@@ -1545,7 +1556,7 @@
     },
     {
       "path": "scripts/validate_strategic_relevance_v321_preservation.py",
-      "current_sha256": "5ad9ba60979b3b82b89192b96ee5caf5ed8ca16bf1a86e25cecc7cf3062ae9cd",
+      "current_sha256": "14a361bf1855e90d95b33334b5889c965093777fc0588d5366f90ecc0a131cc8",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1586,7 +1597,7 @@
     {
       "path": "tests/test_release_evidence_boundaries.py",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "c99246411f5b79246fc0238c0a22c4152e4915be99cde38973ef6b0ca4fca627"
+      "current_sha256": "7dd098af237c30f08b696558de8ba9a3439c06fe0f4bbe945d43e03c91a86357"
     },
     {
       "path": "tests/test_vibecheck03.py",
@@ -1605,8 +1616,8 @@
     "modified_file_count": 22,
     "added_file_count": 5,
     "deleted_file_count": 0,
-    "current_modified": 53,
-    "current_added": 64,
+    "current_modified": 54,
+    "current_added": 65,
     "current_deleted": 0,
     "quality_patch": "CUSTOMER_PRESENTATION_QUALITY_GATE"
   },
@@ -1619,7 +1630,7 @@
     "14-template visual catalog",
     "Customer Closing capability"
   ],
-  "modified_file_count": 53,
+  "modified_file_count": 54,
   "current_active_migration_digest": "1a9c862edfce24d6193273049eebed12e0fa87312d98497bb835ebb4245f1e91",
   "active_migration_delta": {
     "baseline_tree_digest": "dbe282325a1ebd1acaaa0b02c822037a235e573e548e39b0a36ae96ad60569f2",
@@ -1887,6 +1898,11 @@
           "current_sha256": "3a7dfee0c0982033cc80f100c29bc90749a5bdd7db130149cf3bc59fa8d48c5e"
         },
         {
+          "path": "scripts/build_boundary.py",
+          "previous_sha256": null,
+          "current_sha256": "cced142ced2fb8f924ee509c447ebd89e2eadbfa2f295c0fa681558520b86880"
+        },
+        {
           "path": "scripts/build_client_report_model.py",
           "previous_sha256": "5a3c1c8a1a78cb2134aea3608fe0e17b9e5a1bac1cfd320d975d6b100edabce9",
           "current_sha256": "d31c18aff27c006fbf8a60ebeba4356d1e154879f70eb5796fd0e506e941df2a"
@@ -1912,14 +1928,19 @@
           "current_sha256": "4feb2701b07967fb8b987b3f0e61f9f7f2b9df18c7a1b9edf261d6fe78e8ca18"
         },
         {
+          "path": "scripts/package_skill.py",
+          "previous_sha256": "2c216ff3cd1beee9ee7877a746348d09c2d3167c8f74d1e65629c6b1ad2a23f0",
+          "current_sha256": "3c02f99936867375be7edec2f52dbafce6c27071c809c0ea1fc844c27044a30e"
+        },
+        {
           "path": "scripts/pipeline_ledger.py",
           "previous_sha256": "80a04013fdcad476e51560eb47f8aec03cf93417c6717c0c790c5bc61e52ae89",
-          "current_sha256": "4011978dc8f70ab7b4cb3e10c0993493bb83e0a276adef73416cb5a2a6d3221f"
+          "current_sha256": "1a350bc6d2fd0a5ff6f4db2202436167c142c6cee177f7c2073556bb3092ad9f"
         },
         {
           "path": "scripts/quick_validate.py",
           "previous_sha256": "aa59fd9a9cfdca1581e8ce78dec176abe17de8f813019e970118f37795bd6029",
-          "current_sha256": "e179d5c954791627c2ab6f117014badd8eacf04f0d797d9bbed2de6425acdfc4"
+          "current_sha256": "66c12aed45ae1cdf7eefaf3310c6dae20c5a6d377b7c6c9bb1abdfd05b5abba6"
         },
         {
           "path": "scripts/render_internal_analysis_markdown.py",
@@ -1974,12 +1995,12 @@
         {
           "path": "scripts/validate_release_gate.py",
           "previous_sha256": "27241652c8d77ae0e7d5ff945607a6bf8ae85b3482bedbf9c952d863db37ce33",
-          "current_sha256": "4c42a8b5307822cb24913186c1cd8d996cb85cba053d0232ce7c6de7649a7c90"
+          "current_sha256": "d94368077bcf6d357d2c68c537d306d0d573ed0778775812c2a2e92440b3d31a"
         },
         {
           "path": "scripts/validate_strategic_relevance_v321_preservation.py",
           "previous_sha256": "5f51e7debd2d5be8e95070f65f33e20a95a5f1b05008bf83d24f1d18fece75c1",
-          "current_sha256": "5ad9ba60979b3b82b89192b96ee5caf5ed8ca16bf1a86e25cecc7cf3062ae9cd"
+          "current_sha256": "14a361bf1855e90d95b33334b5889c965093777fc0588d5366f90ecc0a131cc8"
         },
         {
           "path": "scripts/vibecheck03.py",
@@ -2024,7 +2045,7 @@
         {
           "path": "tests/test_release_evidence_boundaries.py",
           "previous_sha256": null,
-          "current_sha256": "c99246411f5b79246fc0238c0a22c4152e4915be99cde38973ef6b0ca4fca627"
+          "current_sha256": "7dd098af237c30f08b696558de8ba9a3439c06fe0f4bbe945d43e03c91a86357"
         },
         {
           "path": "tests/test_vibecheck03.py",
