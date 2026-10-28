@@ -57,3 +57,17 @@ Decisions measured during the task:
 - `tests/test_positive_customer_e2e.py` and `tests/test_packaged_brand_fonts.py::OfflineStrictRenderTests` now build `--release-mode proof --require-exact-fonts` (same strict font contract); the positive E2E additionally asserts the customer-mode refusal.
 - Matrix values: V08 Vega tints by value on 0/0.5/1, V10 by label. Shared anchor `MATRIX_VALUE` (Klar 1.0, Verbesserung sinnvoll 0.5, Handlungsbedarf 0.0) gives the same colour for the same status in both renderers; V08 still omits unscored rows (no neutral colour on its scale).
 - `schemas/visualization-plan.schema.json` gains optional `evidence_method` (LAB/FIELD/SYNTHETIC); the schema is not in the protected baseline.
+
+## Task 6 — fail-closed validators, live eval, override evidence
+| check | command | rc | value |
+|---|---|---|---|
+| Case 8 (3 tests) | `$PY -B -m unittest tests.test_evidence_bound_claims.Case8ReadyIsInvalidated` | 0 | OK |
+| mutation canary | `$PY -B -m unittest tests.test_evidence_bound_claims.MutationCanary` | 0 | lab→device mutation makes the inner eval FAIL (Case1 + GoldenPairs fail) |
+| claim eval, venv | `$PY -B scripts/run_evidence_bound_claim_evals.py .` | 0 | PASS ran=17 skipped=0 |
+| claim eval, system python (skip canary) | `python3 -B scripts/run_evidence_bound_claim_evals.py . --json-out …` | 1 | FAIL skipped=4 (PDF runtime missing → NOT RUN) |
+| protected baseline | `python3 -B scripts/validate_measurement_platform_baseline.py .` | 0 | PASS exact=35 overrides=12 chained=7 reports=12 (was rc 1 invalid_override ×5 before the override report) |
+| legacy oracles | `$PY -B -m unittest tests.test_legacy_oracles` | 0 | OK after amendment (synthetic-report plan 894ea740…→45a14b49…, model a881d84f…→77793c00…; lever ids unchanged) |
+| quick_validate (named copy) | `python3 -B <copy>/scripts/quick_validate.py <copy>` | 0 | PASS 317 required files |
+| full suite | `$PY -B -m pytest tests -q` | 0 | 204 passed, 69 subtests |
+
+Implementation notes: finalize downgrades a stored READY to BUILT_PENDING_QA before revalidation and writes CUSTOMER_RELEASE_BLOCKED with block_reason on any failure (atomic replace). Bundle validation checks every `required_artifacts[].sha256` and refuses READY without PASS visual+semantic QA bound to the receipt PDF digest. Release gate loads `reports/evidence-bound-claims-eval-results.json` (PASS, no skips, digest = live tree) and re-runs the suite live.

@@ -123,6 +123,14 @@ def main() -> int:
         payload["checks"].append({"id": "customer_claim_bindings", "status": "PASS" if code == 0 else "FAIL", "stdout": stdout.strip()})
         if code != 0:
             return fail("customer claim bindings failed: " + stdout.strip()[-500:], report_path, payload)
+        for item in manifest.get("required_artifacts", []):
+            if not isinstance(item, dict) or not item.get("path"):
+                return fail("malformed required_artifacts entry in deliverable manifest", report_path, payload)
+            artifact = out_dir / str(item["path"])
+            if not artifact.is_file():
+                return fail(f"required artifact missing: {item['path']}", report_path, payload)
+            if item.get("sha256") != sha(artifact):
+                return fail(f"required artifact sha256 mismatch: {item['path']}", report_path, payload)
         payload["checks"].append({"id": "cross_artifact_digests", "status": "PASS"})
 
         selected = [x for x in plan.get("visuals", []) if isinstance(x, dict) and x.get("status") == "SELECTED"]
@@ -141,6 +149,10 @@ def main() -> int:
         semantic_status = semantic_qa.get("inspection_status")
         quality_status = quality.get("quality_status")
         customer_release_ready = bool(font_status == "EXACT" and embedding_status == "VERIFIED" and visual_status == "PASS" and semantic_status == "PASS" and quality_status == "PASS")
+        if manifest.get("status") == "CUSTOMER_RELEASE_READY" and not (
+            customer_release_ready and visual_qa.get("pdf_sha256") == receipt.get("pdf_sha256") == semantic_qa.get("pdf_sha256")
+        ):
+            return fail("MANIFEST_STATUS_NOT_SUPPORTED_BY_QA: CUSTOMER_RELEASE_READY without PASS QA bound to this PDF", report_path, payload)
         payload.update({
             "status": "PASS",
             "build_complete": True,

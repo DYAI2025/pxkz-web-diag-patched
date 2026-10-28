@@ -1,0 +1,14 @@
+diff --git a/scripts/svg_chart_renderer.py b/scripts/svg_chart_renderer.py
+index 01d21a9..18e7caf 100644
+--- a/scripts/svg_chart_renderer.py
++++ b/scripts/svg_chart_renderer.py
+@@ -202,6 +202,9 @@ def render_svg(visual: dict[str, Any]) -> str:
+             pos = float(row.get("position", 0) or 0)
+             x = 810 - (pos / maxp) * 470
+             lines.append(text_block(42, y + 5, row.get("query"), width=45, max_lines=1, font_size=13.5))
++            if row.get("context_label"):
++                # Place, device and date belong to each plotted query, not only to the chart subtitle.
++                lines.append(text_block(42, y + 18, row.get("context_label"), width=52, max_lines=1, font_size=9))
+             lines.append(f'<line x1="340" y1="{y}" x2="810" y2="{y}" stroke="{SAGE_RAISED}"/>')
+             lines.append(f'<circle cx="{max(345,x):.1f}" cy="{y}" r="8" fill="{ORANGE}"/>')
+             lines.append(f'<text x="825" y="{y+6}" font-family="{MONO}" font-size="13.5" fill="{INK}">{pos:g}</text>')

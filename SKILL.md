@@ -467,6 +467,8 @@ python scripts/validate_no_font_binaries.py .
 python scripts/run_visualization_gallery_evals.py .
 python scripts/validate_customer_business_language.py /path/to/client-report-model.json /path/to/customer_presentation.pdf
 python scripts/validate_customer_output_guardrails.py /path/to/client-report-model.json /path/to/customer_presentation.html /path/to/customer_presentation.pdf /path/to/visuals
+python scripts/validate_customer_claim_bindings.py /path/to/diagnosis-report.json /path/to/client-report-model.json /path/to/customer-claim-bindings.json
+python scripts/run_evidence_bound_claim_evals.py .
 python scripts/validate_analysis_report_completeness.py /path/to/analysis_report.json /path/to/analysis_report.md /path/to/diagnosis-report.json
 python scripts/run_reporting_bundle_evals.py .
 python scripts/run_strategic_relevance_evals.py
@@ -485,6 +487,8 @@ python scripts/validate_installability.py .
 python scripts/validate_agent_agnostic.py .
 python scripts/validate_pipeline_ledger.py .
 ```
+
+Evidence-bound customer claims: customer copy keeps the measurement method ("Testmessung" for lab runs, never device or real-user wording), fixture/example data is labelled "Beispieldaten" and refused in customer mode (`SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT`), strengths come only from positive findings whose metrics read "Klar" (bound in `customer-claim-bindings.json`), every matrix visual uses the one `customer_status` scale, and a deliverable manifest never keeps `CUSTOMER_RELEASE_READY` without PASS QA bound to the current PDF. `run_evidence_bound_claim_evals.py` treats skipped cases as NOT RUN and the release gate re-runs it live.
 
 The gallery gate may render all approved templates for internal regression, including internal-only coverage visuals. The customer reporting-bundle gate plus Strategic Relevance eval proves the three mandatory product outputs, 4-7 business visuals, exactly four strategic levers, full-score-only customer score projection, no internal audit/test/runtime/QA leakage, deterministic plans, no fabricated benchmark/ranking, pending QA, fail-closed fonts and rejection of unsafe SVG.
 

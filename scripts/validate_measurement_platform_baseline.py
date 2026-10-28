@@ -21,6 +21,13 @@ ALLOWED_REASON_PATHS = {
         "scripts/build_visualization_plan.py",
         "scripts/build_client_report_model.py",
     },
+    "EVIDENCE_BOUND_CLAIMS_PATCH": {
+        "scripts/client_story.py",
+        "scripts/build_client_report_model.py",
+        "scripts/build_visualization_plan.py",
+        "scripts/build_audit_deliverables.py",
+        "scripts/svg_chart_renderer.py",
+    },
     "CUSTOMER_SCOPE_STATEMENT_PATCH": {
         "templates/presentation.html.j2",
     },
@@ -92,6 +99,7 @@ OVERRIDE_REPORTS = (
     "reports/claim-scope-shared-overrides.json",
     "reports/customer-scope-statement-shared-overrides.json",
     "reports/customer-label-fidelity-shared-overrides.json",
+    "reports/evidence-bound-claims-shared-overrides.json",
 )
 
 

@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "status": "PASS",
+  "suite": "tests.test_evidence_bound_claims",
+  "artifact_digest": "e7c3bc67d46eccb3f9db1246717ec35666bf7cfa1871bd31a5700ed3ce35c96c",
+  "tests_run": 17,
+  "failures": 0,
+  "errors": 0,
+  "skipped": [],
+  "results": [
+    {
+      "test": "tests.test_evidence_bound_claims.Case1LabStaysLab.test_bare_lab_word_keeps_method",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case1LabStaysLab.test_mobile_lab_sentence_is_not_rewritten_to_real_mobile",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case2SyntheticStaysSynthetic.test_synthetic_evidence_blocks_customer_mode",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case2SyntheticStaysSynthetic.test_synthetic_v07_is_marked_in_plan",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case2SyntheticStaysSynthetic.test_synthetic_wording_is_not_called_documented",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case3SampleScopeStaysVisible.test_ai06_claim_never_says_whole_site",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case4OneStatusScale.test_v08_and_v10_label_75_identically",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case5NoOppositeStrength.test_validator_rejects_a_strength_backed_by_a_blocking_metric",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case5NoOppositeStrength.test_zero_trust_metrics_yield_no_contact_or_privacy_strength",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case6RankingContextPerRow.test_mixed_devices_carry_device_and_date_per_row",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case7DeclaredIconFetchFailure.test_declared_icon_that_fails_to_load_is_a_fetch_problem",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case8ReadyIsInvalidated.test_changed_required_artifact_fails_bundle_validation",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case8ReadyIsInvalidated.test_ready_manifest_is_downgraded_when_semantic_qa_fails",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case8ReadyIsInvalidated.test_ready_manifest_without_pass_qa_fails_bundle_validation",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.GoldenPairs.test_no_customer_replacement_erases_a_measurement_word",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.GoldenPairs.test_replacements_keep_method_scope_and_evidence_class",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.MutationCanary.test_eval_fails_on_reintroduced_lab_rewrite",
+      "outcome": "ok"
+    }
+  ],
+  "python": "3.12.11",
+  "does_not_prove": [
+    "visual quality of a rendered PDF page",
+    "behaviour on real customer audit data"
+  ]
+}

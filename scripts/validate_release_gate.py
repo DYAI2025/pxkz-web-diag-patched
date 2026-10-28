@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import subprocess
+import tempfile
 import sys
 from pathlib import Path
 
@@ -153,6 +154,7 @@ def main(argv: list[str]) -> int:
         legal_customer = json.loads((root / "reports/legal-customer-projection-eval-results.json").read_text(encoding="utf-8"))
         paired = json.loads((root / "reports/paired-release-report.json").read_text(encoding="utf-8"))
         semantic = json.loads((root / "reports/semantic-customer-qa-eval-report.json").read_text(encoding="utf-8"))
+        claims_eval = json.loads((root / "reports/evidence-bound-claims-eval-results.json").read_text(encoding="utf-8"))
     except Exception as exc:
         return fail(f"invalid or missing release evidence: {exc}")
 
@@ -186,6 +188,27 @@ def main(argv: list[str]) -> int:
             errors.append(f"v3.2.1 preservation live check failed: {detail}")
     except Exception as exc:
         errors.append(f"v3.2.1 preservation live check unavailable: {exc}")
+    # Evidence-bound customer claims: the stored eval must be PASS for this tree, and the suite is re-run live
+    # (a skipped case is NOT RUN, which the runner already reports as FAIL).
+    try:
+        with tempfile.TemporaryDirectory(prefix="pxk-claims-") as td:
+            live_out = Path(td) / "evidence-bound-claims-eval-results.json"
+            live_claims = subprocess.run(
+                [sys.executable, "-B", str(root / "scripts" / "run_evidence_bound_claim_evals.py"), str(root), "--json-out", str(live_out)],
+                text=True, capture_output=True, timeout=900,
+            )
+            live_doc = json.loads(live_out.read_text(encoding="utf-8")) if live_out.is_file() else {}
+        if live_claims.returncode != 0 or live_doc.get("status") != "PASS":
+            errors.append(f"evidence-bound claims live eval failed: {(live_claims.stdout or live_claims.stderr).strip()[:300]}")
+    except Exception as exc:
+        errors.append(f"evidence-bound claims live eval unavailable: {exc}")
+    if claims_eval.get("status") != "PASS" or claims_eval.get("skipped"):
+        errors.append("evidence-bound claims eval evidence is not PASS")
+    try:
+        if claims_eval.get("artifact_digest") != tree_digest(root):
+            errors.append("evidence-bound claims eval evidence is stale (STALE_ARTIFACT_DIGEST)")
+    except Exception as exc:
+        errors.append(f"evidence-bound claims digest check unavailable: {exc}")
     if report.get("release_scope") != "website-diagnosis-package": errors.append("release scope drift")
     if report.get("release_gate", {}).get("status") != "PASS": errors.append("release status is not PASS")
     if report.get("release_gate", {}).get("allowed_to_package") is not True: errors.append("allowed_to_package must be true")

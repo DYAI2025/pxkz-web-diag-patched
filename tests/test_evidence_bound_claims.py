@@ -308,5 +308,31 @@ class GoldenPairs(unittest.TestCase):
             self.assertTrue(clientize(raw, 200).strip(), raw)
 
 
+class MutationCanary(unittest.TestCase):
+    """The claim eval must go red when the lab-to-device rewrite returns: proves the gate can fail."""
+
+    def test_eval_fails_on_reintroduced_lab_rewrite(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td) / "pixelkiez-website-diagnosis"
+            shutil.copytree(ROOT, root, ignore=shutil.ignore_patterns(".git", "reports", "dist", "__pycache__", ".pytest_cache", "inputs"))
+            story = root / "scripts/client_story.py"
+            text = story.read_text(encoding="utf-8")
+            mutated = text.replace('_keep_case("in der mobilen Testmessung")', '"auf Mobilgeräten"', 1)
+            self.assertNotEqual(text, mutated, "mutation target must exist")
+            story.write_text(mutated, encoding="utf-8")
+            # Cut this canary out of the copied suite so the inner run cannot recurse.
+            suite = root / "tests/test_evidence_bound_claims.py"
+            body = suite.read_text(encoding="utf-8")
+            cut = body.index("class MutationCanary(unittest.TestCase):")
+            suite.write_text(body[:cut] + 'if __name__ == "__main__":\n    unittest.main()\n', encoding="utf-8")
+            out = Path(td) / "eval.json"
+            result = run("scripts/run_evidence_bound_claim_evals.py", str(root), "--json-out", str(out), cwd=root)
+            self.assertNotEqual(result.returncode, 0, result.stdout)
+            report = load(out)
+            self.assertEqual(report["status"], "FAIL")
+            self.assertGreaterEqual(report["failures"], 1)
+            failed = {r["test"] for r in report["results"] if r["outcome"] == "FAIL"}
+            self.assertIn("tests.test_evidence_bound_claims.Case1LabStaysLab.test_mobile_lab_sentence_is_not_rewritten_to_real_mobile", failed)
+
 if __name__ == "__main__":
     unittest.main()
