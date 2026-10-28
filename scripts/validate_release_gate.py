@@ -74,6 +74,13 @@ def validate_reports(root: Path, report: dict, paired: dict, semantic: dict) -> 
         errors.append("customer semantic QA evidence is not PASS")
     if semantic.get("semantic_bundle_sha256") != current:
         errors.append("customer semantic QA evidence stale against current semantic bundle")
+    # The semantic bundle omits rendering code (CSS, templates, plan builder), so rendered QA must also be
+    # bound to the whole build-controlled tree it was inspected on.
+    build = tree_digest(root)
+    if semantic.get("artifact_digest") != build:
+        errors.append("customer semantic QA evidence not bound to the current build artifact digest")
+    if gate.get("artifact_digest") != build:
+        errors.append("customer semantic gate not bound to the current build artifact digest")
     return errors
 
 
