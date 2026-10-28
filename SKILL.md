@@ -157,9 +157,9 @@ A SERP sample is a dated snapshot, not proof of stable ranking share.
 
 When measurement enrichment is requested or available, keep two ranking truths separate: a query/location/device/timestamp-bound current SERP observation and Search Console's authorized historical average position. Never invent one global website rank. A customer-visible Google result-page number is permitted only when the SERP source explicitly returns the page field.
 
-## Vibe-Check #03 (candidate / internal-only)
+## Vibe-Check #03 (candidate, non-scoring)
 
-For five supplementary site-quality families (favicon, Open Graph, optional 404 navigation, image alt markup, and isolated UI feedback), read `references/vibecheck03-diagnostics.md`. `scripts/vibecheck03.py` produces 20 **non-scoring**, page-bound diagnostic signals from already acquired evidence. Live probe/browser collectors and customer finding admission are not released; do not claim them. Core 48 scoring and four customer levers remain unchanged.
+For five supplementary site-quality families (favicon, Open Graph, optional 404 navigation, image alt markup, and isolated UI feedback), read `references/vibecheck03-diagnostics.md`. `scripts/vibecheck03.py` produces 20 **non-scoring**, page-bound diagnostic signals from already acquired evidence. Optional customer admission: `scripts/attach_vibecheck03_findings.py` adds rule-derived low-severity findings that pass only the `VC03_DIAGNOSTIC` evidence route (same run/page, observed values, retest); `NOT_ASSESSED` is never a weakness. Live probe/browser collectors are not implemented; do not claim them. Core 48 scoring is unchanged and the four-lever limit and legal priority stay protected.
 
 ## Measurement enrichment
 
@@ -351,7 +351,7 @@ Brand rules are machine-backed by `assets/brand-tokens.json` and `references/bra
 - 8.5 pt minimum note/footer;
 - requested families `Schibsted Grotesk` and `IBM Plex Mono`.
 
-Do not shrink text to make content fit. Shorten or change layout. A proof fallback must be labeled in the receipt and keeps `customer_release_ready=false`. Customer mode requires both requested families exactly; no fallback may be described as brand parity.
+Do not shrink text to make content fit. Shorten or change layout. The four-lever page is the one documented exception with a fixed compact card tier (13.5/10/9.5 pt, never below 8.5 pt; see `references/brand-rendering-contract-v2.md`); `validate_pdf_output.py` fails any page whose content reaches the footer band and any lever field missing from the lever page. A proof fallback must be labeled in the receipt and keeps `customer_release_ready=false`. Customer mode requires both requested families exactly; no fallback may be described as brand parity.
 
 After rendering:
 
@@ -490,6 +490,6 @@ python scripts/validate_pipeline_ledger.py .
 The gallery gate may render all approved templates for internal regression, including internal-only coverage visuals. The customer reporting-bundle gate plus Strategic Relevance eval proves the three mandatory product outputs, 4-7 business visuals, exactly four strategic levers, full-score-only customer score projection, no internal audit/test/runtime/QA leakage, deterministic plans, no fabricated benchmark/ranking, pending QA, fail-closed fonts and rejection of unsafe SVG.
 
 ## Non-core Impressum Compliance Routing
-For full public website audits, perform the evidence-bounded Impressum/provider-identification step after public evidence collection and before final finding projection. Read `references/impressum-compliance-method.md` and `references/impressum-legal-source-map.md`. Produce the internal `impressum-compliance.json` sidecar when this step is enabled. Legal sidecar results never alter the 48-metric Core score, coverage or anchors.
+For full public website audits, perform the evidence-bounded Impressum/provider-identification step after public evidence collection and before final finding projection. Read `references/impressum-compliance-method.md` and `references/impressum-legal-source-map.md`. Produce the internal `impressum-compliance.json` sidecar when this step is enabled. Legal sidecar results never alter the 48-metric Core score, coverage or anchors. A finding that carries `customer_risk` is admissible only as the validated projection of a supplied sidecar: `build_audit_deliverables.py` fails with `LEGAL_SIDECAR_REQUIRED` without `--impressum-compliance`, and `validate_impressum_projection.py` requires priority, claim state, group, warning label and legal refs to equal the resolver output (an `INTERNAL_ONLY` sidecar admits no legal customer finding).
 
 Customer-risk surfacing is fail-closed against omission: a supported `ILES_CRITICAL_OVERRIDE`, `AUDIT_PRIORITY_CRITICAL`, critical/high assessed provider-identification defect, or material identity/address conflict must create one consolidated customer-visible legal-review finding. `MANDATORY_CRITICAL` provider-identity risk must occupy lever rank 1 and remain visible on cover, four-lever page, immediate roadmap and closing action. Unresolved jurisdiction changes the claim wording to review language; it does not permit the risk to disappear. Never convert uncertainty into a definitive legal violation, penalty forecast or automatic GDPR conclusion. Never use `LEGAL-IMP-*` as automatic ElevenLabs/voice hooks.

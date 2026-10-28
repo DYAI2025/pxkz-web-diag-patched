@@ -1,0 +1,352 @@
+{
+  "status": "PASS",
+  "inspected_at": "2026-10-28",
+  "inspection_method": "agent_vision",
+  "inspected_by": "Claude Opus 5.5 (main session; not an independent evaluator)",
+  "candidate_artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
+  "semantic_bundle_sha256": "082325992478c88b16c7f2b8c67372e065473ba8e469c78cdae6cf7e37903041",
+  "render_basis": "git archive of candidate commit 92eb6c9; PDFs re-render deterministically (sha-identical across renders). Pages unchanged since the 456c226 inspection are verified identical by raster comparison (72 dpi) and keep their inspection; changed pages (Baumdienst p5, legal p6, p7) were re-inspected. Candidates 80ec6bd and e4a0cb6 change no rendering code; all six PDFs re-rendered from each git archive are byte-identical (cmp, 6/6) to the inspected 92eb6c9 renders.",
+  "cases": [
+    {
+      "case": "baumdienst-renner",
+      "pdf_sha256": "1cdb5b7f32c795a2cb89ab4dce1c4f50c5a485de3ab9812776e5237a97379a14",
+      "page_count": 9,
+      "chart_pages": 4,
+      "visual_qa": "PASS",
+      "semantic_qa": "PASS",
+      "pages": [
+        {
+          "page": 1,
+          "note": "Cover: title, Baumdienst Renner, URL, Pixelkiez Bewertungsstand 71 and the full two-line core message (addresses differ between website and directories) in the bottom band."
+        },
+        {
+          "page": 2,
+          "note": "Executive: 71/100, main lever 'Eine Firma, mehrere öffentliche Adressen', three strengths and three priorities."
+        },
+        {
+          "page": 3,
+          "note": "V03 four levers list 1-4; generous whitespace below, no clipping."
+        },
+        {
+          "page": 4,
+          "note": "V08 AI clarity matrix, six rows klar/teilweise/offen; consistent with lever 3."
+        },
+        {
+          "page": 5,
+          "note": "V10 trust matrix, six four-state rows; Firmendaten X Handlungsbedarf matches lever 1; 'Impressum und rechtliche Angaben' now ! Verbesserung sinnvoll, consistent with lever 4 (F-002 cites TRUST-01; CUSTOMER_STATUS_COHERENCE_PATCH, fixes former O-1)."
+        },
+        {
+          "page": 6,
+          "note": "V11 severity distribution 1 hoch / 3 mittel / 1 niedrig, consistent with levers (01 hoch, 02-04 mittel)."
+        },
+        {
+          "page": 7,
+          "note": "Four lever cards fully above the footer band with observation, 'Warum das zählt', 'Nächster Schritt'. O-4: lever-page subtitle and footer are grey on orange (low contrast, legible at print size)."
+        },
+        {
+          "page": 8,
+          "note": "Roadmap: Jetzt has lever 1 and lever 4 actions, In 30 Tagen levers 2 and 3; 'Danach' column empty (O-2: roadmap columns follow report roadmap data, not lever rank)."
+        },
+        {
+          "page": 9,
+          "note": "Closing: four actions in lever order and next-step box."
+        }
+      ]
+    },
+    {
+      "case": "legal-golden",
+      "pdf_sha256": "15ad0a7d742193744d95174fd5c5833de1643fd8d17733730b5ddea0a153a916",
+      "page_count": 11,
+      "chart_pages": 6,
+      "visual_qa": "PASS",
+      "semantic_qa": "PASS",
+      "pages": [
+        {
+          "page": 1,
+          "note": "Cover: score 65, badge 'Dringender rechtlicher Prüfbedarf' and complete core message on operator identity/address; footerless band, no clipping."
+        },
+        {
+          "page": 2,
+          "note": "Executive: main lever 'Dringender rechtlicher Prüfbedarf'. Strength 'Rechts-/Kontaktflächen gut erreichbar' concerns reachability (O-5: wording tension next to the identity risk, recorded)."
+        },
+        {
+          "page": 3,
+          "note": "V02 category bars, six categories with values; labels legible."
+        },
+        {
+          "page": 4,
+          "note": "V03 levers list with the legal provider-identity risk as item 1."
+        },
+        {
+          "page": 5,
+          "note": "V07 mobile load 3.8 s against target 2.5 / warning 4; value and thresholds clear."
+        },
+        {
+          "page": 6,
+          "note": "V08 AI clarity matrix: 'Eindeutige Unternehmensdarstellung' and 'Fakten überall gleich' read teilweise with the teilweise tint next to the provider-identity risk (CUSTOMER_STATUS_COHERENCE_PATCH); other rows unchanged; legible."
+        },
+        {
+          "page": 7,
+          "note": "V10 trust matrix: 'Impressum und rechtliche Angaben' X Handlungsbedarf, consistent with lever 1; 'Firmendaten auf allen Seiten' and 'Kontakttransparenz' ! Verbesserung sinnvoll next to the identity risk."
+        },
+        {
+          "page": 8,
+          "note": "V11 4 hoch / 2 mittel, consistent with levers."
+        },
+        {
+          "page": 9,
+          "note": "Four lever cards, legal risk first ('01 · HOCH'), review wording, no legal-violation claim; cards above footer band. O-4: lever-page subtitle and footer are grey on orange (low contrast, legible at print size)."
+        },
+        {
+          "page": 10,
+          "note": "Roadmap: legal review first in Jetzt (P1 Rechtsberatung). O-2: roadmap columns follow report roadmap data, not lever rank."
+        },
+        {
+          "page": 11,
+          "note": "Closing: legal review is action 01; next-step box."
+        }
+      ],
+      "inputs": {
+        "scored_report_sha256": "10d89741768b2327a03bedd3d62a1fa332aa834123d794068bb897b0ecefca31",
+        "impressum_sidecar_sha256": "809a2b62916b76185b97c4d53cb9e4b4c66bcb399e514b4269251a92ba1c50d7",
+        "note": "Session inputs (synthetic core report + LEG-GOLD-BFL sidecar); recorded by digest, not committed."
+      }
+    },
+    {
+      "case": "legacy-baseline",
+      "pdf_sha256": "077343bdb0acb08666473343f0c94e0ab711e4f04e9606aa8ce01dcb4d8624d6",
+      "page_count": 11,
+      "chart_pages": 6,
+      "visual_qa": "PASS",
+      "semantic_qa": "PASS",
+      "pages": [
+        {
+          "page": 1,
+          "note": "Cover: title, customer, URL, Pixelkiez score 65 and complete two-line core message visible in the bottom band; no split."
+        },
+        {
+          "page": 2,
+          "note": "Executive: 65/100, main lever, three strengths and three priorities, all legible."
+        },
+        {
+          "page": 3,
+          "note": "V02 category bars, six categories with values; labels legible."
+        },
+        {
+          "page": 4,
+          "note": "V03 four levers list, numbered 1-4, matches lever page order."
+        },
+        {
+          "page": 5,
+          "note": "V07 mobile load 3.8 s against target 2.5 / warning 4; value and thresholds clear."
+        },
+        {
+          "page": 6,
+          "note": "V08 AI clarity matrix, seven rows klar/teilweise; legible."
+        },
+        {
+          "page": 7,
+          "note": "V10 trust matrix, seven four-state rows; legible."
+        },
+        {
+          "page": 8,
+          "note": "V11 3 hoch / 2 mittel, consistent with levers."
+        },
+        {
+          "page": 9,
+          "note": "Four lever cards, each with observation, 'Warum das zählt' and 'Nächster Schritt'; all cards end above the footer band. O-4: lever-page subtitle and footer are grey on orange (low contrast, legible at print size)."
+        },
+        {
+          "page": 10,
+          "note": "Roadmap: lever 2 in Jetzt, lever 1 in 30 Tagen (O-2: roadmap columns follow report roadmap data, not lever rank; legacy behaviour)."
+        },
+        {
+          "page": 11,
+          "note": "Closing: four actions in lever order and next-step box; no clipping."
+        }
+      ]
+    },
+    {
+      "case": "case-a-critical",
+      "pdf_sha256": "bc81f21f1e84d632ae48dbd74969ac6e314f1fab97a06319ac51e06af46dd502",
+      "page_count": 11,
+      "chart_pages": 6,
+      "visual_qa": "PASS",
+      "semantic_qa": "PASS",
+      "pages": [
+        {
+          "page": 1,
+          "note": "Cover: title, customer, URL, Pixelkiez score 65 and complete two-line core message visible in the bottom band; no split."
+        },
+        {
+          "page": 2,
+          "note": "Executive: 65/100, main lever, three strengths and three priorities, all legible."
+        },
+        {
+          "page": 3,
+          "note": "V02 category bars, six categories with values; labels legible."
+        },
+        {
+          "page": 4,
+          "note": "V03 four levers list, numbered 1-4, matches lever page order."
+        },
+        {
+          "page": 5,
+          "note": "V07 mobile load 3.8 s against target 2.5 / warning 4; value and thresholds clear."
+        },
+        {
+          "page": 6,
+          "note": "V08 AI clarity matrix, seven rows klar/teilweise; legible."
+        },
+        {
+          "page": 7,
+          "note": "V10 trust matrix, seven four-state rows; legible."
+        },
+        {
+          "page": 8,
+          "note": "V11 2 kritisch / 1 hoch / 2 mittel, consistent with levers 01-02 kritisch, 03 hoch, 04 mittel."
+        },
+        {
+          "page": 9,
+          "note": "Four lever cards, each with observation, 'Warum das zählt' and 'Nächster Schritt'; all cards end above the footer band. O-4: lever-page subtitle and footer are grey on orange (low contrast, legible at print size)."
+        },
+        {
+          "page": 10,
+          "note": "Roadmap: critical lever 1 sits in 'In 30 Tagen' (O-2: roadmap columns follow report roadmap data, not lever rank)."
+        },
+        {
+          "page": 11,
+          "note": "Closing: four actions in lever order and next-step box; no clipping."
+        }
+      ]
+    },
+    {
+      "case": "case-b-equal-rank-profile",
+      "pdf_sha256": "b64a50e5cebffd6c15516686671ff0de9fa5daffd36a39610c604556e6c1b51b",
+      "page_count": 11,
+      "chart_pages": 6,
+      "visual_qa": "PASS",
+      "semantic_qa": "PASS",
+      "pages": [
+        {
+          "page": 1,
+          "note": "Cover: title, customer, URL, Pixelkiez score 65 and complete two-line core message visible in the bottom band; no split."
+        },
+        {
+          "page": 2,
+          "note": "Executive: 65/100, main lever, three strengths and three priorities, all legible."
+        },
+        {
+          "page": 3,
+          "note": "V02 category bars, six categories with values; labels legible."
+        },
+        {
+          "page": 4,
+          "note": "V03 levers list with profile tie order: lever 4 is the content-question finding."
+        },
+        {
+          "page": 5,
+          "note": "V07 mobile load 3.8 s against target 2.5 / warning 4; value and thresholds clear."
+        },
+        {
+          "page": 6,
+          "note": "V08 AI clarity matrix, seven rows klar/teilweise; legible."
+        },
+        {
+          "page": 7,
+          "note": "V10 trust matrix, seven four-state rows; legible."
+        },
+        {
+          "page": 8,
+          "note": "V11 3 hoch / 2 mittel."
+        },
+        {
+          "page": 9,
+          "note": "Four lever cards; lever 4 'Die Leistungen sind lesbar, aber Fragen ...' per priority profile; above footer. O-4: lever-page subtitle and footer are grey on orange (low contrast, legible at print size)."
+        },
+        {
+          "page": 10,
+          "note": "Roadmap Jetzt / In 30 Tagen / Danach with role labels. O-2: roadmap columns follow report roadmap data, not lever rank."
+        },
+        {
+          "page": 11,
+          "note": "Closing: four actions in lever order and next-step box; no clipping."
+        }
+      ]
+    },
+    {
+      "case": "case-c-vc03-detail",
+      "pdf_sha256": "7a72f50f6e3da562bb09fa7da147168a244235cd3591385465afb68135be2034",
+      "page_count": 11,
+      "chart_pages": 6,
+      "visual_qa": "PASS",
+      "semantic_qa": "PASS",
+      "pages": [
+        {
+          "page": 1,
+          "note": "Cover: title, customer, URL, Pixelkiez score 65 and complete two-line core message visible in the bottom band; no split."
+        },
+        {
+          "page": 2,
+          "note": "Executive: 65/100, main lever, three strengths and three priorities, all legible."
+        },
+        {
+          "page": 3,
+          "note": "V02 category bars, six categories with values; labels legible."
+        },
+        {
+          "page": 4,
+          "note": "V03 levers list: item 4 is the VC03 favicon detail."
+        },
+        {
+          "page": 5,
+          "note": "V07 mobile load 3.8 s against target 2.5 / warning 4; value and thresholds clear."
+        },
+        {
+          "page": 6,
+          "note": "V08 AI clarity matrix, seven rows klar/teilweise; legible."
+        },
+        {
+          "page": 7,
+          "note": "V10 trust matrix, seven four-state rows; legible."
+        },
+        {
+          "page": 8,
+          "note": "V11 3 hoch / 2 mittel / 3 niedrig."
+        },
+        {
+          "page": 9,
+          "note": "Four lever cards; lever 4 'Kein eigenes Website-Symbol' (niedrig) admitted by category diversity while two medium findings stay out (O-3, rule-conform, recorded). O-4: lever-page subtitle and footer are grey on orange (low contrast, legible at print size)."
+        },
+        {
+          "page": 10,
+          "note": "Roadmap Jetzt / In 30 Tagen / Danach with role labels. O-2: roadmap columns follow report roadmap data, not lever rank."
+        },
+        {
+          "page": 11,
+          "note": "Closing: four actions in lever order and next-step box; no clipping."
+        }
+      ]
+    }
+  ],
+  "fixed_during_qa": {
+    "F-QA-1": "Legal case p7 showed 'Impressum und rechtliche Angaben: OK Klar' beside an urgent provider-identity risk; fixed by LEGAL_SURFACE_CUSTOMER_STATUS_PATCH (commit dee40a4), re-rendered page inspected, all other pages pixel-identical to the inspected renders.",
+    "F-QA-2": "Independent evaluation MAJOR-1/MAJOR-2: status rows read clear next to findings citing the same metric (Baumdienst p5 Impressum OK vs lever 4; legal p6 AI-01/AI-06 klar and p7 Kontakttransparenz Klar vs provider-identity risk). Fixed by CUSTOMER_STATUS_COHERENCE_PATCH (c393078), user-approved.",
+    "F-QA-3": "Re-inspection of legal p6 after F-QA-2: capped rows read teilweise but kept the clear tint (value 0.74 on a value-scaled tint). Fixed by capping at the template's 0.5 teilweise anchor (cd90890)."
+  },
+  "open_observations_non_blocking": {
+    "O-1": "RESOLVED by F-QA-2 (Baumdienst p5 now 'Verbesserung sinnvoll'); the earlier non-blocking classification was wrong.",
+    "O-2": "Roadmap columns follow report roadmap data, not lever rank: legacy/case A put lever 1 in 'In 30 Tagen'; Baumdienst 'Danach' is empty. Pre-existing behaviour.",
+    "O-3": "Case C: a low VC03 favicon detail takes lever 4 via the category-diversity rule while two medium findings stay out; required by run_vc03_customer_release_evals.",
+    "O-4": "Lever page subtitle and footer are grey on orange (low contrast). Pre-existing palette choice.",
+    "O-5": "Legal case p2: strength 'Rechts-/Kontaktflächen gut erreichbar' (reachability) beside the provider-identity risk; wording tension, input text from executive.top_strengths.",
+    "O-6": "Independent evaluation MINOR copy findings, not changed in this candidate: Baumdienst p2 'im öffentlichen Stichprobe' (grammar, audit wording); '/home/' path on Baumdienst p7/p8 (fixture text); 'Entität' (legal p2), 'Schema' (legal p6), owner labels 'UX & Frontend' (legal p10); legal p5 '3.8' without unit and with decimal point; closing-page heading descender touches the card top; legal roadmap marks every item P1."
+  },
+  "user_decision": "2026-10-28: observations documented as open risks, not release-blocking ('Als offene Risiken dokumentieren')",
+  "does_not_prove": [
+    "quality of PDFs for other customers without per-output rendered QA",
+    "commercial effect",
+    "legal compliance"
+  ],
+  "candidate_commit": "e4a0cb6"
+}

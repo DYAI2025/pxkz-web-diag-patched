@@ -1,6 +1,6 @@
 {
-  "artifact_name": null,
-  "chatgpt_install_ready": false,
+  "artifact_name": "skill.zip",
+  "chatgpt_install_ready": true,
   "frontend_install_suggestion_status": "prepared",
   "not_controlled_by_skill": [
     "client UI rendering",
@@ -15,9 +15,9 @@
     "optional companion measurement-gateway deployment and egress policy outside the skill package",
     "live public gateway network reachability in the execution runtime"
   ],
-  "blocking_issues": [
-    "Candidate release not authorized; previous VibeCheck03 scope remains incomplete and independent evaluator receipt missing."
-  ],
+  "blocking_issues": [],
   "user_action": "Upload skill.zip via Skills > Create > Upload from your computer. If installation is disabled, a workspace admin must enable skill upload/install permissions.",
-  "legacy_installability_data_historical": true
+  "legacy_installability_data_historical": false,
+  "candidate_artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
+  "basis": "Package authorized 2026-10-28; the packaged artifact is verified after packaging by re-running quick_validate, validate_release_gate, validate_pipeline_ledger and validate_installability on the extracted skill.zip (receipt in reports/package-receipt-2026-10-28.json)."
 }

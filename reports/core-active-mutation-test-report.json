@@ -1,17 +1,17 @@
 {
   "status": "PASS",
-  "artifact_digest": "9f1ce88027c785069dcd1048f7f7f14143801ab781a570db7903e332eba2cb04",
+  "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
   "detected": 20,
   "mutations": [
     {
       "mutation": "BIND-002",
       "status": "DETECTED",
-      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-nk2dpret/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:FAIL: binding must contain exactly 48 unique metric IDs\n"
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>/pxk-binding-mutation-dzq3b_7a/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:F"
     },
     {
       "mutation": "BIND-003",
       "status": "DETECTED",
-      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-agorm45l/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:FAIL: binding/registry ID mismatch missing=['AI-07'] extra=['FAKE-99']\n"
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>/pxk-binding-mutation-ummlgcxv/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:F"
     },
     {
       "mutation": "EXEC-005",
@@ -26,7 +26,7 @@
     {
       "mutation": "SCORE-002",
       "status": "DETECTED",
-      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-tnb7zv_3/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:FAIL: FIND-01 metric weight drift\n"
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>/pxk-binding-mutation-ojxngl2v/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:F"
     },
     {
       "mutation": "SCORE-003",
@@ -41,17 +41,17 @@
     {
       "mutation": "MUT-REGISTRY-REMOVE",
       "status": "DETECTED",
-      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-kk03jeei/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:              'EVIDENCE_GRADE_TOO_WEAK',\n                                     'VALUE_TYPE_INVALID',\n                                     'RAW_PROVIDER_EVIDENCE_REJECTED'],\n      'control_basis': 'PIXELKIEZ_PRODUCT_RUBRIC'},\n     {'metric_id': 'AI-06',\n      'category': 'ai_readiness',\n  "
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>/pxk-binding-mutation-0az8tgm2/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR: "
     },
     {
       "mutation": "MUT-REGISTRY-49TH",
       "status": "DETECTED",
-      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-nk3apm1j/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:                              'EVIDENCE_GRADE_TOO_WEAK',\n                                     'VALUE_TYPE_INVALID',\n                                     'RAW_PROVIDER_EVIDENCE_REJECTED'],\n      'control_basis': 'PIXELKIEZ_PRODUCT_RUBRIC'},\n     {'metric_id': 'FAKE-49',\n      'category': "
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>/pxk-binding-mutation-06k9a_fj/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR: "
     },
     {
       "mutation": "MUT-CATEGORY-WEIGHT",
       "status": "DETECTED",
-      "detail": "return 1 != 0: /opt/pyvenv/bin/python /mnt/data/pixelkiez_work/pixelkiez-website-diagnosis/scripts/validate_core_evidence_bindings.py /tmp/pxk-binding-mutation-lm_h5p_d/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:FAIL: FIND-01 category weight drift\n"
+      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>/pxk-binding-mutation-7zz5k8se/pixelkiez-website-diagnosis\nSTDOUT:\nSTDERR:F"
     },
     {
       "mutation": "MUT-EVIDENCE-REMOVE",

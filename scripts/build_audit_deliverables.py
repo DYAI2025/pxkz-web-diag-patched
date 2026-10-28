@@ -47,6 +47,7 @@ def main() -> int:
     parser.add_argument("--priority-context", default=None, help="Optional customer-story industry/goal context, separate from score")
     parser.add_argument("--priority-catalog", default=None, help="Approved industry-priority catalog")
     parser.add_argument("--priority-catalog-sha256", default=None, help="Exact SHA-256 of external industry catalog")
+    parser.add_argument("--priority-allow-synthetic", action="store_true", help="Proof/test mode only: honor synthetic test profiles")
     parser.add_argument("--impressum-compliance", default=None, help="Optional validated internal legal sidecar; if supplied it becomes a strict digest-bound artifact")
     args = parser.parse_args()
     src = Path(args.scored_report).resolve()
@@ -86,6 +87,12 @@ def main() -> int:
             legal_projection = out / "legal-customer-projection.json"
             run([py, str(root / "scripts/legal_customer_projection.py"), str(legal_sidecar), str(legal_projection)])
             run([py, str(root / "scripts/validate_impressum_projection.py"), str(legal_sidecar), str(canonical)])
+        else:
+            # A legal customer risk is admissible only as the validated projection of a supplied sidecar.
+            claimed = [str(f.get("id")) for f in json.loads(canonical.read_text(encoding="utf-8")).get("findings", [])
+                       if isinstance(f, dict) and isinstance(f.get("customer_risk"), dict) and f["customer_risk"]]
+            if claimed:
+                raise ValueError("LEGAL_SIDECAR_REQUIRED: customer_risk findings without --impressum-compliance: " + ", ".join(claimed))
         analysis = out / "analysis_report.json"
         markdown = out / "analysis_report.md"
         model = out / "client-report-model.json"
@@ -102,18 +109,25 @@ def main() -> int:
         run([py, str(root / "scripts/render_internal_analysis_markdown.py"), str(analysis), str(markdown)])
         run([py, str(root / "scripts/validate_internal_analysis_report.py"), str(analysis), str(canonical), str(markdown)])
         run([py, str(root / "scripts/validate_analysis_report_completeness.py"), str(analysis), str(markdown), str(canonical)])
-        run([py, str(root / "scripts/build_visualization_plan.py"), str(canonical), str(plan)])
-        run([py, str(root / "scripts/validate_visualization_plan.py"), str(plan), str(canonical)])
-        customer_cmd = [py, str(root / "scripts/build_client_report_model.py"), str(canonical), str(model), "--visual-plan", str(plan)]
+        # Plan and model must receive identical priority inputs so the PDF shows one lever selection.
+        priority_args: list[str] = []
         if args.priority_context:
-            customer_cmd.extend(["--priority-context", str(Path(args.priority_context).resolve())])
+            priority_args.extend(["--priority-context", str(Path(args.priority_context).resolve())])
             if args.priority_catalog:
-                customer_cmd.extend(["--priority-catalog", str(Path(args.priority_catalog).resolve())])
+                priority_args.extend(["--priority-catalog", str(Path(args.priority_catalog).resolve())])
                 if args.priority_catalog_sha256:
-                    customer_cmd.extend(["--priority-catalog-sha256", args.priority_catalog_sha256])
-            customer_cmd.extend(["--priority-decision-out", str(out / "prioritization-decision.json")])
+                    priority_args.extend(["--priority-catalog-sha256", args.priority_catalog_sha256])
+            if args.priority_allow_synthetic:
+                if require_exact:
+                    raise ValueError("synthetic priority profiles are test data and cannot shape a customer release")
+                priority_args.append("--priority-allow-synthetic")
         elif args.priority_catalog:
             raise ValueError("industry catalog without a priority context cannot be applied")
+        run([py, str(root / "scripts/build_visualization_plan.py"), str(canonical), str(plan), *priority_args])
+        run([py, str(root / "scripts/validate_visualization_plan.py"), str(plan), str(canonical)])
+        customer_cmd = [py, str(root / "scripts/build_client_report_model.py"), str(canonical), str(model), "--visual-plan", str(plan), *priority_args]
+        if args.priority_context:
+            customer_cmd.extend(["--priority-decision-out", str(out / "prioritization-decision.json")])
         run(customer_cmd)
         run([py, str(root / "scripts/validate_client_report_model.py"), str(model)])
         if legal_sidecar is not None:

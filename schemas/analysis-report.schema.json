@@ -487,6 +487,43 @@
           "additionalProperties": false
         }
       ]
+    },
+    "vibecheck03_admission": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "required": [
+            "route",
+            "rules_version",
+            "run_id",
+            "page_url",
+            "binding_errors",
+            "score_effect",
+            "rules",
+            "not_assessed_is_negative"
+          ],
+          "properties": {
+            "route": {
+              "const": "VC03_DIAGNOSTIC"
+            },
+            "score_effect": {
+              "const": "NONE"
+            },
+            "not_assessed_is_negative": {
+              "const": false
+            },
+            "rules": {
+              "type": "array"
+            },
+            "binding_errors": {
+              "type": "array"
+            }
+          }
+        }
+      ]
     }
   }
 }

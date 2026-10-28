@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "patch_id": "CUSTOMER_LAYOUT_LEGAL_BOUNDARY_PATCH",
+  "authorization_basis": "Explicit user authorization on 2026-10-28 (answer 'Freigeben (3 Dateien)') after review of reports/override-evidence/layout-legal.*.diff and the page-9 geometry/stress evidence.",
+  "scope_note": "Lever page only: scoped .page.levers CSS and the 'levers' section class so copy at the client-report schema budgets fits above the footer band without clipping (validate_pdf_output enforces footer clearance and lever copy on the lever page). build_audit_deliverables fails closed with LEGAL_SIDECAR_REQUIRED when a finding carries customer_risk without --impressum-compliance.",
+  "previous_sha256_semantics": "previous_sha256 = effective approved digest after reports/branch-priority-vc03-shared-overrides.json (equal to the committed file at the time of authorization).",
+  "evidence": [
+    "reports/override-evidence/layout-legal.presentation.approved-to-candidate.diff",
+    "reports/override-evidence/layout-legal.presentation-html.approved-to-candidate.diff",
+    "reports/override-evidence/layout-legal.build_audit_deliverables.approved-to-candidate.diff"
+  ],
+  "overrides": [
+    {
+      "path": "assets/presentation.css",
+      "baseline_sha256": "ffd55bb7baa0b458de6db423792842f2bd4c0ee6e061003f53823ef588955a23",
+      "previous_sha256": "4ede1e7f15d895c247dfe0aef2f3d443048d2b7ad2f896edc559429a225e846a",
+      "current_sha256": "49a0f04b5a2b69da404dba2e7adff496a38f00ff6efcef1620a214ab5dbcf2d0",
+      "reason": "CUSTOMER_LAYOUT_LEGAL_BOUNDARY_PATCH"
+    },
+    {
+      "path": "templates/presentation.html.j2",
+      "baseline_sha256": "71c4af5c66c59e9db107fc1f903e7527c93a3a4101d0693e33df9a9e6287fb02",
+      "previous_sha256": "d375b0df2818297bf1372f38d3080a73fb7fda798f24b614f21d004f48e20737",
+      "current_sha256": "2b141092d49cbea389371f96fe35814974c4f9b64cfe04c0bc1e762a7033fecd",
+      "reason": "CUSTOMER_LAYOUT_LEGAL_BOUNDARY_PATCH"
+    },
+    {
+      "path": "scripts/build_audit_deliverables.py",
+      "baseline_sha256": "b8d3ba5536a2054d2545c17ef2868950597a2fdf7c01bf9dae2a4adf1bae203b",
+      "previous_sha256": "c283fef4e559a42a553cd0122eafed8f55bef81d97248ad7475935491d011713",
+      "current_sha256": "3a7dfee0c0982033cc80f100c29bc90749a5bdd7db130149cf3bc59fa8d48c5e",
+      "reason": "CUSTOMER_LAYOUT_LEGAL_BOUNDARY_PATCH"
+    }
+  ]
+}

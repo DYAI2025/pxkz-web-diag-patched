@@ -1,0 +1,43 @@
+diff --git a/scripts/build_visualization_plan.py b/scripts/build_visualization_plan.py
+index 5cfc440..db90622 100644
+--- a/scripts/build_visualization_plan.py
++++ b/scripts/build_visualization_plan.py
+@@ -17,7 +17,7 @@ from typing import Any
+ sys.path.insert(0, str(Path(__file__).resolve().parent))
+ from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority  # noqa: E402
+ from client_story import clientize, select_client_levers  # noqa: E402
+-from legal_customer_projection import contested_legal_surface  # noqa: E402
++from legal_customer_projection import contested_identity_surface, contested_legal_surface  # noqa: E402
+ from strategic_relevance import eligible_findings  # noqa: E402
+ from visualization_policy import apply_customer_visual_budget, CUSTOMER_MIN_VISUALS  # noqa: E402
+ 
+@@ -201,6 +201,9 @@ def main() -> int:
+         excluded.append({"template_id": "V12_AUDIT_COVERAGE", "reason": "INTERNAL_ONLY_NOT_CUSTOMER_VISIBLE"})
+ 
+         contested = contested_legal_surface(report)
++        # A metric that a customer-visible problem finding cites (or an identity metric next to a projected
++        # provider-identity risk) must not read as clear on the same PDF.
++        capped = {str(x) for f in findings for x in f.get("metric_refs", [])} | contested_identity_surface(report)
+ 
+         def category_matrix(category: str, template: str, title: str, label_name: str, *, four_state: bool = False) -> None:
+             nonlocal vid
+@@ -215,6 +218,8 @@ def main() -> int:
+                 if four_state:
+                     # A projected legal customer risk outranks the presence-only core status on the customer label.
+                     state = {"key": "ACTION", **STATUS_META["ACTION"]} if mid in contested else customer_status(m)
++                    if state["key"] == "CLEAR" and mid in capped:
++                        state = {"key": "IMPROVE", **STATUS_META["IMPROVE"]}
+                     rows.append({label_name: metric_label(defs, m), "status": state["label"], "symbol": state["symbol"], "tone": state["tone"], "value": state["value"]})
+                     refs.append(mid)
+                     continue
+@@ -222,6 +227,10 @@ def main() -> int:
+                 if not isinstance(sc, (int, float)) or isinstance(sc, bool):
+                     continue
+                 value = max(0.0, min(1.0, float(sc) / 100.0))
++                if mid in capped:
++                    # 0.5 is the template's "teilweise" anchor; the tint is a scale over value, so a higher cap
++                    # would still be painted as clear.
++                    value = min(value, .5)
+                 status = "klar" if value >= .75 else "teilweise" if value >= .5 else "offen"
+                 rows.append({label_name: metric_label(defs, m), "status": status, "value": value})
+                 refs.append(mid)

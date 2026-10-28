@@ -42,6 +42,13 @@ An approved fallback is not exact Pixelkiez typeface parity. The current proof f
 
 No auto-shrink below the minimum is allowed. Rewrite or change layout instead.
 
+Documented exception, four-lever page (`.page.levers`, user-approved 2026-10-28): the four lever cards use a fixed
+compact tier because all four must fit one page above the footer band at the client-report schema text budgets
+(headline 110, observation 130, impact 135, action 125 characters): page H2 22 pt, card headline 13.5 pt, observation
+10 pt, impact and action 9.5 pt, label 8.5 pt. The tier is static CSS, not auto-shrink; it never goes below the 8.5 pt
+minimum. Before this tier the cards already used 15/11/10.5 pt and overlapped the footer. `validate_pdf_output.py`
+fails the PDF when any body text or card reaches the footer band or a lever field is missing from the lever page.
+
 ## Validation
 
 `validate_presentation_brand.py` checks:

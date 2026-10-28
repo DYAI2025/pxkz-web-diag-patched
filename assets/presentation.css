@@ -93,3 +93,17 @@ p { margin: 0; }
 .lever.severity-high { border-color:#EC5E43; }
 .lever.severity-medium { border-color:#566360; }
 .lever.severity-low { border-color:#C6D4D1; }
+
+/* Lever page: the absolute footer band (bottom 6mm) is reserved. Card chrome and type are sized so that copy at the
+   client-report schema budgets (headline 110, observation 130, impact 135, action 125 chars) fits without overlap or
+   clipping; validate_pdf_output checks the footer clearance on every rendered page. */
+.page.levers .section-title { margin-top: 4mm; }
+.page.levers .section-title h2 { font-size: 22pt; }
+.page.levers .section-title p { font-size: 9.5pt; }
+.page.levers .lever-grid { margin-top: 4mm; gap: 3mm; }
+.page.levers .lever { min-height: 0; padding: 3.5mm 4.5mm 4mm; border-top-width: 3mm; border-radius: 4mm; }
+.page.levers .lever .number { font-size: 8.5pt; margin-bottom: 1mm; }
+.page.levers .lever h3 { font-size: 13.5pt; line-height: 1.12; margin-bottom: 1.5mm; }
+.page.levers .lever .observation { font-size: 10pt; line-height: 1.24; margin-bottom: 1.5mm; }
+.page.levers .lever .impact { font-size: 9.5pt; line-height: 1.24; margin: 0 0 1.5mm; }
+.page.levers .lever .action { font-size: 9.5pt; line-height: 1.24; margin-top: 0; }

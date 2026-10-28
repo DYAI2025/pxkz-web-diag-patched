@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fixture/offline Vibe-Check #03 observation, no networking or side effects.
 Input: JSON run with `run_id`, `page_url`, `html`, `html_complete`, `observed_at`,
-optional trusted `asset_results`, `unknown_route`, `ui_scenarios`. Output: diagnostic JSON.
+optional trusted `asset_results`, `unknown_route`, `ui_scenario`. Output: diagnostic JSON.
 A rendered/audited external observation must have separately verified provenance.
 """
 from __future__ import annotations
@@ -15,15 +15,19 @@ CAT=json.loads((ROOT/'assets/vibecheck03.check-catalog.v1.json').read_text())
 FAMILIES={c['check_id']:[m['metric_id'] for m in c['metrics']] for c in CAT['checks']}
 METRICS={m['metric_id']:(c['check_id'],m['type']) for c in CAT['checks'] for m in c['metrics']}
 VERSION='vc03-offline-1.0.0'
+HEAD_TAGS={'html','head','meta','link','title','style','script','base','noscript','template'}
 
 class Parser(HTMLParser):
  def __init__(self):
-  super().__init__(convert_charrefs=True);self.head=False;self.links=[];self.meta=[];self.images=[];self.anchors=[]
+  super().__init__(convert_charrefs=True);self.head=False;self.body=False;self.links=[];self.meta=[];self.images=[];self.anchors=[]
  def handle_starttag(self,tag,attrs):
   d=dict(attrs)
   if tag=='head':self.head=True
-  if tag=='link' and self.head:self.links.append(d)
-  if tag=='meta' and self.head:self.meta.append(d)
+  if tag=='body' or (not self.head and tag not in HEAD_TAGS):self.body=True;self.head=False
+  # HTML5 allows an implied head: link/meta before <body> belong to it; in-body metadata does not count.
+  in_head=self.head or not self.body
+  if tag=='link' and in_head:self.links.append(d)
+  if tag=='meta' and in_head:self.meta.append(d)
   if tag=='img':self.images.append(d)
   if tag=='a':self.anchors.append(d)
  def handle_endtag(self,tag):
@@ -41,6 +45,7 @@ def safe_public_url(url):
 
 def observe(data):
  url=data['page_url'];run=data['run_id'];at=data['observed_at'];html=data['html'];complete=data['html_complete']
+ if 'ui_scenarios' in data:raise ValueError('unsupported input key ui_scenarios; supply one authorized ui_scenario object')
  if data.get('source_authority','STANDALONE_OFFLINE')!='STANDALONE_OFFLINE':raise ValueError('PXAPI_CANONICAL requires a verified versioned adapter; not supported by this collector')
  if not isinstance(complete,bool) or not safe_public_url(url) or not run or not at or not isinstance(html,str):raise ValueError('invalid page/run metadata')
  p=Parser();p.feed(html); source_hash=hashlib.sha256(html.encode()).hexdigest()

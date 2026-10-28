@@ -10,12 +10,14 @@ import sys
 from collections import Counter
 from datetime import datetime
 
-from customer_status import customer_status
+from customer_status import STATUS_META, customer_status
 from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority  # noqa: E402
 from client_story import clientize, select_client_levers  # noqa: E402
+from legal_customer_projection import contested_identity_surface, contested_legal_surface  # noqa: E402
 from strategic_relevance import eligible_findings  # noqa: E402
 from visualization_policy import apply_customer_visual_budget, CUSTOMER_MIN_VISUALS  # noqa: E402
 
@@ -95,6 +97,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("report")
     ap.add_argument("output")
+    add_priority_arguments(ap)
     args = ap.parse_args()
     report_path, output = Path(args.report).resolve(), Path(args.output).resolve()
     root = Path(__file__).resolve().parents[1]
@@ -106,7 +109,13 @@ def main() -> int:
         metrics = [x for x in report.get("metrics", []) if isinstance(x, dict)]
         metric_by_id = {str(x.get("id")): x for x in metrics}
         findings = eligible_findings(report)
-        levers = select_client_levers(report, 4)
+        priority_context, priority_catalog = load_priority_inputs(
+            args.priority_context, args.priority_catalog, args.priority_catalog_sha256
+        )
+        branch_weights, branch_roles, _ = resolve_priority(
+            report, priority_context, priority_catalog, allow_synthetic=args.priority_allow_synthetic
+        )
+        levers = select_client_levers(report, 4, branch_weights=branch_weights, branch_roles=branch_roles)
         if len(levers) != 4:
             raise ValueError("exactly four strategically relevant customer levers are required")
         visuals: list[dict[str, Any]] = []
@@ -191,6 +200,11 @@ def main() -> int:
 
         excluded.append({"template_id": "V12_AUDIT_COVERAGE", "reason": "INTERNAL_ONLY_NOT_CUSTOMER_VISIBLE"})
 
+        contested = contested_legal_surface(report)
+        # A metric that a customer-visible problem finding cites (or an identity metric next to a projected
+        # provider-identity risk) must not read as clear on the same PDF.
+        capped = {str(x) for f in findings for x in f.get("metric_refs", [])} | contested_identity_surface(report)
+
         def category_matrix(category: str, template: str, title: str, label_name: str, *, four_state: bool = False) -> None:
             nonlocal vid
             rows = []
@@ -202,7 +216,10 @@ def main() -> int:
                 if m.get("measurement_class") == "not_assessed":
                     continue
                 if four_state:
-                    state = customer_status(m)
+                    # A projected legal customer risk outranks the presence-only core status on the customer label.
+                    state = {"key": "ACTION", **STATUS_META["ACTION"]} if mid in contested else customer_status(m)
+                    if state["key"] == "CLEAR" and mid in capped:
+                        state = {"key": "IMPROVE", **STATUS_META["IMPROVE"]}
                     rows.append({label_name: metric_label(defs, m), "status": state["label"], "symbol": state["symbol"], "tone": state["tone"], "value": state["value"]})
                     refs.append(mid)
                     continue
@@ -210,6 +227,10 @@ def main() -> int:
                 if not isinstance(sc, (int, float)) or isinstance(sc, bool):
                     continue
                 value = max(0.0, min(1.0, float(sc) / 100.0))
+                if mid in capped:
+                    # 0.5 is the template's "teilweise" anchor; the tint is a scale over value, so a higher cap
+                    # would still be painted as clear.
+                    value = min(value, .5)
                 status = "klar" if value >= .75 else "teilweise" if value >= .5 else "offen"
                 rows.append({label_name: metric_label(defs, m), "status": status, "value": value})
                 refs.append(mid)

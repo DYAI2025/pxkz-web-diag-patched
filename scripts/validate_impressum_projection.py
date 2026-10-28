@@ -39,6 +39,9 @@ def validate(sidecar: dict[str, Any], report: dict[str, Any], model: dict[str, A
     legal_findings = _legal_findings(report)
 
     if projection.get("priority") == "INTERNAL_ONLY":
+        # The sidecar holds no customer-relevant result: any legal customer risk in the report is unbacked.
+        if legal_findings:
+            errors.append(f"sidecar projection is INTERNAL_ONLY but report carries {len(legal_findings)} legal customer-risk finding(s)")
         return errors
 
     if len(legal_findings) != 1:
@@ -54,6 +57,10 @@ def validate(sidecar: dict[str, Any], report: dict[str, Any], model: dict[str, A
         errors.append("customer_risk claim_state does not match resolver")
     if risk.get("warning_label") != projection.get("warning_label"):
         errors.append("customer_risk warning label does not match resolver")
+    if risk.get("group") != projection.get("group"):
+        errors.append("customer_risk group does not match resolver")
+    if list(risk.get("legal_metric_refs") or []) != list(projection.get("legal_metric_refs") or []):
+        errors.append("customer_risk legal_metric_refs do not match resolver")
     if not required_refs.issubset(set(finding.get("metric_refs", []))):
         errors.append("legal metric refs missing from finding")
     if not all(str(finding.get(k) or "").strip() for k in ("client_observation", "client_impact", "client_action")):

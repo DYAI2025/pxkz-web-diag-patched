@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "schema_version": "1.0",
+  "authorization_basis": "Explicit user authorization on 2026-10-28 (answer 'Freigeben' to the hash-bound schema chain) after review of reports/override-evidence/schema.pinned-to-installed.diff and schema.installed-to-candidate.diff.",
+  "allowed_reasons_source": "scripts/validate_full_48_active.py ALLOWED_PROTECTED_CHANGES (fixed in code; this report cannot widen it)",
+  "changes": [
+    {
+      "path": "schemas/diagnosis-report.schema.json",
+      "previous_sha256": "7fb5adef99df470054cd70dd101262e278553f96d1c03ea0714ca91d3869ab82",
+      "current_sha256": "06f80e0a70718619fc371f39f28c900beada406ad5532cf0bc76198d7d0f4c50",
+      "reason": "IMPRESSUM_CUSTOMER_RISK_SCHEMA",
+      "source": "installed v2.1 skill (pixelkiez-website-diagnosis-ROLLBACK-BASELINE.zip sha256 0ba0bc673b1bb681483e9195098a07f116dce5edcd238c8387ed83ff372982aa)",
+      "change": "adds $defs/finding/properties/customer_risk only (+59/-0 lines, 0 removed or changed nodes)",
+      "evidence": "reports/override-evidence/schema.pinned-to-installed.diff"
+    },
+    {
+      "path": "schemas/diagnosis-report.schema.json",
+      "previous_sha256": "06f80e0a70718619fc371f39f28c900beada406ad5532cf0bc76198d7d0f4c50",
+      "current_sha256": "3af3c246749698ba428e1817a34610d8bbf9099c0e14a026c128d73fe0378884",
+      "reason": "VIBECHECK03_DIAGNOSTICS_SCHEMA",
+      "source": "branch-priority candidate (pixelkiez-website-diagnosis-BRANCH-PRIORITY-CANDIDATE.zip sha256 a04d41989ed3725bfac1d937f79543b69f134f9df507964dbb530abbb48d1b13; repository initial commit 50e74e4)",
+      "change": "adds properties/vibecheck03 only (+172/-0 lines, 0 removed or changed nodes)",
+      "evidence": "reports/override-evidence/schema.installed-to-candidate.diff"
+    }
+  ]
+}

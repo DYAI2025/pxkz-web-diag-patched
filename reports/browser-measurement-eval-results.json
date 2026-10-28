@@ -1,13 +1,128 @@
 {
   "schema_version": "1.0",
-  "status": "BLOCKED_RUNTIME_POLICY",
+  "status": "PASS",
   "checks": {
-    "playwright_import_available": true,
-    "chromium_executable_available": true,
-    "browser_navigation_executed": false
+    "third_party_prechoice_observed": true,
+    "cookie_prechoice_observed": true,
+    "storage_prechoice_observed": true,
+    "accept_control_observed": true,
+    "reject_control_observed": true,
+    "unnamed_control_observed": true,
+    "mobile_overflow_observed": true,
+    "a11y_manual_boundary": true,
+    "privacy_legal_boundary": true
   },
-  "metric_count": 0,
+  "metric_count": 8,
   "axe_runtime": "OPTIONAL_NOT_REQUIRED_FOR_BASE_EVAL",
-  "runtime_error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://172.26.39.242:43811/index.html\nCall log:\n  - navigating to \"http://172.26.39.242:43811/index.html\", waiting until \"domcontentloaded\"\n",
-  "runtime_policy_note": "Chromium navigation is blocked by the execution environment. Do not claim live browser validation until the skill is run in a runtime that permits navigation."
+  "details": {
+    "chromium_path": "<chromium-headless-shell-1243>",
+    "baseline": {
+      "state": "baseline",
+      "response_status": 200,
+      "request_count": 2,
+      "third_party_hosts": [
+        "thirdparty.invalid"
+      ],
+      "cookie_count": 1,
+      "cookie_names": [
+        "fixture_prechoice"
+      ],
+      "storage": {
+        "local": 1,
+        "session": 0
+      },
+      "consent_control_found": false,
+      "consent_control_clicked": false,
+      "dom": {
+        "interactive_count": 5,
+        "unnamed_controls": [
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "unnamed-input"
+          }
+        ],
+        "unnamed_count": 1,
+        "images_missing_alt_attribute": 0
+      },
+      "keyboard_focus_targets": [
+        "button|accept|||Alle akzeptieren",
+        "button|reject|||Alle ablehnen",
+        "a||||Kontakt",
+        "input|unnamed-input|||",
+        "button||||Absenden",
+        "body||||Alle akzeptierenAlle ablehnen\nKontakt\nAbsenden"
+      ],
+      "horizontal_overflow_px": 318
+    },
+    "reject": {
+      "state": "reject",
+      "response_status": 200,
+      "request_count": 2,
+      "third_party_hosts": [
+        "thirdparty.invalid"
+      ],
+      "cookie_count": 2,
+      "cookie_names": [
+        "consent",
+        "fixture_prechoice"
+      ],
+      "storage": {
+        "local": 0,
+        "session": 0
+      },
+      "consent_control_found": true,
+      "consent_control_clicked": true,
+      "dom": {
+        "interactive_count": 5,
+        "unnamed_controls": [
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "unnamed-input"
+          }
+        ],
+        "unnamed_count": 1,
+        "images_missing_alt_attribute": 0
+      },
+      "keyboard_focus_targets": [],
+      "horizontal_overflow_px": 318
+    },
+    "accept": {
+      "state": "accept",
+      "response_status": 200,
+      "request_count": 2,
+      "third_party_hosts": [
+        "thirdparty.invalid"
+      ],
+      "cookie_count": 2,
+      "cookie_names": [
+        "consent",
+        "fixture_prechoice"
+      ],
+      "storage": {
+        "local": 2,
+        "session": 0
+      },
+      "consent_control_found": true,
+      "consent_control_clicked": true,
+      "dom": {
+        "interactive_count": 5,
+        "unnamed_controls": [
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "unnamed-input"
+          }
+        ],
+        "unnamed_count": 1,
+        "images_missing_alt_attribute": 0
+      },
+      "keyboard_focus_targets": [],
+      "horizontal_overflow_px": 318
+    },
+    "axe_error": null,
+    "manual_accessibility_review_required": true,
+    "privacy_legal_review_boundary": true
+  }
 }

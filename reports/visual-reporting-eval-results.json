@@ -18,7 +18,7 @@
   ],
   "top_lever_count": 4,
   "renderer": "WEASYPRINT",
-  "brand_font_status": "PARTIAL_EXACT_APPROVED_FALLBACK",
+  "brand_font_status": "EXACT",
   "visual_qa_initial_status": "PENDING",
   "semantic_qa_initial_status": "PENDING",
   "quality_gate_initial_status": "PENDING_QA",

@@ -1,0 +1,17 @@
+diff --git a/scripts/build_audit_deliverables.py b/scripts/build_audit_deliverables.py
+index 5f897a6..9ed6f70 100644
+--- a/scripts/build_audit_deliverables.py
++++ b/scripts/build_audit_deliverables.py
+@@ -87,6 +87,12 @@ def main() -> int:
+             legal_projection = out / "legal-customer-projection.json"
+             run([py, str(root / "scripts/legal_customer_projection.py"), str(legal_sidecar), str(legal_projection)])
+             run([py, str(root / "scripts/validate_impressum_projection.py"), str(legal_sidecar), str(canonical)])
++        else:
++            # A legal customer risk is admissible only as the validated projection of a supplied sidecar.
++            claimed = [str(f.get("id")) for f in json.loads(canonical.read_text(encoding="utf-8")).get("findings", [])
++                       if isinstance(f, dict) and isinstance(f.get("customer_risk"), dict) and f["customer_risk"]]
++            if claimed:
++                raise ValueError("LEGAL_SIDECAR_REQUIRED: customer_risk findings without --impressum-compliance: " + ", ".join(claimed))
+         analysis = out / "analysis_report.json"
+         markdown = out / "analysis_report.md"
+         model = out / "client-report-model.json"

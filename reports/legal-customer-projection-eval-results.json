@@ -6,6 +6,8 @@
     "bo_feng_lin_mandatory_projection",
     "core_score_coverage_delta_zero",
     "mandatory_legal_risk_rank1_cover_roadmap_closing",
+    "legal_surface_status_reconciled",
+    "identity_surface_not_clear",
     "mandatory_legal_risk_visible_in_rendered_pdf",
     "omission_fails_closed",
     "cover_warning_required",

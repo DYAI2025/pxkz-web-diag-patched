@@ -1,0 +1,67 @@
+--- approved/scripts/build_client_report_model.py
++++ 236861d/scripts/build_client_report_model.py
+@@ -3,6 +3,7 @@
+ from __future__ import annotations
+ 
+ import argparse
++import hashlib
+ import json
+ import sys
+ from pathlib import Path
+@@ -10,6 +11,7 @@
+ 
+ from client_story import clientize, confidence_de, plan_visual_story, select_client_levers
+ from customer_story_semantics import presentation_metadata, semantic_story_summary
++from branch_priority import choose_priority, validated_roles, load_json as load_priority_json
+ 
+ SKILL_DIR = Path(__file__).resolve().parent.parent
+ REGISTRY_PATH = SKILL_DIR / "assets" / "measurement-registry.json"
+@@ -133,12 +135,29 @@
+     parser.add_argument("report")
+     parser.add_argument("output")
+     parser.add_argument("--visual-plan")
++    parser.add_argument("--priority-context", help="Optional sourced sector/business-model context JSON")
++    parser.add_argument("--priority-catalog", help="Optional approved industry weights catalog; no default estimates")
++    parser.add_argument("--priority-catalog-sha256", help="Required exact SHA-256 for any external priority catalog")
++    parser.add_argument("--priority-decision-out", help="Internal-only selection provenance, not customer PDF")
+     try:
+         args = parser.parse_args(argv[1:])
+         report = load(Path(args.report))
+         registry = load(REGISTRY_PATH)
+         template = load(TEMPLATE_PATH)
+         external_visual_plan = load(Path(args.visual_plan)) if args.visual_plan else None
++        priority_context = load_priority_json(Path(args.priority_context)) if args.priority_context else None
++        if args.priority_catalog:
++            candidate = Path(args.priority_catalog)
++            observed_sha = hashlib.sha256(candidate.read_bytes()).hexdigest()
++            if not args.priority_catalog_sha256 or observed_sha != args.priority_catalog_sha256.lower():
++                raise ValueError("external industry catalog requires matching --priority-catalog-sha256")
++            priority_catalog = load_priority_json(candidate)
++        elif args.priority_catalog_sha256:
++            raise ValueError("priority catalog digest supplied without catalog")
++        else:
++            priority_catalog = None
++        branch_weights, priority_decision = choose_priority(report, priority_context, priority_catalog)
++        branch_roles = validated_roles(report, priority_context)
+     except Exception as exc:
+         return fail(str(exc))
+ 
+@@ -156,7 +175,17 @@
+         [f for f in findings if f.get("severity") == "positive"],
+         key=lambda f: (-int(f.get("confidence", 0)), str(f.get("id", ""))),
+     )
+-    selected_levers = select_client_levers(report, max_levers=4)
++    selected_levers = select_client_levers(
++        report, max_levers=4, branch_weights=branch_weights, branch_roles=branch_roles
++    )
++    if args.priority_decision_out:
++        priority_decision["selected_lever_ids"] = [str(f.get("id")) for f in selected_levers]
++        priority_decision["candidate_role_ids"] = sorted(branch_roles)
++        priority_decision["customer_pdf_contains_priority_metadata"] = False
++        priority_decision["canonical_core_score_unchanged"] = True
++        Path(args.priority_decision_out).write_text(
++            json.dumps(priority_decision, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
++        )
+ 
+     strengths = [clientize(x, budget("executive_strength", 110)) for x in executive.get("top_strengths", []) if str(x).strip()][:3]
+     if len(strengths) < 3:

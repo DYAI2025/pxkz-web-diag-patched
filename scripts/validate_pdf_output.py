@@ -6,7 +6,34 @@ from pathlib import Path
 from pypdf import PdfReader
 FORBIDDEN=["TECHNISCHER ANHANG","ID METRIK KLASSE EVIDENZ SCORE WERT","MISSING / SOURCE_NEEDED","not_assessed"]
 JARGON=re.compile(r"\b(?:Raw DOM|JSON-LD|LCP|INP|CLS|TTFB|CTA|SERP)\b",re.I)
+MM=72/25.4
 def fail(m):print('FAIL: '+m,file=sys.stderr);return 1
+def layout_errors(pdf):
+ """Footer clearance: no body text or card may reach into the footer band (fixed-height pages clip silently).
+ The footer is identified by its template signature (a bottom line carrying the page number), not by position,
+ so body text pushed into the bottom band cannot be mistaken for the footer."""
+ import fitz
+ errors=[]
+ for no,page in enumerate(fitz.open(str(pdf)),1):
+  h,w=page.rect.height,page.rect.width
+  spans=[s for b in page.get_text('dict')['blocks'] for l in b.get('lines',[]) for s in l['spans'] if s['text'].strip()]
+  marks=[s['bbox'][1] for s in spans if s['text'].strip()==f'{no:02d}' and s['bbox'][1]>h-15*MM]
+  # With a footer: keep 1.5mm clear of it. Without one (cover-like pages with full-bleed bands): stay 5mm inside the page.
+  ftop=min(marks) if marks else h
+  body=[s['bbox'][3] for s in spans if abs(s['bbox'][1]-ftop)>0.5*MM or not marks]
+  limit=ftop-1.5*MM if marks else h-5*MM
+  shapes=[d['rect'].y1 for d in page.get_drawings() if d['rect'].y0<limit and d['rect'].height<h*0.9 and d['rect'].width<w*0.95]
+  low=max(body+shapes,default=0)
+  if low>limit:errors.append(f'page {no}: content ends at {low/MM:.1f}mm, footer clearance limit {limit/MM:.1f}mm')
+ return errors
+def lever_page_errors(pdf,findings,squash):
+ """Every lever field must be on the lever page itself; the roadmap repeats headlines/actions elsewhere."""
+ import fitz
+ pages=[squash(page.get_text()) for page in fitz.open(str(pdf))]
+ hits=[i for i,t in enumerate(pages) if squash('Vier konkrete Hebel') in t]
+ if len(hits)!=1:return [f'expected exactly one lever page, found {len(hits)}']
+ text=pages[hits[0]]
+ return [f'lever {f.get("id")} {k} not visible on lever page {hits[0]+1}' for f in findings for k in ('headline','observation','impact','action') if squash(f.get(k,'')) not in text]
 def main(argv):
  if len(argv)!=3:return fail('usage: validate_pdf_output.py <output.pdf> <client-report-model.json>')
  pdf,modelp=map(lambda x:Path(x).resolve(),argv[1:])
@@ -29,11 +56,18 @@ def main(argv):
  if hits:return fail('internal material leaked: '+', '.join(hits))
  m=JARGON.search(text)
  if m:return fail('customer jargon leaked: '+m.group(0))
- normalized = re.sub(r"\s+", " ", text).casefold()
+ # pypdf emits kerning gaps anywhere, even inside words ("t erminvereinbarung", "lesbar , aber"); compare copy
+ # without whitespace. Probes are whole lever fields (20-135 chars), so cross-word false matches are negligible.
+ def squash(value):
+  return re.sub(r"\s+", "", str(value)).casefold()
+ normalized = squash(text)
  for finding in model.get('findings',[])[:4]:
-  headline = re.sub(r"\s+", " ", str(finding.get('headline',''))).casefold()
-  probe = headline[:36].rstrip()
-  if probe and probe not in normalized:return fail('lever headline missing: '+str(finding.get('id')))
+  probe = squash(finding.get('headline','')).strip()
+  if not probe or probe not in normalized:return fail('lever headline missing: '+str(finding.get('id')))
+ try:
+  layout=layout_errors(pdf)+lever_page_errors(pdf,model.get('findings',[])[:4],squash)
+ except Exception as e:return fail(f'layout clearance check unavailable: {e}')
+ if layout:return fail('layout overlap: '+'; '.join(layout))
  meta=reader.metadata or {}
  if 'Pixelkiez' not in str(meta.get('/Author','')):return fail('PDF author metadata must contain Pixelkiez')
  print(f"PASS: chart-led customer PDF pages={len(reader.pages)} embedded_visuals={receipt['embedded_visual_count']} levers=4")

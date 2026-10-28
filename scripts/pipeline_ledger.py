@@ -11,8 +11,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-EXCLUDE_DIRS = {"reports", "dist", "__pycache__", ".git", ".pytest_cache"}
-EXCLUDE_SUFFIXES = {".pyc", ".pyo"}
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from build_boundary import excluded  # noqa: E402  (shared with the v3.2.1 check and package_skill)
+
 STAGES = [
     "INTAKE_COMPLETED",
     "RESEARCH_COMPLETED",
@@ -36,7 +37,7 @@ def digest_tree(root: Path) -> str:
         if not path.is_file():
             continue
         rel = path.relative_to(root)
-        if set(rel.parts) & EXCLUDE_DIRS or path.suffix in EXCLUDE_SUFFIXES:
+        if excluded(rel):
             continue
         h.update(str(rel).replace(os.sep, "/").encode("utf-8"))
         h.update(b"\0")

@@ -10,6 +10,7 @@ from typing import Any
 
 from business_value import finding_business_record, metric_business_interpretation
 from visual_eligibility import classify as classify_visual
+from vibecheck03_admission import admission_summary
 
 
 def sha(path: Path) -> str:
@@ -174,6 +175,9 @@ def main() -> int:
             "missing": report.get("missing", []),
             "source_needed": report.get("source_needed", []),
         }
+        if isinstance(report.get("vibecheck03"), dict):
+            # Internal-only: which VC03 observations reached the customer route, which stayed internal and why.
+            payload["vibecheck03_admission"] = admission_summary(report)
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(f"PASS: internal analysis report metrics={len(metric_rows)} findings={len(findings)} recommendations={len(recommendations)}")

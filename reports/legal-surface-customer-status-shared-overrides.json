@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "patch_id": "LEGAL_SURFACE_CUSTOMER_STATUS_PATCH",
+  "authorization_basis": "Explicit user authorization on 2026-10-28 (answer 'Freigeben' to Override B3) after review of the build_visualization_plan diff, the red/green legal eval check and the re-rendered legal-case page 7.",
+  "scope_note": "Customer projection only: while a validated legal customer risk is projected (finding.customer_risk, admissible only with a supplied sidecar), the V10 trust-matrix row for TRUST-01 (presence-only 'Impressum & rechtliche Oberfläche') renders 'Handlungsbedarf' instead of the presence-based status. Scores, coverage and plans for reports without a legal customer risk are unchanged (byte-identical plans on three fixtures).",
+  "previous_sha256_semantics": "previous_sha256 = effective approved digest after reports/branch-priority-vc03-shared-overrides.json (equal to the committed file at the time of authorization).",
+  "evidence": [
+    "reports/override-evidence/legal-surface.build_visualization_plan.approved-to-candidate.diff"
+  ],
+  "overrides": [
+    {
+      "path": "scripts/build_visualization_plan.py",
+      "baseline_sha256": "baf5d85df264a812165d4ba0fb534619e0ab5b9f3a601b8011955164358be954",
+      "previous_sha256": "0a7446a230cd7955a245e0609b39ca2fd6137fea82ecca59a234af90c86cf4bc",
+      "current_sha256": "08e9d95789a1616955c2dcec5f565ac30c1413484ffd3317c5bd22d3b50495c4",
+      "reason": "LEGAL_SURFACE_CUSTOMER_STATUS_PATCH"
+    }
+  ]
+}

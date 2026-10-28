@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "patch_id": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE_PATCH",
+  "authorization_basis": "Explicit user authorization on 2026-10-28 (answer 'Freigeben (4 Dateien)') after review of reports/override-evidence/override-evidence.json and the per-file diffs against the approved ROLLBACK-BASELINE versions.",
+  "scope_note": "Only selection plumbing changes: opt-in priority flags forwarded to plan and model, plan/model top_levers equality check, genuine-tie ordering key (severity, -confidence, -weight). Default output byte-identical (tests/test_legacy_oracles.py). Core registry, weights, anchors and compute_score.py unchanged.",
+  "previous_sha256_semantics": "previous_sha256 = last effective approved digest from the three existing override reports; scripts/client_story.py, build_client_report_model.py and build_audit_deliverables.py already diverged from it in commit 236861d (branch-priority candidate), so this entry also covers that unapproved earlier edit.",
+  "overrides": [
+    {
+      "path": "scripts/build_visualization_plan.py",
+      "baseline_sha256": "baf5d85df264a812165d4ba0fb534619e0ab5b9f3a601b8011955164358be954",
+      "previous_sha256": "49065426ff29f12c54572ee5004374b472b94e4dc820eaf6cd3b01267a74b655",
+      "current_sha256": "0a7446a230cd7955a245e0609b39ca2fd6137fea82ecca59a234af90c86cf4bc",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE_PATCH"
+    },
+    {
+      "path": "scripts/build_audit_deliverables.py",
+      "baseline_sha256": "b8d3ba5536a2054d2545c17ef2868950597a2fdf7c01bf9dae2a4adf1bae203b",
+      "previous_sha256": "9f2377910e17d918dde2827b060fce218f7aef71647f61a0d2853746d86f07e3",
+      "current_sha256": "c283fef4e559a42a553cd0122eafed8f55bef81d97248ad7475935491d011713",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE_PATCH"
+    },
+    {
+      "path": "scripts/client_story.py",
+      "baseline_sha256": "3798a2babca162db109ce7750b324b7e1c993eb1ba48f1ab0afe4bebba230b2d",
+      "previous_sha256": "d732f8a2ba9d091b8dbe176d865fc4bcce093797422e6ac1012551e200835f5c",
+      "current_sha256": "30d766f3e5a98441c2b3e0224a37ae308377f14cf8eff89f15ecaadba6d47939",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE_PATCH"
+    },
+    {
+      "path": "scripts/build_client_report_model.py",
+      "baseline_sha256": "433a909ec9bb38b29a4864f468d2cdf66a4a83b1beef0fdada2f6db8716a538e",
+      "previous_sha256": "5a3c1c8a1a78cb2134aea3608fe0e17b9e5a1bac1cfd320d975d6b100edabce9",
+      "current_sha256": "d31c18aff27c006fbf8a60ebeba4356d1e154879f70eb5796fd0e506e941df2a",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE_PATCH"
+    }
+  ],
+  "evidence": "reports/override-evidence/override-evidence.json"
+}

@@ -7,10 +7,28 @@ import sys
 import zipfile
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from build_boundary import never_shipped  # noqa: E402
+
 VALIDATORS = [
     "quick_validate.py", "validate_release_gate.py", "validate_pipeline_ledger.py",
 ]
-EXCLUDE_PARTS = {"__pycache__", ".git", "dist"}
+
+def packaged_files(root: Path) -> list[str]:
+    return [path.relative_to(root).as_posix() for path in sorted(root.rglob("*"))
+            if path.is_file() and not never_shipped(path.relative_to(root))]
+
+def write_archive(root: Path, out_dir: Path, canonical_name: str) -> Path:
+    archive = out_dir / "skill.zip"
+    if out_dir.is_relative_to(root) and (out_dir == root or not never_shipped(out_dir.relative_to(root))):
+        raise SystemExit(f"FAIL: output directory {out_dir} lies inside the shipped skill tree; use <skill>/dist or a path outside it")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    if archive.exists(): archive.unlink()
+    files = packaged_files(root)  # listed before the archive exists, so it can never include itself
+    with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as handle:
+        for rel in files:
+            handle.write(root / rel, Path(canonical_name) / rel)
+    return archive
 
 def run_validator(root: Path, name: str) -> None:
     result = subprocess.run([sys.executable, str(root / "scripts" / name), str(root)], text=True, capture_output=True)
@@ -36,13 +54,7 @@ def main() -> int:
         raise SystemExit(result.returncode)
     skill_text = (root / "SKILL.md").read_text(encoding="utf-8")
     canonical_name = skill_text.split("\n---\n", 1)[0].split("name:", 1)[1].splitlines()[0].strip()
-    out_dir = Path(args.out_dir).resolve(); out_dir.mkdir(parents=True, exist_ok=True)
-    archive = out_dir / "skill.zip"
-    if archive.exists(): archive.unlink()
-    with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as handle:
-        for path in sorted(root.rglob("*")):
-            if path.is_file() and not (set(path.relative_to(root).parts) & EXCLUDE_PARTS):
-                handle.write(path, Path(canonical_name) / path.relative_to(root))
+    archive = write_archive(root, Path(args.out_dir).resolve(), canonical_name)
     with zipfile.ZipFile(archive) as handle:
         names = handle.namelist()
         roots = {name.split("/", 1)[0] for name in names if "/" in name}

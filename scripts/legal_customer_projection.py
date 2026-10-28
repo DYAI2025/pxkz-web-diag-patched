@@ -15,6 +15,35 @@ from typing import Any
 VALID_STATES = {"ASSESSED_DEFECT", "POSSIBLE_LEGAL_REVIEW", "CONFLICT"}
 MANDATORY = {"MANDATORY_CRITICAL", "MANDATORY_HIGH"}
 IDENTITY_METRICS = {"LEGAL-IMP-01", "LEGAL-IMP-02", "LEGAL-IMP-03"}
+# Core metrics whose customer label covers the legal surface. TRUST-01 is presence-only, so a validated
+# legal customer risk does not contradict its score, but it does contradict a customer-facing "Klar".
+LEGAL_SURFACE_CORE_METRICS = frozenset({"TRUST-01"})
+
+
+# Core metrics whose customer label speaks about who operates the site. While a provider-identity risk is
+# projected they must not read as clear (their scores are untouched).
+IDENTITY_SURFACE_CORE_METRICS = frozenset({"TRUST-04", "TRUST-07", "AI-01", "AI-06"})
+
+
+def contested_identity_surface(report: dict[str, Any]) -> frozenset[str]:
+    """Identity-related core metrics that cannot read as clear while a PROVIDER_IDENTITY risk is projected."""
+    findings = report.get("findings") if isinstance(report.get("findings"), list) else []
+    if any(isinstance(f, dict) and isinstance(f.get("customer_risk"), dict)
+           and f["customer_risk"].get("group") == "PROVIDER_IDENTITY" for f in findings):
+        return IDENTITY_SURFACE_CORE_METRICS
+    return frozenset()
+
+
+def contested_legal_surface(report: dict[str, Any]) -> frozenset[str]:
+    """Core metric ids whose customer status must not read as clear while a legal customer risk is projected.
+
+    Findings carry customer_risk only as the validated projection of a supplied sidecar
+    (build_audit_deliverables enforces LEGAL_SIDECAR_REQUIRED). Scores are untouched.
+    """
+    findings = report.get("findings") if isinstance(report.get("findings"), list) else []
+    if any(isinstance(f, dict) and isinstance(f.get("customer_risk"), dict) and f["customer_risk"] for f in findings):
+        return LEGAL_SURFACE_CORE_METRICS
+    return frozenset()
 
 
 def _active_results(sidecar: dict[str, Any]) -> list[dict[str, Any]]:
