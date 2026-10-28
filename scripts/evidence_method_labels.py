@@ -33,7 +33,13 @@ def evidence_method(metric: dict[str, Any], item: dict[str, Any] | None = None) 
         metric.get("source_or_method"), metric.get("threshold_source"), metric.get("does_not_prove"),
         ev.get("tool"), ev.get("method"), thr.get("source"), (item or {}).get("metric_label"),
     )]
-    if any(SYNTHETIC_RX.search(t) for t in texts):
+    value = metric.get("value")
+    structural_fixture = (
+        "FIXTURE" in str(metric.get("note") or "").upper()
+        or (isinstance(value, dict) and value.get("fixture") is True)
+        or str(ev.get("mode") or "").upper() in {"FIXTURE", "SYNTHETIC"}
+    )
+    if structural_fixture or any(SYNTHETIC_RX.search(t) for t in texts):
         return "SYNTHETIC"
     # Limitation texts ("Lab result is not real-user field performance.") name what the value is NOT.
     method_texts = [str(x or "") for x in (metric.get("source_or_method"), ev.get("tool"), ev.get("method"))]

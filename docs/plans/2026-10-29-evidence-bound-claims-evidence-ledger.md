@@ -38,3 +38,22 @@ Deviation: no sentence-capitalisation pass (would change unrelated outputs); sen
 | full suite | `$PY -B -m pytest tests -q` | 1 | 195 passed; 9 failed = 7 Task-5/6 targets + 2 known oracle drifts (synthetic-report plan, model); legacy lever_ids unchanged |
 
 Rule as implemented: a strength is admitted only from a positive finding whose every metric_ref is assessed, reads "Klar" under `customer_status` and is not contested by a legal/identity risk; AI-06-only claims get whole-site wording rewritten to "auf den geprüften Seiten", other whole-site wording is refused. Free-text `top_strengths` are recorded as `NO_FINDING_LINK`. Levers on the core-metric route whose every linked assessed metric reads "Klar" are not selectable. Critical and MANDATORY_CRITICAL levers go to roadmap "now". Sidecar `customer-claim-bindings.json` is a required bundle artifact, validated in the build and in `validate_deliverable_bundle.py`.
+
+## Task 5 — visuals, one status scale, synthetic block
+| check | command | rc | value |
+|---|---|---|---|
+| full suite | `$PY -B -m pytest tests -q` | 1 | 200 passed; 5 failed = 3 Case8 (Task 6) + 2 known oracle drifts |
+| visual architecture eval (scratch copy) | `$PY -B scripts/run_visual_architecture_evals.py .` | 0 | PASS |
+| template gallery eval | `… run_visual_template_gallery_evals.py .` | 0 | PASS |
+| customer semantic eval | `… run_customer_semantic_evals.py .` | 0 | PASS |
+| legal customer projection eval | `… run_legal_customer_projection_evals.py .` | 0 | PASS |
+| presentation quality eval | `… run_customer_presentation_quality_evals.py .` | 0 | PASS |
+| business-first eval | `… run_business_first_reporting_evals.py .` | 0 | PASS |
+| VC03 customer release eval | `… run_vc03_customer_release_evals.py .` | 0 | PASS |
+| chart template eval | `… run_chart_template_evals.py .` | 1 | ModuleNotFoundError reportlab (legacy renderer, not in requirements.txt; environmental) |
+
+Decisions measured during the task:
+- The active-core path (synthetic report + `full-48-core-execution.json`, bundle `mode: FIXTURE`) is fixture data too: materialized metrics carry `note: FIXTURE_ONLY_NOT_LIVE_EVIDENCE` and `value.fixture: true`. `evidence_method` treats those structural markers as SYNTHETIC. Result: no repository fixture can produce a customer-mode PDF; customer mode refuses with `CUSTOMER_RELEASE_BLOCKED: SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT` (checked per selected visual and per metric behind it). Proof mode keeps fixture outputs, labelled "Beispieldaten, keine Live-Messung".
+- `tests/test_positive_customer_e2e.py` and `tests/test_packaged_brand_fonts.py::OfflineStrictRenderTests` now build `--release-mode proof --require-exact-fonts` (same strict font contract); the positive E2E additionally asserts the customer-mode refusal.
+- Matrix values: V08 Vega tints by value on 0/0.5/1, V10 by label. Shared anchor `MATRIX_VALUE` (Klar 1.0, Verbesserung sinnvoll 0.5, Handlungsbedarf 0.0) gives the same colour for the same status in both renderers; V08 still omits unscored rows (no neutral colour on its scale).
+- `schemas/visualization-plan.schema.json` gains optional `evidence_method` (LAB/FIELD/SYNTHETIC); the schema is not in the protected baseline.

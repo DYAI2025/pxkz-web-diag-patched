@@ -439,7 +439,9 @@ class OfflineStrictRenderTests(unittest.TestCase):
         subprocess.run([sys.executable, "-B", str(ROOT / "scripts/compute_score.py"), str(ROOT / "evals/fixtures/synthetic-report.json"), str(scored)], check=True, capture_output=True, env=cls.env)
         cls.out = cls.tmp / "deliverables"
         cls.proc = subprocess.run(
-            [sys.executable, "-B", str(ROOT / "scripts/build_audit_deliverables.py"), str(scored), str(cls.out), "--release-mode", "customer", "--force-svg-fallback"],
+            # Fixture data is refused in customer mode (evidence-bound claims patch); the strict font contract is
+            # the same in proof mode with --require-exact-fonts, which is what these tests exercise.
+            [sys.executable, "-B", str(ROOT / "scripts/build_audit_deliverables.py"), str(scored), str(cls.out), "--release-mode", "proof", "--require-exact-fonts", "--force-svg-fallback"],
             capture_output=True, text=True, env=cls.env,
         )
 

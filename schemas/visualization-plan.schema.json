@@ -122,6 +122,14 @@
           },
           "not_rendered_reason": {
             "type": "string"
+          },
+          "evidence_method": {
+            "type": "string",
+            "enum": [
+              "LAB",
+              "FIELD",
+              "SYNTHETIC"
+            ]
           }
         }
       }

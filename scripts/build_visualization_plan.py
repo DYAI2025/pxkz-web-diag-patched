@@ -16,9 +16,14 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority  # noqa: E402
 from client_story import clientize, select_client_levers  # noqa: E402
+from evidence_method_labels import evidence_method, method_phrase, short_label  # noqa: E402
 from legal_customer_projection import contested_identity_surface, contested_legal_surface  # noqa: E402
 from strategic_relevance import eligible_findings  # noqa: E402
 from visualization_policy import apply_customer_visual_budget, CUSTOMER_MIN_VISUALS  # noqa: E402
+
+# Matrix cell value per customer status. V08's Vega template tints by value on the anchors 0 / 0.5 / 1 and
+# V10's by status label, so "Verbesserung sinnvoll" must sit on 0.5 to get the same colour in both.
+MATRIX_VALUE = {"CLEAR": 1.0, "IMPROVE": 0.5, "ACTION": 0.0, "UNASSESSED": STATUS_META["UNASSESSED"]["value"]}
 
 SEVERITY_WEIGHT = {"critical": 100, "high": 80, "medium": 60, "low": 40, "positive": 20}
 RATIO_RE = re.compile(r"(\d+)\s*(?:of|von|/)\s*(\d+)", re.I)
@@ -156,7 +161,15 @@ def main() -> int:
             bands = item.get("data", {}).get("bands", []) if isinstance(item.get("data"), dict) else []
             if not series:
                 continue
-            current = float(series[-1].get("value"))
+            metric_value = linked[0].get("value")
+            if len(linked) != 1 or not isinstance(metric_value, (int, float)) or isinstance(metric_value, bool):
+                excluded.append({"template_id": "V07_PERFORMANCE_THRESHOLD", "reason": "METRIC_VALUE_NOT_NUMERIC_OR_AMBIGUOUS"})
+                continue
+            current = float(metric_value)
+            if abs(float(series[-1].get("value")) - current) > 1e-9:
+                excluded.append({"template_id": "V07_PERFORMANCE_THRESHOLD", "reason": "SERIES_VALUE_IS_NOT_METRIC_VALUE"})
+                continue
+            method_kind = evidence_method(linked[0], item)
             good = next((float(x.get("boundary")) for x in bands if x.get("status") == "good"), None)
             warn = next((float(x.get("boundary")) for x in bands if x.get("status") == "warn"), None)
             if good is None or warn is None:
@@ -166,11 +179,11 @@ def main() -> int:
             finding = next((f for f in findings if str(f.get("id")) == finding_ref), None)
             customer_title = clientize(
                 (finding or {}).get("client_observation")
-                or "Der wichtigste sichtbare Inhalt lädt auf Mobilgeräten langsamer als empfohlen.",
+                or "Der wichtigste sichtbare Inhalt lädt in der mobilen Testmessung langsamer als empfohlen.",
                 120,
             )
-            customer_subtitle = "Mobile Ladezeit im Vergleich zum Zielwert"
-            customer_metric_label = "Mobile Ladezeit"
+            customer_subtitle = f"Mobile Ladezeit im Vergleich zum Zielwert · {method_phrase(method_kind)}"
+            customer_metric_label = f"Mobile Ladezeit ({short_label(method_kind)})"
             threshold_source = visual(
                 vid,
                 "V07_PERFORMANCE_THRESHOLD",
@@ -184,6 +197,7 @@ def main() -> int:
                 str(item.get("does_not_prove") or linked[0].get("does_not_prove") or "Keine Geschäftswirkung belegt."),
                 [{"label": customer_metric_label, "value": current, "good": good, "warn": warn}],
             )
+            threshold_source["evidence_method"] = method_kind
             break
         if threshold_source:
             visuals.append(threshold_source); vid += 1
@@ -211,24 +225,16 @@ def main() -> int:
                     continue
                 if m.get("measurement_class") == "not_assessed":
                     continue
-                if four_state:
-                    # A projected legal customer risk outranks the presence-only core status on the customer label.
-                    state = {"key": "ACTION", **STATUS_META["ACTION"]} if mid in contested else customer_status(m)
-                    if state["key"] == "CLEAR" and mid in capped:
-                        state = {"key": "IMPROVE", **STATUS_META["IMPROVE"]}
-                    rows.append({label_name: metric_label(defs, m), "status": state["label"], "symbol": state["symbol"], "tone": state["tone"], "value": state["value"]})
-                    refs.append(mid)
+                # One customer status scale for every matrix: the same score reads the same in V08 and V10.
+                # A projected legal customer risk outranks the presence-only core status on the customer label.
+                state = {"key": "ACTION", **STATUS_META["ACTION"]} if mid in contested else customer_status(m)
+                if state["key"] == "CLEAR" and mid in capped:
+                    state = {"key": "IMPROVE", **STATUS_META["IMPROVE"]}
+                if state["key"] == "UNASSESSED" and not four_state:
+                    # The value-tinted matrix has no neutral colour; unscored rows stay out as before.
                     continue
-                sc = m.get("score")
-                if not isinstance(sc, (int, float)) or isinstance(sc, bool):
-                    continue
-                value = max(0.0, min(1.0, float(sc) / 100.0))
-                if mid in capped:
-                    # 0.5 is the template's "teilweise" anchor; the tint is a scale over value, so a higher cap
-                    # would still be painted as clear.
-                    value = min(value, .5)
-                status = "klar" if value >= .75 else "teilweise" if value >= .5 else "offen"
-                rows.append({label_name: metric_label(defs, m), "status": status, "value": value})
+                rows.append({label_name: metric_label(defs, m), "metric_ref": mid, "status": state["label"],
+                             "symbol": state["symbol"], "tone": state["tone"], "value": MATRIX_VALUE[state["key"]]})
                 refs.append(mid)
             if len(rows) >= 3:
                 subtitle = "Wo Handlungsbedarf besteht und was bereits trägt" if four_state else "Wie klar dieser Bereich heute aufgestellt ist"
@@ -247,7 +253,7 @@ def main() -> int:
         serp_positions = [x for x in enrichment_metrics if x.get("id") == "SERP_CURRENT_POSITION" and x.get("status") in {"MEASURED", "OBSERVED"} and x.get("query") and isinstance(x.get("value"), (int, float))]
         if serp_positions:
             page_by_key = {(x.get("query"), x.get("device"), x.get("location")): x.get("value") for x in enrichment_metrics if x.get("id") == "SERP_CURRENT_PAGE" and x.get("status") in {"MEASURED", "OBSERVED"}}
-            rankings = [{"query": x.get("query"), "position": int(x.get("value")), "page": page_by_key.get((x.get("query"), x.get("device"), x.get("location"))), "device": x.get("device"), "location": x.get("location"), "observed_at": x.get("observed_at")} for x in serp_positions]
+            rankings = [{"query": x.get("query"), "position": int(x.get("value")), "page": page_by_key.get((x.get("query"), x.get("device"), x.get("location"))), "device": x.get("device"), "location": x.get("location"), "observed_at": x.get("observed_at"), "context_label": " · ".join(c for c in (customer_location(x.get("location")), customer_device(x.get("device")), customer_date(x.get("observed_at"))) if c)} for x in serp_positions]
             first = serp_positions[0]
             # Place, device and date name every plotted query, not only the first one.
             shared = lambda fmt, key: " und ".join(dict.fromkeys(fmt(x.get(key)) for x in serp_positions if fmt(x.get(key))))

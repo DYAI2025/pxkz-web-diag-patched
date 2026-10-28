@@ -4,8 +4,10 @@ Counterpart to the fail-closed Baumdienst and low-coverage cases (test_customer_
 active-core fixture path (synthetic report + full-48 core execution bundle) materializes every core
 metric from a declared evidence catalog, so each selected visual traces back to metric evidence. The
 fixture data is synthetic and says so in every evidence row (claim_boundary); this test proves the
-contract, not a real customer result. Without the declared PDF runtime the test is skipped and must
-be reported as not run.
+contract, not a real customer result. Because the data is fixture data, the full chain is built in
+proof mode with the strict exact-font contract, and the same input must be refused in customer mode
+(evidence-bound claims patch: example data is never presented as a live customer result). Without the
+declared PDF runtime the test is skipped and must be reported as not run.
 """
 from __future__ import annotations
 
@@ -45,8 +47,11 @@ class PositiveCustomerEndToEndTests(unittest.TestCase):
         steps.append(run(str(ROOT / "scripts/compute_score.py"), str(materialized), str(cls.scored_path)))
         cls.out = tmp / "deliverables"
         steps.append(run(str(ROOT / "scripts/build_audit_deliverables.py"), str(cls.scored_path), str(cls.out),
-                         "--release-mode", "customer", "--force-svg-fallback"))
+                         "--release-mode", "proof", "--require-exact-fonts", "--force-svg-fallback"))
         cls.steps = steps
+        cls.customer_attempt = run(str(ROOT / "scripts/build_audit_deliverables.py"), str(cls.scored_path), str(tmp / "customer"),
+                                   "--release-mode", "customer", "--force-svg-fallback")
+        cls.customer_dir = tmp / "customer"
         cls.network_log = tmp / "network.log"
 
     @classmethod
@@ -64,6 +69,11 @@ class PositiveCustomerEndToEndTests(unittest.TestCase):
         self.assertEqual(receipt["pdf_font_embedding"]["status"], "VERIFIED")
         self.assertEqual(self.load("deliverable-manifest.json")["status"], "BUILT_PENDING_QA")
         self.assertFalse(self.network_log.exists() and self.network_log.read_text(encoding="utf-8").strip())
+
+    def test_fixture_evidence_is_refused_in_customer_mode(self):
+        self.assertNotEqual(self.customer_attempt.returncode, 0)
+        self.assertIn("SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT", self.customer_attempt.stdout + self.customer_attempt.stderr)
+        self.assertFalse((self.customer_dir / "customer_presentation.pdf").exists())
 
     def test_at_least_four_admissible_visuals_and_none_forbidden(self):
         selected = [v for v in self.load("visualization-plan.json")["visuals"] if v.get("status") == "SELECTED"]

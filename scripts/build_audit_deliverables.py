@@ -13,6 +13,7 @@ import tempfile
 from pathlib import Path
 
 from check_brand_fonts import looks_like_font
+from evidence_method_labels import evidence_method
 
 
 def sha(path: Path) -> str:
@@ -132,8 +133,13 @@ def main() -> int:
         run([py, str(root / "scripts/validate_visualization_plan.py"), str(plan), str(canonical)])
         if args.release_mode == "customer":
             # Example/fixture data stays recognizable: it may appear in proof bundles, never in a customer release.
+            # Checked per plotted visual and per metric behind it, so a rubric matrix of fixture metrics is caught too.
+            source_metrics = {str(m.get("id")): m for m in json.loads(canonical.read_text(encoding="utf-8")).get("metrics", [])
+                              if isinstance(m, dict)}
             synthetic = [str(v.get("template_id")) for v in json.loads(plan.read_text(encoding="utf-8")).get("visuals", [])
-                         if isinstance(v, dict) and v.get("status") == "SELECTED" and v.get("evidence_method") == "SYNTHETIC"]
+                         if isinstance(v, dict) and v.get("status") == "SELECTED"
+                         and (v.get("evidence_method") == "SYNTHETIC"
+                              or any(evidence_method(source_metrics[r]) == "SYNTHETIC" for r in v.get("metric_refs", []) if r in source_metrics))]
             if synthetic:
                 raise ValueError("CUSTOMER_RELEASE_BLOCKED: SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT " + ",".join(synthetic))
         claim_bindings = out / "customer-claim-bindings.json"
