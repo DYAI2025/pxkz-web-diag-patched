@@ -1201,7 +1201,7 @@
     {
       "path": "scripts/validate_pdf_output.py",
       "baseline_sha256": "eba03d7b80fa721b35f122853489b58709911e8335c99d551492dbc0907cdb50",
-      "current_sha256": "a425a4d1acc04cb2731b50e686ea86f480fa27ca53e4d98a9d8b3de73811ec49",
+      "current_sha256": "ed2b70f65c9df29992f46fca49202b751fc024621b6b88c94649e7fb8fd8ad45",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1558,7 +1558,7 @@
     {
       "path": "tests/test_pdf_layout_gate.py",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "9f616f162678d3d8db85ef88713354ac2bb3017afccdaef27882f99d351ec4b8"
+      "current_sha256": "364a7708f24518ae7d29d2fda7b12eaabb1bd7bb950083aa58d02952c4f9cd14"
     },
     {
       "path": "tests/test_priority_pipeline.py",
@@ -1926,7 +1926,7 @@
         {
           "path": "scripts/validate_pdf_output.py",
           "previous_sha256": "8923002b7a211fafae62a64295390f2ec34c52b45608645c87d63083e1a07a35",
-          "current_sha256": "a425a4d1acc04cb2731b50e686ea86f480fa27ca53e4d98a9d8b3de73811ec49"
+          "current_sha256": "ed2b70f65c9df29992f46fca49202b751fc024621b6b88c94649e7fb8fd8ad45"
         },
         {
           "path": "scripts/validate_release_gate.py",
@@ -1971,7 +1971,7 @@
         {
           "path": "tests/test_pdf_layout_gate.py",
           "previous_sha256": null,
-          "current_sha256": "9f616f162678d3d8db85ef88713354ac2bb3017afccdaef27882f99d351ec4b8"
+          "current_sha256": "364a7708f24518ae7d29d2fda7b12eaabb1bd7bb950083aa58d02952c4f9cd14"
         },
         {
           "path": "tests/test_priority_pipeline.py",
