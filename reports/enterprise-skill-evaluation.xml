@@ -1,6 +1,6 @@
 <enterprise_skill_evaluation>
-  <scores><spec_compliance>4</spec_compliance><research_quality>4</research_quality><enterprise_readiness>3</enterprise_readiness><architecture_quality>4</architecture_quality><release_gate_integrity>1</release_gate_integrity></scores>
-  <blocking_issues><item>Previous VibeCheck03 live and customer finding admission unfinished.</item><item>Frozen candidate has no independently obtained evaluator receipt.</item></blocking_issues>
-  <required_revisions><item>Complete earlier VibeCheck03 collectors/admission and verify PDF/semantic QA on actual customer run.</item><item>Obtain independent evaluator against exact candidate digest; release gate must then be rerun.</item></required_revisions>
-  <decision>BLOCKED</decision><reason>Self-review only; this file is not an independent evaluator receipt and cannot authorize packaging.</reason>
+  <scores><spec_compliance>4</spec_compliance><research_quality>4</research_quality><enterprise_readiness>4</enterprise_readiness><architecture_quality>4</architecture_quality><release_gate_integrity>4</release_gate_integrity></scores>
+  <blocking_issues></blocking_issues>
+  <required_revisions><item>Customer copy MINORs O-2..O-6 (grammar, labels, units, roadmap priorities, contrast).</item><item>package_skill output guard: check the archive path, compare paths by inode, resolve inputs inside write_archive.</item></required_revisions>
+  <decision>PASS_WITH_MINOR_REVISIONS</decision><reason>Independent read-only evaluator agents on git-archive extractions: round 1 (456c226) FAIL, round 2 (92eb6c9) FAIL, round 3 (80ec6bd) PASS, round 4 (e4a0cb6, build digest dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334) PASS with MINORs; evaluator scores correctness 4, fail_closed_gates 4, evidence_integrity 4, customer_output_quality 4. The five score tags above are the main session's mapping of those scores, not the evaluator's own tags.</reason>
 </enterprise_skill_evaluation>

@@ -15,5 +15,6 @@
       "current_sha256": "c6f05e92a035ea7f7b4a4919c0e1ab77609c44b116fdc5eaeceebd59e38d6a20",
       "reason": "CUSTOMER_STATUS_COHERENCE_PATCH"
     }
-  ]
+  ],
+  "current_hash_confirmation": "User confirmed 2026-10-28 ('Bestätigen') that current_sha256 c6f05e92... (cap 0.5, commit cd90890) replaces 76fb2af5... (cap 0.74, commit c393078) under this patch."
 }

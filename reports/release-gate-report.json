@@ -3,10 +3,16 @@
   "draft_version": "vibecheck03-branch-priority-candidate-2026-10-28",
   "release_scope": "website-diagnosis-package",
   "release_gate": {
-    "status": "BLOCKED",
-    "allowed_to_package": false,
-    "blocking_reason": "Candidate frozen at artifact digest dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334; release requires the full gate sweep on this digest, an independent evaluator receipt on the same digest and explicit user release authorization. Historical gate statuses below are superseded only where candidate_gate_results records a result for this digest.",
-    "authorization_basis": "User instruction 2026-10-28: no merge, deployment or skill.zip while release gates are not passed; no automatic release."
+    "status": "PASS",
+    "allowed_to_package": true,
+    "authorization_basis": "Explicit user release authorization 2026-10-28 (answer 'Freigeben (paketieren)') for candidate e4a0cb6, build digest dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334: package skill.zip; no merge, no deployment.",
+    "evidence": "candidate_gate_results (sweep on git archive of e4a0cb6: all gates pass except the three authorization-dependent ones), independent evaluation round 4 PASS, customer QA PASS bound to PDF digests.",
+    "open_risks_accepted": [
+      "customer copy MINORs O-2..O-6",
+      "packager-guard edge cases (fail closed at next packaging run)",
+      "reports/ unsigned (process-bounded)",
+      "legal-golden QA inputs recorded by digest only"
+    ]
   },
   "craftsmanship_gate": {
     "status": "PASS",
@@ -240,7 +246,7 @@
     "added Bo Feng Lin Golden Regression with unresolved jurisdiction, absent operator identity/address, ILES=0 and mandatory customer visibility",
     "preserved anti-overclaim controls and zero Core score/coverage delta"
   ],
-  "final_decision": "BLOCKED_PENDING_RELEASE_AUTHORIZATION",
+  "final_decision": "PACKAGE_AUTHORIZED",
   "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
   "internal_report_gate": {
     "status": "PASS",
@@ -512,10 +518,10 @@
     "plan": "APPROVED",
     "architecture": "PASS",
     "implementation": "COMPLETE",
-    "validation": "SEE_candidate_gate_results",
-    "release_gate": "BLOCKED",
-    "packaging": "NOT_AUTHORIZED",
-    "release": "NOT_RELEASED",
+    "validation": "PASS",
+    "release_gate": "PASS",
+    "packaging": "AUTHORIZED",
+    "release": "PACKAGE_AUTHORIZED_NOT_MERGED_NOT_DEPLOYED",
     "historical_note": "Values before 2026-10-28 claimed release_gate PASS / packaging AUTHORIZED for an earlier draft; superseded."
   },
   "pixelkiez_score_impact": "NONE_DIRECT",
