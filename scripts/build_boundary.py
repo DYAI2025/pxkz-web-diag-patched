@@ -1,7 +1,9 @@
 """One file boundary for the build digest, the v3.2.1 preservation check and skill.zip.
 
 skill.zip ships every file that is not never_shipped(). The build digest covers exactly those files minus the
-top-level reports/ evidence, so nothing can ship without being digested.
+top-level reports/ evidence. reports/ therefore ships undigested: it is evidence that validators read and re-check
+(the release gate re-runs the baseline and v3.2.1 checks live), and the skill's customer pipeline reads nothing
+from it.
 """
 from __future__ import annotations
 

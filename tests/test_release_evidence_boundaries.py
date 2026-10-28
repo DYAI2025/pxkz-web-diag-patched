@@ -1,9 +1,12 @@
 """Release-evidence validators share the build digest boundary and still fail closed."""
 from __future__ import annotations
 
+import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -11,7 +14,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from validate_full_48_active import ALLOWED_PROTECTED_CHANGES, apply_protected_changes  # noqa: E402
 from validate_strategic_relevance_v321_preservation import controlled  # noqa: E402
 from pipeline_ledger import digest_tree  # noqa: E402
-from package_skill import packaged_files  # noqa: E402
+from package_skill import packaged_files, write_archive  # noqa: E402
 
 SCHEMA = "schemas/diagnosis-report.schema.json"
 A, B, C = "a" * 64, "b" * 64, "c" * 64
@@ -75,6 +78,48 @@ class PackageMatchesDigestTest(unittest.TestCase):
         self.assertIn("reports/r.json", packaged)
         for never in ("scripts/jsonschema.pyc", "scripts/b.pyo", ".pytest_cache/v/x", "scripts/.pytest_cache/y", "dist/skill.zip"):
             self.assertNotIn(never, packaged)
+
+
+class PackageOutputDirTest(unittest.TestCase):
+    def test_out_dir_inside_shipped_tree_is_refused(self) -> None:
+        # build/ would ship: the archive (and earlier archives) would land in the package.
+        root = V321BoundaryTest.tree(None, {"SKILL.md": "x", "build/old.txt": "o"})
+        with self.assertRaises(SystemExit):
+            write_archive(root, root / "build", "s")
+        with self.assertRaises(SystemExit):
+            write_archive(root, root / "scripts" / "dist", "s")
+        with self.assertRaises(SystemExit):
+            write_archive(root, root, "s")
+
+    def test_top_level_dist_and_outside_dirs_work(self) -> None:
+        root = V321BoundaryTest.tree(None, {"SKILL.md": "x"})
+        for out in (root / "dist", Path(tempfile.mkdtemp(prefix="pxk-out-"))):
+            with zipfile.ZipFile(write_archive(root, out, "s")) as handle:
+                self.assertEqual(handle.namelist(), ["s/SKILL.md"])
+
+
+class ReleaseGateLiveChecksTest(unittest.TestCase):
+    """A code change outside the protected set fails the release gate even when reports/ is untouched."""
+
+    def gate_output(self, mutate: bool) -> str:
+        tmp = Path(tempfile.mkdtemp(prefix="pxk-gate-")) / ROOT.name
+        shutil.copytree(ROOT, tmp, ignore=shutil.ignore_patterns(".git", "dist", "__pycache__", ".pytest_cache"))
+        if mutate:
+            helper = tmp / "scripts/legal_customer_projection.py"
+            helper.write_text(helper.read_text(encoding="utf-8") + "\n# reverted\n", encoding="utf-8")
+        proc = subprocess.run([sys.executable, "-B", str(tmp / "scripts/validate_release_gate.py"), str(tmp)],
+                              capture_output=True, text=True, timeout=300)
+        shutil.rmtree(tmp.parent)
+        return proc.stdout + proc.stderr
+
+    def test_live_v321_check_catches_unreported_code_change(self) -> None:
+        # Asserted on the mutated path, so a dirty working tree (untracked files) cannot decide the result.
+        flagged = "v3.2.1 preservation live check failed"
+        path = "scripts/legal_customer_projection.py"
+        control, mutated = self.gate_output(mutate=False), self.gate_output(mutate=True)
+        self.assertNotIn(path, control)
+        self.assertIn(flagged, mutated)
+        self.assertIn(path, mutated.split(flagged, 1)[1])
 
 
 class ProtectedChangeChainTest(unittest.TestCase):
