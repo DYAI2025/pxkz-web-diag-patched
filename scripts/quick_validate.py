@@ -20,7 +20,7 @@ BASE_REQUIRED = [
     "assets/fonts/schibsted-grotesk/SchibstedGrotesk-Bold.ttf", "assets/fonts/schibsted-grotesk/OFL.txt",
     "assets/fonts/schibsted-grotesk/AUTHORS.txt", "assets/fonts/ibm-plex-mono/IBMPlexMono-Regular.ttf",
     "assets/fonts/ibm-plex-mono/IBMPlexMono-Bold.ttf", "assets/fonts/ibm-plex-mono/LICENSE.txt",
-    "tests/test_packaged_brand_fonts.py",
+    "tests/test_packaged_brand_fonts.py", "tests/test_customer_claim_scope.py", "tests/test_capability_execution_note.py",
     "assets/brand/colors.css", "assets/brand/typography.css", "assets/brand/spacing.css",
     "assets/brand/document.css", "assets/brand/brand-devices.css", "assets/brand/report-structure.html",
     "references/audit-method.md", "references/measurement-contract.md", "references/scoring-policy.md",

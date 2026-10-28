@@ -5,7 +5,7 @@
   "release_gate": {
     "status": "BLOCKED",
     "allowed_to_package": false,
-    "reason": "New candidate PACKAGED_BRAND_FONT_PATCH (worktree on base 0d3a301) changes the semantic control bundle (render_diagnosis_pdf.py, SKILL.md) and the artifact digest. Release requires the full gate sweep on the committed candidate, re-bound visual and semantic customer QA from actual page inspection, an independent evaluation and a new explicit user release authorization.",
+    "reason": "New candidate (worktree on base 0d3a301): PACKAGED_BRAND_FONT_PATCH plus CLAIM_SCOPE_PATCH (PXK-BUG-001 SEM-001/002/003) and PXK-BUG-002 fix A change the semantic control bundle and the artifact digest. Release requires the full gate sweep on the committed candidate; re-rendered realistic, strategic-relevance and measurement-platform proofs without the internal-only V11 visual (the recorded proofs still select it); visual and semantic customer QA re-bound from actual page inspection; a customer QA fixture that still yields four admissible visuals (Baumdienst now fails closed); an independent evaluation and a new explicit user release authorization.",
     "superseded_authorization": {
       "status": "PASS",
       "allowed_to_package": true,

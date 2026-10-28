@@ -28,7 +28,7 @@ Every selected visual contains:
 
 ## Selection and budget
 
-A full customer presentation contains 4-7 visual pages. Core candidates are score when allowed, category bars, exactly four top levers and audit coverage. Additional visuals are selected only when their required direct data form exists.
+A full customer presentation contains 4-7 visual pages. Core candidates are category bars and exactly four top levers; the overall score appears on the cover, and audit coverage (V12) and the finding count (V11) stay internal-only. Additional visuals are selected only when their required direct data form exists.
 
 The planner records excluded candidates and reasons. Missing input never produces a fabricated chart.
 

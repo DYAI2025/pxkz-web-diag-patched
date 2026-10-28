@@ -115,7 +115,9 @@ Attempt, where available and permitted:
 - at least three relevant non-brand intent queries;
 - public performance data when available.
 
-If a capability is unavailable, record `not_assessed`; do not fabricate the result.
+If a capability is unavailable, record `not_assessed`; do not fabricate the result. A text-only fetch (HTTP or Markdown extraction without a browser DOM/viewport run) is not `public_page_render`; never declare that capability `available` for it.
+
+Customer wording stays inside the measured scope: sampled pages never become `auf allen Seiten`/`überall gleich`, and AI readiness never becomes AI answers, citations or rankings (`validate_customer_output_guardrails.py`).
 
 ## Audit categories
 
@@ -310,7 +312,7 @@ Architecture decisions:
 
 Only the approved template IDs may be used. Arbitrary model-written Vega or Mermaid specifications are prohibited. Every selected visual must remain traceable internally to metric/finding references, population, method and limitation data in the plan/receipts. Those internal fields are not rendered into customer SVG/PDF footers. Customer-visible chart copy describes the website/business result and must not expose test, method, coverage, evidence-grade, tool, validator, QA or runtime terminology.
 
-A full customer report selects four to seven strategically relevant visual pages. Category bars are allowed only when the customer has a full approved score. Exactly four top levers remain core. `V01_OVERALL_SCORE` is not repeated as a separate customer chart page because the full score already appears on cover/overview. `V12_AUDIT_COVERAGE` is internal-only and forbidden in the customer projection. Performance, AI, trust, query, benchmark, ranking, agent-readiness, impact/effort, repeat-audit and process visuals remain conditional on exact evidence and Strategic Relevance requirements.
+A full customer report selects four to seven strategically relevant visual pages. Category bars are allowed only when the customer has a full approved score. Exactly four top levers remain core. `V01_OVERALL_SCORE` is not repeated as a separate customer chart page because the full score already appears on cover/overview. `V12_AUDIT_COVERAGE` (coverage) and `V11_SEVERITY_DISTRIBUTION` (finding count) are internal-only and forbidden in the customer projection. With fewer than four admissible visuals the planner stops with `CUSTOMER_RELEASE_BLOCKED: CUSTOMER_MIN_VISUALS_NOT_MET`: deliver the internal report, no customer PDF, and never pad the story. Performance, AI, trust, query, benchmark, ranking, agent-readiness, impact/effort, repeat-audit and process visuals remain conditional on exact evidence and Strategic Relevance requirements.
 
 Benchmark and Google-ranking charts require documented query/entity, location, method/device and timestamp context. When those fields are missing, the plan records `BENCHMARK_CONTEXT_MISSING` or `SERP_QUERY_CONTEXT_MISSING`; no substitute value or industry average may be invented.
 

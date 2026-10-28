@@ -16,6 +16,7 @@
   "not_assessed_customer_penalty": false,
   "customer_visual_exclusions": [
     "V01_OVERALL_SCORE",
+    "V11_SEVERITY_DISTRIBUTION",
     "V12_AUDIT_COVERAGE"
   ],
   "internal_metric_inventory": 48

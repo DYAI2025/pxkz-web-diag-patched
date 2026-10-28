@@ -44,7 +44,7 @@ In v1.3, `elevenlabs_upload_status=EL_UPLOAD_READY` means only that structural/t
 
 ## Verbindliches PDF-/Diagramm-Template
 
-Der Standard-Kundenbericht ist eine kurze Marketing-Zusammenfassung: maximal vier Verbesserungshebel, zwei bis drei V01-V11-Diagramme, höchstens zwölf Seiten und kein technischer Metrik-/Quellenanhang. Die vollständige Evidenz bleibt in JSON/Sidecars erhalten. V12 bleibt Teil der internen Diagrammbibliothek, wird aber nicht im Standard-Kunden-PDF verwendet.
+Der Standard-Kundenbericht ist eine kurze Marketing-Zusammenfassung: genau vier Verbesserungshebel, vier bis sieben freigegebene Diagramme, höchstens zwölf Seiten und kein technischer Metrik-/Quellenanhang. Die vollständige Evidenz bleibt in JSON/Sidecars erhalten. V11 (Befundanzahl) und V12 (Abdeckung) bleiben Teil der internen Diagrammbibliothek, werden aber nicht im Kunden-PDF verwendet. Ergeben sich weniger als vier zulässige Diagramme, bleibt der Kundenbericht blockiert (`CUSTOMER_MIN_VISUALS_NOT_MET`).
 
 `assets/PXK_web_audit_template.pdf` (Stand 27.08.2026) ist im Skill gebündelt und bildet zusammen mit `templates/chart-library.v1.json` den verbindlichen V01-V12-Diagrammvertrag. Jeder ausführende Agent nutzt dieselben Datenformen, Evidenz-/Populationsangaben, Schwellenregeln und den sichtbaren `Beweist nicht`-Block. Die Chart-Payloads werden deterministisch validiert; danach wird der PDF-Output seitenweise als Bild geprüft. `create_pdf_visual_qa_manifest.py` startet bewusst fail-closed mit `PENDING`; nur ein Agent mit realer Bildsicht oder ein Mensch darf nach Prüfung auf `PASS` setzen. `validate_pdf_visual_qa.py` bindet den QA-Bericht an exakt den finalen PDF-Digest.
 

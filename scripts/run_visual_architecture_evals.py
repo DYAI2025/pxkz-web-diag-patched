@@ -73,7 +73,7 @@ def main(argv: list[str]) -> int:
             for required_id in {"V02_CATEGORY_BARS", "V03_TOP_LEVERS"}:
                 if required_id not in selected_ids:
                     raise AssertionError(f"required core visual absent: {required_id}")
-            for forbidden in {"V01_OVERALL_SCORE", "V12_AUDIT_COVERAGE"}:
+            for forbidden in {"V01_OVERALL_SCORE", "V11_SEVERITY_DISTRIBUTION", "V12_AUDIT_COVERAGE"}:
                 if forbidden in selected_ids:
                     raise AssertionError(f"internal/redundant customer visual selected: {forbidden}")
             for forbidden in {"V04_FINDABILITY_BENCHMARK", "V05_RANKING_POSITION"}:

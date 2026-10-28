@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "patch_id": "CLAIM_SCOPE_PATCH",
+  "authorization_basis": "Explicit user authorization on 2026-10-28 (answer 'Beides freigeben (Recommended)' to the question naming CLAIM_SCOPE_PATCH with client_story.py 30d766f3… -> fd43e018… and build_visualization_plan.py c6f05e92… -> 4a092af8…), after an independent read-only review (workflow wf_262ceb05-6b1, 3 agents, none failed) whose confirmed findings were fixed before the hashes were presented.",
+  "scope_note": "PXK-BUG-001: SEM-001 customer labels for sampled consistency metrics no longer universalize (Einheitliche Fakten / Einheitliche Firmendaten); SEM-002 V08 title and boundary frame answerability, not AI answers or citations; SEM-003 V11 finding-count visual is internal-only and fewer than four admissible visuals fail closed with CUSTOMER_RELEASE_BLOCKED: CUSTOMER_MIN_VISUALS_NOT_MET. No change to scoring, the 48 core metrics, registry, legal projection, batch v1.3 or QA status logic.",
+  "previous_sha256_semantics": "previous = effective approved digest after the existing override chains (equal to the files at base commit 0d3a301 plus the frozen font slice, which does not touch these two files).",
+  "evidence": [
+    "reports/override-evidence/claim-scope.client_story.approved-to-candidate.diff",
+    "reports/override-evidence/claim-scope.build_visualization_plan.approved-to-candidate.diff"
+  ],
+  "overrides": [
+    {
+      "path": "scripts/client_story.py",
+      "baseline_sha256": "3798a2babca162db109ce7750b324b7e1c993eb1ba48f1ab0afe4bebba230b2d",
+      "previous_sha256": "30d766f3e5a98441c2b3e0224a37ae308377f14cf8eff89f15ecaadba6d47939",
+      "current_sha256": "fd43e018fca5269c6178ab15ad4de23d0144fb2021338f827349e145e3f6abf7",
+      "reason": "CLAIM_SCOPE_PATCH"
+    },
+    {
+      "path": "scripts/build_visualization_plan.py",
+      "baseline_sha256": "baf5d85df264a812165d4ba0fb534619e0ab5b9f3a601b8011955164358be954",
+      "previous_sha256": "c6f05e92a035ea7f7b4a4919c0e1ab77609c44b116fdc5eaeceebd59e38d6a20",
+      "current_sha256": "4a092af8b83d080e2c9751cdd1758a54881e1acb42f26423da812b8abb468ff6",
+      "reason": "CLAIM_SCOPE_PATCH"
+    }
+  ],
+  "current_hash_confirmation": "Hashes shown to and approved by the user on 2026-10-28 are exactly current_sha256 above."
+}

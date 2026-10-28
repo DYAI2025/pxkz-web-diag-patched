@@ -89,9 +89,14 @@ def main() -> int:
         if trust is not None and (not legal_rows or any(r.get("status") != "Handlungsbedarf" for r in legal_rows)):
             raise RuntimeError("trust matrix shows the legal surface as clear while a legal customer risk is projected")
         checks.append("legal_surface_status_reconciled")
-        identity = {"Eindeutige Unternehmensdarstellung", "Fakten überall gleich", "Kontakttransparenz", "Firmendaten auf allen Seiten"}
-        clear_identity = [r for v in plan.get("visuals", []) if v.get("template_id") in {"V08_AI_ANSWERABILITY", "V10_TRUST_MATRIX"}
-                          for r in v.get("data", []) if (r.get("question") or r.get("signal")) in identity and str(r.get("status")).casefold() == "klar"]
+        identity = {"Eindeutige Unternehmensdarstellung", "Einheitliche Fakten", "Kontakttransparenz", "Einheitliche Firmendaten"}
+        identity_rows = [r for v in plan.get("visuals", []) if v.get("template_id") in {"V08_AI_ANSWERABILITY", "V10_TRUST_MATRIX"}
+                         for r in v.get("data", []) if (r.get("question") or r.get("signal")) in identity]
+        missing_identity = identity - {r.get("question") or r.get("signal") for r in identity_rows}
+        if missing_identity:
+            # Display labels drift with client wording; an unmatched label would drop its row from this check.
+            raise RuntimeError("identity labels absent from the customer matrices (update the label set): " + str(sorted(missing_identity)))
+        clear_identity = [r for r in identity_rows if str(r.get("status")).casefold() == "klar"]
         if clear_identity:
             raise RuntimeError("identity rows read as clear next to a provider-identity risk: " + str(clear_identity))
         checks.append("identity_surface_not_clear")

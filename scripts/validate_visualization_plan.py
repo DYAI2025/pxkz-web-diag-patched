@@ -6,12 +6,12 @@ from pathlib import Path
 from jsonschema import Draft202012Validator
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from visualization_policy import CUSTOMER_MAX_VISUALS, CUSTOMER_MIN_VISUALS  # noqa: E402
+from visualization_policy import CUSTOMER_FORBIDDEN_TEMPLATES, CUSTOMER_MAX_VISUALS, CUSTOMER_MIN_VISUALS  # noqa: E402
 
 APPROVED={
 "V01_OVERALL_SCORE","V02_CATEGORY_BARS","V03_TOP_LEVERS","V04_FINDABILITY_BENCHMARK","V05_RANKING_POSITION","V06_QUERY_COVERAGE","V07_PERFORMANCE_THRESHOLD","V08_AI_ANSWERABILITY","V09_AGENT_READINESS","V10_TRUST_MATRIX","V11_SEVERITY_DISTRIBUTION","V12_AUDIT_COVERAGE","V13_IMPACT_EFFORT","V14_REPEAT_AUDIT","D01_PROCESS_FLOW"}
 BENCH={"V04_FINDABILITY_BENCHMARK"}
-CUSTOMER_FORBIDDEN={"V01_OVERALL_SCORE","V12_AUDIT_COVERAGE"}
+CUSTOMER_FORBIDDEN=CUSTOMER_FORBIDDEN_TEMPLATES
 
 def fail(m): print('FAIL: '+m,file=sys.stderr); return 1
 
@@ -38,7 +38,7 @@ def main(argv):
         if len(selected)<CUSTOMER_MIN_VISUALS:return fail(f'customer plan requires at least {CUSTOMER_MIN_VISUALS} selected visuals')
         if len(selected)>CUSTOMER_MAX_VISUALS:return fail(f'customer plan may contain at most {CUSTOMER_MAX_VISUALS} selected visuals')
         if len({x['id'] for x in selected})!=len(selected):return fail('duplicate visual IDs')
-        if any(x.get("template_id") in CUSTOMER_FORBIDDEN for x in selected):return fail("customer plan selected internal or redundant score/coverage visual")
+        if any(x.get("template_id") in CUSTOMER_FORBIDDEN for x in selected):return fail("customer plan selected internal-only visual (score duplicate, finding count or coverage)")
         for v in plan['visuals']:
             if v['template_id'] not in APPROVED:return fail('unapproved template '+v['template_id'])
             for ref in v['metric_refs']:

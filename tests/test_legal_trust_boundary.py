@@ -131,11 +131,11 @@ class CitedMetricNotClearTest(unittest.TestCase):
 
     def test_identity_rows_not_clear_next_to_identity_risk(self) -> None:
         rows = self.rows(report_with(finding_from(golden_sidecar(), 99)))
-        for label in ("Eindeutige Unternehmensdarstellung", "Fakten überall gleich", "Kontakttransparenz"):
+        for label in ("Eindeutige Unternehmensdarstellung", "Einheitliche Fakten", "Kontakttransparenz"):
             self.assertNotIn(rows[label], {"Klar", "klar"}, label)
         # The matrix tint is a scale over value; a capped row must sit on the template's "teilweise" anchor,
         # not at a value that both renderers paint as clear.
-        for label in ("Eindeutige Unternehmensdarstellung", "Fakten überall gleich"):
+        for label in ("Eindeutige Unternehmensdarstellung", "Einheitliche Fakten"):
             self.assertLessEqual(self.values[label], 0.5, label)
         self.assertEqual(rows["Impressum und rechtliche Angaben"], "Handlungsbedarf")
 

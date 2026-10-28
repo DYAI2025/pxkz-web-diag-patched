@@ -221,7 +221,13 @@ def materialize_report(root: Path, base_report: dict[str, Any], bundle: dict[str
         if any(s in SCOREABLE for s in states): status="available"
         elif states and all(s=="NOT_APPLICABLE" for s in states): status="not_applicable"
         else: status="unavailable"
-        cap_rows.append({"id":c["id"],"status":status,"note":"derived from active core execution bundle"})
+        note="derived from active core execution bundle"
+        if c["id"]=="public_page_render":
+            # A text-only observation can admit these metrics; record whether a browser render actually ran.
+            families=sorted({r["source_family"] for mid,r in result_by.items()
+                             if reg_by[mid]["capability_id"]==c["id"] and r["execution_state"] in SCOREABLE})
+            note+=f"; browser_render_executed={'true' if 'BROWSER_RENDERING' in families else 'false'}; scoreable_source_families={','.join(families) or 'none'}"
+        cap_rows.append({"id":c["id"],"status":status,"note":note})
     coverage=out.setdefault("coverage",{})
     coverage["capabilities"]=cap_rows
     return out,admission

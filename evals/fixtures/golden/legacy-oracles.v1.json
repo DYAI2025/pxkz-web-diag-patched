@@ -5,8 +5,8 @@
   "cases": {
     "synthetic-report": {
       "scored": "22a535a85bc3464132ffe42a3141c651b993d683cd50b45eaa94ed8e473e1931",
-      "plan": "b3e6fc96e062d9d5cd534fef4822a26f7137f2aff98dc3f2fe609db541be672c",
-      "model": "5908337a6ebbebe9feceb1409a80357f4aae3a9f369711806a4a0c46a6421a32",
+      "plan": "894ea740c6a0d786cf1ff43f7a2f748cba3d3aa39a1d224105d3e99957025666",
+      "model": "a881d84fcfe01ffad3b96f44464cf5e43a2a3311c4e4554f89d714502d7f17b9",
       "batch_csv": "a6dbcf82116fd4e0ba480f377b1592bfc5e974ee9f7ab25393931b11f6184843",
       "internal": "ad959b518725d1f882470dd2fa435d089ffe52ea600ab8588d3fc68dae5928bf",
       "lever_ids": [
@@ -18,16 +18,11 @@
     },
     "low-coverage-marketing-report": {
       "scored": "615b5cd3b12599044e0e9baeac731f6055509522247236e73576a628da44389d",
-      "plan": "ead9b6b549b13887a9db770c36b22a9fa006033156463cc2b235ec1e9f396afa",
-      "model": "3e5d9f3968952f4d6245e855ac0def01e3c9186bbfe7dc5167d5cbb28ea34987",
+      "plan": "FAILS_CLOSED",
+      "model": "FAILS_CLOSED",
       "batch_csv": "108f39d18dda66df4bf23f5cf93f2ab3ab6f8dadebae6190963bd11224169a10",
       "internal": "c81037b6309aaa9454ef39828bde387c4a6f1a61c0c460d3e0fd19e863427645",
-      "lever_ids": [
-        "F-901",
-        "F-902",
-        "F-904",
-        "F-903"
-      ]
+      "lever_ids": null
     },
     "truth-discipline-inferred-risk": {
       "scored": "b42714709062f0cc6461c0548955e0f23bcc66b2f92ce9fbe91bb4a43713ccc6",
@@ -39,16 +34,11 @@
     },
     "baumdienst-renner-reflection-regression": {
       "scored": "8af6f625c2d980f59166b36ea994701a9471f87553fc5fbbb51d146d01abaada",
-      "plan": "c0d97a5887dc1fa9852d49629329aad03aca9a5d78780b304d4ca0d18d8c970a",
-      "model": "5712dad4d8ea5410c2b4b4792fcad7393d1eb2436bcf7f9b5d63b958a55bcd4c",
+      "plan": "FAILS_CLOSED",
+      "model": "FAILS_CLOSED",
       "batch_csv": "74775f62576b7e99a8dad2c4e2389b0d0ade2eda523dbfb24e5a60707acc18a6",
       "internal": "41ef24868edf1b93b9252a6a56b5f3f6feb0b392bacf32eecc806f5150a8f49e",
-      "lever_ids": [
-        "F-001",
-        "F-003",
-        "F-004",
-        "F-002"
-      ]
+      "lever_ids": null
     }
   },
   "amendments": [
@@ -106,6 +96,77 @@
         "baumdienst-renner-reflection-regression": "plan field /brand_token_sha256 only (051a155d… -> 40ab7151…); no visual, status, lever or text change"
       },
       "unchanged": "All scored, model, batch_csv and internal hashes and all lever_ids; truth-discipline-inferred-risk entirely."
+    },
+    {
+      "date": "2026-10-28",
+      "patch_id": "CLAIM_SCOPE_PATCH",
+      "authorization": "Explicit user approval 2026-10-28 ('Beides freigeben (Recommended)') of the legacy-oracle amendment for SEM-001/002/003, after the user decision 'V11 raus, Block bei <4 (Recommended)'.",
+      "changes": [
+        {
+          "fixture": "synthetic-report",
+          "output": "plan",
+          "previous_sha256": "b3e6fc96e062d9d5cd534fef4822a26f7137f2aff98dc3f2fe609db541be672c",
+          "current_sha256": "894ea740c6a0d786cf1ff43f7a2f748cba3d3aa39a1d224105d3e99957025666"
+        },
+        {
+          "fixture": "synthetic-report",
+          "output": "model",
+          "previous_sha256": "5908337a6ebbebe9feceb1409a80357f4aae3a9f369711806a4a0c46a6421a32",
+          "current_sha256": "a881d84fcfe01ffad3b96f44464cf5e43a2a3311c4e4554f89d714502d7f17b9"
+        },
+        {
+          "fixture": "low-coverage-marketing-report",
+          "output": "plan",
+          "previous_sha256": "ead9b6b549b13887a9db770c36b22a9fa006033156463cc2b235ec1e9f396afa",
+          "current_sha256": "FAILS_CLOSED"
+        },
+        {
+          "fixture": "low-coverage-marketing-report",
+          "output": "model",
+          "previous_sha256": "3e5d9f3968952f4d6245e855ac0def01e3c9186bbfe7dc5167d5cbb28ea34987",
+          "current_sha256": "FAILS_CLOSED"
+        },
+        {
+          "fixture": "baumdienst-renner-reflection-regression",
+          "output": "plan",
+          "previous_sha256": "c0d97a5887dc1fa9852d49629329aad03aca9a5d78780b304d4ca0d18d8c970a",
+          "current_sha256": "FAILS_CLOSED"
+        },
+        {
+          "fixture": "baumdienst-renner-reflection-regression",
+          "output": "model",
+          "previous_sha256": "5712dad4d8ea5410c2b4b4792fcad7393d1eb2436bcf7f9b5d63b958a55bcd4c",
+          "current_sha256": "FAILS_CLOSED"
+        },
+        {
+          "fixture": "low-coverage-marketing-report",
+          "output": "lever_ids",
+          "previous": [
+            "F-901",
+            "F-902",
+            "F-904",
+            "F-903"
+          ],
+          "current": null
+        },
+        {
+          "fixture": "baumdienst-renner-reflection-regression",
+          "output": "lever_ids",
+          "previous": [
+            "F-001",
+            "F-003",
+            "F-004",
+            "F-002"
+          ],
+          "current": null
+        }
+      ],
+      "status_deltas": {
+        "synthetic-report": "plan: V11_SEVERITY_DISTRIBUTION removed from visuals and recorded as excluded (INTERNAL_ONLY_FINDING_COUNT_WITHOUT_STRATEGIC_RELEVANCE), visual IDs renumbered, V08 title 'Wie eindeutig die Website Fragen beantwortet' and AI-answer boundary, row labels 'Einheitliche Fakten' / 'Einheitliche Firmendaten'; model: client_story.real_chart_count 6 -> 5 only",
+        "low-coverage-marketing-report": "plan and model FAILS_CLOSED (CUSTOMER_MIN_VISUALS_NOT_MET, 3 admissible visuals); lever_ids not checkable",
+        "baumdienst-renner-reflection-regression": "plan and model FAILS_CLOSED (CUSTOMER_MIN_VISUALS_NOT_MET, 3 admissible visuals); lever_ids not checkable"
+      },
+      "unchanged": "All scored, batch_csv and internal hashes; synthetic-report lever_ids; truth-discipline-inferred-risk entirely."
     }
   ]
 }

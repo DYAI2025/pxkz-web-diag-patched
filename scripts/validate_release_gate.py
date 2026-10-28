@@ -87,6 +87,10 @@ def validate_reports(root: Path, report: dict, paired: dict, semantic: dict) -> 
 PACKAGE_FONT_POLICY = "PACKAGE_BUNDLED_MANIFEST_PINNED"
 
 
+# Mirrors visualization_policy.CUSTOMER_FORBIDDEN_TEMPLATES for recorded proof evidence.
+CUSTOMER_FORBIDDEN_PROOF_TEMPLATES = frozenset({"V01_OVERALL_SCORE", "V11_SEVERITY_DISTRIBUTION", "V12_AUDIT_COVERAGE"})
+
+
 def validate_font_gate(root: Path, report: dict, fonts: dict) -> list[str]:
     """Font policy and strict-font evidence; re-derives the package font check live."""
     errors: list[str] = []
@@ -259,9 +263,9 @@ def main(argv: list[str]) -> int:
     if realistic.get("visual_qa") != "PASS" or realistic.get("semantic_qa") != "PASS": errors.append("realistic rendered QA did not pass")
     if realistic.get("internal_metric_count") != 48: errors.append("realistic internal report is not complete")
     if realistic.get("customer_release_ready") is not False and not exact: errors.append("realistic proof incorrectly claims exact-font customer release")
-    selected_templates = set(realistic.get("selected_template_ids") or [])
-    if selected_templates & {"V01_OVERALL_SCORE", "V12_AUDIT_COVERAGE"}:
-        errors.append("customer proof selected forbidden score/coverage visual")
+    for label, proof in (("realistic", realistic), ("strategic", strategic_proof), ("measurement platform", platform_proof)):
+        if set(proof.get("selected_template_ids") or []) & CUSTOMER_FORBIDDEN_PROOF_TEMPLATES:
+            errors.append(f"{label} customer proof selected forbidden score/finding-count/coverage visual")
 
 
     if gateway.get("status") != "PASS" or gateway.get("core_metric_count") != 48:
@@ -278,7 +282,8 @@ def main(argv: list[str]) -> int:
         errors.append("third-party no-copy gate failed")
     if platform_proof.get("status") != "PASS":
         errors.append("measurement platform proof status failed")
-    if platform_proof.get("renderer") != "WEASYPRINT" or platform_proof.get("page_count") != 12 or platform_proof.get("selected_visual_count") != 7:
+    # Enriched synthetic fixture: six admissible visuals since the finding-count visual is internal-only (SEM-003).
+    if platform_proof.get("renderer") != "WEASYPRINT" or platform_proof.get("page_count") != 11 or platform_proof.get("selected_visual_count") != 6:
         errors.append("measurement platform rendered proof incomplete")
     if platform_proof.get("pdf_output") != "PASS" or platform_proof.get("pdf_brand") != "PASS" or platform_proof.get("customer_language") != "PASS":
         errors.append("measurement platform PDF proof validators failed")

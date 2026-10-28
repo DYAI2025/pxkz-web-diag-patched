@@ -7,7 +7,6 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
-from pypdf import PdfReader
 
 
 def run(cmd: list[str]) -> None:
@@ -39,33 +38,16 @@ def main(argv: list[str]) -> int:
             if score.get("coverage_percent") != 56 or score.get("score") != 71 or score.get("display_status") != "PARTIAL_SCORE" or score.get("label") != "Pixelkiez Teilscore":
                 raise RuntimeError("Baumdienst regression must expose a clearly labelled 56% partial score, not a full score")
 
-            run([sys.executable, str(root / "scripts/build_audit_deliverables.py"), str(scored), str(out), "--force-svg-fallback"])
-            model = json.loads((out / "client-report-model.json").read_text(encoding="utf-8"))
-            story = model["client_story"]
-            if not 4 <= story.get("real_chart_count", 0) <= 7:
-                raise RuntimeError("client-model decision visual count must stay within the approved 4-7 range")
-            if story.get("visualization_plan_is_canonical") is not True:
-                raise RuntimeError("client model is not bound to the canonical external visualization plan")
-            plan = json.loads((out / "visualization-plan.json").read_text(encoding="utf-8"))
-            selected = [v for v in plan.get("visuals", []) if v.get("status") == "SELECTED"]
-            direct_count = sum(v.get("evidence_class") == "DIRECT" for v in selected)
-            derived_count = sum(str(v.get("evidence_class", "")).startswith("DERIVED") for v in selected)
-            if direct_count < 2:
-                raise RuntimeError("expected at least two direct-evidence visuals in the canonical plan")
-            if derived_count > 3:
-                raise RuntimeError("derived overview visuals overused")
-            if len(selected) < 4:
-                raise RuntimeError("Baumdienst presentation must contain at least four approved visuals")
-            if any(v.get("template_id") in {"V04_FINDABILITY_BENCHMARK", "V05_RANKING_POSITION"} for v in selected):
-                raise RuntimeError("unsourced benchmark/ranking visual selected")
-            receipt = json.loads((out / "presentation-render-receipt.json").read_text(encoding="utf-8"))
-            if receipt.get("renderer") != "WEASYPRINT" or receipt.get("embedded_visual_count", 0) < 4:
-                raise RuntimeError("Baumdienst PDF is not chart-led WeasyPrint output")
-            text = "\n".join((p.extract_text() or "") for p in PdfReader(str(out / "customer_presentation.pdf")).pages)
-            for bad in ["DERIVED", "NONE_OFFICIAL", "CATEGORY:", "…", "LCP", "CTA", "Canonical"]:
-                if bad.casefold() in text.casefold():
-                    raise RuntimeError("customer PDF leaked " + bad)
-            analysis = json.loads((out / "analysis_report.json").read_text(encoding="utf-8"))
+            # V11 (finding count) is internal-only, which leaves three admissible customer visuals: the customer
+            # presentation stays blocked until a real fourth visual exists (SEM-003). The build is atomic.
+            blocked = subprocess.run([sys.executable, str(root / "scripts/build_audit_deliverables.py"), str(scored), str(out), "--force-svg-fallback"],
+                                     text=True, capture_output=True)
+            if blocked.returncode == 0 or "CUSTOMER_MIN_VISUALS_NOT_MET" not in (blocked.stdout + blocked.stderr):
+                raise RuntimeError("Baumdienst customer bundle must fail closed below four admissible visuals")
+            if (out / "customer_presentation.pdf").exists() or (out / "visualization-plan.json").exists():
+                raise RuntimeError("blocked Baumdienst build left customer artifacts behind")
+            run([sys.executable, str(root / "scripts/build_internal_analysis_report.py"), str(scored), str(t / "analysis_report.json")])
+            analysis = json.loads((t / "analysis_report.json").read_text(encoding="utf-8"))
             if len(analysis.get("metrics", [])) != len(json.loads(scored.read_text(encoding="utf-8")).get("metrics", [])):
                 raise RuntimeError("Baumdienst internal report lost metrics")
 
@@ -79,7 +61,7 @@ def main(argv: list[str]) -> int:
             run([sys.executable, str(root / "scripts/build_elevenlabs_batch_csv.py"), str(scored), str(csv_path), "--validation-out", str(val)])
             if len(argv) == 3:
                 run([sys.executable, str(root / "scripts/validate_cross_skill_batch_contract.py"), str(Path(argv[2]).resolve())])
-        print("PASS: reflection regression -> labelled partial score, >=4 visuals, readable brand PDF, full internal report, voice handoff")
+        print("PASS: reflection regression -> labelled partial score, customer bundle fails closed below four admissible visuals, full internal report, voice handoff")
         return 0
     except Exception as exc:
         print("FAIL: " + str(exc), file=sys.stderr)

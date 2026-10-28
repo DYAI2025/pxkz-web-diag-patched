@@ -1,0 +1,60 @@
+--- a/scripts/build_visualization_plan.py
++++ b/scripts/build_visualization_plan.py
+@@ -7,7 +7,6 @@
+ import json
+ import re
+ import sys
+-from collections import Counter
+ from datetime import datetime
+ 
+ from customer_status import STATUS_META, customer_status
+@@ -191,12 +190,8 @@
+         else:
+             excluded.append({"template_id": "V07_PERFORMANCE_THRESHOLD", "reason": "NO_DIRECT_VALUE_WITH_SUPPORTED_THRESHOLD"})
+ 
+-        sev = Counter(str(f.get("severity")) for f in findings)
+-        severity_de = {"critical": "kritisch", "high": "hoch", "medium": "mittel", "low": "niedrig"}
+-        sev_rows = [{"group": "Befunde", "severity": severity_de[key], "count": sev.get(key, 0)} for key in ("critical", "high", "medium", "low") if sev.get(key, 0)]
+-        if sev_rows:
+-            all_refs = list(dict.fromkeys(str(x) for f in findings for x in f.get("metric_refs", [])))
+-            visuals.append(visual(vid, "V11_SEVERITY_DISTRIBUTION", "Befunde nach Dringlichkeit", "Verteilung der priorisierbaren Befunde", all_refs, [str(f.get("id")) for f in findings], "CLASSIFIED_FINDINGS", f"{len(findings)} Verbesserungsbefunde", "Finding severity inventory", "Die Anzahl der Befunde misst weder Aufwand noch wirtschaftliche Wirkung.", sev_rows)); vid += 1
++        # A finding count carries no strategic relevance for the customer; the severity inventory stays internal.
++        excluded.append({"template_id": "V11_SEVERITY_DISTRIBUTION", "reason": "INTERNAL_ONLY_FINDING_COUNT_WITHOUT_STRATEGIC_RELEVANCE"})
+ 
+         excluded.append({"template_id": "V12_AUDIT_COVERAGE", "reason": "INTERNAL_ONLY_NOT_CUSTOMER_VISIBLE"})
+ 
+@@ -205,7 +200,8 @@
+         # provider-identity risk) must not read as clear on the same PDF.
+         capped = {str(x) for f in findings for x in f.get("metric_refs", [])} | contested_identity_surface(report)
+ 
+-        def category_matrix(category: str, template: str, title: str, label_name: str, *, four_state: bool = False) -> None:
++        def category_matrix(category: str, template: str, title: str, label_name: str, *, four_state: bool = False,
++                            limitation_default: str = "Die Matrix ist kein Marktbenchmark und keine Erfolgsprognose.") -> None:
+             nonlocal vid
+             rows = []
+             refs = []
+@@ -236,11 +232,13 @@
+                 refs.append(mid)
+             if len(rows) >= 3:
+                 subtitle = "Wo Handlungsbedarf besteht und was bereits trägt" if four_state else "Wie klar dieser Bereich heute aufgestellt ist"
+-                limitation = "Handlungsbedarf ist ein technischer/inhaltlicher Befund und keine juristische Feststellung." if four_state else "Die Matrix ist kein Marktbenchmark und keine Erfolgsprognose."
++                limitation = "Handlungsbedarf ist ein technischer/inhaltlicher Befund und keine juristische Feststellung." if four_state else limitation_default
+                 visuals.append(visual(vid, template, title, subtitle, refs, [], evidence_class([metric_by_id[x] for x in refs]), f"{len(rows)} Aspekte in diesem Bereich", "Pixelkiez four-state customer status projection" if four_state else "Pixelkiez metric-status projection", limitation, rows[:8])); vid += 1
+             else:
+                 excluded.append({"template_id": template, "reason": "TOO_FEW_ELIGIBLE_CATEGORY_METRICS"})
+-        category_matrix("ai_readiness", "V08_AI_ANSWERABILITY", "Wie klar die Website für KI-Systeme ist", "question")
++        # Content inspection measures extractability and answerability only, never AI answers or citations.
++        category_matrix("ai_readiness", "V08_AI_ANSWERABILITY", "Wie eindeutig die Website Fragen beantwortet", "question",
++                        limitation_default="Maschinenlesbare Antworten belegen keine Nennung, Zitierung oder Platzierung in KI-Antworten.")
+         category_matrix("trust_privacy_content", "V10_TRUST_MATRIX", "Vertrauen und Konsistenz", "signal", four_state=True)
+ 
+         ranking_added = False
+@@ -292,7 +290,7 @@
+                 "reason": "CUSTOMER_PAGE_BUDGET_MAX_7",
+             })
+         if len(visuals) < CUSTOMER_MIN_VISUALS:
+-            raise ValueError(f"customer visualization plan requires at least {CUSTOMER_MIN_VISUALS} selected visuals")
++            raise ValueError(f"CUSTOMER_RELEASE_BLOCKED: CUSTOMER_MIN_VISUALS_NOT_MET: customer visualization plan requires at least {CUSTOMER_MIN_VISUALS} admissible visuals, got {len(visuals)}")
+ 
+         payload = {
+             "schema_version": "1.0",

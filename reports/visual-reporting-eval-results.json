@@ -7,14 +7,13 @@
     "customer_presentation.pdf"
   ],
   "metric_count": 48,
-  "selected_visual_count": 6,
+  "selected_visual_count": 5,
   "selected_template_ids": [
     "V02_CATEGORY_BARS",
     "V03_TOP_LEVERS",
     "V07_PERFORMANCE_THRESHOLD",
     "V08_AI_ANSWERABILITY",
-    "V10_TRUST_MATRIX",
-    "V11_SEVERITY_DISTRIBUTION"
+    "V10_TRUST_MATRIX"
   ],
   "top_lever_count": 4,
   "renderer": "WEASYPRINT",
