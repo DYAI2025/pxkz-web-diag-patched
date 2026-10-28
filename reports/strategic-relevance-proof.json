@@ -38,16 +38,18 @@
   "partial_score_customer_policy": "INTERNAL_ONLY",
   "audit_coverage_customer_policy": "FORBIDDEN",
   "not_assessed_customer_penalty": false,
-  "pdf_sha256": "87b96f3ef5a59c74089e23da7ec312452dd3604ed3bbf0b93e8df88499e54bb6",
-  "analysis_json_sha256": "b040d928abb3ca9655d7142b28070791ad7bb22a7155c45e4d320528f781e6c1",
-  "analysis_markdown_sha256": "969793d6b695d87a5f9e0113f47653cd3d1708c70a4761ebe291f2e679684adf",
-  "visualization_plan_sha256": "0c496b2ca9ccd484d2cf95b885097d5bca05403dabbbe0db6b6a0d73e66202f8",
+  "pdf_sha256": "23c433f023dca62442052998f931361baff887ec8f0c1d490e306d70bb8038f2",
+  "analysis_json_sha256": "8d3b92f71fc8b852b5b106ecbf789dde2e209f73e4fcba3097f070da6632edda",
+  "analysis_markdown_sha256": "7b99dbb74fcb37e12d55f159c61b28a44ce9addb38c9567c762a0d6c44a44c3d",
+  "visualization_plan_sha256": "8f80f5eeaa0f4a321efbde6a39c9a6aaf9765b26e6cc3f7158f3274587a51973",
   "client_model_sha256": "978ba38edf172d851eb3b1ba37d98e7e195f26a92f0ae8208d5ce3d3c160eece",
   "inspection_method": "agent_vision",
   "inspection_notes": [
     "All 11 pages inspected individually from the rendered page images.",
     "Customer-visible copy contains no audit-coverage, QA, runtime, evidence-grade or test-process wording.",
     "Measurement enrichment appears as V05 ranking positions and three closing highlight cards (position, active users, p75 load time).",
+    "V05 subtitle reads 'Mobil und Desktop' since the two plotted queries were measured on different devices (CUSTOMER_LABEL_FIDELITY_PATCH; before: 'Mobil' from the first row only).",
+    "O-14: closing card 'Ladezeit p75 3,2 s' (field LCP) and the ISO date range keep technical notation.",
     "O-7 (proof fixture): the enrichment fixture's queries name a different trade (Blitzschutz) than the customer (Bau), and its ranking date 28.10.2026 differs from the audit date 27.08.2026; real runs need per-output QA for query/business fit.",
     "V11 is no longer selected (internal-only, SEM-003)."
   ],
@@ -88,7 +90,7 @@
     },
     {
       "page": 8,
-      "sha256": "25c582577ce09f52345ff4871d6a745126c38cab3e107a4816fd11a456825788"
+      "sha256": "95768e5b4c9550bbedc64f23bb0807e0571cb7d1bc7a625eced20b004188a9c1"
     },
     {
       "page": 9,
@@ -103,7 +105,7 @@
       "sha256": "366958ffb10be21b508d38a3f56f4b4f40fc141d5ff8e1c7648451d6893de29b"
     }
   ],
-  "candidate_commit": "badaf71",
-  "candidate_artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
-  "render_basis": "Built offline from git archive of badaf71 (tree digest f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226) in a network-denied sandbox with no system fonts and no PIXELKIEZ_FONT_DIR; packaged brand fonts resolved EXACT and embedding VERIFIED. All 9 PDFs are byte-identical to the inspected probe renders (sha256 9/9, page rasters 91/91)."
+  "candidate_commit": "a66710f",
+  "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+  "render_basis": "Built offline from git archive of a66710f (tree digest bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d) in a network-denied sandbox with no system fonts and no PIXELKIEZ_FONT_DIR; packaged brand fonts resolved EXACT and embedding VERIFIED. Versus candidate badaf71, six page rasters changed (legal-golden/proof-realistic p2, proof-strategic p8, case-c p8-p10) and were re-inspected; every other raster is byte-identical to an inspected badaf71 raster."
 }

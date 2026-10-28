@@ -1,14 +1,14 @@
 {
   "status": "PASS",
   "policy_version": "1.0",
-  "semantic_bundle_sha256": "560dfdb223060cb8cfb2dd3588425cf375c31954b9eab67c3477c7c44d0551c8",
+  "semantic_bundle_sha256": "9fd973c94e7493e804ccd923b60abfc42a66a8ef3e1c8bbd9dc9bb78939abfeb",
   "fixture": "evals/fixtures/synthetic-report.json (legacy-baseline, customer mode)",
   "fixture_sha256": "5ab6b2268783bceccc58eb5a2aed542cb49c8f9ac0454016d12c34e1421db07a",
   "customer": "Meyer & Sohn Bau GmbH",
   "page_count": 10,
   "decision_visual_count": 5,
   "inspection_method": "agent_vision",
-  "inspected_by": "Claude Opus 5.5 (main session, 2026-10-28; same session that authored the release-completion patch, so not independent)",
+  "inspected_by": "Claude Opus 5.5 (main session, 2026-10-28; same session that authored the release-completion and label-fidelity patches, so not independent; cross-checked by an independent read-only reviewer on candidate fa791c3)",
   "semantic_qa_validation": "PASS",
   "visual_qa_validation": "PASS",
   "pdf_sha256": "de27843d7798299cb891ee937a7deb3a000cb2860006fc755a21f34e439df597",
@@ -33,8 +33,8 @@
     "privacy_claim_scope_correct": "PASS",
     "no_synthetic_metric_visuals": "PASS"
   },
-  "page_evidence": "reports/customer-pdf-qa-release-badaf71/legacy-baseline.semantic-qa.json",
-  "all_cases": "reports/customer-pdf-qa-release-badaf71.json",
+  "page_evidence": "reports/customer-pdf-qa-release-a66710f/legacy-baseline.semantic-qa.json",
+  "all_cases": "reports/customer-pdf-qa-release-a66710f.json",
   "case_verdicts": {
     "legacy-baseline": {
       "visual": "PASS",
@@ -84,7 +84,11 @@
     "O-2",
     "O-4",
     "O-7",
-    "O-8"
+    "O-8",
+    "O-11",
+    "O-12",
+    "O-13",
+    "O-14"
   ],
   "recorded_fail": "active-positive semantic QA FAIL (narrative vs. measured trust/legal values); not deliverable; open risk by user decision 2026-10-28",
   "does_not_prove": [
@@ -93,6 +97,6 @@
     "ElevenLabs provider upload, live telephony, or legal outbound approval"
   ],
   "superseded": "Baumdienst Renner evidence (9 pages, pdf 1cdb5b7f...) no longer applies: that fixture now fails closed with fewer than four admissible visuals.",
-  "artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
-  "candidate_commit": "badaf71"
+  "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+  "candidate_commit": "a66710f"
 }

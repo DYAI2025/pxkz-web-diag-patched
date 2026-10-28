@@ -1,16 +1,12 @@
 {
   "skill_name": "pixelkiez-website-diagnosis",
-  "draft_version": "release-completion-badaf71-2026-10-28",
+  "draft_version": "release-completion-a66710f-2026-10-28",
   "release_scope": "website-diagnosis-package",
   "release_gate": {
     "status": "PASS",
     "allowed_to_package": true,
-    "reason": "Frozen candidate badaf71 (tree digest f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226): packaged brand fonts, claim-scope patch, approved scope sentence, truthful browser source-class note, declared runtime. Full sweep on a git-archive copy: every root-arg validator and eval passes except validate_paired_release (external voice-architect consumer not installed; declared non-package-blocking) and the ledger/release-gate checks that bind this evidence. Unit suite 181 passed, 0 skipped. Proofs re-rendered offline with exact packaged fonts and inspected page by page.",
-    "authorization_basis": "Release Completion & Independent Quality Gate brief (user, 2026-10-28), step 9: build skill.zip only if all gates pass on the final candidate; no push, merge, install or publication.",
-    "previous": {
-      "status": "BLOCKED",
-      "allowed_to_package": false
-    }
+    "reason": "Frozen candidate a66710f (tree digest bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d): badaf71 plus CUSTOMER_LABEL_FIDELITY_PATCH, which fixes the three customer-visible defects the independent evaluation of fa791c3 confirmed (V05 device label, VC03 website-symbol wording, legal-surface strength). Sweep on a git-archive copy: 64 root-arg scripts run, 43 rc 0. Non-zero: 15 usage errors (need explicit artifact paths; 8 of them run inside build_audit_deliverables/validate_deliverable_bundle on all 9 builds, not run standalone: validate_batch_context.py, validate_chart_payloads.py, validate_core_score_admission.py, validate_elevenlabs_batch_csv.py, validate_visual_assets.py, validate_visual_story.py, validate_website_audit_packet.py); validate_full_48_active.py, validate_strategic_relevance_v321_preservation.py failed only because the sweep's own validate_customer_presentation_quality.py wrote its report into the root and changed the digest - rc 0 after removing that file; validate_pipeline_ledger/validate_release_gate bind this evidence (run after it); validate_paired_release + run_paired_release need the external voice-architect consumer (not installed, non-package-blocking). Unit suite 186 passed, 0 skipped.",
+    "authorization_basis": "Release Completion & Independent Quality Gate brief (user, 2026-10-28), step 9; user answers 'Fix + re-evaluate' and 'Narrow fix' (2026-10-28). Packaging only after a fresh independent evaluation of this candidate; no push, merge, install or publication."
   },
   "craftsmanship_gate": {
     "status": "PASS",
@@ -71,7 +67,8 @@
       "evidence": "reports/browser-measurement-eval-results.json",
       "negative_control": "without a Chromium executable the eval exits 1 (FAIL)"
     },
-    "core_note_semantics": "public_page_render capability note records browser_rendering_source_declared and browser_execution_independently_verified=false; it never claims an executed render"
+    "core_note_semantics": "public_page_render capability note records browser_rendering_source_declared and browser_execution_independently_verified=false; it never claims an executed render",
+    "evidence": "reports/browser-measurement-eval-results.json"
   },
   "mcp_gate": {
     "applicable": false,
@@ -173,11 +170,9 @@
   },
   "reliability_gate": {
     "status": "PASS",
-    "pipeline_trace_status": "PASS",
-    "frozen_artifact_digest": "959ea94775c147ca3d6c197a4cc62f4e603557b53ec6bf8ca236a67ffabee13b",
+    "pipeline_trace_status": "PENDING_LEDGER_WRITE",
+    "frozen_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
     "core_regression_status": "PASS",
-    "pipeline_events": 9,
-    "pipeline_run_id": "pxk-impressum-customer-truth-p0-20260909",
     "validator": "scripts/validate_pipeline_ledger.py",
     "truth_boundary": "Build trace proves ordered process and digest consistency; it does not replace legal/source truth."
   },
@@ -194,7 +189,6 @@
     "reconciled release report with the validated visual/reporting architecture",
     "kept strict customer PDF font gate fail-closed while separating skill installability from runtime brand-font availability",
     "reduced agents/openai.yaml to conservative interface metadata for upload compatibility",
-    "confirmed no font binaries are bundled in the skill package",
     "fixed stale deliverable filenames in fixture, marketing, semantic and reflection regressions",
     "made PDF evidence-boundary assertion robust to whitespace loss in PDF text extraction",
     "corrected stale paired-release PASS to a current non-package-blocking dependency boundary",
@@ -251,10 +245,12 @@
     "made mandatory Legal warning visible on cover and persistent through roadmap and closing",
     "added end-to-end validate_impressum_projection omission gate and customer-presentation hard gate",
     "added Bo Feng Lin Golden Regression with unresolved jurisdiction, absent operator identity/address, ILES=0 and mandatory customer visibility",
-    "preserved anti-overclaim controls and zero Core score/coverage delta"
+    "preserved anti-overclaim controls and zero Core score/coverage delta",
+    "bundled four manifest-pinned OFL brand fonts (assets/fonts); validate_no_font_binaries allows exactly these, fail-closed without fontTools",
+    "fixed V05 ranking subtitle, VC03 website-symbol wording and legal-surface strength (CUSTOMER_LABEL_FIDELITY_PATCH) after independent evaluation"
   ],
   "final_decision": "RELEASE_GATE_PASSED_PENDING_EVALUATION",
-  "artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
+  "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
   "internal_report_gate": {
     "status": "PASS",
     "json": "analysis_report.json",
@@ -280,7 +276,7 @@
     "V01_customer_selected": false,
     "V12_customer_selected": false,
     "active_core_delta_regression": "PASS_BUSINESS_FIRST_PLUS_DIRECT_ACTIVE_RENDER_PLUS_DELIVERABLE_BUNDLE",
-    "active_core_monolithic_harness": "UNVERIFIED_RUNTIME_TIMEOUT"
+    "active_core_monolithic_harness": "SUPERSEDED: full build_audit_deliverables customer-mode run on the active-core scored report completed (10 pages, 5 visuals); the earlier timed-out harness was not re-run under that name"
   },
   "weasyprint_render_gate": {
     "status": "PASS",
@@ -290,7 +286,7 @@
     "measurement_platform_staged_proof": "PASS_11_PAGES_6_VISUALS_FULL_BUILDER",
     "strategic_merge_proof": "PASS_11_PAGES_6_VISUALS",
     "active_core_fixture_proof": "PASS_10_PAGES_5_VISUALS",
-    "active_core_fixture_pdf_sha256": "9f78d61ccf0d9d2806ff1bdab7bee69a820467fd3bc32022dacb6028c81120c1"
+    "active_core_fixture_pdf_sha256": "62303d0deeed5b38b7144a4e3eff6a8014ebb566f17b25d64feefc2ea959257b"
   },
   "brand_rendering_gate": {
     "status": "PASS",
@@ -388,11 +384,12 @@
       "Customer Closing"
     ],
     "evidence": "reports/measurement-platform-protected-baseline.json",
-    "exact_files": 36,
-    "intentional_hash_bound_overrides": 11,
+    "exact_files": 35,
+    "intentional_hash_bound_overrides": 12,
     "override_policy": "ONLY_EXPLICIT_SHARED_PATHS_WITH_ALLOWED_REASON_AND_HASH_CHAIN",
-    "chained_overrides": 5,
-    "override_reports": 3
+    "chained_overrides": 6,
+    "override_reports": 11,
+    "live_result": "PASS: protected baseline exact=35 intentional_shared_overrides=12 chained_overrides=6 override_reports=11"
   },
   "third_party_reuse_gate": {
     "status": "PASS",
@@ -454,7 +451,7 @@
   "measurement_platform_preservation_gate": {
     "status": "PASS",
     "validator": "scripts/validate_measurement_platform_baseline.py",
-    "result": "PASS: protected baseline exact=35 intentional_shared_overrides=12 chained_overrides=6 override_reports=10",
+    "result": "PASS: protected baseline exact=35 intentional_shared_overrides=12 chained_overrides=6 override_reports=11",
     "policy": "Only hash-bound, explicitly authorized shared customer-reporting paths may drift; Core scoring remains protected.",
     "override_report": "reports/impressum-customer-truth-shared-overrides.json"
   },
@@ -505,7 +502,7 @@
   },
   "active_core_render_gate": {
     "status": "PASS",
-    "artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
+    "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
     "fixture_only": true,
     "renderer": "WEASYPRINT",
     "page_count": 10,
@@ -513,7 +510,7 @@
     "deliverable_bundle_build_complete": true,
     "customer_release_ready": false,
     "qa_status": "VISUAL_PASS_SEMANTIC_FAIL",
-    "brand_font_status": "PARTIAL_EXACT_APPROVED_FALLBACK",
+    "brand_font_status": "EXACT",
     "validators": [
       "validate_analysis_report_completeness",
       "validate_pdf_output",
@@ -522,10 +519,11 @@
       "validate_customer_output_guardrails",
       "validate_deliverable_bundle"
     ],
-    "monolithic_visual_harness": "UNVERIFIED_RUNTIME_TIMEOUT",
+    "monolithic_visual_harness": "SUPERSEDED: full build_audit_deliverables customer-mode run on the active-core scored report completed (10 pages, 5 visuals); the earlier timed-out harness was not re-run under that name",
     "regression_strategy": "fresh active-core decomposed E2E + unchanged existing visual architecture baseline proof; timeout is not relabeled PASS",
     "evidence": "reports/active-core-render-proof.json",
-    "note": "Positive E2E (>=4 admissible visuals, closed evidence chain) renders and passes all deterministic validators; its semantic QA FAILs (findings/strengths from synthetic-report.json contradict the active trust/legal values). Not deliverable; open risk by user decision 2026-10-28."
+    "note": "Positive E2E (>=4 admissible visuals, closed evidence chain) renders and passes all deterministic validators; its semantic QA FAILs (findings/strengths from synthetic-report.json contradict the active trust/legal values). Not deliverable; open risk by user decision 2026-10-28.",
+    "status_scope": "status covers the rendered positive FULL_48_ACTIVE path and its deterministic validators; customer semantic QA is a separate verdict (semantic_qa_status) and is FAIL"
   },
   "patch_status": {
     "plan": "APPROVED",
@@ -533,7 +531,7 @@
     "implementation": "COMPLETE",
     "validation": "PASS",
     "release_gate": "PASS",
-    "packaging": "AUTHORIZED_CONDITIONAL_ON_LEDGER_AND_EVALUATION",
+    "packaging": "PENDING_INDEPENDENT_EVALUATION",
     "release": "NOT_PUSHED_NOT_MERGED_NOT_INSTALLED",
     "historical_note": "Values before 2026-10-28 claimed release_gate PASS / packaging AUTHORIZED for an earlier draft; superseded."
   },
@@ -557,7 +555,7 @@
     "core_score_delta": 0,
     "golden_case": "LEG-GOLD-BFL"
   },
-  "candidate_artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
+  "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
   "fresh_reporting_gate": {
     "status": "PASS",
     "entrypoint": "scripts/run_reporting_bundle_evals.py",
@@ -586,11 +584,10 @@
     ]
   },
   "packaging_evidence": {
-    "status": "AUTHORIZED",
+    "status": "PENDING_INDEPENDENT_EVALUATION",
     "artifact_name": "skill.zip",
-    "candidate_artifact_digest": "959ea94775c147ca3d6c197a4cc62f4e603557b53ec6bf8ca236a67ffabee13b",
-    "archive_structure_requirement": "PASS_ONE_SKILL_ROOT",
-    "pipeline_ledger": "PASS_9_EVENTS"
+    "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+    "archive_structure_requirement": "ONE_SKILL_ROOT (checked by package_skill.py and on the extracted zip)"
   },
   "impressum_customer_projection_gate": {
     "status": "PASS",
@@ -629,28 +626,38 @@
     ],
     "independent_evaluator": "NOT_EXECUTED",
     "industry_profiles_approved": 0,
-    "installable_skill_zip_authorized": false
+    "installable_skill_zip_authorized": "SUPERSEDED: see release_gate.authorization_basis for candidate a66710f"
   },
   "customer_semantic_gate": {
     "status": "PASS",
-    "semantic_bundle_sha256": "560dfdb223060cb8cfb2dd3588425cf375c31954b9eab67c3477c7c44d0551c8",
-    "artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
+    "semantic_bundle_sha256": "9fd973c94e7493e804ccd923b60abfc42a66a8ef3e1c8bbd9dc9bb78939abfeb",
+    "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
     "evidence": [
       "reports/semantic-customer-qa-eval-report.json",
-      "reports/customer-pdf-qa-release-badaf71.json"
+      "reports/customer-pdf-qa-release-a66710f.json"
     ],
-    "inspected_pdfs": 9,
-    "inspected_pages": 91,
-    "unique_page_rasters": 36,
-    "case_verdicts": "8 of 9 PASS (visual+semantic); active-positive semantic FAIL recorded, deliverable blocked by validate_deliverable_bundle --require-customer-release-ready (rc 1)",
+    "cases": 9,
+    "distinct_pdfs": 7,
+    "case_verdicts": {
+      "legacy-baseline": "PASS",
+      "legal-golden": "PASS",
+      "case-a-critical": "PASS",
+      "case-b-equal-rank-profile": "PASS",
+      "case-c-vc03-detail": "PASS",
+      "active-positive": "FAIL",
+      "proof-realistic": "PASS",
+      "proof-strategic": "PASS",
+      "proof-measurement-gateway": "PASS"
+    },
+    "recorded_fail": "active-positive semantic FAIL; validate_deliverable_bundle --require-customer-release-ready exits 1 (CUSTOMER_RELEASE_BLOCKED)",
     "negatives": "Baumdienst and low-coverage fail closed with CUSTOMER_MIN_VISUALS_NOT_MET, no PDF written",
-    "independence": "inspected by the same session that authored the release-completion patch; independent evaluation is recorded separately"
+    "independence": "page verdicts by the authoring session; an independent read-only reviewer re-checked fa791c3 and its confirmed findings are fixed or recorded (independent_review in the QA report)"
   },
   "candidate_gate_results": {
-    "artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
-    "candidate_commit": "badaf71",
+    "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+    "candidate_commit": "a66710f",
     "status": "SWEEP_DONE",
-    "sweep": "64 scripts: 43 root-arg PASS, 18 need explicit artifact paths (run on the built bundles: guardrails, business language, completeness, deliverable bundle all rc 0), validate_paired_release FAIL (external, non-package-blocking), ledger/release gate pending this evidence",
+    "sweep": "64 root-arg scripts run, 43 rc 0. Non-zero: 15 usage errors (need explicit artifact paths; 8 of them run inside build_audit_deliverables/validate_deliverable_bundle on all 9 builds, not run standalone: validate_batch_context.py, validate_chart_payloads.py, validate_core_score_admission.py, validate_elevenlabs_batch_csv.py, validate_visual_assets.py, validate_visual_story.py, validate_website_audit_packet.py); validate_full_48_active.py, validate_strategic_relevance_v321_preservation.py failed only because the sweep's own validate_customer_presentation_quality.py wrote its report into the root and changed the digest - rc 0 after removing that file; validate_pipeline_ledger/validate_release_gate bind this evidence (run after it); validate_paired_release + run_paired_release need the external voice-architect consumer (not installed, non-package-blocking).",
     "history": [
       {
         "candidate_commit": "456c226",
@@ -674,7 +681,33 @@
         "candidate_commit": "e4a0cb6",
         "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
         "sweep": "SWEEP_DONE"
+      },
+      {
+        "candidate_commit": "badaf71",
+        "artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
+        "status": "SWEEP_DONE"
       }
-    ]
+    ],
+    "listed_needs_paths": 14,
+    "bundle_validators_on_all_builds": "finalize_deliverable_manifest, validate_pdf_visual_qa, validate_customer_semantic_qa, validate_customer_output_guardrails, validate_customer_business_language, validate_analysis_report_completeness, validate_deliverable_bundle --require-customer-release-ready (active-positive rc 1 by design, all others rc 0)"
+  },
+  "historical_sections": {
+    "reliability_gate_pxk-impressum-customer-truth-p0-20260909": {
+      "status": "PASS",
+      "pipeline_trace_status": "PASS",
+      "frozen_artifact_digest": "959ea94775c147ca3d6c197a4cc62f4e603557b53ec6bf8ca236a67ffabee13b",
+      "core_regression_status": "PASS",
+      "pipeline_events": 9,
+      "pipeline_run_id": "pxk-impressum-customer-truth-p0-20260909",
+      "validator": "scripts/validate_pipeline_ledger.py",
+      "truth_boundary": "Build trace proves ordered process and digest consistency; it does not replace legal/source truth."
+    },
+    "packaging_evidence_959ea947": {
+      "status": "AUTHORIZED",
+      "artifact_name": "skill.zip",
+      "candidate_artifact_digest": "959ea94775c147ca3d6c197a4cc62f4e603557b53ec6bf8ca236a67ffabee13b",
+      "archive_structure_requirement": "PASS_ONE_SKILL_ROOT",
+      "pipeline_ledger": "PASS_9_EVENTS"
+    }
   }
 }

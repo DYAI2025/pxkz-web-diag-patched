@@ -20,33 +20,79 @@
     "rerender_required": true,
     "all_pages_reinspected_after_repair": true
   },
+  "repair_loop_recorded_at": "2026-09-08 (initial_state and observed_repair_loop describe that recorded draft -> repair -> rerender loop)",
+  "current_repair_loop": {
+    "draft_candidate": "fa791c3 (bundles BUILT_PENDING_QA, delivery not allowed until visual+semantic QA)",
+    "independent_review_findings_fixed": [
+      "V05 device label",
+      "VC03 website-symbol wording",
+      "legal-surface strength next to the provider-identity risk"
+    ],
+    "repair_commit": "a66710f",
+    "rerender_required": true,
+    "reinspection": "the six page rasters that changed were re-inspected; every other raster is byte-identical to an inspected fa791c3/badaf71 raster"
+  },
+  "historical_final_state": {
+    "final_state": {
+      "quality_status": "PASS",
+      "hard_gate_count": 13,
+      "passed_hard_gates": 13,
+      "failed_gates": [],
+      "pending_gates": [],
+      "visual_qa": "PASS",
+      "semantic_qa": "PASS",
+      "page_count": 11,
+      "pdf_sha256": "80d41c51e50f862bea37004bc448226f74594fadf442d45a4c8eb840f486d03f",
+      "score_projection": "FULL_SCORE -> Pixelkiez Score",
+      "synthetic_priority_magnitude": "ABSENT",
+      "four_lever_business_impact": "VISIBLE",
+      "closing_action_sentence_integrity": "PASS"
+    },
+    "release_boundary": {
+      "customer_presentation_quality": "PASS",
+      "strict_customer_release_ready": false,
+      "remaining_blocker": "Exact Schibsted Grotesk runtime font is not present in this proof runtime; this blocks strict customer PDF release, not skill packaging.",
+      "does_not_prove": [
+        "external website truth",
+        "legal compliance",
+        "WCAG conformance",
+        "production font availability"
+      ]
+    },
+    "candidate_artifact_digest": "1f4fe8356420f494020fcb23d40b5b221e743cd41d636a5a8dd8fd288643fe0b",
+    "revalidated_at": "2026-09-08T18:43:44.369490+00:00",
+    "proof_reuse_basis": "The current deterministic final PDF SHA-256 exactly matches the previously repaired/reinspected final artifact, and current visual+semantic QA was rerun on all 11 pages.",
+    "note": "Recorded 2026-09-08 on an 11-page PARTIAL_EXACT render (pdf 80d41c51...); superseded as current-state evidence by final_state below."
+  },
   "final_state": {
     "quality_status": "PASS",
-    "hard_gate_count": 13,
-    "passed_hard_gates": 13,
+    "hard_gate_count": 14,
+    "passed_hard_gates": 14,
     "failed_gates": [],
     "pending_gates": [],
     "visual_qa": "PASS",
     "semantic_qa": "PASS",
-    "page_count": 11,
-    "pdf_sha256": "80d41c51e50f862bea37004bc448226f74594fadf442d45a4c8eb840f486d03f",
-    "score_projection": "FULL_SCORE -> Pixelkiez Score",
-    "synthetic_priority_magnitude": "ABSENT",
-    "four_lever_business_impact": "VISIBLE",
-    "closing_action_sentence_integrity": "PASS"
+    "page_count": 10,
+    "pdf_sha256": "de27843d7798299cb891ee937a7deb3a000cb2860006fc755a21f34e439df597",
+    "client_model_sha256": "d4ee5c61ba08787166e1188c5ea52fbfd5e10ffb8b057d8f31966b7aa312c3c7",
+    "font_status": "EXACT",
+    "pdf_font_embedding": "VERIFIED",
+    "deliverable_status": "CUSTOMER_RELEASE_READY"
   },
   "release_boundary": {
     "customer_presentation_quality": "PASS",
-    "strict_customer_release_ready": false,
-    "remaining_blocker": "Exact Schibsted Grotesk runtime font is not present in this proof runtime; this blocks strict customer PDF release, not skill packaging.",
+    "strict_customer_release_ready": true,
+    "remaining_blocker": null,
     "does_not_prove": [
       "external website truth",
       "legal compliance",
       "WCAG conformance",
-      "production font availability"
+      "quality of other customers' PDFs without per-output QA"
     ]
   },
-  "candidate_artifact_digest": "1f4fe8356420f494020fcb23d40b5b221e743cd41d636a5a8dd8fd288643fe0b",
-  "revalidated_at": "2026-09-08T18:43:44.369490+00:00",
-  "proof_reuse_basis": "The current deterministic final PDF SHA-256 exactly matches the previously repaired/reinspected final artifact, and current visual+semantic QA was rerun on all 11 pages."
+  "current_binding": "legacy-baseline customer-mode build of evals/fixtures/synthetic-report.json; quality report produced by finalize_deliverable_manifest/validate_deliverable_bundle on that bundle",
+  "candidate_commit": "a66710f",
+  "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+  "revalidated_at": "2026-10-28",
+  "render_basis": "Built offline from git archive of a66710f (tree digest bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d) in a network-denied sandbox with no system fonts and no PIXELKIEZ_FONT_DIR; packaged brand fonts resolved EXACT and embedding VERIFIED. Versus candidate badaf71, six page rasters changed (legal-golden/proof-realistic p2, proof-strategic p8, case-c p8-p10) and were re-inspected; every other raster is byte-identical to an inspected badaf71 raster."
 }

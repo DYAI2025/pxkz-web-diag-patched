@@ -1,7 +1,7 @@
 {
   "status": "PASS",
   "fixture_only": true,
-  "artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
+  "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
   "binding_digest": "09a3b2e2ce8d6b264347af53e9423df87c367d4c475a97940cc24fb415927f09",
   "measurement_registry_digest": "b527f71f397b2f95194ec35f2b85e6ff68024ab90ed25c65d2eccc255a93acac",
   "execution_semantic_digest": "fa0f763b6c98703fe3c5114498105517dc0ee71c65e0a93ec000e464e91ed90f",
@@ -9,7 +9,7 @@
   "release_state": "FULL_48_ACTIVE_PASS",
   "pdf_sha256": "62303d0deeed5b38b7144a4e3eff6a8014ebb566f17b25d64feefc2ea959257b",
   "analysis_report_sha256": "d9d7021dbf6d21e578234788ae1c2f4dd135cef0cd2c68d5c1289ca30550ba13",
-  "html_sha256": "deb49770eecc6391d0a0f94ce4a7a6a246888a4a5aa2d65953074427a402833c",
+  "html_sha256": "8e0d6fdde20f720485dcb0bab42fb77228add9cca5b44a63a9a4ee544b424fad",
   "renderer": "WEASYPRINT",
   "page_count": 10,
   "embedded_visual_count": 5,
@@ -44,6 +44,7 @@
   ],
   "pdf_font_embedding": "VERIFIED",
   "release_mode": "customer",
-  "semantic_qa_failure": "Customer narrative contradicts measured trust/legal values: strength on page 2 vs. weak/blocking Impressum, Datenschutz and Kontakttransparenz on page 7, which no lever addresses. Recorded as open risk by user decision 2026-10-28; this PDF is not deliverable.",
-  "deliverable_status": "BUILT_PENDING_QA"
+  "semantic_qa_failure": "Customer narrative contradicts measured trust/legal values: strength on page 2 vs. weak/blocking Impressum, Datenschutz and Kontakttransparenz on page 7, which no lever addresses. Recorded as open risk by user decision 2026-10-28; this PDF is not deliverable. Independent review (fa791c3) adds: lever 1 'Der nächste Schritt ist mobil nicht klar genug' cites UX-02 (strong, 100); strength 'Sitemap ... brauchbare technische Basis' vs FIND-02 robots/sitemap false; V08 shows AI-05 (strong, 100) as 'teilweise'; V07 3.8 comes from the report's legacy visualization while PERF-02 holds no number. Root cause for all: findings, strengths and visuals come unchanged from synthetic-report.json, written for different values.",
+  "deliverable_status": "BUILT_PENDING_QA",
+  "status_scope": "status covers the rendered positive FULL_48_ACTIVE path and its deterministic validators; customer semantic QA is a separate verdict (semantic_qa_status) and is FAIL"
 }

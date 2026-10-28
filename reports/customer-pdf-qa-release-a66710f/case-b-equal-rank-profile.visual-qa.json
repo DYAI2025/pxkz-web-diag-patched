@@ -1,0 +1,211 @@
+{
+  "schema_version": "1.2",
+  "pdf_path": "customer_presentation.pdf",
+  "pdf_sha256": "25220ad91d50a38314efe1d042f9b1947258e7e802195bccac2e579429b00191",
+  "visualization_plan_path": "visualization-plan.json",
+  "visualization_plan_sha256": "c2da18a85aedab52706d57ee47790783bc50a775be845c23b7e245ca3dce7474",
+  "page_count": 10,
+  "inspection_status": "PASS",
+  "inspection_method": "agent_vision",
+  "inspected_by": "Claude Opus 5.5 (main session, 2026-10-28; same session that authored the release-completion and label-fidelity patches, so not independent; cross-checked by an independent read-only reviewer on candidate fa791c3)",
+  "inspection_note": "Set PASS only after every rendered page and every planned chart page has actually been visually inspected.",
+  "pages": [
+    {
+      "page": 1,
+      "image": "rendered-pages/page-001.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Cover: title, Meyer & Sohn Bau GmbH, URL, score 65 and the complete two-line core message (mobile next step) in the bottom band. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 2,
+      "image": "rendered-pages/page-002.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Overview: 65/100, main lever, three strengths, three priorities; dated scope sentence (sampled public pages, AI answers not queried) inside the card, clear of the footer. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 3,
+      "image": "rendered-pages/page-003.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "V02 category bars, six categories with values; labels legible; 'KI-Verständlichkeit' label kept by user decision. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 4,
+      "image": "rendered-pages/page-004.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "V03: lever 4 is the content-question finding chosen by the approved test profile."
+    },
+    {
+      "page": 5,
+      "image": "rendered-pages/page-005.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "V07 mobile load 3.8 against target 2.5 / warning 4; value and thresholds clear. O-12: value and thresholds carry no unit and an English decimal point. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 6,
+      "image": "rendered-pages/page-006.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "V08 answerability matrix klar/teilweise; title frames answerability, not AI answers. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 7,
+      "image": "rendered-pages/page-007.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "V10 trust matrix four-state rows; consistent with the strengths on page 2. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 8,
+      "image": "rendered-pages/page-008.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Lever cards; lever 4 'Die Leistungen sind lesbar, aber Fragen ...' (MITTEL). 'Warum das zählt' mentions KI-Systeme as a plausibility statement, not a measured AI result."
+    },
+    {
+      "page": 9,
+      "image": "rendered-pages/page-009.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Roadmap with lever 4 action in Danach (P2)."
+    },
+    {
+      "page": 10,
+      "image": "rendered-pages/page-010.png",
+      "checks": {
+        "text_readable": true,
+        "plain_language_clear": true,
+        "no_clipping": true,
+        "no_overlap": true,
+        "no_broken_glyphs": true,
+        "customer_density_ok": true
+      },
+      "notes": "Closing: four actions in lever order."
+    }
+  ],
+  "cover_checks": {
+    "full_takeaway_visible": true,
+    "score_projection_visible_when_required": true,
+    "no_cross_page_sentence_split": true
+  },
+  "chart_pages": [
+    {
+      "page": 3,
+      "template_id": "V02_CATEGORY_BARS",
+      "checks": {
+        "finding_title_clear": true,
+        "chart_labels_legible": true,
+        "business_message_clear": true,
+        "threshold_or_reference_clear_when_applicable": true,
+        "no_internal_method_or_evidence_boilerplate": true
+      },
+      "notes": "V02 category bars, six categories with values; labels legible; 'KI-Verständlichkeit' label kept by user decision. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 4,
+      "template_id": "V03_TOP_LEVERS",
+      "checks": {
+        "finding_title_clear": true,
+        "chart_labels_legible": true,
+        "business_message_clear": true,
+        "threshold_or_reference_clear_when_applicable": true,
+        "no_internal_method_or_evidence_boilerplate": true
+      },
+      "notes": "V03: lever 4 is the content-question finding chosen by the approved test profile."
+    },
+    {
+      "page": 5,
+      "template_id": "V07_PERFORMANCE_THRESHOLD",
+      "checks": {
+        "finding_title_clear": true,
+        "chart_labels_legible": true,
+        "business_message_clear": true,
+        "threshold_or_reference_clear_when_applicable": true,
+        "no_internal_method_or_evidence_boilerplate": true
+      },
+      "notes": "V07 mobile load 3.8 against target 2.5 / warning 4; value and thresholds clear. O-12: value and thresholds carry no unit and an English decimal point. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 6,
+      "template_id": "V08_AI_ANSWERABILITY",
+      "checks": {
+        "finding_title_clear": true,
+        "chart_labels_legible": true,
+        "business_message_clear": true,
+        "threshold_or_reference_clear_when_applicable": true,
+        "no_internal_method_or_evidence_boilerplate": true
+      },
+      "notes": "V08 answerability matrix klar/teilweise; title frames answerability, not AI answers. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 7,
+      "template_id": "V10_TRUST_MATRIX",
+      "checks": {
+        "finding_title_clear": true,
+        "chart_labels_legible": true,
+        "business_message_clear": true,
+        "threshold_or_reference_clear_when_applicable": true,
+        "no_internal_method_or_evidence_boilerplate": true
+      },
+      "notes": "V10 trust matrix four-state rows; consistent with the strengths on page 2. (raster identical to inspected legacy-baseline page)"
+    }
+  ]
+}

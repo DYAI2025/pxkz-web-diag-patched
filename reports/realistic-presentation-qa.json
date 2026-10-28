@@ -3,8 +3,8 @@
   "fixture": "synthetic 48-core + impressum-compliance integration proof (LEG-GOLD-BFL sidecar)",
   "customer": "Meyer & Sohn Bau GmbH",
   "release_mode": "proof",
-  "candidate_commit": "badaf71",
-  "candidate_artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
+  "candidate_commit": "a66710f",
+  "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
   "revalidated_at": "2026-10-28",
   "page_count": 10,
   "selected_visual_count": 5,
@@ -39,11 +39,11 @@
   "customer_output_guardrails": "PASS",
   "strategic_relevance": "PASS",
   "measurement_platform_preservation": "PASS",
-  "pdf_sha256": "e3f50dac1267eda44c8b98b5cd601027c96105495d528e75f6a5c4b9ffa53dbd",
+  "pdf_sha256": "c43027aafdac9fd803b7e5126db22ce8ca1ad5491c167db80b37aedec483d019",
   "analysis_json_sha256": "12eba8ad10df530a214b58504336acc36131ff9157a454d8eccafc24fcde2fc7",
   "analysis_markdown_sha256": "7fbab874ccc066c8ec553f93d08d8173b85874e36837545b256d1af403300147",
   "visualization_plan_sha256": "331c54f9ad5cb1a364e1f4c6423e1cf1accadd340e18375431d53efff1ef77c6",
-  "client_model_sha256": "97c1c1be7798249da8e673401d773024c7963a954a7d85828dd780466bf4a4e2",
+  "client_model_sha256": "c943a3bf68fbb92dc6c882db656a267d1097a60f252d17d998dbd84b0a00b431",
   "rendered_page_sha256": [
     {
       "page": 1,
@@ -51,7 +51,7 @@
     },
     {
       "page": 2,
-      "sha256": "2ec3cb7906d97cd71fe39cf1c510fe3b5848cfe10a32a97b603b190622ed8fc3"
+      "sha256": "5dfcee0ae125a90afcf9e374c5ec5ce25e7daca02a99cafa89967fe95b1c209f"
     },
     {
       "page": 3,
@@ -87,13 +87,15 @@
     }
   ],
   "inspection_method": "agent_vision + deterministic validators",
-  "render_basis": "Built offline from git archive of badaf71 (tree digest f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226) in a network-denied sandbox with no system fonts and no PIXELKIEZ_FONT_DIR; packaged brand fonts resolved EXACT and embedding VERIFIED. All 9 PDFs are byte-identical to the inspected probe renders (sha256 9/9, page rasters 91/91).",
+  "render_basis": "Built offline from git archive of a66710f (tree digest bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d) in a network-denied sandbox with no system fonts and no PIXELKIEZ_FONT_DIR; packaged brand fonts resolved EXACT and embedding VERIFIED. Versus candidate badaf71, six page rasters changed (legal-golden/proof-realistic p2, proof-strategic p8, case-c p8-p10) and were re-inspected; every other raster is byte-identical to an inspected badaf71 raster.",
   "inspection_notes": [
     "All 10 pages inspected from the rendered page images; no clipping, overlap, broken glyphs or cross-page sentence splits.",
     "Legal provider-identity risk is lever 1 with review wording ('rechtlich prüfen'), no claim of a legal violation; V10 shows Impressum X Handlungsbedarf consistent with it.",
     "V11 severity distribution is no longer selected (internal-only, SEM-003); five admissible visuals remain.",
     "Overview page carries the dated scope sentence; no AI-visibility claim beyond answerability wording.",
-    "O-5 (recorded): the strength 'Rechts-/Kontaktflächen gut erreichbar' concerns reachability next to the identity risk."
+    "O-5 resolved (CUSTOMER_LABEL_FIDELITY_PATCH): the strength 'Rechts-/Kontaktflächen gut erreichbar' is withheld while the provider-identity risk is projected; the overview shows two strengths.",
+    "O-9: lever 1 is labelled '01 · HOCH' (finding severity) while customer_risk.priority is MANDATORY_CRITICAL; rank 1 and the cover badge 'Dringender rechtlicher Prüfbedarf' carry the urgency.",
+    "O-10: the page-5 mobile load chart (F-002) has no matching lever because the legal risk took a lever slot."
   ],
   "supersedes": "11-page/6-visual proof with V11 and PARTIAL_EXACT fallback fonts (pdf 80d41c51...)",
   "does_not_prove": [

@@ -19,8 +19,8 @@
  "blocking_issues": [],
  "user_action": "Upload skill.zip via Skills > Create > Upload from your computer. If installation is disabled, a workspace admin must enable skill upload/install permissions.",
  "legacy_installability_data_historical": false,
- "candidate_artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
- "basis": "Release completion 2026-10-28 on candidate badaf71; the packaged artifact is verified after packaging by unpacking skill.zip and re-running quick_validate, validate_release_gate, validate_pipeline_ledger, validate_installability and an offline strict customer render on the extracted copy (receipt in reports/package-receipt-release-badaf71.json).",
+ "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+ "basis": "Release completion 2026-10-28 on candidate a66710f; the packaged artifact is verified after packaging by unpacking skill.zip and re-running quick_validate, validate_release_gate, validate_pipeline_ledger, validate_installability and an offline strict customer render on the extracted copy (receipt in reports/package-receipt-release-a66710f.json).",
  "runtime_declaration": {
   "file": "requirements.txt",
   "verified_with": {

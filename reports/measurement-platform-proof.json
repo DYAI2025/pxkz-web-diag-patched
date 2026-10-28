@@ -18,12 +18,12 @@
   "live_gateway_network": "NOT_ASSESSED_RUNTIME_NETWORK_LIMIT",
   "atomic_builder": "PASS",
   "component_pipeline": "PASS",
-  "customer_presentation_sha256": "87b96f3ef5a59c74089e23da7ec312452dd3604ed3bbf0b93e8df88499e54bb6",
+  "customer_presentation_sha256": "23c433f023dca62442052998f931361baff887ec8f0c1d490e306d70bb8038f2",
   "client_model_sha256": "978ba38edf172d851eb3b1ba37d98e7e195f26a92f0ae8208d5ce3d3c160eece",
-  "visualization_plan_sha256": "0c496b2ca9ccd484d2cf95b885097d5bca05403dabbbe0db6b6a0d73e66202f8",
+  "visualization_plan_sha256": "8f80f5eeaa0f4a321efbde6a39c9a6aaf9765b26e6cc3f7158f3274587a51973",
   "notes": [
     "Full build_audit_deliverables run (no staged fallback) on the enriched synthetic fixture: 11 pages, 6 admissible visuals including V05 ranking positions.",
-    "Customer closing, renderer, visualization catalog, core score and CSV contracts remain protected by baseline hashes; the only presentation change since the previous proof is the approved scope sentence (CUSTOMER_SCOPE_STATEMENT_PATCH).",
+    "Customer closing, renderer, visualization catalog, core score and CSV contracts remain protected by baseline hashes; presentation changes since the previous proof are the approved scope sentence (CUSTOMER_SCOPE_STATEMENT_PATCH) and the V05 subtitle device label (CUSTOMER_LABEL_FIDELITY_PATCH).",
     "Live public gateway networking was not exercised; fixture and injected-transport tests are deterministic and pass."
   ],
   "selected_template_ids": [
@@ -36,8 +36,8 @@
   ],
   "font_status": "EXACT",
   "pdf_font_embedding": "VERIFIED",
-  "candidate_commit": "badaf71",
-  "candidate_artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
+  "candidate_commit": "a66710f",
+  "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
   "gateway_bundle_build": {
     "pdf_sha256": "de27843d7798299cb891ee937a7deb3a000cb2860006fc755a21f34e439df597",
     "page_count": 10,
@@ -48,6 +48,6 @@
       "V08_AI_ANSWERABILITY",
       "V10_TRUST_MATRIX"
     ],
-    "note": "The measurement-gateway provider bundle attaches non-scoring enrichment that selects no additional customer visual; its PDF is byte-identical in page rasters to the un-enriched synthetic build."
+    "note": "The measurement-gateway provider bundle attaches non-scoring enrichment that selects no additional customer visual; its PDF is byte-identical to the un-enriched legacy-baseline build."
   }
 }
