@@ -961,7 +961,7 @@
     {
       "path": "SKILL.md",
       "baseline_sha256": "dd7b983957a1fb16b6b4c5fe72db26a5530c29d91376296826092ccb9b303ccf",
-      "current_sha256": "10d864d70df2cd62c29844bbfcbbfa2ae054934ec1a9eee07ac3961a2224e86a",
+      "current_sha256": "c005b739b1fb2ae8d14e28df8401d55a89584b93383d5bf9110ad332cae8b60b",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -993,6 +993,12 @@
       "baseline_sha256": "19911c11ef252deb29da705ce41da6cbbe7df20e1f3a3f63d26c41432043310d",
       "reason": "IMPRESSUM_COMPLIANCE_PATCH",
       "current_sha256": "1573325cc9c99ae01409c5231ef5d96b4d6e7995441903fd67a11ea98e75c032"
+    },
+    {
+      "path": "references/brand-rendering-contract-v2.md",
+      "baseline_sha256": "061d17d524b2fdd30d74b1a742ea21fcb2d715184f13b5660f66ecc5a919a38e",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "33f04a12c27438cfd149415e27f29378e9de9f675d920ef2089dfcf3b109eb60"
     },
     {
       "path": "references/client-storytelling-contract.md",
@@ -1587,7 +1593,7 @@
     "modified_file_count": 22,
     "added_file_count": 5,
     "deleted_file_count": 0,
-    "current_modified": 50,
+    "current_modified": 51,
     "current_added": 64,
     "current_deleted": 0,
     "quality_patch": "CUSTOMER_PRESENTATION_QUALITY_GATE"
@@ -1601,7 +1607,7 @@
     "14-template visual catalog",
     "Customer Closing capability"
   ],
-  "modified_file_count": 50,
+  "modified_file_count": 51,
   "current_active_migration_digest": "1a9c862edfce24d6193273049eebed12e0fa87312d98497bb835ebb4245f1e91",
   "active_migration_delta": {
     "baseline_tree_digest": "dbe282325a1ebd1acaaa0b02c822037a235e573e548e39b0a36ae96ad60569f2",
@@ -1756,7 +1762,7 @@
         {
           "path": "SKILL.md",
           "previous_sha256": "e64df28533515c79caad4be49e215f0ca80ca140a8dc13e53f2864f180d69398",
-          "current_sha256": "10d864d70df2cd62c29844bbfcbbfa2ae054934ec1a9eee07ac3961a2224e86a"
+          "current_sha256": "c005b739b1fb2ae8d14e28df8401d55a89584b93383d5bf9110ad332cae8b60b"
         },
         {
           "path": "assets/branch-priority-profiles.v1.json",
@@ -1812,6 +1818,11 @@
           "path": "references/branch-aware-customer-prioritization.md",
           "previous_sha256": null,
           "current_sha256": "c6040f358a946efbbb8f74c38c245d91c88df7ce1b62643284e1201cc67743b0"
+        },
+        {
+          "path": "references/brand-rendering-contract-v2.md",
+          "previous_sha256": "061d17d524b2fdd30d74b1a742ea21fcb2d715184f13b5660f66ecc5a919a38e",
+          "current_sha256": "33f04a12c27438cfd149415e27f29378e9de9f675d920ef2089dfcf3b109eb60"
         },
         {
           "path": "references/client-storytelling-contract.md",
