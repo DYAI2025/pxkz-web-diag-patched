@@ -1,0 +1,28 @@
+{
+ "status": "PASS",
+ "patch_id": "CUSTOMER_LABEL_FIDELITY_PATCH",
+ "authorization_basis": "Explicit user authorization on 2026-10-28: answer 'Fix + re-evaluate (Recommended)' (V05 ranking subtitle device label, VC03 website-symbol wording, stale evidence cleanup, fresh evaluator round) and answer 'Narrow fix (Recommended)' (legal-surface strength filter in build_client_report_model.py), after an independent read-only evaluation of candidate fa791c3 found these customer-visible defects.",
+ "scope_note": "Three customer-label defects from the fa791c3 evaluation. (1) build_visualization_plan.py: the V05 ranking subtitle named only the first query's place/device/date; it now names every distinct value ('Mobil und Desktop' when mixed). (2) assets/vibecheck03-customer-admission-rules.v1.json (not baseline-protected): a declared icon that failed to load is no longer called missing ('Website-Symbol für den Browser-Tab nicht abrufbar', action 'als öffentlich abrufbare Datei bereitstellen'). (3) build_client_report_model.py + legal_customer_projection.py: while a legal customer risk is projected, auditor-written strengths that vouch for the legal/contact surface are dropped; the slot stays empty because positive findings restate the audit's own strengths (no refill). Scores, the 48 core metrics, lever selection, batch v1.3 and QA status logic are unchanged; reports without a legal risk and with single-device rankings keep byte-identical plans and models. Red/green: tests/test_customer_label_fidelity.py (3 tests red before, 5 green after).",
+ "previous_sha256_semantics": "previous = effective approved digest after the existing override chain for each path (claim-scope-shared-overrides.json for build_visualization_plan.py, branch-priority-vc03-shared-overrides.json for build_client_report_model.py), identical to the file at commit fa791c3.",
+ "evidence": [
+  "reports/override-evidence/customer-label-fidelity.build_visualization_plan.approved-to-candidate.diff",
+  "reports/override-evidence/customer-label-fidelity.build_client_report_model.approved-to-candidate.diff",
+  "tests/test_customer_label_fidelity.py"
+ ],
+ "overrides": [
+  {
+   "path": "scripts/build_visualization_plan.py",
+   "baseline_sha256": "baf5d85df264a812165d4ba0fb534619e0ab5b9f3a601b8011955164358be954",
+   "previous_sha256": "4a092af8b83d080e2c9751cdd1758a54881e1acb42f26423da812b8abb468ff6",
+   "current_sha256": "488b034dd5fde6b3680fe005e8946417870068467f57bd36e2aebf6a79a8f30c",
+   "reason": "CUSTOMER_LABEL_FIDELITY_PATCH"
+  },
+  {
+   "path": "scripts/build_client_report_model.py",
+   "baseline_sha256": "433a909ec9bb38b29a4864f468d2cdf66a4a83b1beef0fdada2f6db8716a538e",
+   "previous_sha256": "d31c18aff27c006fbf8a60ebeba4356d1e154879f70eb5796fd0e506e941df2a",
+   "current_sha256": "3875b71e2e689fe90154889a7ebffb773e751dede762122e49bae67f25a7d5d7",
+   "reason": "CUSTOMER_LABEL_FIDELITY_PATCH"
+  }
+ ]
+}

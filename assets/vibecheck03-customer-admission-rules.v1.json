@@ -43,12 +43,12 @@
         ]
       },
       "copy": {
-        "title": "Kein eigenes Website-Symbol im Browser-Tab",
+        "title": "Website-Symbol für den Browser-Tab nicht abrufbar",
         "client_observation": "Für die untersuchte Seite ließ sich kein eigenes Website-Symbol für Browser-Tab und Lesezeichen abrufen.",
         "client_impact": "Zwischen vielen offenen Tabs ist die Seite schwerer wiederzufinden.",
-        "client_action": "Ein eigenes Website-Symbol hinterlegen und im Browser-Tab sichtbar kontrollieren.",
+        "client_action": "Das Website-Symbol als öffentlich abrufbare Datei bereitstellen und im Browser-Tab sichtbar kontrollieren.",
         "observation": "Vibe-Check #03: SITE_ICON_FETCH_OK observed false for {page_url} (declared={value:SITE_ICON_DECLARED}).",
-        "business_relevance": "Ein fehlendes Website-Symbol kann die Wiedererkennung im Browser erschweren; eine Wirkung auf Anfragen ist damit nicht belegt.",
+        "business_relevance": "Ein nicht abrufbares Website-Symbol kann die Wiedererkennung im Browser erschweren; eine Wirkung auf Anfragen ist damit nicht belegt.",
         "recommendation_action": "Favicon und Apple-Touch-Icon bereitstellen, im Head deklarieren und öffentlich abrufbar halten.",
         "owner": "Frontend",
         "horizon": "0_30_days"

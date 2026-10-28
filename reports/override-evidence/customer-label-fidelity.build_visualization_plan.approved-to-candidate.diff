@@ -1,0 +1,15 @@
+diff --git a/scripts/build_visualization_plan.py b/scripts/build_visualization_plan.py
+index 3a21efc..19284d4 100644
+--- a/scripts/build_visualization_plan.py
++++ b/scripts/build_visualization_plan.py
+@@ -249,7 +249,9 @@ def main() -> int:
+             page_by_key = {(x.get("query"), x.get("device"), x.get("location")): x.get("value") for x in enrichment_metrics if x.get("id") == "SERP_CURRENT_PAGE" and x.get("status") in {"MEASURED", "OBSERVED"}}
+             rankings = [{"query": x.get("query"), "position": int(x.get("value")), "page": page_by_key.get((x.get("query"), x.get("device"), x.get("location"))), "device": x.get("device"), "location": x.get("location"), "observed_at": x.get("observed_at")} for x in serp_positions]
+             first = serp_positions[0]
+-            context = " · ".join(str(x) for x in [customer_location(first.get("location")), customer_device(first.get("device")), customer_date(first.get("observed_at"))] if x)
++            # Place, device and date name every plotted query, not only the first one.
++            shared = lambda fmt, key: " und ".join(dict.fromkeys(fmt(x.get(key)) for x in serp_positions if fmt(x.get(key))))
++            context = " · ".join(x for x in [shared(customer_location, "location"), shared(customer_device, "device"), shared(customer_date, "observed_at")] if x)
+             visuals.append(visual(vid, "V05_RANKING_POSITION", "Google-Positionen nach Suchanfrage", context or "Aktueller Suchstand", [], [], "MEASURED_SERP", f"{len(rankings)} dokumentierte Suchanfragen", str(first.get("source_provider") or "SERP provider"), "Rankings gelten nur für Query, Ort, Gerät, Zeitpunkt und Messmethode und sind keine dauerhafte Position.", rankings)); vid += 1
+             ranking_added = True
+ 

@@ -1171,7 +1171,7 @@
     {
       "path": "scripts/build_client_report_model.py",
       "baseline_sha256": "433a909ec9bb38b29a4864f468d2cdf66a4a83b1beef0fdada2f6db8716a538e",
-      "current_sha256": "d31c18aff27c006fbf8a60ebeba4356d1e154879f70eb5796fd0e506e941df2a",
+      "current_sha256": "3875b71e2e689fe90154889a7ebffb773e751dede762122e49bae67f25a7d5d7",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1189,7 +1189,7 @@
     {
       "path": "scripts/build_visualization_plan.py",
       "baseline_sha256": "baf5d85df264a812165d4ba0fb534619e0ab5b9f3a601b8011955164358be954",
-      "current_sha256": "4a092af8b83d080e2c9751cdd1758a54881e1acb42f26423da812b8abb468ff6",
+      "current_sha256": "488b034dd5fde6b3680fe005e8946417870068467f57bd36e2aebf6a79a8f30c",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1315,7 +1315,7 @@
     {
       "path": "scripts/validate_measurement_platform_baseline.py",
       "baseline_sha256": "44c342a3da39bf050fa0e6def30502b357c79ce5bf04130e262646c0e6c12532",
-      "current_sha256": "9c7950e963396e582b6332fc20ce202b59e6af9e1cf886c6a2d9bf220f14ab95",
+      "current_sha256": "daeadc5af2fde036a5b58ea8a9f94ef050df2db8c7414507a0c28239d838ac43",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1450,7 +1450,7 @@
     {
       "path": "assets/vibecheck03-customer-admission-rules.v1.json",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "d2a5a9d3d4791aa8347ba0fa62d1742792ea66020dc2bdaf9c403d5549669bf3"
+      "current_sha256": "33ac736d5e388774776e08d865d5b175cce08047010f0d2341674554e0e9f373"
     },
     {
       "path": "assets/vibecheck03.acceptance-cases.v1.json",
@@ -1615,7 +1615,7 @@
     {
       "path": "scripts/legal_customer_projection.py",
       "reason": "INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "4feb2701b07967fb8b987b3f0e61f9f7f2b9df18c7a1b9edf261d6fe78e8ca18"
+      "current_sha256": "8ae05324e93f6f83c55fe101bdfe7d6b96c74c323acd519652a95f0890717958"
     },
     {
       "path": "scripts/materialize_core_metrics.py",
@@ -1738,6 +1738,11 @@
       "current_sha256": "a7512b85a00f70e4ea892b240aef3dbf5d27d5b748d930190f80cf77326eaf65"
     },
     {
+      "path": "tests/test_customer_label_fidelity.py",
+      "reason": "CUSTOMER_LABEL_FIDELITY_PATCH",
+      "current_sha256": "08b8056f89c6ae6dafee2b63be7f53b80e1e8a0ddd2d933fc82ad2c28565078c"
+    },
+    {
       "path": "tests/test_legacy_oracles.py",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
       "current_sha256": "1a9564af014b1ebfa1cbe7d96acbad808d17317df4d82df08e0d4a81c8e713ec"
@@ -1790,7 +1795,7 @@
     "added_file_count": 5,
     "deleted_file_count": 0,
     "current_modified": 72,
-    "current_added": 78,
+    "current_added": 79,
     "current_deleted": 0,
     "quality_patch": "CUSTOMER_PRESENTATION_QUALITY_GATE"
   },
@@ -1812,7 +1817,7 @@
     "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION",
     "protected_registry_and_scorer_unchanged": true
   },
-  "latest_patch": "RELEASE_COMPLETION_PATCH",
+  "latest_patch": "CUSTOMER_LABEL_FIDELITY_PATCH",
   "latest_patch_note": "Hash-bound preservation manifest carried forward by provenance layers (user-authorized 2026-10-28); baseline hashes remain unchanged.",
   "patch_layers": [
     {
@@ -2617,6 +2622,42 @@
           "path": "tests/test_positive_customer_e2e.py",
           "previous_sha256": null,
           "current_sha256": "83f3bafc4edc77e06998273171ada38692baf307c188f34478e29cab439e64da"
+        }
+      ]
+    },
+    {
+      "layer": "CUSTOMER_LABEL_FIDELITY_PATCH",
+      "source": "reports/customer-label-fidelity-shared-overrides.json (user authorization 2026-10-28)",
+      "transitions": [
+        {
+          "path": "assets/vibecheck03-customer-admission-rules.v1.json",
+          "previous_sha256": "d2a5a9d3d4791aa8347ba0fa62d1742792ea66020dc2bdaf9c403d5549669bf3",
+          "current_sha256": "33ac736d5e388774776e08d865d5b175cce08047010f0d2341674554e0e9f373"
+        },
+        {
+          "path": "scripts/build_client_report_model.py",
+          "previous_sha256": "d31c18aff27c006fbf8a60ebeba4356d1e154879f70eb5796fd0e506e941df2a",
+          "current_sha256": "3875b71e2e689fe90154889a7ebffb773e751dede762122e49bae67f25a7d5d7"
+        },
+        {
+          "path": "scripts/build_visualization_plan.py",
+          "previous_sha256": "4a092af8b83d080e2c9751cdd1758a54881e1acb42f26423da812b8abb468ff6",
+          "current_sha256": "488b034dd5fde6b3680fe005e8946417870068467f57bd36e2aebf6a79a8f30c"
+        },
+        {
+          "path": "scripts/legal_customer_projection.py",
+          "previous_sha256": "4feb2701b07967fb8b987b3f0e61f9f7f2b9df18c7a1b9edf261d6fe78e8ca18",
+          "current_sha256": "8ae05324e93f6f83c55fe101bdfe7d6b96c74c323acd519652a95f0890717958"
+        },
+        {
+          "path": "scripts/validate_measurement_platform_baseline.py",
+          "previous_sha256": "9c7950e963396e582b6332fc20ce202b59e6af9e1cf886c6a2d9bf220f14ab95",
+          "current_sha256": "daeadc5af2fde036a5b58ea8a9f94ef050df2db8c7414507a0c28239d838ac43"
+        },
+        {
+          "path": "tests/test_customer_label_fidelity.py",
+          "previous_sha256": null,
+          "current_sha256": "08b8056f89c6ae6dafee2b63be7f53b80e1e8a0ddd2d933fc82ad2c28565078c"
         }
       ]
     }

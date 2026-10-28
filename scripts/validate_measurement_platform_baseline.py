@@ -17,6 +17,10 @@ from pathlib import Path
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
 ALLOWED_REASON_PATHS = {
+    "CUSTOMER_LABEL_FIDELITY_PATCH": {
+        "scripts/build_visualization_plan.py",
+        "scripts/build_client_report_model.py",
+    },
     "CUSTOMER_SCOPE_STATEMENT_PATCH": {
         "templates/presentation.html.j2",
     },
@@ -87,6 +91,7 @@ OVERRIDE_REPORTS = (
     "reports/packaged-brand-font-shared-overrides.json",
     "reports/claim-scope-shared-overrides.json",
     "reports/customer-scope-statement-shared-overrides.json",
+    "reports/customer-label-fidelity-shared-overrides.json",
 )
 
 

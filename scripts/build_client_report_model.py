@@ -10,6 +10,7 @@ from typing import Any
 
 from client_story import clientize, confidence_de, plan_visual_story, select_client_levers
 from customer_story_semantics import presentation_metadata, semantic_story_summary
+from legal_customer_projection import vouches_for_contested_legal_surface
 from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority, selection_provenance
 
 SKILL_DIR = Path(__file__).resolve().parent.parent
@@ -180,11 +181,15 @@ def main(argv: list[str]) -> int:
             json.dumps(provenance, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
         )
 
-    strengths = [clientize(x, budget("executive_strength", 110)) for x in executive.get("top_strengths", []) if str(x).strip()][:3]
-    if len(strengths) < 3:
+    # A strength must not vouch for the legal/contact surface that a projected legal risk contests. A strength
+    # dropped for that reason leaves its slot empty: positive findings mirror the audit's own strengths.
+    supplied = [x for x in executive.get("top_strengths", []) if str(x).strip()]
+    strengths = [clientize(x, budget("executive_strength", 110)) for x in supplied
+                 if not vouches_for_contested_legal_surface(report, x)][:3]
+    if len(supplied) < 3:
         for f in positive:
             candidate = clientize(f.get("client_observation") or f.get("title"), budget("executive_strength", 110))
-            if candidate and candidate not in strengths:
+            if candidate and candidate not in strengths and not vouches_for_contested_legal_surface(report, candidate):
                 strengths.append(candidate)
             if len(strengths) == 3:
                 break
