@@ -52,6 +52,6 @@
     "ElevenLabs provider upload, live telephony, or legal outbound approval"
   ],
   "superseded": "previous evidence (12 pages, inspected by GPT-5.6 Sol, pdf 60777610...) belonged to an older semantic bundle",
-  "artifact_digest": "a815fb3a3016f4d4ae520bc43043f1ea2fe80b19ea6cf4302089ee71dbc19e46",
-  "candidate_commit": "92eb6c9"
+  "artifact_digest": "29802261f20ca35751ed6affc93312e62fd4d974064dce8546de89a3eaba0fb2",
+  "candidate_commit": "80ec6bd"
 }
