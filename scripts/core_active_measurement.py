@@ -223,10 +223,12 @@ def materialize_report(root: Path, base_report: dict[str, Any], bundle: dict[str
         else: status="unavailable"
         note="derived from active core execution bundle"
         if c["id"]=="public_page_render":
-            # A text-only observation can admit these metrics; record whether a browser render actually ran.
+            # A text-only observation can admit these metrics. source_family is declared by the bundle and no
+            # browser artifact is checked, so record the declared class only, never an executed/verified render.
             families=sorted({r["source_family"] for mid,r in result_by.items()
                              if reg_by[mid]["capability_id"]==c["id"] and r["execution_state"] in SCOREABLE})
-            note+=f"; browser_render_executed={'true' if 'BROWSER_RENDERING' in families else 'false'}; scoreable_source_families={','.join(families) or 'none'}"
+            note+=(f"; browser_rendering_source_declared={'true' if 'BROWSER_RENDERING' in families else 'false'}"
+                   f"; browser_execution_independently_verified=false; scoreable_source_families={','.join(families) or 'none'}")
         cap_rows.append({"id":c["id"],"status":status,"note":note})
     coverage=out.setdefault("coverage",{})
     coverage["capabilities"]=cap_rows

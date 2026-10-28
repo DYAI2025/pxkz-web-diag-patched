@@ -1,7 +1,8 @@
 """A text-only observation must not read as an executed browser render (PXK-BUG-002, bounded fix A).
 
-The capability status rule is unchanged (it feeds score admission); the public_page_render note records
-whether a browser render produced any admitted result and which source families did.
+The capability status rule is unchanged (it feeds score admission). source_family is declared by the
+execution bundle and no browser artifact is verified, so the public_page_render note records only the
+declared source class and states that browser execution is not independently verified.
 """
 from __future__ import annotations
 
@@ -27,13 +28,15 @@ def render_note(bundle: dict) -> dict:
 
 
 class CapabilityExecutionNoteTests(unittest.TestCase):
-    def test_note_reports_whether_a_browser_render_ran(self) -> None:
+    def test_note_reports_the_declared_source_class_only(self) -> None:
         families = {r["source_family"] for r in BUNDLE["results"]
                     if REGISTRY[r["metric_id"]]["capability_id"] == "public_page_render"}
         row = render_note(BUNDLE)
         self.assertEqual(row["status"], "available")
-        executed = "BROWSER_RENDERING" in families
-        self.assertIn(f"browser_render_executed={'true' if executed else 'false'}", row["note"])
+        declared = "BROWSER_RENDERING" in families
+        self.assertIn(f"browser_rendering_source_declared={'true' if declared else 'false'}", row["note"])
+        self.assertIn("browser_execution_independently_verified=false", row["note"])
+        self.assertNotIn("browser_render_executed", row["note"])
         self.assertIn("scoreable_source_families=", row["note"])
 
     def test_text_only_observation_is_not_reported_as_render(self) -> None:
@@ -49,7 +52,8 @@ class CapabilityExecutionNoteTests(unittest.TestCase):
                 evidence["source_family"] = "RULE_BASED_QUALITATIVE_OBSERVATION"
         row = render_note(bundle)
         self.assertEqual(row["status"], "available")  # admission is unchanged by design
-        self.assertIn("browser_render_executed=false", row["note"])
+        self.assertIn("browser_rendering_source_declared=false", row["note"])
+        self.assertIn("browser_execution_independently_verified=false", row["note"])
         self.assertIn("scoreable_source_families=RULE_BASED_QUALITATIVE_OBSERVATION", row["note"])
 
     def test_other_capability_notes_are_unchanged(self) -> None:

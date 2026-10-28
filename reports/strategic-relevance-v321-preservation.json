@@ -1039,7 +1039,7 @@
     {
       "path": "references/client-storytelling-contract.md",
       "baseline_sha256": "653cb38c6eeaae6a97a5c3fd7e542241b52053952618bd30f467ffbf8f51920d",
-      "current_sha256": "59d75affd7f6d9a96e484446037c6ffdafae9fad687b96e5ebdb9962677ec455",
+      "current_sha256": "e4c2d1ce8717b8306e12ccf679390fa2efddec63dbfc31ed27286cba9629d33f",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1058,7 +1058,7 @@
       "path": "references/installability-and-distribution.md",
       "baseline_sha256": "e4348bd4c2aa548eec8b1157b37ac00db11eb7941234cfe22faa111c91777e44",
       "reason": "PACKAGED_BRAND_FONT_PATCH",
-      "current_sha256": "bc0d1fe99ae21529f55acf53b1fe78ac38be5513f39cebb3e3fa6fb52d4d24a0"
+      "current_sha256": "5df02b87d0a10533eb4f8cfc3efd496f947ba21ec0f3b9b55b8a2ab9986652a2"
     },
     {
       "path": "references/internal-analysis-report-contract.md",
@@ -1237,7 +1237,7 @@
     {
       "path": "scripts/quick_validate.py",
       "baseline_sha256": "5b64359b1f387aa7ca3dcac89812783b98b3313256d950f958bc675a358084eb",
-      "current_sha256": "a68d8193a412f99d16c0d0d2007a32fd5f785e5c9e91daccd8689ebd1b43903b",
+      "current_sha256": "55f2a46bd988907b6c40d73e271e017f95b5f8460965010a807d81cc83ce7c09",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1315,7 +1315,7 @@
     {
       "path": "scripts/validate_measurement_platform_baseline.py",
       "baseline_sha256": "44c342a3da39bf050fa0e6def30502b357c79ce5bf04130e262646c0e6c12532",
-      "current_sha256": "63c72c41d040dc79c688f22df53eadc3274c29302d25e8282f564f0b6d38d147",
+      "current_sha256": "9c7950e963396e582b6332fc20ce202b59e6af9e1cf886c6a2d9bf220f14ab95",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1381,7 +1381,7 @@
     {
       "path": "templates/presentation.html.j2",
       "baseline_sha256": "71c4af5c66c59e9db107fc1f903e7527c93a3a4101d0693e33df9a9e6287fb02",
-      "current_sha256": "2b141092d49cbea389371f96fe35814974c4f9b64cfe04c0bc1e762a7033fecd",
+      "current_sha256": "3f55a096ed246ae2099d4bceda11ad38490d8daa837efb93d731ffe4496e9a44",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1529,13 +1529,18 @@
     },
     {
       "path": "references/strategic-relevance-customer-output-contract.md",
-      "current_sha256": "7923f35d9999c86da1ed467823f533d3e5c0428dc6ea4f4a6392b9d1432b8764",
+      "current_sha256": "0dd8d0ce6e0d30f89717ac65fbd81ac210348fdec9a50c23c01139df71494f4b",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH"
     },
     {
       "path": "references/vibecheck03-diagnostics.md",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
       "current_sha256": "7b24e5d3971d4a56be0d1fadb3a6e8470ee4d80d431be0a875f3347dcca8f531"
+    },
+    {
+      "path": "requirements.txt",
+      "reason": "RELEASE_COMPLETION_PATCH",
+      "current_sha256": "724e95e2b5d5a7866a0398b87e1a695cfc7ab43391c57b5bb31eadf9c0a1a6a0"
     },
     {
       "path": "schemas/branch-priority.schema.json",
@@ -1599,7 +1604,7 @@
     },
     {
       "path": "scripts/core_active_measurement.py",
-      "current_sha256": "2375f71f8f7da0462992674662daf7f51f8ecdeb08aa6ac61b6cf954e8687c98",
+      "current_sha256": "79a691e69a81c0312cb7b521585d0b3f251b28a8c5ef3fbf9f894c987815d66f",
       "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION"
     },
     {
@@ -1725,7 +1730,7 @@
     {
       "path": "tests/test_capability_execution_note.py",
       "reason": "CLAIM_SCOPE_AND_CAPABILITY_NOTE_PATCH",
-      "current_sha256": "b6eed8812d668ce14607cd3d9974a4af940341c7426ca9eb705bd9551ae4a128"
+      "current_sha256": "604eb362389db9a8d3cf16e0c5c0ef25de764ce3e3b0bfa3e0592efa1abcd573"
     },
     {
       "path": "tests/test_customer_claim_scope.py",
@@ -1751,6 +1756,11 @@
       "path": "tests/test_pdf_layout_gate.py",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
       "current_sha256": "364a7708f24518ae7d29d2fda7b12eaabb1bd7bb950083aa58d02952c4f9cd14"
+    },
+    {
+      "path": "tests/test_positive_customer_e2e.py",
+      "reason": "RELEASE_COMPLETION_PATCH",
+      "current_sha256": "83f3bafc4edc77e06998273171ada38692baf307c188f34478e29cab439e64da"
     },
     {
       "path": "tests/test_priority_pipeline.py",
@@ -1780,7 +1790,7 @@
     "added_file_count": 5,
     "deleted_file_count": 0,
     "current_modified": 72,
-    "current_added": 76,
+    "current_added": 78,
     "current_deleted": 0,
     "quality_patch": "CUSTOMER_PRESENTATION_QUALITY_GATE"
   },
@@ -1802,7 +1812,7 @@
     "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION",
     "protected_registry_and_scorer_unchanged": true
   },
-  "latest_patch": "CLAIM_SCOPE_AND_CAPABILITY_NOTE_PATCH",
+  "latest_patch": "RELEASE_COMPLETION_PATCH",
   "latest_patch_note": "Hash-bound preservation manifest carried forward by provenance layers (user-authorized 2026-10-28); baseline hashes remain unchanged.",
   "patch_layers": [
     {
@@ -2551,6 +2561,62 @@
           "path": "tests/test_legal_trust_boundary.py",
           "previous_sha256": "62b35f017f76e912feecca8088ba095c920062b1066531115212424fa2723f56",
           "current_sha256": "c85f19bfb6b5fc6a435398c05fd12faa86156d13a5da63dea0d43a46279b2a36"
+        }
+      ]
+    },
+    {
+      "layer": "RELEASE_COMPLETION_PATCH",
+      "source": "Release completion 2026-10-28: scope sentence (CUSTOMER_SCOPE_STATEMENT_PATCH, user-approved), truthful browser source-class note, requirements.txt + quick_validate requirement, contract/doc alignment, positive customer E2E test",
+      "transitions": [
+        {
+          "path": "references/client-storytelling-contract.md",
+          "previous_sha256": "59d75affd7f6d9a96e484446037c6ffdafae9fad687b96e5ebdb9962677ec455",
+          "current_sha256": "e4c2d1ce8717b8306e12ccf679390fa2efddec63dbfc31ed27286cba9629d33f"
+        },
+        {
+          "path": "references/installability-and-distribution.md",
+          "previous_sha256": "bc0d1fe99ae21529f55acf53b1fe78ac38be5513f39cebb3e3fa6fb52d4d24a0",
+          "current_sha256": "5df02b87d0a10533eb4f8cfc3efd496f947ba21ec0f3b9b55b8a2ab9986652a2"
+        },
+        {
+          "path": "references/strategic-relevance-customer-output-contract.md",
+          "previous_sha256": "7923f35d9999c86da1ed467823f533d3e5c0428dc6ea4f4a6392b9d1432b8764",
+          "current_sha256": "0dd8d0ce6e0d30f89717ac65fbd81ac210348fdec9a50c23c01139df71494f4b"
+        },
+        {
+          "path": "requirements.txt",
+          "previous_sha256": null,
+          "current_sha256": "724e95e2b5d5a7866a0398b87e1a695cfc7ab43391c57b5bb31eadf9c0a1a6a0"
+        },
+        {
+          "path": "scripts/core_active_measurement.py",
+          "previous_sha256": "2375f71f8f7da0462992674662daf7f51f8ecdeb08aa6ac61b6cf954e8687c98",
+          "current_sha256": "79a691e69a81c0312cb7b521585d0b3f251b28a8c5ef3fbf9f894c987815d66f"
+        },
+        {
+          "path": "scripts/quick_validate.py",
+          "previous_sha256": "a68d8193a412f99d16c0d0d2007a32fd5f785e5c9e91daccd8689ebd1b43903b",
+          "current_sha256": "55f2a46bd988907b6c40d73e271e017f95b5f8460965010a807d81cc83ce7c09"
+        },
+        {
+          "path": "scripts/validate_measurement_platform_baseline.py",
+          "previous_sha256": "63c72c41d040dc79c688f22df53eadc3274c29302d25e8282f564f0b6d38d147",
+          "current_sha256": "9c7950e963396e582b6332fc20ce202b59e6af9e1cf886c6a2d9bf220f14ab95"
+        },
+        {
+          "path": "templates/presentation.html.j2",
+          "previous_sha256": "2b141092d49cbea389371f96fe35814974c4f9b64cfe04c0bc1e762a7033fecd",
+          "current_sha256": "3f55a096ed246ae2099d4bceda11ad38490d8daa837efb93d731ffe4496e9a44"
+        },
+        {
+          "path": "tests/test_capability_execution_note.py",
+          "previous_sha256": "b6eed8812d668ce14607cd3d9974a4af940341c7426ca9eb705bd9551ae4a128",
+          "current_sha256": "604eb362389db9a8d3cf16e0c5c0ef25de764ce3e3b0bfa3e0592efa1abcd573"
+        },
+        {
+          "path": "tests/test_positive_customer_e2e.py",
+          "previous_sha256": null,
+          "current_sha256": "83f3bafc4edc77e06998273171ada38692baf307c188f34478e29cab439e64da"
         }
       ]
     }
