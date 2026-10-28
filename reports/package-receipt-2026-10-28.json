@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "packaged_at": "2026-10-28",
+  "package_commit": "0106b3d",
+  "candidate_code_commit": "e4a0cb6",
+  "build_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
+  "artifact": "skill.zip",
+  "sha256": "a9c1b4d54b0ba883ce1a384bbbb1607b2542ba6b0360d02e85cccd86d857470d",
+  "bytes": 1838587,
+  "built_from": "git archive 0106b3d extracted into an empty directory named pixelkiez-website-diagnosis; scripts/package_skill.py with an output directory outside the skill tree",
+  "packager_gates": [
+    "quick_validate PASS",
+    "validate_release_gate PASS",
+    "validate_pipeline_ledger PASS",
+    "validate_enterprise_skill_evaluation PASS"
+  ],
+  "verified_on_extracted_zip": {
+    "build_digest_equal": true,
+    "file_set_equals_git_tree_0106b3d": true,
+    "forbidden_entries": 0,
+    "local_path_hits": 0,
+    "gates": [
+      "quick_validate PASS",
+      "validate_release_gate PASS",
+      "validate_pipeline_ledger PASS",
+      "validate_installability PASS",
+      "validate_no_font_binaries PASS",
+      "validate_security_patterns PASS",
+      "validate_agent_agnostic PASS"
+    ],
+    "pytest": "125 passed"
+  },
+  "not_done": [
+    "merge",
+    "deployment",
+    "upload/installation in a ChatGPT or Claude workspace"
+  ],
+  "note": "This receipt is committed after packaging and is therefore not contained in skill.zip."
+}
