@@ -961,14 +961,14 @@
     {
       "path": "SKILL.md",
       "baseline_sha256": "dd7b983957a1fb16b6b4c5fe72db26a5530c29d91376296826092ccb9b303ccf",
-      "current_sha256": "8f8ebe6e4a1eae83e12f1300b2c1dc09a9ebc020023230fc425f96fecbe6c865",
-      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION"
+      "current_sha256": "10d864d70df2cd62c29844bbfcbbfa2ae054934ec1a9eee07ac3961a2224e86a",
+      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "assets/presentation.css",
       "baseline_sha256": "ffd55bb7baa0b458de6db423792842f2bd4c0ee6e061003f53823ef588955a23",
-      "current_sha256": "8bdca58dc66e84780a79bf0d914dc1625f5700d881703b6dc953fba8e2ae9332",
-      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE"
+      "current_sha256": "49a0f04b5a2b69da404dba2e7adff496a38f00ff6efcef1620a214ab5dbcf2d0",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "evals/output_evals.json",
@@ -997,20 +997,20 @@
     {
       "path": "references/client-storytelling-contract.md",
       "baseline_sha256": "653cb38c6eeaae6a97a5c3fd7e542241b52053952618bd30f467ffbf8f51920d",
-      "current_sha256": "737a4876fb4c6878127e1bbf2310b45f876535c172c080ddff5b94b43de2e25d",
-      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE"
+      "current_sha256": "d84e583fdcb692d6c22e2a285cda9e6847c973749db1c26bac8da8e376c70ff2",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "references/customer-warning-semiotics.md",
       "baseline_sha256": "f7d187543b0bd71126690fab3bcc71e5e49110742c2566027c30e47c7606c283",
-      "reason": "IMPRESSUM_COMPLIANCE_PATCH",
-      "current_sha256": "1fac4db815d569df159ee3f54ea545f1edea938bf244a0f01504c18d963e43ab"
+      "reason": "IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH",
+      "current_sha256": "2ab529f33036433903412e03b43d60b7fff69086583878c890a512246a1d285e"
     },
     {
       "path": "references/eval-design.md",
       "baseline_sha256": "52f82e404787749ed667435d473c03a9c13b7b1597b4f9edfd64ca7fec0d21a7",
-      "current_sha256": "35b418e21f1a66c99ddf67937c20c764ad58d942f309a4c69a75f27a30fd8800",
-      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION"
+      "current_sha256": "bb93f794d5d934231bac4f3227a16fc920d3d87febd0c67c0aa474f43e5bc703",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH"
     },
     {
       "path": "references/internal-analysis-report-contract.md",
@@ -1057,8 +1057,8 @@
     {
       "path": "references/source-map.md",
       "baseline_sha256": "4f769eb0c2dd591ee30f8f3f0f3d9db4ab5cf2a8e314aedf479c97d905cac103",
-      "current_sha256": "bb0f7b28a0b372e3e343b1c8f6b1ebb35727a8f4f157af51bd8bd93b3883af4b",
-      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION"
+      "current_sha256": "fcdda368cbe9f2c58140ecb0d7f85746d73555768eab39011145ac3f2da4b23b",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "references/source-policy.md",
@@ -1069,8 +1069,8 @@
     {
       "path": "schemas/analysis-report.schema.json",
       "baseline_sha256": "e4bae515cb9941da8e89bf81e7697f54972419c418333b126a7371156e2df756",
-      "current_sha256": "c206ec7a30fb3b6713cb40eb4389f76489baff09620bb1bc88ef2307f854a42e",
-      "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION"
+      "current_sha256": "e77dfd1f4fd61a54ee05ef8cf9ea2af2d7183fd19472ba89d829c4ddbef90abf",
+      "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "schemas/client-report.schema.json",
@@ -1079,16 +1079,22 @@
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE"
     },
     {
+      "path": "schemas/diagnosis-report.schema.json",
+      "baseline_sha256": "7fb5adef99df470054cd70dd101262e278553f96d1c03ea0714ca91d3869ab82",
+      "reason": "INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "3af3c246749698ba428e1817a34610d8bbf9099c0e14a026c128d73fe0378884"
+    },
+    {
       "path": "scripts/build_audit_deliverables.py",
       "baseline_sha256": "b8d3ba5536a2054d2545c17ef2868950597a2fdf7c01bf9dae2a4adf1bae203b",
-      "current_sha256": "58589b5fd21b4a9646b9a1cea4103203f96be173da10fe4d33df52d6026386bf",
-      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE"
+      "current_sha256": "3a7dfee0c0982033cc80f100c29bc90749a5bdd7db130149cf3bc59fa8d48c5e",
+      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "scripts/build_client_report_model.py",
       "baseline_sha256": "433a909ec9bb38b29a4864f468d2cdf66a4a83b1beef0fdada2f6db8716a538e",
-      "current_sha256": "40a52f92a870070c977eee0d75ea91b6b315fcf67ed6e23b21b35c129e73b9f9",
-      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE"
+      "current_sha256": "d31c18aff27c006fbf8a60ebeba4356d1e154879f70eb5796fd0e506e941df2a",
+      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "scripts/build_elevenlabs_batch_csv.py",
@@ -1099,20 +1105,20 @@
     {
       "path": "scripts/build_internal_analysis_report.py",
       "baseline_sha256": "53c753c07adf993ecc0aea3393ebe0cf5f7addb5c63ed12a8f0019b55e412ba0",
-      "current_sha256": "28b8cfecd2001df4675941a95792fd6bf7584029e2c8a62ff98c9bb3fff302be",
-      "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION"
+      "current_sha256": "c52f72f118a4cff3535c39a325b0c98e3721613ece750d3194b6f6749e0f287c",
+      "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "scripts/build_visualization_plan.py",
       "baseline_sha256": "baf5d85df264a812165d4ba0fb534619e0ab5b9f3a601b8011955164358be954",
-      "current_sha256": "49065426ff29f12c54572ee5004374b472b94e4dc820eaf6cd3b01267a74b655",
-      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE"
+      "current_sha256": "0a7446a230cd7955a245e0609b39ca2fd6137fea82ecca59a234af90c86cf4bc",
+      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "scripts/client_story.py",
       "baseline_sha256": "3798a2babca162db109ce7750b324b7e1c993eb1ba48f1ab0afe4bebba230b2d",
-      "current_sha256": "b0b835f2ef49fbb83ca0d9fab8e58074b66f5d30b6c6b65b1f1cf0786ab637e1",
-      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE"
+      "current_sha256": "30d766f3e5a98441c2b3e0224a37ae308377f14cf8eff89f15ecaadba6d47939",
+      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "scripts/create_customer_semantic_qa_manifest.py",
@@ -1135,14 +1141,14 @@
     {
       "path": "scripts/quick_validate.py",
       "baseline_sha256": "5b64359b1f387aa7ca3dcac89812783b98b3313256d950f958bc675a358084eb",
-      "current_sha256": "ff9bc7706b722292f8458ef72418bfe98324f85c508d5aa7c2bf31fcd536f268",
-      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + IMPRESSUM_COMPLIANCE_PATCH"
+      "current_sha256": "e179d5c954791627c2ab6f117014badd8eacf04f0d797d9bbed2de6425acdfc4",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "scripts/render_internal_analysis_markdown.py",
       "baseline_sha256": "b49eb6e0eb7f22befec9ff2a9f3c3ee2b941c31c4a6d7dadcfcdca045c0d39f3",
-      "current_sha256": "e6a3b53011815ae54a1f9440c17f33e580f5de6f7ba36b1d7dd1bddcd814cf87",
-      "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION"
+      "current_sha256": "d5c813b0e443fdb6098719c9fe1fe9e0df4aa2d5dd7dcd94efe654d692dcae60",
+      "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "scripts/run_client_marketing_evals.py",
@@ -1189,14 +1195,14 @@
     {
       "path": "scripts/validate_measurement_platform_baseline.py",
       "baseline_sha256": "44c342a3da39bf050fa0e6def30502b357c79ce5bf04130e262646c0e6c12532",
-      "current_sha256": "7b2c73d8ddc5e02739fb716b7b90e3330eae5fffa50beadc922bff10223dc521",
-      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + IMPRESSUM_COMPLIANCE_PATCH"
+      "current_sha256": "aa683a26dfaa95f2a3626efa8f4fe6331ff874ba79b692e27f9d1109449b867f",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "scripts/validate_pdf_output.py",
       "baseline_sha256": "eba03d7b80fa721b35f122853489b58709911e8335c99d551492dbc0907cdb50",
-      "current_sha256": "8923002b7a211fafae62a64295390f2ec34c52b45608645c87d63083e1a07a35",
-      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE"
+      "current_sha256": "a425a4d1acc04cb2731b50e686ea86f480fa27ca53e4d98a9d8b3de73811ec49",
+      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "scripts/validate_pdf_visual_qa.py",
@@ -1213,8 +1219,8 @@
     {
       "path": "scripts/validate_release_gate.py",
       "baseline_sha256": "4be8ea6b3782d72476621c95d25bda2930593c9d43a12c37552b4186b50b2de2",
-      "current_sha256": "6448bc86c78c084832c944ebdaebf4d8bf05ffde05cad432e0a15d7e5e2c9582",
-      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + IMPRESSUM_COMPLIANCE_PATCH"
+      "current_sha256": "1692b0dcf3d929560489b61512d5ecaa1de0a61bcaafd5c57d77aa069410ee2e",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "scripts/validate_schema.py",
@@ -1231,8 +1237,8 @@
     {
       "path": "scripts/validate_visualization_plan.py",
       "baseline_sha256": "4e2313ba7bc08d0f35b728c32826ad06e32932bc5a1989cadf82d0c8dcb7876a",
-      "current_sha256": "b5a4142ad4c2ece5a8db979b2ddf4bf2ab815c484e1b0da941aecb6114a2d0bf",
-      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE"
+      "current_sha256": "6a56ef0464fa0adf806711f2dcc8b573af347af9125cde19bc57af4110595222",
+      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH"
     },
     {
       "path": "templates/client-report-template.json",
@@ -1243,8 +1249,8 @@
     {
       "path": "templates/presentation.html.j2",
       "baseline_sha256": "71c4af5c66c59e9db107fc1f903e7527c93a3a4101d0693e33df9a9e6287fb02",
-      "current_sha256": "91ba7cfbf55e2d6b996f19f47f41aaf7dc86b796845b78d4a8cdacc4b195d7ae",
-      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE"
+      "current_sha256": "2b141092d49cbea389371f96fe35814974c4f9b64cfe04c0bc1e762a7033fecd",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "templates/visualizations/V03_TOP_LEVERS.vl.json",
@@ -1255,6 +1261,11 @@
   ],
   "added_files": [
     {
+      "path": "assets/branch-priority-profiles.v1.json",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "12da1c1fe16447e0a22099d6593dd621e7309fe55a552a9e1644d530dfab75ea"
+    },
+    {
       "path": "assets/core-evidence-bindings.active.v1.json",
       "current_sha256": "09a3b2e2ce8d6b264347af53e9423df87c367d4c475a97940cc24fb415927f09",
       "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION"
@@ -1263,6 +1274,41 @@
       "path": "assets/impressum-compliance-registry.v1.json",
       "reason": "IMPRESSUM_COMPLIANCE_PATCH",
       "current_sha256": "3bb9ddae00dbc07336fb2e165094ba41a0f466dfdea1f0fa36396fe1ece3038f"
+    },
+    {
+      "path": "assets/vibecheck03-customer-admission-rules.v1.json",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "d2a5a9d3d4791aa8347ba0fa62d1742792ea66020dc2bdaf9c403d5549669bf3"
+    },
+    {
+      "path": "assets/vibecheck03.acceptance-cases.v1.json",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "c83bbfaf24c2171e564522dba17f0a23acf0519c8513726ccf14b5856446e88b"
+    },
+    {
+      "path": "assets/vibecheck03.check-catalog.v1.json",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "bd74fb9f59ab4d48db9fe3ce219ccb91f85367701a2c8f8f41d967f4ae6eb01e"
+    },
+    {
+      "path": "enterprise-skill-patch-order-branch-priority.xml",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "dcb5d7a3177b5f6fab57f3f5d25b6e96e0728976dccf1e13630157e9b363fa71"
+    },
+    {
+      "path": "evals/fixtures/branch-priority-catalog.SYNTHETIC.json",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "32b0fac1d14f38e5e426a76173f40dadbcc95a00e2e79038c8038cdc211be06a"
+    },
+    {
+      "path": "evals/fixtures/branch-priority-context.SYNTHETIC.json",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "46ba170615d2744878fca1b8d5cb84bb1689b7f54f48835b75319131bea75e55"
+    },
+    {
+      "path": "evals/fixtures/branch-priority-tie-report.SYNTHETIC.json",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "6dec2060f60bba7bd512218b1d1301afe748d05d5ada357b564143c41ef4e0f3"
     },
     {
       "path": "evals/fixtures/full-48-active-golden-score.json",
@@ -1275,9 +1321,19 @@
       "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION"
     },
     {
+      "path": "evals/fixtures/golden/legacy-oracles.v1.json",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "dbf05714b9fb10b75a957e87d8e08e0e8ca78f5d56fd5d2614891c9c4451b189"
+    },
+    {
       "path": "evals/fixtures/impressum-compliance-cases.json",
-      "reason": "IMPRESSUM_COMPLIANCE_PATCH",
-      "current_sha256": "493b0e13309097118755b69b5ea5986814ff1fcc84b4dfe0c5d50bb525d700af"
+      "reason": "IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH",
+      "current_sha256": "9209d3f2722592c09f7f1effed201ecb71b3a64f465afb452d4eb08f65e45758"
+    },
+    {
+      "path": "references/branch-aware-customer-prioritization.md",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "c6040f358a946efbbb8f74c38c245d91c88df7ce1b62643284e1201cc67743b0"
     },
     {
       "path": "references/core-active-measurement-migration.md",
@@ -1286,13 +1342,13 @@
     },
     {
       "path": "references/customer-presentation-quality-contract.md",
-      "current_sha256": "f3fbeae77c3ecd40bb788c9622074da8ac4f3916451d7d82517d8934eec0380c",
-      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE"
+      "current_sha256": "c519c6701f71c7b250b08ba5779b6886c8e90909a6d458c5cc66757da57269dc",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH"
     },
     {
       "path": "references/impressum-compliance-method.md",
-      "reason": "IMPRESSUM_COMPLIANCE_PATCH",
-      "current_sha256": "6e20ec7057b18e89c29fc00c3ee4c402a5b7f31364f47ec567d253468f07d80a"
+      "reason": "IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH",
+      "current_sha256": "f3a45a5b2637a7c74c53bdde234fcd19ed2be1634d8c4e08e1958605a20d37da"
     },
     {
       "path": "references/impressum-legal-source-map.md",
@@ -1301,8 +1357,18 @@
     },
     {
       "path": "references/strategic-relevance-customer-output-contract.md",
-      "current_sha256": "e67eae53f9959190b993491100a4b54beb6f0cc23fcc6b4d52256b19485cac45",
-      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + IMPRESSUM_COMPLIANCE_PATCH"
+      "current_sha256": "7923f35d9999c86da1ed467823f533d3e5c0428dc6ea4f4a6392b9d1432b8764",
+      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH"
+    },
+    {
+      "path": "references/vibecheck03-diagnostics.md",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "7b24e5d3971d4a56be0d1fadb3a6e8470ee4d80d431be0a875f3347dcca8f531"
+    },
+    {
+      "path": "schemas/branch-priority.schema.json",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "8157d6146399d47ab920d4c52f496eb81792c1469187b5534045f1b7cf2fd89e"
     },
     {
       "path": "schemas/core-evidence-binding.schema.json",
@@ -1330,9 +1396,24 @@
       "current_sha256": "ce47b226056f278bbb7726672f234bc03ac9be98f332d2badcc020bc4b824f7e"
     },
     {
+      "path": "schemas/vibecheck03-diagnostics.schema.json",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "c66b66e8e2b40d349bd970673fed492f2380dc939fe24bfe86f410420c112c74"
+    },
+    {
       "path": "scripts/attach_impressum_findings.py",
-      "reason": "IMPRESSUM_COMPLIANCE_PATCH",
-      "current_sha256": "5cad355301af86374d419a3fdba7f833df79bf89ca6151014c089f4cdb2a8cec"
+      "reason": "IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH",
+      "current_sha256": "b0c3100da567cd8713c645fc74026b419dc0ab60a7050c67ceadb03d49cee916"
+    },
+    {
+      "path": "scripts/attach_vibecheck03_findings.py",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "257659c719c20d735e17e7c016484b62eb893176e3fb1ca442e5f31a8ce0a160"
+    },
+    {
+      "path": "scripts/branch_priority.py",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "20cf1e2a473f213a27d697d617ee41005c2d05208933c137a6ea9df0fcb79022"
     },
     {
       "path": "scripts/build_core_execution_matrix.py",
@@ -1350,9 +1431,19 @@
       "current_sha256": "b74492b1f4de5eb9040e94e1117e30a7120f529f9b4d1a66d90789236f7ad03a"
     },
     {
+      "path": "scripts/legal_customer_projection.py",
+      "reason": "INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH",
+      "current_sha256": "a4f5df992de0367f10bbb911ae32fd8c9d46488710eccad91907084ffaafdb65"
+    },
+    {
       "path": "scripts/materialize_core_metrics.py",
       "current_sha256": "d184f6c42571ab38d3112af2c0c7b7f4b1021001813b8daf3229639ec884e509",
       "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION"
+    },
+    {
+      "path": "scripts/run_branch_priority_evals.py",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "99aeb73e646b018f2dde4c147020d959c8a3369767cac9c36fc1ade1439c4733"
     },
     {
       "path": "scripts/run_customer_presentation_quality_evals.py",
@@ -1366,18 +1457,28 @@
     },
     {
       "path": "scripts/run_impressum_compliance_evals.py",
-      "reason": "IMPRESSUM_COMPLIANCE_PATCH",
-      "current_sha256": "bb72970a2261940aeb793a57fc07adf050e528f10be4b2e7148455a403dcc437"
+      "reason": "IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH",
+      "current_sha256": "0e853d42780986ccc166e7f7517380a220108d865b54560240b49e78916fda9d"
+    },
+    {
+      "path": "scripts/run_legal_customer_projection_evals.py",
+      "reason": "INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH",
+      "current_sha256": "9d88ac0397af048d4dbba5a41b6371385652cb9109fbcc1c1919615549a298c7"
     },
     {
       "path": "scripts/run_strategic_relevance_evals.py",
-      "current_sha256": "36e13b97e61c52830d3944d1de93e2bb2dd42ea1289287a43d4346e1a3416832",
-      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS"
+      "current_sha256": "268ea8b8b5e17dbabd9c8f1e41d289d4331fe9db80a94d10937a3a3e5e1256bc",
+      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH"
+    },
+    {
+      "path": "scripts/run_vc03_customer_release_evals.py",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "459847e8cc80b70a85be9261237cdff56d8da7255732bc9dd466d6e6562727bf"
     },
     {
       "path": "scripts/strategic_relevance.py",
-      "current_sha256": "b081073c54125643db2cc9e2a9c1ad8775d41d7f860f3619f551118f3a7b6cd4",
-      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS"
+      "current_sha256": "80c74a4bb4f94dbc88b9e2c6ce4c2a75808d88605c482f02a5e04098487c625e",
+      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "scripts/validate_core_evidence_bindings.py",
@@ -1401,13 +1502,13 @@
     },
     {
       "path": "scripts/validate_customer_presentation_quality.py",
-      "current_sha256": "e4932972d14ec54535fb072087d7e7e687f50a18b0375265c6c0f74ec1f05625",
-      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + IMPRESSUM_COMPLIANCE_PATCH"
+      "current_sha256": "90cbeafade1389385d3d9773150f7bb51eadd6f045181a2630585d4127ac1bd4",
+      "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH"
     },
     {
       "path": "scripts/validate_full_48_active.py",
-      "current_sha256": "1ca65b69396575a1f39ba2f41d5935140b49eb0043dc8856cba0d74925e7b08c",
-      "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION"
+      "current_sha256": "8134b9e22775b7b847ee1206f4c9b1c15c79f0cfcba529c1db0510d2a569e9dd",
+      "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
       "path": "scripts/validate_impressum_compliance.py",
@@ -1420,9 +1521,64 @@
       "current_sha256": "41a35f2cfbe7a8e289ee4b02191468b41bb764aee4771cab7cc8bd1974aabd13"
     },
     {
+      "path": "scripts/validate_impressum_projection.py",
+      "reason": "INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "0c403a33600198e01030d63f5094f938f44fd50d56d1747c79d15b789db2f17d"
+    },
+    {
       "path": "scripts/validate_strategic_relevance_v321_preservation.py",
-      "current_sha256": "5f51e7debd2d5be8e95070f65f33e20a95a5f1b05008bf83d24f1d18fece75c1",
-      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS"
+      "current_sha256": "e6c4161eb90c4e38a52a20bf770b92acbb527205b9ab5c4061925e18c4c12a31",
+      "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
+    },
+    {
+      "path": "scripts/vibecheck03.py",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "585fcf5f6847cd4a461b0632a4990a3b4be66bca389cc498ecff31d85abaae44"
+    },
+    {
+      "path": "scripts/vibecheck03_admission.py",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "65af05c9561accc51d12e3d309b681bf93484ee75df571c4029510a969f4009f"
+    },
+    {
+      "path": "tests/test_branch_priority.py",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "40e89586e1f6756e0ebd9717832dd434dede62ff6635eb123d00f72549ae2eef"
+    },
+    {
+      "path": "tests/test_legacy_oracles.py",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "1a9564af014b1ebfa1cbe7d96acbad808d17317df4d82df08e0d4a81c8e713ec"
+    },
+    {
+      "path": "tests/test_legal_trust_boundary.py",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "1ff3e4d64fcf57b01d9209b2c890b4875573a03bdb7158a9253a22e50f6fd676"
+    },
+    {
+      "path": "tests/test_pdf_layout_gate.py",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "9f616f162678d3d8db85ef88713354ac2bb3017afccdaef27882f99d351ec4b8"
+    },
+    {
+      "path": "tests/test_priority_pipeline.py",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "8cd1b24b9a6933affd147282f8821d41bb52b40f3e6cbe4addd463dfc3ddd5ba"
+    },
+    {
+      "path": "tests/test_release_evidence_boundaries.py",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "95e4c4704f7f06881296f83e3e224fa855b3a17228ed5f192e686bb1c813dae9"
+    },
+    {
+      "path": "tests/test_vibecheck03.py",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "728fa8fc19a4f1e3ec0d88ca4070cc005b6ec5164f563f89c90b4f136ccdc2aa"
+    },
+    {
+      "path": "tests/test_vibecheck03_admission.py",
+      "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "e12d53130c3a984df1fa4185b8a84fc8c98fddc2f5d44344995de90cdc5febd8"
     }
   ],
   "deleted_files": [],
@@ -1431,8 +1587,8 @@
     "modified_file_count": 22,
     "added_file_count": 5,
     "deleted_file_count": 0,
-    "current_modified": 34,
-    "current_added": 8,
+    "current_modified": 50,
+    "current_added": 64,
     "current_deleted": 0,
     "quality_patch": "CUSTOMER_PRESENTATION_QUALITY_GATE"
   },
@@ -1445,7 +1601,7 @@
     "14-template visual catalog",
     "Customer Closing capability"
   ],
-  "modified_file_count": 34,
+  "modified_file_count": 50,
   "current_active_migration_digest": "1a9c862edfce24d6193273049eebed12e0fa87312d98497bb835ebb4245f1e91",
   "active_migration_delta": {
     "baseline_tree_digest": "dbe282325a1ebd1acaaa0b02c822037a235e573e548e39b0a36ae96ad60569f2",
@@ -1454,6 +1610,391 @@
     "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION",
     "protected_registry_and_scorer_unchanged": true
   },
-  "latest_patch": "IMPRESSUM_COMPLIANCE_PATCH",
-  "latest_patch_note": "Hash-bound preservation manifest updated for the authorized additive Impressum patch; baseline hashes remain unchanged."
+  "latest_patch": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+  "latest_patch_note": "Hash-bound preservation manifest carried forward by provenance layers (user-authorized 2026-10-28); baseline hashes remain unchanged.",
+  "patch_layers": [
+    {
+      "layer": "INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH",
+      "source": "pixelkiez-website-diagnosis-ROLLBACK-BASELINE.zip sha256 0ba0bc673b1bb681483e9195098a07f116dce5edcd238c8387ed83ff372982aa",
+      "transitions": [
+        {
+          "path": "SKILL.md",
+          "previous_sha256": "8f8ebe6e4a1eae83e12f1300b2c1dc09a9ebc020023230fc425f96fecbe6c865",
+          "current_sha256": "e64df28533515c79caad4be49e215f0ca80ca140a8dc13e53f2864f180d69398"
+        },
+        {
+          "path": "assets/presentation.css",
+          "previous_sha256": "8bdca58dc66e84780a79bf0d914dc1625f5700d881703b6dc953fba8e2ae9332",
+          "current_sha256": "4ede1e7f15d895c247dfe0aef2f3d443048d2b7ad2f896edc559429a225e846a"
+        },
+        {
+          "path": "evals/fixtures/impressum-compliance-cases.json",
+          "previous_sha256": "493b0e13309097118755b69b5ea5986814ff1fcc84b4dfe0c5d50bb525d700af",
+          "current_sha256": "9209d3f2722592c09f7f1effed201ecb71b3a64f465afb452d4eb08f65e45758"
+        },
+        {
+          "path": "references/customer-presentation-quality-contract.md",
+          "previous_sha256": "f3fbeae77c3ecd40bb788c9622074da8ac4f3916451d7d82517d8934eec0380c",
+          "current_sha256": "c519c6701f71c7b250b08ba5779b6886c8e90909a6d458c5cc66757da57269dc"
+        },
+        {
+          "path": "references/customer-warning-semiotics.md",
+          "previous_sha256": "1fac4db815d569df159ee3f54ea545f1edea938bf244a0f01504c18d963e43ab",
+          "current_sha256": "2ab529f33036433903412e03b43d60b7fff69086583878c890a512246a1d285e"
+        },
+        {
+          "path": "references/eval-design.md",
+          "previous_sha256": "35b418e21f1a66c99ddf67937c20c764ad58d942f309a4c69a75f27a30fd8800",
+          "current_sha256": "bb93f794d5d934231bac4f3227a16fc920d3d87febd0c67c0aa474f43e5bc703"
+        },
+        {
+          "path": "references/impressum-compliance-method.md",
+          "previous_sha256": "6e20ec7057b18e89c29fc00c3ee4c402a5b7f31364f47ec567d253468f07d80a",
+          "current_sha256": "f3a45a5b2637a7c74c53bdde234fcd19ed2be1634d8c4e08e1958605a20d37da"
+        },
+        {
+          "path": "references/source-map.md",
+          "previous_sha256": "bb0f7b28a0b372e3e343b1c8f6b1ebb35727a8f4f157af51bd8bd93b3883af4b",
+          "current_sha256": "9a6dc42dd085ebae4aea48bc606c3fcfe69a2b26c1d809f58f1f26c9ce299b62"
+        },
+        {
+          "path": "references/strategic-relevance-customer-output-contract.md",
+          "previous_sha256": "e67eae53f9959190b993491100a4b54beb6f0cc23fcc6b4d52256b19485cac45",
+          "current_sha256": "7923f35d9999c86da1ed467823f533d3e5c0428dc6ea4f4a6392b9d1432b8764"
+        },
+        {
+          "path": "schemas/diagnosis-report.schema.json",
+          "previous_sha256": "7fb5adef99df470054cd70dd101262e278553f96d1c03ea0714ca91d3869ab82",
+          "current_sha256": "06f80e0a70718619fc371f39f28c900beada406ad5532cf0bc76198d7d0f4c50"
+        },
+        {
+          "path": "scripts/attach_impressum_findings.py",
+          "previous_sha256": "5cad355301af86374d419a3fdba7f833df79bf89ca6151014c089f4cdb2a8cec",
+          "current_sha256": "b0c3100da567cd8713c645fc74026b419dc0ab60a7050c67ceadb03d49cee916"
+        },
+        {
+          "path": "scripts/build_audit_deliverables.py",
+          "previous_sha256": "58589b5fd21b4a9646b9a1cea4103203f96be173da10fe4d33df52d6026386bf",
+          "current_sha256": "9f2377910e17d918dde2827b060fce218f7aef71647f61a0d2853746d86f07e3"
+        },
+        {
+          "path": "scripts/build_client_report_model.py",
+          "previous_sha256": "40a52f92a870070c977eee0d75ea91b6b315fcf67ed6e23b21b35c129e73b9f9",
+          "current_sha256": "5a3c1c8a1a78cb2134aea3608fe0e17b9e5a1bac1cfd320d975d6b100edabce9"
+        },
+        {
+          "path": "scripts/client_story.py",
+          "previous_sha256": "b0b835f2ef49fbb83ca0d9fab8e58074b66f5d30b6c6b65b1f1cf0786ab637e1",
+          "current_sha256": "d732f8a2ba9d091b8dbe176d865fc4bcce093797422e6ac1012551e200835f5c"
+        },
+        {
+          "path": "scripts/legal_customer_projection.py",
+          "previous_sha256": null,
+          "current_sha256": "a4f5df992de0367f10bbb911ae32fd8c9d46488710eccad91907084ffaafdb65"
+        },
+        {
+          "path": "scripts/quick_validate.py",
+          "previous_sha256": "ff9bc7706b722292f8458ef72418bfe98324f85c508d5aa7c2bf31fcd536f268",
+          "current_sha256": "aa59fd9a9cfdca1581e8ce78dec176abe17de8f813019e970118f37795bd6029"
+        },
+        {
+          "path": "scripts/run_impressum_compliance_evals.py",
+          "previous_sha256": "bb72970a2261940aeb793a57fc07adf050e528f10be4b2e7148455a403dcc437",
+          "current_sha256": "0e853d42780986ccc166e7f7517380a220108d865b54560240b49e78916fda9d"
+        },
+        {
+          "path": "scripts/run_legal_customer_projection_evals.py",
+          "previous_sha256": null,
+          "current_sha256": "9d88ac0397af048d4dbba5a41b6371385652cb9109fbcc1c1919615549a298c7"
+        },
+        {
+          "path": "scripts/run_strategic_relevance_evals.py",
+          "previous_sha256": "36e13b97e61c52830d3944d1de93e2bb2dd42ea1289287a43d4346e1a3416832",
+          "current_sha256": "268ea8b8b5e17dbabd9c8f1e41d289d4331fe9db80a94d10937a3a3e5e1256bc"
+        },
+        {
+          "path": "scripts/strategic_relevance.py",
+          "previous_sha256": "b081073c54125643db2cc9e2a9c1ad8775d41d7f860f3619f551118f3a7b6cd4",
+          "current_sha256": "d8204aad515a2097a34623e53b7474f46e8bef836a8fb7b46b2448fd6c514669"
+        },
+        {
+          "path": "scripts/validate_customer_presentation_quality.py",
+          "previous_sha256": "e4932972d14ec54535fb072087d7e7e687f50a18b0375265c6c0f74ec1f05625",
+          "current_sha256": "90cbeafade1389385d3d9773150f7bb51eadd6f045181a2630585d4127ac1bd4"
+        },
+        {
+          "path": "scripts/validate_impressum_projection.py",
+          "previous_sha256": null,
+          "current_sha256": "6170238ec423e537f3867a723432d512d87ed2e099e9ca44840dc6e7cad2f5e0"
+        },
+        {
+          "path": "scripts/validate_measurement_platform_baseline.py",
+          "previous_sha256": "7b2c73d8ddc5e02739fb716b7b90e3330eae5fffa50beadc922bff10223dc521",
+          "current_sha256": "23dc0660ed1ecf920590a57ba1cb2a75801a2975546c3c9e17282c1ad7998939"
+        },
+        {
+          "path": "scripts/validate_release_gate.py",
+          "previous_sha256": "6448bc86c78c084832c944ebdaebf4d8bf05ffde05cad432e0a15d7e5e2c9582",
+          "current_sha256": "27241652c8d77ae0e7d5ff945607a6bf8ae85b3482bedbf9c952d863db37ce33"
+        },
+        {
+          "path": "scripts/validate_visualization_plan.py",
+          "previous_sha256": "b5a4142ad4c2ece5a8db979b2ddf4bf2ab815c484e1b0da941aecb6114a2d0bf",
+          "current_sha256": "6a56ef0464fa0adf806711f2dcc8b573af347af9125cde19bc57af4110595222"
+        },
+        {
+          "path": "templates/presentation.html.j2",
+          "previous_sha256": "91ba7cfbf55e2d6b996f19f47f41aaf7dc86b796845b78d4a8cdacc4b195d7ae",
+          "current_sha256": "d375b0df2818297bf1372f38d3080a73fb7fda798f24b614f21d004f48e20737"
+        }
+      ]
+    },
+    {
+      "layer": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "source": "candidate tree (git archive of the release candidate commit)",
+      "transitions": [
+        {
+          "path": "SKILL.md",
+          "previous_sha256": "e64df28533515c79caad4be49e215f0ca80ca140a8dc13e53f2864f180d69398",
+          "current_sha256": "10d864d70df2cd62c29844bbfcbbfa2ae054934ec1a9eee07ac3961a2224e86a"
+        },
+        {
+          "path": "assets/branch-priority-profiles.v1.json",
+          "previous_sha256": null,
+          "current_sha256": "12da1c1fe16447e0a22099d6593dd621e7309fe55a552a9e1644d530dfab75ea"
+        },
+        {
+          "path": "assets/presentation.css",
+          "previous_sha256": "4ede1e7f15d895c247dfe0aef2f3d443048d2b7ad2f896edc559429a225e846a",
+          "current_sha256": "49a0f04b5a2b69da404dba2e7adff496a38f00ff6efcef1620a214ab5dbcf2d0"
+        },
+        {
+          "path": "assets/vibecheck03-customer-admission-rules.v1.json",
+          "previous_sha256": null,
+          "current_sha256": "d2a5a9d3d4791aa8347ba0fa62d1742792ea66020dc2bdaf9c403d5549669bf3"
+        },
+        {
+          "path": "assets/vibecheck03.acceptance-cases.v1.json",
+          "previous_sha256": null,
+          "current_sha256": "c83bbfaf24c2171e564522dba17f0a23acf0519c8513726ccf14b5856446e88b"
+        },
+        {
+          "path": "assets/vibecheck03.check-catalog.v1.json",
+          "previous_sha256": null,
+          "current_sha256": "bd74fb9f59ab4d48db9fe3ce219ccb91f85367701a2c8f8f41d967f4ae6eb01e"
+        },
+        {
+          "path": "enterprise-skill-patch-order-branch-priority.xml",
+          "previous_sha256": null,
+          "current_sha256": "dcb5d7a3177b5f6fab57f3f5d25b6e96e0728976dccf1e13630157e9b363fa71"
+        },
+        {
+          "path": "evals/fixtures/branch-priority-catalog.SYNTHETIC.json",
+          "previous_sha256": null,
+          "current_sha256": "32b0fac1d14f38e5e426a76173f40dadbcc95a00e2e79038c8038cdc211be06a"
+        },
+        {
+          "path": "evals/fixtures/branch-priority-context.SYNTHETIC.json",
+          "previous_sha256": null,
+          "current_sha256": "46ba170615d2744878fca1b8d5cb84bb1689b7f54f48835b75319131bea75e55"
+        },
+        {
+          "path": "evals/fixtures/branch-priority-tie-report.SYNTHETIC.json",
+          "previous_sha256": null,
+          "current_sha256": "6dec2060f60bba7bd512218b1d1301afe748d05d5ada357b564143c41ef4e0f3"
+        },
+        {
+          "path": "evals/fixtures/golden/legacy-oracles.v1.json",
+          "previous_sha256": null,
+          "current_sha256": "dbf05714b9fb10b75a957e87d8e08e0e8ca78f5d56fd5d2614891c9c4451b189"
+        },
+        {
+          "path": "references/branch-aware-customer-prioritization.md",
+          "previous_sha256": null,
+          "current_sha256": "c6040f358a946efbbb8f74c38c245d91c88df7ce1b62643284e1201cc67743b0"
+        },
+        {
+          "path": "references/client-storytelling-contract.md",
+          "previous_sha256": "737a4876fb4c6878127e1bbf2310b45f876535c172c080ddff5b94b43de2e25d",
+          "current_sha256": "d84e583fdcb692d6c22e2a285cda9e6847c973749db1c26bac8da8e376c70ff2"
+        },
+        {
+          "path": "references/source-map.md",
+          "previous_sha256": "9a6dc42dd085ebae4aea48bc606c3fcfe69a2b26c1d809f58f1f26c9ce299b62",
+          "current_sha256": "fcdda368cbe9f2c58140ecb0d7f85746d73555768eab39011145ac3f2da4b23b"
+        },
+        {
+          "path": "references/vibecheck03-diagnostics.md",
+          "previous_sha256": null,
+          "current_sha256": "7b24e5d3971d4a56be0d1fadb3a6e8470ee4d80d431be0a875f3347dcca8f531"
+        },
+        {
+          "path": "schemas/analysis-report.schema.json",
+          "previous_sha256": "c206ec7a30fb3b6713cb40eb4389f76489baff09620bb1bc88ef2307f854a42e",
+          "current_sha256": "e77dfd1f4fd61a54ee05ef8cf9ea2af2d7183fd19472ba89d829c4ddbef90abf"
+        },
+        {
+          "path": "schemas/branch-priority.schema.json",
+          "previous_sha256": null,
+          "current_sha256": "8157d6146399d47ab920d4c52f496eb81792c1469187b5534045f1b7cf2fd89e"
+        },
+        {
+          "path": "schemas/diagnosis-report.schema.json",
+          "previous_sha256": "06f80e0a70718619fc371f39f28c900beada406ad5532cf0bc76198d7d0f4c50",
+          "current_sha256": "3af3c246749698ba428e1817a34610d8bbf9099c0e14a026c128d73fe0378884"
+        },
+        {
+          "path": "schemas/vibecheck03-diagnostics.schema.json",
+          "previous_sha256": null,
+          "current_sha256": "c66b66e8e2b40d349bd970673fed492f2380dc939fe24bfe86f410420c112c74"
+        },
+        {
+          "path": "scripts/attach_vibecheck03_findings.py",
+          "previous_sha256": null,
+          "current_sha256": "257659c719c20d735e17e7c016484b62eb893176e3fb1ca442e5f31a8ce0a160"
+        },
+        {
+          "path": "scripts/branch_priority.py",
+          "previous_sha256": null,
+          "current_sha256": "20cf1e2a473f213a27d697d617ee41005c2d05208933c137a6ea9df0fcb79022"
+        },
+        {
+          "path": "scripts/build_audit_deliverables.py",
+          "previous_sha256": "9f2377910e17d918dde2827b060fce218f7aef71647f61a0d2853746d86f07e3",
+          "current_sha256": "3a7dfee0c0982033cc80f100c29bc90749a5bdd7db130149cf3bc59fa8d48c5e"
+        },
+        {
+          "path": "scripts/build_client_report_model.py",
+          "previous_sha256": "5a3c1c8a1a78cb2134aea3608fe0e17b9e5a1bac1cfd320d975d6b100edabce9",
+          "current_sha256": "d31c18aff27c006fbf8a60ebeba4356d1e154879f70eb5796fd0e506e941df2a"
+        },
+        {
+          "path": "scripts/build_internal_analysis_report.py",
+          "previous_sha256": "28b8cfecd2001df4675941a95792fd6bf7584029e2c8a62ff98c9bb3fff302be",
+          "current_sha256": "c52f72f118a4cff3535c39a325b0c98e3721613ece750d3194b6f6749e0f287c"
+        },
+        {
+          "path": "scripts/build_visualization_plan.py",
+          "previous_sha256": "49065426ff29f12c54572ee5004374b472b94e4dc820eaf6cd3b01267a74b655",
+          "current_sha256": "0a7446a230cd7955a245e0609b39ca2fd6137fea82ecca59a234af90c86cf4bc"
+        },
+        {
+          "path": "scripts/client_story.py",
+          "previous_sha256": "d732f8a2ba9d091b8dbe176d865fc4bcce093797422e6ac1012551e200835f5c",
+          "current_sha256": "30d766f3e5a98441c2b3e0224a37ae308377f14cf8eff89f15ecaadba6d47939"
+        },
+        {
+          "path": "scripts/quick_validate.py",
+          "previous_sha256": "aa59fd9a9cfdca1581e8ce78dec176abe17de8f813019e970118f37795bd6029",
+          "current_sha256": "e179d5c954791627c2ab6f117014badd8eacf04f0d797d9bbed2de6425acdfc4"
+        },
+        {
+          "path": "scripts/render_internal_analysis_markdown.py",
+          "previous_sha256": "e6a3b53011815ae54a1f9440c17f33e580f5de6f7ba36b1d7dd1bddcd814cf87",
+          "current_sha256": "d5c813b0e443fdb6098719c9fe1fe9e0df4aa2d5dd7dcd94efe654d692dcae60"
+        },
+        {
+          "path": "scripts/run_branch_priority_evals.py",
+          "previous_sha256": null,
+          "current_sha256": "99aeb73e646b018f2dde4c147020d959c8a3369767cac9c36fc1ade1439c4733"
+        },
+        {
+          "path": "scripts/run_vc03_customer_release_evals.py",
+          "previous_sha256": null,
+          "current_sha256": "459847e8cc80b70a85be9261237cdff56d8da7255732bc9dd466d6e6562727bf"
+        },
+        {
+          "path": "scripts/strategic_relevance.py",
+          "previous_sha256": "d8204aad515a2097a34623e53b7474f46e8bef836a8fb7b46b2448fd6c514669",
+          "current_sha256": "80c74a4bb4f94dbc88b9e2c6ce4c2a75808d88605c482f02a5e04098487c625e"
+        },
+        {
+          "path": "scripts/validate_full_48_active.py",
+          "previous_sha256": "1ca65b69396575a1f39ba2f41d5935140b49eb0043dc8856cba0d74925e7b08c",
+          "current_sha256": "8134b9e22775b7b847ee1206f4c9b1c15c79f0cfcba529c1db0510d2a569e9dd"
+        },
+        {
+          "path": "scripts/validate_impressum_projection.py",
+          "previous_sha256": "6170238ec423e537f3867a723432d512d87ed2e099e9ca44840dc6e7cad2f5e0",
+          "current_sha256": "0c403a33600198e01030d63f5094f938f44fd50d56d1747c79d15b789db2f17d"
+        },
+        {
+          "path": "scripts/validate_measurement_platform_baseline.py",
+          "previous_sha256": "23dc0660ed1ecf920590a57ba1cb2a75801a2975546c3c9e17282c1ad7998939",
+          "current_sha256": "aa683a26dfaa95f2a3626efa8f4fe6331ff874ba79b692e27f9d1109449b867f"
+        },
+        {
+          "path": "scripts/validate_pdf_output.py",
+          "previous_sha256": "8923002b7a211fafae62a64295390f2ec34c52b45608645c87d63083e1a07a35",
+          "current_sha256": "a425a4d1acc04cb2731b50e686ea86f480fa27ca53e4d98a9d8b3de73811ec49"
+        },
+        {
+          "path": "scripts/validate_release_gate.py",
+          "previous_sha256": "27241652c8d77ae0e7d5ff945607a6bf8ae85b3482bedbf9c952d863db37ce33",
+          "current_sha256": "1692b0dcf3d929560489b61512d5ecaa1de0a61bcaafd5c57d77aa069410ee2e"
+        },
+        {
+          "path": "scripts/validate_strategic_relevance_v321_preservation.py",
+          "previous_sha256": "5f51e7debd2d5be8e95070f65f33e20a95a5f1b05008bf83d24f1d18fece75c1",
+          "current_sha256": "e6c4161eb90c4e38a52a20bf770b92acbb527205b9ab5c4061925e18c4c12a31"
+        },
+        {
+          "path": "scripts/vibecheck03.py",
+          "previous_sha256": null,
+          "current_sha256": "585fcf5f6847cd4a461b0632a4990a3b4be66bca389cc498ecff31d85abaae44"
+        },
+        {
+          "path": "scripts/vibecheck03_admission.py",
+          "previous_sha256": null,
+          "current_sha256": "65af05c9561accc51d12e3d309b681bf93484ee75df571c4029510a969f4009f"
+        },
+        {
+          "path": "templates/presentation.html.j2",
+          "previous_sha256": "d375b0df2818297bf1372f38d3080a73fb7fda798f24b614f21d004f48e20737",
+          "current_sha256": "2b141092d49cbea389371f96fe35814974c4f9b64cfe04c0bc1e762a7033fecd"
+        },
+        {
+          "path": "tests/test_branch_priority.py",
+          "previous_sha256": null,
+          "current_sha256": "40e89586e1f6756e0ebd9717832dd434dede62ff6635eb123d00f72549ae2eef"
+        },
+        {
+          "path": "tests/test_legacy_oracles.py",
+          "previous_sha256": null,
+          "current_sha256": "1a9564af014b1ebfa1cbe7d96acbad808d17317df4d82df08e0d4a81c8e713ec"
+        },
+        {
+          "path": "tests/test_legal_trust_boundary.py",
+          "previous_sha256": null,
+          "current_sha256": "1ff3e4d64fcf57b01d9209b2c890b4875573a03bdb7158a9253a22e50f6fd676"
+        },
+        {
+          "path": "tests/test_pdf_layout_gate.py",
+          "previous_sha256": null,
+          "current_sha256": "9f616f162678d3d8db85ef88713354ac2bb3017afccdaef27882f99d351ec4b8"
+        },
+        {
+          "path": "tests/test_priority_pipeline.py",
+          "previous_sha256": null,
+          "current_sha256": "8cd1b24b9a6933affd147282f8821d41bb52b40f3e6cbe4addd463dfc3ddd5ba"
+        },
+        {
+          "path": "tests/test_release_evidence_boundaries.py",
+          "previous_sha256": null,
+          "current_sha256": "95e4c4704f7f06881296f83e3e224fa855b3a17228ed5f192e686bb1c813dae9"
+        },
+        {
+          "path": "tests/test_vibecheck03.py",
+          "previous_sha256": null,
+          "current_sha256": "728fa8fc19a4f1e3ec0d88ca4070cc005b6ec5164f563f89c90b4f136ccdc2aa"
+        },
+        {
+          "path": "tests/test_vibecheck03_admission.py",
+          "previous_sha256": null,
+          "current_sha256": "e12d53130c3a984df1fa4185b8a84fc8c98fddc2f5d44344995de90cdc5febd8"
+        }
+      ]
+    }
+  ],
+  "generator": "reports/override-evidence/build_v321_preservation_layers.py"
 }
