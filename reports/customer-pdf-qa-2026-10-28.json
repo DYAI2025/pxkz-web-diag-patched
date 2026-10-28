@@ -3,9 +3,9 @@
   "inspected_at": "2026-10-28",
   "inspection_method": "agent_vision",
   "inspected_by": "Claude Opus 5.5 (main session; not an independent evaluator)",
-  "candidate_artifact_digest": "29802261f20ca35751ed6affc93312e62fd4d974064dce8546de89a3eaba0fb2",
+  "candidate_artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
   "semantic_bundle_sha256": "082325992478c88b16c7f2b8c67372e065473ba8e469c78cdae6cf7e37903041",
-  "render_basis": "git archive of candidate commit 92eb6c9; PDFs re-render deterministically (sha-identical across renders). Pages unchanged since the 456c226 inspection are verified identical by raster comparison (72 dpi) and keep their inspection; changed pages (Baumdienst p5, legal p6, p7) were re-inspected. Candidate 80ec6bd changes no rendering code; all six PDFs re-rendered from its git archive are byte-identical (cmp) to the inspected 92eb6c9 renders.",
+  "render_basis": "git archive of candidate commit 92eb6c9; PDFs re-render deterministically (sha-identical across renders). Pages unchanged since the 456c226 inspection are verified identical by raster comparison (72 dpi) and keep their inspection; changed pages (Baumdienst p5, legal p6, p7) were re-inspected. Candidates 80ec6bd and e4a0cb6 change no rendering code; all six PDFs re-rendered from each git archive are byte-identical (cmp, 6/6) to the inspected 92eb6c9 renders.",
   "cases": [
     {
       "case": "baumdienst-renner",
@@ -348,5 +348,5 @@
     "commercial effect",
     "legal compliance"
   ],
-  "candidate_commit": "80ec6bd"
+  "candidate_commit": "e4a0cb6"
 }

@@ -5,7 +5,7 @@
   "release_gate": {
     "status": "BLOCKED",
     "allowed_to_package": false,
-    "blocking_reason": "Candidate frozen at artifact digest 29802261f20ca35751ed6affc93312e62fd4d974064dce8546de89a3eaba0fb2; release requires the full gate sweep on this digest, an independent evaluator receipt on the same digest and explicit user release authorization. Historical gate statuses below are superseded only where candidate_gate_results records a result for this digest.",
+    "blocking_reason": "Candidate frozen at artifact digest dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334; release requires the full gate sweep on this digest, an independent evaluator receipt on the same digest and explicit user release authorization. Historical gate statuses below are superseded only where candidate_gate_results records a result for this digest.",
     "authorization_basis": "User instruction 2026-10-28: no merge, deployment or skill.zip while release gates are not passed; no automatic release."
   },
   "craftsmanship_gate": {
@@ -241,7 +241,7 @@
     "preserved anti-overclaim controls and zero Core score/coverage delta"
   ],
   "final_decision": "BLOCKED_PENDING_RELEASE_AUTHORIZATION",
-  "artifact_digest": "29802261f20ca35751ed6affc93312e62fd4d974064dce8546de89a3eaba0fb2",
+  "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
   "internal_report_gate": {
     "status": "PASS",
     "json": "analysis_report.json",
@@ -538,7 +538,7 @@
     "core_score_delta": 0,
     "golden_case": "LEG-GOLD-BFL"
   },
-  "candidate_artifact_digest": "29802261f20ca35751ed6affc93312e62fd4d974064dce8546de89a3eaba0fb2",
+  "candidate_artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
   "fresh_reporting_gate": {
     "status": "PASS",
     "entrypoint": "scripts/run_reporting_bundle_evals.py",
@@ -633,11 +633,11 @@
       "O-5",
       "O-6"
     ],
-    "artifact_digest": "29802261f20ca35751ed6affc93312e62fd4d974064dce8546de89a3eaba0fb2"
+    "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334"
   },
   "candidate_gate_results": {
-    "artifact_digest": "29802261f20ca35751ed6affc93312e62fd4d974064dce8546de89a3eaba0fb2",
-    "candidate_commit": "80ec6bd",
+    "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
+    "candidate_commit": "e4a0cb6",
     "status": "SWEEP_DONE",
     "history": [
       {
@@ -651,9 +651,15 @@
         "artifact_digest": "a815fb3a3016f4d4ae520bc43043f1ea2fe80b19ea6cf4302089ee71dbc19e46",
         "sweep": "44 of 47 pass (3 authorization-dependent)",
         "independent_evaluation": "FAIL (MAJOR-N1: packager shipped .pyc/.pytest_cache outside the build digest; MINOR: release gate trusted stored v3.2.1 status). Fixed in 85f6e46, 05aff4f."
+      },
+      {
+        "candidate_commit": "80ec6bd",
+        "artifact_digest": "29802261f20ca35751ed6affc93312e62fd4d974064dce8546de89a3eaba0fb2",
+        "sweep": "44 of 47 pass (3 authorization-dependent)",
+        "independent_evaluation": "PASS (round 3; MINORs: package output dir self-inclusion, boundary docstring, untested live v3.2.1 branch — fixed in f8bf3cf; sourceless .pyc in a working tree and reports/ rewritability remain process-bounded)"
       }
     ],
-    "run": "2026-10-28 full gate sweep on a git-archive extraction of 80ec6bd",
+    "run": "2026-10-28 full gate sweep on a git-archive extraction of e4a0cb6",
     "pass": [
       "unittest",
       "quick_validate",
@@ -701,10 +707,27 @@
       "run_fixture_eval"
     ],
     "fail": {
-      "validate_release_gate": "release status is not PASS; allowed_to_package must be true (pending release authorization; no other error, live v3.2.1 and baseline checks pass)",
+      "validate_release_gate": "release status is not PASS; allowed_to_package must be true (pending release authorization; no other error)",
       "validate_pipeline_ledger": "STALE_ARTIFACT_DIGEST (ledger run not recorded before authorization)",
       "validate_installability": "artifact must be skill.zip (no package before authorization)"
     },
-    "independent_evaluation": "PENDING (round 3 on 80ec6bd)"
+    "independent_evaluation": {
+      "round": 4,
+      "candidate_commit": "e4a0cb6",
+      "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
+      "verdict": "PASS",
+      "scores": {
+        "correctness": 4,
+        "fail_closed_gates": 4,
+        "evidence_integrity": 4
+      },
+      "open_minors": [
+        "package_skill.write_archive guard checks the output folder, not the archive path (root/x.pyc/ accepted); release gate catches the shipped zip on the next run (v3.2.1 unreported_addition, stale digest)",
+        "APFS case variant of the root path passes is_relative_to; same downstream catch",
+        "write_archive does not resolve its own inputs; main() resolves both, CLI not exposed",
+        "test temp trees not cleaned up"
+      ],
+      "receipts": "Round 1 (456c226) FAIL 4 MAJOR; round 2 (92eb6c9) FAIL MAJOR-N1; round 3 (80ec6bd) PASS; round 4 (e4a0cb6, delta) PASS. All rounds run by fresh read-only evaluator agents on git-archive extractions; reports are claims re-derived by the main session."
+    }
   }
 }

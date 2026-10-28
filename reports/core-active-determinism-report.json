@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "artifact_digest": "29802261f20ca35751ed6affc93312e62fd4d974064dce8546de89a3eaba0fb2",
+  "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
   "semantic_digest": "fa0f763b6c98703fe3c5114498105517dc0ee71c65e0a93ec000e464e91ed90f",
   "shuffled_semantic_digest": "fa0f763b6c98703fe3c5114498105517dc0ee71c65e0a93ec000e464e91ed90f",
   "scored_report_sha256": "de915b6f43e26dfbd8198b36738bb6202f5f6bd4576462fcddca936ed1542c34",
