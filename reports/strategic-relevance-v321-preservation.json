@@ -1117,7 +1117,7 @@
     {
       "path": "scripts/build_visualization_plan.py",
       "baseline_sha256": "baf5d85df264a812165d4ba0fb534619e0ab5b9f3a601b8011955164358be954",
-      "current_sha256": "0a7446a230cd7955a245e0609b39ca2fd6137fea82ecca59a234af90c86cf4bc",
+      "current_sha256": "08e9d95789a1616955c2dcec5f565ac30c1413484ffd3317c5bd22d3b50495c4",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1201,7 +1201,7 @@
     {
       "path": "scripts/validate_measurement_platform_baseline.py",
       "baseline_sha256": "44c342a3da39bf050fa0e6def30502b357c79ce5bf04130e262646c0e6c12532",
-      "current_sha256": "aa683a26dfaa95f2a3626efa8f4fe6331ff874ba79b692e27f9d1109449b867f",
+      "current_sha256": "05bcae28eb5f13ffbc53e8ff68bd6199a1048a5f36bee480189653f53dc119ed",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1438,8 +1438,8 @@
     },
     {
       "path": "scripts/legal_customer_projection.py",
-      "reason": "INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH",
-      "current_sha256": "a4f5df992de0367f10bbb911ae32fd8c9d46488710eccad91907084ffaafdb65"
+      "reason": "INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "6dc9bb0db6a8b70ca9b1049e3ef8c4a12ce56da04cb8a33a800725c707441e6d"
     },
     {
       "path": "scripts/materialize_core_metrics.py",
@@ -1468,8 +1468,8 @@
     },
     {
       "path": "scripts/run_legal_customer_projection_evals.py",
-      "reason": "INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH",
-      "current_sha256": "9d88ac0397af048d4dbba5a41b6371385652cb9109fbcc1c1919615549a298c7"
+      "reason": "INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+      "current_sha256": "662030f5b8b04287b3adf9980e6ccfaed7f69668caa7bb058ffc3ff6fb585228"
     },
     {
       "path": "scripts/run_strategic_relevance_evals.py",
@@ -1559,7 +1559,7 @@
     {
       "path": "tests/test_legal_trust_boundary.py",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "1ff3e4d64fcf57b01d9209b2c890b4875573a03bdb7158a9253a22e50f6fd676"
+      "current_sha256": "dff0d5ee73730756d6c235aaa8589ae36cccfb67624bae267b8bf4df53333754"
     },
     {
       "path": "tests/test_pdf_layout_gate.py",
@@ -1887,12 +1887,17 @@
         {
           "path": "scripts/build_visualization_plan.py",
           "previous_sha256": "49065426ff29f12c54572ee5004374b472b94e4dc820eaf6cd3b01267a74b655",
-          "current_sha256": "0a7446a230cd7955a245e0609b39ca2fd6137fea82ecca59a234af90c86cf4bc"
+          "current_sha256": "08e9d95789a1616955c2dcec5f565ac30c1413484ffd3317c5bd22d3b50495c4"
         },
         {
           "path": "scripts/client_story.py",
           "previous_sha256": "d732f8a2ba9d091b8dbe176d865fc4bcce093797422e6ac1012551e200835f5c",
           "current_sha256": "30d766f3e5a98441c2b3e0224a37ae308377f14cf8eff89f15ecaadba6d47939"
+        },
+        {
+          "path": "scripts/legal_customer_projection.py",
+          "previous_sha256": "a4f5df992de0367f10bbb911ae32fd8c9d46488710eccad91907084ffaafdb65",
+          "current_sha256": "6dc9bb0db6a8b70ca9b1049e3ef8c4a12ce56da04cb8a33a800725c707441e6d"
         },
         {
           "path": "scripts/quick_validate.py",
@@ -1908,6 +1913,11 @@
           "path": "scripts/run_branch_priority_evals.py",
           "previous_sha256": null,
           "current_sha256": "99aeb73e646b018f2dde4c147020d959c8a3369767cac9c36fc1ade1439c4733"
+        },
+        {
+          "path": "scripts/run_legal_customer_projection_evals.py",
+          "previous_sha256": "9d88ac0397af048d4dbba5a41b6371385652cb9109fbcc1c1919615549a298c7",
+          "current_sha256": "662030f5b8b04287b3adf9980e6ccfaed7f69668caa7bb058ffc3ff6fb585228"
         },
         {
           "path": "scripts/run_vc03_customer_release_evals.py",
@@ -1932,7 +1942,7 @@
         {
           "path": "scripts/validate_measurement_platform_baseline.py",
           "previous_sha256": "23dc0660ed1ecf920590a57ba1cb2a75801a2975546c3c9e17282c1ad7998939",
-          "current_sha256": "aa683a26dfaa95f2a3626efa8f4fe6331ff874ba79b692e27f9d1109449b867f"
+          "current_sha256": "05bcae28eb5f13ffbc53e8ff68bd6199a1048a5f36bee480189653f53dc119ed"
         },
         {
           "path": "scripts/validate_pdf_output.py",
@@ -1977,7 +1987,7 @@
         {
           "path": "tests/test_legal_trust_boundary.py",
           "previous_sha256": null,
-          "current_sha256": "1ff3e4d64fcf57b01d9209b2c890b4875573a03bdb7158a9253a22e50f6fd676"
+          "current_sha256": "dff0d5ee73730756d6c235aaa8589ae36cccfb67624bae267b8bf4df53333754"
         },
         {
           "path": "tests/test_pdf_layout_gate.py",
