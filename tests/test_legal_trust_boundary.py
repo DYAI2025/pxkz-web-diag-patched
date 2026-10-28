@@ -116,6 +116,8 @@ class CitedMetricNotClearTest(unittest.TestCase):
             subprocess.run([sys.executable, "-B", str(ROOT / "scripts/compute_score.py"), str(src), str(scored)], check=True, capture_output=True)
             subprocess.run([sys.executable, "-B", str(ROOT / "scripts/build_visualization_plan.py"), str(scored), str(plan)], check=True, capture_output=True)
             data = json.loads(plan.read_text(encoding="utf-8"))
+        self.values = {(r.get("signal") or r.get("question")): r["value"] for v in data["visuals"]
+                       if v["template_id"] == "V08_AI_ANSWERABILITY" for r in v["data"]}
         return {(r.get("signal") or r.get("question")): r["status"] for v in data["visuals"]
                 if v["template_id"] in {"V08_AI_ANSWERABILITY", "V10_TRUST_MATRIX"} for r in v["data"]}
 
@@ -131,6 +133,10 @@ class CitedMetricNotClearTest(unittest.TestCase):
         rows = self.rows(report_with(finding_from(golden_sidecar(), 99)))
         for label in ("Eindeutige Unternehmensdarstellung", "Fakten überall gleich", "Kontakttransparenz"):
             self.assertNotIn(rows[label], {"Klar", "klar"}, label)
+        # The matrix tint is a scale over value; a capped row must sit on the template's "teilweise" anchor,
+        # not at a value that both renderers paint as clear.
+        for label in ("Eindeutige Unternehmensdarstellung", "Fakten überall gleich"):
+            self.assertLessEqual(self.values[label], 0.5, label)
         self.assertEqual(rows["Impressum und rechtliche Angaben"], "Handlungsbedarf")
 
 

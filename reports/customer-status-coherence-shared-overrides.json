@@ -2,7 +2,7 @@
   "status": "PASS",
   "patch_id": "CUSTOMER_STATUS_COHERENCE_PATCH",
   "authorization_basis": "Explicit user authorization on 2026-10-28 (answers 'Freigeben' to Regel A and 'Identitätsmetriken anfechten' to Regel B) after the independent evaluator reported MAJOR-1/MAJOR-2 status contradictions.",
-  "scope_note": "Customer status matrices (V08/V10) only: a metric cited by a customer-eligible problem finding never reads as clear (capped to 'Verbesserung sinnvoll'/'teilweise'); while a PROVIDER_IDENTITY legal risk is projected, TRUST-04, TRUST-07, AI-01 and AI-06 are capped the same way. Scores and coverage unchanged. Legacy output changes only where such a contradiction existed (Baumdienst V10 TRUST-01); synthetic and tie fixtures byte-identical.",
+  "scope_note": "Customer status matrices (V08/V10) only: a metric cited by a customer-eligible problem finding never reads as clear (capped to 'Verbesserung sinnvoll' / 'teilweise' at the template's 0.5 anchor, so the tint matches the label); while a PROVIDER_IDENTITY legal risk is projected, TRUST-04, TRUST-07, AI-01 and AI-06 are capped the same way. Scores and coverage unchanged. Legacy output changes only where such a contradiction existed (Baumdienst V10 TRUST-01); synthetic and tie fixtures byte-identical.",
   "previous_sha256_semantics": "previous_sha256 = effective approved digest after reports/legal-surface-customer-status-shared-overrides.json (equal to the committed file at the time of authorization).",
   "evidence": [
     "reports/override-evidence/status-coherence.build_visualization_plan.approved-to-candidate.diff"
@@ -12,7 +12,7 @@
       "path": "scripts/build_visualization_plan.py",
       "baseline_sha256": "baf5d85df264a812165d4ba0fb534619e0ab5b9f3a601b8011955164358be954",
       "previous_sha256": "08e9d95789a1616955c2dcec5f565ac30c1413484ffd3317c5bd22d3b50495c4",
-      "current_sha256": "76fb2af5ca24956d3a051b8279063f609220a32a1a61435ec96edb85bd2bc2fd",
+      "current_sha256": "c6f05e92a035ea7f7b4a4919c0e1ab77609c44b116fdc5eaeceebd59e38d6a20",
       "reason": "CUSTOMER_STATUS_COHERENCE_PATCH"
     }
   ]

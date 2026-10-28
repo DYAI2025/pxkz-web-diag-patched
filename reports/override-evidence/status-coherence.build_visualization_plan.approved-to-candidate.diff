@@ -1,5 +1,5 @@
 diff --git a/scripts/build_visualization_plan.py b/scripts/build_visualization_plan.py
-index 5cfc440..7aba2b3 100644
+index 5cfc440..db90622 100644
 --- a/scripts/build_visualization_plan.py
 +++ b/scripts/build_visualization_plan.py
 @@ -17,7 +17,7 @@ from typing import Any
@@ -30,12 +30,14 @@ index 5cfc440..7aba2b3 100644
                      rows.append({label_name: metric_label(defs, m), "status": state["label"], "symbol": state["symbol"], "tone": state["tone"], "value": state["value"]})
                      refs.append(mid)
                      continue
-@@ -222,6 +227,8 @@ def main() -> int:
+@@ -222,6 +227,10 @@ def main() -> int:
                  if not isinstance(sc, (int, float)) or isinstance(sc, bool):
                      continue
                  value = max(0.0, min(1.0, float(sc) / 100.0))
 +                if mid in capped:
-+                    value = min(value, .74)
++                    # 0.5 is the template's "teilweise" anchor; the tint is a scale over value, so a higher cap
++                    # would still be painted as clear.
++                    value = min(value, .5)
                  status = "klar" if value >= .75 else "teilweise" if value >= .5 else "offen"
                  rows.append({label_name: metric_label(defs, m), "status": status, "value": value})
                  refs.append(mid)

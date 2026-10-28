@@ -18,7 +18,7 @@
     },
     "low-coverage-marketing-report": {
       "scored": "615b5cd3b12599044e0e9baeac731f6055509522247236e73576a628da44389d",
-      "plan": "e752bf9da9348d54d382358a8d0ad132a6b887f9d0a014fad61251860d2ea35a",
+      "plan": "cffc35eede7d2f5cc30a47b21e65dbd5541de5b39402241260782de47b0e608e",
       "model": "3e5d9f3968952f4d6245e855ac0def01e3c9186bbfe7dc5167d5cbb28ea34987",
       "batch_csv": "108f39d18dda66df4bf23f5cf93f2ab3ab6f8dadebae6190963bd11224169a10",
       "internal": "c81037b6309aaa9454ef39828bde387c4a6f1a61c0c460d3e0fd19e863427645",
@@ -61,7 +61,7 @@
           "fixture": "low-coverage-marketing-report",
           "output": "plan",
           "previous_sha256": "0a1450c1ae714a36bbd105590fc3887384bd0e0d4616d8bbdd724f8c393b3fd8",
-          "current_sha256": "e752bf9da9348d54d382358a8d0ad132a6b887f9d0a014fad61251860d2ea35a"
+          "current_sha256": "cffc35eede7d2f5cc30a47b21e65dbd5541de5b39402241260782de47b0e608e"
         },
         {
           "fixture": "baumdienst-renner-reflection-regression",
@@ -72,7 +72,7 @@
       ],
       "status_deltas": {
         "baumdienst-renner-reflection-regression": "V10 'Impressum und rechtliche Angaben' Klar -> Verbesserung sinnvoll (TRUST-01 cited by F-002)",
-        "low-coverage-marketing-report": "V08 'Leistung, Zielgruppe und Standort' klar -> teilweise (AI-02 cited by F-904)"
+        "low-coverage-marketing-report": "V08 'Leistung, Zielgruppe und Standort' klar (0.75) -> teilweise (0.5) (AI-02 cited by F-904)"
       },
       "unchanged": "All scored, model, batch_csv and internal hashes and all lever_ids; synthetic-report and truth-discipline-inferred-risk entirely."
     }

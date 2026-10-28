@@ -228,7 +228,9 @@ def main() -> int:
                     continue
                 value = max(0.0, min(1.0, float(sc) / 100.0))
                 if mid in capped:
-                    value = min(value, .74)
+                    # 0.5 is the template's "teilweise" anchor; the tint is a scale over value, so a higher cap
+                    # would still be painted as clear.
+                    value = min(value, .5)
                 status = "klar" if value >= .75 else "teilweise" if value >= .5 else "offen"
                 rows.append({label_name: metric_label(defs, m), "status": status, "value": value})
                 refs.append(mid)
