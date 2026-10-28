@@ -26,7 +26,8 @@
   "fonts": {
     "display_requested": "Schibsted Grotesk",
     "data_requested": "IBM Plex Mono",
-    "binary_status": "RUNTIME_SUPPLIED_NOT_BUNDLED",
+    "binary_status": "PACKAGE_BUNDLED_MANIFEST_PINNED",
+    "font_manifest": "assets/fonts/font-manifest.json",
     "customer_release_requirement": "EXACT_BOTH_FAMILIES",
     "proof_display_fallbacks": [
       "IBM Plex Sans",

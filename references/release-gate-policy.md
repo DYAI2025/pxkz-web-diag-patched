@@ -23,7 +23,7 @@ The Skill package release requires:
 - full reporting-bundle E2E PASS;
 - complete internal JSON/Markdown metric reports;
 - WeasyPrint default renderer;
-- font binaries absent from package;
+- only manifest-pinned, verified brand fonts and their licences in the package (`validate_no_font_binaries.py`, re-run live by the release gate and by `package_skill.py`); no fonts in customer deliverables;
 - exact-font customer mode fail-closed;
 - visual/semantic QA creation remains fail-closed;
 - current visual-source/brand/template digests in the release report.

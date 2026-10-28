@@ -22,7 +22,14 @@ Requested families:
 - display/body: `Schibsted Grotesk`;
 - data/labels: `IBM Plex Mono`.
 
-Font binaries are not included in the Skill package. `PIXELKIEZ_FONT_DIR` may point to an approved runtime font directory. The renderer records file digests but never exports font binaries.
+The exact Regular and Bold files of both families ship unmodified in `assets/fonts/` under OFL-1.1 and are pinned in `assets/fonts/font-manifest.json` (path, upstream release/commit, SHA-256, git blob, PostScript name, licence). Resolution order:
+
+1. package fonts, verified by manifest hash, name table (family, subfamily, PostScript name), weight, non-variable outlines, required German glyphs and a safe in-tree non-symlink path;
+2. `PIXELKIEZ_FONT_DIR`, consulted only when the package fonts are absent, verified by name table, upstream PostScript name, style, weight and glyphs (not hash-pinned);
+3. system font directories, same verification;
+4. proof-only approved fallback.
+
+A filename or `fc-match` result never proves identity. A present but damaged package manifest blocks `EXACT` for both roles even if a runtime directory holds the fonts. When exact, `@font-face` binds both the Pixelkiez aliases and the real family names to the verified files. After rendering, every embedded font program is identified from its own name/head tables and the outline of every codepoint it carries against the resolved files (`pdf_font_embedding`); any unidentified or non-embedded font, and any glyph drawn as `.notdef`, fails strict mode. `validate_presentation_brand.py` and `finalize_deliverable_manifest.py` re-resolve the fonts live and never take an identity from the receipt. The receipt records `font_provenance` (source, styles, checksums, manifest SHA-256). Font binaries are never copied into customer deliverables.
 
 Two modes exist:
 
@@ -61,4 +68,4 @@ fails the PDF when any body text or card reaches the footer band or a lever fiel
 - minimum extracted text size;
 - approved palette and local-only resources.
 
-`validate_no_font_binaries.py` blocks accidental font redistribution.
+`validate_no_font_binaries.py` enforces the manifest allowlist: every font binary (by suffix or font magic) must be a pinned, verified manifest file inside `assets/fonts/`; unknown or renamed fonts, symlinks, unsafe paths, missing styles and missing or altered licences fail.

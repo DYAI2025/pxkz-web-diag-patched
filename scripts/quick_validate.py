@@ -16,6 +16,11 @@ BASE_REQUIRED = [
     "assets/sql/ga4_journey_events.sql",
     "assets/PXK_web_audit_template.pdf", "assets/presentation.css", "assets/vega-lite-schema-v6.4.3.json",
     "assets/third-party/README.md", "assets/third-party/vega-lite-LICENSE.txt",
+    "assets/fonts/font-manifest.json", "assets/fonts/schibsted-grotesk/SchibstedGrotesk-Regular.ttf",
+    "assets/fonts/schibsted-grotesk/SchibstedGrotesk-Bold.ttf", "assets/fonts/schibsted-grotesk/OFL.txt",
+    "assets/fonts/schibsted-grotesk/AUTHORS.txt", "assets/fonts/ibm-plex-mono/IBMPlexMono-Regular.ttf",
+    "assets/fonts/ibm-plex-mono/IBMPlexMono-Bold.ttf", "assets/fonts/ibm-plex-mono/LICENSE.txt",
+    "tests/test_packaged_brand_fonts.py",
     "assets/brand/colors.css", "assets/brand/typography.css", "assets/brand/spacing.css",
     "assets/brand/document.css", "assets/brand/brand-devices.css", "assets/brand/report-structure.html",
     "references/audit-method.md", "references/measurement-contract.md", "references/scoring-policy.md",
@@ -117,7 +122,7 @@ VEGA_TEMPLATE_NAMES = [
     "V11_SEVERITY_DISTRIBUTION", "V12_AUDIT_COVERAGE", "V13_IMPACT_EFFORT", "V14_REPEAT_AUDIT",
 ]
 JSON_REQUIRED = [
-    "assets/brand.json", "assets/brand-tokens.json", "assets/measurement-registry.json", "assets/branch-priority-profiles.v1.json", "schemas/branch-priority.schema.json", "assets/capability-registry.json", "assets/enrichment-metric-registry.json", "assets/impressum-compliance-registry.v1.json",
+    "assets/brand.json", "assets/brand-tokens.json", "assets/fonts/font-manifest.json", "assets/measurement-registry.json", "assets/branch-priority-profiles.v1.json", "schemas/branch-priority.schema.json", "assets/capability-registry.json", "assets/enrichment-metric-registry.json", "assets/impressum-compliance-registry.v1.json",
     "templates/chart-library.v1.json", "templates/client-report-template.json", "templates/visualization-catalog.v2.json",
     "schemas/diagnosis-report.schema.json", "schemas/client-report.schema.json", "schemas/analysis-report.schema.json", "schemas/impressum-evidence.schema.json", "schemas/impressum-compliance.schema.json", "schemas/measurement-enrichment.schema.json",
     "schemas/measurement-envelope.schema.json", "schemas/availability-monitoring.schema.json", "schemas/owner-analytics.schema.json",

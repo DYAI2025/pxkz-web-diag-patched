@@ -30,16 +30,13 @@ python scripts/build_audit_deliverables.py \
   --release-mode proof
 ```
 
-`proof` mode permits an explicitly labeled approved font fallback for development/QA. `customer` mode requires exact `Schibsted Grotesk` and `IBM Plex Mono` runtime fonts and fails closed otherwise:
+`proof` mode permits an explicitly labeled approved font fallback for development/QA. `customer` mode requires exact `Schibsted Grotesk` and `IBM Plex Mono` and fails closed otherwise. The exact Regular/Bold files ship in `assets/fonts/` (OFL-1.1, pinned in `assets/fonts/font-manifest.json`); they resolve first, offline, without `PIXELKIEZ_FONT_DIR` (consulted only when the package fonts are absent), and the PDF embedding is re-verified:
 
 ```bash
-PIXELKIEZ_FONT_DIR=/approved/runtime/fonts \
-python scripts/build_audit_deliverables.py \
-  diagnosis-report-scored.json ./deliverables \
-  --release-mode customer
+python scripts/build_audit_deliverables.py diagnosis-report-scored.json ./deliverables --release-mode customer
 ```
 
-Font binaries are runtime inputs and must never be bundled or returned as Skill artifacts.
+Only manifest-pinned fonts may exist in the package (`validate_no_font_binaries.py`); fonts are never copied into customer deliverables. Font verification never sets visual or semantic QA to PASS.
 
 PowerPoint generation remains outside this Skill. Do not create a PPTX.
 

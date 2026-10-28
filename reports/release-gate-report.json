@@ -3,16 +3,21 @@
   "draft_version": "vibecheck03-branch-priority-candidate-2026-10-28",
   "release_scope": "website-diagnosis-package",
   "release_gate": {
-    "status": "PASS",
-    "allowed_to_package": true,
-    "authorization_basis": "Explicit user release authorization 2026-10-28 (answer 'Freigeben (paketieren)') for candidate e4a0cb6, build digest dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334: package skill.zip; no merge, no deployment.",
-    "evidence": "candidate_gate_results (sweep on git archive of e4a0cb6: all gates pass except the three authorization-dependent ones), independent evaluation round 4 PASS, customer QA PASS bound to PDF digests.",
-    "open_risks_accepted": [
-      "customer copy MINORs O-2..O-6",
-      "packager-guard edge cases (fail closed at next packaging run)",
-      "reports/ unsigned (process-bounded)",
-      "legal-golden QA inputs recorded by digest only"
-    ]
+    "status": "BLOCKED",
+    "allowed_to_package": false,
+    "reason": "New candidate PACKAGED_BRAND_FONT_PATCH (worktree on base 0d3a301) changes the semantic control bundle (render_diagnosis_pdf.py, SKILL.md) and the artifact digest. Release requires the full gate sweep on the committed candidate, re-bound visual and semantic customer QA from actual page inspection, an independent evaluation and a new explicit user release authorization.",
+    "superseded_authorization": {
+      "status": "PASS",
+      "allowed_to_package": true,
+      "authorization_basis": "Explicit user release authorization 2026-10-28 (answer 'Freigeben (paketieren)') for candidate e4a0cb6, build digest dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334: package skill.zip; no merge, no deployment.",
+      "evidence": "candidate_gate_results (sweep on git archive of e4a0cb6: all gates pass except the three authorization-dependent ones), independent evaluation round 4 PASS, customer QA PASS bound to PDF digests.",
+      "open_risks_accepted": [
+        "customer copy MINORs O-2..O-6",
+        "packager-guard edge cases (fail closed at next packaging run)",
+        "reports/ unsigned (process-bounded)",
+        "legal-golden QA inputs recorded by digest only"
+      ]
+    }
   },
   "craftsmanship_gate": {
     "status": "PASS",
@@ -287,12 +292,17 @@
   },
   "brand_rendering_gate": {
     "status": "PASS",
-    "font_binary_policy": "NOT_BUNDLED",
+    "font_binary_policy": "PACKAGE_BUNDLED_MANIFEST_PINNED",
     "strict_customer_mode_fail_closed": true,
-    "runtime_font_status": "PARTIAL_EXACT_APPROVED_FALLBACK",
-    "exact_display_font_available": false,
+    "runtime_font_status": "EXACT",
+    "exact_display_font_available": true,
     "exact_data_font_available": true,
-    "evidence": "reports/brand-font-capability.json"
+    "evidence": "reports/brand-font-capability.json",
+    "font_manifest_sha256": "4b8a2e8ca39cdb5a1a3b6b0221d3e6afe9fdf2ec451390ac58a4c7a1255e1e16",
+    "font_source": {
+      "display": "PACKAGED",
+      "data": "PACKAGED"
+    }
   },
   "proof_output_gate": {
     "status": "PASS",
@@ -314,9 +324,9 @@
     "four_levers": 4
   },
   "strict_customer_output_gate": {
-    "status": "BLOCKED_EXTERNAL_FONT",
+    "status": "PASS",
     "customer_release_ready": false,
-    "reason": "Exact Schibsted Grotesk display font is not available in the current validated runtime. Skill installation is allowed; strict customer PDF release remains fail-closed."
+    "reason": "Exact Schibsted Grotesk and IBM Plex Mono resolve from the manifest-pinned package fonts offline; strict customer rendering is no longer font-blocked. customer_release_ready stays false until visual and semantic QA pass on the exact PDF digest."
   },
   "measurement_enrichment_gate": {
     "status": "PASS",

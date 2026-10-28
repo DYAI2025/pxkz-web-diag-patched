@@ -9,7 +9,7 @@
     "visualization_plan_sha256", "visual_render_receipt_sha256", "css_sha256", "template_sha256",
     "html_path", "html_sha256", "pdf_sha256", "page_count", "page_format", "orientation",
     "available_visual_count", "embedded_visual_count", "omitted_visual_ids", "brand_font_status",
-    "font_resolution", "pdf_fonts", "minimum_rendered_text_size_pt", "body_text_size_pt",
+    "font_resolution", "font_provenance", "pdf_font_embedding", "pdf_fonts", "minimum_rendered_text_size_pt", "body_text_size_pt",
     "chart_label_minimum_pt", "brand_palette", "local_only_resources",
     "legacy_reportlab_default", "limitations"
   ],
@@ -43,6 +43,52 @@
         "exact": {"type": "object"},
         "customer_release_ready": {"type": "boolean"},
         "font_file_sha256": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+      }
+    },
+    "font_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "package_policy", "package_fonts_status", "package_manifest_sha256", "verification", "styles"],
+      "properties": {
+        "source": {"type": "object", "additionalProperties": {"enum": ["PACKAGED", "CONFIGURED_FONT_DIR", "SYSTEM_FONT_DIR", "APPROVED_FALLBACK", "UNRESOLVED"]}},
+        "package_policy": {"const": "PACKAGE_BUNDLED_MANIFEST_PINNED"},
+        "package_fonts_status": {"enum": ["VERIFIED", "FAILED", "ABSENT"]},
+        "package_manifest_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "verification": {"type": "string", "minLength": 1},
+        "styles": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["family", "style", "weight", "postscript_name", "unique_id", "head_created", "font_revision", "sha256", "source"],
+            "properties": {
+              "family": {"type": "string"},
+              "style": {"type": "string"},
+              "weight": {"type": "integer"},
+              "postscript_name": {"type": "string"},
+              "unique_id": {"type": "string"},
+              "head_created": {"type": "integer"},
+              "font_revision": {"type": "number"},
+              "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+              "source": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "pdf_font_embedding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "identity_method", "required_embedded", "embedded_fonts", "unexpected_fonts", "not_embedded_fonts", "family_mismatch", "notdef_glyphs"],
+      "properties": {
+        "status": {"enum": ["VERIFIED", "FAILED", "NOT_APPLICABLE_NON_EXACT"]},
+        "identity_method": {"enum": ["EMBEDDED_PROGRAM_NAME_TABLE_HEAD_AND_OUTLINES", "EMBEDDED_PROGRAM_NAME_TABLE_HEAD"]},
+        "required_embedded": {"type": "object", "additionalProperties": {"type": "boolean"}},
+        "embedded_fonts": {"type": "array", "items": {"type": "object"}},
+        "unexpected_fonts": {"type": "array", "items": {"type": "string"}},
+        "not_embedded_fonts": {"type": "array", "items": {"type": "string"}},
+        "family_mismatch": {"type": "array", "items": {"type": "string"}},
+        "notdef_glyphs": {"type": "array", "items": {"type": "string"}, "maxItems": 50}
       }
     },
     "pdf_fonts": {"type": "array", "minItems": 2, "items": {"type": "string"}},

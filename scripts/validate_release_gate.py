@@ -84,6 +84,41 @@ def validate_reports(root: Path, report: dict, paired: dict, semantic: dict) -> 
     return errors
 
 
+PACKAGE_FONT_POLICY = "PACKAGE_BUNDLED_MANIFEST_PINNED"
+
+
+def validate_font_gate(root: Path, report: dict, fonts: dict) -> list[str]:
+    """Font policy and strict-font evidence; re-derives the package font check live."""
+    errors: list[str] = []
+    strict = report.get("strict_customer_output_gate", {})
+    brand = report.get("brand_rendering_gate", {})
+    exact = bool(fonts.get("exact", {}).get("display") and fonts.get("exact", {}).get("data"))
+    if exact:
+        if strict.get("status") != "PASS": errors.append("exact fonts available but strict customer output gate is not PASS")
+    else:
+        if strict.get("status") != "BLOCKED_EXTERNAL_FONT": errors.append("missing exact fonts must block strict customer output")
+        if strict.get("customer_release_ready") is not False: errors.append("missing exact fonts cannot be customer-release-ready")
+    if brand.get("font_binary_policy") != PACKAGE_FONT_POLICY: errors.append("font binary policy must be the manifest-pinned package allowlist")
+    if brand.get("strict_customer_mode_fail_closed") is not True: errors.append("strict customer font gate must fail closed")
+    if fonts.get("package_policy") != PACKAGE_FONT_POLICY: errors.append("brand font capability report predates the package font policy")
+    manifest = root / "assets/fonts/font-manifest.json"
+    live_manifest = hashlib.sha256(manifest.read_bytes()).hexdigest() if manifest.is_file() else None
+    if (fonts.get("package_fonts") or {}).get("manifest_sha256") != live_manifest:
+        errors.append("brand font capability report is stale against the font manifest")
+    if brand.get("font_manifest_sha256") != live_manifest:
+        errors.append("release brand gate is stale against the font manifest")
+    try:
+        policy = subprocess.run(
+            [sys.executable, str(root / "scripts" / "validate_no_font_binaries.py"), str(root)],
+            text=True, capture_output=True, timeout=120,
+        )
+        if policy.returncode != 0:
+            errors.append(f"package font allowlist live check failed: {(policy.stderr or policy.stdout).strip()}")
+    except Exception as exc:
+        errors.append(f"package font allowlist live check unavailable: {exc}")
+    return errors
+
+
 def main(argv: list[str]) -> int:
     if len(argv) != 2:
         return fail("usage: validate_release_gate.py <skill-dir>")
@@ -207,15 +242,8 @@ def main(argv: list[str]) -> int:
     if active_render.get("fixture_only") is not True:
         errors.append("active core render proof must remain fixture-only")
 
-    strict = report.get("strict_customer_output_gate", {})
     exact = bool(fonts.get("exact", {}).get("display") and fonts.get("exact", {}).get("data"))
-    if exact:
-        if strict.get("status") != "PASS": errors.append("exact fonts available but strict customer output gate is not PASS")
-    else:
-        if strict.get("status") != "BLOCKED_EXTERNAL_FONT": errors.append("missing exact fonts must block strict customer output")
-        if strict.get("customer_release_ready") is not False: errors.append("missing exact fonts cannot be customer-release-ready")
-    if report.get("brand_rendering_gate", {}).get("font_binary_policy") != "NOT_BUNDLED": errors.append("font binaries must not be bundled")
-    if report.get("brand_rendering_gate", {}).get("strict_customer_mode_fail_closed") is not True: errors.append("strict customer font gate must fail closed")
+    errors.extend(validate_font_gate(root, report, fonts))
 
     if visual.get("status") != "PASS" or visual.get("metric_count") != 48: errors.append("visual/reporting architecture eval incomplete")
     if visual.get("mandatory_product_outputs") != ["analysis_report.json", "analysis_report.md", "customer_presentation.pdf"]: errors.append("mandatory output contract drift")

@@ -54,6 +54,10 @@ ALLOWED_REASON_PATHS = {
         "scripts/build_audit_deliverables.py",
         "scripts/build_elevenlabs_batch_csv.py",
     },
+    "PACKAGED_BRAND_FONT_PATCH": {
+        "scripts/render_diagnosis_pdf.py",
+        "scripts/build_audit_deliverables.py",
+    },
     "IMPRESSUM_CUSTOMER_TRUTH_PATCH": {
         "scripts/client_story.py",
         "scripts/build_client_report_model.py",
@@ -73,6 +77,7 @@ OVERRIDE_REPORTS = (
     "reports/customer-layout-legal-boundary-shared-overrides.json",
     "reports/legal-surface-customer-status-shared-overrides.json",
     "reports/customer-status-coherence-shared-overrides.json",
+    "reports/packaged-brand-font-shared-overrides.json",
 )
 
 

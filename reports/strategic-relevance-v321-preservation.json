@@ -961,8 +961,20 @@
     {
       "path": "SKILL.md",
       "baseline_sha256": "dd7b983957a1fb16b6b4c5fe72db26a5530c29d91376296826092ccb9b303ccf",
-      "current_sha256": "c005b739b1fb2ae8d14e28df8401d55a89584b93383d5bf9110ad332cae8b60b",
+      "current_sha256": "c2b2d571af90c165d15c14af050e7671da18c783ed412552aa9bf79df5147ce4",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
+    },
+    {
+      "path": "assets/brand-tokens.json",
+      "baseline_sha256": "051a155d5b8b95d812168fee967946226bee986954c21c8c55c71a099a4bc0b5",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "40ab7151e12231e4ff889e9d23264be9075425fc00a2556f492477c741031e2d"
+    },
+    {
+      "path": "assets/brand.json",
+      "baseline_sha256": "a44b451efb0521f151c689f2cf08d5272510f94fbed7d0a6985d6d600c9647aa",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "c9e4176619873b311393fa228eb0aa7e8510a812c36df8eabd524eec56db54ef"
     },
     {
       "path": "assets/presentation.css",
@@ -971,9 +983,15 @@
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
+      "path": "assets/third-party/README.md",
+      "baseline_sha256": "d4b2becea8cd18be1ca5a08bb3f88f936ba582658189e1d10becf536b9f422c7",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "7daa3580ebbce8424edbeb52cf45209632c3b3673a188f0230d59212a068fdb0"
+    },
+    {
       "path": "evals/output_evals.json",
       "baseline_sha256": "08f154f8b966f391bb15e0c137af40e91242df6d7e2857de6990463d594845b7",
-      "current_sha256": "b18a84316df9a7979b16015591794bbb8fcd6636468959a0b4373c85549320b7",
+      "current_sha256": "538cdecef290bea2ba1c92e377ebcc7d3ffe4c1c74884d7c60387922dffed0f8",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION"
     },
     {
@@ -995,10 +1013,16 @@
       "current_sha256": "1573325cc9c99ae01409c5231ef5d96b4d6e7995441903fd67a11ea98e75c032"
     },
     {
+      "path": "references/brand-design-system.md",
+      "baseline_sha256": "9725eec5d9fd2e50b928fcf65a9e26aaf0a43a6f66bf56120f9cc7ebc665efff",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "009d3c618ccae59b25931aef6ce898ea29c0cf70b7fed5f1c484626cb009dac8"
+    },
+    {
       "path": "references/brand-rendering-contract-v2.md",
       "baseline_sha256": "061d17d524b2fdd30d74b1a742ea21fcb2d715184f13b5660f66ecc5a919a38e",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "33f04a12c27438cfd149415e27f29378e9de9f675d920ef2089dfcf3b109eb60"
+      "current_sha256": "3c38e481d893377bf586faf278e3e6b585edef9d06c8956cd40a59496649f101"
     },
     {
       "path": "references/client-storytelling-contract.md",
@@ -1017,6 +1041,12 @@
       "baseline_sha256": "52f82e404787749ed667435d473c03a9c13b7b1597b4f9edfd64ca7fec0d21a7",
       "current_sha256": "bb93f794d5d934231bac4f3227a16fc920d3d87febd0c67c0aa474f43e5bc703",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH"
+    },
+    {
+      "path": "references/installability-and-distribution.md",
+      "baseline_sha256": "e4348bd4c2aa548eec8b1157b37ac00db11eb7941234cfe22faa111c91777e44",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "bc0d1fe99ae21529f55acf53b1fe78ac38be5513f39cebb3e3fa6fb52d4d24a0"
     },
     {
       "path": "references/internal-analysis-report-contract.md",
@@ -1043,9 +1073,15 @@
       "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION"
     },
     {
+      "path": "references/pixelkiez-brand-rendering-contract.md",
+      "baseline_sha256": "c5ce0a97a8fb18d9f7c1e712a42ea6913902aea70a1a756c76d614097e591315",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "9143f18cd33558eb32429a2f8be6aa0c879f1a73e4a4be491d6ac6f55daabcfd"
+    },
+    {
       "path": "references/release-gate-policy.md",
       "baseline_sha256": "229a2cb13fee3e20905b59d084a9a1306f777fdcc0d59c6fa34e5a0ebaf75500",
-      "current_sha256": "8cbf0197dee85dfb87e701094b1452128170f5c3d2dcdf0c9eb4b26e6aeeb627",
+      "current_sha256": "9b29af4294643a61e40e24a08925fb1bfc5c5d4c0f91cf5c16d699cb9a312bfe",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION"
     },
     {
@@ -1057,13 +1093,13 @@
     {
       "path": "references/security-and-tools.md",
       "baseline_sha256": "943bed6897e2ef2e0bbfa8b5e6823c2d0112a3b2efb9eefe5242922553fdaa2f",
-      "current_sha256": "eed988f494c0a1a404ce3b11ec5aec8a486437420d4af514fa3920aa98b10951",
+      "current_sha256": "84d11b27038efec3884cc05e7c484b4464ec72cd077e4a085cf4ac47ee99b4ee",
       "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION"
     },
     {
       "path": "references/source-map.md",
       "baseline_sha256": "4f769eb0c2dd591ee30f8f3f0f3d9db4ab5cf2a8e314aedf479c97d905cac103",
-      "current_sha256": "fcdda368cbe9f2c58140ecb0d7f85746d73555768eab39011145ac3f2da4b23b",
+      "current_sha256": "9924ebf5d940e66291779482dbcb68cf0e2c29c090fa3ca65c1a401f9d2d1098",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1071,6 +1107,18 @@
       "baseline_sha256": "ed98acb1ca752a8c10bf3c14f0571d3a6adda9b105c597c498255ed53f2d996b",
       "reason": "IMPRESSUM_COMPLIANCE_PATCH",
       "current_sha256": "c6dd86199d178a1295532deb8ffafd400431524ee67bb319c3db74ad3b3ada11"
+    },
+    {
+      "path": "references/third-party-notices.md",
+      "baseline_sha256": "baac084bb9a3d17e3743a690fa993670e90b9625a4a21698900e57367faf2dc4",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "2cca5744348e5a64d432946b80b2d888e873629e935be87f75430d2490550360"
+    },
+    {
+      "path": "references/visualization-and-reporting-architecture-v1.md",
+      "baseline_sha256": "3fbaafc63298fb2628c2e7db20f7b3a3d85493df790774967b1a3fcd91559f2d",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "3e78d4da7b613ff6bf2212f77dc9414150269863c5b35a108f75593cd095d904"
     },
     {
       "path": "schemas/analysis-report.schema.json",
@@ -1091,9 +1139,15 @@
       "current_sha256": "3af3c246749698ba428e1817a34610d8bbf9099c0e14a026c128d73fe0378884"
     },
     {
+      "path": "schemas/presentation-render-receipt.schema.json",
+      "baseline_sha256": "e6ec0fd7872980d72cb70c8d1a16b2b177cce5b6362e1c402b6686126bda12c5",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "674f5af729d96091bb201f73b14c7bc4d5e8d586c77c55ce93066209c474846d"
+    },
+    {
       "path": "scripts/build_audit_deliverables.py",
       "baseline_sha256": "b8d3ba5536a2054d2545c17ef2868950597a2fdf7c01bf9dae2a4adf1bae203b",
-      "current_sha256": "3a7dfee0c0982033cc80f100c29bc90749a5bdd7db130149cf3bc59fa8d48c5e",
+      "current_sha256": "c6cf4b71c5a77fdfa52efad70b6f1cf26c8dbdecffff664ba9f4bc31c1f3ff02",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1121,6 +1175,12 @@
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
+      "path": "scripts/check_brand_fonts.py",
+      "baseline_sha256": "1f93e8015a15febe1322c1ffa02f8a2b7431cd414434d800a38d6b5c9719584c",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "e2a5a39afa9c733551978749a91a2ff5d55a4fdd82ac66a40d7931a4546caca0"
+    },
+    {
       "path": "scripts/client_story.py",
       "baseline_sha256": "3798a2babca162db109ce7750b324b7e1c993eb1ba48f1ab0afe4bebba230b2d",
       "current_sha256": "30d766f3e5a98441c2b3e0224a37ae308377f14cf8eff89f15ecaadba6d47939",
@@ -1141,14 +1201,14 @@
     {
       "path": "scripts/finalize_deliverable_manifest.py",
       "baseline_sha256": "a7e25b75339e0ea1255ceafb45b6ee733e2256d23a66af02af58a0fea2f90e6a",
-      "current_sha256": "be83da075d3f8c03475663464ede7ae9e002628a3cb46ab8d2b4a3eebeedefad",
+      "current_sha256": "31ccc9cc8f4c2e29eeb94b7c90c8ebc0f6c8e19cf53423ecb6398825c51fab6e",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE"
     },
     {
       "path": "scripts/package_skill.py",
       "baseline_sha256": "2c216ff3cd1beee9ee7877a746348d09c2d3167c8f74d1e65629c6b1ad2a23f0",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "41e96c7b64f53be10d63766079f080fd8d4693136f2f0a1e029ad5ff18f1a00c"
+      "current_sha256": "fc1ba9cf241dbcb326062fa6228292d33b7c53868ee6b5be280be0e49a7e3504"
     },
     {
       "path": "scripts/pipeline_ledger.py",
@@ -1159,8 +1219,14 @@
     {
       "path": "scripts/quick_validate.py",
       "baseline_sha256": "5b64359b1f387aa7ca3dcac89812783b98b3313256d950f958bc675a358084eb",
-      "current_sha256": "66c12aed45ae1cdf7eefaf3310c6dae20c5a6d377b7c6c9bb1abdfd05b5abba6",
+      "current_sha256": "8c5ceb0e826bae433c018b8f85ab4b6fd15b23189f15c7f83d15386332685556",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
+    },
+    {
+      "path": "scripts/render_diagnosis_pdf.py",
+      "baseline_sha256": "411d7adfe8952de7b5dd60f566b0384ccfc3ceda8b7b4b5c83378b471f474ea1",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "7f3ca7826b6ec5ea2a5787ca3eb0aa1fc4878b6521fc57c76bc63be852110260"
     },
     {
       "path": "scripts/render_internal_analysis_markdown.py",
@@ -1178,7 +1244,7 @@
       "path": "scripts/run_release_gate_mutation_evals.py",
       "baseline_sha256": "a4d06f5d6359fc9c6f3ebe73c7f81bf7d7af3b0b1e3c2c0249dfa5938c819d9e",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "fd2a2951e62cee4b8888d9fccdc183bec9fc57c7e13931dc9e9a36bfb4bb23ba"
+      "current_sha256": "c6d487999a269580d335ad739029f891bfd6b6b426dfb95232b41ee611ea1a3c"
     },
     {
       "path": "scripts/run_visual_architecture_evals.py",
@@ -1191,6 +1257,12 @@
       "baseline_sha256": "35d0ee5acb12d7d798d41e50ab9e9b0593ebca18f66e9fd1dbbe40e38befba89",
       "current_sha256": "56346daa17f50190bc5a824e38958a25d125db85a3f50f7f9f670c220e1da113",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE"
+    },
+    {
+      "path": "scripts/validate_asset_integrity.py",
+      "baseline_sha256": "22cdf03f129feb2ec7a6b699ab38c65d313765c9b45dff9b13bb0caf34da7985",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "a22895806077bccf089deea112006c83c92d095e6522ae95e6885d6213d280dc"
     },
     {
       "path": "scripts/validate_client_report_model.py",
@@ -1213,14 +1285,20 @@
     {
       "path": "scripts/validate_deliverable_bundle.py",
       "baseline_sha256": "73d0f45e6479d8fba097e853ff25a4d30e4ad44dc6d6e92d31f9f9ae0d252d8f",
-      "current_sha256": "f8cb3cd79b6247a1d7dad31fe50fd65ba3a404a40dcfdb7f1cb809f49daff821",
+      "current_sha256": "935623de2ce563162755727034ad4a69670e9fb64ad5fbd0252d40314d382b84",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE"
     },
     {
       "path": "scripts/validate_measurement_platform_baseline.py",
       "baseline_sha256": "44c342a3da39bf050fa0e6def30502b357c79ce5bf04130e262646c0e6c12532",
-      "current_sha256": "78d0aa27bbffd5bb8653e850cfc44c412e2f705cde2d7f24777d2971c91644dc",
+      "current_sha256": "dab369324fbffc2aaa46af1960f4e90de3dea1cebbbbb46eab6fb68317d88c03",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
+    },
+    {
+      "path": "scripts/validate_no_font_binaries.py",
+      "baseline_sha256": "4a1ef73206ebc8945eb56dcdf43d2e15c8946fcd3b712d95a72229c36ff9942b",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "7254d056bccd9e01b6ebbe51c9af63656d2a4c8e242479eca2c97222d00307b3"
     },
     {
       "path": "scripts/validate_pdf_output.py",
@@ -1237,13 +1315,13 @@
     {
       "path": "scripts/validate_presentation_brand.py",
       "baseline_sha256": "9a0dd5c21d38359decae728a88d149b05bb9e11b641e33c19cb2dc2c886e6b97",
-      "current_sha256": "b9ad062bfab6e7934e05753d33655176855613794a3693578936a43615a4be55",
+      "current_sha256": "bb9ad64142b47f396c6e1d964984db823ba064cd7186bdd742ab2a997fc3b21d",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE"
     },
     {
       "path": "scripts/validate_release_gate.py",
       "baseline_sha256": "4be8ea6b3782d72476621c95d25bda2930593c9d43a12c37552b4186b50b2de2",
-      "current_sha256": "d94368077bcf6d357d2c68c537d306d0d573ed0778775812c2a2e92440b3d31a",
+      "current_sha256": "e6ab97e02d8607ca8132812605579419ccab7aaa2cb7a55796db4930a121ab1b",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1293,6 +1371,46 @@
       "path": "assets/core-evidence-bindings.active.v1.json",
       "current_sha256": "09a3b2e2ce8d6b264347af53e9423df87c367d4c475a97940cc24fb415927f09",
       "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION"
+    },
+    {
+      "path": "assets/fonts/font-manifest.json",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "4b8a2e8ca39cdb5a1a3b6b0221d3e6afe9fdf2ec451390ac58a4c7a1255e1e16"
+    },
+    {
+      "path": "assets/fonts/ibm-plex-mono/IBMPlexMono-Bold.ttf",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "74e5eedcfa4596497d34e19023cabdabd3a8c852b903007a5654a59591a72ffb"
+    },
+    {
+      "path": "assets/fonts/ibm-plex-mono/IBMPlexMono-Regular.ttf",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "7c6fbddca4b700be918f5f6183d9bd4464fa427fe435f0b480d77fe2bb8c5a43"
+    },
+    {
+      "path": "assets/fonts/ibm-plex-mono/LICENSE.txt",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+    },
+    {
+      "path": "assets/fonts/schibsted-grotesk/AUTHORS.txt",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "0e0bf58c8b8bfdc2e1b0311a6c68f4d95eeee02340d39d409f42e1c435e617f9"
+    },
+    {
+      "path": "assets/fonts/schibsted-grotesk/OFL.txt",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "3b4f3063b6ac7c1e403e2c4a5e8ef3a58190ff83ed7b15af66511858699139ce"
+    },
+    {
+      "path": "assets/fonts/schibsted-grotesk/SchibstedGrotesk-Bold.ttf",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "d1d1ed9301f19a994161b0b763db11cce356204477e81bf3434d2f5dd85905e0"
+    },
+    {
+      "path": "assets/fonts/schibsted-grotesk/SchibstedGrotesk-Regular.ttf",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "e2cc0926fd159816bd934df5875000077e5ec8b1f9cd18154fe4d3e482b03b42"
     },
     {
       "path": "assets/impressum-compliance-registry.v1.json",
@@ -1347,7 +1465,7 @@
     {
       "path": "evals/fixtures/golden/legacy-oracles.v1.json",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "aff8a3a195d1525afc1bdec5bc90c93486149902687f2fe0f0002c4f97389f9d"
+      "current_sha256": "ec6d64e5b2f6a2e0cecf986ee8cffeb54c9336f4eb63eb1112145cfed215a66d"
     },
     {
       "path": "evals/fixtures/impressum-compliance-cases.json",
@@ -1536,7 +1654,7 @@
     },
     {
       "path": "scripts/validate_full_48_active.py",
-      "current_sha256": "8134b9e22775b7b847ee1206f4c9b1c15c79f0cfcba529c1db0510d2a569e9dd",
+      "current_sha256": "a38d7403afd1112bf145da9decc38a89786d5dd580df4b956d511b4858a5b7a3",
       "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1585,6 +1703,11 @@
       "current_sha256": "62b35f017f76e912feecca8088ba095c920062b1066531115212424fa2723f56"
     },
     {
+      "path": "tests/test_packaged_brand_fonts.py",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "current_sha256": "cfb687ee13657aac5b521b4840d56af3dafabf41b9198ecf644f1f92990f31a3"
+    },
+    {
       "path": "tests/test_pdf_layout_gate.py",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
       "current_sha256": "364a7708f24518ae7d29d2fda7b12eaabb1bd7bb950083aa58d02952c4f9cd14"
@@ -1597,7 +1720,7 @@
     {
       "path": "tests/test_release_evidence_boundaries.py",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "bf65f6edbe952389f5d4b0126ee9d986d53156501859759e3331ea2ff890e347"
+      "current_sha256": "63a815b23806c63520726ce11665d476e02cf901aa8e433e94af8be9e4868f9b"
     },
     {
       "path": "tests/test_vibecheck03.py",
@@ -1616,8 +1739,8 @@
     "modified_file_count": 22,
     "added_file_count": 5,
     "deleted_file_count": 0,
-    "current_modified": 54,
-    "current_added": 65,
+    "current_modified": 67,
+    "current_added": 74,
     "current_deleted": 0,
     "quality_patch": "CUSTOMER_PRESENTATION_QUALITY_GATE"
   },
@@ -1630,7 +1753,7 @@
     "14-template visual catalog",
     "Customer Closing capability"
   ],
-  "modified_file_count": 54,
+  "modified_file_count": 67,
   "current_active_migration_digest": "1a9c862edfce24d6193273049eebed12e0fa87312d98497bb835ebb4245f1e91",
   "active_migration_delta": {
     "baseline_tree_digest": "dbe282325a1ebd1acaaa0b02c822037a235e573e548e39b0a36ae96ad60569f2",
@@ -1639,7 +1762,7 @@
     "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION",
     "protected_registry_and_scorer_unchanged": true
   },
-  "latest_patch": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
+  "latest_patch": "PACKAGED_BRAND_FONT_PATCH",
   "latest_patch_note": "Hash-bound preservation manifest carried forward by provenance layers (user-authorized 2026-10-28); baseline hashes remain unchanged.",
   "patch_layers": [
     {
@@ -2058,7 +2181,213 @@
           "current_sha256": "e12d53130c3a984df1fa4185b8a84fc8c98fddc2f5d44344995de90cdc5febd8"
         }
       ]
+    },
+    {
+      "layer": "PACKAGED_BRAND_FONT_PATCH",
+      "source": "worktree feature/pixelkiez-packaged-brand-fonts on base 0d3a301 (user-authorized 2026-10-28)",
+      "transitions": [
+        {
+          "path": "SKILL.md",
+          "previous_sha256": "c005b739b1fb2ae8d14e28df8401d55a89584b93383d5bf9110ad332cae8b60b",
+          "current_sha256": "c2b2d571af90c165d15c14af050e7671da18c783ed412552aa9bf79df5147ce4"
+        },
+        {
+          "path": "assets/brand-tokens.json",
+          "previous_sha256": "051a155d5b8b95d812168fee967946226bee986954c21c8c55c71a099a4bc0b5",
+          "current_sha256": "40ab7151e12231e4ff889e9d23264be9075425fc00a2556f492477c741031e2d"
+        },
+        {
+          "path": "assets/brand.json",
+          "previous_sha256": "a44b451efb0521f151c689f2cf08d5272510f94fbed7d0a6985d6d600c9647aa",
+          "current_sha256": "c9e4176619873b311393fa228eb0aa7e8510a812c36df8eabd524eec56db54ef"
+        },
+        {
+          "path": "assets/fonts/font-manifest.json",
+          "previous_sha256": null,
+          "current_sha256": "4b8a2e8ca39cdb5a1a3b6b0221d3e6afe9fdf2ec451390ac58a4c7a1255e1e16"
+        },
+        {
+          "path": "assets/fonts/ibm-plex-mono/IBMPlexMono-Bold.ttf",
+          "previous_sha256": null,
+          "current_sha256": "74e5eedcfa4596497d34e19023cabdabd3a8c852b903007a5654a59591a72ffb"
+        },
+        {
+          "path": "assets/fonts/ibm-plex-mono/IBMPlexMono-Regular.ttf",
+          "previous_sha256": null,
+          "current_sha256": "7c6fbddca4b700be918f5f6183d9bd4464fa427fe435f0b480d77fe2bb8c5a43"
+        },
+        {
+          "path": "assets/fonts/ibm-plex-mono/LICENSE.txt",
+          "previous_sha256": null,
+          "current_sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+        },
+        {
+          "path": "assets/fonts/schibsted-grotesk/AUTHORS.txt",
+          "previous_sha256": null,
+          "current_sha256": "0e0bf58c8b8bfdc2e1b0311a6c68f4d95eeee02340d39d409f42e1c435e617f9"
+        },
+        {
+          "path": "assets/fonts/schibsted-grotesk/OFL.txt",
+          "previous_sha256": null,
+          "current_sha256": "3b4f3063b6ac7c1e403e2c4a5e8ef3a58190ff83ed7b15af66511858699139ce"
+        },
+        {
+          "path": "assets/fonts/schibsted-grotesk/SchibstedGrotesk-Bold.ttf",
+          "previous_sha256": null,
+          "current_sha256": "d1d1ed9301f19a994161b0b763db11cce356204477e81bf3434d2f5dd85905e0"
+        },
+        {
+          "path": "assets/fonts/schibsted-grotesk/SchibstedGrotesk-Regular.ttf",
+          "previous_sha256": null,
+          "current_sha256": "e2cc0926fd159816bd934df5875000077e5ec8b1f9cd18154fe4d3e482b03b42"
+        },
+        {
+          "path": "assets/third-party/README.md",
+          "previous_sha256": "d4b2becea8cd18be1ca5a08bb3f88f936ba582658189e1d10becf536b9f422c7",
+          "current_sha256": "7daa3580ebbce8424edbeb52cf45209632c3b3673a188f0230d59212a068fdb0"
+        },
+        {
+          "path": "evals/fixtures/golden/legacy-oracles.v1.json",
+          "previous_sha256": "aff8a3a195d1525afc1bdec5bc90c93486149902687f2fe0f0002c4f97389f9d",
+          "current_sha256": "ec6d64e5b2f6a2e0cecf986ee8cffeb54c9336f4eb63eb1112145cfed215a66d"
+        },
+        {
+          "path": "evals/output_evals.json",
+          "previous_sha256": "b18a84316df9a7979b16015591794bbb8fcd6636468959a0b4373c85549320b7",
+          "current_sha256": "538cdecef290bea2ba1c92e377ebcc7d3ffe4c1c74884d7c60387922dffed0f8"
+        },
+        {
+          "path": "references/brand-design-system.md",
+          "previous_sha256": "9725eec5d9fd2e50b928fcf65a9e26aaf0a43a6f66bf56120f9cc7ebc665efff",
+          "current_sha256": "009d3c618ccae59b25931aef6ce898ea29c0cf70b7fed5f1c484626cb009dac8"
+        },
+        {
+          "path": "references/brand-rendering-contract-v2.md",
+          "previous_sha256": "33f04a12c27438cfd149415e27f29378e9de9f675d920ef2089dfcf3b109eb60",
+          "current_sha256": "3c38e481d893377bf586faf278e3e6b585edef9d06c8956cd40a59496649f101"
+        },
+        {
+          "path": "references/installability-and-distribution.md",
+          "previous_sha256": "e4348bd4c2aa548eec8b1157b37ac00db11eb7941234cfe22faa111c91777e44",
+          "current_sha256": "bc0d1fe99ae21529f55acf53b1fe78ac38be5513f39cebb3e3fa6fb52d4d24a0"
+        },
+        {
+          "path": "references/pixelkiez-brand-rendering-contract.md",
+          "previous_sha256": "c5ce0a97a8fb18d9f7c1e712a42ea6913902aea70a1a756c76d614097e591315",
+          "current_sha256": "9143f18cd33558eb32429a2f8be6aa0c879f1a73e4a4be491d6ac6f55daabcfd"
+        },
+        {
+          "path": "references/release-gate-policy.md",
+          "previous_sha256": "8cbf0197dee85dfb87e701094b1452128170f5c3d2dcdf0c9eb4b26e6aeeb627",
+          "current_sha256": "9b29af4294643a61e40e24a08925fb1bfc5c5d4c0f91cf5c16d699cb9a312bfe"
+        },
+        {
+          "path": "references/security-and-tools.md",
+          "previous_sha256": "eed988f494c0a1a404ce3b11ec5aec8a486437420d4af514fa3920aa98b10951",
+          "current_sha256": "84d11b27038efec3884cc05e7c484b4464ec72cd077e4a085cf4ac47ee99b4ee"
+        },
+        {
+          "path": "references/source-map.md",
+          "previous_sha256": "fcdda368cbe9f2c58140ecb0d7f85746d73555768eab39011145ac3f2da4b23b",
+          "current_sha256": "9924ebf5d940e66291779482dbcb68cf0e2c29c090fa3ca65c1a401f9d2d1098"
+        },
+        {
+          "path": "references/third-party-notices.md",
+          "previous_sha256": "baac084bb9a3d17e3743a690fa993670e90b9625a4a21698900e57367faf2dc4",
+          "current_sha256": "2cca5744348e5a64d432946b80b2d888e873629e935be87f75430d2490550360"
+        },
+        {
+          "path": "references/visualization-and-reporting-architecture-v1.md",
+          "previous_sha256": "3fbaafc63298fb2628c2e7db20f7b3a3d85493df790774967b1a3fcd91559f2d",
+          "current_sha256": "3e78d4da7b613ff6bf2212f77dc9414150269863c5b35a108f75593cd095d904"
+        },
+        {
+          "path": "schemas/presentation-render-receipt.schema.json",
+          "previous_sha256": "e6ec0fd7872980d72cb70c8d1a16b2b177cce5b6362e1c402b6686126bda12c5",
+          "current_sha256": "674f5af729d96091bb201f73b14c7bc4d5e8d586c77c55ce93066209c474846d"
+        },
+        {
+          "path": "scripts/build_audit_deliverables.py",
+          "previous_sha256": "3a7dfee0c0982033cc80f100c29bc90749a5bdd7db130149cf3bc59fa8d48c5e",
+          "current_sha256": "c6cf4b71c5a77fdfa52efad70b6f1cf26c8dbdecffff664ba9f4bc31c1f3ff02"
+        },
+        {
+          "path": "scripts/check_brand_fonts.py",
+          "previous_sha256": "1f93e8015a15febe1322c1ffa02f8a2b7431cd414434d800a38d6b5c9719584c",
+          "current_sha256": "e2a5a39afa9c733551978749a91a2ff5d55a4fdd82ac66a40d7931a4546caca0"
+        },
+        {
+          "path": "scripts/finalize_deliverable_manifest.py",
+          "previous_sha256": "be83da075d3f8c03475663464ede7ae9e002628a3cb46ab8d2b4a3eebeedefad",
+          "current_sha256": "31ccc9cc8f4c2e29eeb94b7c90c8ebc0f6c8e19cf53423ecb6398825c51fab6e"
+        },
+        {
+          "path": "scripts/package_skill.py",
+          "previous_sha256": "41e96c7b64f53be10d63766079f080fd8d4693136f2f0a1e029ad5ff18f1a00c",
+          "current_sha256": "fc1ba9cf241dbcb326062fa6228292d33b7c53868ee6b5be280be0e49a7e3504"
+        },
+        {
+          "path": "scripts/quick_validate.py",
+          "previous_sha256": "66c12aed45ae1cdf7eefaf3310c6dae20c5a6d377b7c6c9bb1abdfd05b5abba6",
+          "current_sha256": "8c5ceb0e826bae433c018b8f85ab4b6fd15b23189f15c7f83d15386332685556"
+        },
+        {
+          "path": "scripts/render_diagnosis_pdf.py",
+          "previous_sha256": "411d7adfe8952de7b5dd60f566b0384ccfc3ceda8b7b4b5c83378b471f474ea1",
+          "current_sha256": "7f3ca7826b6ec5ea2a5787ca3eb0aa1fc4878b6521fc57c76bc63be852110260"
+        },
+        {
+          "path": "scripts/run_release_gate_mutation_evals.py",
+          "previous_sha256": "fd2a2951e62cee4b8888d9fccdc183bec9fc57c7e13931dc9e9a36bfb4bb23ba",
+          "current_sha256": "c6d487999a269580d335ad739029f891bfd6b6b426dfb95232b41ee611ea1a3c"
+        },
+        {
+          "path": "scripts/validate_asset_integrity.py",
+          "previous_sha256": "22cdf03f129feb2ec7a6b699ab38c65d313765c9b45dff9b13bb0caf34da7985",
+          "current_sha256": "a22895806077bccf089deea112006c83c92d095e6522ae95e6885d6213d280dc"
+        },
+        {
+          "path": "scripts/validate_deliverable_bundle.py",
+          "previous_sha256": "f8cb3cd79b6247a1d7dad31fe50fd65ba3a404a40dcfdb7f1cb809f49daff821",
+          "current_sha256": "935623de2ce563162755727034ad4a69670e9fb64ad5fbd0252d40314d382b84"
+        },
+        {
+          "path": "scripts/validate_full_48_active.py",
+          "previous_sha256": "8134b9e22775b7b847ee1206f4c9b1c15c79f0cfcba529c1db0510d2a569e9dd",
+          "current_sha256": "a38d7403afd1112bf145da9decc38a89786d5dd580df4b956d511b4858a5b7a3"
+        },
+        {
+          "path": "scripts/validate_measurement_platform_baseline.py",
+          "previous_sha256": "78d0aa27bbffd5bb8653e850cfc44c412e2f705cde2d7f24777d2971c91644dc",
+          "current_sha256": "dab369324fbffc2aaa46af1960f4e90de3dea1cebbbbb46eab6fb68317d88c03"
+        },
+        {
+          "path": "scripts/validate_no_font_binaries.py",
+          "previous_sha256": "4a1ef73206ebc8945eb56dcdf43d2e15c8946fcd3b712d95a72229c36ff9942b",
+          "current_sha256": "7254d056bccd9e01b6ebbe51c9af63656d2a4c8e242479eca2c97222d00307b3"
+        },
+        {
+          "path": "scripts/validate_presentation_brand.py",
+          "previous_sha256": "b9ad062bfab6e7934e05753d33655176855613794a3693578936a43615a4be55",
+          "current_sha256": "bb9ad64142b47f396c6e1d964984db823ba064cd7186bdd742ab2a997fc3b21d"
+        },
+        {
+          "path": "scripts/validate_release_gate.py",
+          "previous_sha256": "d94368077bcf6d357d2c68c537d306d0d573ed0778775812c2a2e92440b3d31a",
+          "current_sha256": "e6ab97e02d8607ca8132812605579419ccab7aaa2cb7a55796db4930a121ab1b"
+        },
+        {
+          "path": "tests/test_packaged_brand_fonts.py",
+          "previous_sha256": null,
+          "current_sha256": "cfb687ee13657aac5b521b4840d56af3dafabf41b9198ecf644f1f92990f31a3"
+        },
+        {
+          "path": "tests/test_release_evidence_boundaries.py",
+          "previous_sha256": "bf65f6edbe952389f5d4b0126ee9d986d53156501859759e3331ea2ff890e347",
+          "current_sha256": "63a815b23806c63520726ce11665d476e02cf901aa8e433e94af8be9e4868f9b"
+        }
+      ]
     }
   ],
-  "generator": "reports/override-evidence/build_v321_preservation_layers.py"
+  "generator": "reports/override-evidence/build_v321_preservation_layers.py + reports/override-evidence/add_v321_patch_layer.py"
 }

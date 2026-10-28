@@ -73,8 +73,7 @@ python scripts/build_audit_deliverables.py diagnosis-report-scored.json ./delive
 For a customer release:
 
 ```bash
-PIXELKIEZ_FONT_DIR=/approved/runtime/fonts \
 python scripts/build_audit_deliverables.py diagnosis-report-scored.json ./deliverables --release-mode customer
 ```
 
-Font files are runtime inputs and must not be bundled into the Skill package.
+The exact brand fonts ship manifest-pinned in `assets/fonts/`; `PIXELKIEZ_FONT_DIR` is consulted only when the package fonts are absent (see `references/brand-rendering-contract-v2.md`).

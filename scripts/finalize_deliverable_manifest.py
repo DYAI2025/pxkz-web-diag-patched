@@ -66,7 +66,12 @@ def main() -> int:
         qa_complete = visual_status == "PASS" and semantic_status == "PASS"
         quality = json.loads((out / "customer-presentation-quality-report.json").read_text(encoding="utf-8"))
         quality_status = quality.get("quality_status")
-        customer_ready = bool(qa_complete and quality_status == "PASS" and font_status == "EXACT")
+        embedding_status = (receipt.get("pdf_font_embedding") or {}).get("status")
+        if font_status == "EXACT" or embedding_status == "VERIFIED":
+            # The receipt was written by the renderer and may have been edited since; re-derive the font verdict.
+            run([sys.executable, str(root / "scripts/validate_presentation_brand.py"), str(out / "customer_presentation.pdf"),
+                 str(out / "presentation-render-receipt.json"), str(root / "assets/brand-tokens.json"), "--require-exact-fonts"])
+        customer_ready = bool(qa_complete and quality_status == "PASS" and font_status == "EXACT" and embedding_status == "VERIFIED")
         manifest.update({
             "status": "CUSTOMER_RELEASE_READY" if customer_ready else ("QA_COMPLETE_FONT_BLOCKED" if qa_complete else "BUILT_PENDING_QA"),
             "qa_status": {"visual": visual_status, "semantic": semantic_status},
@@ -75,7 +80,8 @@ def main() -> int:
             "font_resolution": {
                 **(manifest.get("font_resolution") if isinstance(manifest.get("font_resolution"), dict) else {}),
                 "status": font_status,
-                "customer_release_ready": font_status == "EXACT",
+                "customer_release_ready": font_status == "EXACT" and embedding_status == "VERIFIED",
+                "pdf_font_embedding_status": embedding_status,
             },
         })
         manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

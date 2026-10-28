@@ -12,6 +12,8 @@ import sys
 import tempfile
 from pathlib import Path
 
+from check_brand_fonts import looks_like_font
+
 
 def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -65,8 +67,11 @@ def main() -> int:
         font_state = json.loads(font_proc.stdout)
         if require_exact and font_state.get("status") != "EXACT":
             raise ValueError(
-                "BRAND_FONT_EXACT_REQUIRED: install Schibsted Grotesk and IBM Plex Mono in the runtime; "
-                f"current status={font_state.get('status')} resolved={font_state.get('resolved')}"
+                "BRAND_FONT_EXACT_REQUIRED: the packaged brand fonts (assets/fonts/font-manifest.json) or verified "
+                "runtime fonts must resolve Schibsted Grotesk and IBM Plex Mono exactly; "
+                f"current status={font_state.get('status')} resolved={font_state.get('resolved')} "
+                f"package={(font_state.get('package_fonts') or {}).get('status')} "
+                f"issues={(font_state.get('package_fonts') or {}).get('issues', [])[:5]}"
             )
 
         destination.parent.mkdir(parents=True, exist_ok=True)
@@ -152,7 +157,10 @@ def main() -> int:
             run([py, str(root / "scripts/validate_impressum_projection.py"), str(legal_sidecar), str(canonical), str(model), str(pdf)])
         run([py, str(root / "scripts/validate_customer_business_language.py"), str(model), str(pdf)])
         run([py, str(root / "scripts/validate_customer_output_guardrails.py"), str(model), str(html), str(pdf), str(visuals)])
-        run([py, str(root / "scripts/validate_pdf_brand.py"), str(pdf), str(preceipt), str(root / "assets/brand-tokens.json")])
+        brand_command = [py, str(root / "scripts/validate_pdf_brand.py"), str(pdf), str(preceipt), str(root / "assets/brand-tokens.json")]
+        if require_exact:
+            brand_command.append("--require-exact-fonts")
+        run(brand_command)
         pages = out / "rendered-pages"
         run([py, str(root / "scripts/render_pdf_pages.py"), str(pdf), str(pages)])
         visual_qa = out / "customer_presentation.visual-qa.json"
@@ -185,6 +193,9 @@ def main() -> int:
                 "requested": font_state.get("requested"),
                 "resolved": font_state.get("resolved"),
                 "customer_release_ready": font_state.get("customer_release_ready"),
+                "source": font_state.get("source"),
+                "package_fonts_status": (font_state.get("package_fonts") or {}).get("status"),
+                "package_manifest_sha256": (font_state.get("package_fonts") or {}).get("manifest_sha256"),
             },
             "qa_status": {"visual": "PENDING_ACTUAL_INSPECTION", "semantic": "PENDING_ACTUAL_INSPECTION"},
             "quality_gate_status": "PENDING_QA",
@@ -199,6 +210,10 @@ def main() -> int:
                 "live provider or telephony behavior",
             ],
         }
+        # Font binaries ship in the Skill package only; customers get the subsets embedded in the PDF.
+        font_files = sorted(str(path.relative_to(out)) for path in out.rglob("*") if path.is_file() and looks_like_font(path))
+        if font_files:
+            raise ValueError("font binaries must not be copied into customer deliverables: " + ", ".join(font_files))
         (out / "deliverable-manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         run([
             py, str(root / "scripts/validate_deliverable_bundle.py"), str(out),

@@ -14,6 +14,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from check_brand_fonts import looks_like_font
+
 
 def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -77,7 +79,8 @@ def main() -> int:
             [py, str(root / "scripts/validate_visualization_plan.py"), str(out_dir / "visualization-plan.json"), str(out_dir / "diagnosis-report.json")],
             [py, str(root / "scripts/validate_visualization_assets.py"), str(out_dir / "visualization-plan.json"), str(out_dir / "visualization-render-receipt.json"), str(out_dir / "visuals")],
             [py, str(root / "scripts/validate_pdf_output.py"), str(out_dir / "customer_presentation.pdf"), str(out_dir / "client-report-model.json")],
-            [py, str(root / "scripts/validate_presentation_brand.py"), str(out_dir / "customer_presentation.pdf"), str(out_dir / "presentation-render-receipt.json"), str(root / "assets/brand-tokens.json")],
+            [py, str(root / "scripts/validate_presentation_brand.py"), str(out_dir / "customer_presentation.pdf"), str(out_dir / "presentation-render-receipt.json"), str(root / "assets/brand-tokens.json")]
+            + (["--require-exact-fonts"] if args.require_customer_release_ready else []),
         ]
         for command in commands:
             code, stdout, stderr = run(command)
@@ -121,16 +124,23 @@ def main() -> int:
             return fail("selected/rendered/embedded visual counts differ or fall below four", report_path, payload)
         payload["checks"].append({"id": "visual_count_parity", "status": "PASS", "count": len(selected)})
 
+        font_files = sorted(str(path.relative_to(out_dir)) for path in out_dir.rglob("*") if path.is_file() and looks_like_font(path))
+        if font_files:
+            return fail("font binaries must not be shipped in customer deliverables: " + ", ".join(font_files), report_path, payload)
+        payload["checks"].append({"id": "no_font_binaries_in_deliverable", "status": "PASS"})
+
         font_status = receipt.get("brand_font_status")
+        embedding_status = (receipt.get("pdf_font_embedding") or {}).get("status")
         visual_status = visual_qa.get("inspection_status")
         semantic_status = semantic_qa.get("inspection_status")
         quality_status = quality.get("quality_status")
-        customer_release_ready = bool(font_status == "EXACT" and visual_status == "PASS" and semantic_status == "PASS" and quality_status == "PASS")
+        customer_release_ready = bool(font_status == "EXACT" and embedding_status == "VERIFIED" and visual_status == "PASS" and semantic_status == "PASS" and quality_status == "PASS")
         payload.update({
             "status": "PASS",
             "build_complete": True,
             "customer_release_ready": customer_release_ready,
             "brand_font_status": font_status,
+            "pdf_font_embedding_status": embedding_status,
             "visual_qa_status": visual_status,
             "semantic_qa_status": semantic_status,
             "quality_gate_status": quality_status,

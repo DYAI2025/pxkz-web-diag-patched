@@ -16,4 +16,4 @@ Canonical machine tokens live in `assets/brand-tokens.json`. The detailed render
 
 ## Current runtime status
 
-The bundled `reports/brand-font-capability.json` records that IBM Plex Mono resolves exactly while Schibsted Grotesk is not present in the current runtime and an approved proof fallback is used. Therefore proof rendering is possible, but exact-font customer release remains blocked until the runtime supplies the requested display family. Font binaries are never bundled in the Skill.
+Both requested families ship manifest-pinned in `assets/fonts/` and resolve from the package first, so exact-font rendering no longer depends on the host. `reports/brand-font-capability.json` records the resolved sources, checksums and manifest SHA-256 of the evaluated candidate. Exact fonts make the strict font gate pass; customer release still requires actual visual and semantic QA bound to the PDF SHA-256. Only the manifest-pinned files may be bundled.

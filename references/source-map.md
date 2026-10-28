@@ -37,7 +37,7 @@ sources:
     location: supplied Pixelkiez Design System archives and Pixelkiez Design System#final.pdf
     purpose: authoritative project brand direction for colors, typography intent, spacing, report rhythm, cards, pixel-meter device, and client-report structure
     reliability: strong for this project because the user explicitly supplied it as the required brand system
-    limitations: font binaries are not bundled; public brand state outside the supplied package is not independently verified here; an earlier supplied report page rejected any overall score, but that product rule is explicitly superseded by the current user request and replaced with a proprietary coverage-gated score policy
+    limitations: the design system names the families but supplies no font binaries (the bundled files come from S-FONT-001/S-FONT-002); public brand state outside the supplied package is not independently verified here; an earlier supplied report page rejected any overall score, but that product rule is explicitly superseded by the current user request and replaced with a proprietary coverage-gated score policy
     confidence_default: 4
 
   - source_id: S005
@@ -507,3 +507,7 @@ sources:
 - `S-VC03-003` — `assets/vibecheck03-customer-admission-rules.v1.json`. `type: derived` product policy (Pixelkiez); defect rules and German copy templates; no outcome, benchmark or legal claim; confidence 3 per admitted finding.
 - `S-VC03-004` — Synthetic fixtures `evals/fixtures/branch-priority-*.SYNTHETIC.json`. `type: synthetic test data`; never a sector weight source; honored only in test mode.
 
+## Packaged brand font sources (28 October 2026)
+
+- `S-FONT-001` — Schibsted Grotesk, https://github.com/schibsted/schibsted-grotesk, tag `1.100`, commit `d485f61f105e1b3935f4d21dfb4d371359798603`, raw `fonts/ttf/SchibstedGrotesk-Regular.ttf` / `-Bold.ttf`, `OFL.txt`, `AUTHORS.txt`. `type: primary`; git blob SHA-1 of each file matches the upstream tree; SHA-256 pinned in `assets/fonts/font-manifest.json`; OFL-1.1, no Reserved Font Name. Limitation: the release-1.100 asset zip does not contain these exact files (its `fonts/ttf/` copies are an earlier gftools 0.9.23 build and its fontbakery proof copies also differ); the pinned files are the raw tag-commit files (gftools 0.9.25 build). Confidence 5.
+- `S-FONT-002` — IBM Plex Mono, https://github.com/IBM/plex, release `@ibm/plex-mono@2.5.0`, commit `2f9ba1b25957d958db71a849e85d72e3ecfb845a`, asset `ibm-plex-mono.zip` (SHA-256 `6d23f01257663d8cc49a0d64c22ced630b79e0e2a0ac08a0da86e9a38bbc481c`, equal to the GitHub asset digest), `IBMPlexMono-Regular.ttf` / `-Bold.ttf`, `LICENSE.txt`. `type: primary`; blobs match `packages/plex-mono/` in the tag tree; OFL-1.1 with Reserved Font Name "Plex". Confidence 5.

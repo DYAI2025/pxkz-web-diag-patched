@@ -1,7 +1,7 @@
 {
   "status": "PASS",
   "schema_version": "1.0",
-  "authorization_basis": "Explicit user authorization on 2026-10-28 (answer 'Freigeben' to the hash-bound schema chain) after review of reports/override-evidence/schema.pinned-to-installed.diff and schema.installed-to-candidate.diff.",
+  "authorization_basis": "Explicit user authorization on 2026-10-28 (answer 'Freigeben' to the hash-bound schema chain) after review of reports/override-evidence/schema.pinned-to-installed.diff and schema.installed-to-candidate.diff. PACKAGED_BRAND_FONT_PATCH row: Explicit user authorization on 2026-10-28 (answer 'Freigeben (Recommended)' to the question naming PACKAGED_BRAND_FONT_PATCH with render_diagnosis_pdf.py 411d7adf… -> 7f3ca782… and build_audit_deliverables.py 3a7dfee0… -> c6cf4b71…), after an independent read-only review (workflow wf_532a77be-acb) whose confirmed findings were fixed before the hashes were presented.",
   "allowed_reasons_source": "scripts/validate_full_48_active.py ALLOWED_PROTECTED_CHANGES (fixed in code; this report cannot widen it)",
   "changes": [
     {
@@ -21,6 +21,15 @@
       "source": "branch-priority candidate (pixelkiez-website-diagnosis-BRANCH-PRIORITY-CANDIDATE.zip sha256 a04d41989ed3725bfac1d937f79543b69f134f9df507964dbb530abbb48d1b13; repository initial commit 50e74e4)",
       "change": "adds properties/vibecheck03 only (+172/-0 lines, 0 removed or changed nodes)",
       "evidence": "reports/override-evidence/schema.installed-to-candidate.diff"
+    },
+    {
+      "path": "scripts/render_diagnosis_pdf.py",
+      "previous_sha256": "411d7adfe8952de7b5dd60f566b0384ccfc3ceda8b7b4b5c83378b471f474ea1",
+      "current_sha256": "7f3ca7826b6ec5ea2a5787ca3eb0aa1fc4878b6521fc57c76bc63be852110260",
+      "reason": "PACKAGED_BRAND_FONT_PATCH",
+      "source": "worktree feature/pixelkiez-packaged-brand-fonts on base 0d3a301",
+      "change": "packaged brand font binding, PDF embedding verification and receipt provenance (+42/-12 lines)",
+      "evidence": "reports/override-evidence/packaged-fonts.render_diagnosis_pdf.baseline-to-candidate.diff"
     }
   ]
 }

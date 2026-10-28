@@ -16,6 +16,7 @@ PROTECTED_CHANGE_REPORT = "reports/active-measurement-protected-changes.json"
 ALLOWED_PROTECTED_CHANGES = {
     "IMPRESSUM_CUSTOMER_RISK_SCHEMA": {"schemas/diagnosis-report.schema.json"},
     "VIBECHECK03_DIAGNOSTICS_SCHEMA": {"schemas/diagnosis-report.schema.json"},
+    "PACKAGED_BRAND_FONT_PATCH": {"scripts/render_diagnosis_pdf.py"},
 }
 SHA_RX = re.compile(r"^[0-9a-f]{64}$")
 

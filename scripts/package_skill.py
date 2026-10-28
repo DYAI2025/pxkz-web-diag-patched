@@ -2,6 +2,7 @@
 """Validate and package exactly one Pixelkiez skill folder as skill.zip."""
 from __future__ import annotations
 import argparse
+import json
 import subprocess
 import sys
 import zipfile
@@ -11,8 +12,28 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build_boundary import never_shipped  # noqa: E402
 
 VALIDATORS = [
-    "quick_validate.py", "validate_release_gate.py", "validate_pipeline_ledger.py",
+    "quick_validate.py", "validate_no_font_binaries.py", "validate_release_gate.py", "validate_pipeline_ledger.py",
 ]
+from check_brand_fonts import FONT_SUFFIXES, looks_like_font_bytes  # noqa: E402
+
+
+def check_archive_fonts(root: Path, names: list[str], canonical_name: str, heads: dict[str, bytes] | None = None) -> None:
+    """The archive must carry each manifest font and licence exactly once and no other font binary."""
+    manifest = json.loads((root / "assets/fonts/font-manifest.json").read_text(encoding="utf-8"))
+    expected = {entry["path"] for entry in manifest["fonts"]}
+    licences = {family["license_file"] for family in manifest["families"]}
+    licences |= {notice["path"] for family in manifest["families"] for notice in family.get("notice_files", [])}
+    prefix = canonical_name + "/"
+    rel = [name[len(prefix):] for name in names if name.startswith(prefix)]
+    if len(rel) != len(set(rel)):
+        raise SystemExit("FAIL: archive contains duplicate entries")
+    heads = heads or {}
+    fonts = {name for name in rel if Path(name).suffix.casefold() in FONT_SUFFIXES or looks_like_font_bytes(heads.get(prefix + name, b""))}
+    if fonts != expected:
+        raise SystemExit(f"FAIL: archive font set differs from manifest: extra={sorted(fonts - expected)} missing={sorted(expected - fonts)}")
+    missing = sorted((licences | {"assets/fonts/font-manifest.json"}) - set(rel))
+    if missing:
+        raise SystemExit("FAIL: archive lacks font licence/manifest files: " + ", ".join(missing))
 
 def packaged_files(root: Path) -> list[str]:
     return [path.relative_to(root).as_posix() for path in sorted(root.rglob("*"))
@@ -60,6 +81,8 @@ def main() -> int:
         roots = {name.split("/", 1)[0] for name in names if "/" in name}
         if roots != {canonical_name} or f"{canonical_name}/SKILL.md" not in names or f"{canonical_name}/agents/openai.yaml" not in names:
             raise SystemExit("FAIL: archive must contain exactly one valid skill folder")
+        heads = {name: handle.read(name)[:16] for name in names if not name.endswith("/")}
+        check_archive_fonts(root, names, canonical_name, heads)
     print(f"PACKAGED: {archive}")
     return 0
 

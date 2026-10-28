@@ -331,17 +331,20 @@
   },
   {
     "id": "OUT-BRAND-FONT-020",
-    "prompt": "Render a proof report on a runtime without Schibsted Grotesk, then attempt a customer-release render.",
+    "prompt": "Render a proof report with a damaged or removed package font, then a customer-release render; separately render a customer report offline with the intact package and no PIXELKIEZ_FONT_DIR.",
     "expected_properties": [
-      "proof render uses a named approved fallback and records degraded/partial font status",
-      "customer-release mode fails closed with BRAND_FONT_EXACT_REQUIRED",
-      "no font binary is bundled or returned in skill.zip",
+      "proof render with a damaged package uses a named approved fallback and records degraded/partial font status",
+      "customer-release mode with a damaged package fails closed with BRAND_FONT_EXACT_REQUIRED naming the manifest issue",
+      "with the intact package, customer mode resolves both families EXACT from PACKAGED sources offline and the embedded PDF fonts verify against the pinned files",
+      "only manifest-pinned fonts and their licences are in skill.zip; no font file is returned in customer deliverables",
       "font fallback is never described as exact Pixelkiez parity"
     ],
     "failure_modes": [
       "silent DejaVu fallback claimed as brand exact",
       "customer release passes without exact requested families",
-      "font files are included in the delivered skill package"
+      "a filename or fc-match result accepted as font identity",
+      "unknown or extra font files included in the delivered skill package",
+      "font files copied into customer deliverables"
     ]
   },
   {
