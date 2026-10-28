@@ -1,13 +1,13 @@
 {
   "schema_version": "1.2",
   "pdf_path": "customer_presentation.pdf",
-  "pdf_sha256": "b679724004495f2999f3598c811c06ea77fd7b2a87ae04ed7d7daceed1324003",
+  "pdf_sha256": "1cdb5b7f32c795a2cb89ab4dce1c4f50c5a485de3ab9812776e5237a97379a14",
   "visualization_plan_path": "visualization-plan.json",
-  "visualization_plan_sha256": "912c407b092b22818d2cb20cd6ba97cd6643ec2a6d1062f6426bfac935820095",
+  "visualization_plan_sha256": "96387c6b99e14568a21ce8b6e7bbdb94f1a5abb35e4e8240c6d359394eff7383",
   "page_count": 9,
   "inspection_status": "PASS",
   "inspection_method": "agent_vision",
-  "inspected_by": "Claude Opus 5.5 (agent_vision, 2026-10-28; renders bound by pdf_sha256)",
+  "inspected_by": "Claude Opus 5.5 (agent_vision, 2026-10-28; renders bound by pdf_sha256; pages unchanged since the 456c226 inspection verified by raster comparison, changed pages re-inspected)",
   "inspection_note": "Set PASS only after every rendered page and every planned chart page has actually been visually inspected.",
   "pages": [
     {
@@ -73,7 +73,7 @@
         "no_broken_glyphs": true,
         "customer_density_ok": true
       },
-      "notes": "V10 trust matrix, six four-state rows; Firmendaten X Handlungsbedarf matches lever 1. O-1: TRUST-01 row 'Impressum OK' reports presence; lever 4 reports outdated references (currency). Not a factual contradiction; wording tension recorded as open risk."
+      "notes": "V10 trust matrix, six four-state rows; Firmendaten X Handlungsbedarf matches lever 1; 'Impressum und rechtliche Angaben' now ! Verbesserung sinnvoll, consistent with lever 4 (F-002 cites TRUST-01; CUSTOMER_STATUS_COHERENCE_PATCH, fixes former O-1)."
     },
     {
       "page": 6,
@@ -168,7 +168,7 @@
         "threshold_or_reference_clear_when_applicable": true,
         "no_internal_method_or_evidence_boilerplate": true
       },
-      "notes": "V10_TRUST_MATRIX inspected on page 5: V10 trust matrix, six four-state rows; Firmendaten X Handlungsbedarf matches lever 1. O-1: TRUST-01 row 'Impressum OK' reports presence; lever 4 reports outdated references (currency). Not a factual contradiction; wording tension recorded as open risk."
+      "notes": "V10_TRUST_MATRIX inspected on page 5: V10 trust matrix, six four-state rows; Firmendaten X Handlungsbedarf matches lever 1; 'Impressum und rechtliche Angaben' now ! Verbesserung sinnvoll, consistent with lever 4 (F-002 cites TRUST-01; CUSTOMER_STATUS_COHERENCE_PATCH, fixes former O-1)."
     },
     {
       "page": 6,

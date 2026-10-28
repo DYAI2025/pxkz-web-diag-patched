@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "pdf_path": "customer_presentation.pdf",
-  "pdf_sha256": "b679724004495f2999f3598c811c06ea77fd7b2a87ae04ed7d7daceed1324003",
+  "pdf_sha256": "1cdb5b7f32c795a2cb89ab4dce1c4f50c5a485de3ab9812776e5237a97379a14",
   "client_model_path": "client-report-model.json",
   "client_model_sha256": "8e60555fe46235f15afffb895989b2136f1264354c1a6a0fe2c6c6ad28e05def",
   "scored_report_path": "diagnosis-report.json",
@@ -10,7 +10,7 @@
   "page_count": 9,
   "inspection_status": "PASS",
   "inspection_method": "agent_vision",
-  "inspected_by": "Claude Opus 5.5 (agent_vision, 2026-10-28; renders bound by pdf_sha256)",
+  "inspected_by": "Claude Opus 5.5 (agent_vision, 2026-10-28; renders bound by pdf_sha256; pages unchanged since the 456c226 inspection verified by raster comparison, changed pages re-inspected)",
   "overall_checks": {
     "customer_specificity": true,
     "plain_language_comprehension": true,
@@ -92,7 +92,7 @@
         "evidence_faithful": true,
         "visual_semantic_fit": true
       },
-      "notes": "V10 trust matrix, six four-state rows; Firmendaten X Handlungsbedarf matches lever 1. O-1: TRUST-01 row 'Impressum OK' reports presence; lever 4 reports outdated references (currency). Not a factual contradiction; wording tension recorded as open risk."
+      "notes": "V10 trust matrix, six four-state rows; Firmendaten X Handlungsbedarf matches lever 1; 'Impressum und rechtliche Angaben' now ! Verbesserung sinnvoll, consistent with lever 4 (F-002 cites TRUST-01; CUSTOMER_STATUS_COHERENCE_PATCH, fixes former O-1)."
     },
     {
       "page": 6,

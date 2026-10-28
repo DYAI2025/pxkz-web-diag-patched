@@ -1,13 +1,13 @@
 {
   "schema_version": "1.2",
   "pdf_path": "customer_presentation.pdf",
-  "pdf_sha256": "5f36009f8ce325ea46f73a83389c2d5be2a7c11aaf84888b834e136fbc52bcb9",
+  "pdf_sha256": "15ad0a7d742193744d95174fd5c5833de1643fd8d17733730b5ddea0a153a916",
   "visualization_plan_path": "visualization-plan.json",
-  "visualization_plan_sha256": "044bcaf86adda1a9dfc10ddee72ec1d0d8dfd7a3fd9e05c5f0ff25d42c38a2d5",
+  "visualization_plan_sha256": "e2bac7368d46e775850dd540d2611a2cf0589fbc421c4b91064b87e5fb8abeb2",
   "page_count": 11,
   "inspection_status": "PASS",
   "inspection_method": "agent_vision",
-  "inspected_by": "Claude Opus 5.5 (agent_vision, 2026-10-28; renders bound by pdf_sha256)",
+  "inspected_by": "Claude Opus 5.5 (agent_vision, 2026-10-28; renders bound by pdf_sha256; pages unchanged since the 456c226 inspection verified by raster comparison, changed pages re-inspected)",
   "inspection_note": "Set PASS only after every rendered page and every planned chart page has actually been visually inspected.",
   "pages": [
     {
@@ -86,7 +86,7 @@
         "no_broken_glyphs": true,
         "customer_density_ok": true
       },
-      "notes": "V08 AI clarity matrix, seven rows klar/teilweise; legible."
+      "notes": "V08 AI clarity matrix: 'Eindeutige Unternehmensdarstellung' and 'Fakten überall gleich' read teilweise with the teilweise tint next to the provider-identity risk (CUSTOMER_STATUS_COHERENCE_PATCH); other rows unchanged; legible."
     },
     {
       "page": 7,
@@ -99,7 +99,7 @@
         "no_broken_glyphs": true,
         "customer_density_ok": true
       },
-      "notes": "V10 trust matrix: 'Impressum und rechtliche Angaben' now X Handlungsbedarf, consistent with lever 1 (LEGAL_SURFACE_CUSTOMER_STATUS_PATCH)."
+      "notes": "V10 trust matrix: 'Impressum und rechtliche Angaben' X Handlungsbedarf, consistent with lever 1; 'Firmendaten auf allen Seiten' and 'Kontakttransparenz' ! Verbesserung sinnvoll next to the identity risk."
     },
     {
       "page": 8,
@@ -206,7 +206,7 @@
         "threshold_or_reference_clear_when_applicable": true,
         "no_internal_method_or_evidence_boilerplate": true
       },
-      "notes": "V08_AI_ANSWERABILITY inspected on page 6: V08 AI clarity matrix, seven rows klar/teilweise; legible."
+      "notes": "V08_AI_ANSWERABILITY inspected on page 6: V08 AI clarity matrix: 'Eindeutige Unternehmensdarstellung' and 'Fakten überall gleich' read teilweise with the teilweise tint next to the provider-identity risk (CUSTOMER_STATUS_COHERENCE_PATCH); other rows unchanged; legible."
     },
     {
       "page": 7,
@@ -218,7 +218,7 @@
         "threshold_or_reference_clear_when_applicable": true,
         "no_internal_method_or_evidence_boilerplate": true
       },
-      "notes": "V10_TRUST_MATRIX inspected on page 7: V10 trust matrix: 'Impressum und rechtliche Angaben' now X Handlungsbedarf, consistent with lever 1 (LEGAL_SURFACE_CUSTOMER_STATUS_PATCH)."
+      "notes": "V10_TRUST_MATRIX inspected on page 7: V10 trust matrix: 'Impressum und rechtliche Angaben' X Handlungsbedarf, consistent with lever 1; 'Firmendaten auf allen Seiten' and 'Kontakttransparenz' ! Verbesserung sinnvoll next to the identity risk."
     },
     {
       "page": 8,

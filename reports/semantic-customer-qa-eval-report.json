@@ -11,7 +11,7 @@
   "inspected_by": "Claude Opus 5.5 (2026-10-28)",
   "semantic_qa_validation": "PASS",
   "visual_qa_validation": "PASS",
-  "pdf_sha256": "b679724004495f2999f3598c811c06ea77fd7b2a87ae04ed7d7daceed1324003",
+  "pdf_sha256": "1cdb5b7f32c795a2cb89ab4dce1c4f50c5a485de3ab9812776e5237a97379a14",
   "client_model_sha256": "8e60555fe46235f15afffb895989b2136f1264354c1a6a0fe2c6c6ad28e05def",
   "scored_report_sha256": "8af6f625c2d980f59166b36ea994701a9471f87553fc5fbbb51d146d01abaada",
   "release_mode": "customer",
@@ -42,14 +42,16 @@
     "closing": "four actions in lever order"
   },
   "open_observations": [
-    "O-1",
     "O-2",
-    "O-4"
+    "O-4",
+    "O-6"
   ],
   "does_not_prove": [
     "commercial conversion or revenue improvement",
     "semantic quality for every future website without per-output rendered QA",
     "ElevenLabs provider upload, live telephony, or legal outbound approval"
   ],
-  "superseded": "previous evidence (12 pages, inspected by GPT-5.6 Sol, pdf 60777610...) belonged to an older semantic bundle"
+  "superseded": "previous evidence (12 pages, inspected by GPT-5.6 Sol, pdf 60777610...) belonged to an older semantic bundle",
+  "artifact_digest": "a815fb3a3016f4d4ae520bc43043f1ea2fe80b19ea6cf4302089ee71dbc19e46",
+  "candidate_commit": "92eb6c9"
 }

@@ -10,7 +10,7 @@
   "page_count": 11,
   "inspection_status": "PASS",
   "inspection_method": "agent_vision",
-  "inspected_by": "Claude Opus 5.5 (agent_vision, 2026-10-28; renders bound by pdf_sha256)",
+  "inspected_by": "Claude Opus 5.5 (agent_vision, 2026-10-28; renders bound by pdf_sha256; pages unchanged since the 456c226 inspection verified by raster comparison, changed pages re-inspected)",
   "overall_checks": {
     "customer_specificity": true,
     "plain_language_comprehension": true,

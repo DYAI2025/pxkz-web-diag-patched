@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "pdf_path": "customer_presentation.pdf",
-  "pdf_sha256": "5f36009f8ce325ea46f73a83389c2d5be2a7c11aaf84888b834e136fbc52bcb9",
+  "pdf_sha256": "15ad0a7d742193744d95174fd5c5833de1643fd8d17733730b5ddea0a153a916",
   "client_model_path": "client-report-model.json",
   "client_model_sha256": "90f589d89c4ac089c7923ba9a3a704e9fd0d5fc8dd3c57dcfb50f5e21158db8f",
   "scored_report_path": "diagnosis-report.json",
@@ -10,7 +10,7 @@
   "page_count": 11,
   "inspection_status": "PASS",
   "inspection_method": "agent_vision",
-  "inspected_by": "Claude Opus 5.5 (agent_vision, 2026-10-28; renders bound by pdf_sha256)",
+  "inspected_by": "Claude Opus 5.5 (agent_vision, 2026-10-28; renders bound by pdf_sha256; pages unchanged since the 456c226 inspection verified by raster comparison, changed pages re-inspected)",
   "overall_checks": {
     "customer_specificity": true,
     "plain_language_comprehension": true,
@@ -105,7 +105,7 @@
         "evidence_faithful": true,
         "visual_semantic_fit": true
       },
-      "notes": "V08 AI clarity matrix, seven rows klar/teilweise; legible."
+      "notes": "V08 AI clarity matrix: 'Eindeutige Unternehmensdarstellung' and 'Fakten überall gleich' read teilweise with the teilweise tint next to the provider-identity risk (CUSTOMER_STATUS_COHERENCE_PATCH); other rows unchanged; legible."
     },
     {
       "page": 7,
@@ -118,7 +118,7 @@
         "evidence_faithful": true,
         "visual_semantic_fit": true
       },
-      "notes": "V10 trust matrix: 'Impressum und rechtliche Angaben' now X Handlungsbedarf, consistent with lever 1 (LEGAL_SURFACE_CUSTOMER_STATUS_PATCH)."
+      "notes": "V10 trust matrix: 'Impressum und rechtliche Angaben' X Handlungsbedarf, consistent with lever 1; 'Firmendaten auf allen Seiten' and 'Kontakttransparenz' ! Verbesserung sinnvoll next to the identity risk."
     },
     {
       "page": 8,

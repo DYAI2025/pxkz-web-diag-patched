@@ -5,7 +5,7 @@
   "release_gate": {
     "status": "BLOCKED",
     "allowed_to_package": false,
-    "blocking_reason": "Candidate frozen at artifact digest 3b442603b519158d158c924e9d65e19e3a30aca4ade5fcfe3307c7fb94be7196; release requires the full gate sweep on this digest, an independent evaluator receipt on the same digest and explicit user release authorization. Historical gate statuses below are superseded only where candidate_gate_results records a result for this digest.",
+    "blocking_reason": "Candidate frozen at artifact digest a815fb3a3016f4d4ae520bc43043f1ea2fe80b19ea6cf4302089ee71dbc19e46; release requires the full gate sweep on this digest, an independent evaluator receipt on the same digest and explicit user release authorization. Historical gate statuses below are superseded only where candidate_gate_results records a result for this digest.",
     "authorization_basis": "User instruction 2026-10-28: no merge, deployment or skill.zip while release gates are not passed; no automatic release."
   },
   "craftsmanship_gate": {
@@ -241,7 +241,7 @@
     "preserved anti-overclaim controls and zero Core score/coverage delta"
   ],
   "final_decision": "BLOCKED_PENDING_RELEASE_AUTHORIZATION",
-  "artifact_digest": "3b442603b519158d158c924e9d65e19e3a30aca4ade5fcfe3307c7fb94be7196",
+  "artifact_digest": "a815fb3a3016f4d4ae520bc43043f1ea2fe80b19ea6cf4302089ee71dbc19e46",
   "internal_report_gate": {
     "status": "PASS",
     "json": "analysis_report.json",
@@ -512,10 +512,11 @@
     "plan": "APPROVED",
     "architecture": "PASS",
     "implementation": "COMPLETE",
-    "validation": "PASS",
-    "release_gate": "PASS",
-    "packaging": "AUTHORIZED",
-    "release": "NOT_RELEASED"
+    "validation": "SEE_candidate_gate_results",
+    "release_gate": "BLOCKED",
+    "packaging": "NOT_AUTHORIZED",
+    "release": "NOT_RELEASED",
+    "historical_note": "Values before 2026-10-28 claimed release_gate PASS / packaging AUTHORIZED for an earlier draft; superseded."
   },
   "pixelkiez_score_impact": "NONE_DIRECT",
   "impressum_legal_source_gate": {
@@ -537,7 +538,7 @@
     "core_score_delta": 0,
     "golden_case": "LEG-GOLD-BFL"
   },
-  "candidate_artifact_digest": "3b442603b519158d158c924e9d65e19e3a30aca4ade5fcfe3307c7fb94be7196",
+  "candidate_artifact_digest": "a815fb3a3016f4d4ae520bc43043f1ea2fe80b19ea6cf4302089ee71dbc19e46",
   "fresh_reporting_gate": {
     "status": "PASS",
     "entrypoint": "scripts/run_reporting_bundle_evals.py",
@@ -621,20 +622,30 @@
     "inspected_pdfs": 6,
     "inspected_pages": 64,
     "fixed_during_qa": [
-      "F-QA-1 legal surface status (dee40a4)"
+      "F-QA-1 (dee40a4)",
+      "F-QA-2 (c393078)",
+      "F-QA-3 (cd90890)"
     ],
     "open_observations_non_blocking": [
-      "O-1",
       "O-2",
       "O-3",
       "O-4",
-      "O-5"
-    ]
+      "O-5",
+      "O-6"
+    ],
+    "artifact_digest": "a815fb3a3016f4d4ae520bc43043f1ea2fe80b19ea6cf4302089ee71dbc19e46"
   },
   "candidate_gate_results": {
-    "artifact_digest": "3b442603b519158d158c924e9d65e19e3a30aca4ade5fcfe3307c7fb94be7196",
-    "candidate_commit": "456c226",
-    "run": "2026-10-28 full gate sweep on a git-archive extraction of the candidate commit",
+    "artifact_digest": "a815fb3a3016f4d4ae520bc43043f1ea2fe80b19ea6cf4302089ee71dbc19e46",
+    "candidate_commit": "92eb6c9",
+    "status": "SWEEP_DONE",
+    "previous_round": {
+      "candidate_commit": "456c226",
+      "artifact_digest": "3b442603b519158d158c924e9d65e19e3a30aca4ade5fcfe3307c7fb94be7196",
+      "sweep": "44 of 47 pass",
+      "independent_evaluation": "FAIL (4 MAJOR: two status contradictions, nested reports/dist boundary, QA not bound to rendering code); all four fixed in 6875f5a, 22d2d3e, c393078, cd90890"
+    },
+    "run": "2026-10-28 full gate sweep on a git-archive extraction of 92eb6c9",
     "pass": [
       "unittest",
       "quick_validate",
@@ -682,10 +693,10 @@
       "run_fixture_eval"
     ],
     "fail": {
-      "validate_installability": "artifact must be skill.zip (no package built before authorization)",
-      "validate_release_gate": "release status is not PASS; allowed_to_package must be true (pending release authorization)",
-      "validate_pipeline_ledger": "STALE_ARTIFACT_DIGEST (no ledger run recorded for this digest before authorization)"
+      "validate_release_gate": "release status is not PASS; allowed_to_package must be true (pending release authorization; no other error)",
+      "validate_pipeline_ledger": "STALE_ARTIFACT_DIGEST (ledger run not recorded before authorization)",
+      "validate_installability": "artifact must be skill.zip (no package before authorization)"
     },
-    "independent_evaluation": "PENDING"
+    "independent_evaluation": "PENDING (second round on 92eb6c9)"
   }
 }

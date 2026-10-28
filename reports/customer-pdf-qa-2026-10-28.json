@@ -3,13 +3,13 @@
   "inspected_at": "2026-10-28",
   "inspection_method": "agent_vision",
   "inspected_by": "Claude Opus 5.5 (main session; not an independent evaluator)",
-  "candidate_artifact_digest": "3b442603b519158d158c924e9d65e19e3a30aca4ade5fcfe3307c7fb94be7196",
+  "candidate_artifact_digest": "a815fb3a3016f4d4ae520bc43043f1ea2fe80b19ea6cf4302089ee71dbc19e46",
   "semantic_bundle_sha256": "082325992478c88b16c7f2b8c67372e065473ba8e469c78cdae6cf7e37903041",
-  "render_basis": "git archive of the candidate commit; PDFs re-render deterministically (sha-identical across two renders)",
+  "render_basis": "git archive of candidate commit 92eb6c9; PDFs re-render deterministically (sha-identical across renders). Pages unchanged since the 456c226 inspection are verified identical by raster comparison (72 dpi) and keep their inspection; changed pages (Baumdienst p5, legal p6, p7) were re-inspected.",
   "cases": [
     {
       "case": "baumdienst-renner",
-      "pdf_sha256": "b679724004495f2999f3598c811c06ea77fd7b2a87ae04ed7d7daceed1324003",
+      "pdf_sha256": "1cdb5b7f32c795a2cb89ab4dce1c4f50c5a485de3ab9812776e5237a97379a14",
       "page_count": 9,
       "chart_pages": 4,
       "visual_qa": "PASS",
@@ -33,7 +33,7 @@
         },
         {
           "page": 5,
-          "note": "V10 trust matrix, six four-state rows; Firmendaten X Handlungsbedarf matches lever 1. O-1: TRUST-01 row 'Impressum OK' reports presence; lever 4 reports outdated references (currency). Not a factual contradiction; wording tension recorded as open risk."
+          "note": "V10 trust matrix, six four-state rows; Firmendaten X Handlungsbedarf matches lever 1; 'Impressum und rechtliche Angaben' now ! Verbesserung sinnvoll, consistent with lever 4 (F-002 cites TRUST-01; CUSTOMER_STATUS_COHERENCE_PATCH, fixes former O-1)."
         },
         {
           "page": 6,
@@ -55,7 +55,7 @@
     },
     {
       "case": "legal-golden",
-      "pdf_sha256": "5f36009f8ce325ea46f73a83389c2d5be2a7c11aaf84888b834e136fbc52bcb9",
+      "pdf_sha256": "15ad0a7d742193744d95174fd5c5833de1643fd8d17733730b5ddea0a153a916",
       "page_count": 11,
       "chart_pages": 6,
       "visual_qa": "PASS",
@@ -83,11 +83,11 @@
         },
         {
           "page": 6,
-          "note": "V08 AI clarity matrix, seven rows klar/teilweise; legible."
+          "note": "V08 AI clarity matrix: 'Eindeutige Unternehmensdarstellung' and 'Fakten überall gleich' read teilweise with the teilweise tint next to the provider-identity risk (CUSTOMER_STATUS_COHERENCE_PATCH); other rows unchanged; legible."
         },
         {
           "page": 7,
-          "note": "V10 trust matrix: 'Impressum und rechtliche Angaben' now X Handlungsbedarf, consistent with lever 1 (LEGAL_SURFACE_CUSTOMER_STATUS_PATCH)."
+          "note": "V10 trust matrix: 'Impressum und rechtliche Angaben' X Handlungsbedarf, consistent with lever 1; 'Firmendaten auf allen Seiten' and 'Kontakttransparenz' ! Verbesserung sinnvoll next to the identity risk."
         },
         {
           "page": 8,
@@ -105,7 +105,12 @@
           "page": 11,
           "note": "Closing: legal review is action 01; next-step box."
         }
-      ]
+      ],
+      "inputs": {
+        "scored_report_sha256": "10d89741768b2327a03bedd3d62a1fa332aa834123d794068bb897b0ecefca31",
+        "impressum_sidecar_sha256": "809a2b62916b76185b97c4d53cb9e4b4c66bcb399e514b4269251a92ba1c50d7",
+        "note": "Session inputs (synthetic core report + LEG-GOLD-BFL sidecar); recorded by digest, not committed."
+      }
     },
     {
       "case": "legacy-baseline",
@@ -325,19 +330,23 @@
     }
   ],
   "fixed_during_qa": {
-    "F-QA-1": "Legal case p7 showed 'Impressum und rechtliche Angaben: OK Klar' beside an urgent provider-identity risk; fixed by LEGAL_SURFACE_CUSTOMER_STATUS_PATCH (commit dee40a4), re-rendered page inspected, all other pages pixel-identical to the inspected renders."
+    "F-QA-1": "Legal case p7 showed 'Impressum und rechtliche Angaben: OK Klar' beside an urgent provider-identity risk; fixed by LEGAL_SURFACE_CUSTOMER_STATUS_PATCH (commit dee40a4), re-rendered page inspected, all other pages pixel-identical to the inspected renders.",
+    "F-QA-2": "Independent evaluation MAJOR-1/MAJOR-2: status rows read clear next to findings citing the same metric (Baumdienst p5 Impressum OK vs lever 4; legal p6 AI-01/AI-06 klar and p7 Kontakttransparenz Klar vs provider-identity risk). Fixed by CUSTOMER_STATUS_COHERENCE_PATCH (c393078), user-approved.",
+    "F-QA-3": "Re-inspection of legal p6 after F-QA-2: capped rows read teilweise but kept the clear tint (value 0.74 on a value-scaled tint). Fixed by capping at the template's 0.5 teilweise anchor (cd90890)."
   },
   "open_observations_non_blocking": {
-    "O-1": "Baumdienst p5: trust row 'Impressum OK' (presence, TRUST-01) beside lever 4 'Impressum enthält veraltete Referenzen' (currency). Not a factual contradiction; wording tension.",
+    "O-1": "RESOLVED by F-QA-2 (Baumdienst p5 now 'Verbesserung sinnvoll'); the earlier non-blocking classification was wrong.",
     "O-2": "Roadmap columns follow report roadmap data, not lever rank: legacy/case A put lever 1 in 'In 30 Tagen'; Baumdienst 'Danach' is empty. Pre-existing behaviour.",
     "O-3": "Case C: a low VC03 favicon detail takes lever 4 via the category-diversity rule while two medium findings stay out; required by run_vc03_customer_release_evals.",
     "O-4": "Lever page subtitle and footer are grey on orange (low contrast). Pre-existing palette choice.",
-    "O-5": "Legal case p2: strength 'Rechts-/Kontaktflächen gut erreichbar' (reachability) beside the provider-identity risk; wording tension, input text from executive.top_strengths."
+    "O-5": "Legal case p2: strength 'Rechts-/Kontaktflächen gut erreichbar' (reachability) beside the provider-identity risk; wording tension, input text from executive.top_strengths.",
+    "O-6": "Independent evaluation MINOR copy findings, not changed in this candidate: Baumdienst p2 'im öffentlichen Stichprobe' (grammar, audit wording); '/home/' path on Baumdienst p7/p8 (fixture text); 'Entität' (legal p2), 'Schema' (legal p6), owner labels 'UX & Frontend' (legal p10); legal p5 '3.8' without unit and with decimal point; closing-page heading descender touches the card top; legal roadmap marks every item P1."
   },
   "user_decision": "2026-10-28: observations documented as open risks, not release-blocking ('Als offene Risiken dokumentieren')",
   "does_not_prove": [
     "quality of PDFs for other customers without per-output rendered QA",
     "commercial effect",
     "legal compliance"
-  ]
+  ],
+  "candidate_commit": "92eb6c9"
 }
