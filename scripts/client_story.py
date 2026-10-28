@@ -13,27 +13,39 @@ REAL_CHARTS = {f"V{i:02d}" for i in range(1, 12)}
 SEVERITY_RANK = {"critical": 0, "high": 1, "medium": 2, "low": 3, "positive": 4}
 CONFIDENCE_DE = {"HIGH": "hoch", "MEDIUM": "mittel", "LOW": "niedrig"}
 
+
+def _keep_case(replacement: str):
+    """Replacement callable that keeps a sentence-initial capital letter."""
+    def sub(match: re.Match) -> str:
+        return replacement[:1].upper() + replacement[1:] if match.group(0)[:1].isupper() else replacement
+    return sub
+
 CLIENT_REPLACEMENTS = [
     (re.compile(r"Die drei wichtigsten Suchintentionen auf eigene, klar verlinkte Leistungsseiten abbilden\.?", re.I), "Die drei wichtigsten Suchanfragen mit klar verlinkten Leistungsseiten abdecken."),
     (re.compile(r"LCP-Element,?\s*Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen\.?", re.I), "Mobile Hauptdarstellung durch optimierte Bilder und Ressourcen beschleunigen."),
     (re.compile(r"größtes sichtbares Seitenelement,?\s*Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen\.?", re.I), "Mobile Hauptdarstellung durch optimierte Bilder und Ressourcen beschleunigen."),
-    (re.compile(r"\bim\s+mobilen\s+Labortest\b", re.I), "auf Mobilgeräten"),
-    (re.compile(r"\bim\s+Labortest\b", re.I), ""),
-    (re.compile(r"\bLabortest(?:s)?\b", re.I), ""),
+    # Method, synthetic origin and sample scope survive simplification (evidence-bound claims patch).
+    # "Testmessung" is customer-safe; "Labortest"/"Labormessung" are guardrail-forbidden provider/test terms.
+    (re.compile(r"Lighthouse/PageSpeed-Labortest", re.I), "technische Testmessung der Ladezeit"),
+    (re.compile(r"\bim\s+mobilen\s+Labortest\b", re.I), _keep_case("in der mobilen Testmessung")),
+    (re.compile(r"\bim\s+Labortest\b", re.I), _keep_case("in der Testmessung")),
+    (re.compile(r"\bLabortest(?:s)?\b", re.I), "Testmessung"),
+    (re.compile(r"\bdie\s+mobile\s+Labormessung\b", re.I), _keep_case("die mobile Testmessung")),
+    (re.compile(r"\bLabormessung(?:en)?\b", re.I), "Testmessung"),
+    (re.compile(r"synthetische\s+Testreihe", re.I), "Beispieldaten"),
+    (re.compile(r"synthetisches?\s+Testfeld", re.I), "Beispieldaten"),
+    (re.compile(r"Synthetic fixture", re.I), "Beispieldaten"),
+    (re.compile(r"synthetisch(?:e|en|er|es)?\s+(?:Fixture|Daten|Messung)", re.I), "Beispieldaten"),
     (re.compile(r"\bTestläufe?\b", re.I), "Messwerte"),
     (re.compile(r"\bTestreihen?\b", re.I), "Messwerte"),
     (re.compile(r"\bMessreihe(?:n)?\b", re.I), "Messwerte"),
     (re.compile(r"\bdokumentierte\s+Datenbasis\b", re.I), "vorliegende Werte"),
-    (re.compile(r"\bim\s+geprüften\s+Umfang\b", re.I), ""),
-    (re.compile(r"\bBelegstärke\b", re.I), "geschäftlicher Bedeutung"),
-    (re.compile(r"synthetische\s+Testreihe", re.I), "dokumentierte Messreihe"),
-    (re.compile(r"synthetisches?\s+Testfeld", re.I), "dokumentierte Datenbasis"),
+    (re.compile(r"\bim\s+geprüften\s+Umfang\b", re.I), "in der Stichprobe"),
+    (re.compile(r"\bBelegstärke\b", re.I), "Belastbarkeit der Werte"),
     (re.compile(r"Testläufen", re.I), "Messungen"),
     (re.compile(r"Testlauf", re.I), "Messung"),
     (re.compile(r"Testreihe", re.I), "Messreihe"),
     (re.compile(r"\bTests?\b", re.I), "Prüfung"),
-    (re.compile(r"Synthetic fixture", re.I), "dokumentierte Datenbasis"),
-    (re.compile(r"synthetisch(?:e|en|er|es)?\s+(?:Fixture|Daten|Messung)", re.I), "dokumentierte Datenbasis"),
     (re.compile(r"\bFixture\b", re.I), "Analyse"),
     (re.compile(r"Belegte Projektbeispiele, Zertifikate und Qualifikationsnachweise und freigegebene Kundenstimmen", re.I), "Belegte Projektbeispiele, Zertifikate, Qualifikationsnachweise und freigegebene Kundenstimmen"),
     (re.compile(r"\bEntitätsklarheit\b", re.I), "Eindeutige Unternehmensdarstellung"),
@@ -57,7 +69,6 @@ CLIENT_REPLACEMENTS = [
     (re.compile(r"lokale Pixelkiez Scoring-/Validierungs-/PDF-Werkzeuge", re.I), "lokale Pixelkiez Prüf- und Berichtswerkzeuge"),
     (re.compile(r"Raw-HTML Canonical/Robots-Meta/JSON-LD", re.I), "technische Angaben zur Hauptadresse, Indexierung und Seitenstruktur"),
     (re.compile(r"CrUX/Felddaten", re.I), "reale Lade- und Nutzungsdaten"),
-    (re.compile(r"Lighthouse/PageSpeed-Labortest", re.I), "technische Ladezeit-Messung"),
     (re.compile(r"Assetgrößen und Response-Header", re.I), "Größe wichtiger Seitendateien und Serverantworten"),
     (re.compile(r"pixelgenaue Mobile-/Desktop-Viewportprüfung", re.I), "pixelgenaue Prüfung auf Mobilgeräten und Desktop"),
     (re.compile(r"Tastatur/Fokus/Kontrast/automatisierter WCAG-Snapshot", re.I), "vollständige Prüfung von Tastaturbedienung, Fokus, Kontrast und Barrierefreiheit"),

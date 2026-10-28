@@ -281,5 +281,32 @@ class Case8ReadyIsInvalidated(unittest.TestCase):
             self.assertIn("sha256 mismatch", bundle.stdout + bundle.stderr)
 
 
+GOLDEN_PAIRS = [
+    # (internal wording, customer wording): simplification may shorten, never change method, origin or scope.
+    ("Der wichtigste sichtbare Inhalt erscheint im mobilen Labortest spürbar verzögert.",
+     "Der wichtigste sichtbare Inhalt erscheint in der mobilen Testmessung spürbar verzögert."),
+    ("Im Labortest lädt die Seite langsam.", "In der Testmessung lädt die Seite langsam."),
+    ("Mobile Ladezeit · synthetische Testreihe", "Mobile Ladezeit · Beispieldaten"),
+    ("Synthetic fixture 1.0", "Beispieldaten 1.0"),
+    ("Die mobile Labormessung bleibt in vier Testläufen über dem Zielband.",
+     "Die mobile Testmessung bleibt in vier Messungen über dem Zielband."),
+    ("Gilt im geprüften Umfang.", "Gilt in der Stichprobe."),
+    ("Sortiert nach Belegstärke.", "Sortiert nach Belastbarkeit der Werte."),
+    ("Lighthouse/PageSpeed-Labortest zeigt 3,8 s.", "technische Testmessung der Ladezeit zeigt 3,8 s."),
+    # Unchanged rules that keep their meaning: pinned so a later edit cannot silently drop the evidence class.
+    ("CrUX/Felddaten zeigen 3,2 s.", "reale Lade- und Nutzungsdaten zeigen 3,2 s."),
+]
+
+
+class GoldenPairs(unittest.TestCase):
+    def test_replacements_keep_method_scope_and_evidence_class(self) -> None:
+        for raw, expected in GOLDEN_PAIRS:
+            self.assertEqual(clientize(raw, 200), expected, raw)
+
+    def test_no_customer_replacement_erases_a_measurement_word(self) -> None:
+        for raw in ("im mobilen Labortest", "im Labortest", "Labortest", "Labormessung", "im geprüften Umfang", "synthetische Testreihe"):
+            self.assertTrue(clientize(raw, 200).strip(), raw)
+
+
 if __name__ == "__main__":
     unittest.main()
