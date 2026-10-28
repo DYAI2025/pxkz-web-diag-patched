@@ -9,14 +9,9 @@ from __future__ import annotations
 import hashlib, json, sys
 from pathlib import Path
 
-# Same boundary as pipeline_ledger.digest_tree: reports/ and dist/ only at the skill root, caches and VCS
-# metadata at any depth, plus compiled files.
-EXCLUDED_TOP_LEVEL = {"reports", "dist"}
-EXCLUDED_DIRS = {"__pycache__", ".git", ".pytest_cache"}
-
-
-def excluded(rel: Path) -> bool:
-    return rel.parts[0] in EXCLUDED_TOP_LEVEL or bool(set(rel.parts) & EXCLUDED_DIRS) or rel.suffix in {".pyc", ".pyo"}
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+# Same boundary as pipeline_ledger.digest_tree and package_skill (scripts/build_boundary.py).
+from build_boundary import excluded  # noqa: E402,F401  (re-exported for build_v321_preservation_layers)
 
 def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()

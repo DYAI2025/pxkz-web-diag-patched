@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from validate_full_48_active import ALLOWED_PROTECTED_CHANGES, apply_protected_changes  # noqa: E402
 from validate_strategic_relevance_v321_preservation import controlled  # noqa: E402
 from pipeline_ledger import digest_tree  # noqa: E402
+from package_skill import packaged_files  # noqa: E402
 
 SCHEMA = "schemas/diagnosis-report.schema.json"
 A, B, C = "a" * 64, "b" * 64, "c" * 64
@@ -58,6 +59,22 @@ class V321BoundaryTest(unittest.TestCase):
         # Only whole path components are excluded; look-alike names are still controlled.
         root = self.tree({".gitignore": "*", "docs/git/notes.md": "n", "scripts/reports_helper.py": "p"})
         self.assertEqual(set(controlled(root)), {".gitignore", "docs/git/notes.md", "scripts/reports_helper.py"})
+
+
+class PackageMatchesDigestTest(unittest.TestCase):
+    """skill.zip ships exactly the build-digest files plus the top-level reports/ evidence."""
+
+    def test_packaged_set_equals_digest_set_plus_reports(self) -> None:
+        root = V321BoundaryTest.tree(None, {
+            "SKILL.md": "x", "scripts/a.py": "a", "scripts/jsonschema.pyc": "shadow", "scripts/b.pyo": "o",
+            ".pytest_cache/v/x": "c", "scripts/.pytest_cache/y": "c", "scripts/__pycache__/a.cpython-312.pyc": "c",
+            "scripts/reports/payload.py": "p", "reports/r.json": "{}", "dist/skill.zip": "z", "assets/dist/a.json": "{}",
+        })
+        packaged = set(packaged_files(root))
+        self.assertEqual(packaged - {p for p in packaged if p.startswith("reports/")}, set(controlled(root)))
+        self.assertIn("reports/r.json", packaged)
+        for never in ("scripts/jsonschema.pyc", "scripts/b.pyo", ".pytest_cache/v/x", "scripts/.pytest_cache/y", "dist/skill.zip"):
+            self.assertNotIn(never, packaged)
 
 
 class ProtectedChangeChainTest(unittest.TestCase):

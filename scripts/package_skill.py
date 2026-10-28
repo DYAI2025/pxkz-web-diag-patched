@@ -7,10 +7,16 @@ import sys
 import zipfile
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from build_boundary import never_shipped  # noqa: E402
+
 VALIDATORS = [
     "quick_validate.py", "validate_release_gate.py", "validate_pipeline_ledger.py",
 ]
-EXCLUDE_PARTS = {"__pycache__", ".git", "dist"}
+
+def packaged_files(root: Path) -> list[str]:
+    return [path.relative_to(root).as_posix() for path in sorted(root.rglob("*"))
+            if path.is_file() and not never_shipped(path.relative_to(root))]
 
 def run_validator(root: Path, name: str) -> None:
     result = subprocess.run([sys.executable, str(root / "scripts" / name), str(root)], text=True, capture_output=True)
@@ -40,9 +46,8 @@ def main() -> int:
     archive = out_dir / "skill.zip"
     if archive.exists(): archive.unlink()
     with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as handle:
-        for path in sorted(root.rglob("*")):
-            if path.is_file() and not (set(path.relative_to(root).parts) & EXCLUDE_PARTS):
-                handle.write(path, Path(canonical_name) / path.relative_to(root))
+        for rel in packaged_files(root):
+            handle.write(root / rel, Path(canonical_name) / rel)
     with zipfile.ZipFile(archive) as handle:
         names = handle.namelist()
         roots = {name.split("/", 1)[0] for name in names if "/" in name}
