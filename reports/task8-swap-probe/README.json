@@ -1,0 +1,8 @@
+{
+  "probe": "Task 8 brief item 3: do swapped metric_refs with identical values change the customer levers?",
+  "method": "real CLIs (compute_score -> build_visualization_plan -> build_client_report_model --claim-bindings-out -> validate_customer_surface_consistency) on evals/fixtures/synthetic-report.json and the active-positive fixture",
+  "probe_output.txt": "run on d95ad75 (unfixed): 57 records = 51 reorder/swap/identical-value replacement mutations (sections a, b, b') + 6 primary-rule controls (section c)",
+  "probe_output_fixed.txt": "same probe after the first primary_metric fix (a65c5b6 equivalent)",
+  "result": "51 mutations: levers unchanged in all 51 (strengths changed in 2 one-sided replacements via B2 topic overlap). 6 controls: levers changed in 3, all attributable to selector and gate reading the primary metric differently (fixed in a65c5b6, refined in the next candidate after review: primary = first cited metric that reads as a status)",
+  "regression_tests": "tests/test_evidence_bound_claims.py::PrimaryMetricOrder"
+}

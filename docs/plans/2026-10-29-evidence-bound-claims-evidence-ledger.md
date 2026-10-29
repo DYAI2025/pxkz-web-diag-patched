@@ -238,7 +238,7 @@ change.
 
 ### Task 7 — review round 4 (checklist-bound) and real-data wording
 Independent review round 4 on the frozen build of 4ab90a9, against the fixed probe checklist: 50/50 rasters opened,
-18 probes PASS, 0 FAIL, A3 AMBIGUOUS ("1.240 aktive Nutzer"). Re-derived locally on the same build: forbidden-term,
+20 probes, 19 PASS, 0 FAIL, 1 AMBIGUOUS (A3, "1.240 aktive Nutzer"; the reviewer's summary line said "18 of 19"). Re-derived locally on the same build: forbidden-term,
 date, "Ladezeit" and P-label scans 0 hits on all 88 pages, 0 pages without "Beispieldaten", gateway pair the only
 identical PDFs, surface gate PASS 9/9, 11/11 customer-mode refusals without PDF.
 
@@ -289,14 +289,16 @@ real audit input built in customer mode, otherwise `BLOCKED_NO_REAL_AUDIT_INPUT`
 PASS on proof or example data is rejected in both states (this closes the gap that let 746c424 package on a fixture).
 `run_release_gate_mutation_evals.py`: 22 → 45 fail-closed cases; canary (two checks disabled) → exactly those two red.
 
-Swap probe (`metric_refs` reordered or swapped with identical values, 51 real-CLI mutations on two fixtures): levers
-unchanged in every literal case. Proven narrower defect: lever admission (`client_story.contradicted_by_clear_metrics`)
+Swap probe (real CLIs, two fixtures, 57 records in `reports/task8-swap-probe/`): 51 reorder, swap or identical-value
+replacement mutations left the levers unchanged (strengths changed in 2 one-sided replacements, B2 topic overlap); the
+6 primary-rule controls changed the levers in 3. Proven narrower defect: lever admission (`client_story.contradicted_by_clear_metrics`)
 read the primary metric with `customer_status` and counted `inferred_risk` as assessed, while B4 and the surface gate
 used `customer_reading`; reordering refs that B4 reads alike changed the levers, and one order failed the gate
 (`LEVER_PRIMARY_CLEAR`). Both now call `customer_reading.primary_metric`. `PrimaryMetricOrder`: red 2 FAIL on d95ad75,
 green 4/4; full suite 286 passed. Nine-case build of the fix: 9/9 PDFs and client models byte-identical to the
 reviewed build (plans and bindings differ only by the offline enrichment's `observed_at`, as between 4ab90a9 and
-5305049). Gate, ledger and package results for the frozen candidate: `reports/task8-release-reconciliation.json`.
+5305049). Sweep, gate, ledger and package results for the frozen candidate are recorded in `reports/task8-release-reconciliation.json`
+as each step runs; a step not yet run is recorded NOT_RUN.
 
 Independent review of a65c5b6 (two read-only lenses, no authoring context). Gate lens: 1 MAJOR, 7 MINOR, 1 PLAUSIBLE.
 The MAJOR: a customer PASS rested on the self-declared `data_class`; an example-data record relabelled REAL passed.
@@ -315,3 +317,16 @@ reads "Klar", so the rule never admits a lever that checklist B4 rejects (MINOR 
 checklist is unchanged). New test red first (`['F-003','F-004','F-002','F-005'] != ['F-001','F-003','F-004','F-002']`),
 then green; full suite 287 passed. MINOR 2 (a legal-sidecar lever citing a "Klar" core metric fails the build via B4)
 exists on d95ad75 too and fails closed: backlog, not changed here.
+
+Independent evaluation of cf98339 and its first regenerated evidence (two read-only lenses): both REVISE. Code and
+measurements reproduced (61 mutation cases, 287 passed, 97/97 PDF+PNG identical to the round-4 build). Blocking:
+the regenerated release report kept 32 gate bodies of d95ad75 under a new `measured_on` stamp, several contradicting
+live output (baseline counts 6/11 vs 7/12, an active-core PDF hash not in the build, page count 10 vs 9,
+`proof_output_gate.semantic_qa` PASS on example data); the four judgment gates were inherited from the Impressum
+patch; `reliability_gate` read PASS while the ledger was stale; the QA record copied four cases' plan/binding hashes
+from 5305049. Changed strategy: the release report is rebuilt from measurements only (prior report moved whole into
+`historical_sections`), judgment gates come from the evaluator verdict or stay NOT_RUN, `reliability_gate` follows
+`validate_pipeline_ledger.py`. Gate: the proof QA record must cover exactly the nine release cases, and while the
+customer report is blocked no gate may carry a semantic PASS (mutation evals 61 → 63, canary → those two red).
+Residual, documented: a customer PASS rests on recorded hashes and labels; binding it to a deliverable bundle on disk
+belongs to the first real customer release, not this package.

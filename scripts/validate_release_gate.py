@@ -98,6 +98,9 @@ def validate_customer_report_release(root: Path, report: dict, semantic: dict, p
         ready = sorted(k for k, v in report.items() if isinstance(v, dict) and v.get("customer_release_ready") is True)
         if ready:
             errors.append(f"customer report release is blocked but {', '.join(ready)} claims customer readiness")
+        semantic_pass = sorted(k for k, v in report.items() if isinstance(v, dict) and _claims_pass(v.get("semantic_qa")))
+        if semantic_pass:
+            errors.append(f"customer report release is blocked but {', '.join(semantic_pass)} claims a semantic PASS")
         return errors
     if status != "PASS":
         errors.append("customer report release status invalid")
@@ -166,6 +169,9 @@ def validate_skill_package_release(root: Path, report: dict, qa: dict, proofs: d
     refusals = {r.get("case"): r for r in raw_refusals if isinstance(r, dict)}
     if not cases or len(cases) != len(raw_cases) or len(refusals) != len(raw_refusals):
         errors.append("proof QA record lists no cases or malformed case/refusal entries")
+    names = [c.get("case") for c in cases]
+    if len(names) != len(set(names)) or set(names) != RELEASE_CASES:
+        errors.append("proof QA record does not cover exactly the nine release cases")
     for case in cases:
         name = case.get("case")
         if case.get("release_mode") != "proof":
@@ -203,6 +209,9 @@ CUSTOMER_REPORT_BLOCKED = "BLOCKED_NO_REAL_AUDIT_INPUT"
 PROOF_QA_PASS = "PROOF_QA_PASS_AGAINST_CHECKLIST_CUSTOMER_RELEASE_BLOCKED"
 PROOF_SEMANTIC_PASS = "PASS_AGAINST_CHECKLIST"
 PROOF_CHECKLIST = "docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md"
+# The nine release cases scripts/run_customer_release_cases.py builds; a proof QA record must cover exactly these.
+RELEASE_CASES = frozenset({"legacy-baseline", "legal-golden", "case-a-critical", "case-b-equal-rank-profile", "case-c-vc03-detail",
+                           "active-positive", "proof-realistic", "proof-strategic", "proof-measurement-gateway"})
 PROOF_QA_RECORD = re.compile(r"customer-pdf-qa-release-[0-9a-f]{7,40}\.json")
 
 
