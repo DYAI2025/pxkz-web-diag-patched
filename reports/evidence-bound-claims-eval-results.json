@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "status": "PASS",
   "suite": "tests.test_evidence_bound_claims",
-  "artifact_digest": "e7c3bc67d46eccb3f9db1246717ec35666bf7cfa1871bd31a5700ed3ce35c96c",
-  "tests_run": 17,
+  "artifact_digest": "8b51b5763db458a0d73dea8af922efc7164f870c7b9d3e7d061d304da9fe2ab5",
+  "tests_run": 22,
   "failures": 0,
   "errors": 0,
   "skipped": [],
@@ -14,6 +14,18 @@
     },
     {
       "test": "tests.test_evidence_bound_claims.Case1LabStaysLab.test_mobile_lab_sentence_is_not_rewritten_to_real_mobile",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case2SyntheticStaysSynthetic.test_every_proof_page_names_example_data",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case2SyntheticStaysSynthetic.test_example_data_is_announced_in_the_model",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case2SyntheticStaysSynthetic.test_lab_measurements_carry_no_example_data_notice",
       "outcome": "ok"
     },
     {

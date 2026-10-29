@@ -25,7 +25,8 @@ from test_packaged_brand_fonts import HAS_PDF_RUNTIME, isolated_env  # noqa: E40
 from visualization_policy import CUSTOMER_FORBIDDEN_TEMPLATES, CUSTOMER_MAX_VISUALS, CUSTOMER_MIN_VISUALS  # noqa: E402
 
 BUNDLE_PATH = ROOT / "evals/fixtures/full-48-core-execution.json"
-SCOPE_SENTENCE = "Grundlage: Stichprobe öffentlich erreichbarer Seiten"
+# The bundle is fixture data: the PDF names it as example data instead of claiming a page sample.
+SCOPE_SENTENCE = "Grundlage: Beispieldaten, keine Live-Messung."
 
 
 @unittest.skipUnless(HAS_PDF_RUNTIME, "PDF runtime (WeasyPrint/PyMuPDF/fontTools) unavailable: positive customer E2E NOT RUN")

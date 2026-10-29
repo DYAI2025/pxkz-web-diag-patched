@@ -13,6 +13,7 @@ from typing import Any
 from client_story import clientize, confidence_de, plan_visual_story, select_client_levers
 from customer_story_semantics import presentation_metadata, semantic_story_summary
 from customer_status import customer_status
+from evidence_method_labels import evidence_method, method_phrase
 from legal_customer_projection import contested_identity_surface, contested_legal_surface, vouches_for_contested_legal_surface
 from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority, selection_provenance
 
@@ -380,6 +381,9 @@ def main(argv: list[str]) -> int:
             "url": meta.get("audited_url", ""),
             "date": meta.get("audit_date", ""),
             "language": meta.get("language", "de"),
+            # Example data stays recognizable on every page; real measurements never carry this key.
+            **({"sample_data_notice": method_phrase("SYNTHETIC")}
+               if any(evidence_method(m) == "SYNTHETIC" for m in report.get("metrics", []) if isinstance(m, dict)) else {}),
         },
         "cover": {
             "eyebrow": "01 · WEBSITE-ANALYSE",

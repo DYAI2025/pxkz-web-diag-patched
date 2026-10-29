@@ -1,8 +1,8 @@
 diff --git a/scripts/build_client_report_model.py b/scripts/build_client_report_model.py
-index 71d1ff1..4d2747d 100644
+index 71d1ff1..f7738d3 100644
 --- a/scripts/build_client_report_model.py
 +++ b/scripts/build_client_report_model.py
-@@ -3,14 +3,17 @@
+@@ -3,14 +3,18 @@
  from __future__ import annotations
  
  import argparse
@@ -17,11 +17,12 @@ index 71d1ff1..4d2747d 100644
  from customer_story_semantics import presentation_metadata, semantic_story_summary
 -from legal_customer_projection import vouches_for_contested_legal_surface
 +from customer_status import customer_status
++from evidence_method_labels import evidence_method, method_phrase
 +from legal_customer_projection import contested_identity_surface, contested_legal_surface, vouches_for_contested_legal_surface
  from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority, selection_provenance
  
  SKILL_DIR = Path(__file__).resolve().parent.parent
-@@ -26,6 +29,68 @@ ROUTE_DE = {
+@@ -26,6 +30,68 @@ ROUTE_DE = {
  }
  
  
@@ -90,7 +91,7 @@ index 71d1ff1..4d2747d 100644
  def fail(msg: str) -> int:
      print(f"FAIL: {msg}", file=sys.stderr)
      return 1
-@@ -137,6 +202,7 @@ def main(argv: list[str]) -> int:
+@@ -137,6 +203,7 @@ def main(argv: list[str]) -> int:
      parser.add_argument("--visual-plan")
      add_priority_arguments(parser)
      parser.add_argument("--priority-decision-out", help="Internal-only selection provenance, not customer PDF")
@@ -98,7 +99,7 @@ index 71d1ff1..4d2747d 100644
      try:
          args = parser.parse_args(argv[1:])
          report = load(Path(args.report))
-@@ -162,10 +228,6 @@ def main(argv: list[str]) -> int:
+@@ -162,10 +229,6 @@ def main(argv: list[str]) -> int:
      score = report.get("score_summary", {})
      executive = report.get("executive_summary", {})
      findings = [f for f in report.get("findings", []) if isinstance(f, dict)]
@@ -109,7 +110,7 @@ index 71d1ff1..4d2747d 100644
      selected_levers = select_client_levers(
          report, max_levers=4, branch_weights=branch_weights, branch_roles=branch_roles
      )
-@@ -181,18 +243,8 @@ def main(argv: list[str]) -> int:
+@@ -181,18 +244,8 @@ def main(argv: list[str]) -> int:
              json.dumps(provenance, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
          )
  
@@ -130,7 +131,7 @@ index 71d1ff1..4d2747d 100644
  
      priorities: list[str] = []
      for f in selected_levers:
-@@ -274,7 +326,11 @@ def main(argv: list[str]) -> int:
+@@ -274,7 +327,11 @@ def main(argv: list[str]) -> int:
          if not action:
              continue
          horizon = rec.get("horizon")
@@ -143,7 +144,17 @@ index 71d1ff1..4d2747d 100644
              bucket = "now"
          elif horizon == "0_30_days":
              bucket = "next_30_days"
-@@ -368,6 +424,16 @@ def main(argv: list[str]) -> int:
+@@ -324,6 +381,9 @@ def main(argv: list[str]) -> int:
+             "url": meta.get("audited_url", ""),
+             "date": meta.get("audit_date", ""),
+             "language": meta.get("language", "de"),
++            # Example data stays recognizable on every page; real measurements never carry this key.
++            **({"sample_data_notice": method_phrase("SYNTHETIC")}
++               if any(evidence_method(m) == "SYNTHETIC" for m in report.get("metrics", []) if isinstance(m, dict)) else {}),
+         },
+         "cover": {
+             "eyebrow": "01 · WEBSITE-ANALYSE",
+@@ -368,6 +428,16 @@ def main(argv: list[str]) -> int:
      }
  
      Path(args.output).write_text(json.dumps(model, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

@@ -8,6 +8,7 @@
 <style>{{ css|safe }}</style>
 </head>
 <body>
+{% set notice = model.meta.get('sample_data_notice') %}{% set owner = model.meta.customer ~ (' · Beispieldaten' if notice else '') %}
 <section class="page orange">
   <div class="header"><div class="brand">Pixelkiez.<small>WEB DESIGN BERLIN</small></div><div class="eyebrow">Website-Analyse</div></div>
   <div class="cover-main">
@@ -15,6 +16,7 @@
     <h1 class="cover-title">{{ model.cover.title }}</h1>
     <div class="cover-customer">{{ model.meta.customer }}</div>
     <div class="cover-url">{{ model.meta.url }}</div>
+    {% if notice %}<div class="cover-url">{{ notice }}</div>{% endif %}
   </div>
   <div class="cover-band {{ 'with-score' if model.cover.score is not none else 'no-score' }}">
     {% if model.cover.score is not none %}<div><span class="label">{{ model.cover.score_label }}</span><strong>{{ model.cover.score }}</strong><span>Pixelkiez Gesamtbild</span></div>{% endif %}
@@ -37,17 +39,17 @@
         <div><div class="label">Stärken</div><ul class="summary-list">{% for item in model.executive.strengths[:3] %}<li>{{ item }}</li>{% endfor %}</ul></div>
         <div><div class="label">Prioritäten</div><ul class="summary-list">{% for item in model.executive.priorities[:3] %}<li>{{ item }}</li>{% endfor %}</ul></div>
       </div>
-      <p class="scope-note" style="margin-top: auto; padding-top: 4mm; font-size: 10pt; line-height: 1.35; color: #566360;">Grundlage: Stichprobe öffentlich erreichbarer Seiten, Stand {{ model.meta.date }}. KI-Antworten wurden nicht abgefragt.</p>
+      <p class="scope-note" style="margin-top: auto; padding-top: 4mm; font-size: 10pt; line-height: 1.35; color: #566360;">{% if notice %}Grundlage: {{ notice }}.{% else %}Grundlage: Stichprobe öffentlich erreichbarer Seiten, Stand {{ model.meta.date }}.{% endif %} KI-Antworten wurden nicht abgefragt.</p>
     </div>
   </div>
-  <div class="footer"><span>{{ model.meta.customer }} · {{ model.meta.date }}</span><span>02</span></div>
+  <div class="footer"><span>{{ owner }} · {{ model.meta.date }}</span><span>02</span></div>
 </section>
 
 {% for visual in visuals %}
 <section class="page {{ 'white' if loop.index is odd else '' }}">
   <div class="header"><div class="brand">Pixelkiez.</div><div class="eyebrow">{{ '%02d'|format(loop.index + 2) }} · WEBSITE-BEFUND</div></div>
   <div class="chart-frame">{{ visual.svg|safe }}</div>
-  <div class="footer"><span>{{ model.meta.customer }} · Website-Analyse</span><span>{{ '%02d'|format(loop.index + 2) }}</span></div>
+  <div class="footer"><span>{{ owner }} · Website-Analyse</span><span>{{ '%02d'|format(loop.index + 2) }}</span></div>
 </section>
 {% endfor %}
 
@@ -57,7 +59,7 @@
   <div class="lever-grid">
     {% for finding in findings %}<div class="lever severity-{{ finding.severity }}"><div class="number">{{ '%02d'|format(loop.index) }} · {{ {'critical':'KRITISCH','high':'HOCH','medium':'MITTEL','low':'NIEDRIG','positive':'STÄRKE'}.get(finding.severity, finding.severity|upper) }}</div><h3>{{ finding.headline }}</h3><p class="observation">{{ finding.observation }}</p><p class="impact"><strong>Warum das zählt:</strong> {{ finding.impact }}</p><p class="action">Nächster Schritt: {{ finding.action }}</p></div>{% endfor %}
   </div>
-  <div class="footer"><span>{{ model.meta.customer }} · priorisierte Befunde</span><span>{{ '%02d'|format(visuals|length + 3) }}</span></div>
+  <div class="footer"><span>{{ owner }} · priorisierte Befunde</span><span>{{ '%02d'|format(visuals|length + 3) }}</span></div>
 </section>
 
 <section class="page ink">
@@ -66,7 +68,7 @@
   <div class="roadmap">
     {% for key,label in [('now','Jetzt'),('next_30_days','In 30 Tagen'),('next_quarter','Danach')] %}<div class="roadmap-col"><h3>{{ label }}</h3>{% for item in model.roadmap[key] %}<div class="roadmap-item"><strong>{{ item.priority }} · {{ item.owner }}</strong><p>{{ item.action }}</p></div>{% endfor %}</div>{% endfor %}
   </div>
-  <div class="footer"><span>{{ model.meta.customer }} · {{ model.recommendation.next_step }}</span><span>{{ '%02d'|format(visuals|length + 4) }}</span></div>
+  <div class="footer"><span>{{ owner }} · {{ model.recommendation.next_step }}</span><span>{{ '%02d'|format(visuals|length + 4) }}</span></div>
 </section>
 
 <section class="page closing-page">
@@ -77,7 +79,7 @@
     <div class="closing-actions"><div class="label">WAS WIR JETZT TUN</div>{% for item in model.closing.actions %}<div class="closing-action"><b>{{ '%02d'|format(loop.index) }}</b><span>{{ item }}</span></div>{% endfor %}</div>
     <div class="closing-cta"><div class="label">NÄCHSTER SCHRITT</div><h3>{{ model.closing.cta }}</h3><p>{{ model.closing.next_step }}</p></div>
   </div>
-  <div class="footer"><span>{{ model.meta.customer }} · Pixelkiez Umsetzungspfad</span><span>{{ '%02d'|format(visuals|length + 5) }}</span></div>
+  <div class="footer"><span>{{ owner }} · Pixelkiez Umsetzungspfad</span><span>{{ '%02d'|format(visuals|length + 5) }}</span></div>
 </section>
 </body>
 </html>

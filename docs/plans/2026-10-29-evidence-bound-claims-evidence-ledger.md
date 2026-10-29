@@ -71,3 +71,20 @@ Decisions measured during the task:
 | full suite | `$PY -B -m pytest tests -q` | 0 | 204 passed, 69 subtests |
 
 Implementation notes: finalize downgrades a stored READY to BUILT_PENDING_QA before revalidation and writes CUSTOMER_RELEASE_BLOCKED with block_reason on any failure (atomic replace). Bundle validation checks every `required_artifacts[].sha256` and refuses READY without PASS visual+semantic QA bound to the receipt PDF digest. Release gate loads `reports/evidence-bound-claims-eval-results.json` (PASS, no skips, digest = live tree) and re-runs the suite live.
+
+## Task 7 — part 1: fresh nine-case build found two defects (fixed TDD before review)
+| check | command | rc | value |
+|---|---|---|---|
+| first nine-case build | `$PY -B scripts/run_customer_release_cases.py <named copy> <out>` | 1 | proof-strategic FAIL `SVG font too small VIZ-006=9.0px` (V05 per-row caption from Task 4) |
+| red: SVG legibility | `…Case6RankingContextPerRow.test_per_row_context_stays_legible_in_the_rendered_svg` | 1 | `9.0 not greater than or equal to 13` |
+| green after fix | same | 0 | caption 13 px, row pitch 34, 8 rows end y=387 < footer 407 |
+| red: example-data notice | `…Case2SyntheticStaysSynthetic` (model + every proof page) | 1 | pages [1,2,3,4,6,7,8,9,10] without "Beispieldaten"; model meta has no notice |
+| red: real-data template path | `…test_real_data_template_keeps_its_sampling_basis` | 1 | `UndefinedError: 'dict object' has no attribute 'sample_data_notice'` (StrictUndefined) |
+| green | `$PY -B -m pytest tests/test_evidence_bound_claims.py tests/test_positive_customer_e2e.py` | 0 | 28 passed |
+| legacy oracles | `$PY -B -m unittest tests.test_legacy_oracles` | 0 | amendment updated in place: synthetic-report model 77793c00…→e5f745cc… (plan unchanged) |
+| protected baseline | `python3 -B scripts/validate_measurement_platform_baseline.py .` | 0 | PASS; override scope now 6 files incl. templates/presentation.html.j2 |
+| v3.2.1 layer | `add_v321_patch_layer.py` + validator | 0 | 23 transitions; PASS modified=73 added=85 |
+| full suite | `$PY -B -m pytest tests -q` | 0 | 209 passed, 69 subtests |
+| claim eval | `$PY -B scripts/run_evidence_bound_claim_evals.py .` | 0 | PASS ran=22 skipped=0 |
+
+Deviation: case B (synthetic priority profile) builds without `--require-exact-fonts`, because build_audit_deliverables refuses that pairing by design; its receipt still has to read EXACT/VERIFIED or the builder fails. All five former customer cases are first attempted in customer mode and must be refused (`SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT`, no PDF); the nine inspectable PDFs are proof-mode builds of fixture data, now labelled "Beispieldaten" on every page. They are not nine live audits.

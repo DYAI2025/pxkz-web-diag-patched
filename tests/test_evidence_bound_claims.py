@@ -97,6 +97,48 @@ class Case2SyntheticStaysSynthetic(unittest.TestCase):
             self.assertIn("SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT", result.stdout + result.stderr)
             self.assertFalse((tmp / "out" / "customer_presentation.pdf").exists())
 
+    def model_meta(self, fixture: Path) -> dict:
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            scored, model = scored_from(load(fixture), tmp), tmp / "model.json"
+            result = run("scripts/build_client_report_model.py", str(scored), str(model))
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            return load(model)["meta"]
+
+    def test_example_data_is_announced_in_the_model(self) -> None:
+        self.assertEqual(self.model_meta(FIXTURE).get("sample_data_notice"), "Beispieldaten, keine Live-Messung")
+
+    def test_lab_measurements_carry_no_example_data_notice(self) -> None:
+        # Every metric of this fixture reads as a lab measurement, none as example data.
+        self.assertNotIn("sample_data_notice", self.model_meta(ROOT / "evals/fixtures/baumdienst-renner-reflection-regression.json"))
+
+    def test_real_data_template_keeps_its_sampling_basis(self) -> None:
+        """Rendered with the renderer's StrictUndefined environment, a model without the notice keeps the sampling sentence."""
+        from jinja2 import Environment, FileSystemLoader, StrictUndefined
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            scored, model_path = scored_from(load(ROOT / "evals/fixtures/baumdienst-renner-reflection-regression.json"), tmp), tmp / "model.json"
+            self.assertEqual(run("scripts/build_client_report_model.py", str(scored), str(model_path)).returncode, 0)
+            model = load(model_path)
+        self.assertNotIn("sample_data_notice", model["meta"])
+        env = Environment(loader=FileSystemLoader(str(ROOT / "templates")), undefined=StrictUndefined, autoescape=True)
+        html = env.get_template("presentation.html.j2").render(model=model, visuals=[], findings=model["findings"][:4], css="", font_status="EXACT")
+        self.assertIn("Grundlage: Stichprobe öffentlich erreichbarer Seiten", html)
+        self.assertNotIn("Beispieldaten", html)
+
+    @unittest.skipUnless(HAS_PDF_RUNTIME, "PDF runtime missing: NOT RUN")
+    def test_every_proof_page_names_example_data(self) -> None:
+        from pypdf import PdfReader
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            scored = scored_from(load(FIXTURE), tmp)
+            result = run("scripts/build_audit_deliverables.py", str(scored), str(tmp / "out"), "--release-mode", "proof", "--force-svg-fallback")
+            self.assertEqual(result.returncode, 0, result.stdout[-1500:] + result.stderr[-1500:])
+            pages = [page.extract_text() or "" for page in PdfReader(str(tmp / "out" / "customer_presentation.pdf")).pages]
+            missing = [i + 1 for i, text in enumerate(pages) if "Beispieldaten" not in text]
+            self.assertEqual(missing, [], "pages without an example-data notice")
+            self.assertNotIn("Stichprobe öffentlich erreichbarer Seiten", "\n".join(pages))
+
 
 class Case3SampleScopeStaysVisible(unittest.TestCase):
     def test_ai06_claim_never_says_whole_site(self) -> None:
@@ -201,6 +243,27 @@ class Case6RankingContextPerRow(unittest.TestCase):  # CANARY (subtitle) + new p
             self.assertIn("Desktop", v05["subtitle"])
             self.assertEqual([r["context_label"] for r in v05["data"]],
                              ["Berlin, Deutschland · Mobil · 28.10.2026", "Berlin, Deutschland · Desktop · 28.10.2026"])
+
+    def test_per_row_context_stays_legible_in_the_rendered_svg(self) -> None:
+        """The per-row context line obeys the 13 px SVG floor of validate_visual_assets.py and stays above the footer."""
+        import re
+        from svg_chart_renderer import render_svg
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            scored = scored_from(load(FIXTURE), tmp)
+            report = load(scored)
+            metrics = []
+            for i in range(8):
+                metrics += self.serp(f"anfrage {i}", "mobile" if i % 2 else "desktop", 3 + i)
+            report["measurement_enrichment"] = {"metrics": metrics}
+            dump(scored, report)
+            v05 = next(v for v in build_plan(scored, tmp)["visuals"] if v["template_id"] == "V05_RANKING_POSITION")
+            svg = render_svg(v05)
+            sizes = [float(x) for x in re.findall(r'font-size="([0-9.]+)"', svg)]
+            self.assertGreaterEqual(min(sizes), 13, sizes)
+            self.assertIn("Berlin, Deutschland · Desktop · 28.10.2026", svg)
+            ys = [float(y) for y in re.findall(r'<text x="42" y="([0-9.]+)"', svg)]
+            self.assertLess(max(ys), 407, "row text must stay above the footer rule")
 
 
 class Case7DeclaredIconFetchFailure(unittest.TestCase):  # CANARY, fixed in a66710f
