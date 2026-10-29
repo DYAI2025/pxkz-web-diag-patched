@@ -330,3 +330,16 @@ from 5305049. Changed strategy: the release report is rebuilt from measurements 
 customer report is blocked no gate may carry a semantic PASS (mutation evals 61 → 63, canary → those two red).
 Residual, documented: a customer PASS rests on recorded hashes and labels; binding it to a deliverable bundle on disk
 belongs to the first real customer release, not this package.
+
+Independent evaluation round 2 of a16ea1f and its rebuilt evidence: rubric PASS_WITH_MINOR_REVISIONS, evidence audit
+REVISE; all round-1 findings but one closed (the ledger sentence on NOT_RUN steps). Blocking: `validate_installability.py`
+(SKILL.md § Validation) was neither in the recorded sweep nor recorded NOT_RUN; the generator on disk was 20 s newer than
+the evidence, so its recorded output excerpts (pytest without a test count) came from an earlier revision. Gate
+hardening taken from both lenses: a proof case's PDF must equal the PDF the review inspected and the PDF of its signed
+visual QA manifest (a record whose cases and proofs share one unreviewed hash was self-consistent and passed); an owner
+resolution counts only as `AMBIGUOUS -> resolved PASS by owner clarification` with a row for exactly that probe in the
+checklist's owner-clarifications table; the policy states that `package_skill.py` enforces the pipeline ledger. Mutation
+evals 63 → 69, canary → those six red. The sweep now includes `validate_installability.py` and is checked against the
+SKILL.md list; the evidence records the generator's SHA-256, the pytest summary, the path-argument validators the nine-case
+build covers, and the swap probe rerun on the final rule. Residual, unchanged: `reports/brand-font-capability.json`
+`customer_release_ready: true` means font capability, not release.

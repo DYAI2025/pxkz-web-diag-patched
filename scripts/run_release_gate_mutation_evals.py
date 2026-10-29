@@ -8,7 +8,7 @@ import shutil
 import sys
 import tempfile
 from pathlib import Path
-from validate_release_gate import (CUSTOMER_REPORT_BLOCKED, PROOF_QA_PASS, PROOF_SEMANTIC_PASS, tree_digest, RELEASE_CASES, validate_font_gate,
+from validate_release_gate import (CUSTOMER_REPORT_BLOCKED, PROOF_QA_PASS, PROOF_SEMANTIC_PASS, tree_digest, RELEASE_CASES, OWNER_RESOLVED, validate_font_gate,
                                    validate_reports, validate_skill_package_release)
 from semantic_release_evidence import semantic_bundle_digest
 
@@ -70,13 +70,16 @@ def main(argv: list[str]) -> int:
     expect('customer_blocked_with_gate_semantic_pass', lambda r,p,sem: (blocked(r,p,sem), r.__setitem__('proof_output_gate',{'status':'PASS','semantic_qa':'PASS'})))
     expect('customer_blocked_with_example_semantic_pass', lambda r,p,sem: (blocked(r,p,sem), sem.__setitem__('semantic_qa_validation','PASS')))
     # SKILL_PACKAGE_RELEASE: proofs prove function only; reviewed against the fixed checklist and bound to the live tree.
-    pdf='a'*64
     import re
+    signed_dir='reports/customer-pdf-qa-release-5305049'
+    signed={c: json.loads((root/signed_dir/f'{c}.visual-qa.json').read_text(encoding='utf-8'))['pdf_sha256'] for c in RELEASE_CASES}
+    pdf=signed['proof-realistic']
     release_cases=['proof-realistic',*sorted(RELEASE_CASES-{'proof-realistic'})]
     probes=re.findall(r'^\| ([A-E]\d) \|', (root/'docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md').read_text(encoding='utf-8'), re.M)
     qa={'status':PROOF_QA_PASS,'artifact_digest':td,'unadjudicated':[],'yardstick_sha256':hashlib.sha256((root/'docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md').read_bytes()).hexdigest(),
-        'independent_review':{'rounds':[{'round':4,'fail':0,'probe_lines':{k:'PASS' for k in probes}}]},
-        'cases':[{'case':c,'release_mode':'proof','pdf_sha256':pdf,'visual_qa':'PASS','deliverable_status':'CUSTOMER_RELEASE_BLOCKED'} for c in release_cases],
+        'independent_review':{'rounds':[{'round':4,'fail':0,'probe_lines':{k:(OWNER_RESOLVED if k=='A3' else 'PASS') for k in probes}}]},
+        'signed_visual_qa_dir':signed_dir,
+        'cases':[{'case':c,'release_mode':'proof','pdf_sha256':signed[c],'reviewed_pdf_sha256':signed[c],'visual_qa':'PASS','deliverable_status':'CUSTOMER_RELEASE_BLOCKED'} for c in release_cases],
         'customer_mode_refusals':[{'case':c,'blocked':True,'pdf_written':False} for c in release_cases]}
     proof={'release_mode':'proof','customer_release_ready':False,'visual_qa':'PASS','proof_semantic_qa':PROOF_SEMANTIC_PASS,'semantic_qa':'FAIL','pdf_sha256':pdf}
     pkg={'skill_package_release':{'status':'PASS','artifact_digest':td}}
@@ -105,7 +108,14 @@ def main(argv: list[str]) -> int:
     expect_pkg('proof_case_visual_pass_with_rc1', lambda r,q,pr: q['cases'][0].__setitem__('visual_qa','PASS (validate_pdf_visual_qa rc 1)'))
     expect_pkg('proof_case_without_refusal', lambda r,q,pr: q['customer_mode_refusals'][0].__setitem__('case','other-case'))
     expect_pkg('proof_case_entry_not_object', lambda r,q,pr: q['cases'].append('pdf written'))
-    expect_pkg('proof_without_pdf_sha', lambda r,q,pr: (pr['realistic'].pop('pdf_sha256'), q['cases'].append({'case':'x','release_mode':'proof','visual_qa':'PASS','deliverable_status':'CUSTOMER_RELEASE_BLOCKED'}), q['customer_mode_refusals'].append({'case':'x','blocked':True,'pdf_written':False})))
+    expect_pkg('proof_without_pdf_sha', lambda r,q,pr: pr['realistic'].pop('pdf_sha256'))
+    expect_pkg('proof_case_pdf_not_reviewed_pdf', lambda r,q,pr: q['cases'][0].__setitem__('reviewed_pdf_sha256','c'*64))
+    # A record whose cases and proofs all carry one unreviewed PDF hash is consistent with itself, not with the signature.
+    expect_pkg('proof_case_pdf_not_signed', lambda r,q,pr: (q['cases'][0].update({'pdf_sha256':'b'*64,'reviewed_pdf_sha256':'b'*64}), pr['realistic'].__setitem__('pdf_sha256','b'*64)))
+    expect_pkg('proof_qa_without_signed_dir', lambda r,q,pr: q.pop('signed_visual_qa_dir'))
+    expect_pkg('proof_qa_signed_dir_outside_reports', lambda r,q,pr: q.__setitem__('signed_visual_qa_dir','docs/plans'))
+    expect_pkg('proof_qa_fail_relabelled_owner_resolved', lambda r,q,pr: q['independent_review']['rounds'][-1]['probe_lines'].__setitem__('A3','FAIL -> resolved PASS by owner clarification'))
+    expect_pkg('proof_qa_owner_resolved_without_table_row', lambda r,q,pr: q['independent_review']['rounds'][-1]['probe_lines'].__setitem__('B2',OWNER_RESOLVED))
     expect_pkg('proof_qa_case_set_trimmed', lambda r,q,pr: q.__setitem__('cases',q['cases'][:1]))
     expect_pkg('proof_built_in_customer_mode', lambda r,q,pr: pr['realistic'].__setitem__('release_mode','customer'))
     manifest=root/'assets/fonts/font-manifest.json'; md=hashlib.sha256(manifest.read_bytes()).hexdigest()

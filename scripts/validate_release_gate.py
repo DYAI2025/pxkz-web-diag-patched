@@ -162,7 +162,8 @@ def validate_skill_package_release(root: Path, report: dict, qa: dict, proofs: d
     lines = latest.get("probe_lines") if isinstance(latest.get("probe_lines"), dict) else {}
     if type(latest.get("fail")) is not int or latest.get("fail") != 0 or latest.get("confirmed"):
         errors.append("latest independent proof review round has confirmed defects")
-    if not probes or sorted(lines) != sorted(probes) or not all(_probe_passed(v) for v in lines.values()):
+    owner = _owner_resolved_probes(checklist.read_text(encoding="utf-8")) if checklist.is_file() else set()
+    if not probes or sorted(lines) != sorted(probes) or not all(_probe_passed(k, v, owner) for k, v in lines.items()):
         errors.append("latest independent proof review did not pass every checklist probe")
     raw_cases, raw_refusals = qa.get("cases") or [], qa.get("customer_mode_refusals") or []
     cases = [c for c in raw_cases if isinstance(c, dict)]
@@ -185,6 +186,22 @@ def validate_skill_package_release(root: Path, report: dict, qa: dict, proofs: d
             errors.append(f"customer mode did not refuse proof case {name}")
     if any(r.get("blocked") is not True or r.get("pdf_written") is not False for r in refusals.values()):
         errors.append("customer mode did not refuse every example-data case")
+    try:
+        signed_dir = signed_visual_qa_dir(root, qa)
+    except ValueError as exc:
+        errors.append(str(exc))
+        signed_dir = None
+    for case in cases:
+        name, pdf = case.get("case"), case.get("pdf_sha256")
+        if not _is_sha256(pdf) or case.get("reviewed_pdf_sha256") != pdf:
+            errors.append(f"proof case {name} PDF is not the PDF the independent review inspected")
+        manifest = signed_dir / f"{name}.visual-qa.json" if signed_dir is not None and isinstance(name, str) else None
+        try:
+            signed = json.loads(manifest.read_text(encoding="utf-8")) if manifest is not None and manifest.is_file() else {}
+        except (OSError, ValueError):
+            signed = {}
+        if signed.get("inspection_status") != "PASS" or signed.get("pdf_sha256") != pdf:
+            errors.append(f"proof case {name} PDF is not the PDF of its signed visual QA manifest")
     reviewed = {c.get("pdf_sha256") for c in cases if _is_sha256(c.get("pdf_sha256"))}
     for label, proof in proofs.items():
         if proof.get("release_mode") != "proof":
@@ -223,12 +240,32 @@ def _claims_pass(value: object) -> bool:
     return isinstance(value, str) and value.strip().upper().startswith("PASS")
 
 
-def _probe_passed(value: object) -> bool:
-    return value == "PASS" or (isinstance(value, str) and value.endswith("resolved PASS by owner clarification"))
+OWNER_RESOLVED = "AMBIGUOUS -> resolved PASS by owner clarification"
+
+
+def _owner_resolved_probes(checklist_text: str) -> set[str]:
+    """Probe IDs named on their own in the checklist's "Owner clarifications" table."""
+    section = checklist_text.split("## Owner clarifications", 1)[1] if "## Owner clarifications" in checklist_text else ""
+    section = re.split(r"^## ", section, maxsplit=1, flags=re.M)[0]
+    return set(re.findall(r"^\| [^|]+ \| ([A-E]\d) \|", section, re.M))
+
+
+def _probe_passed(probe: str, value: object, owner_resolved: set[str]) -> bool:
+    """A probe passed, or was AMBIGUOUS and the checklist's owner-clarification table resolves exactly that probe."""
+    return value == "PASS" or (value == OWNER_RESOLVED and probe in owner_resolved)
 
 
 def _tree_file_hashes(root: Path) -> set[str]:
     return {hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob("*") if p.is_file() and ".git" not in p.parts}
+
+
+def signed_visual_qa_dir(root: Path, qa: dict) -> Path:
+    """Folder of the per-case visual QA manifests the independent review signed, confined to reports/."""
+    rel = str(qa.get("signed_visual_qa_dir") or "")
+    path = (root / rel).resolve()
+    if not rel or path.parent != (root / "reports").resolve() or not path.is_dir():
+        raise ValueError("proof QA record must name signed_visual_qa_dir as a folder under reports/")
+    return path
 
 
 def proof_qa_record_path(root: Path, report: dict) -> Path:
