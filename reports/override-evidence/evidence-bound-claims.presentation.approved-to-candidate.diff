@@ -1,8 +1,16 @@
 diff --git a/assets/presentation.css b/assets/presentation.css
-index c49e8d7..92a4e89 100644
+index c49e8d7..02144d6 100644
 --- a/assets/presentation.css
 +++ b/assets/presentation.css
-@@ -100,6 +100,8 @@ p { margin: 0; }
+@@ -45,6 +45,7 @@ p { margin: 0; }
+ .summary-card { background: #FFFFFF; border-radius: 6mm; padding: 9mm; }
+ .summary-card .takeaway { font-size: 16pt; line-height: 1.32; font-weight: 700; margin-bottom: 7mm; }
+ .summary-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 7mm; }
++.summary-columns.single { grid-template-columns: 1fr; }
+ .summary-list { list-style: none; padding: 0; margin: 3mm 0 0; }
+ .summary-list li { border-top: .7pt solid #C6D4D1; padding: 3mm 0; font-size: 11pt; }
+ .lever-grid { margin-top: 5mm; display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+@@ -100,6 +101,8 @@ p { margin: 0; }
  .page.levers .section-title { margin-top: 4mm; }
  .page.levers .section-title h2 { font-size: 22pt; }
  .page.levers .section-title p { font-size: 9.5pt; }

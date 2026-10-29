@@ -480,7 +480,10 @@ class ReviewRoundOne(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             model = self.model_for(load(FIXTURE), Path(td))
         model["executive"]["strengths"] = []
-        self.assertNotIn('<div class="label">Stärken</div>', self.render_template(model))
+        html = self.render_template(model)
+        self.assertNotIn('<div class="label">Stärken</div>', html)
+        # The remaining priorities column takes the full width instead of leaving half the card empty.
+        self.assertIn('class="summary-columns single"', html)
 
     def test_example_data_page_two_footer_carries_no_report_date(self) -> None:  # P1
         with tempfile.TemporaryDirectory() as td:

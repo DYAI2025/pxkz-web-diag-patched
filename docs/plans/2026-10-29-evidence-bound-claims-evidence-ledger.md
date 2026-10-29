@@ -128,3 +128,12 @@ Result: 11 confirmed, 4 plausible findings, so QA was NOT signed. Each was re-de
 | 12 eval suites | enrichment, gateway, strategic, visual architecture, customer semantic, VC03, branch priority, legal projection, business-first, gallery, truth discipline, reporting bundle | 0 | all PASS |
 | oracles | amendment in place: plan 45a14b49…→ac5e2787…, model e5f745cc…→ffae93dd…; lever ids unchanged | 0 | OK |
 | baseline / v3.2.1 | validators | 0 | PASS (7 override files incl. assets/presentation.css) / PASS 25 transitions |
+
+### Task 7 — own look at the frozen build of 3a1f4da (before dispatching reviewer round 2)
+Frozen build from `git archive 3a1f4da`: rc 0, 9 cases, 90 pages / 41 unique rasters, crosscheck BAD 0; customer mode refused for all nine cases (8 × `SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT`, case B × synthetic priority profile) plus both negatives, no PDF written.
+Inspected pages: proof-strategic 08 (V05 scale), 10 (roadmap), 11 (highlights); legacy-baseline 05 (V07), 08 (orange lever page); legal-golden 02. The fixes look as intended. One new defect: with the strengths column hidden, the priorities column stayed half-width (right half of the card empty).
+| check | rc | value |
+|---|---|---|
+| red `test_empty_strengths_leave_no_empty_column` (+ `summary-columns single`) | 1 | assertion failed for the stated reason |
+| green after template class + `.summary-columns.single` CSS | 0 | OK |
+| full suite | 0 | see commit; claim eval PASS ran=33 skipped=0 |

@@ -35,7 +35,7 @@
     </div>
     <div class="summary-card" style="display: flex; flex-direction: column;">
       <p class="takeaway">{{ model.executive.takeaway }}</p>
-      <div class="summary-columns">
+      <div class="summary-columns{% if not model.executive.strengths %} single{% endif %}">
         {% if model.executive.strengths %}<div><div class="label">Stärken</div><ul class="summary-list">{% for item in model.executive.strengths[:3] %}<li>{{ item }}</li>{% endfor %}</ul></div>{% endif %}
         <div><div class="label">Prioritäten</div><ul class="summary-list">{% for item in model.executive.priorities[:3] %}<li>{{ item }}</li>{% endfor %}</ul></div>
       </div>

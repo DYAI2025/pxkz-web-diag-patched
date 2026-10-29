@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "status": "PASS",
   "suite": "tests.test_evidence_bound_claims",
-  "artifact_digest": "de899a912477dbc74d9aee13d9640636cb4e0ce46683182718b57f6477b8deff",
+  "artifact_digest": "97c0f43ae12feb05ed49bb7334f58e6e77c0a4c88f573b45f0ccfb62a922eb59",
   "tests_run": 33,
   "failures": 0,
   "errors": 0,

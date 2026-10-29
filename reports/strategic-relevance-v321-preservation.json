@@ -985,7 +985,7 @@
     {
       "path": "assets/presentation.css",
       "baseline_sha256": "ffd55bb7baa0b458de6db423792842f2bd4c0ee6e061003f53823ef588955a23",
-      "current_sha256": "3900eb15c400d61b19a907ce8e2151363790c3ce32bb1ca08b83b95a88fa7d87",
+      "current_sha256": "0daebd869bcb774c323ccb103e695860b309a9116a213978705969916714d875",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1387,7 +1387,7 @@
     {
       "path": "templates/presentation.html.j2",
       "baseline_sha256": "71c4af5c66c59e9db107fc1f903e7527c93a3a4101d0693e33df9a9e6287fb02",
-      "current_sha256": "be3fc4664d7064b320ab33185acd083c983685a1bd60c48783078f26f6548979",
+      "current_sha256": "529cc83de5cb3277b72a94f8114d184f8aa7021e634f5e12d77df989f7b62588",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1471,7 +1471,7 @@
     {
       "path": "docs/plans/2026-10-29-evidence-bound-claims-evidence-ledger.md",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "4ee2946311a3c256948ea0b9c3d38fb6cf06b4e22289ba571993fbe30fa968f3"
+      "current_sha256": "40ad8d94e74fbeeaba522af708e1b280582218eafca2f5db05fae1bb9931e9d3"
     },
     {
       "path": "enterprise-skill-patch-order-branch-priority.xml",
@@ -1776,7 +1776,7 @@
     {
       "path": "tests/test_evidence_bound_claims.py",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "341e464457d23caf1defeac4b592bc3a12bc71d4123d58b7e23e8685f23103aa"
+      "current_sha256": "ec60b2573cd27eabea14430e218a3622e8743b2ab26b0e48684809120f7652b3"
     },
     {
       "path": "tests/test_legacy_oracles.py",
@@ -2709,12 +2709,12 @@
         {
           "path": "assets/presentation.css",
           "previous_sha256": "49a0f04b5a2b69da404dba2e7adff496a38f00ff6efcef1620a214ab5dbcf2d0",
-          "current_sha256": "3900eb15c400d61b19a907ce8e2151363790c3ce32bb1ca08b83b95a88fa7d87"
+          "current_sha256": "0daebd869bcb774c323ccb103e695860b309a9116a213978705969916714d875"
         },
         {
           "path": "docs/plans/2026-10-29-evidence-bound-claims-evidence-ledger.md",
           "previous_sha256": null,
-          "current_sha256": "4ee2946311a3c256948ea0b9c3d38fb6cf06b4e22289ba571993fbe30fa968f3"
+          "current_sha256": "40ad8d94e74fbeeaba522af708e1b280582218eafca2f5db05fae1bb9931e9d3"
         },
         {
           "path": "evals/fixtures/golden/legacy-oracles.v1.json",
@@ -2799,7 +2799,7 @@
         {
           "path": "templates/presentation.html.j2",
           "previous_sha256": "3f55a096ed246ae2099d4bceda11ad38490d8daa837efb93d731ffe4496e9a44",
-          "current_sha256": "be3fc4664d7064b320ab33185acd083c983685a1bd60c48783078f26f6548979"
+          "current_sha256": "529cc83de5cb3277b72a94f8114d184f8aa7021e634f5e12d77df989f7b62588"
         },
         {
           "path": "tests/test_customer_label_fidelity.py",
@@ -2809,7 +2809,7 @@
         {
           "path": "tests/test_evidence_bound_claims.py",
           "previous_sha256": null,
-          "current_sha256": "341e464457d23caf1defeac4b592bc3a12bc71d4123d58b7e23e8685f23103aa"
+          "current_sha256": "ec60b2573cd27eabea14430e218a3622e8743b2ab26b0e48684809120f7652b3"
         },
         {
           "path": "tests/test_legal_trust_boundary.py",

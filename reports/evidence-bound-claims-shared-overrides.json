@@ -54,14 +54,14 @@
    "path": "templates/presentation.html.j2",
    "baseline_sha256": "71c4af5c66c59e9db107fc1f903e7527c93a3a4101d0693e33df9a9e6287fb02",
    "previous_sha256": "3f55a096ed246ae2099d4bceda11ad38490d8daa837efb93d731ffe4496e9a44",
-   "current_sha256": "be3fc4664d7064b320ab33185acd083c983685a1bd60c48783078f26f6548979",
+   "current_sha256": "529cc83de5cb3277b72a94f8114d184f8aa7021e634f5e12d77df989f7b62588",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   },
   {
    "path": "assets/presentation.css",
    "baseline_sha256": "ffd55bb7baa0b458de6db423792842f2bd4c0ee6e061003f53823ef588955a23",
    "previous_sha256": "49a0f04b5a2b69da404dba2e7adff496a38f00ff6efcef1620a214ab5dbcf2d0",
-   "current_sha256": "3900eb15c400d61b19a907ce8e2151363790c3ce32bb1ca08b83b95a88fa7d87",
+   "current_sha256": "0daebd869bcb774c323ccb103e695860b309a9116a213978705969916714d875",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   }
  ]
