@@ -38,6 +38,8 @@ def evidence_method(metric: dict[str, Any], item: dict[str, Any] | None = None) 
         "FIXTURE" in str(metric.get("note") or "").upper()
         or (isinstance(value, dict) and value.get("fixture") is True)
         or str(ev.get("mode") or "").upper() in {"FIXTURE", "SYNTHETIC"}
+        # Measurement-enrichment records replayed from a fixture bundle (source_type FIXTURE_REPLAY).
+        or "FIXTURE" in str(metric.get("source_type") or "").upper()
     )
     if structural_fixture or any(SYNTHETIC_RX.search(t) for t in texts):
         return "SYNTHETIC"

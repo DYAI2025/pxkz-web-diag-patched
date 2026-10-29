@@ -88,3 +88,14 @@ Implementation notes: finalize downgrades a stored READY to BUILT_PENDING_QA bef
 | claim eval | `$PY -B scripts/run_evidence_bound_claim_evals.py .` | 0 | PASS ran=22 skipped=0 |
 
 Deviation: case B (synthetic priority profile) builds without `--require-exact-fonts`, because build_audit_deliverables refuses that pairing by design; its receipt still has to read EXACT/VERIFIED or the builder fails. All five former customer cases are first attempted in customer mode and must be refused (`SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT`, no PDF); the nine inspectable PDFs are proof-mode builds of fixture data, now labelled "Beispieldaten" on every page. They are not nine live audits.
+
+## Task 7 — part 2: fixture-replay rankings (found by own raster check of the frozen 4671d0a build)
+proof-strategic page 8 showed SERP rankings from an offline `mode: FIXTURE` bundle (`source_type: FIXTURE_REPLAY`) dated with the replay time (29.10.2026) and without evidence_method, so the customer-mode block could not see them.
+| check | command | rc | value |
+|---|---|---|---|
+| red | `…Case6RankingContextPerRow.test_fixture_replay_rankings_are_example_data_without_a_measurement_date` | 1 | `None != 'SYNTHETIC'` |
+| red | `…Case6RankingContextPerRow.test_example_data_enrichment_blocks_customer_mode` | 1 | `'MEASUREMENT_ENRICHMENT' not found` |
+| green | `$PY -B -m unittest tests.test_evidence_bound_claims.Case6RankingContextPerRow` | 0 | 4 tests OK |
+| full suite | `$PY -B -m pytest tests -q` | 0 | 211 passed, 69 subtests |
+| evals | enrichment / gateway / strategic / visual architecture / customer semantic / VC03 / branch priority / legal projection | 0 | all PASS (gateway after override refresh) |
+| baseline + v3.2.1 | validators | 0 | PASS / PASS (23 transitions) |

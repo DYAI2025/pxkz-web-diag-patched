@@ -253,12 +253,19 @@ def main() -> int:
         serp_positions = [x for x in enrichment_metrics if x.get("id") == "SERP_CURRENT_POSITION" and x.get("status") in {"MEASURED", "OBSERVED"} and x.get("query") and isinstance(x.get("value"), (int, float))]
         if serp_positions:
             page_by_key = {(x.get("query"), x.get("device"), x.get("location")): x.get("value") for x in enrichment_metrics if x.get("id") == "SERP_CURRENT_PAGE" and x.get("status") in {"MEASURED", "OBSERVED"}}
-            rankings = [{"query": x.get("query"), "position": int(x.get("value")), "page": page_by_key.get((x.get("query"), x.get("device"), x.get("location"))), "device": x.get("device"), "location": x.get("location"), "observed_at": x.get("observed_at"), "context_label": " · ".join(c for c in (customer_location(x.get("location")), customer_device(x.get("device")), customer_date(x.get("observed_at"))) if c)} for x in serp_positions]
+            # Rankings replayed from a fixture bundle are example data: the replay time is not a measurement date.
+            example_rankings = (str(enrichment.get("mode") or "").upper() in {"FIXTURE", "SYNTHETIC"}
+                                or any(evidence_method(x) == "SYNTHETIC" for x in serp_positions))
+            when = (lambda value: short_label("SYNTHETIC")) if example_rankings else customer_date
+            rankings = [{"query": x.get("query"), "position": int(x.get("value")), "page": page_by_key.get((x.get("query"), x.get("device"), x.get("location"))), "device": x.get("device"), "location": x.get("location"), "observed_at": x.get("observed_at"), "context_label": " · ".join(c for c in (customer_location(x.get("location")), customer_device(x.get("device")), when(x.get("observed_at"))) if c)} for x in serp_positions]
             first = serp_positions[0]
             # Place, device and date name every plotted query, not only the first one.
             shared = lambda fmt, key: " und ".join(dict.fromkeys(fmt(x.get(key)) for x in serp_positions if fmt(x.get(key))))
-            context = " · ".join(x for x in [shared(customer_location, "location"), shared(customer_device, "device"), shared(customer_date, "observed_at")] if x)
+            context = " · ".join(x for x in [shared(customer_location, "location"), shared(customer_device, "device"),
+                                             method_phrase("SYNTHETIC") if example_rankings else shared(customer_date, "observed_at")] if x)
             visuals.append(visual(vid, "V05_RANKING_POSITION", "Google-Positionen nach Suchanfrage", context or "Aktueller Suchstand", [], [], "MEASURED_SERP", f"{len(rankings)} dokumentierte Suchanfragen", str(first.get("source_provider") or "SERP provider"), "Rankings gelten nur für Query, Ort, Gerät, Zeitpunkt und Messmethode und sind keine dauerhafte Position.", rankings)); vid += 1
+            if example_rankings:
+                visuals[-1]["evidence_method"] = "SYNTHETIC"
             ranking_added = True
 
         benchmark = report.get("benchmark_data")

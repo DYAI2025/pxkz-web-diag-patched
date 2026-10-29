@@ -1171,7 +1171,7 @@
     {
       "path": "scripts/build_audit_deliverables.py",
       "baseline_sha256": "b8d3ba5536a2054d2545c17ef2868950597a2fdf7c01bf9dae2a4adf1bae203b",
-      "current_sha256": "d66e8cb16bedc475047f1073edfd7038390ee68bb086572320029c3ee4030f3d",
+      "current_sha256": "ebf7f564fc537c65cc35a4016bc945ade045dcd67c2245d0a9503bd859301c46",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1195,7 +1195,7 @@
     {
       "path": "scripts/build_visualization_plan.py",
       "baseline_sha256": "baf5d85df264a812165d4ba0fb534619e0ab5b9f3a601b8011955164358be954",
-      "current_sha256": "acb04954163d3cf6dbc723cac8ebd49d0fdded31d528435f994d488ff4bea372",
+      "current_sha256": "ea3f5fd1d471d826fbec4a78fae49de4311a65a448c306c0537ad9407c25695f",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1471,7 +1471,7 @@
     {
       "path": "docs/plans/2026-10-29-evidence-bound-claims-evidence-ledger.md",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "204054d1674d6b743797935c431e5c3f391dd6bee5b16ac315be31d541e52523"
+      "current_sha256": "419746e0bd67dc4706d63a18666e5cc31ea2829ef755823248a8a6c7ba3bf0fb"
     },
     {
       "path": "enterprise-skill-patch-order-branch-priority.xml",
@@ -1621,7 +1621,7 @@
     {
       "path": "scripts/evidence_method_labels.py",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "a2f3f0419ee3e59a4d807ecd20de34c7e4975f4d4b71127d3f3eac00993c7c3a"
+      "current_sha256": "62fd436513aabadbe79ab2522e834ea6bc05c7cb9b9886fd393d77d6525f6cae"
     },
     {
       "path": "scripts/impressum_compliance.py",
@@ -1776,7 +1776,7 @@
     {
       "path": "tests/test_evidence_bound_claims.py",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "f350cf8b40beb966643fdf1a2c4e01be9720d382efc1542c241a32336e9133c3"
+      "current_sha256": "3cc836f6edbe26e5f2072a05f8b02473bb92a44801c782cea60ab32752d5e752"
     },
     {
       "path": "tests/test_legacy_oracles.py",
@@ -2709,7 +2709,7 @@
         {
           "path": "docs/plans/2026-10-29-evidence-bound-claims-evidence-ledger.md",
           "previous_sha256": null,
-          "current_sha256": "204054d1674d6b743797935c431e5c3f391dd6bee5b16ac315be31d541e52523"
+          "current_sha256": "419746e0bd67dc4706d63a18666e5cc31ea2829ef755823248a8a6c7ba3bf0fb"
         },
         {
           "path": "evals/fixtures/golden/legacy-oracles.v1.json",
@@ -2724,7 +2724,7 @@
         {
           "path": "scripts/build_audit_deliverables.py",
           "previous_sha256": "c6cf4b71c5a77fdfa52efad70b6f1cf26c8dbdecffff664ba9f4bc31c1f3ff02",
-          "current_sha256": "d66e8cb16bedc475047f1073edfd7038390ee68bb086572320029c3ee4030f3d"
+          "current_sha256": "ebf7f564fc537c65cc35a4016bc945ade045dcd67c2245d0a9503bd859301c46"
         },
         {
           "path": "scripts/build_client_report_model.py",
@@ -2734,7 +2734,7 @@
         {
           "path": "scripts/build_visualization_plan.py",
           "previous_sha256": "488b034dd5fde6b3680fe005e8946417870068467f57bd36e2aebf6a79a8f30c",
-          "current_sha256": "acb04954163d3cf6dbc723cac8ebd49d0fdded31d528435f994d488ff4bea372"
+          "current_sha256": "ea3f5fd1d471d826fbec4a78fae49de4311a65a448c306c0537ad9407c25695f"
         },
         {
           "path": "scripts/client_story.py",
@@ -2744,7 +2744,7 @@
         {
           "path": "scripts/evidence_method_labels.py",
           "previous_sha256": null,
-          "current_sha256": "a2f3f0419ee3e59a4d807ecd20de34c7e4975f4d4b71127d3f3eac00993c7c3a"
+          "current_sha256": "62fd436513aabadbe79ab2522e834ea6bc05c7cb9b9886fd393d77d6525f6cae"
         },
         {
           "path": "scripts/finalize_deliverable_manifest.py",
@@ -2804,7 +2804,7 @@
         {
           "path": "tests/test_evidence_bound_claims.py",
           "previous_sha256": null,
-          "current_sha256": "f350cf8b40beb966643fdf1a2c4e01be9720d382efc1542c241a32336e9133c3"
+          "current_sha256": "3cc836f6edbe26e5f2072a05f8b02473bb92a44801c782cea60ab32752d5e752"
         },
         {
           "path": "tests/test_packaged_brand_fonts.py",

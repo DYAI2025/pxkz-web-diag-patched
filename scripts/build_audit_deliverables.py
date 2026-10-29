@@ -140,6 +140,12 @@ def main() -> int:
                          if isinstance(v, dict) and v.get("status") == "SELECTED"
                          and (v.get("evidence_method") == "SYNTHETIC"
                               or any(evidence_method(source_metrics[r]) == "SYNTHETIC" for r in v.get("metric_refs", []) if r in source_metrics))]
+            # Enrichment replayed from a fixture bundle can also reach customer text (highlights), not only charts.
+            enrichment = json.loads(canonical.read_text(encoding="utf-8")).get("measurement_enrichment") or {}
+            if isinstance(enrichment, dict) and (str(enrichment.get("mode") or "").upper() in {"FIXTURE", "SYNTHETIC"}
+                                                 or any(isinstance(m, dict) and evidence_method(m) == "SYNTHETIC"
+                                                        for m in enrichment.get("metrics", []))):
+                synthetic.append("MEASUREMENT_ENRICHMENT")
             if synthetic:
                 raise ValueError("CUSTOMER_RELEASE_BLOCKED: SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT " + ",".join(synthetic))
         claim_bindings = out / "customer-claim-bindings.json"

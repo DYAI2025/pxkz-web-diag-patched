@@ -244,6 +244,39 @@ class Case6RankingContextPerRow(unittest.TestCase):  # CANARY (subtitle) + new p
             self.assertEqual([r["context_label"] for r in v05["data"]],
                              ["Berlin, Deutschland · Mobil · 28.10.2026", "Berlin, Deutschland · Desktop · 28.10.2026"])
 
+    def test_fixture_replay_rankings_are_example_data_without_a_measurement_date(self) -> None:
+        import re
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            scored = scored_from(load(FIXTURE), tmp)
+            report = load(scored)
+            metrics = self.serp("anfrage 0", "mobile", 9) + self.serp("anfrage 1", "desktop", 10)
+            for m in metrics:
+                m["source_type"] = "FIXTURE_REPLAY"
+            report["measurement_enrichment"] = {"mode": "FIXTURE", "metrics": metrics}
+            dump(scored, report)
+            v05 = next(v for v in build_plan(scored, tmp)["visuals"] if v["template_id"] == "V05_RANKING_POSITION")
+            self.assertEqual(v05.get("evidence_method"), "SYNTHETIC")
+            self.assertIn("Beispieldaten", v05["subtitle"])
+            labels = [r["context_label"] for r in v05["data"]] + [v05["subtitle"]]
+            self.assertEqual([x for x in labels if re.search(r"\d{2}\.\d{2}\.\d{4}", x)], [], "a replay time is not a measurement date")
+            self.assertTrue(all("Beispieldaten" in x for x in labels), labels)
+
+    @unittest.skipUnless(HAS_PDF_RUNTIME, "PDF runtime missing: NOT RUN")
+    def test_example_data_enrichment_blocks_customer_mode(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            scored, enrichment, enriched = scored_from(load(FIXTURE), tmp), tmp / "enrichment.json", tmp / "enriched.json"
+            collected = run("scripts/collect_measurement_enrichment.py", "https://example.com", str(enrichment),
+                            "--config", "evals/fixtures/measurement-enrichment-config.json",
+                            "--fixture-bundle", "evals/fixtures/measurement-provider-responses.json", "--offline")
+            self.assertEqual(collected.returncode, 0, collected.stdout + collected.stderr)
+            self.assertEqual(run("scripts/attach_measurement_enrichment.py", str(scored), str(enrichment), str(enriched)).returncode, 0)
+            result = run("scripts/build_audit_deliverables.py", str(enriched), str(tmp / "out"), "--release-mode", "customer", "--force-svg-fallback")
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("MEASUREMENT_ENRICHMENT", result.stdout + result.stderr)
+            self.assertFalse((tmp / "out" / "customer_presentation.pdf").exists())
+
     def test_per_row_context_stays_legible_in_the_rendered_svg(self) -> None:
         """The per-row context line obeys the 13 px SVG floor of validate_visual_assets.py and stays above the footer."""
         import re

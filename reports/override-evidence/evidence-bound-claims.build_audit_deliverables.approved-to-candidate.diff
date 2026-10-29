@@ -1,5 +1,5 @@
 diff --git a/scripts/build_audit_deliverables.py b/scripts/build_audit_deliverables.py
-index bd88f96..98a66f4 100644
+index bd88f96..363516d 100644
 --- a/scripts/build_audit_deliverables.py
 +++ b/scripts/build_audit_deliverables.py
 @@ -13,6 +13,7 @@ import tempfile
@@ -10,7 +10,7 @@ index bd88f96..98a66f4 100644
  
  
  def sha(path: Path) -> str:
-@@ -130,11 +131,25 @@ def main() -> int:
+@@ -130,11 +131,31 @@ def main() -> int:
              raise ValueError("industry catalog without a priority context cannot be applied")
          run([py, str(root / "scripts/build_visualization_plan.py"), str(canonical), str(plan), *priority_args])
          run([py, str(root / "scripts/validate_visualization_plan.py"), str(plan), str(canonical)])
@@ -24,6 +24,12 @@ index bd88f96..98a66f4 100644
 +                         if isinstance(v, dict) and v.get("status") == "SELECTED"
 +                         and (v.get("evidence_method") == "SYNTHETIC"
 +                              or any(evidence_method(source_metrics[r]) == "SYNTHETIC" for r in v.get("metric_refs", []) if r in source_metrics))]
++            # Enrichment replayed from a fixture bundle can also reach customer text (highlights), not only charts.
++            enrichment = json.loads(canonical.read_text(encoding="utf-8")).get("measurement_enrichment") or {}
++            if isinstance(enrichment, dict) and (str(enrichment.get("mode") or "").upper() in {"FIXTURE", "SYNTHETIC"}
++                                                 or any(isinstance(m, dict) and evidence_method(m) == "SYNTHETIC"
++                                                        for m in enrichment.get("metrics", []))):
++                synthetic.append("MEASUREMENT_ENRICHMENT")
 +            if synthetic:
 +                raise ValueError("CUSTOMER_RELEASE_BLOCKED: SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT " + ",".join(synthetic))
 +        claim_bindings = out / "customer-claim-bindings.json"
@@ -37,7 +43,7 @@ index bd88f96..98a66f4 100644
          if legal_sidecar is not None:
              run([py, str(root / "scripts/validate_impressum_projection.py"), str(legal_sidecar), str(canonical), str(model)])
          run([py, str(root / "scripts/validate_client_semantics.py"), str(model)])
-@@ -170,7 +185,7 @@ def main() -> int:
+@@ -170,7 +191,7 @@ def main() -> int:
          quality_report = out / "customer-presentation-quality-report.json"
          run([py, str(root / "scripts/validate_customer_presentation_quality.py"), str(out), "--allow-pending", "--json-out", str(quality_report)])
  

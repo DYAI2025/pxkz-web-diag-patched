@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "status": "PASS",
   "suite": "tests.test_evidence_bound_claims",
-  "artifact_digest": "8b51b5763db458a0d73dea8af922efc7164f870c7b9d3e7d061d304da9fe2ab5",
-  "tests_run": 22,
+  "artifact_digest": "4b72715328821f1d4c9cf91020f8fd21f337dedf51d67ca042546c763373f552",
+  "tests_run": 24,
   "failures": 0,
   "errors": 0,
   "skipped": [],
@@ -54,6 +54,14 @@
     },
     {
       "test": "tests.test_evidence_bound_claims.Case5NoOppositeStrength.test_zero_trust_metrics_yield_no_contact_or_privacy_strength",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case6RankingContextPerRow.test_example_data_enrichment_blocks_customer_mode",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.Case6RankingContextPerRow.test_fixture_replay_rankings_are_example_data_without_a_measurement_date",
       "outcome": "ok"
     },
     {
