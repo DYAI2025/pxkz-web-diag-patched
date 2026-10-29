@@ -253,3 +253,12 @@ identical PDFs, surface gate PASS 9/9, 11/11 customer-mode refusals without PDF.
 | green | 0 | 6 selected tests OK |
 | full suite | 0 | 282 passed, 79 subtests |
 | oracles | 0 | unchanged (default outputs byte-identical) |
+
+### Task 7 — QA sign-off for the proof PDFs (5305049)
+Frozen build of 5305049: rc 0, crosscheck BAD 0, surface gate PASS 9/9; all 9 PDFs and all 88 page PNGs byte-identical
+to the 4ab90a9 build that review round 4 inspected. Reviewer findings round 4: 0 FAIL, 1 AMBIGUOUS (resolved by owner
+clarification), 0 confirmed (the reviewer's summary said "18 of 19"; its probe lines list 20 probes, 19 PASS).
+Visual QA signed PASS per case (`validate_pdf_visual_qa.py` rc 0, 9/9). Semantic QA recorded FAIL by fact: example data
+(`no_synthetic_metric_visuals` false) and checks outside the checklist not assessed; `finalize_deliverable_manifest.py`
+records CUSTOMER_RELEASE_BLOCKED for all 9 cases. Record: `reports/customer-pdf-qa-release-5305049.json` (+ per-case
+manifests in `reports/customer-pdf-qa-release-5305049/`). A customer release needs a real audit input.
