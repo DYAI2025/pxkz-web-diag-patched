@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import subprocess
 import tempfile
 import sys
@@ -29,7 +30,7 @@ def _contract(root: Path) -> tuple[str, dict]:
     return hashlib.sha256(path.read_bytes()).hexdigest(), json.loads(path.read_text(encoding="utf-8"))
 
 
-def validate_reports(root: Path, report: dict, paired: dict, semantic: dict) -> list[str]:
+def validate_reports(root: Path, report: dict, paired: dict, semantic: dict, proof_pdfs: frozenset[str] | set[str] = frozenset()) -> list[str]:
     """Cross-skill, paired-release and customer-semantic evidence binding (fail closed).
 
     A claimed PASS must be backed by digest-consistent paired evidence; a blocked
@@ -65,35 +66,51 @@ def validate_reports(root: Path, report: dict, paired: dict, semantic: dict) -> 
     elif status != "BLOCKED_DEPENDENCY_NON_PACKAGE_BLOCKING":
         errors.append("cross-skill dependency status invalid")
 
-    errors.extend(validate_customer_report_release(root, report, semantic))
+    errors.extend(validate_customer_report_release(root, report, semantic, proof_pdfs))
     return errors
 
 
-def validate_customer_report_release(root: Path, report: dict, semantic: dict) -> list[str]:
+def validate_customer_report_release(root: Path, report: dict, semantic: dict, proof_pdfs: frozenset[str] | set[str] = frozenset()) -> list[str]:
     """CUSTOMER_REPORT_RELEASE: a customer PDF built from a real audit, never a proof (release-gate-policy.md).
 
     PASS needs customer semantic QA on a real audit input built in customer mode, bound to the live semantic bundle
     and tree. BLOCKED_NO_REAL_AUDIT_INPUT is a valid state that does not block the skill package, but then nothing
     may claim customer readiness, and no semantic PASS may come from proof or example data.
+
+    data_class is a recorded label, so a PASS is also bound to an audit input that is no file of this skill tree
+    (every example input ships in it), to a PDF that is none of the proof PDFs, and to a record without fixture
+    provenance. The gate cannot prove an external audit is real beyond that; customer mode refusing example data
+    (SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT) is the build-time guard.
     """
     errors: list[str] = []
     decision = report.get("customer_report_release") or {}
     status = decision.get("status")
     real = semantic.get("release_mode") == "customer" and semantic.get("data_class") == REAL_AUDIT_INPUT
-    if not real and "PASS" in {semantic.get("status"), semantic.get("semantic_qa_validation")}:
+    gate = report.get("customer_semantic_gate") or {}
+    claims = (semantic.get("status"), semantic.get("semantic_qa_validation"), gate.get("status"))
+    if not real and any(_claims_pass(x) for x in claims):
         errors.append("customer semantic PASS recorded on proof or example data")
     if status == CUSTOMER_REPORT_BLOCKED:
         if decision.get("package_blocking") is not False:
             errors.append("blocked customer report release must be declared non-package-blocking")
         if decision.get("customer_release_ready") is not False:
             errors.append("blocked customer report release cannot be customer-release-ready")
+        ready = sorted(k for k, v in report.items() if isinstance(v, dict) and v.get("customer_release_ready") is True)
+        if ready:
+            errors.append(f"customer report release is blocked but {', '.join(ready)} claims customer readiness")
         return errors
     if status != "PASS":
         errors.append("customer report release status invalid")
         return errors
     if not real:
         errors.append("customer report release PASS without a real audit input built in customer mode")
-    gate = report.get("customer_semantic_gate") or {}
+    if {"fixture", "fixture_sha256"} & set(semantic):
+        errors.append("customer report release PASS on a record with fixture provenance")
+    audit, pdf = semantic.get("audit_input_sha256"), semantic.get("pdf_sha256")
+    if not _is_sha256(audit) or audit in _tree_file_hashes(root):
+        errors.append("customer report release PASS needs an audit input that is not a file of the skill tree")
+    if not _is_sha256(pdf) or pdf in proof_pdfs:
+        errors.append("customer report release PASS needs a customer PDF that is none of the proof PDFs")
     current = semantic_bundle_digest(root)
     if gate.get("status") != "PASS":
         errors.append("customer semantic gate is not PASS")
@@ -131,39 +148,48 @@ def validate_skill_package_release(root: Path, report: dict, qa: dict, proofs: d
         errors.append("proof QA record is not PASS against the fixed checklist")
     if qa.get("artifact_digest") != build:
         errors.append("proof QA record not bound to the current build artifact digest")
-    if qa.get("unadjudicated"):
+    if qa.get("unadjudicated") != []:
         errors.append("proof QA record has unadjudicated review items")
-    rounds = (qa.get("independent_review") or {}).get("rounds") or [{}]
-    if rounds[-1].get("fail") != 0 or rounds[-1].get("confirmed"):
-        errors.append("last independent proof review round has confirmed defects")
     checklist = root / PROOF_CHECKLIST
     if not checklist.is_file() or qa.get("yardstick_sha256") != hashlib.sha256(checklist.read_bytes()).hexdigest():
         errors.append("proof QA yardstick differs from the fixed probe checklist")
-    cases = [c for c in qa.get("cases") or [] if isinstance(c, dict)]
-    if not cases:
-        errors.append("proof QA record lists no cases")
+    probes = re.findall(r"^\| ([A-E]\d) \|", checklist.read_text(encoding="utf-8"), re.M) if checklist.is_file() else []
+    rounds = [r for r in (qa.get("independent_review") or {}).get("rounds") or [] if isinstance(r, dict)]
+    latest = max(rounds, key=lambda r: r.get("round") if isinstance(r.get("round"), int) else -1, default={})
+    lines = latest.get("probe_lines") if isinstance(latest.get("probe_lines"), dict) else {}
+    if type(latest.get("fail")) is not int or latest.get("fail") != 0 or latest.get("confirmed"):
+        errors.append("latest independent proof review round has confirmed defects")
+    if not probes or sorted(lines) != sorted(probes) or not all(_probe_passed(v) for v in lines.values()):
+        errors.append("latest independent proof review did not pass every checklist probe")
+    raw_cases, raw_refusals = qa.get("cases") or [], qa.get("customer_mode_refusals") or []
+    cases = [c for c in raw_cases if isinstance(c, dict)]
+    refusals = {r.get("case"): r for r in raw_refusals if isinstance(r, dict)}
+    if not cases or len(cases) != len(raw_cases) or len(refusals) != len(raw_refusals):
+        errors.append("proof QA record lists no cases or malformed case/refusal entries")
     for case in cases:
         name = case.get("case")
         if case.get("release_mode") != "proof":
             errors.append(f"proof case {name} was not built in proof mode")
-        if not str(case.get("visual_qa", "")).startswith("PASS"):
+        if not re.fullmatch(r"PASS( \(validate_pdf_visual_qa rc 0\))?", str(case.get("visual_qa", ""))):
             errors.append(f"proof case {name} visual QA is not PASS")
         if case.get("deliverable_status") != "CUSTOMER_RELEASE_BLOCKED":
             errors.append(f"proof case {name} must stay CUSTOMER_RELEASE_BLOCKED")
-    refusals = [r for r in qa.get("customer_mode_refusals") or [] if isinstance(r, dict)]
-    if not refusals or any(r.get("blocked") is not True or r.get("pdf_written") is not False for r in refusals):
+        refusal = refusals.get(name) or {}
+        if refusal.get("blocked") is not True or refusal.get("pdf_written") is not False:
+            errors.append(f"customer mode did not refuse proof case {name}")
+    if any(r.get("blocked") is not True or r.get("pdf_written") is not False for r in refusals.values()):
         errors.append("customer mode did not refuse every example-data case")
-    reviewed = {c.get("pdf_sha256") for c in cases}
+    reviewed = {c.get("pdf_sha256") for c in cases if _is_sha256(c.get("pdf_sha256"))}
     for label, proof in proofs.items():
         if proof.get("release_mode") != "proof":
             errors.append(f"{label} proof was not built in proof mode")
         if proof.get("customer_release_ready") is not False:
             errors.append(f"{label} proof claims customer release readiness")
-        if proof.get("semantic_qa") == "PASS":
+        if _claims_pass(proof.get("semantic_qa")):
             errors.append(f"{label} proof claims a customer semantic PASS on example data")
         if proof.get("visual_qa") != "PASS" or proof.get("proof_semantic_qa") != PROOF_SEMANTIC_PASS:
             errors.append(f"{label} proof is not visual PASS and PASS against the fixed checklist")
-        if proof.get("pdf_sha256") not in reviewed:
+        if not _is_sha256(proof.get("pdf_sha256")) or proof.get("pdf_sha256") not in reviewed:
             errors.append(f"{label} proof PDF is not one of the reviewed proof PDFs")
     return errors
 
@@ -177,6 +203,32 @@ CUSTOMER_REPORT_BLOCKED = "BLOCKED_NO_REAL_AUDIT_INPUT"
 PROOF_QA_PASS = "PROOF_QA_PASS_AGAINST_CHECKLIST_CUSTOMER_RELEASE_BLOCKED"
 PROOF_SEMANTIC_PASS = "PASS_AGAINST_CHECKLIST"
 PROOF_CHECKLIST = "docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md"
+PROOF_QA_RECORD = re.compile(r"customer-pdf-qa-release-[0-9a-f]{7,40}\.json")
+
+
+def _is_sha256(value: object) -> bool:
+    return isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value) is not None
+
+
+def _claims_pass(value: object) -> bool:
+    return isinstance(value, str) and value.strip().upper().startswith("PASS")
+
+
+def _probe_passed(value: object) -> bool:
+    return value == "PASS" or (isinstance(value, str) and value.endswith("resolved PASS by owner clarification"))
+
+
+def _tree_file_hashes(root: Path) -> set[str]:
+    return {hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob("*") if p.is_file() and ".git" not in p.parts}
+
+
+def proof_qa_record_path(root: Path, report: dict) -> Path:
+    """The proof QA record named in skill_package_release, confined to reports/customer-pdf-qa-release-<sha>.json."""
+    rel = str((report.get("skill_package_release") or {}).get("proof_qa_record") or "")
+    path = (root / rel).resolve()
+    if path.parent != (root / "reports").resolve() or not PROOF_QA_RECORD.fullmatch(path.name):
+        raise ValueError("skill_package_release.proof_qa_record must be reports/customer-pdf-qa-release-<sha>.json")
+    return path
 
 
 # Mirrors visualization_policy.CUSTOMER_FORBIDDEN_TEMPLATES for recorded proof evidence.
@@ -439,20 +491,19 @@ def main(argv: list[str]) -> int:
     if live.get("package_blocking") is not False:
         errors.append("optional live gateway verification must be explicitly non-package-blocking")
 
+    proof_pdfs: set[str] = set()
     try:
-        errors.extend(validate_reports(root, report, paired, semantic))
-    except Exception as exc:
-        errors.append(f"cross-skill/semantic evidence unavailable: {exc}")
-    try:
-        record = str((report.get("skill_package_release") or {}).get("proof_qa_record") or "")
-        if not record.startswith("reports/customer-pdf-qa-release-"):
-            raise ValueError("skill_package_release.proof_qa_record must name a reports/customer-pdf-qa-release-*.json record")
-        proof_qa = json.loads((root / record).read_text(encoding="utf-8"))
+        proof_qa = json.loads(proof_qa_record_path(root, report).read_text(encoding="utf-8"))
+        proof_pdfs = {c.get("pdf_sha256") for c in proof_qa.get("cases") or [] if isinstance(c, dict)}
         proofs = {"realistic": realistic, "strategic": strategic_proof, "quality": quality_proof.get("final_state") or {},
-                  "active core render": active_render}
+                  "active core render": active_render, "measurement platform": platform_proof}
         errors.extend(validate_skill_package_release(root, report, proof_qa, proofs))
     except Exception as exc:
         errors.append(f"skill package proof evidence unavailable: {exc}")
+    try:
+        errors.extend(validate_reports(root, report, paired, semantic, proof_pdfs))
+    except Exception as exc:
+        errors.append(f"cross-skill/semantic evidence unavailable: {exc}")
 
     try:
         current = tree_digest(root)

@@ -930,6 +930,18 @@ class PrimaryMetricOrder(unittest.TestCase):
         self.assertNotIn("F-001", first)
         self.assertEqual((gate1.returncode, gate2.returncode), (0, 0), gate1.stdout + gate2.stdout)
 
+    def test_refs_with_the_same_customer_reading_are_interchangeable(self) -> None:
+        # Review of a65c5b6: UX-08 (not_assessed) and TRUST-01 (presence_only, present) both read "Nicht belastbar
+        # bewertet", yet only UX-08 was skipped as primary, so swapping them changed the levers. The first metric
+        # that reads as a status is TRUST-03 (Klar) in both orders, so F-001 is rejected in both orders.
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            first, gate1 = order_build(order_variant(["UX-08", "TRUST-03", "TRUST-01"]), tmp, "unread_first")
+            second, gate2 = order_build(order_variant(["TRUST-01", "TRUST-03", "UX-08"]), tmp, "unread_last")
+        self.assertEqual(first, second)
+        self.assertNotIn("F-001", first)
+        self.assertEqual((gate1.returncode, gate2.returncode), (0, 0), gate1.stdout + gate2.stdout)
+
     def test_documented_primary_rule_still_rejects_a_clear_primary(self) -> None:  # guard: B4 stays effective
         with tempfile.TemporaryDirectory() as td:
             tmp = Path(td)

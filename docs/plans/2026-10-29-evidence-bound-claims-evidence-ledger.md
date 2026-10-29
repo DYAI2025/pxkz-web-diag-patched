@@ -297,3 +297,21 @@ used `customer_reading`; reordering refs that B4 reads alike changed the levers,
 green 4/4; full suite 286 passed. Nine-case build of the fix: 9/9 PDFs and client models byte-identical to the
 reviewed build (plans and bindings differ only by the offline enrichment's `observed_at`, as between 4ab90a9 and
 5305049). Gate, ledger and package results for the frozen candidate: `reports/task8-release-reconciliation.json`.
+
+Independent review of a65c5b6 (two read-only lenses, no authoring context). Gate lens: 1 MAJOR, 7 MINOR, 1 PLAUSIBLE.
+The MAJOR: a customer PASS rested on the self-declared `data_class`; an example-data record relabelled REAL passed.
+Fixed: a customer PASS now also needs an `audit_input_sha256` that is no file of the skill tree, a PDF that is none
+of the proof PDFs, and no fixture provenance; any `PASS…` spelling counts as a semantic PASS; while blocked no gate
+may claim customer readiness; every proof case needs its own customer-mode refusal; malformed entries and missing
+hashes fail; the latest review round (by number) must have `fail` 0 and every checklist probe PASS; the QA record
+path is confined to `reports/customer-pdf-qa-release-<sha>.json`; the measurement-platform proof is bound too.
+The PLAUSIBLE (the gate compares recorded hashes, it does not re-render) is narrowed in the policy text: the rebuild
+at rebinding time is what shows the tree still produces the reviewed PDFs. Mutation evals 45 → 61; canary (two new
+checks disabled) → exactly their four cases red.
+Selector lens: 1 MAJOR, 2 MINOR. The MAJOR: `primary_metric` skipped refs by measurement class, so UX-08
+(not_assessed) and TRUST-01 (present presence check), which both read "Nicht belastbar bewertet", were not
+interchangeable. Fixed: the primary metric is the first cited metric that reads as a status; a skipped ref never
+reads "Klar", so the rule never admits a lever that checklist B4 rejects (MINOR 3, docstring now says so; the
+checklist is unchanged). New test red first (`['F-003','F-004','F-002','F-005'] != ['F-001','F-003','F-004','F-002']`),
+then green; full suite 287 passed. MINOR 2 (a legal-sidecar lever citing a "Klar" core metric fails the build via B4)
+exists on d95ad75 too and fails closed: backlog, not changed here.

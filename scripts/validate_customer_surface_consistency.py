@@ -81,7 +81,7 @@ def check(report: dict[str, Any], plan: dict[str, Any], model: dict[str, Any], b
 
     # B4: no lever whose primary assessed metric reads "Klar".
     for fid in lever_ids:
-        primary = primary_metric(report, source_findings.get(fid, {}))
+        primary = primary_metric(report, source_findings.get(fid, {}), defs)
         if primary is not None and reading[str(primary.get("id"))]["key"] == "CLEAR":
             errors.append(f"LEVER_PRIMARY_CLEAR: {fid} primary metric {primary.get('id')} reads Klar")
 

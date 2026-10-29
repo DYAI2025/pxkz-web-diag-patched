@@ -269,8 +269,9 @@ def contradicted_by_clear_metrics(report: dict[str, Any], finding: dict[str, Any
     if verdict.get("evidence_route") != "CORE_METRIC":
         return False
     # Same primary and same reading as checklist B4 and validate_customer_surface_consistency.py.
-    primary = primary_metric(report, finding)
-    return primary is not None and metric_reading(report, registry_defs(), primary)["key"] == "CLEAR"
+    defs = registry_defs()
+    primary = primary_metric(report, finding, defs)
+    return primary is not None and metric_reading(report, defs, primary)["key"] == "CLEAR"
 
 
 def select_client_levers(

@@ -26,7 +26,7 @@ def main(argv: list[str]) -> int:
       'cross_skill_dependency':{'status':'PASS','website_skill_side_status':'PASS','voice_architect_side_status':'PASS','shared_v1_3_sha256':d,'shared_contract_version':'1.3.0','website_fields':96,'voice_fields':96,'voice_custom_dynamic_variables':95,'actual_installed_consumer_validation':'PASS','voice_release_harness':'PASS'}
     }
     report['customer_report_release']={'status':'PASS','package_blocking':False}
-    semantic={'status':'PASS','semantic_bundle_sha256':sd,'artifact_digest':td,'semantic_qa_validation':'PASS','visual_qa_validation':'PASS','inspection_method':'agent_vision','page_count':12,'release_mode':'customer','data_class':'REAL_AUDIT_INPUT'}
+    semantic={'status':'PASS','semantic_bundle_sha256':sd,'artifact_digest':td,'semantic_qa_validation':'PASS','visual_qa_validation':'PASS','inspection_method':'agent_vision','page_count':12,'release_mode':'customer','data_class':'REAL_AUDIT_INPUT','audit_input_sha256':'c'*64,'pdf_sha256':'d'*64}
     paired={'status':'PASS','contract':{'version':'1.3.0','sha256':d,'field_count':96,'custom_dynamic_variable_count':95},'website_skill_side_status':'PASS','voice_architect_side_status':'PASS','voice_release_harness':{'status':'PASS'},'provider_neutral_packet_e2e':'PASS','truth_attack_e2e':'PASS','consumer_skill_dir':'/actual/consumer'}
     cases=[]
     def expect(name, mutate):
@@ -51,16 +51,29 @@ def main(argv: list[str]) -> int:
     expect('customer_pass_on_example_data', lambda r,p,sem: sem.__setitem__('data_class','EXAMPLE_DATA'))
     expect('customer_release_status_invalid', lambda r,p,sem: r['customer_report_release'].__setitem__('status','READY'))
     expect('customer_release_missing', lambda r,p,sem: r.pop('customer_report_release'))
+    # Review round 1 (a65c5b6): data_class alone is a self-declared label; bind a customer PASS to an audit input that is
+    # no repository file, a PDF that is no proof, and a record without fixture provenance.
+    fixture_sha=hashlib.sha256((root/'evals/fixtures/synthetic-report.json').read_bytes()).hexdigest()
+    expect('customer_pass_relabelled_fixture_record', lambda r,p,sem: sem.__setitem__('fixture','evals/fixtures/synthetic-report.json'))
+    expect('customer_pass_audit_input_is_repo_fixture', lambda r,p,sem: sem.__setitem__('audit_input_sha256',fixture_sha))
+    expect('customer_pass_without_audit_input', lambda r,p,sem: sem.pop('audit_input_sha256'))
+    expect('customer_pass_without_pdf', lambda r,p,sem: sem.pop('pdf_sha256'))
+    cases.append(('customer_pass_pdf_is_a_proof', bool(validate_reports(root,report,paired,semantic,proof_pdfs={'d'*64})), []))
     blocked=lambda r,p,sem: (r['customer_report_release'].update({'status':CUSTOMER_REPORT_BLOCKED,'customer_release_ready':False}), r['customer_semantic_gate'].__setitem__('status','FAIL'), sem.update({'status':'FAIL','semantic_qa_validation':'FAIL','release_mode':'proof','data_class':'EXAMPLE_DATA'}))
     r0=copy.deepcopy(report); p0=copy.deepcopy(paired); s0=copy.deepcopy(semantic); blocked(r0,p0,s0)
     assert not validate_reports(root,r0,p0,s0), validate_reports(root,r0,p0,s0)  # positive control: blocked customer release
     expect('customer_blocked_but_package_blocking', lambda r,p,sem: (blocked(r,p,sem), r['customer_report_release'].__setitem__('package_blocking',True)))
     expect('customer_blocked_but_release_ready', lambda r,p,sem: (blocked(r,p,sem), r['customer_report_release'].__setitem__('customer_release_ready',True)))
+    expect('customer_blocked_with_semantic_pass_variant', lambda r,p,sem: (blocked(r,p,sem), sem.__setitem__('status','PASS_WITH_ASSUMPTIONS')))
+    expect('customer_blocked_with_gate_pass_claim', lambda r,p,sem: (blocked(r,p,sem), r['customer_semantic_gate'].__setitem__('status','PASS')))
+    expect('customer_blocked_but_other_gate_ready', lambda r,p,sem: (blocked(r,p,sem), r.__setitem__('strict_customer_output_gate',{'status':'PASS','customer_release_ready':True})))
     expect('customer_blocked_with_example_semantic_pass', lambda r,p,sem: (blocked(r,p,sem), sem.__setitem__('semantic_qa_validation','PASS')))
     # SKILL_PACKAGE_RELEASE: proofs prove function only; reviewed against the fixed checklist and bound to the live tree.
     pdf='a'*64
+    import re
+    probes=re.findall(r'^\| ([A-E]\d) \|', (root/'docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md').read_text(encoding='utf-8'), re.M)
     qa={'status':PROOF_QA_PASS,'artifact_digest':td,'unadjudicated':[],'yardstick_sha256':hashlib.sha256((root/'docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md').read_bytes()).hexdigest(),
-        'independent_review':{'rounds':[{'round':4,'fail':0}]},
+        'independent_review':{'rounds':[{'round':4,'fail':0,'probe_lines':{k:'PASS' for k in probes}}]},
         'cases':[{'case':'proof-realistic','release_mode':'proof','pdf_sha256':pdf,'visual_qa':'PASS','deliverable_status':'CUSTOMER_RELEASE_BLOCKED'}],
         'customer_mode_refusals':[{'case':'proof-realistic','blocked':True,'pdf_written':False}]}
     proof={'release_mode':'proof','customer_release_ready':False,'visual_qa':'PASS','proof_semantic_qa':PROOF_SEMANTIC_PASS,'semantic_qa':'FAIL','pdf_sha256':pdf}
@@ -83,6 +96,14 @@ def main(argv: list[str]) -> int:
     expect_pkg('proof_claims_customer_semantic_pass', lambda r,q,pr: pr['realistic'].__setitem__('semantic_qa','PASS'))
     expect_pkg('proof_semantic_not_checklist_pass', lambda r,q,pr: pr['realistic'].__setitem__('proof_semantic_qa','FAIL'))
     expect_pkg('proof_pdf_not_reviewed', lambda r,q,pr: pr['realistic'].__setitem__('pdf_sha256','b'*64))
+    expect_pkg('proof_qa_review_fail_not_int', lambda r,q,pr: q['independent_review']['rounds'][-1].__setitem__('fail',False))
+    expect_pkg('proof_qa_review_latest_round_failed', lambda r,q,pr: q['independent_review']['rounds'].insert(0,{'round':5,'fail':3,'confirmed':3,'probe_lines':{}}))
+    expect_pkg('proof_qa_probe_not_pass', lambda r,q,pr: q['independent_review']['rounds'][-1]['probe_lines'].__setitem__('B2','AMBIGUOUS'))
+    expect_pkg('proof_qa_probe_missing', lambda r,q,pr: q['independent_review']['rounds'][-1]['probe_lines'].pop('E2'))
+    expect_pkg('proof_case_visual_pass_with_rc1', lambda r,q,pr: q['cases'][0].__setitem__('visual_qa','PASS (validate_pdf_visual_qa rc 1)'))
+    expect_pkg('proof_case_without_refusal', lambda r,q,pr: q['customer_mode_refusals'][0].__setitem__('case','other-case'))
+    expect_pkg('proof_case_entry_not_object', lambda r,q,pr: q['cases'].append('pdf written'))
+    expect_pkg('proof_without_pdf_sha', lambda r,q,pr: (pr['realistic'].pop('pdf_sha256'), q['cases'].append({'case':'x','release_mode':'proof','visual_qa':'PASS','deliverable_status':'CUSTOMER_RELEASE_BLOCKED'}), q['customer_mode_refusals'].append({'case':'x','blocked':True,'pdf_written':False})))
     expect_pkg('proof_built_in_customer_mode', lambda r,q,pr: pr['realistic'].__setitem__('release_mode','customer'))
     manifest=root/'assets/fonts/font-manifest.json'; md=hashlib.sha256(manifest.read_bytes()).hexdigest()
     font_report={'strict_customer_output_gate':{'status':'PASS','customer_release_ready':False},'brand_rendering_gate':{'font_binary_policy':'PACKAGE_BUNDLED_MANIFEST_PINNED','strict_customer_mode_fail_closed':True,'font_manifest_sha256':md}}
