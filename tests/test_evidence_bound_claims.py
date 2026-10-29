@@ -441,9 +441,10 @@ class ReviewRoundOne(unittest.TestCase):
         from build_client_report_model import short_action
         with tempfile.TemporaryDirectory() as td:
             model = self.model_for(load(FIXTURE), Path(td))
-        # Audit roadmap: F-003 now/P1, F-001 and F-002 0-30 days/P1, F-004 31-90 days/P2.
-        self.assertEqual([[i["priority"] for i in model["roadmap"][k]] for k in ("now", "next_30_days", "next_quarter")],
-                         [["P1"], ["P1", "P1"], ["P2"]])
+        # Audit roadmap timing: F-003 now, F-001 and F-002 0-30 days, F-004 31-90 days. The audit's P1/P2 labels stay
+        # internal (owner decision 2026-10-29), the timing still decides the buckets.
+        self.assertEqual([[i["finding_ref"] for i in model["roadmap"][k]] for k in ("now", "next_30_days", "next_quarter")],
+                         [["F-003"], ["F-001", "F-002"], ["F-004"]])
         by_id = {f["id"]: f for f in model["findings"]}
         order = ["F-003", "F-001", "F-002", "F-004"]
         self.assertEqual(model["closing"]["actions"], [short_action(by_id[x]["action"]) for x in order])
@@ -698,6 +699,121 @@ class ReviewRoundThree(ReviewRoundOne):
                 self.assertNotEqual(customer_status(cited[0])["key"], "CLEAR", f["id"])
             ev_ids = {e["id"] for e in f["evidence"]}
             self.assertTrue(ev_ids <= {r for m in cited for r in m.get("evidence_refs", [])}, f["id"])
+
+
+class SurfaceConsistency(ReviewRoundThree):
+    """Review convergence (three same-class rounds): one customer reading per metric for every surface, a
+    fail-closed cross-surface gate, P1/P2 dropped, topic overlaps declared, low never outranks medium."""
+
+    def bundle(self, report: dict, tmp: Path) -> dict[str, Path]:
+        scored = scored_from(report, tmp, "consistency")
+        plan, model, bindings = tmp / "c.plan.json", tmp / "c.model.json", tmp / "c.bindings.json"
+        for args in (("scripts/build_visualization_plan.py", str(scored), str(plan)),
+                     ("scripts/build_client_report_model.py", str(scored), str(model), "--visual-plan", str(plan),
+                      "--claim-bindings-out", str(bindings))):
+            result = run(*args)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        return {"report": scored, "plan": plan, "model": model, "bindings": bindings}
+
+    def gate(self, files: dict[str, Path]) -> subprocess.CompletedProcess:
+        return run("scripts/validate_customer_surface_consistency.py", *(str(files[k]) for k in ("report", "plan", "model", "bindings")))
+
+    def test_presence_only_metrics_back_no_strength(self) -> None:  # round 3 F1
+        with tempfile.TemporaryDirectory() as td:
+            files = self.bundle(load(FIXTURE), Path(td))
+            model, bindings = load(files["model"]), load(files["bindings"])
+        self.assertEqual(model["executive"]["strengths"], [])
+        f006 = next(c for c in bindings["claims"] if c["finding_ref"] == "F-006")
+        self.assertIn("METRIC_NOT_CLEAR:TRUST-01", f006["reasons"])
+
+    def test_overlapping_topic_blocks_strength_and_clear_row(self) -> None:  # round 3 F3, F4
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            scored = active_positive_scored(tmp)
+            plan = build_plan(scored, tmp)
+            model = tmp / "m.json"
+            self.assertEqual(run("scripts/build_client_report_model.py", str(scored), str(model), "--visual-plan", str(tmp / "plan.json")).returncode, 0)
+            strengths = load(model)["executive"]["strengths"]
+        self.assertFalse([x for x in strengths if "Überschriften" in x or "gegliedert" in x], strengths)
+        v08 = self.rows(plan, "V08_AI_ANSWERABILITY")
+        self.assertFalse("AI-05" in v08 and v08["AI-05"]["status"] == "Klar", "proof reads Handlungsbedarf in TRUST-06")
+
+    def test_category_bars_skip_every_contested_area_and_say_so(self) -> None:  # round 3 F7
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            plan = build_plan(scored_from(self.legal_report(), tmp), tmp)
+        v02 = next(v for v in plan["visuals"] if v["template_id"] == "V02_CATEGORY_BARS")
+        labels = [r["label"] for r in v02["data"]]
+        self.assertFalse([x for x in labels if x.startswith(("Vertrauen", "KI-"))], labels)
+        self.assertIn("ohne Bereiche mit rechtlichem Prüfbedarf", v02["subtitle"])
+
+    def test_roadmap_shows_no_priority_scale_and_every_lever_once(self) -> None:  # round 3 F5, F12
+        with tempfile.TemporaryDirectory() as td:
+            model = self.model_for(load(FIXTURE), Path(td))
+        items = [i for k in ("now", "next_30_days", "next_quarter") for i in model["roadmap"][k]]
+        self.assertFalse([i for i in items if "priority" in i])
+        self.assertEqual(sorted(i["finding_ref"] for i in items), sorted(f["id"] for f in model["findings"]))
+        html = self.render_template(model)
+        self.assertNotRegex(html, r"P[123] ·")
+        self.assertIn("Reihenfolge der Umsetzung", html.split("ROADMAP")[1][:600])
+
+    def test_low_finding_never_outranks_medium(self) -> None:  # round 3 F6
+        from attach_vibecheck03_findings import attach
+        from vibecheck03 import observe
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            c = load(scored_from(load(FIXTURE), tmp, "base"))
+            for f in c["findings"]:
+                if f["id"] in {"F-002", "F-005"}:
+                    f["category"] = "ux_conversion"
+            c["meta"]["audit_id"] = "vc03-eval-c"
+            html = ("<html><head><title>Meyer</title><link rel='icon' href='/icon.png'></head>"
+                    "<body><img src='a.jpg'><img src='b.jpg' alt=''></body></html>")
+            vc = observe({"run_id": "vc03-eval-c", "page_url": c["meta"]["audited_url"], "html": html, "html_complete": True,
+                          "observed_at": "2026-10-27T10:00:00+01:00", "asset_results": {"https://example.com/icon.png": False}})
+            plan = build_plan(scored_from(attach(c, vc), tmp, "case-c"), tmp)
+            severities = {f["id"]: f["severity"] for f in attach(c, vc)["findings"]}
+        chosen = [severities[x] for x in plan["top_levers"]]
+        self.assertNotIn("low", chosen, plan["top_levers"])
+
+    def test_consistency_gate_passes_a_consistent_bundle(self) -> None:  # positive control
+        with tempfile.TemporaryDirectory() as td:
+            result = self.gate(self.bundle(load(FIXTURE), Path(td)))
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_consistency_gate_fails_on_each_cross_surface_contradiction(self) -> None:  # canaries
+        mutations = {
+            "STRENGTH_NOT_CLEAR": lambda f: f["bindings"].update(claims=[{"text": "x", "finding_ref": "F-006", "metric_refs": ["TRUST-01"],
+                                                                                   "evidence_refs": [], "admitted": True, "reasons": ["BOUND_TO_CLEAR_METRICS"]}]),
+            "MATRIX_READING_MISMATCH": lambda f: next(r for v in f["plan"]["visuals"] if v["template_id"] == "V10_TRUST_MATRIX" for r in v["data"]
+                                                      if r["metric_ref"] == "TRUST-01").update(status="Klar"),
+            "EXECUTION_ORDER_MISMATCH": lambda f: f["model"]["closing"]["actions"].reverse(),
+            "LEVER_NOT_SCHEDULED": lambda f: f["model"]["roadmap"].update(next_quarter=[]),
+        }
+        for code, mutate in mutations.items():
+            with self.subTest(code=code), tempfile.TemporaryDirectory() as td:
+                files = self.bundle(load(FIXTURE), Path(td))
+                data = {k: load(files[k]) for k in ("plan", "model", "bindings")}
+                mutate(data)
+                for k, v in data.items():
+                    dump(files[k], v)
+                result = self.gate(files)
+                self.assertNotEqual(result.returncode, 0, code)
+                self.assertIn(code, result.stdout + result.stderr)
+
+    def test_status_symbols_and_numerals_meet_contrast(self) -> None:  # round 3 F11
+        import re
+        from svg_chart_renderer import render_svg
+        lever = render_svg({"id": "VIZ-002", "template_id": "V03_TOP_LEVERS", "title": "t", "subtitle": "s",
+                            "data": [{"label": "a", "priority": 1}]})
+        self.assertNotIn('fill="#FFFFFF">1<', lever)
+        trust = render_svg({"id": "VIZ-003", "template_id": "V10_TRUST_MATRIX", "title": "t", "subtitle": "s",
+                            "data": [{"signal": "a", "status": "Handlungsbedarf", "symbol": "X", "tone": "bad"},
+                                     {"signal": "b", "status": "Nicht belastbar bewertet", "symbol": "-", "tone": "neutral"}]})
+        symbol_fills = re.findall(r'font-size="14" font-weight="700" fill="(#[0-9A-Fa-f]{6})">[X-]<', trust)
+        self.assertEqual(symbol_fills, ["#0E1414", "#0E1414"])
+        css = (ROOT / "assets/presentation.css").read_text(encoding="utf-8")
+        self.assertRegex(css, r"\.closing-action b \{[^}]*color:\s*#8F250F")
 
 
 class MutationCanary(unittest.TestCase):

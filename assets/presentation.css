@@ -81,7 +81,7 @@ p { margin: 0; }
 .closing-grid { display:grid; grid-template-columns: 1.2fr .8fr; gap:7mm; }
 .closing-actions, .closing-cta { background:#FFFFFF; border-radius:5mm; padding:6mm; min-height:72mm; }
 .closing-action { display:grid; grid-template-columns:14mm 1fr; gap:3mm; padding:2.5mm 0; border-bottom:1px solid #C6D4D1; }
-.closing-action b { font-family:"IBM Plex Mono","DejaVu Sans Mono",monospace; color:#EC5E43; }
+.closing-action b { font-family:"IBM Plex Mono","DejaVu Sans Mono",monospace; color:#8F250F; }
 .closing-action span { font-size:12pt; font-weight:650; }
 .closing-cta { background:#EC5E43; }
 .closing-cta h3 { font-size:22pt; line-height:1.08; margin:6mm 0; }

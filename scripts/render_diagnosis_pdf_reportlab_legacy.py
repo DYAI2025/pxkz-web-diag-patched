@@ -596,7 +596,7 @@ def draw_roadmap(c: Canvas, model: dict[str, Any], brand: dict[str, Any], page_n
         if not items:
             paragraph(c, "Keine priorisierte Maßnahme in diesem Zeitfenster.", x + 7 * mm, yy, card_w - 14 * mm, 25 * mm, size=10, color=ink)
         for j, item in enumerate(items[:3], 1):
-            paragraph(c, f"{item['priority']} · {item['action']}", x + 7 * mm, yy - (j - 1) * 23 * mm, card_w - 14 * mm, 20 * mm, size=10.2, leading=12.8, color=ink, bold=(j == 1))
+            paragraph(c, item['action'], x + 7 * mm, yy - (j - 1) * 23 * mm, card_w - 14 * mm, 20 * mm, size=10.2, leading=12.8, color=ink, bold=(j == 1))
     c.showPage()
 
 

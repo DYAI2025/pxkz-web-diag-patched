@@ -1,8 +1,27 @@
 diff --git a/scripts/svg_chart_renderer.py b/scripts/svg_chart_renderer.py
-index 01d21a9..5873602 100644
+index 01d21a9..8ce90cf 100644
 --- a/scripts/svg_chart_renderer.py
 +++ b/scripts/svg_chart_renderer.py
-@@ -197,13 +197,25 @@ def render_svg(visual: dict[str, Any]) -> str:
+@@ -126,7 +126,7 @@ def ranked_levers(lines: list[str], rows: list[dict[str, Any]]) -> None:
+         y = top + i * step
+         rank = row.get("priority") if row.get("priority") is not None else i + 1
+         lines.append(f'<circle cx="86" cy="{y:.1f}" r="20" fill="{ORANGE}"/>')
+-        lines.append(f'<text x="86" y="{y+6:.1f}" text-anchor="middle" font-family="{MONO}" font-size="14" font-weight="700" fill="{WHITE}">{esc(rank)}</text>')
++        lines.append(f'<text x="86" y="{y+6:.1f}" text-anchor="middle" font-family="{MONO}" font-size="14" font-weight="700" fill="{INK}">{esc(rank)}</text>')
+         lines.append(text_block(126, y + 6, row.get("label"), width=72, max_lines=2, font_size=14, line_height=15))
+ 
+ 
+@@ -152,7 +152,8 @@ def trust_matrix(lines: list[str], rows: list[dict[str, Any]]) -> None:
+         fill, accent = tones.get(str(row.get("tone")), (SAGE_RAISED, INK))
+         lines.append(text_block(42, y + 20, row.get("signal"), width=67, max_lines=1, font_size=13))
+         lines.append(f'<rect x="520" y="{y}" width="300" height="26" rx="5" fill="{fill}" stroke="{accent}" stroke-width="{2 if row.get("tone") == "bad" else 1}"/>')
+-        lines.append(f'<text x="536" y="{y+18}" font-family="{MONO}" font-size="14" font-weight="700" fill="{accent}">{esc(row.get("symbol") or "-")}</text>')
++        # The symbol is text: ink on every tone keeps it at >= 4.5:1; the accent colour stays on the frame only.
++        lines.append(f'<text x="536" y="{y+18}" font-family="{MONO}" font-size="14" font-weight="700" fill="{INK}">{esc(row.get("symbol") or "-")}</text>')
+         lines.append(f'<text x="566" y="{y+18}" font-family="{MONO}" font-size="13" font-weight="700" fill="{INK}">{esc(row.get("status") or "")}</text>')
+ 
+ 
+@@ -197,13 +198,25 @@ def render_svg(visual: dict[str, Any]) -> str:
      elif tid == "V05_RANKING_POSITION":
          rows = data[:8]
          maxp = max(max_value(rows, "position", 100), 10)
@@ -31,7 +50,7 @@ index 01d21a9..5873602 100644
              lines.append(f'<text x="825" y="{y+6}" font-family="{MONO}" font-size="13.5" fill="{INK}">{pos:g}</text>')
      elif tid == "V10_TRUST_MATRIX":
          trust_matrix(lines, data)
-@@ -217,6 +229,9 @@ def render_svg(visual: dict[str, Any]) -> str:
+@@ -217,6 +230,9 @@ def render_svg(visual: dict[str, Any]) -> str:
          warn = float(row.get("warn", max(good, 1)) or max(good, 1))
          domain = max(warn * 1.5, value * 1.15, 1)
          x, width, y, h = 90, 720, 190, 70
@@ -41,7 +60,7 @@ index 01d21a9..5873602 100644
          gx = width * good / domain
          wx = width * warn / domain
          lines += [
-@@ -224,8 +239,8 @@ def render_svg(visual: dict[str, Any]) -> str:
+@@ -224,8 +240,8 @@ def render_svg(visual: dict[str, Any]) -> str:
              f'<rect x="{x+gx:.1f}" y="{y}" width="{max(0,wx-gx):.1f}" height="{h}" fill="{WARN_SURFACE}"/>',
              f'<rect x="{x+wx:.1f}" y="{y}" width="{max(0,width-wx):.1f}" height="{h}" fill="{BAD_SURFACE}"/>',
              f'<line x1="{x+width*value/domain:.1f}" y1="{y-18}" x2="{x+width*value/domain:.1f}" y2="{y+h+18}" stroke="{ORANGE}" stroke-width="6"/>',

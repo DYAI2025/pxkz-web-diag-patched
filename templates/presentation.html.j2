@@ -64,9 +64,9 @@
 
 <section class="page ink">
   <div class="header"><div class="brand">Pixelkiez.</div><div class="eyebrow">{{ '%02d'|format(visuals|length + 4) }} · ROADMAP</div></div>
-  <div class="section-title"><h2>Vom Befund zur überprüfbaren Verbesserung.</h2><p>{{ model.recommendation.route }} · {{ model.recommendation.reason }}</p></div>
+  <div class="section-title"><h2>Vom Befund zur überprüfbaren Verbesserung.</h2><p>Reihenfolge der Umsetzung: was jetzt, in 30 Tagen und danach ansteht.</p></div>
   <div class="roadmap">
-    {% for key,label in [('now','Jetzt'),('next_30_days','In 30 Tagen'),('next_quarter','Danach')] %}<div class="roadmap-col"><h3>{{ label }}</h3>{% for item in model.roadmap[key] %}<div class="roadmap-item"><strong>{{ item.priority }} · {{ item.owner }}</strong><p>{{ item.action }}</p></div>{% endfor %}</div>{% endfor %}
+    {% for key,label in [('now','Jetzt'),('next_30_days','In 30 Tagen'),('next_quarter','Danach')] %}<div class="roadmap-col"><h3>{{ label }}</h3>{% for item in model.roadmap[key] %}<div class="roadmap-item"><strong>{{ item.owner }}</strong><p>{{ item.action }}</p></div>{% endfor %}</div>{% endfor %}
   </div>
   <div class="footer"><span>{{ owner }} · {{ model.recommendation.next_step }}</span><span>{{ '%02d'|format(visuals|length + 4) }}</span></div>
 </section>

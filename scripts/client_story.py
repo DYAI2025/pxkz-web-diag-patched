@@ -322,19 +322,20 @@ def select_client_levers(
             selected.append(f)
             seen_categories.add(str(f.get("category", "")))
 
-    # Then add medium/low findings with category diversity where possible.
-    for f in findings:
-        if f in selected or len(selected) >= max_levers:
-            continue
-        cat = str(f.get("category", ""))
-        if cat not in seen_categories:
-            selected.append(f)
-            seen_categories.add(cat)
-
-    # Fill remaining slots only from findings that passed the Strategic Relevance Gate.
-    for f in findings:
-        if f not in selected and len(selected) < max_levers:
-            selected.append(f)
+    # Then medium findings, then low findings, each band with category diversity where possible. A low finding
+    # never takes a slot while an admissible medium-or-higher finding remains (owner decision 2026-10-29).
+    for band in ({"medium"}, None):
+        for f in findings:
+            if f in selected or len(selected) >= max_levers or (band is not None and f.get("severity") not in band):
+                continue
+            cat = str(f.get("category", ""))
+            if cat not in seen_categories:
+                selected.append(f)
+                seen_categories.add(cat)
+        # Fill remaining slots only from findings that passed the Strategic Relevance Gate.
+        for f in findings:
+            if f not in selected and len(selected) < max_levers and (band is None or f.get("severity") in band):
+                selected.append(f)
     return selected[:max_levers]
 
 def _next_viz_id(values: list[dict[str, Any]]) -> str:

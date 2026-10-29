@@ -190,3 +190,42 @@ Consequence recorded: the bare branch-priority tie report under its synthetic pr
 | synthetic-report plan diff vs cd8689d | — | only V03 subtitle and TRUST-01/02 rows changed; lever ids unchanged |
 | oracles / baseline / v3.2.1 / quick_validate | 0 | amendment in place (plan 8f23ac34…→ac9dc88e…) / PASS / PASS / PASS 319 files |
 Follow-up: the frozen build of 339518f failed at `validate_report_input.py` ("VIZ-001 references unknown finding F-002") because the legacy `visualizations`/`options` still referenced replaced findings. Red: the fixture test now runs `validate_report_input.py` (rc 1, same message). Green: the fixture carries its own `options` and empty `visualizations`; the working-tree nine-case build returns rc 0 (gateway invariant True, no other identical PDFs).
+
+### Task 7 — review round 3 and strategy change (review convergence, 2026-10-29)
+Independent review round 3 on the frozen build of 2be0a98 opened 50/50 rasters and reported 12 confirmed and 2 plausible
+findings. Third consecutive round with the same defect class (two customer surfaces reading one metric or one order
+differently), so the per-finding patch strategy was frozen. Root cause: every surface (strengths, lever admission, V02,
+V08, V10, roadmap, closing) derived its own reading of a metric; nothing compared them. Classified as an insufficient
+oracle plus an architecture mismatch, not as single wrong implementations.
+
+Materially different remediation:
+- one reading per metric for every surface: `scripts/customer_reading.py` (presence-only and present, contested,
+  score status) and a declared topic-overlap map `assets/customer-topic-overlaps.v1.json` (registry untouched);
+- a fail-closed cross-surface gate `scripts/validate_customer_surface_consistency.py`, run by
+  `build_audit_deliverables.py` after the claim-binding check, with a positive control and four mutation canaries
+  (STRENGTH_NOT_CLEAR, MATRIX_READING_MISMATCH, EXECUTION_ORDER_MISMATCH, LEVER_NOT_SCHEDULED);
+- a fixed probe checklist `docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md`, frozen before round 4.
+
+| question (asked and answered 2026-10-29) | decision | implementation |
+|---|---|---|
+| F5 roadmap P1/P2 next to lever severity | drop P1/P2 | roadmap items carry `finding_ref`, no `priority`; timing still from the audit roadmap; every lever scheduled once (two-per-bucket cap removed) |
+| F3/F4 overlapping metrics | declare topic overlaps | a strength or a "Klar" matrix row is withheld while a same-topic metric is a lever metric or reads "Handlungsbedarf" |
+| F6 low lever ahead of medium | low never outranks medium | `select_client_levers` fills medium (diversity, then fill) before low; VC03 case C lowers F-002/F-005 so the VC03 detail is admitted only once no medium remains |
+| QA gate scope | fixed probe checklist | zero confirmed defects against the checklist; other items are backlog |
+
+Finding disposition: F1 fixed (presence-only metrics back no strength; `test_customer_label_fidelity` updated to the
+decision, reasons asserted); F3/F4 fixed (overlap map); F5 fixed; F6 fixed; F7 fixed (V02 withholds every category
+with a legal- or identity-contested metric and says so); F9 fixed (roadmap subtitle names the execution order instead
+of route and lever 1); F10 fixed (cover note "Ein kritischer Befund wiegt schwerer als der Gesamtwert."); F11 fixed
+(V03 rank and V10 symbols in ink, closing numerals #8F250F 8.6:1). Backlog: F2 (category bar includes presence-only
+metrics; decision 3 keeps scores unchanged), F8 (periods on example data conflict with checklist A2), F12 (whitespace,
+stripe), F13 (fixture presence score), F14 (internal scope_summary not rendered).
+
+| check | rc | value |
+|---|---|---|
+| red `SurfaceConsistency` (11 new tests) | 1 | 11 failures for the stated reasons (gate script absent → canaries and positive control red) |
+| green claim suite | 0 | 24 selected tests OK |
+| full suite | 0 | 277 passed, 73 subtests |
+| eval suites | 0 | all PASS except two environment gaps unrelated to this change: `run_browser_measurement_evals.py` (no Playwright), `run_chart_template_evals.py` (no reportlab) |
+| oracles | 0 | amendment in place: model 4146f0fb…→a09512e5…; plan unchanged; lever ids unchanged |
+| baseline / v3.2.1 / quick_validate | 0 | PASS / PASS 34 transitions / PASS 322 files |

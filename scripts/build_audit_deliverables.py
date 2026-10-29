@@ -156,6 +156,8 @@ def main() -> int:
         run(customer_cmd)
         run([py, str(root / "scripts/validate_client_report_model.py"), str(model)])
         run([py, str(root / "scripts/validate_customer_claim_bindings.py"), str(canonical), str(model), str(claim_bindings)])
+        # One reading per metric and one execution order across strengths, matrices, bars, levers and roadmap.
+        run([py, str(root / "scripts/validate_customer_surface_consistency.py"), str(canonical), str(plan), str(model), str(claim_bindings)])
         if legal_sidecar is not None:
             run([py, str(root / "scripts/validate_impressum_projection.py"), str(legal_sidecar), str(canonical), str(model)])
         run([py, str(root / "scripts/validate_client_semantics.py"), str(model)])

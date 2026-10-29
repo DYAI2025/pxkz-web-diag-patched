@@ -9,7 +9,7 @@ import re
 import sys
 from datetime import datetime
 
-from customer_status import STATUS_META, customer_status
+from customer_status import STATUS_META
 from pathlib import Path
 from typing import Any
 
@@ -17,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority  # noqa: E402
 from client_story import clientize, select_client_levers  # noqa: E402
 from evidence_method_labels import evidence_method, method_phrase, short_label  # noqa: E402
-from legal_customer_projection import contested_identity_surface, contested_legal_surface  # noqa: E402
+from customer_reading import contested_metrics, metric_reading, overlap_blocked  # noqa: E402
 from strategic_relevance import eligible_findings  # noqa: E402
 from visualization_policy import apply_customer_visual_budget, CUSTOMER_MIN_VISUALS  # noqa: E402
 
@@ -130,8 +130,9 @@ def main() -> int:
         excluded.append({"template_id": "V01_OVERALL_SCORE", "reason": "COVER_OR_OVERVIEW_ONLY_NO_DUPLICATE_CHART_PAGE"})
 
         cats = []
-        # A category bar must not vouch for an area while a projected legal risk contests its metrics.
-        legal_review_categories = {str(defs.get(mid, {}).get("category")) for mid in contested_legal_surface(report) if mid in defs}
+        # A category bar must not vouch for an area while a projected legal or provider-identity risk contests any
+        # of its metrics: those rows read "Nicht belastbar bewertet", so the bar would be a second reading.
+        legal_review_categories = {str(defs.get(mid, {}).get("category")) for mid in contested_metrics(report) if mid in defs}
         withheld = []
         if score.get("display_status") == "FULL_SCORE":
             for c in score.get("category_scores", []) if isinstance(score.get("category_scores"), list) else []:
@@ -142,7 +143,8 @@ def main() -> int:
                     cats.append({"label": clientize(c.get("label") or c.get("category"), 36), "value": float(c["score"])})
         if len(cats) >= 2:
             population = f"{len(cats)} bewertete Kategorien" + (f"; ohne Balken wegen rechtlichem Prüfbedarf: {', '.join(withheld)}" if withheld else "")
-            visuals.append(visual(vid, "V02_CATEGORY_BARS", "Stärken und Schwächen nach Bereich", "Wie die wichtigsten Bereiche der Website heute abschneiden", [f"CATEGORY:{c.get('category')}" for c in score.get("category_scores", []) if str(c.get("category")) not in withheld], [], "DERIVED", population, "Pixelkiez Bewertungsmodell", "Bereichswerte sind keine externen Benchmarks und beweisen keine Geschäftswirkung.", cats)); vid += 1
+            v02_subtitle = "Wie die wichtigsten Bereiche der Website heute abschneiden" + ("; ohne Bereiche mit rechtlichem Prüfbedarf" if withheld else "")
+            visuals.append(visual(vid, "V02_CATEGORY_BARS", "Stärken und Schwächen nach Bereich", v02_subtitle, [f"CATEGORY:{c.get('category')}" for c in score.get("category_scores", []) if str(c.get("category")) not in withheld], [], "DERIVED", population, "Pixelkiez Bewertungsmodell", "Bereichswerte sind keine externen Benchmarks und beweisen keine Geschäftswirkung.", cats)); vid += 1
         else:
             excluded.append({"template_id": "V02_CATEGORY_BARS", "reason": "NO_CUSTOMER_FULL_SCORE_OR_TOO_FEW_CATEGORIES"})
 
@@ -224,14 +226,12 @@ def main() -> int:
 
         excluded.append({"template_id": "V12_AUDIT_COVERAGE", "reason": "INTERNAL_ONLY_NOT_CUSTOMER_VISIBLE"})
 
-        contested = contested_legal_surface(report)
-        # A metric that a customer-visible problem finding cites (or an identity metric next to a projected
-        # provider-identity risk) must not read as clear on the same PDF.
+        # A metric that a customer-visible problem finding cites must not read as clear on the same PDF.
         # Only the four customer levers are visible problem findings; a finding the reader never sees cannot cap a status.
         capped = {str(x) for f in levers for x in f.get("metric_refs", [])}
-        # Owner decision 2026-10-29: rows contested by a projected legal risk read "Nicht belastbar bewertet";
-        # the legal lever carries the explanation. Their scores are untouched.
-        contested = contested | contested_identity_surface(report)
+        # Owner decision 2026-10-29: a "Klar" row is not shown while a metric of the same declared topic is a lever
+        # metric or reads "Handlungsbedarf" (assets/customer-topic-overlaps.v1.json).
+        overlap = overlap_blocked(report, capped, defs)
 
         def category_matrix(category: str, template: str, title: str, label_name: str, *, four_state: bool = False,
                             limitation_default: str = "Die Matrix ist kein Marktbenchmark und keine Erfolgsprognose.") -> None:
@@ -244,20 +244,17 @@ def main() -> int:
                     continue
                 if m.get("measurement_class") == "not_assessed":
                     continue
-                # One customer status scale for every matrix: the same score reads the same in V08 and V10.
-                # A projected legal customer risk outranks the presence-only core status on the customer label.
-                state = {"key": "UNASSESSED", **STATUS_META["UNASSESSED"]} if mid in contested else customer_status(m)
-                presence_only = defs.get(mid, {}).get("score_mode") == "presence_only"
-                present = presence_only and state["key"] != "ACTION" and mid not in contested
-                if present:
-                    # A presence check proves the page exists, not that its content is complete or compliant.
-                    state = {"key": "UNASSESSED", **STATUS_META["UNASSESSED"]}
+                # One customer reading per metric for every surface (customer_reading): presence-only and present or
+                # contested by a projected legal/identity risk -> "Nicht belastbar bewertet"; scores are untouched.
+                reading = state = metric_reading(report, defs, m)
                 if state["key"] == "CLEAR" and mid in capped:
                     state = {"key": "IMPROVE", **STATUS_META["IMPROVE"]}
+                if state["key"] == "CLEAR" and mid in overlap:
+                    continue
                 if state["key"] == "UNASSESSED" and not four_state:
                     # The value-tinted matrix has no neutral colour; unscored rows stay out as before.
                     continue
-                label = metric_label(defs, m) + (" (vorhanden)" if presence_only and (present or mid in contested) else "")
+                label = metric_label(defs, m) + (" (vorhanden)" if reading["present"] else "")
                 rows.append({label_name: label, "metric_ref": mid, "status": state["label"],
                              "symbol": state["symbol"], "tone": state["tone"], "value": MATRIX_VALUE[state["key"]]})
                 refs.append(mid)

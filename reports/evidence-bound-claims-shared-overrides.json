@@ -19,49 +19,49 @@
    "path": "scripts/client_story.py",
    "baseline_sha256": "3798a2babca162db109ce7750b324b7e1c993eb1ba48f1ab0afe4bebba230b2d",
    "previous_sha256": "fd43e018fca5269c6178ab15ad4de23d0144fb2021338f827349e145e3f6abf7",
-   "current_sha256": "aecbcfbdf78aca0aee9825e565a78b245c279b1a3dae412e9d4af931dec6ca20",
+   "current_sha256": "d9281edaf26487abdb8df3c52167529d80e26ef611d39a6b75ef348f54556aba",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   },
   {
    "path": "scripts/build_client_report_model.py",
    "baseline_sha256": "433a909ec9bb38b29a4864f468d2cdf66a4a83b1beef0fdada2f6db8716a538e",
    "previous_sha256": "3875b71e2e689fe90154889a7ebffb773e751dede762122e49bae67f25a7d5d7",
-   "current_sha256": "b29ef002b3ee1c876b34d72a819f6e5ea1d6cc925d79cc5de2405f1a38ec3698",
+   "current_sha256": "d95bce2b6265ac10e3bcbc328d24ccfb0692d711a24d911f439badc726e0c40c",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   },
   {
    "path": "scripts/build_visualization_plan.py",
    "baseline_sha256": "baf5d85df264a812165d4ba0fb534619e0ab5b9f3a601b8011955164358be954",
    "previous_sha256": "488b034dd5fde6b3680fe005e8946417870068467f57bd36e2aebf6a79a8f30c",
-   "current_sha256": "72e4fa237cfb579ed39d5b5af1ace7ba86b4953a7b4e601553fb6947737987aa",
+   "current_sha256": "cddea30072a68d1a5013cef0a93874a80e5a202dca91d148f2915f941fa9f839",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   },
   {
    "path": "scripts/build_audit_deliverables.py",
    "baseline_sha256": "b8d3ba5536a2054d2545c17ef2868950597a2fdf7c01bf9dae2a4adf1bae203b",
    "previous_sha256": "c6cf4b71c5a77fdfa52efad70b6f1cf26c8dbdecffff664ba9f4bc31c1f3ff02",
-   "current_sha256": "ebf7f564fc537c65cc35a4016bc945ade045dcd67c2245d0a9503bd859301c46",
+   "current_sha256": "0ac4b8d33846a6b4f02bf38c18e0420a45a279fb6b6810623b4e793cafa0bf46",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   },
   {
    "path": "scripts/svg_chart_renderer.py",
    "baseline_sha256": "35d0ee5acb12d7d798d41e50ab9e9b0593ebca18f66e9fd1dbbe40e38befba89",
    "previous_sha256": "56346daa17f50190bc5a824e38958a25d125db85a3f50f7f9f670c220e1da113",
-   "current_sha256": "abb42c523eec881894febe8dc32fc1000ec539576d4aa7d99f359255f640c473",
+   "current_sha256": "d4f809d321c45e4c86915f7ac554cebbb93e6c820d677400062d777b78dfc559",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   },
   {
    "path": "templates/presentation.html.j2",
    "baseline_sha256": "71c4af5c66c59e9db107fc1f903e7527c93a3a4101d0693e33df9a9e6287fb02",
    "previous_sha256": "3f55a096ed246ae2099d4bceda11ad38490d8daa837efb93d731ffe4496e9a44",
-   "current_sha256": "f8c5c854eb097932fe43509a37b45045d81286dfce8e78725cd8ceb26eeb8139",
+   "current_sha256": "04c6dd2b0dd9ffdfe26d04a300ea4983df790925c062b5eec2dfc362b59c780b",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   },
   {
    "path": "assets/presentation.css",
    "baseline_sha256": "ffd55bb7baa0b458de6db423792842f2bd4c0ee6e061003f53823ef588955a23",
    "previous_sha256": "49a0f04b5a2b69da404dba2e7adff496a38f00ff6efcef1620a214ab5dbcf2d0",
-   "current_sha256": "e065ce1e5937d4e653fceb2deabfec603081ae8b44d1d02397966be1cc9d3be8",
+   "current_sha256": "b6678441b1d7e29937b7e6e58795b1aee1f468d665b08e08f30b93f2dac86f46",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   }
  ]

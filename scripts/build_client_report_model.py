@@ -12,9 +12,9 @@ from typing import Any
 
 from client_story import clientize, confidence_de, plan_visual_story, select_client_levers
 from customer_story_semantics import presentation_metadata, semantic_story_summary
-from customer_status import customer_status
+from customer_reading import contested_metrics, metric_reading, overlap_blocked, registry_defs
 from evidence_method_labels import evidence_method, method_phrase
-from legal_customer_projection import contested_identity_surface, contested_legal_surface, vouches_for_contested_legal_surface
+from legal_customer_projection import vouches_for_contested_legal_surface
 from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority, selection_provenance
 
 SKILL_DIR = Path(__file__).resolve().parent.parent
@@ -35,14 +35,19 @@ SAMPLE_SCOPED_METRICS = {"AI-06"}
 UNASSESSED_CLASSES = {None, "", "not_assessed", "inferred_risk"}
 
 
-def bound_strengths(report: dict[str, Any], limit: int) -> tuple[list[str], list[dict[str, Any]]]:
+def bound_strengths(report: dict[str, Any], limit: int,
+                    lever_metric_refs: set[str] | frozenset[str] = frozenset()) -> tuple[list[str], list[dict[str, Any]]]:
     """Customer strengths come only from positive findings whose linked metrics all read "Klar".
 
-    One status scale: a metric the visuals label "Verbesserung sinnvoll" or worse cannot back a strength.
+    One reading per metric (customer_reading): a metric the visuals label "Verbesserung sinnvoll", "(vorhanden) ·
+    Nicht belastbar bewertet" or worse cannot back a strength, and neither can a metric whose declared topic
+    overlaps a lever metric or a metric reading "Handlungsbedarf" (owner decision 2026-10-29).
     Free-text executive_summary.top_strengths have no metric link and are recorded as not admitted.
     """
     metrics = {str(m.get("id")): m for m in report.get("metrics", []) if isinstance(m, dict)}
-    contested = set(contested_legal_surface(report)) | set(contested_identity_surface(report))
+    defs = registry_defs()
+    contested = contested_metrics(report)
+    blocked = overlap_blocked(report, set(lever_metric_refs), defs)
     positives = sorted(
         [f for f in report.get("findings", []) if isinstance(f, dict) and f.get("severity") == "positive"],
         key=lambda f: (-int(f.get("confidence", 0)), str(f.get("id", ""))),
@@ -59,10 +64,12 @@ def bound_strengths(report: dict[str, Any], limit: int) -> tuple[list[str], list
             m = metrics.get(ref)
             if m is None or m.get("measurement_class") in UNASSESSED_CLASSES:
                 reasons.append(f"METRIC_NOT_ASSESSED:{ref}")
-            elif customer_status(m)["key"] != "CLEAR":
+            elif metric_reading(report, defs, m)["key"] != "CLEAR":
                 reasons.append(f"METRIC_NOT_CLEAR:{ref}")
             if ref in contested:
                 reasons.append(f"METRIC_CONTESTED:{ref}")
+            if ref in blocked:
+                reasons.append(f"TOPIC_OVERLAP:{ref}")
         if WHOLE_SITE_RX.search(raw):
             if refs and set(refs) <= SAMPLE_SCOPED_METRICS:
                 raw = WHOLE_SITE_RX.sub("auf den geprüften Seiten", raw)
@@ -252,7 +259,8 @@ def main(argv: list[str]) -> int:
         )
 
     # Strengths are bound to positive findings whose metrics read "Klar"; see bound_strengths.
-    strengths, claim_bindings = bound_strengths(report, budget("executive_strength", 110))
+    lever_metric_refs = {str(x) for f in selected_levers for x in f.get("metric_refs", []) or []}
+    strengths, claim_bindings = bound_strengths(report, budget("executive_strength", 110), lever_metric_refs)
 
     priorities: list[str] = []
     for f in selected_levers:
@@ -330,8 +338,9 @@ def main(argv: list[str]) -> int:
         })
 
     roadmap = {"now": [], "next_30_days": [], "next_quarter": []}
-    # The audit's own roadmap entry (linked by evidence_basis) decides timing and priority of each lever, so the
-    # roadmap, the next step and the closing actions follow one execution order instead of re-deriving P1/P2.
+    # The audit's own roadmap entry (linked by evidence_basis) decides the timing of each lever, so the roadmap,
+    # the next step and the closing actions follow one execution order. The audit's P1/P2 labels stay internal:
+    # next to the lever severity they read as a third, unexplained priority scale (owner decision 2026-10-29).
     source_roadmap = [x for x in report.get("roadmap", []) if isinstance(x, dict)]
     bucket_order = {"now": 0, "next_30_days": 1, "next_quarter": 2}
     scheduled = []
@@ -342,23 +351,22 @@ def main(argv: list[str]) -> int:
             continue
         entry = next((x for x in source_roadmap if str(f.get("id")) in [str(y) for y in x.get("evidence_basis") or []]), {})
         horizon = entry.get("horizon") or rec.get("horizon")
-        priority = entry.get("priority") if entry.get("priority") in {"P1", "P2", "P3"} else ("P1" if f.get("severity") in {"critical", "high"} else "P2")
         mandatory_critical = isinstance(f.get("customer_risk"), dict) and f["customer_risk"].get("priority") == "MANDATORY_CRITICAL"
         if f.get("severity") == "critical" or mandatory_critical:
             # A critical finding is never scheduled behind "Jetzt".
-            bucket, priority = "now", "P1"
+            bucket = "now"
         elif horizon == "now":
             bucket = "now"
         elif horizon == "0_30_days":
             bucket = "next_30_days"
         else:
             bucket = "next_quarter"
-        scheduled.append((bucket_order[bucket], rank, bucket, priority, action, f, rec))
+        scheduled.append((bucket_order[bucket], rank, bucket, action, f, rec))
     scheduled.sort(key=lambda x: (x[0], x[1]))
-    for _, _, bucket, priority, action, f, rec in scheduled:
-        if len(roadmap[bucket]) < 2:
-            roadmap[bucket].append({"priority": priority, "action": action, "owner": clientize(rec.get("owner"), 55)})
-    execution_ids = [str(x[5].get("id")) for x in scheduled]
+    # Every lever is scheduled exactly once; a bucket holds at most the four levers.
+    for _, _, bucket, action, f, rec in scheduled:
+        roadmap[bucket].append({"finding_ref": str(f.get("id")), "action": action, "owner": clientize(rec.get("owner"), 55)})
+    execution_ids = [str(x[4].get("id")) for x in scheduled]
 
     display_status = str(score.get("display_status") or "NO_SCORE")
     numeric_score_visible = (
@@ -381,7 +389,7 @@ def main(argv: list[str]) -> int:
     if mandatory_risk is not None:
         blocker_note = clientize(mandatory_risk.get("customer_risk", {}).get("warning_label"), 80)
     elif numeric_score_visible and score.get("blocker_present"):
-        blocker_note = "Ein kritischer Website-Befund bleibt trotz Gesamtwert sichtbar."
+        blocker_note = "Ein kritischer Befund wiegt schwerer als der Gesamtwert."
     # The cover takeaway must be a customer-specific website finding, not a generic score band.
     cover_verdict = scan_first_recommendation_reason(selected_levers, executive.get("decision") or score.get("interpretation"))
 

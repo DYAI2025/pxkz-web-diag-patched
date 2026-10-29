@@ -1,5 +1,5 @@
 diff --git a/scripts/build_audit_deliverables.py b/scripts/build_audit_deliverables.py
-index bd88f96..363516d 100644
+index bd88f96..2abb1e8 100644
 --- a/scripts/build_audit_deliverables.py
 +++ b/scripts/build_audit_deliverables.py
 @@ -13,6 +13,7 @@ import tempfile
@@ -10,7 +10,7 @@ index bd88f96..363516d 100644
  
  
  def sha(path: Path) -> str:
-@@ -130,11 +131,31 @@ def main() -> int:
+@@ -130,11 +131,33 @@ def main() -> int:
              raise ValueError("industry catalog without a priority context cannot be applied")
          run([py, str(root / "scripts/build_visualization_plan.py"), str(canonical), str(plan), *priority_args])
          run([py, str(root / "scripts/validate_visualization_plan.py"), str(plan), str(canonical)])
@@ -40,10 +40,12 @@ index bd88f96..363516d 100644
          run(customer_cmd)
          run([py, str(root / "scripts/validate_client_report_model.py"), str(model)])
 +        run([py, str(root / "scripts/validate_customer_claim_bindings.py"), str(canonical), str(model), str(claim_bindings)])
++        # One reading per metric and one execution order across strengths, matrices, bars, levers and roadmap.
++        run([py, str(root / "scripts/validate_customer_surface_consistency.py"), str(canonical), str(plan), str(model), str(claim_bindings)])
          if legal_sidecar is not None:
              run([py, str(root / "scripts/validate_impressum_projection.py"), str(legal_sidecar), str(canonical), str(model)])
          run([py, str(root / "scripts/validate_client_semantics.py"), str(model)])
-@@ -170,7 +191,7 @@ def main() -> int:
+@@ -170,7 +193,7 @@ def main() -> int:
          quality_report = out / "customer-presentation-quality-report.json"
          run([py, str(root / "scripts/validate_customer_presentation_quality.py"), str(out), "--allow-pending", "--json-out", str(quality_report)])
  

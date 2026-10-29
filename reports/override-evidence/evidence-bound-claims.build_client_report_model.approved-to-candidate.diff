@@ -1,8 +1,8 @@
 diff --git a/scripts/build_client_report_model.py b/scripts/build_client_report_model.py
-index 71d1ff1..144ad65 100644
+index 71d1ff1..4769632 100644
 --- a/scripts/build_client_report_model.py
 +++ b/scripts/build_client_report_model.py
-@@ -3,14 +3,18 @@
+@@ -3,13 +3,17 @@
  from __future__ import annotations
  
  import argparse
@@ -15,14 +15,12 @@ index 71d1ff1..144ad65 100644
  
  from client_story import clientize, confidence_de, plan_visual_story, select_client_levers
  from customer_story_semantics import presentation_metadata, semantic_story_summary
--from legal_customer_projection import vouches_for_contested_legal_surface
-+from customer_status import customer_status
++from customer_reading import contested_metrics, metric_reading, overlap_blocked, registry_defs
 +from evidence_method_labels import evidence_method, method_phrase
-+from legal_customer_projection import contested_identity_surface, contested_legal_surface, vouches_for_contested_legal_surface
+ from legal_customer_projection import vouches_for_contested_legal_surface
  from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority, selection_provenance
  
- SKILL_DIR = Path(__file__).resolve().parent.parent
-@@ -26,6 +30,68 @@ ROUTE_DE = {
+@@ -26,6 +30,75 @@ ROUTE_DE = {
  }
  
  
@@ -31,14 +29,19 @@ index 71d1ff1..144ad65 100644
 +UNASSESSED_CLASSES = {None, "", "not_assessed", "inferred_risk"}
 +
 +
-+def bound_strengths(report: dict[str, Any], limit: int) -> tuple[list[str], list[dict[str, Any]]]:
++def bound_strengths(report: dict[str, Any], limit: int,
++                    lever_metric_refs: set[str] | frozenset[str] = frozenset()) -> tuple[list[str], list[dict[str, Any]]]:
 +    """Customer strengths come only from positive findings whose linked metrics all read "Klar".
 +
-+    One status scale: a metric the visuals label "Verbesserung sinnvoll" or worse cannot back a strength.
++    One reading per metric (customer_reading): a metric the visuals label "Verbesserung sinnvoll", "(vorhanden) ·
++    Nicht belastbar bewertet" or worse cannot back a strength, and neither can a metric whose declared topic
++    overlaps a lever metric or a metric reading "Handlungsbedarf" (owner decision 2026-10-29).
 +    Free-text executive_summary.top_strengths have no metric link and are recorded as not admitted.
 +    """
 +    metrics = {str(m.get("id")): m for m in report.get("metrics", []) if isinstance(m, dict)}
-+    contested = set(contested_legal_surface(report)) | set(contested_identity_surface(report))
++    defs = registry_defs()
++    contested = contested_metrics(report)
++    blocked = overlap_blocked(report, set(lever_metric_refs), defs)
 +    positives = sorted(
 +        [f for f in report.get("findings", []) if isinstance(f, dict) and f.get("severity") == "positive"],
 +        key=lambda f: (-int(f.get("confidence", 0)), str(f.get("id", ""))),
@@ -55,10 +58,12 @@ index 71d1ff1..144ad65 100644
 +            m = metrics.get(ref)
 +            if m is None or m.get("measurement_class") in UNASSESSED_CLASSES:
 +                reasons.append(f"METRIC_NOT_ASSESSED:{ref}")
-+            elif customer_status(m)["key"] != "CLEAR":
++            elif metric_reading(report, defs, m)["key"] != "CLEAR":
 +                reasons.append(f"METRIC_NOT_CLEAR:{ref}")
 +            if ref in contested:
 +                reasons.append(f"METRIC_CONTESTED:{ref}")
++            if ref in blocked:
++                reasons.append(f"TOPIC_OVERLAP:{ref}")
 +        if WHOLE_SITE_RX.search(raw):
 +            if refs and set(refs) <= SAMPLE_SCOPED_METRICS:
 +                raw = WHOLE_SITE_RX.sub("auf den geprüften Seiten", raw)
@@ -91,7 +96,7 @@ index 71d1ff1..144ad65 100644
  def fail(msg: str) -> int:
      print(f"FAIL: {msg}", file=sys.stderr)
      return 1
-@@ -105,6 +171,10 @@ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
+@@ -105,6 +178,10 @@ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
      enrichment = report.get("measurement_enrichment") if isinstance(report.get("measurement_enrichment"), dict) else {}
      metrics = [x for x in enrichment.get("metrics", []) if isinstance(x, dict) and x.get("status") in {"MEASURED", "OBSERVED"}]
      out: list[dict[str, str]] = []
@@ -102,7 +107,7 @@ index 71d1ff1..144ad65 100644
      # 1) current query-specific SERP result, only with explicit provider page if present
      pos = next((x for x in metrics if x.get("id") == "SERP_CURRENT_POSITION" and x.get("query")), None)
      if pos:
-@@ -112,7 +182,7 @@ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
+@@ -112,7 +189,7 @@ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
          value = f"Position {int(pos.get('value'))}"
          if page and isinstance(page.get("value"), (int,float)):
              value += f" · Seite {int(page.get('value'))}"
@@ -111,7 +116,7 @@ index 71d1ff1..144ad65 100644
          out.append({"label":"Google-Sichtbarkeit", "value":value, "context":clientize(context, 100)})
      # 2) authorized real audience signal
      users = next((x for x in metrics if x.get("id") == "GA4_ACTIVE_USERS"), None)
-@@ -120,13 +190,16 @@ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
+@@ -120,13 +197,16 @@ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
          value = f"{int(users.get('value')):,}".replace(",", ".") + " aktive Nutzer"
          dr = users.get("date_range") or {}
          context = f"{dr.get('start','')} bis {dr.get('end','')}" if isinstance(dr, dict) else "Dokumentierter Zeitraum"
@@ -130,7 +135,7 @@ index 71d1ff1..144ad65 100644
      return out[:3]
  
  
-@@ -137,6 +210,7 @@ def main(argv: list[str]) -> int:
+@@ -137,6 +217,7 @@ def main(argv: list[str]) -> int:
      parser.add_argument("--visual-plan")
      add_priority_arguments(parser)
      parser.add_argument("--priority-decision-out", help="Internal-only selection provenance, not customer PDF")
@@ -138,7 +143,7 @@ index 71d1ff1..144ad65 100644
      try:
          args = parser.parse_args(argv[1:])
          report = load(Path(args.report))
-@@ -162,10 +236,6 @@ def main(argv: list[str]) -> int:
+@@ -162,10 +243,6 @@ def main(argv: list[str]) -> int:
      score = report.get("score_summary", {})
      executive = report.get("executive_summary", {})
      findings = [f for f in report.get("findings", []) if isinstance(f, dict)]
@@ -149,7 +154,7 @@ index 71d1ff1..144ad65 100644
      selected_levers = select_client_levers(
          report, max_levers=4, branch_weights=branch_weights, branch_roles=branch_roles
      )
-@@ -181,18 +251,8 @@ def main(argv: list[str]) -> int:
+@@ -181,18 +258,9 @@ def main(argv: list[str]) -> int:
              json.dumps(provenance, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
          )
  
@@ -166,11 +171,12 @@ index 71d1ff1..144ad65 100644
 -            if len(strengths) == 3:
 -                break
 +    # Strengths are bound to positive findings whose metrics read "Klar"; see bound_strengths.
-+    strengths, claim_bindings = bound_strengths(report, budget("executive_strength", 110))
++    lever_metric_refs = {str(x) for f in selected_levers for x in f.get("metric_refs", []) or []}
++    strengths, claim_bindings = bound_strengths(report, budget("executive_strength", 110), lever_metric_refs)
  
      priorities: list[str] = []
      for f in selected_levers:
-@@ -256,7 +316,9 @@ def main(argv: list[str]) -> int:
+@@ -256,7 +324,9 @@ def main(argv: list[str]) -> int:
          semantic = presentation_metadata(report, f, registry)
          finding_models.append({
              "id": str(f.get("id", "")),
@@ -181,13 +187,14 @@ index 71d1ff1..144ad65 100644
              "category": str(f.get("category", "")),
              "headline": clientize(f.get("title"), budget("finding_headline", 110)),
              "observation": clientize(f.get("client_observation") or f.get("observation"), budget("finding_observation", 130)),
-@@ -268,24 +330,35 @@ def main(argv: list[str]) -> int:
+@@ -268,24 +338,35 @@ def main(argv: list[str]) -> int:
          })
  
      roadmap = {"now": [], "next_30_days": [], "next_quarter": []}
 -    for f in selected_levers:
-+    # The audit's own roadmap entry (linked by evidence_basis) decides timing and priority of each lever, so the
-+    # roadmap, the next step and the closing actions follow one execution order instead of re-deriving P1/P2.
++    # The audit's own roadmap entry (linked by evidence_basis) decides the timing of each lever, so the roadmap,
++    # the next step and the closing actions follow one execution order. The audit's P1/P2 labels stay internal:
++    # next to the lever severity they read as a third, unexplained priority scale (owner decision 2026-10-29).
 +    source_roadmap = [x for x in report.get("roadmap", []) if isinstance(x, dict)]
 +    bucket_order = {"now": 0, "next_30_days": 1, "next_quarter": 2}
 +    scheduled = []
@@ -200,32 +207,38 @@ index 71d1ff1..144ad65 100644
 -        if horizon == "now":
 +        entry = next((x for x in source_roadmap if str(f.get("id")) in [str(y) for y in x.get("evidence_basis") or []]), {})
 +        horizon = entry.get("horizon") or rec.get("horizon")
-+        priority = entry.get("priority") if entry.get("priority") in {"P1", "P2", "P3"} else ("P1" if f.get("severity") in {"critical", "high"} else "P2")
 +        mandatory_critical = isinstance(f.get("customer_risk"), dict) and f["customer_risk"].get("priority") == "MANDATORY_CRITICAL"
 +        if f.get("severity") == "critical" or mandatory_critical:
 +            # A critical finding is never scheduled behind "Jetzt".
-+            bucket, priority = "now", "P1"
++            bucket = "now"
 +        elif horizon == "now":
              bucket = "now"
          elif horizon == "0_30_days":
              bucket = "next_30_days"
          else:
              bucket = "next_quarter"
-+        scheduled.append((bucket_order[bucket], rank, bucket, priority, action, f, rec))
-+    scheduled.sort(key=lambda x: (x[0], x[1]))
-+    for _, _, bucket, priority, action, f, rec in scheduled:
-         if len(roadmap[bucket]) < 2:
+-        if len(roadmap[bucket]) < 2:
 -            roadmap[bucket].append({
 -                "priority": "P1" if f.get("severity") in {"critical", "high"} else "P2",
 -                "action": action,
 -                "owner": clientize(rec.get("owner"), 55),
 -            })
-+            roadmap[bucket].append({"priority": priority, "action": action, "owner": clientize(rec.get("owner"), 55)})
-+    execution_ids = [str(x[5].get("id")) for x in scheduled]
++        scheduled.append((bucket_order[bucket], rank, bucket, action, f, rec))
++    scheduled.sort(key=lambda x: (x[0], x[1]))
++    # Every lever is scheduled exactly once; a bucket holds at most the four levers.
++    for _, _, bucket, action, f, rec in scheduled:
++        roadmap[bucket].append({"finding_ref": str(f.get("id")), "action": action, "owner": clientize(rec.get("owner"), 55)})
++    execution_ids = [str(x[4].get("id")) for x in scheduled]
  
      display_status = str(score.get("display_status") or "NO_SCORE")
      numeric_score_visible = (
-@@ -313,9 +386,15 @@ def main(argv: list[str]) -> int:
+@@ -308,14 +389,20 @@ def main(argv: list[str]) -> int:
+     if mandatory_risk is not None:
+         blocker_note = clientize(mandatory_risk.get("customer_risk", {}).get("warning_label"), 80)
+     elif numeric_score_visible and score.get("blocker_present"):
+-        blocker_note = "Ein kritischer Website-Befund bleibt trotz Gesamtwert sichtbar."
++        blocker_note = "Ein kritischer Befund wiegt schwerer als der Gesamtwert."
+     # The cover takeaway must be a customer-specific website finding, not a generic score band.
      cover_verdict = scan_first_recommendation_reason(selected_levers, executive.get("decision") or score.get("interpretation"))
  
      next_step = "Die wichtigsten Maßnahmen zuerst umsetzen."
@@ -242,7 +255,7 @@ index 71d1ff1..144ad65 100644
      model = {
          "template_version": str(template.get("template_version", "5.0")),
          "brand": "Pixelkiez",
-@@ -324,10 +403,13 @@ def main(argv: list[str]) -> int:
+@@ -324,10 +411,13 @@ def main(argv: list[str]) -> int:
              "url": meta.get("audited_url", ""),
              "date": meta.get("audit_date", ""),
              "language": meta.get("language", "de"),
@@ -257,7 +270,7 @@ index 71d1ff1..144ad65 100644
              "customer": meta.get("customer_name", ""),
              "url": meta.get("audited_url", ""),
              "date": meta.get("audit_date", ""),
-@@ -360,7 +442,7 @@ def main(argv: list[str]) -> int:
+@@ -360,7 +450,7 @@ def main(argv: list[str]) -> int:
              "eyebrow": "NÄCHSTER SCHRITT",
              "title": "Aus Analyse wird Umsetzung.",
              "summary": "Die wichtigsten Stellschrauben sind klar. Jetzt geht es darum, sie in der richtigen Reihenfolge umzusetzen und die geschäftliche Wirkung zu verbessern.",
@@ -266,7 +279,7 @@ index 71d1ff1..144ad65 100644
              "cta": "Prioritäten bestätigen. Umsetzung starten.",
              "next_step": "Gemeinsam priorisieren wir die vier Hebel und starten mit dem ersten konkreten Umsetzungspaket.",
              "measurement_highlights": measurement_highlights(report),
-@@ -368,6 +450,16 @@ def main(argv: list[str]) -> int:
+@@ -368,6 +458,16 @@ def main(argv: list[str]) -> int:
      }
  
      Path(args.output).write_text(json.dumps(model, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

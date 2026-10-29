@@ -2,7 +2,8 @@
 
 Ranking chart: a device, place or date in the subtitle must hold for every plotted query.
 Website symbol: a declared icon that failed to load is not a missing icon.
-Strengths: while a legal customer risk is projected, no strength vouches for the legal or contact surface.
+Strengths: while a legal customer risk is projected, no strength vouches for the legal or contact surface;
+presence checks back no strength at all.
 """
 from __future__ import annotations
 
@@ -85,7 +86,7 @@ class WebsiteSymbolCopyTests(unittest.TestCase):
 
 
 class LegalSurfaceStrengthTests(unittest.TestCase):
-    def strengths(self, *, legal_risk: bool) -> list[str]:
+    def strengths(self, *, legal_risk: bool, claims: list | None = None) -> list[str]:
         report = json.loads((ROOT / "evals/fixtures/synthetic-report.json").read_text(encoding="utf-8"))
         if legal_risk:
             golden = next(c for c in json.loads((ROOT / "evals/fixtures/impressum-compliance-cases.json").read_text(encoding="utf-8"))["cases"]
@@ -97,8 +98,11 @@ class LegalSurfaceStrengthTests(unittest.TestCase):
             src, scored, model = tmp / "report.json", tmp / "scored.json", tmp / "model.json"
             src.write_text(json.dumps(report, ensure_ascii=False), encoding="utf-8")
             self.assertEqual(run("scripts/compute_score.py", str(src), str(scored)).returncode, 0)
-            result = run("scripts/build_client_report_model.py", str(scored), str(model))
+            bindings = tmp / "bindings.json"
+            result = run("scripts/build_client_report_model.py", str(scored), str(model), "--claim-bindings-out", str(bindings))
             self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+            if claims is not None:
+                claims.extend(json.loads(bindings.read_text(encoding="utf-8"))["claims"])
             return json.loads(model.read_text(encoding="utf-8"))["executive"]["strengths"]
 
     def test_projected_legal_risk_drops_legal_surface_strength(self) -> None:
@@ -109,9 +113,13 @@ class LegalSurfaceStrengthTests(unittest.TestCase):
         # "Verbesserung sinnvoll") does not read "Klar". Free-text top_strengths have no metric link.
         self.assertEqual(strengths, [])
 
-    def test_without_legal_risk_the_strength_stays(self) -> None:
-        self.assertEqual(self.strengths(legal_risk=False),
-                         ["Kontakt, Impressum und Datenschutz sind gut erreichbar und die Website läuft über HTTPS."])
+    def test_without_legal_risk_only_the_presence_reading_withholds_the_strength(self) -> None:
+        # Owner decision 2026-10-29: TRUST-01/02 are presence checks and read "(vorhanden) · Nicht belastbar bewertet",
+        # so "gut erreichbar" claims more than they show. Without a legal risk nothing is contested.
+        claims: list = []
+        self.assertEqual(self.strengths(legal_risk=False, claims=claims), [])
+        f006 = next(c for c in claims if c["finding_ref"] == "F-006")
+        self.assertEqual(f006["reasons"], ["METRIC_NOT_CLEAR:TRUST-01", "METRIC_NOT_CLEAR:TRUST-02"])
 
 
 if __name__ == "__main__":

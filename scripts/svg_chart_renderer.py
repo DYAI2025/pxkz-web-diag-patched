@@ -126,7 +126,7 @@ def ranked_levers(lines: list[str], rows: list[dict[str, Any]]) -> None:
         y = top + i * step
         rank = row.get("priority") if row.get("priority") is not None else i + 1
         lines.append(f'<circle cx="86" cy="{y:.1f}" r="20" fill="{ORANGE}"/>')
-        lines.append(f'<text x="86" y="{y+6:.1f}" text-anchor="middle" font-family="{MONO}" font-size="14" font-weight="700" fill="{WHITE}">{esc(rank)}</text>')
+        lines.append(f'<text x="86" y="{y+6:.1f}" text-anchor="middle" font-family="{MONO}" font-size="14" font-weight="700" fill="{INK}">{esc(rank)}</text>')
         lines.append(text_block(126, y + 6, row.get("label"), width=72, max_lines=2, font_size=14, line_height=15))
 
 
@@ -152,7 +152,8 @@ def trust_matrix(lines: list[str], rows: list[dict[str, Any]]) -> None:
         fill, accent = tones.get(str(row.get("tone")), (SAGE_RAISED, INK))
         lines.append(text_block(42, y + 20, row.get("signal"), width=67, max_lines=1, font_size=13))
         lines.append(f'<rect x="520" y="{y}" width="300" height="26" rx="5" fill="{fill}" stroke="{accent}" stroke-width="{2 if row.get("tone") == "bad" else 1}"/>')
-        lines.append(f'<text x="536" y="{y+18}" font-family="{MONO}" font-size="14" font-weight="700" fill="{accent}">{esc(row.get("symbol") or "-")}</text>')
+        # The symbol is text: ink on every tone keeps it at >= 4.5:1; the accent colour stays on the frame only.
+        lines.append(f'<text x="536" y="{y+18}" font-family="{MONO}" font-size="14" font-weight="700" fill="{INK}">{esc(row.get("symbol") or "-")}</text>')
         lines.append(f'<text x="566" y="{y+18}" font-family="{MONO}" font-size="13" font-weight="700" fill="{INK}">{esc(row.get("status") or "")}</text>')
 
 
