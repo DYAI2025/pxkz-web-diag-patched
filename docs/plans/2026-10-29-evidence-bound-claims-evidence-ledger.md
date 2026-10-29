@@ -262,3 +262,38 @@ Visual QA signed PASS per case (`validate_pdf_visual_qa.py` rc 0, 9/9). Semantic
 (`no_synthetic_metric_visuals` false) and checks outside the checklist not assessed; `finalize_deliverable_manifest.py`
 records CUSTOMER_RELEASE_BLOCKED for all 9 cases. Record: `reports/customer-pdf-qa-release-5305049.json` (+ per-case
 manifests in `reports/customer-pdf-qa-release-5305049/`). A customer release needs a real audit input.
+
+### Task 8 — release reconciliation (owner brief 2026-10-29)
+Runtime: isolated venv `~/.venvs/pxkz-release` (Python 3.12.11, the pxkz-ebc pins plus playwright 1.64.1 and
+reportlab 5.1.0; Chromium 156 via `PIXELKIEZ_CHROMIUM_PATH`). `run_browser_measurement_evals.py` PASS (8 metrics) and
+`run_chart_template_evals.py` PASS, both previously NOT RUN for missing dependencies. Without
+`DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib` WeasyPrint cannot render and the live claim eval in the release gate
+fails closed (`ran=91 failures=1 errors=1`); every sweep sets it.
+
+CLI usage lines (Step 1): `validate_full_48_active.py <skill-dir>`, `validate_measurement_platform_baseline.py <skill-dir>`,
+`validate_strategic_relevance_v321_preservation.py <skill-dir>`, `run_browser_measurement_evals.py <skill-dir>`
+(no usage string; needs Chromium), `validate_release_gate.py <skill-dir>`, `validate_pipeline_ledger.py <skill-dir>`,
+`package_skill.py [-h] skill_dir [out_dir]`.
+
+Baseline sweep on d95ad75 (50 root-arg scripts): 45 rc 0. Non-zero: `run_paired_release` rc 2 (needs
+`--consumer-skill-dir`, the external voice-architect consumer is not installed) and `validate_paired_release` rc 1
+(declared non-package-blocking); `validate_strategic_relevance_v321_preservation` rc 1
+(`unreported_addition` of this ledger: d95ad75 edited it without a v3.2.1 layer); `validate_release_gate` rc 1 and
+`validate_pipeline_ledger` rc 1 (stale release evidence).
+
+Release contract (`references/release-gate-policy.md` 3-31): packaging rests on the synthetic PDF fixture, visual
+inspection and fail-closed QA creation; the gate code additionally required a customer semantic PASS, which example
+data can no longer produce. The gate now makes two decisions (policy § Two release decisions): `SKILL_PACKAGE_RELEASE`
+on proofs reviewed against the fixed checklist and bound to the live tree; `CUSTOMER_REPORT_RELEASE` PASS only for a
+real audit input built in customer mode, otherwise `BLOCKED_NO_REAL_AUDIT_INPUT`, non-package-blocking. A semantic
+PASS on proof or example data is rejected in both states (this closes the gap that let 746c424 package on a fixture).
+`run_release_gate_mutation_evals.py`: 22 → 45 fail-closed cases; canary (two checks disabled) → exactly those two red.
+
+Swap probe (`metric_refs` reordered or swapped with identical values, 51 real-CLI mutations on two fixtures): levers
+unchanged in every literal case. Proven narrower defect: lever admission (`client_story.contradicted_by_clear_metrics`)
+read the primary metric with `customer_status` and counted `inferred_risk` as assessed, while B4 and the surface gate
+used `customer_reading`; reordering refs that B4 reads alike changed the levers, and one order failed the gate
+(`LEVER_PRIMARY_CLEAR`). Both now call `customer_reading.primary_metric`. `PrimaryMetricOrder`: red 2 FAIL on d95ad75,
+green 4/4; full suite 286 passed. Nine-case build of the fix: 9/9 PDFs and client models byte-identical to the
+reviewed build (plans and bindings differ only by the offline enrichment's `observed_at`, as between 4ab90a9 and
+5305049). Gate, ledger and package results for the frozen candidate: `reports/task8-release-reconciliation.json`.

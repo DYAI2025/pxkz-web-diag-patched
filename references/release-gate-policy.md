@@ -30,6 +30,15 @@ The Skill package release requires:
 
 The Skill may be packaged when it correctly blocks a customer release without exact fonts. It may not claim that a proof-mode PDF using fallback fonts is fully brand-identical or customer-release-ready.
 
+## Two release decisions
+
+`validate_release_gate.py` decides two things separately and never lets one stand in for the other:
+
+- **`SKILL_PACKAGE_RELEASE`** (`skill_package_release` in `reports/release-gate-report.json`): may `skill.zip` be built and installed? Synthetic proofs prove skill function. It needs the proof PDFs of the current tree to be the ones an independent review passed against the fixed probe checklist (`docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md`, record `reports/customer-pdf-qa-release-*.json` rebound to the live tree digest), customer mode refusing every example-data case, and no proof claiming customer readiness or a customer semantic PASS. Proof records carry `proof_semantic_qa: PASS_AGAINST_CHECKLIST`; their `semantic_qa` stays the customer semantic result, which example data cannot pass.
+- **`CUSTOMER_REPORT_RELEASE`** (`customer_report_release`): is a customer report built from a real audit validated? `PASS` needs customer semantic QA on a real audit input built in customer mode (`release_mode: customer`, `data_class: REAL_AUDIT_INPUT`) bound to the live semantic bundle and tree. Without a real audit the state is `BLOCKED_NO_REAL_AUDIT_INPUT`, declared `package_blocking: false` and `customer_release_ready: false`. A semantic PASS on proof or example data is rejected in either state.
+
+A package release therefore never says anything about a customer report. Each customer deliverable still needs its own `validate_deliverable_bundle.py --require-customer-release-ready`.
+
 ## Customer Presentation Quality Gate
 
 Final customer-presentation delivery is non-compensatory. `customer-presentation-quality-report.json` must be `PASS` for the exact final PDF/model/scored-report digest set. `PENDING_QA` is a valid build state but blocks final-delivery claims. Exact fonts remain a separate strict customer-release condition.

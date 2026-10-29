@@ -8,7 +8,7 @@ from typing import Any
 
 from strategic_relevance import evaluate_finding
 from branch_priority import preferred_order
-from customer_status import customer_status
+from customer_reading import metric_reading, primary_metric, registry_defs
 
 REAL_CHARTS = {f"V{i:02d}" for i in range(1, 12)}
 SEVERITY_RANK = {"critical": 0, "high": 1, "medium": 2, "low": 3, "positive": 4}
@@ -268,10 +268,9 @@ def contradicted_by_clear_metrics(report: dict[str, Any], finding: dict[str, Any
     verdict = evaluate_finding(report, finding)
     if verdict.get("evidence_route") != "CORE_METRIC":
         return False
-    metrics = {str(m.get("id")): m for m in report.get("metrics", []) if isinstance(m, dict)}
-    assessed = {str(x) for x in verdict.get("linked_assessed_metrics", [])}
-    linked = [metrics[x] for x in (str(y) for y in finding.get("metric_refs", [])) if x in assessed and x in metrics]
-    return bool(linked) and customer_status(linked[0])["key"] == "CLEAR"
+    # Same primary and same reading as checklist B4 and validate_customer_surface_consistency.py.
+    primary = primary_metric(report, finding)
+    return primary is not None and metric_reading(report, registry_defs(), primary)["key"] == "CLEAR"
 
 
 def select_client_levers(

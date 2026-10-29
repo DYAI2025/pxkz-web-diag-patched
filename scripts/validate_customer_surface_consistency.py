@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from customer_reading import contested_metrics, metric_reading, overlap_blocked, registry_defs  # noqa: E402
+from customer_reading import contested_metrics, metric_reading, overlap_blocked, primary_metric, registry_defs  # noqa: E402
 from customer_status import STATUS_META  # noqa: E402
 
 MATRICES = {"V08_AI_ANSWERABILITY": "question", "V10_TRUST_MATRIX": "signal"}
@@ -81,10 +81,9 @@ def check(report: dict[str, Any], plan: dict[str, Any], model: dict[str, Any], b
 
     # B4: no lever whose primary assessed metric reads "Klar".
     for fid in lever_ids:
-        refs = [str(x) for x in source_findings.get(fid, {}).get("metric_refs", []) or [] if str(x) in reading]
-        assessed = [r for r in refs if metrics[r].get("measurement_class") not in {None, "", "not_assessed", "inferred_risk"}]
-        if assessed and reading[assessed[0]]["key"] == "CLEAR":
-            errors.append(f"LEVER_PRIMARY_CLEAR: {fid} primary metric {assessed[0]} reads Klar")
+        primary = primary_metric(report, source_findings.get(fid, {}))
+        if primary is not None and reading[str(primary.get("id"))]["key"] == "CLEAR":
+            errors.append(f"LEVER_PRIMARY_CLEAR: {fid} primary metric {primary.get('id')} reads Klar")
 
     # B5: no category bar for an area containing a contested metric.
     contested_categories = {str(defs.get(mid, {}).get("category")) for mid in contested_metrics(report) if mid in defs}

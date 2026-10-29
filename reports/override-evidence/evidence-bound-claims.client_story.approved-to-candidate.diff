@@ -1,12 +1,12 @@
 diff --git a/scripts/client_story.py b/scripts/client_story.py
-index 8a7a789..2a0c9a7 100644
+index 8a7a789..db8bb50 100644
 --- a/scripts/client_story.py
 +++ b/scripts/client_story.py
 @@ -8,32 +8,46 @@ from typing import Any
  
  from strategic_relevance import evaluate_finding
  from branch_priority import preferred_order
-+from customer_status import customer_status
++from customer_reading import metric_reading, primary_metric, registry_defs
  
  REAL_CHARTS = {f"V{i:02d}" for i in range(1, 12)}
  SEVERITY_RANK = {"critical": 0, "high": 1, "medium": 2, "low": 3, "positive": 4}
@@ -149,7 +149,7 @@ index 8a7a789..2a0c9a7 100644
      (re.compile(r"\bLighthouse\b", re.I), "technischer Ladezeit-Test"),
      (re.compile(r"Assets,? Caching,? Kompression,? Security-Header", re.I), "Seitendateien, Zwischenspeicherung und Sicherheitsangaben"),
      (re.compile(r"Canonical,? noindex und hreflang", re.I), "Indexierungs- und Sprachsignale"),
-@@ -239,6 +257,23 @@ def confidence_de(value: object) -> str:
+@@ -239,6 +257,22 @@ def confidence_de(value: object) -> str:
      return CONFIDENCE_DE.get(str(value).upper(), str(value).lower() if value else "niedrig")
  
  
@@ -164,16 +164,15 @@ index 8a7a789..2a0c9a7 100644
 +    verdict = evaluate_finding(report, finding)
 +    if verdict.get("evidence_route") != "CORE_METRIC":
 +        return False
-+    metrics = {str(m.get("id")): m for m in report.get("metrics", []) if isinstance(m, dict)}
-+    assessed = {str(x) for x in verdict.get("linked_assessed_metrics", [])}
-+    linked = [metrics[x] for x in (str(y) for y in finding.get("metric_refs", [])) if x in assessed and x in metrics]
-+    return bool(linked) and customer_status(linked[0])["key"] == "CLEAR"
++    # Same primary and same reading as checklist B4 and validate_customer_surface_consistency.py.
++    primary = primary_metric(report, finding)
++    return primary is not None and metric_reading(report, registry_defs(), primary)["key"] == "CLEAR"
 +
 +
  def select_client_levers(
      report: dict[str, Any], max_levers: int = 4, *,
      branch_weights: dict[str, int] | None = None,
-@@ -249,6 +284,7 @@ def select_client_levers(
+@@ -249,6 +283,7 @@ def select_client_levers(
          if isinstance(f, dict)
          and f.get("severity") != "positive"
          and evaluate_finding(report, f)["eligible"]
@@ -181,7 +180,7 @@ index 8a7a789..2a0c9a7 100644
      ]
      findings.sort(key=lambda f: (SEVERITY_RANK.get(str(f.get("severity")), 9), -int(f.get("confidence", 0)), str(f.get("id", ""))))
      # Approved industry priorities reorder only existing evidence-admitted findings
-@@ -289,19 +325,20 @@ def select_client_levers(
+@@ -289,19 +324,20 @@ def select_client_levers(
              selected.append(f)
              seen_categories.add(str(f.get("category", "")))
  

@@ -967,7 +967,7 @@
     {
       "path": "SKILL.md",
       "baseline_sha256": "dd7b983957a1fb16b6b4c5fe72db26a5530c29d91376296826092ccb9b303ccf",
-      "current_sha256": "c35632f0bd1ef07057ffd8d2258598e8585d65803cdca3951ff1bab1dc1507c7",
+      "current_sha256": "6386531e97b3ebcee14a9b455b0595ffe944f1107259aedb6e5049a6367176b4",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1093,7 +1093,7 @@
     {
       "path": "references/release-gate-policy.md",
       "baseline_sha256": "229a2cb13fee3e20905b59d084a9a1306f777fdcc0d59c6fa34e5a0ebaf75500",
-      "current_sha256": "9b29af4294643a61e40e24a08925fb1bfc5c5d4c0f91cf5c16d699cb9a312bfe",
+      "current_sha256": "9dfb16937740903af48939e5227a075c505d9006d75c97b37b2c4a5bc07dd352",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION"
     },
     {
@@ -1207,7 +1207,7 @@
     {
       "path": "scripts/client_story.py",
       "baseline_sha256": "3798a2babca162db109ce7750b324b7e1c993eb1ba48f1ab0afe4bebba230b2d",
-      "current_sha256": "99f2494f6b33c1936993d3a623f2bdadca5f31772b89754b1e486d6db187aea4",
+      "current_sha256": "62873ccd8e1ea84e2ef7f89b43138c3ba27276d2c3a931cbbf6fd5c3627ecd2e",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1280,7 +1280,7 @@
       "path": "scripts/run_release_gate_mutation_evals.py",
       "baseline_sha256": "a4d06f5d6359fc9c6f3ebe73c7f81bf7d7af3b0b1e3c2c0249dfa5938c819d9e",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "c6d487999a269580d335ad739029f891bfd6b6b426dfb95232b41ee611ea1a3c"
+      "current_sha256": "69ec6e18a19663fcc4fd6be0078eedfed9cce6dab260e1c7fc9d194097442e91"
     },
     {
       "path": "scripts/run_visual_architecture_evals.py",
@@ -1357,7 +1357,7 @@
     {
       "path": "scripts/validate_release_gate.py",
       "baseline_sha256": "4be8ea6b3782d72476621c95d25bda2930593c9d43a12c37552b4186b50b2de2",
-      "current_sha256": "74b1089b00cdb1315a3621896a6934eb715582507f8bf5ab487743aae7ac9b6e",
+      "current_sha256": "fed497addc13dfd511b595ea956e3f4caaccee2a88eef25aca044a29b48b4758",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1487,7 +1487,7 @@
     {
       "path": "docs/plans/2026-10-29-evidence-bound-claims-evidence-ledger.md",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "31f1ea5a4823c858b1f4a3532f45aa5556fbda68904fd8c7b5305a51d0e64601"
+      "current_sha256": "5b69541b575cecf1b47d33dca17b10f4a6ad10b6d7bf0b258aa37497af0a51f0"
     },
     {
       "path": "enterprise-skill-patch-order-branch-priority.xml",
@@ -1642,7 +1642,7 @@
     {
       "path": "scripts/customer_reading.py",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "1a5bae4673e801c9739bdb9e22da636e63bc06b668de695daec32333e9f64b86"
+      "current_sha256": "252bdad9697e5b3cfdb4e1e30fbe6543538c2b4d5cb1d798963964a325ed2f93"
     },
     {
       "path": "scripts/evidence_method_labels.py",
@@ -1747,7 +1747,7 @@
     {
       "path": "scripts/validate_customer_surface_consistency.py",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "a3d9db967655aa978aca8f8ab484fd7584e4e0c94849d7f3d12b1b05d8fb9f59"
+      "current_sha256": "78709e7bb98893a7671d8425bcdf62c00b708bff621b018c3a1b3b059d49ec21"
     },
     {
       "path": "scripts/validate_full_48_active.py",
@@ -1807,7 +1807,7 @@
     {
       "path": "tests/test_evidence_bound_claims.py",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "250a6eed4535ab33c09a1c0a9c48c6ed72da7cb40f8484395cb7fc3f45a0d903"
+      "current_sha256": "5880320e8fc66df63386a0fead3a157a19bc6f90cfef0c248ff21f5c6c5de5ce"
     },
     {
       "path": "tests/test_legacy_oracles.py",
@@ -1884,7 +1884,7 @@
     "reason": "ACTIVE_CORE_MEASUREMENT_MIGRATION",
     "protected_registry_and_scorer_unchanged": true
   },
-  "latest_patch": "EVIDENCE_BOUND_CLAIMS_PATCH",
+  "latest_patch": "RELEASE_RECONCILIATION_PATCH",
   "latest_patch_note": "Hash-bound preservation manifest carried forward by provenance layers (user-authorized 2026-10-28); baseline hashes remain unchanged.",
   "patch_layers": [
     {
@@ -2901,6 +2901,57 @@
           "path": "tests/test_priority_pipeline.py",
           "previous_sha256": "8cd1b24b9a6933affd147282f8821d41bb52b40f3e6cbe4addd463dfc3ddd5ba",
           "current_sha256": "83497f9fed2710445b7cf69c6ba39e431d74c549f1da899907aa0acf09e4726a"
+        }
+      ]
+    },
+    {
+      "layer": "RELEASE_RECONCILIATION_PATCH",
+      "source": "Task 8 release reconciliation 2026-10-29 (owner brief): SKILL_PACKAGE_RELEASE vs CUSTOMER_REPORT_RELEASE in the release gate, shared B4 primary metric for lever admission (swap probe), evidence ledger of d95ad75",
+      "transitions": [
+        {
+          "path": "SKILL.md",
+          "previous_sha256": "c35632f0bd1ef07057ffd8d2258598e8585d65803cdca3951ff1bab1dc1507c7",
+          "current_sha256": "6386531e97b3ebcee14a9b455b0595ffe944f1107259aedb6e5049a6367176b4"
+        },
+        {
+          "path": "docs/plans/2026-10-29-evidence-bound-claims-evidence-ledger.md",
+          "previous_sha256": "31f1ea5a4823c858b1f4a3532f45aa5556fbda68904fd8c7b5305a51d0e64601",
+          "current_sha256": "5b69541b575cecf1b47d33dca17b10f4a6ad10b6d7bf0b258aa37497af0a51f0"
+        },
+        {
+          "path": "references/release-gate-policy.md",
+          "previous_sha256": "9b29af4294643a61e40e24a08925fb1bfc5c5d4c0f91cf5c16d699cb9a312bfe",
+          "current_sha256": "9dfb16937740903af48939e5227a075c505d9006d75c97b37b2c4a5bc07dd352"
+        },
+        {
+          "path": "scripts/client_story.py",
+          "previous_sha256": "99f2494f6b33c1936993d3a623f2bdadca5f31772b89754b1e486d6db187aea4",
+          "current_sha256": "62873ccd8e1ea84e2ef7f89b43138c3ba27276d2c3a931cbbf6fd5c3627ecd2e"
+        },
+        {
+          "path": "scripts/customer_reading.py",
+          "previous_sha256": "1a5bae4673e801c9739bdb9e22da636e63bc06b668de695daec32333e9f64b86",
+          "current_sha256": "252bdad9697e5b3cfdb4e1e30fbe6543538c2b4d5cb1d798963964a325ed2f93"
+        },
+        {
+          "path": "scripts/run_release_gate_mutation_evals.py",
+          "previous_sha256": "c6d487999a269580d335ad739029f891bfd6b6b426dfb95232b41ee611ea1a3c",
+          "current_sha256": "69ec6e18a19663fcc4fd6be0078eedfed9cce6dab260e1c7fc9d194097442e91"
+        },
+        {
+          "path": "scripts/validate_customer_surface_consistency.py",
+          "previous_sha256": "a3d9db967655aa978aca8f8ab484fd7584e4e0c94849d7f3d12b1b05d8fb9f59",
+          "current_sha256": "78709e7bb98893a7671d8425bcdf62c00b708bff621b018c3a1b3b059d49ec21"
+        },
+        {
+          "path": "scripts/validate_release_gate.py",
+          "previous_sha256": "74b1089b00cdb1315a3621896a6934eb715582507f8bf5ab487743aae7ac9b6e",
+          "current_sha256": "fed497addc13dfd511b595ea956e3f4caaccee2a88eef25aca044a29b48b4758"
+        },
+        {
+          "path": "tests/test_evidence_bound_claims.py",
+          "previous_sha256": "250a6eed4535ab33c09a1c0a9c48c6ed72da7cb40f8484395cb7fc3f45a0d903",
+          "current_sha256": "5880320e8fc66df63386a0fead3a157a19bc6f90cfef0c248ff21f5c6c5de5ce"
         }
       ]
     }

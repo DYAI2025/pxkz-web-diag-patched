@@ -19,7 +19,7 @@
    "path": "scripts/client_story.py",
    "baseline_sha256": "3798a2babca162db109ce7750b324b7e1c993eb1ba48f1ab0afe4bebba230b2d",
    "previous_sha256": "fd43e018fca5269c6178ab15ad4de23d0144fb2021338f827349e145e3f6abf7",
-   "current_sha256": "99f2494f6b33c1936993d3a623f2bdadca5f31772b89754b1e486d6db187aea4",
+   "current_sha256": "62873ccd8e1ea84e2ef7f89b43138c3ba27276d2c3a931cbbf6fd5c3627ecd2e",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   },
   {

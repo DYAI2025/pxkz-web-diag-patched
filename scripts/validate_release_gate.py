@@ -65,6 +65,34 @@ def validate_reports(root: Path, report: dict, paired: dict, semantic: dict) -> 
     elif status != "BLOCKED_DEPENDENCY_NON_PACKAGE_BLOCKING":
         errors.append("cross-skill dependency status invalid")
 
+    errors.extend(validate_customer_report_release(root, report, semantic))
+    return errors
+
+
+def validate_customer_report_release(root: Path, report: dict, semantic: dict) -> list[str]:
+    """CUSTOMER_REPORT_RELEASE: a customer PDF built from a real audit, never a proof (release-gate-policy.md).
+
+    PASS needs customer semantic QA on a real audit input built in customer mode, bound to the live semantic bundle
+    and tree. BLOCKED_NO_REAL_AUDIT_INPUT is a valid state that does not block the skill package, but then nothing
+    may claim customer readiness, and no semantic PASS may come from proof or example data.
+    """
+    errors: list[str] = []
+    decision = report.get("customer_report_release") or {}
+    status = decision.get("status")
+    real = semantic.get("release_mode") == "customer" and semantic.get("data_class") == REAL_AUDIT_INPUT
+    if not real and "PASS" in {semantic.get("status"), semantic.get("semantic_qa_validation")}:
+        errors.append("customer semantic PASS recorded on proof or example data")
+    if status == CUSTOMER_REPORT_BLOCKED:
+        if decision.get("package_blocking") is not False:
+            errors.append("blocked customer report release must be declared non-package-blocking")
+        if decision.get("customer_release_ready") is not False:
+            errors.append("blocked customer report release cannot be customer-release-ready")
+        return errors
+    if status != "PASS":
+        errors.append("customer report release status invalid")
+        return errors
+    if not real:
+        errors.append("customer report release PASS without a real audit input built in customer mode")
     gate = report.get("customer_semantic_gate") or {}
     current = semantic_bundle_digest(root)
     if gate.get("status") != "PASS":
@@ -85,7 +113,70 @@ def validate_reports(root: Path, report: dict, paired: dict, semantic: dict) -> 
     return errors
 
 
+def validate_skill_package_release(root: Path, report: dict, qa: dict, proofs: dict[str, dict]) -> list[str]:
+    """SKILL_PACKAGE_RELEASE: synthetic proofs prove skill function, never a customer result.
+
+    The proof PDFs must be the ones an independent review passed against the fixed probe checklist, the QA record
+    must be rebound to the live tree, customer mode must have refused every example-data case, and no proof may
+    claim customer readiness or a customer semantic PASS.
+    """
+    errors: list[str] = []
+    build = tree_digest(root)
+    decision = report.get("skill_package_release") or {}
+    if decision.get("status") != "PASS":
+        errors.append("skill package release is not PASS")
+    if decision.get("artifact_digest") != build:
+        errors.append("skill package release not bound to the current build artifact digest")
+    if qa.get("status") != PROOF_QA_PASS:
+        errors.append("proof QA record is not PASS against the fixed checklist")
+    if qa.get("artifact_digest") != build:
+        errors.append("proof QA record not bound to the current build artifact digest")
+    if qa.get("unadjudicated"):
+        errors.append("proof QA record has unadjudicated review items")
+    rounds = (qa.get("independent_review") or {}).get("rounds") or [{}]
+    if rounds[-1].get("fail") != 0 or rounds[-1].get("confirmed"):
+        errors.append("last independent proof review round has confirmed defects")
+    checklist = root / PROOF_CHECKLIST
+    if not checklist.is_file() or qa.get("yardstick_sha256") != hashlib.sha256(checklist.read_bytes()).hexdigest():
+        errors.append("proof QA yardstick differs from the fixed probe checklist")
+    cases = [c for c in qa.get("cases") or [] if isinstance(c, dict)]
+    if not cases:
+        errors.append("proof QA record lists no cases")
+    for case in cases:
+        name = case.get("case")
+        if case.get("release_mode") != "proof":
+            errors.append(f"proof case {name} was not built in proof mode")
+        if not str(case.get("visual_qa", "")).startswith("PASS"):
+            errors.append(f"proof case {name} visual QA is not PASS")
+        if case.get("deliverable_status") != "CUSTOMER_RELEASE_BLOCKED":
+            errors.append(f"proof case {name} must stay CUSTOMER_RELEASE_BLOCKED")
+    refusals = [r for r in qa.get("customer_mode_refusals") or [] if isinstance(r, dict)]
+    if not refusals or any(r.get("blocked") is not True or r.get("pdf_written") is not False for r in refusals):
+        errors.append("customer mode did not refuse every example-data case")
+    reviewed = {c.get("pdf_sha256") for c in cases}
+    for label, proof in proofs.items():
+        if proof.get("release_mode") != "proof":
+            errors.append(f"{label} proof was not built in proof mode")
+        if proof.get("customer_release_ready") is not False:
+            errors.append(f"{label} proof claims customer release readiness")
+        if proof.get("semantic_qa") == "PASS":
+            errors.append(f"{label} proof claims a customer semantic PASS on example data")
+        if proof.get("visual_qa") != "PASS" or proof.get("proof_semantic_qa") != PROOF_SEMANTIC_PASS:
+            errors.append(f"{label} proof is not visual PASS and PASS against the fixed checklist")
+        if proof.get("pdf_sha256") not in reviewed:
+            errors.append(f"{label} proof PDF is not one of the reviewed proof PDFs")
+    return errors
+
+
 PACKAGE_FONT_POLICY = "PACKAGE_BUNDLED_MANIFEST_PINNED"
+
+# Two release decisions (release-gate-policy.md): the skill package is proven on synthetic proofs; a customer report
+# needs a real audit input. Proof QA is judged against the fixed probe checklist.
+REAL_AUDIT_INPUT = "REAL_AUDIT_INPUT"
+CUSTOMER_REPORT_BLOCKED = "BLOCKED_NO_REAL_AUDIT_INPUT"
+PROOF_QA_PASS = "PROOF_QA_PASS_AGAINST_CHECKLIST_CUSTOMER_RELEASE_BLOCKED"
+PROOF_SEMANTIC_PASS = "PASS_AGAINST_CHECKLIST"
+PROOF_CHECKLIST = "docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md"
 
 
 # Mirrors visualization_policy.CUSTOMER_FORBIDDEN_TEMPLATES for recorded proof evidence.
@@ -283,7 +374,7 @@ def main(argv: list[str]) -> int:
         errors.append("approved visualization gallery incomplete")
     if realistic.get("status") != "PASS" or not 8 <= int(realistic.get("page_count", 0)) <= 12 or not 4 <= int(realistic.get("selected_visual_count", 0)) <= 7:
         errors.append("realistic rendered presentation QA incomplete")
-    if realistic.get("visual_qa") != "PASS" or realistic.get("semantic_qa") != "PASS": errors.append("realistic rendered QA did not pass")
+    # Proof QA (visual + fixed checklist) and the customer-semantic boundary are checked in validate_skill_package_release.
     if realistic.get("internal_metric_count") != 48: errors.append("realistic internal report is not complete")
     if realistic.get("customer_release_ready") is not False and not exact: errors.append("realistic proof incorrectly claims exact-font customer release")
     for label, proof in (("realistic", realistic), ("strategic", strategic_proof), ("measurement platform", platform_proof)):
@@ -319,7 +410,7 @@ def main(argv: list[str]) -> int:
         errors.append("strategic relevance required checks incomplete")
     if quality_eval.get("status") != "PASS":
         errors.append("customer presentation quality regression failed")
-    if quality_proof.get("status") != "PASS" or quality_proof.get("final_state", {}).get("quality_status") != "PASS":
+    if quality_proof.get("status") != "PASS" or quality_proof.get("final_state", {}).get("quality_status") != "PROOF_PASS_CUSTOMER_BLOCKED":
         errors.append("customer presentation quality rendered proof failed")
     if quality_proof.get("initial_state", {}).get("quality_status") != "PENDING_QA" or quality_proof.get("initial_state", {}).get("delivery_allowed") is not False:
         errors.append("quality proof does not demonstrate fail-closed PENDING_QA draft state")
@@ -332,8 +423,6 @@ def main(argv: list[str]) -> int:
         errors.append("customer score projection policy not reconciled")
     if strategic_proof.get("status") != "PASS" or strategic_proof.get("guardrails") != "PASS":
         errors.append("strategic customer proof failed")
-    if strategic_proof.get("visual_qa") != "PASS" or strategic_proof.get("semantic_qa") != "PASS":
-        errors.append("strategic proof rendered QA failed")
     if strategic_proof.get("top_lever_count") != 4 or not 4 <= int(strategic_proof.get("selected_visual_count", 0)) <= 7:
         errors.append("strategic proof story contract failed")
     if strategic_proof.get("internal_metric_count") != 48:
@@ -354,6 +443,16 @@ def main(argv: list[str]) -> int:
         errors.extend(validate_reports(root, report, paired, semantic))
     except Exception as exc:
         errors.append(f"cross-skill/semantic evidence unavailable: {exc}")
+    try:
+        record = str((report.get("skill_package_release") or {}).get("proof_qa_record") or "")
+        if not record.startswith("reports/customer-pdf-qa-release-"):
+            raise ValueError("skill_package_release.proof_qa_record must name a reports/customer-pdf-qa-release-*.json record")
+        proof_qa = json.loads((root / record).read_text(encoding="utf-8"))
+        proofs = {"realistic": realistic, "strategic": strategic_proof, "quality": quality_proof.get("final_state") or {},
+                  "active core render": active_render}
+        errors.extend(validate_skill_package_release(root, report, proof_qa, proofs))
+    except Exception as exc:
+        errors.append(f"skill package proof evidence unavailable: {exc}")
 
     try:
         current = tree_digest(root)

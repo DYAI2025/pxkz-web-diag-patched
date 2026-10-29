@@ -879,6 +879,78 @@ class RealDataWording(unittest.TestCase):
         self.assertEqual(measurement_highlights(self.real_enrichment(with_period=False)), [])
 
 
+def order_build(report: dict, tmp: Path, name: str) -> tuple[list[str], subprocess.CompletedProcess]:
+    """Real CLIs: score -> plan -> model (+bindings) -> surface-consistency gate. Returns (lever ids, gate run)."""
+    scored = scored_from(report, tmp, f"{name}.scored")
+    plan, model, bind = tmp / f"{name}.plan.json", tmp / f"{name}.model.json", tmp / f"{name}.bindings.json"
+    for cmd in (("scripts/build_visualization_plan.py", str(scored), str(plan)),
+                ("scripts/build_client_report_model.py", str(scored), str(model), "--visual-plan", str(plan),
+                 "--claim-bindings-out", str(bind))):
+        result = run(*cmd)
+        assert result.returncode == 0, result.stdout + result.stderr
+    gate = run("scripts/validate_customer_surface_consistency.py", str(scored), str(plan), str(model), str(bind))
+    return [f["id"] for f in load(model)["findings"]], gate
+
+
+def order_variant(refs: list[str], *, inferred_perf01: bool = False) -> dict:
+    report = load(FIXTURE)
+    if inferred_perf01:
+        for m in report["metrics"]:
+            if m["id"] == "PERF-01":  # an unscored inferred risk, as the scoring contract defines it
+                m.update({"measurement_class": "inferred_risk", "status": "not_assessed", "score": None})
+    next(f for f in report["findings"] if f["id"] == "F-001")["metric_refs"] = refs
+    return report
+
+
+class PrimaryMetricOrder(unittest.TestCase):
+    """Task 8 swap probe: lever admission and gate B4 read the same primary metric the same way.
+
+    The selector used to read the first ref outside not_assessed with customer_status, while B4 and the gate read
+    the first ref outside not_assessed/inferred_risk with customer_reading, so reordering refs that B4 treats alike
+    changed the levers, and one order failed the gate. Both now ask customer_reading.primary_metric.
+    """
+
+    def test_present_presence_check_first_does_not_suppress_the_lever(self) -> None:
+        # TRUST-01 is presence_only at 100: B1 reads it "(vorhanden) · Nicht belastbar bewertet", never "Klar".
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            first, gate1 = order_build(order_variant(["TRUST-01", "UX-02"]), tmp, "presence_first")
+            second, gate2 = order_build(order_variant(["UX-02", "TRUST-01"]), tmp, "presence_second")
+        self.assertEqual(first, second)
+        self.assertIn("F-001", first)
+        self.assertEqual((gate1.returncode, gate2.returncode), (0, 0), gate1.stdout + gate2.stdout)
+
+    def test_inferred_risk_ref_is_never_the_primary(self) -> None:
+        # The first assessed metric is TRUST-03 (Klar) in both orders, so F-001 is rejected in both orders.
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            first, gate1 = order_build(order_variant(["PERF-01", "TRUST-03"], inferred_perf01=True), tmp, "inferred_first")
+            second, gate2 = order_build(order_variant(["TRUST-03", "PERF-01"], inferred_perf01=True), tmp, "inferred_second")
+        self.assertEqual(first, second)
+        self.assertNotIn("F-001", first)
+        self.assertEqual((gate1.returncode, gate2.returncode), (0, 0), gate1.stdout + gate2.stdout)
+
+    def test_documented_primary_rule_still_rejects_a_clear_primary(self) -> None:  # guard: B4 stays effective
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            action_first, _ = order_build(order_variant(["UX-02", "TRUST-03"]), tmp, "action_first")
+            clear_first, gate = order_build(order_variant(["TRUST-03", "UX-02"]), tmp, "clear_first")
+        self.assertIn("F-001", action_first)
+        self.assertNotIn("F-001", clear_first)
+        self.assertEqual(gate.returncode, 0, gate.stdout)
+
+    def test_reversing_every_finding_keeps_the_levers(self) -> None:  # guard: identical readings, any order
+        reversed_report = load(FIXTURE)
+        for f in reversed_report["findings"]:
+            f["metric_refs"] = list(reversed(f.get("metric_refs", [])))
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            base, _ = order_build(load(FIXTURE), tmp, "base")
+            mutated, gate = order_build(reversed_report, tmp, "reversed")
+        self.assertEqual(base, mutated)
+        self.assertEqual(gate.returncode, 0, gate.stdout)
+
+
 class MutationCanary(unittest.TestCase):
     """The claim eval must go red when the lab-to-device rewrite returns: proves the gate can fail."""
 

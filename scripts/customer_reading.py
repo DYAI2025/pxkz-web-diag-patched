@@ -50,6 +50,22 @@ def metric_reading(report: dict[str, Any], defs: dict[str, dict[str, Any]], metr
             "contested": contested}
 
 
+PRIMARY_UNASSESSED = frozenset({None, "", "not_assessed", "inferred_risk"})
+
+
+def primary_metric(report: dict[str, Any], finding: dict[str, Any]) -> dict[str, Any] | None:
+    """Checklist B4: a finding's primary metric is its first cited metric outside not_assessed/inferred_risk.
+
+    Lever admission and the surface-consistency gate both ask this, so ref order cannot pick different metrics.
+    """
+    metrics = {str(m.get("id")): m for m in report.get("metrics", []) if isinstance(m, dict)}
+    for ref in finding.get("metric_refs", []) or []:
+        metric = metrics.get(str(ref))
+        if metric is not None and metric.get("measurement_class") not in PRIMARY_UNASSESSED:
+            return metric
+    return None
+
+
 def readings(report: dict[str, Any], defs: dict[str, dict[str, Any]] | None = None) -> dict[str, dict[str, Any]]:
     defs = defs if defs is not None else registry_defs()
     return {str(m.get("id")): metric_reading(report, defs, m) for m in report.get("metrics", []) if isinstance(m, dict)}
