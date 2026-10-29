@@ -189,3 +189,4 @@ Consequence recorded: the bare branch-priority tie report under its synthetic pr
 | 12 eval suites | 0 | all PASS (legal projection eval updated to the decision, rows matched by metric_ref) |
 | synthetic-report plan diff vs cd8689d | — | only V03 subtitle and TRUST-01/02 rows changed; lever ids unchanged |
 | oracles / baseline / v3.2.1 / quick_validate | 0 | amendment in place (plan 8f23ac34…→ac9dc88e…) / PASS / PASS / PASS 319 files |
+Follow-up: the frozen build of 339518f failed at `validate_report_input.py` ("VIZ-001 references unknown finding F-002") because the legacy `visualizations`/`options` still referenced replaced findings. Red: the fixture test now runs `validate_report_input.py` (rc 1, same message). Green: the fixture carries its own `options` and empty `visualizations`; the working-tree nine-case build returns rc 0 (gateway invariant True, no other identical PDFs).

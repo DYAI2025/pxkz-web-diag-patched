@@ -1471,7 +1471,7 @@
     {
       "path": "docs/plans/2026-10-29-evidence-bound-claims-evidence-ledger.md",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "875072ed25477dcf39ee9180c721198daa931568d999cc0ab248f3fb8d873432"
+      "current_sha256": "8f51fb006b0076bb386be138795995e7eb14eb52986b57cac7b984003439f45c"
     },
     {
       "path": "enterprise-skill-patch-order-branch-priority.xml",
@@ -1481,7 +1481,7 @@
     {
       "path": "evals/fixtures/active-positive-consistent-findings.v1.json",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "3cd0227ad1fb8844191a76457e69c451a5912cede7897132ca1e566255a47d0b"
+      "current_sha256": "5bbf359fb50051302bd6b1471b3cc600edabf6e62eb15f586b61e9a7348ea4cb"
     },
     {
       "path": "evals/fixtures/branch-priority-catalog.SYNTHETIC.json",
@@ -1656,7 +1656,7 @@
     {
       "path": "scripts/run_customer_release_cases.py",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "94196667064d75592e4539428c5e1df9e82e4602a1c0dc6e06ddd6e5f4b589ff"
+      "current_sha256": "7f2dfc210008a584b51d7a7f625241244d1b5972b9c49c49d132d00794af64f4"
     },
     {
       "path": "scripts/run_evidence_bound_claim_evals.py",
@@ -1676,7 +1676,7 @@
     {
       "path": "scripts/run_legal_customer_projection_evals.py",
       "reason": "INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "cfaf52f74f50cc818ca496c472d99e289e39b43cc84f5136f9859e2380a42cbd"
+      "current_sha256": "0bad44e7e773b8c2f389fcbd016f2b1ef72a3d71b5b0d6eee280afba5c90db32"
     },
     {
       "path": "scripts/run_strategic_relevance_evals.py",
@@ -1781,7 +1781,7 @@
     {
       "path": "tests/test_evidence_bound_claims.py",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "12790fb92584e66c0db9a2d20eb765f06089010bc2b410d3220c0907be0023b8"
+      "current_sha256": "011cfd81302c813526a5f3deb340ef9b9b9589457ed19cefd90ddb9c2a550e47"
     },
     {
       "path": "tests/test_legacy_oracles.py",
@@ -2719,12 +2719,12 @@
         {
           "path": "docs/plans/2026-10-29-evidence-bound-claims-evidence-ledger.md",
           "previous_sha256": null,
-          "current_sha256": "875072ed25477dcf39ee9180c721198daa931568d999cc0ab248f3fb8d873432"
+          "current_sha256": "8f51fb006b0076bb386be138795995e7eb14eb52986b57cac7b984003439f45c"
         },
         {
           "path": "evals/fixtures/active-positive-consistent-findings.v1.json",
           "previous_sha256": null,
-          "current_sha256": "3cd0227ad1fb8844191a76457e69c451a5912cede7897132ca1e566255a47d0b"
+          "current_sha256": "5bbf359fb50051302bd6b1471b3cc600edabf6e62eb15f586b61e9a7348ea4cb"
         },
         {
           "path": "evals/fixtures/golden/legacy-oracles.v1.json",
@@ -2774,7 +2774,7 @@
         {
           "path": "scripts/run_customer_release_cases.py",
           "previous_sha256": null,
-          "current_sha256": "94196667064d75592e4539428c5e1df9e82e4602a1c0dc6e06ddd6e5f4b589ff"
+          "current_sha256": "7f2dfc210008a584b51d7a7f625241244d1b5972b9c49c49d132d00794af64f4"
         },
         {
           "path": "scripts/run_evidence_bound_claim_evals.py",
@@ -2784,7 +2784,7 @@
         {
           "path": "scripts/run_legal_customer_projection_evals.py",
           "previous_sha256": "24f45ca0ac6bc4be4d68315a3fe82e726fb49b4bbc5138c1819399be9f53aaa2",
-          "current_sha256": "cfaf52f74f50cc818ca496c472d99e289e39b43cc84f5136f9859e2380a42cbd"
+          "current_sha256": "0bad44e7e773b8c2f389fcbd016f2b1ef72a3d71b5b0d6eee280afba5c90db32"
         },
         {
           "path": "scripts/svg_chart_renderer.py",
@@ -2824,7 +2824,7 @@
         {
           "path": "tests/test_evidence_bound_claims.py",
           "previous_sha256": null,
-          "current_sha256": "12790fb92584e66c0db9a2d20eb765f06089010bc2b410d3220c0907be0023b8"
+          "current_sha256": "011cfd81302c813526a5f3deb340ef9b9b9589457ed19cefd90ddb9c2a550e47"
         },
         {
           "path": "tests/test_legal_trust_boundary.py",

@@ -598,7 +598,7 @@ ACTIVE_FINDINGS = ROOT / "evals/fixtures/active-positive-consistent-findings.v1.
 def active_positive_scored(tmp: Path) -> Path:
     """The active-positive release case: consistent findings on the full-48 fixture execution (example data)."""
     report, fx = load(FIXTURE), load(ACTIVE_FINDINGS)
-    for key in ("findings", "roadmap", "executive_summary"):
+    for key in ("findings", "roadmap", "options", "visualizations", "executive_summary"):
         report[key] = fx[key]
     src, mat = tmp / "active.input.json", tmp / "active.materialized.json"
     dump(src, report)
@@ -684,6 +684,9 @@ class ReviewRoundThree(ReviewRoundOne):
             scored = active_positive_scored(tmp)
             report = load(scored)
             plan = build_plan(scored, tmp)
+            # The full deliverable build validates the report input first: no reference to a replaced finding may remain.
+            check = run("scripts/validate_report_input.py", str(scored))
+            self.assertEqual(check.returncode, 0, check.stdout + check.stderr)
         metrics = {m["id"]: m for m in report["metrics"]}
         self.assertEqual(len(plan["top_levers"]), 4)
         for f in report["findings"]:

@@ -134,7 +134,7 @@ def main(argv: list[str]) -> int:
     # (the legacy synthetic findings contradict those metrics, e.g. "next step unclear" next to UX-02 = 100).
     consistent = json.loads((fix / "active-positive-consistent-findings.v1.json").read_text(encoding="utf-8"))
     active_input = json.loads((fix / "synthetic-report.json").read_text(encoding="utf-8"))
-    for key in ("findings", "roadmap", "executive_summary"):
+    for key in ("findings", "roadmap", "options", "visualizations", "executive_summary"):
         active_input[key] = consistent[key]
     active_src = out / "active.input.json"
     write(active_src, active_input)

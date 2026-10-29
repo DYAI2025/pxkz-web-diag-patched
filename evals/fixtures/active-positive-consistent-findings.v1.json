@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "purpose": "Consistent findings for the active-positive release case: every finding cites only metrics of the full-48 fixture execution whose status supports it (problem findings cite weak metrics, positive findings cite strong ones) and carries that execution's evidence ids. Replaces the legacy synthetic-report findings, roadmap and executive summary before materialization. Example data, never a customer result.",
+  "purpose": "Consistent findings for the active-positive release case: every finding cites only metrics of the full-48 fixture execution whose status supports it (problem findings cite weak metrics, positive findings cite strong ones) and carries that execution's evidence ids. Replaces the legacy synthetic-report findings, roadmap, options, visualizations and executive summary before materialization. Example data, never a customer result.",
   "findings": [
     {
       "id": "F-101",
@@ -377,6 +377,39 @@
       ]
     }
   ],
+  "options": [
+    {
+      "route": "monitor",
+      "evidence_basis": [
+        "F-107",
+        "F-108"
+      ]
+    },
+    {
+      "route": "maintenance",
+      "evidence_basis": [
+        "F-107",
+        "F-108"
+      ]
+    },
+    {
+      "route": "targeted_modernization",
+      "evidence_basis": [
+        "F-101",
+        "F-102",
+        "F-103",
+        "F-104"
+      ]
+    },
+    {
+      "route": "redesign",
+      "evidence_basis": [
+        "F-101",
+        "F-104"
+      ]
+    }
+  ],
+  "visualizations": [],
   "executive_summary": {
     "overall_status": "needs_action",
     "decision": "Die Website ist erreichbar und klar gegliedert. Die größten Hebel liegen im Anfrageweg, in der Seitenlast, in der Struktur für Hilfsmittel und in der Sichtbarkeit beim Firmennamen.",
