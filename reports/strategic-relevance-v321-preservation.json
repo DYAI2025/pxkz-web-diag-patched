@@ -1093,7 +1093,7 @@
     {
       "path": "references/release-gate-policy.md",
       "baseline_sha256": "229a2cb13fee3e20905b59d084a9a1306f777fdcc0d59c6fa34e5a0ebaf75500",
-      "current_sha256": "e04d641a9ce257bbb566cc01fcf9c77c1961ba7266f9d52adcf37683808c5d25",
+      "current_sha256": "5946862ea8e4e0b869daa2bbf7b0a948837afdabf5276284f7748f7ab73f4d83",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION"
     },
     {
@@ -1280,7 +1280,7 @@
       "path": "scripts/run_release_gate_mutation_evals.py",
       "baseline_sha256": "a4d06f5d6359fc9c6f3ebe73c7f81bf7d7af3b0b1e3c2c0249dfa5938c819d9e",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "446a0ea2abe8d6cf86e35710a455b3f760727b6fa39bf362c41139c26b03e468"
+      "current_sha256": "4b1a019b0db1623033ad51d93f67d5e975a8242e5ae2a0158c9130931cea5723"
     },
     {
       "path": "scripts/run_visual_architecture_evals.py",
@@ -1357,7 +1357,7 @@
     {
       "path": "scripts/validate_release_gate.py",
       "baseline_sha256": "4be8ea6b3782d72476621c95d25bda2930593c9d43a12c37552b4186b50b2de2",
-      "current_sha256": "e9e606f29acc7b44a694e615e72b6d16187439b9934d9af53d6adf7781c56d0f",
+      "current_sha256": "a01c22f5bee045a28ffc70cdd1bf53926fcec475b62e3cb32cd026007021c98f",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + ACTIVE_CORE_MEASUREMENT_MIGRATION + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1487,7 +1487,7 @@
     {
       "path": "docs/plans/2026-10-29-evidence-bound-claims-evidence-ledger.md",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "96d7ea3e62e067e3bd31032aebd55635a859d139a020359488dc0e45e99706b6"
+      "current_sha256": "e3540b345e2aaceac2fdf4f0d94164b2ee439a47ab1e9c2d821a9d7d9c7b6ef1"
     },
     {
       "path": "enterprise-skill-patch-order-branch-priority.xml",
@@ -1642,7 +1642,7 @@
     {
       "path": "scripts/customer_reading.py",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "aa6f5d730471bc61c614d1322b692db00c28fe0e664dca67db21679ee3b7b583"
+      "current_sha256": "100b84b668d0cc5be48466a0ab2ba9429efd01eb2b0326e2d7a025ec11a07f8d"
     },
     {
       "path": "scripts/evidence_method_labels.py",
@@ -2916,12 +2916,12 @@
         {
           "path": "docs/plans/2026-10-29-evidence-bound-claims-evidence-ledger.md",
           "previous_sha256": "31f1ea5a4823c858b1f4a3532f45aa5556fbda68904fd8c7b5305a51d0e64601",
-          "current_sha256": "96d7ea3e62e067e3bd31032aebd55635a859d139a020359488dc0e45e99706b6"
+          "current_sha256": "e3540b345e2aaceac2fdf4f0d94164b2ee439a47ab1e9c2d821a9d7d9c7b6ef1"
         },
         {
           "path": "references/release-gate-policy.md",
           "previous_sha256": "9b29af4294643a61e40e24a08925fb1bfc5c5d4c0f91cf5c16d699cb9a312bfe",
-          "current_sha256": "e04d641a9ce257bbb566cc01fcf9c77c1961ba7266f9d52adcf37683808c5d25"
+          "current_sha256": "5946862ea8e4e0b869daa2bbf7b0a948837afdabf5276284f7748f7ab73f4d83"
         },
         {
           "path": "scripts/client_story.py",
@@ -2931,12 +2931,12 @@
         {
           "path": "scripts/customer_reading.py",
           "previous_sha256": "1a5bae4673e801c9739bdb9e22da636e63bc06b668de695daec32333e9f64b86",
-          "current_sha256": "aa6f5d730471bc61c614d1322b692db00c28fe0e664dca67db21679ee3b7b583"
+          "current_sha256": "100b84b668d0cc5be48466a0ab2ba9429efd01eb2b0326e2d7a025ec11a07f8d"
         },
         {
           "path": "scripts/run_release_gate_mutation_evals.py",
           "previous_sha256": "c6d487999a269580d335ad739029f891bfd6b6b426dfb95232b41ee611ea1a3c",
-          "current_sha256": "446a0ea2abe8d6cf86e35710a455b3f760727b6fa39bf362c41139c26b03e468"
+          "current_sha256": "4b1a019b0db1623033ad51d93f67d5e975a8242e5ae2a0158c9130931cea5723"
         },
         {
           "path": "scripts/validate_customer_surface_consistency.py",
@@ -2946,7 +2946,7 @@
         {
           "path": "scripts/validate_release_gate.py",
           "previous_sha256": "74b1089b00cdb1315a3621896a6934eb715582507f8bf5ab487743aae7ac9b6e",
-          "current_sha256": "e9e606f29acc7b44a694e615e72b6d16187439b9934d9af53d6adf7781c56d0f"
+          "current_sha256": "a01c22f5bee045a28ffc70cdd1bf53926fcec475b62e3cb32cd026007021c98f"
         },
         {
           "path": "tests/test_evidence_bound_claims.py",

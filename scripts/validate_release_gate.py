@@ -143,7 +143,8 @@ def validate_gate_statuses(report: dict) -> list[str]:
     if report.get("anti_confabulation_gate", {}).get("status") != "PASS": errors.append("anti-confabulation gate failed")
     if report.get("anti_confabulation_gate", {}).get("blocked_claims"): errors.append("blocked_claims must be empty")
     syco = report.get("anti_sycophancy", {})
-    if not isinstance(syco.get("score"), int) or syco["score"] >= syco.get("threshold", 3): errors.append("anti-sycophancy threshold failed")
+    if type(syco.get("score")) is not int or not 0 <= syco["score"] < ANTI_SYCOPHANCY_THRESHOLD or syco.get("threshold") != ANTI_SYCOPHANCY_THRESHOLD:
+        errors.append("anti-sycophancy threshold failed")
     if report.get("bias_gate", {}).get("status") != "PASS": errors.append("bias gate is not PASS")
     browser = report.get("browser_gate", {})
     if browser.get("applicable") and browser.get("status") not in {"PASS", "PASS_WITH_ASSUMPTIONS"}: errors.append("browser gate failed")
@@ -157,7 +158,9 @@ def validate_gate_statuses(report: dict) -> list[str]:
         "strategic_relevance_gate", "customer_output_guardrail_gate", "measurement_platform_preservation_gate",
         "customer_presentation_quality_gate",
         "impressum_legal_source_gate", "impressum_compliance_gate", "impressum_eval_gate", "impressum_customer_projection_gate",
-        "installability_gate", "test_suite_gate",
+        "installability_gate", "test_suite_gate", "measurement_enrichment_gate", "customer_warning_semantics_gate",
+        "customer_closing_gate", "measurement_platform_baseline_gate", "protected_candidate_gate",
+        "strategic_relevance_preservation_gate", "fresh_reporting_gate", "template_gate", "visual_story_gate",
     ):
         if report.get(gate_name, {}).get("status") != "PASS": errors.append(f"{gate_name} failed")
     return errors
@@ -197,6 +200,9 @@ def validate_skill_package_release(root: Path, report: dict, qa: dict, proofs: d
     if type(latest.get("fail")) is not int or latest.get("fail") != 0 or latest.get("confirmed"):
         errors.append("latest independent proof review round has confirmed defects")
     owner = _owner_resolved_probes(checklist.read_text(encoding="utf-8")) if checklist.is_file() else set()
+    if checklist.is_file() and latest.get("probe_rows_sha256") != probe_rows_sha256(checklist.read_text(encoding="utf-8")):
+        errors.append("checklist probe rows differ from the rows the latest independent review used")
+    owner &= {p for p in latest.get("owner_resolved") or [] if isinstance(p, str)}
     if not probes or sorted(lines) != sorted(probes) or not all(_probe_passed(k, v, owner) for k, v in lines.items()):
         errors.append("latest independent proof review did not pass every checklist probe")
     raw_cases, raw_refusals = qa.get("cases") or [], qa.get("customer_mode_refusals") or []
@@ -252,6 +258,7 @@ def validate_skill_package_release(root: Path, report: dict, qa: dict, proofs: d
 
 
 PACKAGE_FONT_POLICY = "PACKAGE_BUNDLED_MANIFEST_PINNED"
+ANTI_SYCOPHANCY_THRESHOLD = 3
 
 # Two release decisions (release-gate-policy.md): the skill package is proven on synthetic proofs; a customer report
 # needs a real audit input. Proof QA is judged against the fixed probe checklist.
@@ -275,6 +282,12 @@ def _claims_pass(value: object) -> bool:
 
 
 OWNER_RESOLVED = "AMBIGUOUS -> resolved PASS by owner clarification"
+
+
+def probe_rows_sha256(checklist_text: str) -> str:
+    """SHA-256 of the checklist's probe rows: an edit to a probe after the review changes it."""
+    rows = [line for line in checklist_text.splitlines() if re.match(r"^\| [A-E]\d \|", line)]
+    return hashlib.sha256("\n".join(rows).encode("utf-8")).hexdigest()
 
 
 def _owner_resolved_probes(checklist_text: str) -> set[str]:

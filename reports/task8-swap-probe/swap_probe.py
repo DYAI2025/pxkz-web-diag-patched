@@ -25,6 +25,12 @@ PY = sys.executable
 sys.path.insert(0, str(ROOT / "scripts"))
 from customer_status import customer_status  # noqa: E402
 from strategic_relevance import evaluate_finding  # noqa: E402
+try:  # the probed tree's own lever-admission rule (cf98339 and later); older trees fall back to the d95ad75 selector
+    from customer_reading import metric_reading, primary_metric, registry_defs  # noqa: E402
+    PRIMARY_RULE = "customer_reading.primary_metric (the probed tree's lever admission)"
+except ImportError:
+    primary_metric = None
+    PRIMARY_RULE = "legacy d95ad75 selector: customer_status of the first linked assessed metric"
 
 REG = {m["id"]: m for m in json.loads((ROOT / "assets/measurement-registry.json").read_text())["metrics"]}
 COUNTER = itertools.count()
@@ -97,7 +103,10 @@ def diff(base: dict, mut: dict) -> dict:
 
 
 def primary_key(scored_report: dict, finding: dict) -> str | None:
-    """Selector's primary reading (client_story.contradicted_by_clear_metrics definition)."""
+    """Selector's primary reading, by the rule the probed tree's lever admission uses (PRIMARY_RULE)."""
+    if primary_metric is not None:
+        m = primary_metric(scored_report, finding, registry_defs())
+        return f"{m['id']}:{metric_reading(scored_report, registry_defs(), m)['key']}" if m else None
     v = evaluate_finding(scored_report, finding)
     if v.get("evidence_route") != "CORE_METRIC":
         return None
@@ -169,7 +178,7 @@ def scored_metrics(pre: dict) -> dict:
 def main() -> int:
     records: list[dict] = []
     for name, pre in fixtures().items():
-        print(f"\n===== FIXTURE {name}")
+        print(f"\n===== FIXTURE {name} (primary rule: {PRIMARY_RULE})")
         base = pipeline(pre, f"{name}-baseline")
         print("BASELINE", json.dumps({k: base.get(k) for k in ("levers", "strengths", "admitted", "roadmap", "gate_rc", "gate_out", "matrix_rows", "numeric_signal")}, ensure_ascii=False))
         base_again = pipeline(pre, f"{name}-baseline-rerun")

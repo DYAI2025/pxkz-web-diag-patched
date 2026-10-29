@@ -61,7 +61,8 @@ def primary_metric(report: dict[str, Any], finding: dict[str, Any],
     contested or unscored metrics) are skipped like not_assessed ones, so two refs with the same customer reading
     are interchangeable. Refs whose measurement_class is not_assessed, inferred_risk or missing are skipped by class;
     a class-less ref that carries a score would read "Klar" and still be skipped, so checklist B4 ("first cited")
-    and this rule agree only while such refs read "Nicht belastbar bewertet", as all 48 do in the nine release cases.
+    and this rule agree only while no finding cites such a ref. The nine release cases cite none: of their 141 refs,
+    0 are skipped by class, 18 by their "Nicht belastbar bewertet" reading, and 4 name metrics the report lacks.
     Lever admission and the surface-consistency gate both ask this.
     """
     defs = defs if defs is not None else registry_defs()

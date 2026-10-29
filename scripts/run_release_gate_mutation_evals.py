@@ -8,7 +8,7 @@ import shutil
 import sys
 import tempfile
 from pathlib import Path
-from validate_release_gate import (CUSTOMER_REPORT_BLOCKED, PROOF_QA_PASS, PROOF_SEMANTIC_PASS, tree_digest, RELEASE_CASES, OWNER_RESOLVED, validate_font_gate, validate_gate_statuses,
+from validate_release_gate import (CUSTOMER_REPORT_BLOCKED, PROOF_QA_PASS, PROOF_SEMANTIC_PASS, tree_digest, RELEASE_CASES, OWNER_RESOLVED, validate_font_gate, validate_gate_statuses, probe_rows_sha256,
                                    validate_reports, validate_skill_package_release)
 from semantic_release_evidence import semantic_bundle_digest
 
@@ -77,7 +77,8 @@ def main(argv: list[str]) -> int:
     release_cases=['proof-realistic',*sorted(RELEASE_CASES-{'proof-realistic'})]
     probes=re.findall(r'^\| ([A-E]\d) \|', (root/'docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md').read_text(encoding='utf-8'), re.M)
     qa={'status':PROOF_QA_PASS,'artifact_digest':td,'unadjudicated':[],'yardstick_sha256':hashlib.sha256((root/'docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md').read_bytes()).hexdigest(),
-        'independent_review':{'rounds':[{'round':4,'fail':0,'probe_lines':{k:(OWNER_RESOLVED if k=='A3' else 'PASS') for k in probes}}]},
+        'independent_review':{'rounds':[{'round':4,'fail':0,'probe_lines':{k:(OWNER_RESOLVED if k=='A3' else 'PASS') for k in probes},
+                                         'owner_resolved':['A3'],'probe_rows_sha256':probe_rows_sha256((root/'docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md').read_text(encoding='utf-8'))}]},
         'reviewed_visual_qa_dir':review_dir,
         'cases':[{'case':c,'release_mode':'proof','pdf_sha256':signed[c],'reviewed_pdf_sha256':signed[c],'visual_qa':'PASS','deliverable_status':'CUSTOMER_RELEASE_BLOCKED'} for c in release_cases],
         'customer_mode_refusals':[{'case':c,'blocked':True,'pdf_written':False} for c in release_cases]}
@@ -119,6 +120,9 @@ def main(argv: list[str]) -> int:
     expect_pkg('proof_qa_round_number_reused', lambda r,q,pr: q['independent_review']['rounds'].append({'round':4,'fail':3,'confirmed':3,'probe_lines':{}}))
     expect_pkg('proof_qa_round_number_string', lambda r,q,pr: q['independent_review']['rounds'].append({'round':'5','fail':3,'confirmed':3,'probe_lines':{}}))
     expect_pkg('proof_qa_round_not_object', lambda r,q,pr: q['independent_review']['rounds'].append('round 5: 3 defects'))
+    # Review round 4: the probe rows must be the ones the latest round used, and an owner resolution must be the round's own.
+    expect_pkg('proof_qa_probe_rows_changed_after_review', lambda r,q,pr: q['independent_review']['rounds'][-1].__setitem__('probe_rows_sha256','0'*64))
+    expect_pkg('proof_qa_owner_resolution_not_in_round', lambda r,q,pr: q['independent_review']['rounds'][-1].__setitem__('owner_resolved',[]))
     expect_pkg('proof_qa_owner_resolved_without_table_row', lambda r,q,pr: q['independent_review']['rounds'][-1]['probe_lines'].__setitem__('B2',OWNER_RESOLVED))
     expect_pkg('proof_qa_case_set_trimmed', lambda r,q,pr: q.__setitem__('cases',q['cases'][:1]))
     expect_pkg('proof_built_in_customer_mode', lambda r,q,pr: pr['realistic'].__setitem__('release_mode','customer'))
@@ -152,7 +156,9 @@ def main(argv: list[str]) -> int:
                  'protected_baseline_gate','third_party_reuse_gate','measurement_platform_proof_gate','strategic_relevance_gate',
                  'customer_output_guardrail_gate','measurement_platform_preservation_gate','customer_presentation_quality_gate',
                  'impressum_legal_source_gate','impressum_compliance_gate','impressum_eval_gate','impressum_customer_projection_gate',
-                 'installability_gate','test_suite_gate'):
+                 'installability_gate','test_suite_gate','measurement_enrichment_gate','customer_warning_semantics_gate',
+                 'customer_closing_gate','measurement_platform_baseline_gate','protected_candidate_gate',
+                 'strategic_relevance_preservation_gate','fresh_reporting_gate','template_gate','visual_story_gate'):
         gates[name]={'status':'PASS'}
     assert not validate_gate_statuses(gates), validate_gate_statuses(gates)
     def expect_gates(name, mutate):
@@ -161,6 +167,11 @@ def main(argv: list[str]) -> int:
     expect_gates('installability_gate_missing', lambda g: g.pop('installability_gate'))
     expect_gates('test_suite_gate_failed', lambda g: g['test_suite_gate'].__setitem__('status','FAIL'))
     expect_gates('judgment_gate_not_run', lambda g: g['craftsmanship_gate'].__setitem__('status','NOT_RUN'))
+    expect_gates('sycophancy_score_bool', lambda g: g['anti_sycophancy'].__setitem__('score',False))
+    expect_gates('sycophancy_score_negative', lambda g: g['anti_sycophancy'].__setitem__('score',-1))
+    expect_gates('sycophancy_threshold_self_declared', lambda g: g['anti_sycophancy'].update({'score':4,'threshold':99}))
+    expect_gates('sycophancy_threshold_missing', lambda g: g['anti_sycophancy'].pop('threshold'))
+    expect_gates('report_gate_missing', lambda g: g.pop('template_gate'))
     failed=[name for name,blocked,_ in cases if not blocked]
     if failed:
         print('FAIL: mutations not blocked: '+', '.join(failed),file=sys.stderr); return 1

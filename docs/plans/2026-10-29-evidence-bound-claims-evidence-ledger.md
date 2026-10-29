@@ -355,6 +355,22 @@ need unique integer numbers (a reused or string number hid a failing round behin
 `installability_gate` and `test_suite_gate` must read PASS (`validate_gate_statuses`); the review manifests are named
 for what they are (`reviewed_visual_qa_dir`, JSON records, not signatures); the `primary_metric` docstring now states
 that a class-less scored ref would be skipped although it reads Klar, and that all 48 class-skipped refs in the nine
-release cases read "Nicht belastbar bewertet" (measured; the evaluator's count of 142 did not reproduce). Mutation evals
+release cases read "Nicht belastbar bewertet" (superseded in round 4: 48 counted not_assessed metric entries, not refs). Mutation evals
 69 → 76, canary → those six red (the judgment-gate case was already enforced). Backlog: `run_batch_contract_evals.py`
 prints its not-executed sibling case as PASS.
+
+Independent evaluation round 4 of 2d89e61: both lenses REVISE. Confirmed by re-measurement: (1) the 2d89e61 docstring,
+commit message and the round-3 entry above said "all 48 class-skipped refs"; measured on the nine cases, their findings
+cite 141 refs, 0 skipped by class, 18 skipped by their "Nicht belastbar bewertet" reading, 4 naming metrics the report
+lacks (LEGAL-IMP-02/03 in legal-golden and proof-realistic); 48 is the number of not_assessed metric entries, none of
+them cited. The docstring now states that. (2) Coverage still under-recorded what ran: the build trace missed
+validators imported in-process (`validate_visualization_assets` runs `validate_visual_assets.main`), validators the
+sweep runners start, and the generator's own subprocesses; `skill_md_not_executed` exempted path-argument names. The
+trace now covers the sweep, the build and the generator, records in-process imports, and a validator counts as not run
+only if no trace shows it. (3) The gate bound the review to the current checklist only: a probe edited after the review
+passed. The latest round now records the SHA-256 of the probe rows it used and the owner resolutions it accepted
+(`probe_rows_sha256`, `owner_resolved`). (4) `anti_sycophancy` accepted `False`, negative scores and a self-declared
+threshold; the threshold is pinned to 3. (5) The swap probe's primary oracle modelled the d95ad75 selector; it now asks
+the probed tree's `customer_reading.primary_metric` and prints the rule it used. The remaining report gates
+(`measurement_enrichment_gate` … `visual_story_gate`) are required PASS too. Mutation evals 76 → 83, canary → those
+seven red; canaries are recorded in `reports/task8-gate-canaries.json`.

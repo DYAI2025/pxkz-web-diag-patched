@@ -1,0 +1,57 @@
+{
+  "purpose": "each gate check added in Task 8 was seen red before it was trusted green: with the check disabled, exactly the new mutation cases must pass unblocked",
+  "note": "outputs are verbatim; the first three were run by hand in the authoring session, later ones by the canary script",
+  "canaries": [
+    {
+      "label": "checks added in a16ea1f (nine-case pin, gate semantic PASS while blocked), run on the uncommitted tree before commit",
+      "method": "manual copy, checks replaced by 'if False:', run_release_gate_mutation_evals.py",
+      "rc": 1,
+      "output": "FAIL: mutations not blocked: customer_blocked_with_gate_semantic_pass, proof_qa_case_set_trimmed"
+    },
+    {
+      "label": "checks added in 6d846de (PDF = reviewed PDF = review manifest PDF; owner resolution bound to the checklist table), before commit",
+      "method": "manual copy, checks disabled, run_release_gate_mutation_evals.py",
+      "rc": 1,
+      "output": "FAIL: mutations not blocked: proof_case_pdf_not_reviewed_pdf, proof_case_pdf_not_signed, proof_qa_without_signed_dir, proof_qa_signed_dir_outside_reports, proof_qa_fail_relabelled_owner_resolved, proof_qa_owner_resolved_without_table_row"
+    },
+    {
+      "label": "checks added in 2d89e61 (unique integer review rounds; bias, installability, test suite PASS), before commit",
+      "method": "manual copy, checks reverted, run_release_gate_mutation_evals.py",
+      "rc": 1,
+      "output": "FAIL: mutations not blocked: proof_qa_round_number_reused, proof_qa_round_number_string, proof_qa_round_not_object, bias_gate_not_run, installability_gate_missing, test_suite_gate_failed"
+    },
+    {
+      "label": "review round 4 checks (probe rows, owner resolution per round, pinned sycophancy threshold, report gates), before commit",
+      "disabled_checks": [
+        [
+          "scripts/validate_release_gate.py",
+          "    if checklist.is_file() and latest.get(\"probe_rows_sha256\") != probe_rows_sha256(checklist.read_text(encoding=\"utf-8\")):"
+        ],
+        [
+          "scripts/validate_release_gate.py",
+          "    owner &= {p for p in latest.get(\"owner_resolved\") or [] if isinstance(p, str)}\n"
+        ],
+        [
+          "scripts/validate_release_gate.py",
+          "    if type(syco.get(\"score\")) is not int or not 0 <= syco[\"score\"] < ANTI_SYCOPHANCY_THRESHOLD or syco.get(\"threshold\") != ANTI_SYCOPHANCY_THRESHOLD:"
+        ],
+        [
+          "scripts/validate_release_gate.py",
+          "        \"installability_gate\", \"test_suite_gate\", \"measurement_enrichment_gate\", \"customer_warning_semantics_gate\",\n        \"customer_closing_gate\", \"measurement_platform_baseline_gate\", \"protected_candidate_gate\",\n        \"strategic_relevance_preservation_gate\", \"fresh_reporting_gate\", \"template_gate\", \"visual_story_gate\",\n"
+        ]
+      ],
+      "rc": 1,
+      "output": "FAIL: mutations not blocked: proof_qa_probe_rows_changed_after_review, proof_qa_owner_resolution_not_in_round, sycophancy_score_bool, sycophancy_score_negative, sycophancy_threshold_self_declared, sycophancy_threshold_missing, report_gate_missing",
+      "red": [
+        "proof_qa_owner_resolution_not_in_round",
+        "proof_qa_probe_rows_changed_after_review",
+        "report_gate_missing",
+        "sycophancy_score_bool",
+        "sycophancy_score_negative",
+        "sycophancy_threshold_missing",
+        "sycophancy_threshold_self_declared"
+      ],
+      "method": "scratchpad notes/gate_canary.py (copy of the tree, named checks disabled, mutation evals)"
+    }
+  ]
+}
