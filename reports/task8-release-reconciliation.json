@@ -19,11 +19,11 @@
   "extra_runs": {
     "tests/test_packaged_brand_fonts.py": {
       "rc": 0,
-      "last": "42 passed, 8 warnings, 4 subtests passed in 12.88s"
+      "last": "42 passed, 8 warnings, 4 subtests passed in 12.10s"
     },
     "pytest tests": {
       "rc": 0,
-      "last": "287 passed, 8 warnings, 79 subtests passed in 249.64s (0:04:09)"
+      "last": "287 passed, 8 warnings, 79 subtests passed in 254.81s (0:04:14)"
     },
     "run_batch_contract_evals not executed cases": [
       "PASS: cross_skill_v1_3_same_digest (NOT_EXECUTED_SIBLING_V1_3_NOT_PRESENT)"
@@ -446,7 +446,7 @@
   "traces": [
     "build-trace.jsonl",
     "sweep-trace.jsonl",
-    "generator-trace.jsonl"
+    "generator-trace-r6.jsonl"
   ],
   "path_arg_validators": {
     "validate_analysis_report_completeness": {
@@ -471,7 +471,7 @@
             "build_audit_deliverables.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 24,
           "cases": [],
           "rcs": [
@@ -530,7 +530,7 @@
             "build_audit_deliverables.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 12,
           "cases": [],
           "rcs": [
@@ -583,7 +583,7 @@
             "build_audit_deliverables.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 12,
           "cases": [],
           "rcs": [
@@ -650,7 +650,7 @@
             "validate_customer_presentation_quality.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 45,
           "cases": [
             "active-positive",
@@ -717,7 +717,7 @@
             "validate_deliverable_bundle.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 54,
           "cases": [],
           "rcs": [
@@ -774,7 +774,7 @@
             "build_audit_deliverables.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 21,
           "cases": [
             "active-positive",
@@ -840,7 +840,7 @@
             "build_audit_deliverables.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 12,
           "cases": [],
           "rcs": [
@@ -870,7 +870,7 @@
     },
     "validate_customer_semantic_qa": {
       "subprocess_runs": {
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 9,
           "cases": [
             "active-positive",
@@ -925,7 +925,7 @@
             "build_audit_deliverables.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 102,
           "cases": [],
           "rcs": [
@@ -980,7 +980,7 @@
             "build_audit_deliverables.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 30,
           "cases": [],
           "rcs": [
@@ -1087,7 +1087,7 @@
             "validate_deliverable_bundle.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 54,
           "cases": [],
           "rcs": [
@@ -1141,7 +1141,7 @@
             "build_audit_deliverables.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 61,
           "cases": [],
           "rcs": [
@@ -1210,7 +1210,7 @@
             "build_audit_deliverables.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 12,
           "cases": [],
           "rcs": [
@@ -1261,7 +1261,7 @@
             "validate_deliverable_bundle.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 51,
           "cases": [
             "active-positive",
@@ -1308,7 +1308,7 @@
     },
     "validate_pdf_visual_qa": {
       "subprocess_runs": {
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 24,
           "cases": [
             "active-positive",
@@ -1366,7 +1366,7 @@
             "validate_pdf_brand.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 46,
           "cases": [],
           "rcs": [
@@ -1421,7 +1421,7 @@
             "build_audit_deliverables.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 74,
           "cases": [],
           "rcs": [
@@ -1507,7 +1507,7 @@
             "validate_deliverable_bundle.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 42,
           "cases": [],
           "rcs": [
@@ -1560,7 +1560,7 @@
             "validate_deliverable_bundle.py"
           ]
         },
-        "generator-trace.jsonl": {
+        "generator-trace-r6.jsonl": {
           "invocations": 55,
           "cases": [],
           "rcs": [
@@ -2152,17 +2152,17 @@
     "test_suite_gate": "PASS"
   },
   "judgment_gates": {
-    "craftsmanship_gate": "NOT_RUN",
-    "anti_confabulation_gate": "NOT_RUN",
-    "anti_sycophancy": "NOT_RUN",
-    "bias_gate": "NOT_RUN"
+    "craftsmanship_gate": "PASS",
+    "anti_confabulation_gate": "PASS",
+    "anti_sycophancy": "PASS",
+    "bias_gate": "PASS"
   },
   "release_gate": {
-    "status": "BLOCKED",
-    "allowed_to_package": false,
+    "status": "PASS",
+    "allowed_to_package": true,
     "decision_basis": "Task 8 owner brief 2026-10-29: SKILL_PACKAGE_RELEASE and CUSTOMER_REPORT_RELEASE decided separately; every gate below is measured on this candidate or comes from the independent evaluator",
     "measured_gates_failed": [],
-    "evaluator_decision": "NOT_RUN"
+    "evaluator_decision": "PASS_WITH_MINOR_REVISIONS"
   },
   "reliability_gate": {
     "status": "NOT_RUN",
@@ -2564,6 +2564,35 @@
       ]
     }
   ],
-  "final_validators": "NOT_RUN at evidence write time; appended by the final sweep",
-  "package": "NOT_RUN at evidence write time"
+  "final_validators": {
+    "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+    "validate_enterprise_skill_evaluation": {
+      "rc": 0
+    },
+    "validate_release_gate": {
+      "rc": 0
+    },
+    "validate_pipeline_ledger": {
+      "rc": 0,
+      "note": "fresh 9-stage ledger, run pxk-task8-release-49c0806-20261029; the same ledger with 8 stages returned rc 1"
+    },
+    "r1_fixture_run": {
+      "note": "validate_core_execution_bundle, materialize_core_metrics, validate_core_score_admission, compute_score on the golden fixture: rc 0; three canaries rc 1; log sha256 c306e188462cfde3528e20b661059e64e268b1f14068222510aebcb9ac929bcb (not in the package)"
+    }
+  },
+  "evaluator_round6": {
+    "decision": "PASS_WITH_MINOR_REVISIONS",
+    "scores_all": 4,
+    "blocking_issues": 0,
+    "required_revisions": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R5"
+    ],
+    "owner_decision": "2026-10-29: PASS_WITH_MINOR_REVISIONS accepted for SKILL_PACKAGE_RELEASE (option A); R1-R5 to backlog",
+    "evidence": "reports/enterprise-skill-evaluation.xml"
+  },
+  "package": "built after this commit; receipt in the following commit"
 }

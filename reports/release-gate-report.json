@@ -6,14 +6,14 @@
   "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
   "candidate_artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
   "release_gate": {
-    "status": "BLOCKED",
-    "allowed_to_package": false,
+    "status": "PASS",
+    "allowed_to_package": true,
     "decision_basis": "Task 8 owner brief 2026-10-29: SKILL_PACKAGE_RELEASE and CUSTOMER_REPORT_RELEASE decided separately; every gate below is measured on this candidate or comes from the independent evaluator",
     "measured_gates_failed": [],
-    "evaluator_decision": "NOT_RUN"
+    "evaluator_decision": "PASS_WITH_MINOR_REVISIONS"
   },
   "skill_package_release": {
-    "status": "BLOCKED",
+    "status": "PASS",
     "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
     "candidate_commit": "49c0806",
     "proof_qa_record": "reports/customer-pdf-qa-release-49c0806.json"
@@ -35,23 +35,70 @@
     ]
   },
   "craftsmanship_gate": {
-    "status": "NOT_RUN",
-    "source": "independent evaluator not yet run on this candidate"
+    "status": "PASS",
+    "strongest_counterarguments": [
+      "Round-4 class (a)/(b), under-recorded coverage, reappears in narrower form. The SKILL.md listing is scoped to one section, so the canonical scoring-path validators (core_execution_bundle, core_score_admission) never run and are not listed as not-executed in the SKILL.md record. Under the review-convergence rule this could justify REVISE. I hold it as non-blocking because the gap is disclosed in path_arg_validators_summary.not_run, the registry, compute_score, contracts and fixtures are unchanged since d95ad75 (empty diffstat), and the PDFs are byte-identical to the reviewed build."
+    ],
+    "evaluator_run": "eval-r6-single-readonly-20261029",
+    "decision": "PASS_WITH_MINOR_REVISIONS",
+    "total_cost_usd": 1.1956533999999999,
+    "duration_ms": 185534,
+    "permission_denials": 0,
+    "source": "independent evaluator",
+    "measured_on": {
+      "candidate_commit": "49c0806",
+      "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+    }
   },
   "anti_confabulation_gate": {
-    "status": "NOT_RUN",
-    "source": "independent evaluator not yet run on this candidate",
-    "blocked_claims": null
+    "status": "PASS",
+    "blocked_claims": [],
+    "evaluator_run": "eval-r6-single-readonly-20261029",
+    "decision": "PASS_WITH_MINOR_REVISIONS",
+    "total_cost_usd": 1.1956533999999999,
+    "duration_ms": 185534,
+    "permission_denials": 0,
+    "source": "independent evaluator",
+    "measured_on": {
+      "candidate_commit": "49c0806",
+      "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+    }
   },
   "anti_sycophancy": {
-    "status": "NOT_RUN",
-    "source": "independent evaluator not yet run on this candidate",
-    "score": null,
-    "threshold": 3
+    "score": 2,
+    "threshold": 3,
+    "status": "PASS",
+    "evaluator_run": "eval-r6-single-readonly-20261029",
+    "decision": "PASS_WITH_MINOR_REVISIONS",
+    "total_cost_usd": 1.1956533999999999,
+    "duration_ms": 185534,
+    "permission_denials": 0,
+    "source": "independent evaluator",
+    "measured_on": {
+      "candidate_commit": "49c0806",
+      "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+    }
   },
   "bias_gate": {
-    "status": "NOT_RUN",
-    "source": "independent evaluator not yet run on this candidate"
+    "status": "PASS",
+    "overall_risk": [
+      "low-medium"
+    ],
+    "notes": [
+      "Under the read-only rules I could not run Python, so all runner, test and gate rc values are builder or authorized-runner records. Their weight is set by reading the code and checking the canary's divergence, not by re-running anything.",
+      "The owner-resolved A3 counts as a pass in the 'independent' round, but the decision came from the owner after the review. Disclosed, but it softens the independence claim (R4).",
+      "The sweep script that defines the SKILL.md listing lives outside the package (notes/gate_sweep.py). Its section scoping is visible only there."
+    ],
+    "evaluator_run": "eval-r6-single-readonly-20261029",
+    "decision": "PASS_WITH_MINOR_REVISIONS",
+    "total_cost_usd": 1.1956533999999999,
+    "duration_ms": 185534,
+    "permission_denials": 0,
+    "source": "independent evaluator",
+    "measured_on": {
+      "candidate_commit": "49c0806",
+      "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+    }
   },
   "batch_contract_gate": {
     "status": "PASS",
@@ -181,7 +228,7 @@
         "result": "PASS"
       }
     ],
-    "font_tests_summary": "42 passed, 8 warnings, 4 subtests passed in 12.88s",
+    "font_tests_summary": "42 passed, 8 warnings, 4 subtests passed in 12.10s",
     "font_binary_policy": "PACKAGE_BUNDLED_MANIFEST_PINNED",
     "strict_customer_mode_fail_closed": true,
     "font_manifest_sha256": "4b8a2e8ca39cdb5a1a3b6b0221d3e6afe9fdf2ec451390ac58a4c7a1255e1e16"
@@ -619,7 +666,7 @@
         "rc": 0
       }
     ],
-    "summary": "287 passed, 8 warnings, 79 subtests passed in 249.64s (0:04:09)"
+    "summary": "287 passed, 8 warnings, 79 subtests passed in 254.81s (0:04:14)"
   },
   "cross_skill_dependency": {
     "status": "BLOCKED_DEPENDENCY_NON_PACKAGE_BLOCKING",
@@ -662,7 +709,7 @@
   },
   "measurement_platform_baseline_digest": "f8a385b42c6a3291e8544f1c600e405b112c1c8b27080cfe6bdf682304ab3e55",
   "pixelkiez_score_impact": "NONE_DIRECT",
-  "final_decision": "BLOCKED",
+  "final_decision": "SKILL_PACKAGE_RELEASE_PASS_CUSTOMER_REPORT_BLOCKED",
   "candidate_gate_results": {
     "candidate_commit": "49c0806",
     "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
@@ -912,717 +959,1633 @@
   },
   "historical_sections_note": "superseded documents kept for history; their claims are not current, and some are refuted by this candidate's traces (e.g. the a66710f sentence that seven path-argument validators run inside the build: see task8-release-reconciliation.json path_arg_validators)",
   "historical_sections": {
-    "release-gate-report before Task 8 rebuild (draft release-completion-a66710f-2026-10-28)": {
+    "release-gate-report before Task 8 rebuild (draft task8-release-reconciliation-49c0806-2026-10-29)": {
       "skill_name": "pixelkiez-website-diagnosis",
-      "draft_version": "release-completion-a66710f-2026-10-28",
       "release_scope": "website-diagnosis-package",
+      "draft_version": "task8-release-reconciliation-49c0806-2026-10-29",
+      "candidate_commit": "49c0806",
+      "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+      "candidate_artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
       "release_gate": {
         "status": "BLOCKED",
         "allowed_to_package": false,
-        "reason": "Round-2 independent evaluation of 9ba024d: the adversarial PDF reviewer found, and the main session re-derived from code and PDF text, that scripts/client_story.py:20 rewrites 'im mobilen Labortest' to 'auf Mobilgeräten' (a 4-run lab value reads as the real mobile experience) in every case including the default legacy-baseline output, and that V08 shows minor-gap rows as 'klar'. All 9 cases are semantic QA FAIL; validate_deliverable_bundle --require-customer-release-ready exits 1 for each. This is the third review round of the same defect class (customer text not bound to measurement/evidence class) after CLAIM_SCOPE_PATCH and CUSTOMER_LABEL_FIDELITY_PATCH; instance fixes do not converge.",
-        "decision_basis": "User decision 2026-10-28 ('Close BLOCKED (Recommended)'): no further code change in this slice; follow-up patch 'evidence-bound customer claims' needs its own approval.",
-        "rubric_evaluator_round_2": "PASS_WITH_MINOR_REVISIONS (4/4/4/4/4); MAJOR: LEGAL_SURFACE_STRENGTH_TERMS keyword heuristic misses other legal/contact wordings"
+        "decision_basis": "Task 8 owner brief 2026-10-29: SKILL_PACKAGE_RELEASE and CUSTOMER_REPORT_RELEASE decided separately; every gate below is measured on this candidate or comes from the independent evaluator",
+        "measured_gates_failed": [],
+        "evaluator_decision": "NOT_RUN"
+      },
+      "skill_package_release": {
+        "status": "BLOCKED",
+        "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+        "candidate_commit": "49c0806",
+        "proof_qa_record": "reports/customer-pdf-qa-release-49c0806.json"
+      },
+      "customer_report_release": {
+        "status": "BLOCKED_NO_REAL_AUDIT_INPUT",
+        "package_blocking": false,
+        "customer_release_ready": false,
+        "reason": "no real audit input exists; every release case is example data and customer mode refuses it"
+      },
+      "customer_semantic_gate": {
+        "status": "FAIL",
+        "data_class": "EXAMPLE_DATA",
+        "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+        "semantic_bundle_sha256": "6fce98e4b2786baa338cfc599d8f776939a6813f4f64c571d4c9fd22850cabec",
+        "evidence": [
+          "reports/semantic-customer-qa-eval-report.json",
+          "reports/customer-pdf-qa-release-49c0806.json"
+        ]
       },
       "craftsmanship_gate": {
-        "status": "PASS",
-        "smallest_robust_scope": true,
-        "progressive_disclosure": true,
-        "strongest_counterargument": "More sensitive legal warnings can alarm customers when jurisdiction is unresolved. The design therefore raises customer visibility without raising the legal claim state: POSSIBLE_LEGAL_REVIEW remains distinct from an assessed legal defect.",
-        "failure_mode_chain": "Impressum sidecar detects strong provider opacity -> generic projection or Core-only relevance gate loses it -> top-four report omits it -> customer reads omission as reassurance. Controls: central legal_customer_projection resolver, non-core legal evidence route, mandatory top-four rank, cover/roadmap/closing propagation and end-to-end omission gate.",
-        "notes": [
-          "No external capability was added.",
-          "The exact 48-metric Core score, coverage, weights and compute_score.py remain unchanged."
-        ]
+        "status": "NOT_RUN",
+        "source": "independent evaluator not yet run on this candidate"
       },
       "anti_confabulation_gate": {
-        "status": "PASS",
-        "blocked_claims": [],
-        "notes": [
-          "Unresolved jurisdiction remains POSSIBLE_LEGAL_REVIEW and is never rewritten as a proven legal violation.",
-          "The customer warning can be MANDATORY_CRITICAL while legal claim certainty remains unresolved.",
-          "Expected fines, automatic GDPR conclusions and definitive illegality wording remain blocked.",
-          "LEGAL-IMP-* remains non-core and has NONE_DIRECT score impact."
-        ]
+        "status": "NOT_RUN",
+        "source": "independent evaluator not yet run on this candidate",
+        "blocked_claims": null
       },
       "anti_sycophancy": {
-        "score": 1,
-        "threshold": 3,
-        "status": "PASS",
-        "notes": [
-          "The user preference for stronger warnings was not implemented as automatic violation claims.",
-          "Alarmism is controlled by separating customer-risk priority from legal claim state and by negative overclaim tests."
-        ]
+        "status": "NOT_RUN",
+        "source": "independent evaluator not yet run on this candidate",
+        "score": null,
+        "threshold": 3
       },
       "bias_gate": {
-        "overall_risk": "medium_controlled",
-        "status": "PASS",
-        "mitigations": [
-          "false-negative bias: mandatory observed provider-opacity risks cannot be omitted",
-          "false-positive/alarmism bias: unresolved applicability cannot become a definitive violation",
-          "severity inflation bias: customer priority is separate from finding/legal certainty",
-          "score contamination bias: Legal sidecar remains outside the 48-metric Core"
-        ]
-      },
-      "browser_gate": {
-        "applicable": true,
-        "status": "PASS_WITH_ASSUMPTIONS",
-        "capability_type": "extraction",
-        "permission_boundary": "public visible website evidence only; no auth bypass, private-area automation or irreversible submission",
-        "implementation_status": "IMPLEMENTED_OPTIONAL",
-        "contract_eval": "PASS",
-        "live_runtime_verification": "LOCAL_FIXTURE_PASS_LIVE_PUBLIC_SITE_NOT_ASSESSED",
-        "runtime_error_class": null,
-        "package_impact": "NON_PACKAGE_BLOCKING",
-        "blockers": [],
-        "local_runtime_eval": {
-          "status": "PASS",
-          "metric_count": 8,
-          "checks_true": 9,
-          "chromium": "ms-playwright chromium-1248 via PIXELKIEZ_CHROMIUM_PATH",
-          "evidence": "reports/browser-measurement-eval-results.json",
-          "negative_control": "without a Chromium executable the eval exits 1 (FAIL)"
-        },
-        "core_note_semantics": "public_page_render capability note records browser_rendering_source_declared and browser_execution_independently_verified=false; it never claims an executed render",
-        "evidence": "reports/browser-measurement-eval-results.json"
-      },
-      "mcp_gate": {
-        "applicable": false,
-        "status": "NOT_APPLICABLE",
-        "blockers": []
-      },
-      "template_gate": {
-        "status": "PASS",
-        "source_sha256": "1fcde5007f6ef92967dd7caa740bec86df8f9f7239909a23aac5c06259205e8c",
-        "chart_templates": 14,
-        "customer_chart_policy": "BUSINESS_FIRST_V8_ENRICHMENT_V12_INTERNAL_ONLY"
-      },
-      "visual_story_gate": {
-        "status": "PASS",
-        "policy": "STRATEGIC_RELEVANCE_CUSTOMER_PROJECTION",
-        "max_customer_pages": 12,
-        "customer_warning_states": 4,
-        "closing_required": true,
-        "customer_score_policy": "FULL_SCORE_OR_PARTIAL_BEWERTUNGSSTAND",
-        "V01_customer_chart": "FORBIDDEN_DUPLICATE",
-        "V12_customer_chart": "INTERNAL_ONLY"
+        "status": "NOT_RUN",
+        "source": "independent evaluator not yet run on this candidate"
       },
       "batch_contract_gate": {
         "status": "PASS",
-        "default_version": "1.3.0",
-        "expected_fields": 96,
-        "custom_dynamic_variables": 95,
-        "contract_sha256": "ed9924084c479c3627ceb2648ef301162d5b99bbfddfe3fefe265c7cec915d38",
-        "classification_model": "v1.3-five-class-readiness",
-        "classification_counts": {
-          "INTERNAL_RECORD": 48,
-          "EL_RUNTIME_REQUIRED": 3,
-          "EL_RUNTIME_DEFAULTED": 18,
-          "OPTIONAL": 14,
-          "PRODUCTION_GATE_ONLY": 13
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
         },
-        "runtime_required": [
-          "phone_number",
-          "company_name",
-          "company_website"
-        ],
-        "current_observed_agent_variables_preserved_nonempty": 13,
-        "v1_2": {
-          "field_count": 96,
-          "contract_sha256": "798864ba5998d0e7784137749d8bf857c7d1f7747c996e0c9bc58e7ae8962f76"
-        },
-        "v1_1": {
-          "field_count": 83,
-          "contract_sha256": "ab5570bac1066d4c999a0e8f9b674a9ebfb13eccfabbb1cd0fd049400f0cec5a"
-        },
-        "legacy_v1": {
-          "field_count": 82,
-          "contract_sha256": "66018327ad7480c44e17cf071e6e864105f7d9185d4965cafbd76f9c168edfe5"
-        }
+        "evidence_runs": [
+          {
+            "source": "scripts/validate_batch_contract.py",
+            "rc": 0,
+            "result": "PASS"
+          },
+          {
+            "source": "scripts/run_batch_contract_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
       },
       "batch_evals_gate": {
         "status": "PASS",
-        "cases": 17,
-        "five_class_partition": "PASS",
-        "blank_optional_email_upload_regression": "PASS",
-        "unknown_prospect_default_regression": "PASS",
-        "separate_production_gate_regression": "PASS",
-        "v1_v1_1_v1_2_v1_3_regression": "PASS"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/run_batch_contract_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ],
+        "not_executed_cases": [
+          "PASS: cross_skill_v1_3_same_digest (NOT_EXECUTED_SIBLING_V1_3_NOT_PRESENT)"
+        ]
       },
       "core_regression_gate": {
         "status": "PASS",
-        "pdf_json_pipeline_changed": true,
-        "change_type": "intentional visual/reporting architecture: complete JSON+Markdown internal reports and WeasyPrint/SVG customer presentation",
-        "synthetic_fixture_regression": "PASS",
-        "low_coverage_marketing_regression": "PASS",
-        "score_gate_regression": "PASS",
-        "customer_semantic_regression": "PASS",
-        "truth_discipline_regression": "PASS_8",
-        "measurement_enrichment_regression": "PASS_13",
-        "measurement_platform_protected_baseline": "PASS_47_FILES",
-        "measurement_gateway_regression": "PASS_9",
-        "gateway_companion_unit_tests": "PASS_14",
-        "strategic_relevance_regression": "PASS_6",
-        "batch_contract_regression": "PASS_17",
-        "business_first_reporting_regression": "PASS",
-        "visualization_gallery_regression": "PASS_15_OUTPUTS",
-        "measurement_platform_v321_preservation": "PASS_238_BASELINE_FILES_NO_DELETIONS",
-        "customer_presentation_quality_regression": "PASS_3_TARGETED_NEGATIVE_POSITIVE_CASES",
-        "active_core_regression": "PASS_33_CHECKS_20_MUTATIONS",
-        "active_core_score_regression": "PASS_INDEPENDENT_RECOMPUTE_52_EQUALS_COMPUTE_SCORE",
-        "active_core_protected_core": "PASS_COMPUTE_SCORE_REGISTRY_BATCH_RENDERER_PROTECTED",
-        "active_core_full_visual_harness": "UNVERIFIED_RUNTIME_TIMEOUT_NOT_RELABELED_PASS",
-        "impressum_customer_projection_regression": "PASS_8_CHECKS",
-        "impressum_compliance_regression": "PASS_31",
-        "legal_core_score_delta": "PASS_ZERO"
-      },
-      "cross_skill_dependency": {
-        "status": "BLOCKED_DEPENDENCY_NON_PACKAGE_BLOCKING",
-        "website_skill_side_status": "PASS",
-        "voice_architect_side_status": "CURRENT_INSTALLATION_V1_3_CONTRACT_MISSING",
-        "shared_wire_header_status": "WEBSITE_V1_3_96_FIELDS_VALIDATED",
-        "shared_v1_3_digest_parity": "NOT_CURRENTLY_EXECUTABLE",
-        "runtime_boundary": "Current Voice Architect installation does not expose the v1.3 contract. This blocks paired Audit-to-Voice release proof, not installation of the Website Diagnosis skill package."
-      },
-      "reliability_gate": {
-        "status": "PASS",
-        "pipeline_trace_status": "NOT_WRITTEN_RELEASE_BLOCKED",
-        "frozen_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
-        "core_regression_status": "PASS",
-        "validator": "scripts/validate_pipeline_ledger.py",
-        "truth_boundary": "Build trace proves ordered process and digest consistency; it does not replace legal/source truth."
-      },
-      "corrections_applied": [
-        "created v1.3 contract while retaining the exact 96-field v1.2 wire header",
-        "classified every field exactly once into the five requested classes",
-        "made customer_email explicitly OPTIONAL",
-        "made prospect_name runtime-defaulted with a non-spoken sentinel when unverified",
-        "separated elevenlabs_upload_status from production_prerequisite_gate",
-        "kept the 13 currently observed agent variables non-empty via required/defaulted semantics",
-        "preserved explicit v1.2, v1.1 and v1 compatibility modes",
-        "added 17 deterministic batch-contract regressions including missing-email and unknown-prospect cases",
-        "preserved the customer PDF/chart/scoring pipeline",
-        "reconciled release report with the validated visual/reporting architecture",
-        "kept strict customer PDF font gate fail-closed while separating skill installability from runtime brand-font availability",
-        "reduced agents/openai.yaml to conservative interface metadata for upload compatibility",
-        "fixed stale deliverable filenames in fixture, marketing, semantic and reflection regressions",
-        "made PDF evidence-boundary assertion robust to whitespace loss in PDF text extraction",
-        "corrected stale paired-release PASS to a current non-package-blocking dependency boundary",
-        "removed coverage/confidence/test/QA/validator/internal evidence terminology from customer-visible model and PDF projection",
-        "made V12 audit coverage internal-only for customer story planning",
-        "added deterministic business-value, visual-eligibility and full-report completeness layers",
-        "fixed canonical voice-hook evidence projection so HYPOTHESIS cannot become VERIFIED_FACT",
-        "added provider-neutral non-scoring measurement enrichment with provenance and fail-closed unavailable states",
-        "added read-only PageSpeed, CrUX, Search Console, GA4 and replaceable DataForSEO SERP adapters without serializing secrets",
-        "added public-only browser privacy/accessibility/mobile measurement module with explicit legal/WCAG boundaries",
-        "replaced ambiguous customer warning state with four-state semantics and strong X Handlungsbedarf only for evidenced findings",
-        "added query/location/device/time-bound V05 Google position visual when complete SERP evidence exists",
-        "replaced the negative limitations closing with schema-required v8 action closing and up to three evidence-backed measurement highlights",
-        "patched semantic QA page-role detection so the final action page is validated as closing",
-        "made legacy customer/marketing render regressions component-level to avoid redundant atomic-builder timeout while separately validating the full atomic builder",
-        "added Strategic Relevance North-Star gate and three-layer internal/business/customer projection boundary",
-        "kept internal PARTIAL_SCORE/NO_SCORE reliability while suppressing Teilscore, coverage and confidence from customer output",
-        "made not_assessed and missing measurement capability non-penalizing and non-customer-visible",
-        "removed V01 duplicate score page and V12 audit coverage from customer visualization selection",
-        "kept population/method/does_not_prove trace internally while removing those process footers from customer SVG/PDF",
-        "added customer-output leakage validator covering model, HTML, PDF and SVG",
-        "added exact v3.2.1 conflict-aware merge preservation report/validator with no baseline deletions",
-        "proved Measurement Enrichment and Strategic Relevance together in one 12-page/7-visual/four-lever rendered proof",
-        "reconciled conflicting customer score rules: PARTIAL_SCORE now projects as Pixelkiez Bewertungsstand without coverage/confidence leakage",
-        "made first rendered PDF draft-only and added non-compensatory final presentation quality gate",
-        "added explicit cover visual checks for complete takeaway, score visibility and no cross-page sentence split",
-        "added semantic QA checks for cover completeness, score correctness, lever business impact, privacy scope and synthetic metric visuals",
-        "removed invented V03 priority magnitude and retained ordinal rank only",
-        "rendered business impact on every four-lever card",
-        "preserved complete closing actions and fail-closed instead of arbitrary text clipping",
-        {
-          "file": "scripts/build_internal_analysis_report.py",
-          "change": "added internal metric/category weight and weighted-contribution traceability without customer leakage"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
         },
-        {
-          "file": "assets/core-evidence-bindings.active.v1.json",
-          "change": "added exact 48-row active binding with registry-mirrored weights, methods, control basis and admission rules"
-        },
-        {
-          "file": "references/measurement-gateway-contract.md",
-          "change": "clarified native NON_SCORING_ENRICHMENT versus explicit active-core promotion boundary"
-        },
-        "implemented non-core LEGAL-IMP-01..11 sidecar architecture without changing the 48-metric score core",
-        "added current primary-source legal registry and source freshness validation",
-        "added deterministic ILES admission/no-double-count and critical/audit-priority override logic",
-        "added schema-valid finding projection and zero-core-score firewall regression",
-        "added customer legal-overclaim/internal-metadata leakage guardrails and voice isolation",
-        "added optional strict digest-bound impressum-compliance.json deliverable integration",
-        "refused to bypass the legacy Measurement Platform override allowlist conflict",
-        "added central legal_customer_projection resolver with separate legal claim state and customer-risk priority",
-        "consolidated provider-identification Legal findings into one concrete customer-facing risk finding",
-        "added a second Strategic Relevance evidence route for validated non-core Legal findings",
-        "made MANDATORY_CRITICAL Legal risk rank first in the exactly-four customer levers",
-        "made mandatory Legal warning visible on cover and persistent through roadmap and closing",
-        "added end-to-end validate_impressum_projection omission gate and customer-presentation hard gate",
-        "added Bo Feng Lin Golden Regression with unresolved jurisdiction, absent operator identity/address, ILES=0 and mandatory customer visibility",
-        "preserved anti-overclaim controls and zero Core score/coverage delta",
-        "bundled four manifest-pinned OFL brand fonts (assets/fonts); validate_no_font_binaries allows exactly these, fail-closed without fontTools",
-        "fixed V05 ranking subtitle, VC03 website-symbol wording and legal-surface strength (CUSTOMER_LABEL_FIDELITY_PATCH) after independent evaluation"
-      ],
-      "final_decision": "BLOCKED",
-      "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+        "evidence_runs": [
+          {
+            "source": "scripts/run_score_gate_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          },
+          {
+            "source": "scripts/validate_core_parity.py",
+            "rc": 0,
+            "result": "PASS"
+          },
+          {
+            "source": "scripts/run_fixture_eval.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
+      },
       "internal_report_gate": {
         "status": "PASS",
-        "json": "analysis_report.json",
-        "markdown": "analysis_report.md",
-        "metric_parity": "48/48",
-        "evidence": "reports/visual-reporting-eval-results.json",
-        "measurement_enrichment": "PASS_32_FIXTURE_METRICS_5_SOURCES",
-        "customer_filter_does_not_delete_internal_metrics": true,
-        "active_core_weight_traceability": "PASS_48_METRICS_WEIGHTED_CONTRIBUTIONS_RECONCILED",
-        "active_core_analysis_report": "reports/analysis-report-reconciliation.json"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/run_visual_reporting_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
       },
       "visualization_reporting_gate": {
         "status": "PASS",
-        "approved_templates": "14 Vega-Lite + 1 Mermaid/process profile",
-        "selected_visual_range": "4-7",
-        "four_levers": "PASS",
-        "benchmark_without_context": "BLOCKED",
-        "ranking_without_context": "BLOCKED",
-        "evidence": "reports/visual-reporting-eval-results.json",
-        "contextual_serp_ranking": "PASS_V05",
-        "measurement_platform_patch_change": "NONE_PROTECTED_BYTE_IDENTICAL",
-        "customer_method_footer": "FORBIDDEN",
-        "V01_customer_selected": false,
-        "V12_customer_selected": false,
-        "active_core_delta_regression": "PASS_BUSINESS_FIRST_PLUS_DIRECT_ACTIVE_RENDER_PLUS_DELIVERABLE_BUNDLE",
-        "active_core_monolithic_harness": "SUPERSEDED: full build_audit_deliverables customer-mode run on the active-core scored report completed (10 pages, 5 visuals); the earlier timed-out harness was not re-run under that name"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/run_visual_reporting_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          },
+          {
+            "source": "scripts/run_visualization_gallery_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
       },
       "weasyprint_render_gate": {
         "status": "PASS",
-        "renderer": "WEASYPRINT",
-        "realistic_fixture_pages": 10,
-        "evidence": "reports/realistic-presentation-qa.json",
-        "measurement_platform_staged_proof": "PASS_11_PAGES_6_VISUALS_FULL_BUILDER",
-        "strategic_merge_proof": "PASS_11_PAGES_6_VISUALS",
-        "active_core_fixture_proof": "PASS_10_PAGES_5_VISUALS",
-        "active_core_fixture_pdf_sha256": "62303d0deeed5b38b7144a4e3eff6a8014ebb566f17b25d64feefc2ea959257b"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "@nine_case_build",
+            "result": "PASS"
+          }
+        ]
       },
       "brand_rendering_gate": {
         "status": "PASS",
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/validate_no_font_binaries.py",
+            "rc": 0,
+            "result": "PASS"
+          },
+          {
+            "source": "@tests/test_packaged_brand_fonts.py",
+            "result": "PASS",
+            "rc": 0
+          },
+          {
+            "source": "@nine_case_build",
+            "result": "PASS"
+          }
+        ],
+        "font_tests_summary": "42 passed, 8 warnings, 4 subtests passed in 12.88s",
         "font_binary_policy": "PACKAGE_BUNDLED_MANIFEST_PINNED",
         "strict_customer_mode_fail_closed": true,
-        "runtime_font_status": "EXACT",
-        "exact_display_font_available": true,
-        "exact_data_font_available": true,
-        "evidence": "reports/brand-font-capability.json",
-        "font_manifest_sha256": "4b8a2e8ca39cdb5a1a3b6b0221d3e6afe9fdf2ec451390ac58a4c7a1255e1e16",
-        "font_source": {
-          "display": "PACKAGED",
-          "data": "PACKAGED"
-        }
+        "font_manifest_sha256": "4b8a2e8ca39cdb5a1a3b6b0221d3e6afe9fdf2ec451390ac58a4c7a1255e1e16"
       },
       "proof_output_gate": {
         "status": "PASS",
-        "fixture": "Synthetic Measurement Enrichment + Strategic Relevance merge proof",
-        "visual_qa": "PASS",
-        "semantic_qa": "PASS",
-        "internal_metric_count": 48,
-        "selected_visual_count": 6,
-        "customer_release_ready": false,
-        "evidence": "reports/strategic-relevance-proof.json",
-        "measurement_highlights": 3,
-        "privacy_action_x": "PASS",
-        "serp_visual": "PASS",
-        "closing": "PASS",
-        "measurement_platform_staged_proof": "PASS",
-        "measurement_enrichment_metric_count": 32,
-        "measurement_enrichment_source_count": 5,
-        "customer_output_guardrails": "PASS",
-        "four_levers": 4
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "@nine_case_build",
+            "result": "PASS"
+          },
+          {
+            "source": "@proof_qa_rebinding",
+            "result": "PASS"
+          }
+        ],
+        "customer_release_ready": false
       },
       "strict_customer_output_gate": {
         "status": "PASS",
-        "customer_release_ready": false,
-        "reason": "Exact Schibsted Grotesk and IBM Plex Mono resolve from the manifest-pinned package fonts offline; strict customer rendering is no longer font-blocked. customer_release_ready stays false until visual and semantic QA pass on the exact PDF digest."
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "@customer_mode_refusals",
+            "result": "PASS"
+          },
+          {
+            "source": "@tests/test_packaged_brand_fonts.py",
+            "result": "PASS"
+          }
+        ],
+        "customer_release_ready": false
       },
       "measurement_enrichment_gate": {
         "status": "PASS",
-        "mode": "NON_SCORING_ENRICHMENT",
-        "fixture_metrics": 32,
-        "fixture_sources": 5,
-        "eval_cases": 13,
-        "source_truth_separation": "PASS",
-        "score_core_unchanged": "PASS",
-        "live_provider_credentials": "NOT_PRESENT_NOT_CLAIMED",
-        "evidence": "reports/measurement-enrichment-eval-results.json",
-        "measurement_gateway_attachment": "PASS_NON_SCORING_9_PUBLIC_METRICS"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/run_measurement_enrichment_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
       },
       "customer_warning_semantics_gate": {
         "status": "PASS",
-        "states": [
-          "Klar",
-          "Verbesserung sinnvoll",
-          "Handlungsbedarf",
-          "Nicht belastbar bewertet"
-        ],
-        "privacy_action_x": "PASS",
-        "unknown_neutral": "PASS",
-        "legal_overclaim_blocked": true,
-        "evidence": "reports/realistic-presentation-qa.json"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/run_customer_presentation_quality_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          },
+          {
+            "source": "@proof_qa_rebinding",
+            "result": "PASS"
+          }
+        ]
       },
       "customer_closing_gate": {
         "status": "PASS",
-        "schema_version": "8.0",
-        "negative_limits_final_page_removed": true,
-        "action_oriented_closing": true,
-        "measurement_highlights": 3,
-        "cta": "Prioritäten bestätigen. Umsetzung starten. Wirkung nachmessen.",
-        "evidence": "reports/realistic-presentation-qa.json",
-        "measurement_platform_patch_change": "NONE_PROTECTED_BYTE_IDENTICAL"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/run_business_first_reporting_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          },
+          {
+            "source": "@proof_qa_rebinding",
+            "result": "PASS"
+          }
+        ]
       },
-      "measurement_platform_baseline_digest": "f8a385b42c6a3291e8544f1c600e405b112c1c8b27080cfe6bdf682304ab3e55",
       "measurement_gateway_gate": {
         "status": "PASS",
-        "mode": "OPTIONAL_READ_ONLY_NON_SCORING",
-        "integration_checks": 9,
-        "gateway_unit_tests": 14,
-        "network_tests": "INJECTED_TRANSPORT_NO_LIVE_NETWORK",
-        "core_metric_count": 48,
-        "evidence": "reports/measurement-gateway-eval-results.json"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/run_measurement_gateway_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          },
+          {
+            "source": "scripts/validate_gateway_optional_contracts.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
       },
       "protected_baseline_gate": {
         "status": "PASS",
-        "baseline_digest": "f8a385b42c6a3291e8544f1c600e405b112c1c8b27080cfe6bdf682304ab3e55",
-        "protected_files": 47,
-        "protected_domains": [
-          "48-metric score core",
-          "WeasyPrint/SVG renderer",
-          "14-template visual catalog",
-          "ElevenLabs v1.3 96-field contract",
-          "existing Measurement Enrichment core",
-          "Customer Closing"
-        ],
-        "evidence": "reports/measurement-platform-protected-baseline.json",
-        "exact_files": 35,
-        "intentional_hash_bound_overrides": 12,
-        "override_policy": "ONLY_EXPLICIT_SHARED_PATHS_WITH_ALLOWED_REASON_AND_HASH_CHAIN",
-        "chained_overrides": 6,
-        "override_reports": 11,
-        "live_result": "PASS: protected baseline exact=35 intentional_shared_overrides=12 chained_overrides=6 override_reports=11"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/validate_measurement_platform_baseline.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
+      },
+      "measurement_platform_baseline_gate": {
+        "status": "PASS",
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/validate_measurement_platform_baseline.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
+      },
+      "protected_candidate_gate": {
+        "status": "PASS",
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/validate_measurement_platform_baseline.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
       },
       "third_party_reuse_gate": {
         "status": "PASS",
-        "repositories_reviewed": 4,
-        "source_code_copied": false,
-        "policy": "REFERENCE_OR_INDEPENDENT_REIMPLEMENTATION_ONLY",
-        "evidence": "reports/third-party-license-ledger.json"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/validate_third_party_license_ledger.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
       },
       "measurement_platform_proof_gate": {
         "status": "PASS",
-        "proof_mode": "ENRICHED_SYNTHETIC_FIXTURE_FULL_BUILDER",
-        "page_count": 11,
-        "selected_visual_count": 6,
-        "four_levers": 4,
-        "renderer": "WEASYPRINT",
-        "pdf_output": "PASS",
-        "pdf_brand": "PASS",
-        "customer_language": "PASS",
-        "evidence": "reports/measurement-platform-proof.json"
-      },
-      "measurement_gateway_live_gate": {
-        "status": "NOT_ASSESSED_NON_BLOCKING",
-        "package_blocking": false,
-        "reason": "Host runtime did not provide usable live DNS/egress for the public gateway smoke. Offline fixture and injected-transport correctness/security tests pass; live gateway capability is not claimed as validated."
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "@nine_case_build",
+            "result": "PASS"
+          }
+        ]
       },
       "strategic_relevance_gate": {
         "status": "PASS",
-        "north_star_question": "Hätte ein Unternehmer, der Geld mit seiner Seite oder dem beworbenen Service/Produkt verdient, einen strategischen Vorteil, wenn er diese Information hätte?",
-        "three_layers": [
-          "INTERNAL_RECORD",
-          "WEBSITE_BUSINESS_FACT",
-          "CUSTOMER_STRATEGIC_PROJECTION"
-        ],
-        "checks": 6,
-        "partial_score_customer_policy": "BEWERTUNGSSTAND_NO_COVERAGE_OR_CONFIDENCE",
-        "not_assessed_customer_penalty": false,
-        "evidence": "reports/strategic-relevance-eval-results.json",
-        "legal_sidecar_route": "PASS",
-        "mandatory_legal_risk_selection": "PASS"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/run_strategic_relevance_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
       },
       "customer_output_guardrail_gate": {
         "status": "PASS",
-        "forbidden_customer_classes": [
-          "audit/test coverage",
-          "test procedure/runtime/QA",
-          "evidence grade/measurement class",
-          "not_assessed/SOURCE_NEEDED",
-          "provider/test jargon",
-          "internal method/does_not_prove boilerplate"
-        ],
-        "validated_artifacts": [
-          "client-report-model.json",
-          "customer_presentation.html",
-          "customer_presentation.pdf",
-          "visuals/*.svg"
-        ],
-        "evidence": "reports/strategic-relevance-proof.json"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "@nine_case_build",
+            "result": "PASS"
+          }
+        ]
       },
       "measurement_platform_preservation_gate": {
         "status": "PASS",
-        "validator": "scripts/validate_measurement_platform_baseline.py",
-        "result": "PASS: protected baseline exact=35 intentional_shared_overrides=12 chained_overrides=6 override_reports=11",
-        "policy": "Only hash-bound, explicitly authorized shared customer-reporting paths may drift; Core scoring remains protected.",
-        "override_report": "reports/impressum-customer-truth-shared-overrides.json"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/validate_strategic_relevance_v321_preservation.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
+      },
+      "strategic_relevance_preservation_gate": {
+        "status": "PASS",
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/validate_strategic_relevance_v321_preservation.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
       },
       "customer_presentation_quality_gate": {
         "status": "PASS",
-        "contract_version": "1.0",
-        "eval_status": "PASS",
-        "non_compensatory": true,
-        "final_delivery_requires": "quality_status=PASS on exact final PDF/model/scored-report digests",
-        "pending_state": "BUILT_PENDING_QA is draft-only",
-        "score_projection": "FULL_SCORE=Pixelkiez Score; PARTIAL_SCORE=Pixelkiez Bewertungsstand; NO_SCORE=no number",
-        "synthetic_priority_magnitude": "FORBIDDEN",
-        "four_lever_business_impact": "REQUIRED",
-        "privacy_legal_certainty": "FAIL_CLOSED",
-        "rendered_proof_status": "PASS",
-        "rendered_proof": "reports/customer-presentation-quality-proof.json",
-        "repair_loop_verified": true,
-        "initial_pending_qa_blocks_delivery": true,
-        "eval_checks": 5,
-        "legal_risk_projection_completeness": "REQUIRED_AND_PASS",
-        "hard_gate_count_with_legal_projection": 14
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/run_customer_presentation_quality_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
       },
       "active_core_gate": {
         "status": "PASS",
-        "mode": "ACTIVE_CORE_ADMISSION_CONTRACT_PATH",
-        "artifact_digest": "1a9c862edfce24d6193273049eebed12e0fa87312d98497bb835ebb4245f1e91",
-        "exact_registry_metrics": 48,
-        "execution_ready_fixture": 48,
-        "evidence_ready_fixture": 48,
-        "score_admitted_fixture": 48,
-        "report_reconciled_fixture": 48,
-        "mutation_controls_detected": 20,
-        "registry_weights_unchanged": true,
-        "compute_score_changed": false,
-        "fixture_only": true,
-        "evidence": [
-          "reports/core-active-eval-results.json",
-          "reports/core-active-mutation-test-report.json",
-          "reports/score-reconciliation-report.json",
-          "reports/analysis-report-reconciliation.json",
-          "reports/core-active-determinism-report.json"
-        ],
-        "does_not_prove": [
-          "48 live measurements on an arbitrary website",
-          "live provider availability",
-          "truth of an unsupported qualitative observation"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/run_full_48_active_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          },
+          {
+            "source": "scripts/validate_full_48_active.py",
+            "rc": 0,
+            "result": "PASS"
+          },
+          {
+            "source": "scripts/validate_core_evidence_bindings.py",
+            "rc": 0,
+            "result": "PASS"
+          }
         ]
       },
       "active_core_render_gate": {
         "status": "PASS",
-        "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
-        "fixture_only": true,
-        "renderer": "WEASYPRINT",
-        "page_count": 10,
-        "embedded_visual_count": 5,
-        "deliverable_bundle_build_complete": true,
-        "customer_release_ready": false,
-        "qa_status": "VISUAL_PASS_SEMANTIC_FAIL",
-        "brand_font_status": "EXACT",
-        "validators": [
-          "validate_analysis_report_completeness",
-          "validate_pdf_output",
-          "validate_presentation_brand",
-          "validate_customer_business_language",
-          "validate_customer_output_guardrails",
-          "validate_deliverable_bundle"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "@nine_case_build",
+            "result": "PASS"
+          }
         ],
-        "monolithic_visual_harness": "SUPERSEDED: full build_audit_deliverables customer-mode run on the active-core scored report completed (10 pages, 5 visuals); the earlier timed-out harness was not re-run under that name",
-        "regression_strategy": "fresh active-core decomposed E2E + unchanged existing visual architecture baseline proof; timeout is not relabeled PASS",
-        "evidence": "reports/active-core-render-proof.json",
-        "note": "Positive E2E (>=4 admissible visuals, closed evidence chain) renders and passes all deterministic validators; its semantic QA FAILs (findings/strengths from synthetic-report.json contradict the active trust/legal values). Not deliverable; open risk by user decision 2026-10-28.",
-        "status_scope": "status covers the rendered positive FULL_48_ACTIVE path and its deterministic validators; customer semantic QA is a separate verdict (semantic_qa_status) and is FAIL"
+        "customer_release_ready": false
       },
-      "patch_status": {
-        "plan": "APPROVED",
-        "architecture": "PASS",
-        "implementation": "COMPLETE",
-        "validation": "FAIL_SEMANTIC_QA",
-        "release_gate": "BLOCKED",
-        "packaging": "NOT_AUTHORIZED",
-        "release": "NOT_PUSHED_NOT_MERGED_NOT_INSTALLED",
-        "historical_note": "Values before 2026-10-28 claimed release_gate PASS / packaging AUTHORIZED for an earlier draft; superseded."
-      },
-      "pixelkiez_score_impact": "NONE_DIRECT",
       "impressum_legal_source_gate": {
         "status": "PASS",
-        "enabled_primary_rules": 9,
-        "disabled_source_needed_rules": 6,
-        "verified_at": "2026-09-08"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/validate_impressum_legal_sources.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
       },
       "impressum_compliance_gate": {
         "status": "PASS",
-        "legal_submetrics": 11,
-        "iles_weight_total": 100,
-        "pixelkiez_score_impact": "NONE_DIRECT"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/validate_impressum_compliance.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
       },
       "impressum_eval_gate": {
         "status": "PASS",
-        "cases": 31,
-        "pass_count": 31,
-        "core_score_delta": 0,
-        "golden_case": "LEG-GOLD-BFL"
-      },
-      "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
-      "fresh_reporting_gate": {
-        "status": "PASS",
-        "entrypoint": "scripts/run_reporting_bundle_evals.py",
-        "exit_code": 0,
-        "report": "reports/visual-reporting-eval-results.json"
-      },
-      "protected_candidate_gate": {
-        "status": "PASS",
-        "checked_files": 31,
-        "unexpected_changes": [],
-        "report": "reports/impressum-protected-preservation.json"
-      },
-      "strategic_relevance_preservation_gate": {
-        "status": "PASS",
-        "baseline_files": 238,
-        "deleted_files": 0
-      },
-      "measurement_platform_baseline_gate": {
-        "status": "PASS",
-        "validator": "scripts/validate_measurement_platform_baseline.py",
-        "authorized_patch_reason": "IMPRESSUM_CUSTOMER_TRUTH_PATCH",
-        "negative_controls": [
-          "unlisted protected mutation rejected",
-          "wrong override reason rejected",
-          "broken hash chain rejected"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/run_impressum_compliance_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          }
         ]
-      },
-      "packaging_evidence": {
-        "status": "NOT_AUTHORIZED",
-        "artifact_name": "skill.zip",
-        "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
-        "reason": "release gate BLOCKED; no skill.zip built"
       },
       "impressum_customer_projection_gate": {
         "status": "PASS",
-        "golden_case": "LEG-GOLD-BFL",
-        "customer_priority": "MANDATORY_CRITICAL",
-        "claim_state": "POSSIBLE_LEGAL_REVIEW",
-        "pixelkiez_score_impact": "NONE_DIRECT",
-        "required_surfaces": [
-          "top-four rank 1",
-          "cover warning",
-          "roadmap now",
-          "closing",
-          "rendered PDF"
-        ],
-        "omission_controls": [
-          "finding omitted -> FAIL",
-          "cover warning omitted -> FAIL",
-          "roadmap action omitted -> FAIL"
-        ],
-        "overclaim_controls": "PASS",
-        "evidence": "reports/legal-customer-projection-eval-results.json"
-      },
-      "candidate_patch_evidence": {
-        "all_legacy_gate_sections_are_historical": true,
-        "date": "2026-10-27",
-        "branch_priority_unit_tests": "PASS_16",
-        "branch_priority_integration": "PASS",
-        "core_regression": "PASS_33_CHECKS_20_MUTATIONS",
-        "customer_model_default_exact_identity": "PASS",
-        "reporting_bundle_regression": "PASS",
-        "vibecheck03_unit_tests": "PASS_18",
-        "remaining_previous_patch_issues": [
-          "safe 404 browser acquisition",
-          "dynamic browser scenario acquisition",
-          "non-core VC03 finding customer admission"
-        ],
-        "independent_evaluator": "NOT_EXECUTED",
-        "industry_profiles_approved": 0,
-        "installable_skill_zip_authorized": "SUPERSEDED: see release_gate.authorization_basis for candidate a66710f"
-      },
-      "customer_semantic_gate": {
-        "status": "FAIL",
-        "semantic_bundle_sha256": "9fd973c94e7493e804ccd923b60abfc42a66a8ef3e1c8bbd9dc9bb78939abfeb",
-        "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
-        "evidence": [
-          "reports/semantic-customer-qa-eval-report.json",
-          "reports/customer-pdf-qa-release-a66710f.json"
-        ],
-        "cases": 9,
-        "distinct_pdfs": 7,
-        "case_verdicts": {
-          "legacy-baseline": "FAIL",
-          "legal-golden": "FAIL",
-          "case-a-critical": "FAIL",
-          "case-b-equal-rank-profile": "FAIL",
-          "case-c-vc03-detail": "FAIL",
-          "active-positive": "FAIL",
-          "proof-realistic": "FAIL",
-          "proof-strategic": "FAIL",
-          "proof-measurement-gateway": "FAIL"
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
         },
-        "recorded_fail": "all 9 cases semantic FAIL (round-2 review, re-derived); validate_deliverable_bundle rc 1 for all",
-        "negatives": "Baumdienst and low-coverage fail closed with CUSTOMER_MIN_VISUALS_NOT_MET, no PDF written",
-        "independence": "page verdicts by the authoring session; an independent read-only reviewer re-checked fa791c3 and its confirmed findings are fixed or recorded (independent_review in the QA report)"
+        "evidence_runs": [
+          {
+            "source": "scripts/run_legal_customer_projection_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
       },
-      "candidate_gate_results": {
-        "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
-        "candidate_commit": "a66710f",
-        "status": "SWEEP_DONE",
-        "sweep": "64 root-arg scripts run, 43 rc 0. Non-zero: 15 usage errors (need explicit artifact paths; 8 of them run inside build_audit_deliverables/validate_deliverable_bundle on all 9 builds, not run standalone: validate_batch_context.py, validate_chart_payloads.py, validate_core_score_admission.py, validate_elevenlabs_batch_csv.py, validate_visual_assets.py, validate_visual_story.py, validate_website_audit_packet.py); validate_full_48_active.py, validate_strategic_relevance_v321_preservation.py failed only because the sweep's own validate_customer_presentation_quality.py wrote its report into the root and changed the digest - rc 0 after removing that file; validate_pipeline_ledger/validate_release_gate bind this evidence (run after it); validate_paired_release + run_paired_release need the external voice-architect consumer (not installed, non-package-blocking).",
-        "history": [
+      "fresh_reporting_gate": {
+        "status": "PASS",
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
           {
-            "candidate_commit": "456c226",
-            "artifact_digest": "3b442603b519158d158c924e9d65e19e3a30aca4ade5fcfe3307c7fb94be7196",
-            "sweep": "44 of 47 pass",
-            "independent_evaluation": "FAIL (4 MAJOR: two status contradictions, nested reports/dist boundary, QA not bound to rendering code); all four fixed in 6875f5a, 22d2d3e, c393078, cd90890"
+            "source": "scripts/run_reporting_bundle_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
+      },
+      "template_gate": {
+        "status": "PASS",
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/run_visual_template_gallery_evals.py",
+            "rc": 0,
+            "result": "PASS"
           },
           {
-            "candidate_commit": "92eb6c9",
-            "artifact_digest": "a815fb3a3016f4d4ae520bc43043f1ea2fe80b19ea6cf4302089ee71dbc19e46",
-            "sweep": "44 of 47 pass (3 authorization-dependent)",
-            "independent_evaluation": "FAIL (MAJOR-N1: packager shipped .pyc/.pytest_cache outside the build digest; MINOR: release gate trusted stored v3.2.1 status). Fixed in 85f6e46, 05aff4f."
+            "source": "scripts/run_chart_template_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
+      },
+      "visual_story_gate": {
+        "status": "PASS",
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/run_visual_architecture_evals.py",
+            "rc": 0,
+            "result": "PASS"
           },
           {
-            "candidate_commit": "80ec6bd",
-            "artifact_digest": "29802261f20ca35751ed6affc93312e62fd4d974064dce8546de89a3eaba0fb2",
-            "sweep": "44 of 47 pass (3 authorization-dependent)",
-            "independent_evaluation": "PASS (round 3; MINORs: package output dir self-inclusion, boundary docstring, untested live v3.2.1 branch — fixed in f8bf3cf; sourceless .pyc in a working tree and reports/ rewritability remain process-bounded)"
-          },
-          {
-            "candidate_commit": "e4a0cb6",
-            "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
-            "sweep": "SWEEP_DONE"
-          },
-          {
-            "candidate_commit": "badaf71",
-            "artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
-            "status": "SWEEP_DONE"
+            "source": "scripts/run_customer_presentation_quality_evals.py",
+            "rc": 0,
+            "result": "PASS"
           }
         ],
-        "listed_needs_paths": 14,
-        "bundle_validators_on_all_builds": "finalize_deliverable_manifest, validate_pdf_visual_qa, validate_customer_semantic_qa, validate_customer_output_guardrails, validate_customer_business_language, validate_analysis_report_completeness, validate_deliverable_bundle --require-customer-release-ready (active-positive rc 1 by design, all others rc 0)"
+        "customer_score_policy": "FULL_SCORE_OR_PARTIAL_BEWERTUNGSSTAND"
       },
-      "historical_sections": {
-        "reliability_gate_pxk-impressum-customer-truth-p0-20260909": {
-          "status": "PASS",
-          "pipeline_trace_status": "PASS",
-          "frozen_artifact_digest": "959ea94775c147ca3d6c197a4cc62f4e603557b53ec6bf8ca236a67ffabee13b",
-          "core_regression_status": "PASS",
-          "pipeline_events": 9,
-          "pipeline_run_id": "pxk-impressum-customer-truth-p0-20260909",
-          "validator": "scripts/validate_pipeline_ledger.py",
-          "truth_boundary": "Build trace proves ordered process and digest consistency; it does not replace legal/source truth."
+      "browser_gate": {
+        "status": "PASS",
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
         },
-        "packaging_evidence_959ea947": {
-          "status": "AUTHORIZED",
-          "artifact_name": "skill.zip",
-          "candidate_artifact_digest": "959ea94775c147ca3d6c197a4cc62f4e603557b53ec6bf8ca236a67ffabee13b",
-          "archive_structure_requirement": "PASS_ONE_SKILL_ROOT",
-          "pipeline_ledger": "PASS_9_EVENTS"
+        "evidence_runs": [
+          {
+            "source": "scripts/run_browser_measurement_evals.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ],
+        "applicable": true,
+        "blockers": []
+      },
+      "installability_gate": {
+        "status": "PASS",
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/validate_installability.py",
+            "rc": 0,
+            "result": "PASS"
+          }
+        ]
+      },
+      "test_suite_gate": {
+        "status": "PASS",
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "@pytest_tests",
+            "result": "PASS",
+            "rc": 0
+          }
+        ],
+        "summary": "287 passed, 8 warnings, 79 subtests passed in 249.64s (0:04:09)"
+      },
+      "cross_skill_dependency": {
+        "status": "BLOCKED_DEPENDENCY_NON_PACKAGE_BLOCKING",
+        "website_skill_side_status": "PASS",
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        },
+        "evidence_runs": [
+          {
+            "source": "scripts/run_paired_release.py",
+            "rc": 2,
+            "result": "NOT_RUN: needs --consumer-skill-dir; the voice-architect consumer skill is not installed"
+          },
+          {
+            "source": "scripts/validate_paired_release.py",
+            "rc": 1,
+            "result": "FAIL: paired release status is not PASS"
+          }
+        ]
+      },
+      "reliability_gate": {
+        "status": "NOT_RUN",
+        "validator": "scripts/validate_pipeline_ledger.py",
+        "rc": null,
+        "measured_on": {
+          "candidate_commit": "49c0806",
+          "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+        }
+      },
+      "mcp_gate": {
+        "status": "NOT_APPLICABLE",
+        "applicable": false,
+        "blockers": []
+      },
+      "measurement_gateway_live_gate": {
+        "status": "NOT_ASSESSED_NON_BLOCKING",
+        "package_blocking": false,
+        "reason": "no live gateway run in this sweep (network not used)"
+      },
+      "measurement_platform_baseline_digest": "f8a385b42c6a3291e8544f1c600e405b112c1c8b27080cfe6bdf682304ab3e55",
+      "pixelkiez_score_impact": "NONE_DIRECT",
+      "final_decision": "BLOCKED",
+      "candidate_gate_results": {
+        "candidate_commit": "49c0806",
+        "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+        "evidence": "reports/task8-release-reconciliation.json",
+        "steps": [
+          {
+            "script": "run_full_48_active_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_visual_architecture_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_visual_template_gallery_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_measurement_gateway_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_legal_customer_projection_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_customer_presentation_quality_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_business_first_reporting_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_browser_measurement_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_paired_release.py",
+            "group": "evals",
+            "rc": 2
+          },
+          {
+            "script": "run_evidence_bound_claim_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_customer_semantic_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_batch_contract_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_branch_priority_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_chart_template_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_client_marketing_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_fixture_eval.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_impressum_compliance_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_measurement_enrichment_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_reflection_improvement_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_reporting_bundle_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_score_gate_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_strategic_relevance_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_truth_discipline_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_vc03_customer_release_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_visual_reporting_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_visualization_gallery_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "run_release_gate_mutation_evals.py",
+            "group": "evals",
+            "rc": 0
+          },
+          {
+            "script": "quick_validate.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_schema.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_source_map.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_evals.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_no_font_binaries.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_batch_contract.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_full_48_active.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_measurement_platform_baseline.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_strategic_relevance_v321_preservation.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_third_party_license_ledger.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_gateway_optional_contracts.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_core_parity.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_agent_agnostic.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_asset_integrity.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_core_evidence_bindings.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_impressum_compliance.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_impressum_legal_sources.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_no_placeholders.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_security_patterns.py",
+            "group": "validators",
+            "rc": 0
+          },
+          {
+            "script": "validate_paired_release.py",
+            "group": "validators",
+            "rc": 1
+          },
+          {
+            "script": "validate_installability.py",
+            "group": "validators",
+            "rc": 0
+          }
+        ]
+      },
+      "historical_sections_note": "superseded documents kept for history; their claims are not current, and some are refuted by this candidate's traces (e.g. the a66710f sentence that seven path-argument validators run inside the build: see task8-release-reconciliation.json path_arg_validators)",
+      "historical_sections": {
+        "release-gate-report before Task 8 rebuild (draft release-completion-a66710f-2026-10-28)": {
+          "skill_name": "pixelkiez-website-diagnosis",
+          "draft_version": "release-completion-a66710f-2026-10-28",
+          "release_scope": "website-diagnosis-package",
+          "release_gate": {
+            "status": "BLOCKED",
+            "allowed_to_package": false,
+            "reason": "Round-2 independent evaluation of 9ba024d: the adversarial PDF reviewer found, and the main session re-derived from code and PDF text, that scripts/client_story.py:20 rewrites 'im mobilen Labortest' to 'auf Mobilgeräten' (a 4-run lab value reads as the real mobile experience) in every case including the default legacy-baseline output, and that V08 shows minor-gap rows as 'klar'. All 9 cases are semantic QA FAIL; validate_deliverable_bundle --require-customer-release-ready exits 1 for each. This is the third review round of the same defect class (customer text not bound to measurement/evidence class) after CLAIM_SCOPE_PATCH and CUSTOMER_LABEL_FIDELITY_PATCH; instance fixes do not converge.",
+            "decision_basis": "User decision 2026-10-28 ('Close BLOCKED (Recommended)'): no further code change in this slice; follow-up patch 'evidence-bound customer claims' needs its own approval.",
+            "rubric_evaluator_round_2": "PASS_WITH_MINOR_REVISIONS (4/4/4/4/4); MAJOR: LEGAL_SURFACE_STRENGTH_TERMS keyword heuristic misses other legal/contact wordings"
+          },
+          "craftsmanship_gate": {
+            "status": "PASS",
+            "smallest_robust_scope": true,
+            "progressive_disclosure": true,
+            "strongest_counterargument": "More sensitive legal warnings can alarm customers when jurisdiction is unresolved. The design therefore raises customer visibility without raising the legal claim state: POSSIBLE_LEGAL_REVIEW remains distinct from an assessed legal defect.",
+            "failure_mode_chain": "Impressum sidecar detects strong provider opacity -> generic projection or Core-only relevance gate loses it -> top-four report omits it -> customer reads omission as reassurance. Controls: central legal_customer_projection resolver, non-core legal evidence route, mandatory top-four rank, cover/roadmap/closing propagation and end-to-end omission gate.",
+            "notes": [
+              "No external capability was added.",
+              "The exact 48-metric Core score, coverage, weights and compute_score.py remain unchanged."
+            ]
+          },
+          "anti_confabulation_gate": {
+            "status": "PASS",
+            "blocked_claims": [],
+            "notes": [
+              "Unresolved jurisdiction remains POSSIBLE_LEGAL_REVIEW and is never rewritten as a proven legal violation.",
+              "The customer warning can be MANDATORY_CRITICAL while legal claim certainty remains unresolved.",
+              "Expected fines, automatic GDPR conclusions and definitive illegality wording remain blocked.",
+              "LEGAL-IMP-* remains non-core and has NONE_DIRECT score impact."
+            ]
+          },
+          "anti_sycophancy": {
+            "score": 1,
+            "threshold": 3,
+            "status": "PASS",
+            "notes": [
+              "The user preference for stronger warnings was not implemented as automatic violation claims.",
+              "Alarmism is controlled by separating customer-risk priority from legal claim state and by negative overclaim tests."
+            ]
+          },
+          "bias_gate": {
+            "overall_risk": "medium_controlled",
+            "status": "PASS",
+            "mitigations": [
+              "false-negative bias: mandatory observed provider-opacity risks cannot be omitted",
+              "false-positive/alarmism bias: unresolved applicability cannot become a definitive violation",
+              "severity inflation bias: customer priority is separate from finding/legal certainty",
+              "score contamination bias: Legal sidecar remains outside the 48-metric Core"
+            ]
+          },
+          "browser_gate": {
+            "applicable": true,
+            "status": "PASS_WITH_ASSUMPTIONS",
+            "capability_type": "extraction",
+            "permission_boundary": "public visible website evidence only; no auth bypass, private-area automation or irreversible submission",
+            "implementation_status": "IMPLEMENTED_OPTIONAL",
+            "contract_eval": "PASS",
+            "live_runtime_verification": "LOCAL_FIXTURE_PASS_LIVE_PUBLIC_SITE_NOT_ASSESSED",
+            "runtime_error_class": null,
+            "package_impact": "NON_PACKAGE_BLOCKING",
+            "blockers": [],
+            "local_runtime_eval": {
+              "status": "PASS",
+              "metric_count": 8,
+              "checks_true": 9,
+              "chromium": "ms-playwright chromium-1248 via PIXELKIEZ_CHROMIUM_PATH",
+              "evidence": "reports/browser-measurement-eval-results.json",
+              "negative_control": "without a Chromium executable the eval exits 1 (FAIL)"
+            },
+            "core_note_semantics": "public_page_render capability note records browser_rendering_source_declared and browser_execution_independently_verified=false; it never claims an executed render",
+            "evidence": "reports/browser-measurement-eval-results.json"
+          },
+          "mcp_gate": {
+            "applicable": false,
+            "status": "NOT_APPLICABLE",
+            "blockers": []
+          },
+          "template_gate": {
+            "status": "PASS",
+            "source_sha256": "1fcde5007f6ef92967dd7caa740bec86df8f9f7239909a23aac5c06259205e8c",
+            "chart_templates": 14,
+            "customer_chart_policy": "BUSINESS_FIRST_V8_ENRICHMENT_V12_INTERNAL_ONLY"
+          },
+          "visual_story_gate": {
+            "status": "PASS",
+            "policy": "STRATEGIC_RELEVANCE_CUSTOMER_PROJECTION",
+            "max_customer_pages": 12,
+            "customer_warning_states": 4,
+            "closing_required": true,
+            "customer_score_policy": "FULL_SCORE_OR_PARTIAL_BEWERTUNGSSTAND",
+            "V01_customer_chart": "FORBIDDEN_DUPLICATE",
+            "V12_customer_chart": "INTERNAL_ONLY"
+          },
+          "batch_contract_gate": {
+            "status": "PASS",
+            "default_version": "1.3.0",
+            "expected_fields": 96,
+            "custom_dynamic_variables": 95,
+            "contract_sha256": "ed9924084c479c3627ceb2648ef301162d5b99bbfddfe3fefe265c7cec915d38",
+            "classification_model": "v1.3-five-class-readiness",
+            "classification_counts": {
+              "INTERNAL_RECORD": 48,
+              "EL_RUNTIME_REQUIRED": 3,
+              "EL_RUNTIME_DEFAULTED": 18,
+              "OPTIONAL": 14,
+              "PRODUCTION_GATE_ONLY": 13
+            },
+            "runtime_required": [
+              "phone_number",
+              "company_name",
+              "company_website"
+            ],
+            "current_observed_agent_variables_preserved_nonempty": 13,
+            "v1_2": {
+              "field_count": 96,
+              "contract_sha256": "798864ba5998d0e7784137749d8bf857c7d1f7747c996e0c9bc58e7ae8962f76"
+            },
+            "v1_1": {
+              "field_count": 83,
+              "contract_sha256": "ab5570bac1066d4c999a0e8f9b674a9ebfb13eccfabbb1cd0fd049400f0cec5a"
+            },
+            "legacy_v1": {
+              "field_count": 82,
+              "contract_sha256": "66018327ad7480c44e17cf071e6e864105f7d9185d4965cafbd76f9c168edfe5"
+            }
+          },
+          "batch_evals_gate": {
+            "status": "PASS",
+            "cases": 17,
+            "five_class_partition": "PASS",
+            "blank_optional_email_upload_regression": "PASS",
+            "unknown_prospect_default_regression": "PASS",
+            "separate_production_gate_regression": "PASS",
+            "v1_v1_1_v1_2_v1_3_regression": "PASS"
+          },
+          "core_regression_gate": {
+            "status": "PASS",
+            "pdf_json_pipeline_changed": true,
+            "change_type": "intentional visual/reporting architecture: complete JSON+Markdown internal reports and WeasyPrint/SVG customer presentation",
+            "synthetic_fixture_regression": "PASS",
+            "low_coverage_marketing_regression": "PASS",
+            "score_gate_regression": "PASS",
+            "customer_semantic_regression": "PASS",
+            "truth_discipline_regression": "PASS_8",
+            "measurement_enrichment_regression": "PASS_13",
+            "measurement_platform_protected_baseline": "PASS_47_FILES",
+            "measurement_gateway_regression": "PASS_9",
+            "gateway_companion_unit_tests": "PASS_14",
+            "strategic_relevance_regression": "PASS_6",
+            "batch_contract_regression": "PASS_17",
+            "business_first_reporting_regression": "PASS",
+            "visualization_gallery_regression": "PASS_15_OUTPUTS",
+            "measurement_platform_v321_preservation": "PASS_238_BASELINE_FILES_NO_DELETIONS",
+            "customer_presentation_quality_regression": "PASS_3_TARGETED_NEGATIVE_POSITIVE_CASES",
+            "active_core_regression": "PASS_33_CHECKS_20_MUTATIONS",
+            "active_core_score_regression": "PASS_INDEPENDENT_RECOMPUTE_52_EQUALS_COMPUTE_SCORE",
+            "active_core_protected_core": "PASS_COMPUTE_SCORE_REGISTRY_BATCH_RENDERER_PROTECTED",
+            "active_core_full_visual_harness": "UNVERIFIED_RUNTIME_TIMEOUT_NOT_RELABELED_PASS",
+            "impressum_customer_projection_regression": "PASS_8_CHECKS",
+            "impressum_compliance_regression": "PASS_31",
+            "legal_core_score_delta": "PASS_ZERO"
+          },
+          "cross_skill_dependency": {
+            "status": "BLOCKED_DEPENDENCY_NON_PACKAGE_BLOCKING",
+            "website_skill_side_status": "PASS",
+            "voice_architect_side_status": "CURRENT_INSTALLATION_V1_3_CONTRACT_MISSING",
+            "shared_wire_header_status": "WEBSITE_V1_3_96_FIELDS_VALIDATED",
+            "shared_v1_3_digest_parity": "NOT_CURRENTLY_EXECUTABLE",
+            "runtime_boundary": "Current Voice Architect installation does not expose the v1.3 contract. This blocks paired Audit-to-Voice release proof, not installation of the Website Diagnosis skill package."
+          },
+          "reliability_gate": {
+            "status": "PASS",
+            "pipeline_trace_status": "NOT_WRITTEN_RELEASE_BLOCKED",
+            "frozen_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+            "core_regression_status": "PASS",
+            "validator": "scripts/validate_pipeline_ledger.py",
+            "truth_boundary": "Build trace proves ordered process and digest consistency; it does not replace legal/source truth."
+          },
+          "corrections_applied": [
+            "created v1.3 contract while retaining the exact 96-field v1.2 wire header",
+            "classified every field exactly once into the five requested classes",
+            "made customer_email explicitly OPTIONAL",
+            "made prospect_name runtime-defaulted with a non-spoken sentinel when unverified",
+            "separated elevenlabs_upload_status from production_prerequisite_gate",
+            "kept the 13 currently observed agent variables non-empty via required/defaulted semantics",
+            "preserved explicit v1.2, v1.1 and v1 compatibility modes",
+            "added 17 deterministic batch-contract regressions including missing-email and unknown-prospect cases",
+            "preserved the customer PDF/chart/scoring pipeline",
+            "reconciled release report with the validated visual/reporting architecture",
+            "kept strict customer PDF font gate fail-closed while separating skill installability from runtime brand-font availability",
+            "reduced agents/openai.yaml to conservative interface metadata for upload compatibility",
+            "fixed stale deliverable filenames in fixture, marketing, semantic and reflection regressions",
+            "made PDF evidence-boundary assertion robust to whitespace loss in PDF text extraction",
+            "corrected stale paired-release PASS to a current non-package-blocking dependency boundary",
+            "removed coverage/confidence/test/QA/validator/internal evidence terminology from customer-visible model and PDF projection",
+            "made V12 audit coverage internal-only for customer story planning",
+            "added deterministic business-value, visual-eligibility and full-report completeness layers",
+            "fixed canonical voice-hook evidence projection so HYPOTHESIS cannot become VERIFIED_FACT",
+            "added provider-neutral non-scoring measurement enrichment with provenance and fail-closed unavailable states",
+            "added read-only PageSpeed, CrUX, Search Console, GA4 and replaceable DataForSEO SERP adapters without serializing secrets",
+            "added public-only browser privacy/accessibility/mobile measurement module with explicit legal/WCAG boundaries",
+            "replaced ambiguous customer warning state with four-state semantics and strong X Handlungsbedarf only for evidenced findings",
+            "added query/location/device/time-bound V05 Google position visual when complete SERP evidence exists",
+            "replaced the negative limitations closing with schema-required v8 action closing and up to three evidence-backed measurement highlights",
+            "patched semantic QA page-role detection so the final action page is validated as closing",
+            "made legacy customer/marketing render regressions component-level to avoid redundant atomic-builder timeout while separately validating the full atomic builder",
+            "added Strategic Relevance North-Star gate and three-layer internal/business/customer projection boundary",
+            "kept internal PARTIAL_SCORE/NO_SCORE reliability while suppressing Teilscore, coverage and confidence from customer output",
+            "made not_assessed and missing measurement capability non-penalizing and non-customer-visible",
+            "removed V01 duplicate score page and V12 audit coverage from customer visualization selection",
+            "kept population/method/does_not_prove trace internally while removing those process footers from customer SVG/PDF",
+            "added customer-output leakage validator covering model, HTML, PDF and SVG",
+            "added exact v3.2.1 conflict-aware merge preservation report/validator with no baseline deletions",
+            "proved Measurement Enrichment and Strategic Relevance together in one 12-page/7-visual/four-lever rendered proof",
+            "reconciled conflicting customer score rules: PARTIAL_SCORE now projects as Pixelkiez Bewertungsstand without coverage/confidence leakage",
+            "made first rendered PDF draft-only and added non-compensatory final presentation quality gate",
+            "added explicit cover visual checks for complete takeaway, score visibility and no cross-page sentence split",
+            "added semantic QA checks for cover completeness, score correctness, lever business impact, privacy scope and synthetic metric visuals",
+            "removed invented V03 priority magnitude and retained ordinal rank only",
+            "rendered business impact on every four-lever card",
+            "preserved complete closing actions and fail-closed instead of arbitrary text clipping",
+            {
+              "file": "scripts/build_internal_analysis_report.py",
+              "change": "added internal metric/category weight and weighted-contribution traceability without customer leakage"
+            },
+            {
+              "file": "assets/core-evidence-bindings.active.v1.json",
+              "change": "added exact 48-row active binding with registry-mirrored weights, methods, control basis and admission rules"
+            },
+            {
+              "file": "references/measurement-gateway-contract.md",
+              "change": "clarified native NON_SCORING_ENRICHMENT versus explicit active-core promotion boundary"
+            },
+            "implemented non-core LEGAL-IMP-01..11 sidecar architecture without changing the 48-metric score core",
+            "added current primary-source legal registry and source freshness validation",
+            "added deterministic ILES admission/no-double-count and critical/audit-priority override logic",
+            "added schema-valid finding projection and zero-core-score firewall regression",
+            "added customer legal-overclaim/internal-metadata leakage guardrails and voice isolation",
+            "added optional strict digest-bound impressum-compliance.json deliverable integration",
+            "refused to bypass the legacy Measurement Platform override allowlist conflict",
+            "added central legal_customer_projection resolver with separate legal claim state and customer-risk priority",
+            "consolidated provider-identification Legal findings into one concrete customer-facing risk finding",
+            "added a second Strategic Relevance evidence route for validated non-core Legal findings",
+            "made MANDATORY_CRITICAL Legal risk rank first in the exactly-four customer levers",
+            "made mandatory Legal warning visible on cover and persistent through roadmap and closing",
+            "added end-to-end validate_impressum_projection omission gate and customer-presentation hard gate",
+            "added Bo Feng Lin Golden Regression with unresolved jurisdiction, absent operator identity/address, ILES=0 and mandatory customer visibility",
+            "preserved anti-overclaim controls and zero Core score/coverage delta",
+            "bundled four manifest-pinned OFL brand fonts (assets/fonts); validate_no_font_binaries allows exactly these, fail-closed without fontTools",
+            "fixed V05 ranking subtitle, VC03 website-symbol wording and legal-surface strength (CUSTOMER_LABEL_FIDELITY_PATCH) after independent evaluation"
+          ],
+          "final_decision": "BLOCKED",
+          "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+          "internal_report_gate": {
+            "status": "PASS",
+            "json": "analysis_report.json",
+            "markdown": "analysis_report.md",
+            "metric_parity": "48/48",
+            "evidence": "reports/visual-reporting-eval-results.json",
+            "measurement_enrichment": "PASS_32_FIXTURE_METRICS_5_SOURCES",
+            "customer_filter_does_not_delete_internal_metrics": true,
+            "active_core_weight_traceability": "PASS_48_METRICS_WEIGHTED_CONTRIBUTIONS_RECONCILED",
+            "active_core_analysis_report": "reports/analysis-report-reconciliation.json"
+          },
+          "visualization_reporting_gate": {
+            "status": "PASS",
+            "approved_templates": "14 Vega-Lite + 1 Mermaid/process profile",
+            "selected_visual_range": "4-7",
+            "four_levers": "PASS",
+            "benchmark_without_context": "BLOCKED",
+            "ranking_without_context": "BLOCKED",
+            "evidence": "reports/visual-reporting-eval-results.json",
+            "contextual_serp_ranking": "PASS_V05",
+            "measurement_platform_patch_change": "NONE_PROTECTED_BYTE_IDENTICAL",
+            "customer_method_footer": "FORBIDDEN",
+            "V01_customer_selected": false,
+            "V12_customer_selected": false,
+            "active_core_delta_regression": "PASS_BUSINESS_FIRST_PLUS_DIRECT_ACTIVE_RENDER_PLUS_DELIVERABLE_BUNDLE",
+            "active_core_monolithic_harness": "SUPERSEDED: full build_audit_deliverables customer-mode run on the active-core scored report completed (10 pages, 5 visuals); the earlier timed-out harness was not re-run under that name"
+          },
+          "weasyprint_render_gate": {
+            "status": "PASS",
+            "renderer": "WEASYPRINT",
+            "realistic_fixture_pages": 10,
+            "evidence": "reports/realistic-presentation-qa.json",
+            "measurement_platform_staged_proof": "PASS_11_PAGES_6_VISUALS_FULL_BUILDER",
+            "strategic_merge_proof": "PASS_11_PAGES_6_VISUALS",
+            "active_core_fixture_proof": "PASS_10_PAGES_5_VISUALS",
+            "active_core_fixture_pdf_sha256": "62303d0deeed5b38b7144a4e3eff6a8014ebb566f17b25d64feefc2ea959257b"
+          },
+          "brand_rendering_gate": {
+            "status": "PASS",
+            "font_binary_policy": "PACKAGE_BUNDLED_MANIFEST_PINNED",
+            "strict_customer_mode_fail_closed": true,
+            "runtime_font_status": "EXACT",
+            "exact_display_font_available": true,
+            "exact_data_font_available": true,
+            "evidence": "reports/brand-font-capability.json",
+            "font_manifest_sha256": "4b8a2e8ca39cdb5a1a3b6b0221d3e6afe9fdf2ec451390ac58a4c7a1255e1e16",
+            "font_source": {
+              "display": "PACKAGED",
+              "data": "PACKAGED"
+            }
+          },
+          "proof_output_gate": {
+            "status": "PASS",
+            "fixture": "Synthetic Measurement Enrichment + Strategic Relevance merge proof",
+            "visual_qa": "PASS",
+            "semantic_qa": "PASS",
+            "internal_metric_count": 48,
+            "selected_visual_count": 6,
+            "customer_release_ready": false,
+            "evidence": "reports/strategic-relevance-proof.json",
+            "measurement_highlights": 3,
+            "privacy_action_x": "PASS",
+            "serp_visual": "PASS",
+            "closing": "PASS",
+            "measurement_platform_staged_proof": "PASS",
+            "measurement_enrichment_metric_count": 32,
+            "measurement_enrichment_source_count": 5,
+            "customer_output_guardrails": "PASS",
+            "four_levers": 4
+          },
+          "strict_customer_output_gate": {
+            "status": "PASS",
+            "customer_release_ready": false,
+            "reason": "Exact Schibsted Grotesk and IBM Plex Mono resolve from the manifest-pinned package fonts offline; strict customer rendering is no longer font-blocked. customer_release_ready stays false until visual and semantic QA pass on the exact PDF digest."
+          },
+          "measurement_enrichment_gate": {
+            "status": "PASS",
+            "mode": "NON_SCORING_ENRICHMENT",
+            "fixture_metrics": 32,
+            "fixture_sources": 5,
+            "eval_cases": 13,
+            "source_truth_separation": "PASS",
+            "score_core_unchanged": "PASS",
+            "live_provider_credentials": "NOT_PRESENT_NOT_CLAIMED",
+            "evidence": "reports/measurement-enrichment-eval-results.json",
+            "measurement_gateway_attachment": "PASS_NON_SCORING_9_PUBLIC_METRICS"
+          },
+          "customer_warning_semantics_gate": {
+            "status": "PASS",
+            "states": [
+              "Klar",
+              "Verbesserung sinnvoll",
+              "Handlungsbedarf",
+              "Nicht belastbar bewertet"
+            ],
+            "privacy_action_x": "PASS",
+            "unknown_neutral": "PASS",
+            "legal_overclaim_blocked": true,
+            "evidence": "reports/realistic-presentation-qa.json"
+          },
+          "customer_closing_gate": {
+            "status": "PASS",
+            "schema_version": "8.0",
+            "negative_limits_final_page_removed": true,
+            "action_oriented_closing": true,
+            "measurement_highlights": 3,
+            "cta": "Prioritäten bestätigen. Umsetzung starten. Wirkung nachmessen.",
+            "evidence": "reports/realistic-presentation-qa.json",
+            "measurement_platform_patch_change": "NONE_PROTECTED_BYTE_IDENTICAL"
+          },
+          "measurement_platform_baseline_digest": "f8a385b42c6a3291e8544f1c600e405b112c1c8b27080cfe6bdf682304ab3e55",
+          "measurement_gateway_gate": {
+            "status": "PASS",
+            "mode": "OPTIONAL_READ_ONLY_NON_SCORING",
+            "integration_checks": 9,
+            "gateway_unit_tests": 14,
+            "network_tests": "INJECTED_TRANSPORT_NO_LIVE_NETWORK",
+            "core_metric_count": 48,
+            "evidence": "reports/measurement-gateway-eval-results.json"
+          },
+          "protected_baseline_gate": {
+            "status": "PASS",
+            "baseline_digest": "f8a385b42c6a3291e8544f1c600e405b112c1c8b27080cfe6bdf682304ab3e55",
+            "protected_files": 47,
+            "protected_domains": [
+              "48-metric score core",
+              "WeasyPrint/SVG renderer",
+              "14-template visual catalog",
+              "ElevenLabs v1.3 96-field contract",
+              "existing Measurement Enrichment core",
+              "Customer Closing"
+            ],
+            "evidence": "reports/measurement-platform-protected-baseline.json",
+            "exact_files": 35,
+            "intentional_hash_bound_overrides": 12,
+            "override_policy": "ONLY_EXPLICIT_SHARED_PATHS_WITH_ALLOWED_REASON_AND_HASH_CHAIN",
+            "chained_overrides": 6,
+            "override_reports": 11,
+            "live_result": "PASS: protected baseline exact=35 intentional_shared_overrides=12 chained_overrides=6 override_reports=11"
+          },
+          "third_party_reuse_gate": {
+            "status": "PASS",
+            "repositories_reviewed": 4,
+            "source_code_copied": false,
+            "policy": "REFERENCE_OR_INDEPENDENT_REIMPLEMENTATION_ONLY",
+            "evidence": "reports/third-party-license-ledger.json"
+          },
+          "measurement_platform_proof_gate": {
+            "status": "PASS",
+            "proof_mode": "ENRICHED_SYNTHETIC_FIXTURE_FULL_BUILDER",
+            "page_count": 11,
+            "selected_visual_count": 6,
+            "four_levers": 4,
+            "renderer": "WEASYPRINT",
+            "pdf_output": "PASS",
+            "pdf_brand": "PASS",
+            "customer_language": "PASS",
+            "evidence": "reports/measurement-platform-proof.json"
+          },
+          "measurement_gateway_live_gate": {
+            "status": "NOT_ASSESSED_NON_BLOCKING",
+            "package_blocking": false,
+            "reason": "Host runtime did not provide usable live DNS/egress for the public gateway smoke. Offline fixture and injected-transport correctness/security tests pass; live gateway capability is not claimed as validated."
+          },
+          "strategic_relevance_gate": {
+            "status": "PASS",
+            "north_star_question": "Hätte ein Unternehmer, der Geld mit seiner Seite oder dem beworbenen Service/Produkt verdient, einen strategischen Vorteil, wenn er diese Information hätte?",
+            "three_layers": [
+              "INTERNAL_RECORD",
+              "WEBSITE_BUSINESS_FACT",
+              "CUSTOMER_STRATEGIC_PROJECTION"
+            ],
+            "checks": 6,
+            "partial_score_customer_policy": "BEWERTUNGSSTAND_NO_COVERAGE_OR_CONFIDENCE",
+            "not_assessed_customer_penalty": false,
+            "evidence": "reports/strategic-relevance-eval-results.json",
+            "legal_sidecar_route": "PASS",
+            "mandatory_legal_risk_selection": "PASS"
+          },
+          "customer_output_guardrail_gate": {
+            "status": "PASS",
+            "forbidden_customer_classes": [
+              "audit/test coverage",
+              "test procedure/runtime/QA",
+              "evidence grade/measurement class",
+              "not_assessed/SOURCE_NEEDED",
+              "provider/test jargon",
+              "internal method/does_not_prove boilerplate"
+            ],
+            "validated_artifacts": [
+              "client-report-model.json",
+              "customer_presentation.html",
+              "customer_presentation.pdf",
+              "visuals/*.svg"
+            ],
+            "evidence": "reports/strategic-relevance-proof.json"
+          },
+          "measurement_platform_preservation_gate": {
+            "status": "PASS",
+            "validator": "scripts/validate_measurement_platform_baseline.py",
+            "result": "PASS: protected baseline exact=35 intentional_shared_overrides=12 chained_overrides=6 override_reports=11",
+            "policy": "Only hash-bound, explicitly authorized shared customer-reporting paths may drift; Core scoring remains protected.",
+            "override_report": "reports/impressum-customer-truth-shared-overrides.json"
+          },
+          "customer_presentation_quality_gate": {
+            "status": "PASS",
+            "contract_version": "1.0",
+            "eval_status": "PASS",
+            "non_compensatory": true,
+            "final_delivery_requires": "quality_status=PASS on exact final PDF/model/scored-report digests",
+            "pending_state": "BUILT_PENDING_QA is draft-only",
+            "score_projection": "FULL_SCORE=Pixelkiez Score; PARTIAL_SCORE=Pixelkiez Bewertungsstand; NO_SCORE=no number",
+            "synthetic_priority_magnitude": "FORBIDDEN",
+            "four_lever_business_impact": "REQUIRED",
+            "privacy_legal_certainty": "FAIL_CLOSED",
+            "rendered_proof_status": "PASS",
+            "rendered_proof": "reports/customer-presentation-quality-proof.json",
+            "repair_loop_verified": true,
+            "initial_pending_qa_blocks_delivery": true,
+            "eval_checks": 5,
+            "legal_risk_projection_completeness": "REQUIRED_AND_PASS",
+            "hard_gate_count_with_legal_projection": 14
+          },
+          "active_core_gate": {
+            "status": "PASS",
+            "mode": "ACTIVE_CORE_ADMISSION_CONTRACT_PATH",
+            "artifact_digest": "1a9c862edfce24d6193273049eebed12e0fa87312d98497bb835ebb4245f1e91",
+            "exact_registry_metrics": 48,
+            "execution_ready_fixture": 48,
+            "evidence_ready_fixture": 48,
+            "score_admitted_fixture": 48,
+            "report_reconciled_fixture": 48,
+            "mutation_controls_detected": 20,
+            "registry_weights_unchanged": true,
+            "compute_score_changed": false,
+            "fixture_only": true,
+            "evidence": [
+              "reports/core-active-eval-results.json",
+              "reports/core-active-mutation-test-report.json",
+              "reports/score-reconciliation-report.json",
+              "reports/analysis-report-reconciliation.json",
+              "reports/core-active-determinism-report.json"
+            ],
+            "does_not_prove": [
+              "48 live measurements on an arbitrary website",
+              "live provider availability",
+              "truth of an unsupported qualitative observation"
+            ]
+          },
+          "active_core_render_gate": {
+            "status": "PASS",
+            "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+            "fixture_only": true,
+            "renderer": "WEASYPRINT",
+            "page_count": 10,
+            "embedded_visual_count": 5,
+            "deliverable_bundle_build_complete": true,
+            "customer_release_ready": false,
+            "qa_status": "VISUAL_PASS_SEMANTIC_FAIL",
+            "brand_font_status": "EXACT",
+            "validators": [
+              "validate_analysis_report_completeness",
+              "validate_pdf_output",
+              "validate_presentation_brand",
+              "validate_customer_business_language",
+              "validate_customer_output_guardrails",
+              "validate_deliverable_bundle"
+            ],
+            "monolithic_visual_harness": "SUPERSEDED: full build_audit_deliverables customer-mode run on the active-core scored report completed (10 pages, 5 visuals); the earlier timed-out harness was not re-run under that name",
+            "regression_strategy": "fresh active-core decomposed E2E + unchanged existing visual architecture baseline proof; timeout is not relabeled PASS",
+            "evidence": "reports/active-core-render-proof.json",
+            "note": "Positive E2E (>=4 admissible visuals, closed evidence chain) renders and passes all deterministic validators; its semantic QA FAILs (findings/strengths from synthetic-report.json contradict the active trust/legal values). Not deliverable; open risk by user decision 2026-10-28.",
+            "status_scope": "status covers the rendered positive FULL_48_ACTIVE path and its deterministic validators; customer semantic QA is a separate verdict (semantic_qa_status) and is FAIL"
+          },
+          "patch_status": {
+            "plan": "APPROVED",
+            "architecture": "PASS",
+            "implementation": "COMPLETE",
+            "validation": "FAIL_SEMANTIC_QA",
+            "release_gate": "BLOCKED",
+            "packaging": "NOT_AUTHORIZED",
+            "release": "NOT_PUSHED_NOT_MERGED_NOT_INSTALLED",
+            "historical_note": "Values before 2026-10-28 claimed release_gate PASS / packaging AUTHORIZED for an earlier draft; superseded."
+          },
+          "pixelkiez_score_impact": "NONE_DIRECT",
+          "impressum_legal_source_gate": {
+            "status": "PASS",
+            "enabled_primary_rules": 9,
+            "disabled_source_needed_rules": 6,
+            "verified_at": "2026-09-08"
+          },
+          "impressum_compliance_gate": {
+            "status": "PASS",
+            "legal_submetrics": 11,
+            "iles_weight_total": 100,
+            "pixelkiez_score_impact": "NONE_DIRECT"
+          },
+          "impressum_eval_gate": {
+            "status": "PASS",
+            "cases": 31,
+            "pass_count": 31,
+            "core_score_delta": 0,
+            "golden_case": "LEG-GOLD-BFL"
+          },
+          "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+          "fresh_reporting_gate": {
+            "status": "PASS",
+            "entrypoint": "scripts/run_reporting_bundle_evals.py",
+            "exit_code": 0,
+            "report": "reports/visual-reporting-eval-results.json"
+          },
+          "protected_candidate_gate": {
+            "status": "PASS",
+            "checked_files": 31,
+            "unexpected_changes": [],
+            "report": "reports/impressum-protected-preservation.json"
+          },
+          "strategic_relevance_preservation_gate": {
+            "status": "PASS",
+            "baseline_files": 238,
+            "deleted_files": 0
+          },
+          "measurement_platform_baseline_gate": {
+            "status": "PASS",
+            "validator": "scripts/validate_measurement_platform_baseline.py",
+            "authorized_patch_reason": "IMPRESSUM_CUSTOMER_TRUTH_PATCH",
+            "negative_controls": [
+              "unlisted protected mutation rejected",
+              "wrong override reason rejected",
+              "broken hash chain rejected"
+            ]
+          },
+          "packaging_evidence": {
+            "status": "NOT_AUTHORIZED",
+            "artifact_name": "skill.zip",
+            "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+            "reason": "release gate BLOCKED; no skill.zip built"
+          },
+          "impressum_customer_projection_gate": {
+            "status": "PASS",
+            "golden_case": "LEG-GOLD-BFL",
+            "customer_priority": "MANDATORY_CRITICAL",
+            "claim_state": "POSSIBLE_LEGAL_REVIEW",
+            "pixelkiez_score_impact": "NONE_DIRECT",
+            "required_surfaces": [
+              "top-four rank 1",
+              "cover warning",
+              "roadmap now",
+              "closing",
+              "rendered PDF"
+            ],
+            "omission_controls": [
+              "finding omitted -> FAIL",
+              "cover warning omitted -> FAIL",
+              "roadmap action omitted -> FAIL"
+            ],
+            "overclaim_controls": "PASS",
+            "evidence": "reports/legal-customer-projection-eval-results.json"
+          },
+          "candidate_patch_evidence": {
+            "all_legacy_gate_sections_are_historical": true,
+            "date": "2026-10-27",
+            "branch_priority_unit_tests": "PASS_16",
+            "branch_priority_integration": "PASS",
+            "core_regression": "PASS_33_CHECKS_20_MUTATIONS",
+            "customer_model_default_exact_identity": "PASS",
+            "reporting_bundle_regression": "PASS",
+            "vibecheck03_unit_tests": "PASS_18",
+            "remaining_previous_patch_issues": [
+              "safe 404 browser acquisition",
+              "dynamic browser scenario acquisition",
+              "non-core VC03 finding customer admission"
+            ],
+            "independent_evaluator": "NOT_EXECUTED",
+            "industry_profiles_approved": 0,
+            "installable_skill_zip_authorized": "SUPERSEDED: see release_gate.authorization_basis for candidate a66710f"
+          },
+          "customer_semantic_gate": {
+            "status": "FAIL",
+            "semantic_bundle_sha256": "9fd973c94e7493e804ccd923b60abfc42a66a8ef3e1c8bbd9dc9bb78939abfeb",
+            "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+            "evidence": [
+              "reports/semantic-customer-qa-eval-report.json",
+              "reports/customer-pdf-qa-release-a66710f.json"
+            ],
+            "cases": 9,
+            "distinct_pdfs": 7,
+            "case_verdicts": {
+              "legacy-baseline": "FAIL",
+              "legal-golden": "FAIL",
+              "case-a-critical": "FAIL",
+              "case-b-equal-rank-profile": "FAIL",
+              "case-c-vc03-detail": "FAIL",
+              "active-positive": "FAIL",
+              "proof-realistic": "FAIL",
+              "proof-strategic": "FAIL",
+              "proof-measurement-gateway": "FAIL"
+            },
+            "recorded_fail": "all 9 cases semantic FAIL (round-2 review, re-derived); validate_deliverable_bundle rc 1 for all",
+            "negatives": "Baumdienst and low-coverage fail closed with CUSTOMER_MIN_VISUALS_NOT_MET, no PDF written",
+            "independence": "page verdicts by the authoring session; an independent read-only reviewer re-checked fa791c3 and its confirmed findings are fixed or recorded (independent_review in the QA report)"
+          },
+          "candidate_gate_results": {
+            "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+            "candidate_commit": "a66710f",
+            "status": "SWEEP_DONE",
+            "sweep": "64 root-arg scripts run, 43 rc 0. Non-zero: 15 usage errors (need explicit artifact paths; 8 of them run inside build_audit_deliverables/validate_deliverable_bundle on all 9 builds, not run standalone: validate_batch_context.py, validate_chart_payloads.py, validate_core_score_admission.py, validate_elevenlabs_batch_csv.py, validate_visual_assets.py, validate_visual_story.py, validate_website_audit_packet.py); validate_full_48_active.py, validate_strategic_relevance_v321_preservation.py failed only because the sweep's own validate_customer_presentation_quality.py wrote its report into the root and changed the digest - rc 0 after removing that file; validate_pipeline_ledger/validate_release_gate bind this evidence (run after it); validate_paired_release + run_paired_release need the external voice-architect consumer (not installed, non-package-blocking).",
+            "history": [
+              {
+                "candidate_commit": "456c226",
+                "artifact_digest": "3b442603b519158d158c924e9d65e19e3a30aca4ade5fcfe3307c7fb94be7196",
+                "sweep": "44 of 47 pass",
+                "independent_evaluation": "FAIL (4 MAJOR: two status contradictions, nested reports/dist boundary, QA not bound to rendering code); all four fixed in 6875f5a, 22d2d3e, c393078, cd90890"
+              },
+              {
+                "candidate_commit": "92eb6c9",
+                "artifact_digest": "a815fb3a3016f4d4ae520bc43043f1ea2fe80b19ea6cf4302089ee71dbc19e46",
+                "sweep": "44 of 47 pass (3 authorization-dependent)",
+                "independent_evaluation": "FAIL (MAJOR-N1: packager shipped .pyc/.pytest_cache outside the build digest; MINOR: release gate trusted stored v3.2.1 status). Fixed in 85f6e46, 05aff4f."
+              },
+              {
+                "candidate_commit": "80ec6bd",
+                "artifact_digest": "29802261f20ca35751ed6affc93312e62fd4d974064dce8546de89a3eaba0fb2",
+                "sweep": "44 of 47 pass (3 authorization-dependent)",
+                "independent_evaluation": "PASS (round 3; MINORs: package output dir self-inclusion, boundary docstring, untested live v3.2.1 branch — fixed in f8bf3cf; sourceless .pyc in a working tree and reports/ rewritability remain process-bounded)"
+              },
+              {
+                "candidate_commit": "e4a0cb6",
+                "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
+                "sweep": "SWEEP_DONE"
+              },
+              {
+                "candidate_commit": "badaf71",
+                "artifact_digest": "f2029844764c4dfc3784cbee00d1c8c84e1976d54574c8f5f69c9c5287ef3226",
+                "status": "SWEEP_DONE"
+              }
+            ],
+            "listed_needs_paths": 14,
+            "bundle_validators_on_all_builds": "finalize_deliverable_manifest, validate_pdf_visual_qa, validate_customer_semantic_qa, validate_customer_output_guardrails, validate_customer_business_language, validate_analysis_report_completeness, validate_deliverable_bundle --require-customer-release-ready (active-positive rc 1 by design, all others rc 0)"
+          },
+          "historical_sections": {
+            "reliability_gate_pxk-impressum-customer-truth-p0-20260909": {
+              "status": "PASS",
+              "pipeline_trace_status": "PASS",
+              "frozen_artifact_digest": "959ea94775c147ca3d6c197a4cc62f4e603557b53ec6bf8ca236a67ffabee13b",
+              "core_regression_status": "PASS",
+              "pipeline_events": 9,
+              "pipeline_run_id": "pxk-impressum-customer-truth-p0-20260909",
+              "validator": "scripts/validate_pipeline_ledger.py",
+              "truth_boundary": "Build trace proves ordered process and digest consistency; it does not replace legal/source truth."
+            },
+            "packaging_evidence_959ea947": {
+              "status": "AUTHORIZED",
+              "artifact_name": "skill.zip",
+              "candidate_artifact_digest": "959ea94775c147ca3d6c197a4cc62f4e603557b53ec6bf8ca236a67ffabee13b",
+              "archive_structure_requirement": "PASS_ONE_SKILL_ROOT",
+              "pipeline_ledger": "PASS_9_EVENTS"
+            }
+          }
         }
       }
     }

@@ -68,15 +68,17 @@
     "deliverable_status": "CUSTOMER_RELEASE_BLOCKED"
   },
   "history": {
-    "document before Task 8 rebuild (candidate a66710f)": {
-      "schema_version": "1.0",
-      "status": "FAIL",
-      "fixture_kind": "SYNTHETIC_REGRESSION_FIXTURE",
-      "external_website_truth_authority": false,
-      "goal": "Prove the draft -> inspect -> repair -> rerender -> digest-bound QA -> quality PASS workflow.",
+    "document before Task 8 rebuild (candidate 49c0806)": {
+      "status": "PASS",
+      "candidate_commit": "49c0806",
+      "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+      "fixture_only": true,
+      "goal": "draft -> inspect -> repair -> rerender -> digest-bound QA, on the current candidate",
       "initial_state": {
+        "source": "customer-presentation-quality-report.json of the legacy-baseline build of this candidate",
         "quality_status": "PENDING_QA",
-        "passed_hard_gates": 9,
+        "passed_hard_gates": 11,
+        "hard_gate_count": 14,
         "pending_gates": [
           "cover_integrity",
           "visual_qa",
@@ -85,88 +87,158 @@
         "delivery_allowed": false
       },
       "observed_repair_loop": {
-        "first_visual_issue": "Cover key message was clipped in the first rendered proof layout.",
-        "repair_applied": "Cover score/message band layout changed and the PDF was rerendered.",
-        "rerender_required": true,
-        "all_pages_reinspected_after_repair": true
-      },
-      "repair_loop_recorded_at": "2026-09-08 (initial_state and observed_repair_loop describe that recorded draft -> repair -> rerender loop)",
-      "current_repair_loop": {
-        "draft_candidate": "fa791c3 (bundles BUILT_PENDING_QA, delivery not allowed until visual+semantic QA)",
-        "independent_review_findings_fixed": [
-          "V05 device label",
-          "VC03 website-symbol wording",
-          "legal-surface strength next to the provider-identity risk"
+        "rounds": [
+          {
+            "round": 1,
+            "build": "6846366",
+            "confirmed": 11,
+            "fail": null,
+            "outcome": "fixed in 9c506de"
+          },
+          {
+            "round": 2,
+            "build": "9c506de",
+            "confirmed": 18,
+            "fail": null,
+            "outcome": "fixed in cd8689d; owner decisions applied in 339518f, 2be0a98"
+          },
+          {
+            "round": 3,
+            "build": "2be0a98",
+            "confirmed": 12,
+            "fail": null,
+            "outcome": "review-convergence rule: strategy changed in d779396, 4ab90a9 (shared reading, topic overlaps, fail-closed cross-surface gate, fixed checklist)"
+          },
+          {
+            "round": 4,
+            "build": "4ab90a9",
+            "confirmed": null,
+            "fail": 0,
+            "outcome": null
+          }
         ],
-        "repair_commit": "a66710f",
         "rerender_required": true,
-        "reinspection": "the six page rasters that changed were re-inspected; every other raster is byte-identical to an inspected fa791c3/badaf71 raster"
+        "all_pages_reinspected_after_repair": true,
+        "basis": "rounds 1-3 led to fixes and rerenders; round 4 opened 50 of 50 unique rasters of the rerendered build"
       },
-      "historical_final_state": {
-        "final_state": {
-          "quality_status": "PASS",
-          "hard_gate_count": 14,
-          "passed_hard_gates": 14,
-          "failed_gates": [],
-          "pending_gates": [],
-          "visual_qa": "PASS",
-          "semantic_qa": "PASS",
-          "page_count": 10,
-          "pdf_sha256": "de27843d7798299cb891ee937a7deb3a000cb2860006fc755a21f34e439df597",
-          "client_model_sha256": "d4ee5c61ba08787166e1188c5ea52fbfd5e10ffb8b057d8f31966b7aa312c3c7",
-          "font_status": "EXACT",
-          "pdf_font_embedding": "VERIFIED",
-          "deliverable_status": "CUSTOMER_RELEASE_READY"
-        },
-        "release_boundary": {
-          "customer_presentation_quality": "PASS",
-          "strict_customer_release_ready": true,
-          "remaining_blocker": null,
-          "does_not_prove": [
-            "external website truth",
-            "legal compliance",
-            "WCAG conformance",
-            "quality of other customers' PDFs without per-output QA"
-          ]
-        },
-        "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
-        "revalidated_at": "2026-10-28",
-        "note": "Recorded 2026-09-08 on an 11-page PARTIAL_EXACT render (pdf 80d41c51...); superseded as current-state evidence by final_state below."
-      },
-      "current_binding": "legacy-baseline customer-mode build of evals/fixtures/synthetic-report.json; quality report produced by finalize_deliverable_manifest/validate_deliverable_bundle on that bundle",
-      "candidate_commit": "a66710f",
-      "render_basis": "Built offline from git archive of a66710f (tree digest bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d) in a network-denied sandbox with no system fonts and no PIXELKIEZ_FONT_DIR; packaged brand fonts resolved EXACT and embedding VERIFIED. Versus candidate badaf71, six page rasters changed (legal-golden/proof-realistic p2, proof-strategic p8, case-c p8-p10) and were re-inspected; every other raster is byte-identical to an inspected badaf71 raster.",
       "final_state": {
-        "quality_status": "FAIL",
-        "hard_gate_count": 14,
-        "passed_hard_gates": 14,
-        "failed_gates": [],
-        "pending_gates": [],
+        "case": "legacy-baseline",
+        "quality_status": "PROOF_PASS_CUSTOMER_BLOCKED",
+        "quality_status_rule": "review visual QA rc 0 + proof QA PASS against the fixed checklist + customer semantic FAIL on example data",
+        "release_mode": "proof",
+        "customer_release_ready": false,
         "visual_qa": "PASS",
-        "semantic_qa": "FAIL",
+        "proof_semantic_qa": "PASS_AGAINST_CHECKLIST",
+        "semantic_qa": "FAIL by fact: example data",
         "page_count": 10,
-        "pdf_sha256": "de27843d7798299cb891ee937a7deb3a000cb2860006fc755a21f34e439df597",
-        "client_model_sha256": "d4ee5c61ba08787166e1188c5ea52fbfd5e10ffb8b057d8f31966b7aa312c3c7",
+        "pdf_sha256": "d8b20180a3dca89cc7fac421ffec5cbed57cc58783a0c50850e09b764c7673f4",
+        "client_model_sha256": "14e07acdd5641513b064b68756534dab34788fd4a9de28f23155523b66554a9d",
         "font_status": "EXACT",
         "pdf_font_embedding": "VERIFIED",
         "deliverable_status": "CUSTOMER_RELEASE_BLOCKED"
       },
-      "release_boundary": {
-        "customer_presentation_quality": "FAIL",
-        "strict_customer_release_ready": false,
-        "remaining_blocker": "Round-2 independent review of 9ba024d, re-derived from PDF text and plan data: client_story.py rewrites 'im mobilen Labortest' to 'auf Mobilgeräten' (lab value shown as real mobile experience) in every case, and V08 shows minor-gap rows as 'klar'. User decision 2026-10-28: close BLOCKED; follow-up patch 'evidence-bound customer claims'.",
-        "does_not_prove": [
-          "external website truth",
-          "legal compliance",
-          "WCAG conformance",
-          "quality of other customers' PDFs without per-output QA"
-        ]
-      },
-      "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
-      "revalidated_at": "2026-10-28",
-      "limitations": [
-        "finalize_deliverable_manifest.py exits 1 on semantic FAIL but leaves a previously written CUSTOMER_RELEASE_READY status in deliverable-manifest.json; validate_deliverable_bundle --require-customer-release-ready is the authoritative check and exits 1."
-      ]
+      "history": {
+        "document before Task 8 rebuild (candidate a66710f)": {
+          "schema_version": "1.0",
+          "status": "FAIL",
+          "fixture_kind": "SYNTHETIC_REGRESSION_FIXTURE",
+          "external_website_truth_authority": false,
+          "goal": "Prove the draft -> inspect -> repair -> rerender -> digest-bound QA -> quality PASS workflow.",
+          "initial_state": {
+            "quality_status": "PENDING_QA",
+            "passed_hard_gates": 9,
+            "pending_gates": [
+              "cover_integrity",
+              "visual_qa",
+              "semantic_qa"
+            ],
+            "delivery_allowed": false
+          },
+          "observed_repair_loop": {
+            "first_visual_issue": "Cover key message was clipped in the first rendered proof layout.",
+            "repair_applied": "Cover score/message band layout changed and the PDF was rerendered.",
+            "rerender_required": true,
+            "all_pages_reinspected_after_repair": true
+          },
+          "repair_loop_recorded_at": "2026-09-08 (initial_state and observed_repair_loop describe that recorded draft -> repair -> rerender loop)",
+          "current_repair_loop": {
+            "draft_candidate": "fa791c3 (bundles BUILT_PENDING_QA, delivery not allowed until visual+semantic QA)",
+            "independent_review_findings_fixed": [
+              "V05 device label",
+              "VC03 website-symbol wording",
+              "legal-surface strength next to the provider-identity risk"
+            ],
+            "repair_commit": "a66710f",
+            "rerender_required": true,
+            "reinspection": "the six page rasters that changed were re-inspected; every other raster is byte-identical to an inspected fa791c3/badaf71 raster"
+          },
+          "historical_final_state": {
+            "final_state": {
+              "quality_status": "PASS",
+              "hard_gate_count": 14,
+              "passed_hard_gates": 14,
+              "failed_gates": [],
+              "pending_gates": [],
+              "visual_qa": "PASS",
+              "semantic_qa": "PASS",
+              "page_count": 10,
+              "pdf_sha256": "de27843d7798299cb891ee937a7deb3a000cb2860006fc755a21f34e439df597",
+              "client_model_sha256": "d4ee5c61ba08787166e1188c5ea52fbfd5e10ffb8b057d8f31966b7aa312c3c7",
+              "font_status": "EXACT",
+              "pdf_font_embedding": "VERIFIED",
+              "deliverable_status": "CUSTOMER_RELEASE_READY"
+            },
+            "release_boundary": {
+              "customer_presentation_quality": "PASS",
+              "strict_customer_release_ready": true,
+              "remaining_blocker": null,
+              "does_not_prove": [
+                "external website truth",
+                "legal compliance",
+                "WCAG conformance",
+                "quality of other customers' PDFs without per-output QA"
+              ]
+            },
+            "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+            "revalidated_at": "2026-10-28",
+            "note": "Recorded 2026-09-08 on an 11-page PARTIAL_EXACT render (pdf 80d41c51...); superseded as current-state evidence by final_state below."
+          },
+          "current_binding": "legacy-baseline customer-mode build of evals/fixtures/synthetic-report.json; quality report produced by finalize_deliverable_manifest/validate_deliverable_bundle on that bundle",
+          "candidate_commit": "a66710f",
+          "render_basis": "Built offline from git archive of a66710f (tree digest bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d) in a network-denied sandbox with no system fonts and no PIXELKIEZ_FONT_DIR; packaged brand fonts resolved EXACT and embedding VERIFIED. Versus candidate badaf71, six page rasters changed (legal-golden/proof-realistic p2, proof-strategic p8, case-c p8-p10) and were re-inspected; every other raster is byte-identical to an inspected badaf71 raster.",
+          "final_state": {
+            "quality_status": "FAIL",
+            "hard_gate_count": 14,
+            "passed_hard_gates": 14,
+            "failed_gates": [],
+            "pending_gates": [],
+            "visual_qa": "PASS",
+            "semantic_qa": "FAIL",
+            "page_count": 10,
+            "pdf_sha256": "de27843d7798299cb891ee937a7deb3a000cb2860006fc755a21f34e439df597",
+            "client_model_sha256": "d4ee5c61ba08787166e1188c5ea52fbfd5e10ffb8b057d8f31966b7aa312c3c7",
+            "font_status": "EXACT",
+            "pdf_font_embedding": "VERIFIED",
+            "deliverable_status": "CUSTOMER_RELEASE_BLOCKED"
+          },
+          "release_boundary": {
+            "customer_presentation_quality": "FAIL",
+            "strict_customer_release_ready": false,
+            "remaining_blocker": "Round-2 independent review of 9ba024d, re-derived from PDF text and plan data: client_story.py rewrites 'im mobilen Labortest' to 'auf Mobilgeräten' (lab value shown as real mobile experience) in every case, and V08 shows minor-gap rows as 'klar'. User decision 2026-10-28: close BLOCKED; follow-up patch 'evidence-bound customer claims'.",
+            "does_not_prove": [
+              "external website truth",
+              "legal compliance",
+              "WCAG conformance",
+              "quality of other customers' PDFs without per-output QA"
+            ]
+          },
+          "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+          "revalidated_at": "2026-10-28",
+          "limitations": [
+            "finalize_deliverable_manifest.py exits 1 on semantic FAIL but leaves a previously written CUSTOMER_RELEASE_READY status in deliverable-manifest.json; validate_deliverable_bundle --require-customer-release-ready is the authoritative check and exits 1."
+          ]
+        }
+      }
     }
   }
 }
