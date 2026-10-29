@@ -2594,5 +2594,17 @@
     "owner_decision": "2026-10-29: PASS_WITH_MINOR_REVISIONS accepted for SKILL_PACKAGE_RELEASE (option A); R1-R5 to backlog",
     "evidence": "reports/enterprise-skill-evaluation.xml"
   },
-  "package": "built after this commit; receipt in the following commit"
+  "package": {
+    "script": "scripts/package_skill.py",
+    "rc": 0,
+    "built_from_commit": "bcb0189",
+    "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+    "skill_zip_sha256": "8ea5e045f042bc5f78a8d766918e8caa2a7d26dcd3732270cb9252f330f53290",
+    "entries": 536,
+    "content_mismatches_vs_commit": 0,
+    "unzip_test": "no errors",
+    "output": "outside the repository",
+    "pushed_or_uploaded": false,
+    "note": "this receipt is committed after the build, so the archive does not contain it"
+  }
 }
