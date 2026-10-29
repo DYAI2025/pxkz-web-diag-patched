@@ -126,7 +126,7 @@ def ranked_levers(lines: list[str], rows: list[dict[str, Any]]) -> None:
         y = top + i * step
         rank = row.get("priority") if row.get("priority") is not None else i + 1
         lines.append(f'<circle cx="86" cy="{y:.1f}" r="20" fill="{ORANGE}"/>')
-        lines.append(f'<text x="86" y="{y+6:.1f}" text-anchor="middle" font-family="{MONO}" font-size="14" font-weight="700" fill="{WHITE}">{esc(rank)}</text>')
+        lines.append(f'<text x="86" y="{y+6:.1f}" text-anchor="middle" font-family="{MONO}" font-size="14" font-weight="700" fill="{INK}">{esc(rank)}</text>')
         lines.append(text_block(126, y + 6, row.get("label"), width=72, max_lines=2, font_size=14, line_height=15))
 
 
@@ -152,7 +152,8 @@ def trust_matrix(lines: list[str], rows: list[dict[str, Any]]) -> None:
         fill, accent = tones.get(str(row.get("tone")), (SAGE_RAISED, INK))
         lines.append(text_block(42, y + 20, row.get("signal"), width=67, max_lines=1, font_size=13))
         lines.append(f'<rect x="520" y="{y}" width="300" height="26" rx="5" fill="{fill}" stroke="{accent}" stroke-width="{2 if row.get("tone") == "bad" else 1}"/>')
-        lines.append(f'<text x="536" y="{y+18}" font-family="{MONO}" font-size="14" font-weight="700" fill="{accent}">{esc(row.get("symbol") or "-")}</text>')
+        # The symbol is text: ink on every tone keeps it at >= 4.5:1; the accent colour stays on the frame only.
+        lines.append(f'<text x="536" y="{y+18}" font-family="{MONO}" font-size="14" font-weight="700" fill="{INK}">{esc(row.get("symbol") or "-")}</text>')
         lines.append(f'<text x="566" y="{y+18}" font-family="{MONO}" font-size="13" font-weight="700" fill="{INK}">{esc(row.get("status") or "")}</text>')
 
 
@@ -197,13 +198,25 @@ def render_svg(visual: dict[str, Any]) -> str:
     elif tid == "V05_RANKING_POSITION":
         rows = data[:8]
         maxp = max(max_value(rows, "position", 100), 10)
+        # Rows that carry their own place/device/date get a caption line, so they need a little more pitch:
+        # eight captioned rows end at y=387, above the footer rule at y=407.
+        pitch = 34 if any(row.get("context_label") for row in rows) else 32
+        # Name the scale: better positions sit to the right, position 1 at the right end of the track.
+        lines.append(f'<text x="340" y="112" font-family="{MONO}" font-size="13" fill="{SAGE_LINE}">Position {maxp:g}</text>')
+        lines.append(f'<text x="810" y="112" text-anchor="end" font-family="{MONO}" font-size="13" fill="{SAGE_LINE}">Position 1</text>')
         for i, row in enumerate(rows):
-            y = 130 + i * 32
+            y = 130 + i * pitch
             pos = float(row.get("position", 0) or 0)
-            x = 810 - (pos / maxp) * 470
+            # Position maxp sits on the left end (x=340, labelled "Position maxp"), position 1 on the right end (x=810).
+            x = min(810.0, max(340.0, 340 + (maxp - pos) / (maxp - 1) * 470))
             lines.append(text_block(42, y + 5, row.get("query"), width=45, max_lines=1, font_size=13.5))
+            if row.get("context_label"):
+                # Place, device and date belong to each plotted query, not only to the chart subtitle.
+                # 13 px is the SVG legibility floor (validate_visual_assets.py); the caption runs under the plot line,
+                # below the 8 px position dot, and never truncates (wrapped() raises on overflow).
+                lines.append(text_block(42, y + 19, row.get("context_label"), width=100, max_lines=1, font_size=13, fill=SAGE_LINE))
             lines.append(f'<line x1="340" y1="{y}" x2="810" y2="{y}" stroke="{SAGE_RAISED}"/>')
-            lines.append(f'<circle cx="{max(345,x):.1f}" cy="{y}" r="8" fill="{ORANGE}"/>')
+            lines.append(f'<circle cx="{x:.1f}" cy="{y}" r="8" fill="{ORANGE}"/>')
             lines.append(f'<text x="825" y="{y+6}" font-family="{MONO}" font-size="13.5" fill="{INK}">{pos:g}</text>')
     elif tid == "V10_TRUST_MATRIX":
         trust_matrix(lines, data)
@@ -217,6 +230,9 @@ def render_svg(visual: dict[str, Any]) -> str:
         warn = float(row.get("warn", max(good, 1)) or max(good, 1))
         domain = max(warn * 1.5, value * 1.15, 1)
         x, width, y, h = 90, 720, 190, 70
+        # German decimal comma and the metric's own unit on every printed number.
+        unit = f" {row['unit']}" if row.get("unit") else ""
+        num = lambda v: f"{v:g}".replace(".", ",") + unit
         gx = width * good / domain
         wx = width * warn / domain
         lines += [
@@ -224,8 +240,8 @@ def render_svg(visual: dict[str, Any]) -> str:
             f'<rect x="{x+gx:.1f}" y="{y}" width="{max(0,wx-gx):.1f}" height="{h}" fill="{WARN_SURFACE}"/>',
             f'<rect x="{x+wx:.1f}" y="{y}" width="{max(0,width-wx):.1f}" height="{h}" fill="{BAD_SURFACE}"/>',
             f'<line x1="{x+width*value/domain:.1f}" y1="{y-18}" x2="{x+width*value/domain:.1f}" y2="{y+h+18}" stroke="{ORANGE}" stroke-width="6"/>',
-            f'<text x="{x}" y="{y+120}" font-family="{FONT}" font-size="15" fill="{INK}">Ziel ≤ {good:g} · Warnschwelle {warn:g}</text>',
-            f'<text x="{x+width*value/domain:.1f}" y="{y-28}" text-anchor="middle" font-family="{MONO}" font-size="25" font-weight="700" fill="{INK}">{value:g}</text>',
+            f'<text x="{x}" y="{y+120}" font-family="{FONT}" font-size="15" fill="{INK}">Ziel ≤ {esc(num(good))} · Warnschwelle {esc(num(warn))}</text>',
+            f'<text x="{x+width*value/domain:.1f}" y="{y-28}" text-anchor="middle" font-family="{MONO}" font-size="25" font-weight="700" fill="{INK}">{esc(num(value))}</text>',
         ]
     elif tid == "V11_SEVERITY_DISTRIBUTION":
         stacked(lines, data, "severity", "count")

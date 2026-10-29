@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.1",
+  "pdf_path": "customer_presentation.pdf",
+  "pdf_sha256": "62303d0deeed5b38b7144a4e3eff6a8014ebb566f17b25d64feefc2ea959257b",
+  "client_model_path": "client-report-model.json",
+  "client_model_sha256": "62689828b4e263e3841bd58a8573ea31047f4af010b9a42c20de2b259bac12f3",
+  "scored_report_path": "diagnosis-report.json",
+  "scored_report_sha256": "de27e873f05dfb862c387203381a203b78d585c8ec93c902a85914078b1ec6d1",
+  "customer": "Meyer & Sohn Bau GmbH",
+  "page_count": 10,
+  "inspection_status": "FAIL",
+  "inspection_method": "agent_vision",
+  "inspected_by": "Claude Opus 5.5 (main session, 2026-10-28; same session that authored the release-completion and label-fidelity patches, so not independent; cross-checked by an independent read-only reviewer on candidate fa791c3)",
+  "overall_checks": {
+    "customer_specificity": true,
+    "plain_language_comprehension": true,
+    "scan_first_story": true,
+    "evidence_fidelity": false,
+    "priority_quality": false,
+    "quantitative_content_visualized": true,
+    "cross_page_coherence": false,
+    "actionability": true,
+    "no_generic_agency_copy": true,
+    "no_unsupported_business_claims": true,
+    "cover_message_complete": true,
+    "score_projection_correct": true,
+    "lever_business_impact_complete": true,
+    "privacy_claim_scope_correct": true,
+    "no_synthetic_metric_visuals": true
+  },
+  "pages": [
+    {
+      "page": 1,
+      "role": "cover",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Cover: score 52, complete core message."
+    },
+    {
+      "page": 2,
+      "role": "executive",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": false,
+        "visual_semantic_fit": true
+      },
+      "notes": "Overview: 52/100, main lever, scope sentence. SEMANTIC FAIL: strength 'HTTPS und wichtige Rechts-/Kontaktflächen sind gut erreichbar' contradicts the measured Impressum 25 (weak) and Kontakttransparenz 0 (blocking) shown on page 7."
+    },
+    {
+      "page": 3,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "V02 category bars with the active-core values (46-61); labels legible."
+    },
+    {
+      "page": 4,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": false,
+        "visual_semantic_fit": true
+      },
+      "notes": "V03 four levers 1-4, same order as the lever page. (raster identical to inspected legacy-baseline page) SEMANTIC FAIL (round-2 review, re-derived): Lab measurement presented as the real mobile experience: 'auf Mobilgeräten' / 'mobile Hauptdarstellung ist zu langsam' comes from client_story.py rewriting 'im mobilen Labortest' (PERF-02 is a synthetic lab value)."
+    },
+    {
+      "page": 5,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": false,
+        "visual_semantic_fit": true
+      },
+      "notes": "V07 mobile load 3.8 against target 2.5 / warning 4; value and thresholds clear. O-12: value and thresholds carry no unit and an English decimal point. (raster identical to inspected legacy-baseline page) SEMANTIC FAIL (round-2 review, re-derived): Lab measurement presented as the real mobile experience: 'auf Mobilgeräten' / 'mobile Hauptdarstellung ist zu langsam' comes from client_story.py rewriting 'im mobilen Labortest' (PERF-02 is a synthetic lab value). SEMANTIC FAIL in this case: V07 shows 3.8 from the report's legacy visualization; active PERF-02 is minor_gaps 75 with no numeric value."
+    },
+    {
+      "page": 6,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": false,
+        "visual_semantic_fit": true
+      },
+      "notes": "V08 matrix klar/teilweise/offen; legible. SEMANTIC FAIL (round-2 review, re-derived): V08 shows minor-gap rows (value 0.75) as 'klar', overstating them; V10 calls the same 75 'Verbesserung sinnvoll'. SEMANTIC FAIL in this case: V08 shows 'Belege für Nutzenversprechen' as teilweise although AI-05 is strong (100)."
+    },
+    {
+      "page": 7,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": false,
+        "visual_semantic_fit": false
+      },
+      "notes": "V10: Impressum, Datenschutz, Referenzen and Kontakttransparenz X Handlungsbedarf. SEMANTIC FAIL: none of the four levers addresses these, and page 2 lists the opposite as a strength (findings/strengths come unchanged from synthetic-report.json, written for different values)."
+    },
+    {
+      "page": 8,
+      "role": "findings",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": false,
+        "visual_semantic_fit": true
+      },
+      "notes": "Four lever cards (3 hoch, 1 mittel) with observation, 'Warum das zählt' and 'Nächster Schritt', all above the footer. O-4: subtitle/footer grey on orange, low contrast but legible. (raster identical to inspected legacy-baseline page) SEMANTIC FAIL (round-2 review, re-derived): Lab measurement presented as the real mobile experience: 'auf Mobilgeräten' / 'mobile Hauptdarstellung ist zu langsam' comes from client_story.py rewriting 'im mobilen Labortest' (PERF-02 is a synthetic lab value). SEMANTIC FAIL in this case: Lever 1 'Der nächste Schritt ist mobil nicht klar genug' cites UX-02, which is strong (100) in the active values."
+    },
+    {
+      "page": 9,
+      "role": "roadmap",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Roadmap Jetzt / In 30 Tagen / Danach. O-2: columns follow report roadmap data, not lever rank. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 10,
+      "role": "closing",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Closing: four actions in lever order and next-step box. (raster identical to inspected legacy-baseline page)"
+    }
+  ],
+  "review_questions": [
+    "Würde der Kerninhalt ohne Firmenname/Logo noch konkrete Beobachtungen dieser Website enthalten?",
+    "Kann ein Nicht-Fachmann je Prioritätsseite in einem Satz Problem und nächsten Schritt erklären?",
+    "Sind direkt messbare oder zählbare Signale als Zahl/Visual sichtbar statt im Fließtext versteckt?",
+    "Passt jedes Visual zur Aussage der Seite und zum kanonischen Audit?",
+    "Sind die wichtigsten 3-4 Hebel des konkreten Kunden priorisiert statt generischer Agenturthemen?",
+    "Ist die Kernaussage auf Seite 1 vollständig sichtbar und nicht auf eine Folgeseite abgeschnitten?",
+    "Ist die Score-Darstellung exakt mit dem internen display_status konsistent?",
+    "Zeigt jeder der vier Hebel Befund, geschäftliche Wirkung und nächsten Schritt?"
+  ],
+  "inspection_note": "Set PASS only after actual rendered-page review against both the client model and canonical scored audit. This file must not self-certify.",
+  "failure_summary": "Customer narrative contradicts measured trust/legal values: strength on page 2 vs. weak/blocking Impressum, Datenschutz and Kontakttransparenz on page 7, which no lever addresses. Recorded as open risk by user decision 2026-10-28; this PDF is not deliverable. Independent review (fa791c3) adds: lever 1 'Der nächste Schritt ist mobil nicht klar genug' cites UX-02 (strong, 100); strength 'Sitemap ... brauchbare technische Basis' vs FIND-02 robots/sitemap false; V08 shows AI-05 (strong, 100) as 'teilweise'; V07 3.8 comes from the report's legacy visualization while PERF-02 holds no number. Root cause for all: findings, strengths and visuals come unchanged from synthetic-report.json, written for different values.",
+  "review_answers": "Evidence fidelity / coherence answered no (see failure_summary)"
+}

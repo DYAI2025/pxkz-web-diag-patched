@@ -5,8 +5,8 @@
   "cases": {
     "synthetic-report": {
       "scored": "22a535a85bc3464132ffe42a3141c651b993d683cd50b45eaa94ed8e473e1931",
-      "plan": "c0eb5035d6f1789a109bd4db22df47dbe180b5f5c2bf4cb26513c3ab27745b76",
-      "model": "5908337a6ebbebe9feceb1409a80357f4aae3a9f369711806a4a0c46a6421a32",
+      "plan": "ac9dc88e38cfce0165d322eafb8c4007ae4021ba4fdab9073f909895c20a03d3",
+      "model": "a09512e54ba694d8e172b69d78f26c8e8575c35044688345751933771d5ef380",
       "batch_csv": "a6dbcf82116fd4e0ba480f377b1592bfc5e974ee9f7ab25393931b11f6184843",
       "internal": "ad959b518725d1f882470dd2fa435d089ffe52ea600ab8588d3fc68dae5928bf",
       "lever_ids": [
@@ -18,16 +18,11 @@
     },
     "low-coverage-marketing-report": {
       "scored": "615b5cd3b12599044e0e9baeac731f6055509522247236e73576a628da44389d",
-      "plan": "cffc35eede7d2f5cc30a47b21e65dbd5541de5b39402241260782de47b0e608e",
-      "model": "3e5d9f3968952f4d6245e855ac0def01e3c9186bbfe7dc5167d5cbb28ea34987",
+      "plan": "FAILS_CLOSED",
+      "model": "FAILS_CLOSED",
       "batch_csv": "108f39d18dda66df4bf23f5cf93f2ab3ab6f8dadebae6190963bd11224169a10",
       "internal": "c81037b6309aaa9454ef39828bde387c4a6f1a61c0c460d3e0fd19e863427645",
-      "lever_ids": [
-        "F-901",
-        "F-902",
-        "F-904",
-        "F-903"
-      ]
+      "lever_ids": null
     },
     "truth-discipline-inferred-risk": {
       "scored": "b42714709062f0cc6461c0548955e0f23bcc66b2f92ce9fbe91bb4a43713ccc6",
@@ -39,16 +34,11 @@
     },
     "baumdienst-renner-reflection-regression": {
       "scored": "8af6f625c2d980f59166b36ea994701a9471f87553fc5fbbb51d146d01abaada",
-      "plan": "96387c6b99e14568a21ce8b6e7bbdb94f1a5abb35e4e8240c6d359394eff7383",
-      "model": "5712dad4d8ea5410c2b4b4792fcad7393d1eb2436bcf7f9b5d63b958a55bcd4c",
+      "plan": "FAILS_CLOSED",
+      "model": "FAILS_CLOSED",
       "batch_csv": "74775f62576b7e99a8dad2c4e2389b0d0ade2eda523dbfb24e5a60707acc18a6",
       "internal": "41ef24868edf1b93b9252a6a56b5f3f6feb0b392bacf32eecc806f5150a8f49e",
-      "lever_ids": [
-        "F-001",
-        "F-003",
-        "F-004",
-        "F-002"
-      ]
+      "lever_ids": null
     }
   },
   "amendments": [
@@ -75,6 +65,130 @@
         "low-coverage-marketing-report": "V08 'Leistung, Zielgruppe und Standort' klar (0.75) -> teilweise (0.5) (AI-02 cited by F-904)"
       },
       "unchanged": "All scored, model, batch_csv and internal hashes and all lever_ids; synthetic-report and truth-discipline-inferred-risk entirely."
+    },
+    {
+      "date": "2026-10-28",
+      "patch_id": "PACKAGED_BRAND_FONT_PATCH",
+      "authorization": "Explicit user approval 2026-10-28 ('Oracle-Amendment (Recommended)'): keep assets/brand-tokens.json truthful (font_binary_status PACKAGE_BUNDLED_MANIFEST_PINNED, font_manifest) and accept the resulting brand_token_sha256 provenance change in the visualization plan.",
+      "changes": [
+        {
+          "fixture": "synthetic-report",
+          "output": "plan",
+          "previous_sha256": "c0eb5035d6f1789a109bd4db22df47dbe180b5f5c2bf4cb26513c3ab27745b76",
+          "current_sha256": "b3e6fc96e062d9d5cd534fef4822a26f7137f2aff98dc3f2fe609db541be672c"
+        },
+        {
+          "fixture": "low-coverage-marketing-report",
+          "output": "plan",
+          "previous_sha256": "cffc35eede7d2f5cc30a47b21e65dbd5541de5b39402241260782de47b0e608e",
+          "current_sha256": "ead9b6b549b13887a9db770c36b22a9fa006033156463cc2b235ec1e9f396afa"
+        },
+        {
+          "fixture": "baumdienst-renner-reflection-regression",
+          "output": "plan",
+          "previous_sha256": "96387c6b99e14568a21ce8b6e7bbdb94f1a5abb35e4e8240c6d359394eff7383",
+          "current_sha256": "c0d97a5887dc1fa9852d49629329aad03aca9a5d78780b304d4ca0d18d8c970a"
+        }
+      ],
+      "status_deltas": {
+        "synthetic-report": "plan field /brand_token_sha256 only (051a155d… -> 40ab7151…); no visual, status, lever or text change",
+        "low-coverage-marketing-report": "plan field /brand_token_sha256 only (051a155d… -> 40ab7151…); no visual, status, lever or text change",
+        "baumdienst-renner-reflection-regression": "plan field /brand_token_sha256 only (051a155d… -> 40ab7151…); no visual, status, lever or text change"
+      },
+      "unchanged": "All scored, model, batch_csv and internal hashes and all lever_ids; truth-discipline-inferred-risk entirely."
+    },
+    {
+      "date": "2026-10-28",
+      "patch_id": "CLAIM_SCOPE_PATCH",
+      "authorization": "Explicit user approval 2026-10-28 ('Beides freigeben (Recommended)') of the legacy-oracle amendment for SEM-001/002/003, after the user decision 'V11 raus, Block bei <4 (Recommended)'.",
+      "changes": [
+        {
+          "fixture": "synthetic-report",
+          "output": "plan",
+          "previous_sha256": "b3e6fc96e062d9d5cd534fef4822a26f7137f2aff98dc3f2fe609db541be672c",
+          "current_sha256": "894ea740c6a0d786cf1ff43f7a2f748cba3d3aa39a1d224105d3e99957025666"
+        },
+        {
+          "fixture": "synthetic-report",
+          "output": "model",
+          "previous_sha256": "5908337a6ebbebe9feceb1409a80357f4aae3a9f369711806a4a0c46a6421a32",
+          "current_sha256": "a881d84fcfe01ffad3b96f44464cf5e43a2a3311c4e4554f89d714502d7f17b9"
+        },
+        {
+          "fixture": "low-coverage-marketing-report",
+          "output": "plan",
+          "previous_sha256": "ead9b6b549b13887a9db770c36b22a9fa006033156463cc2b235ec1e9f396afa",
+          "current_sha256": "FAILS_CLOSED"
+        },
+        {
+          "fixture": "low-coverage-marketing-report",
+          "output": "model",
+          "previous_sha256": "3e5d9f3968952f4d6245e855ac0def01e3c9186bbfe7dc5167d5cbb28ea34987",
+          "current_sha256": "FAILS_CLOSED"
+        },
+        {
+          "fixture": "baumdienst-renner-reflection-regression",
+          "output": "plan",
+          "previous_sha256": "c0d97a5887dc1fa9852d49629329aad03aca9a5d78780b304d4ca0d18d8c970a",
+          "current_sha256": "FAILS_CLOSED"
+        },
+        {
+          "fixture": "baumdienst-renner-reflection-regression",
+          "output": "model",
+          "previous_sha256": "5712dad4d8ea5410c2b4b4792fcad7393d1eb2436bcf7f9b5d63b958a55bcd4c",
+          "current_sha256": "FAILS_CLOSED"
+        },
+        {
+          "fixture": "low-coverage-marketing-report",
+          "output": "lever_ids",
+          "previous": [
+            "F-901",
+            "F-902",
+            "F-904",
+            "F-903"
+          ],
+          "current": null
+        },
+        {
+          "fixture": "baumdienst-renner-reflection-regression",
+          "output": "lever_ids",
+          "previous": [
+            "F-001",
+            "F-003",
+            "F-004",
+            "F-002"
+          ],
+          "current": null
+        }
+      ],
+      "status_deltas": {
+        "synthetic-report": "plan: V11_SEVERITY_DISTRIBUTION removed from visuals and recorded as excluded (INTERNAL_ONLY_FINDING_COUNT_WITHOUT_STRATEGIC_RELEVANCE), visual IDs renumbered, V08 title 'Wie eindeutig die Website Fragen beantwortet' and AI-answer boundary, row labels 'Einheitliche Fakten' / 'Einheitliche Firmendaten'; model: client_story.real_chart_count 6 -> 5 only",
+        "low-coverage-marketing-report": "plan and model FAILS_CLOSED (CUSTOMER_MIN_VISUALS_NOT_MET, 3 admissible visuals); lever_ids not checkable",
+        "baumdienst-renner-reflection-regression": "plan and model FAILS_CLOSED (CUSTOMER_MIN_VISUALS_NOT_MET, 3 admissible visuals); lever_ids not checkable"
+      },
+      "unchanged": "All scored, batch_csv and internal hashes; synthetic-report lever_ids; truth-discipline-inferred-risk entirely."
+    },
+    {
+      "date": "2026-10-29",
+      "patch_id": "EVIDENCE_BOUND_CLAIMS_PATCH",
+      "authorization": "User-approved fix slice 'Pixelkiez — Evidence-bound Customer Claims' (spec 2026-10-28, READY FOR DISCOVERY + IMPLEMENTATION) and the user's 2026-10-29 instruction to execute its implementation plan, whose TASK-006 names this legacy-oracle amendment.",
+      "changes": [
+        {
+          "fixture": "synthetic-report",
+          "output": "plan",
+          "previous_sha256": "894ea740c6a0d786cf1ff43f7a2f748cba3d3aa39a1d224105d3e99957025666",
+          "current_sha256": "ac9dc88e38cfce0165d322eafb8c4007ae4021ba4fdab9073f909895c20a03d3"
+        },
+        {
+          "fixture": "synthetic-report",
+          "output": "model",
+          "previous_sha256": "a881d84fcfe01ffad3b96f44464cf5e43a2a3311c4e4554f89d714502d7f17b9",
+          "current_sha256": "a09512e54ba694d8e172b69d78f26c8e8575c35044688345751933771d5ef380"
+        }
+      ],
+      "status_deltas": {
+        "synthetic-report": "plan: V07 title/subtitle/label keep the method ('in der mobilen Testmessung', 'Beispieldaten, keine Live-Messung', 'Mobile Ladezeit (Beispieldaten)') and carry evidence_method SYNTHETIC; V08/V10 rows carry metric_ref and the one customer_status scale (V08 'klar'/'teilweise' replaced by 'Klar'/'Verbesserung sinnvoll', matrix value anchors 1.0/0.5/0.0); model: lab/synthetic wording kept, strengths bound to positive findings whose metrics read 'Klar' (F-006 only), free-text top_strengths dropped. Lever ids unchanged for every fixture. Model meta carries sample_data_notice 'Beispieldaten, keine Live-Messung' because every metric of this fixture is example data (real measurements never carry the key). Review round 1: V07 subtitle 'Mobile Anzeige des Hauptinhalts im Vergleich zum Zielwert', label 'Hauptinhalt sichtbar (Beispieldaten)', data unit 's'; roadmap priorities and horizons from the audit roadmap (F-003 now P1; F-001, F-002 0-30 days P1; F-004 31-90 days P2), recommendation.next_step and closing.actions in that execution order. Review round 2: LCP lever action 'Größtes sichtbares Element, Bilder und wichtige Ladeschritte prüfen und danach erneut messen.' (no asserted cause); TRUST-03 row label 'HTTPS-Verschlüsselung'. Owner decisions 2026-10-29: V03 subtitle 'Nach geschäftlicher Bedeutung geordnet; die Reihenfolge der Umsetzung zeigt der Fahrplan'; presence-only TRUST-01/02 rows 'Impressum und rechtliche Angaben (vorhanden)' / 'Datenschutz und Einwilligungen (vorhanden)' read 'Nicht belastbar bewertet' instead of 'Klar'. Lever ids unchanged. Round-3 strategy change (owner decisions 2026-10-29): roadmap items show no P1/P2 label and carry finding_ref; the presence-only F-006 strength 'Kontakt, Impressum und Datenschutz sind gut erreichbar…' is withheld (TRUST-01/02 read 'Nicht belastbar bewertet'), so the cover reads 'Was Ihre Website heute bremst - und was zuerst zählt.'. Lever ids unchanged."
+      }
     }
   ]
 }

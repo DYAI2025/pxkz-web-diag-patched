@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.1",
+  "pdf_path": "customer_presentation.pdf",
+  "pdf_sha256": "d8b20180a3dca89cc7fac421ffec5cbed57cc58783a0c50850e09b764c7673f4",
+  "client_model_path": "client-report-model.json",
+  "client_model_sha256": "14e07acdd5641513b064b68756534dab34788fd4a9de28f23155523b66554a9d",
+  "scored_report_path": "diagnosis-report.json",
+  "scored_report_sha256": "31995922cfa6e211e2ce382db7c2096754fe87b75b5f47f920adb882366c7a22",
+  "customer": "Meyer & Sohn Bau GmbH",
+  "page_count": 10,
+  "inspection_status": "FAIL",
+  "inspection_method": "hybrid",
+  "inspected_by": "independent adversarial review round 4 (read-only agent, fixed probe checklist, 50/50 unique rasters of the pixel-identical 4ab90a9 build) + authoring cross-check (main session, Claude Opus 5.5)",
+  "overall_checks": {
+    "customer_specificity": false,
+    "plain_language_comprehension": true,
+    "scan_first_story": false,
+    "evidence_fidelity": true,
+    "priority_quality": true,
+    "quantitative_content_visualized": false,
+    "cross_page_coherence": true,
+    "actionability": false,
+    "no_generic_agency_copy": false,
+    "no_unsupported_business_claims": false,
+    "cover_message_complete": false,
+    "score_projection_correct": false,
+    "lever_business_impact_complete": false,
+    "privacy_claim_scope_correct": true,
+    "no_synthetic_metric_visuals": false
+  },
+  "pages": [
+    {
+      "page": 1,
+      "role": "cover",
+      "checks": {
+        "customer_specific": false,
+        "main_message_clear": false,
+        "scan_in_seconds": false,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": false
+      },
+      "notes": "A/B probes PASS on this page; other checks not assessed"
+    },
+    {
+      "page": 2,
+      "role": "executive",
+      "checks": {
+        "customer_specific": false,
+        "main_message_clear": false,
+        "scan_in_seconds": false,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": false
+      },
+      "notes": "A/B probes PASS on this page; other checks not assessed"
+    },
+    {
+      "page": 3,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": false,
+        "main_message_clear": false,
+        "scan_in_seconds": false,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": false
+      },
+      "notes": "A/B probes PASS on this page; other checks not assessed"
+    },
+    {
+      "page": 4,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": false,
+        "main_message_clear": false,
+        "scan_in_seconds": false,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": false
+      },
+      "notes": "A/B probes PASS on this page; other checks not assessed"
+    },
+    {
+      "page": 5,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": false,
+        "main_message_clear": false,
+        "scan_in_seconds": false,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": false
+      },
+      "notes": "A/B probes PASS on this page; other checks not assessed"
+    },
+    {
+      "page": 6,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": false,
+        "main_message_clear": false,
+        "scan_in_seconds": false,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": false
+      },
+      "notes": "A/B probes PASS on this page; other checks not assessed"
+    },
+    {
+      "page": 7,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": false,
+        "main_message_clear": false,
+        "scan_in_seconds": false,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": false
+      },
+      "notes": "A/B probes PASS on this page; other checks not assessed"
+    },
+    {
+      "page": 8,
+      "role": "findings",
+      "checks": {
+        "customer_specific": false,
+        "main_message_clear": false,
+        "scan_in_seconds": false,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": false
+      },
+      "notes": "A/B probes PASS on this page; other checks not assessed"
+    },
+    {
+      "page": 9,
+      "role": "roadmap",
+      "checks": {
+        "customer_specific": false,
+        "main_message_clear": false,
+        "scan_in_seconds": false,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": false
+      },
+      "notes": "A/B probes PASS on this page; other checks not assessed"
+    },
+    {
+      "page": 10,
+      "role": "closing",
+      "checks": {
+        "customer_specific": false,
+        "main_message_clear": false,
+        "scan_in_seconds": false,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": false
+      },
+      "notes": "A/B probes PASS on this page; other checks not assessed"
+    }
+  ],
+  "review_questions": [
+    "Würde der Kerninhalt ohne Firmenname/Logo noch konkrete Beobachtungen dieser Website enthalten?",
+    "Kann ein Nicht-Fachmann je Prioritätsseite in einem Satz Problem und nächsten Schritt erklären?",
+    "Sind direkt messbare oder zählbare Signale als Zahl/Visual sichtbar statt im Fließtext versteckt?",
+    "Passt jedes Visual zur Aussage der Seite und zum kanonischen Audit?",
+    "Sind die wichtigsten 3-4 Hebel des konkreten Kunden priorisiert statt generischer Agenturthemen?",
+    "Ist die Kernaussage auf Seite 1 vollständig sichtbar und nicht auf eine Folgeseite abgeschnitten?",
+    "Ist die Score-Darstellung exakt mit dem internen display_status konsistent?",
+    "Zeigt jeder der vier Hebel Befund, geschäftliche Wirkung und nächsten Schritt?"
+  ],
+  "inspection_note": "FAIL by fact, not by defect: the PDF is built from example data (no_synthetic_metric_visuals is false), and checks outside the fixed probe checklist were not assessed (false = not assessed). Customer semantic QA needs a real audit input."
+}

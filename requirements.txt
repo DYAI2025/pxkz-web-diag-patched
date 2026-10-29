@@ -1,0 +1,23 @@
+# Python runtime dependencies of the pixelkiez-website-diagnosis skill scripts.
+# Bounds cover the versions the release was verified with; see
+# references/installability-and-distribution.md.
+#
+# WeasyPrint also needs the Pango/GObject system libraries (e.g. Homebrew `pango`
+# on macOS, `libpango-1.0-0` on Debian/Ubuntu).
+
+# Required for every validator and builder
+jsonschema>=4.26,<5
+Jinja2>=3.1.6,<4
+
+# Required for customer PDF rendering, PDF QA and font verification.
+# Verified with WeasyPrint 68.1. WeasyPrint 70.0 removed weasyprint.default_url_fetcher,
+# which scripts/render_diagnosis_pdf.py imports, so customer rendering fails there.
+weasyprint>=68.1,<69
+pypdf>=6.21,<7
+PyMuPDF>=2.0,<3
+# fontTools verifies the packaged brand fonts; without it strict customer mode fails closed.
+fonttools>=4.68,<5
+
+# Optional: live browser enrichment (scripts/browser_measurements.py) and its eval.
+# Set PIXELKIEZ_CHROMIUM_PATH to a Chromium binary, e.g. the one from `playwright install chromium`.
+# playwright>=1.64,<2

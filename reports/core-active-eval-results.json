@@ -1,7 +1,7 @@
 {
   "status": "PASS",
   "suite": "FULL_48_ACTIVE",
-  "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
+  "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
   "checks": [
     {
       "id": "BIND-001",

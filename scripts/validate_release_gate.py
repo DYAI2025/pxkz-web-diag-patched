@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import subprocess
+import tempfile
 import sys
 from pathlib import Path
 
@@ -28,7 +30,7 @@ def _contract(root: Path) -> tuple[str, dict]:
     return hashlib.sha256(path.read_bytes()).hexdigest(), json.loads(path.read_text(encoding="utf-8"))
 
 
-def validate_reports(root: Path, report: dict, paired: dict, semantic: dict) -> list[str]:
+def validate_reports(root: Path, report: dict, paired: dict, semantic: dict, proof_pdfs: frozenset[str] | set[str] = frozenset()) -> list[str]:
     """Cross-skill, paired-release and customer-semantic evidence binding (fail closed).
 
     A claimed PASS must be backed by digest-consistent paired evidence; a blocked
@@ -64,7 +66,54 @@ def validate_reports(root: Path, report: dict, paired: dict, semantic: dict) -> 
     elif status != "BLOCKED_DEPENDENCY_NON_PACKAGE_BLOCKING":
         errors.append("cross-skill dependency status invalid")
 
+    errors.extend(validate_customer_report_release(root, report, semantic, proof_pdfs))
+    return errors
+
+
+def validate_customer_report_release(root: Path, report: dict, semantic: dict, proof_pdfs: frozenset[str] | set[str] = frozenset()) -> list[str]:
+    """CUSTOMER_REPORT_RELEASE: a customer PDF built from a real audit, never a proof (release-gate-policy.md).
+
+    PASS needs customer semantic QA on a real audit input built in customer mode, bound to the live semantic bundle
+    and tree. BLOCKED_NO_REAL_AUDIT_INPUT is a valid state that does not block the skill package, but then nothing
+    may claim customer readiness, and no semantic PASS may come from proof or example data.
+
+    data_class is a recorded label, so a PASS is also bound to an audit input that is no file of this skill tree
+    (every example input ships in it), to a PDF that is none of the proof PDFs, and to a record without fixture
+    provenance. The gate cannot prove an external audit is real beyond that; customer mode refusing example data
+    (SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT) is the build-time guard.
+    """
+    errors: list[str] = []
+    decision = report.get("customer_report_release") or {}
+    status = decision.get("status")
+    real = semantic.get("release_mode") == "customer" and semantic.get("data_class") == REAL_AUDIT_INPUT
     gate = report.get("customer_semantic_gate") or {}
+    claims = (semantic.get("status"), semantic.get("semantic_qa_validation"), gate.get("status"))
+    if not real and any(_claims_pass(x) for x in claims):
+        errors.append("customer semantic PASS recorded on proof or example data")
+    if status == CUSTOMER_REPORT_BLOCKED:
+        if decision.get("package_blocking") is not False:
+            errors.append("blocked customer report release must be declared non-package-blocking")
+        if decision.get("customer_release_ready") is not False:
+            errors.append("blocked customer report release cannot be customer-release-ready")
+        ready = sorted(k for k, v in report.items() if isinstance(v, dict) and v.get("customer_release_ready") is True)
+        if ready:
+            errors.append(f"customer report release is blocked but {', '.join(ready)} claims customer readiness")
+        semantic_pass = sorted(k for k, v in report.items() if isinstance(v, dict) and _claims_pass(v.get("semantic_qa")))
+        if semantic_pass:
+            errors.append(f"customer report release is blocked but {', '.join(semantic_pass)} claims a semantic PASS")
+        return errors
+    if status != "PASS":
+        errors.append("customer report release status invalid")
+        return errors
+    if not real:
+        errors.append("customer report release PASS without a real audit input built in customer mode")
+    if {"fixture", "fixture_sha256"} & set(semantic):
+        errors.append("customer report release PASS on a record with fixture provenance")
+    audit, pdf = semantic.get("audit_input_sha256"), semantic.get("pdf_sha256")
+    if not _is_sha256(audit) or audit in _tree_file_hashes(root):
+        errors.append("customer report release PASS needs an audit input that is not a file of the skill tree")
+    if not _is_sha256(pdf) or pdf in proof_pdfs:
+        errors.append("customer report release PASS needs a customer PDF that is none of the proof PDFs")
     current = semantic_bundle_digest(root)
     if gate.get("status") != "PASS":
         errors.append("customer semantic gate is not PASS")
@@ -81,6 +130,236 @@ def validate_reports(root: Path, report: dict, paired: dict, semantic: dict) -> 
         errors.append("customer semantic QA evidence not bound to the current build artifact digest")
     if gate.get("artifact_digest") != build:
         errors.append("customer semantic gate not bound to the current build artifact digest")
+    return errors
+
+
+def validate_gate_statuses(report: dict) -> list[str]:
+    """Release decision, judgment gates and every measured gate the package needs must read PASS."""
+    errors: list[str] = []
+    if report.get("release_scope") != "website-diagnosis-package": errors.append("release scope drift")
+    if report.get("release_gate", {}).get("status") != "PASS": errors.append("release status is not PASS")
+    if report.get("release_gate", {}).get("allowed_to_package") is not True: errors.append("allowed_to_package must be true")
+    if report.get("craftsmanship_gate", {}).get("status") != "PASS": errors.append("craftsmanship gate failed")
+    if report.get("anti_confabulation_gate", {}).get("status") != "PASS": errors.append("anti-confabulation gate failed")
+    if report.get("anti_confabulation_gate", {}).get("blocked_claims"): errors.append("blocked_claims must be empty")
+    syco = report.get("anti_sycophancy", {})
+    if type(syco.get("score")) is not int or not 0 <= syco["score"] < ANTI_SYCOPHANCY_THRESHOLD or syco.get("threshold") != ANTI_SYCOPHANCY_THRESHOLD:
+        errors.append("anti-sycophancy threshold failed")
+    if report.get("bias_gate", {}).get("status") != "PASS": errors.append("bias gate is not PASS")
+    browser = report.get("browser_gate", {})
+    if browser.get("applicable") and browser.get("status") not in {"PASS", "PASS_WITH_ASSUMPTIONS"}: errors.append("browser gate failed")
+    if browser.get("blockers"): errors.append("browser blockers must be empty")
+
+    for gate_name in (
+        "batch_contract_gate", "batch_evals_gate", "core_regression_gate", "internal_report_gate",
+        "active_core_gate", "active_core_render_gate",
+        "visualization_reporting_gate", "weasyprint_render_gate", "brand_rendering_gate", "proof_output_gate",
+        "measurement_gateway_gate", "protected_baseline_gate", "third_party_reuse_gate", "measurement_platform_proof_gate",
+        "strategic_relevance_gate", "customer_output_guardrail_gate", "measurement_platform_preservation_gate",
+        "customer_presentation_quality_gate",
+        "impressum_legal_source_gate", "impressum_compliance_gate", "impressum_eval_gate", "impressum_customer_projection_gate",
+        "installability_gate", "test_suite_gate", "measurement_enrichment_gate", "customer_warning_semantics_gate",
+        "customer_closing_gate", "measurement_platform_baseline_gate", "protected_candidate_gate",
+        "strategic_relevance_preservation_gate", "fresh_reporting_gate", "template_gate", "visual_story_gate",
+    ):
+        if report.get(gate_name, {}).get("status") != "PASS": errors.append(f"{gate_name} failed")
+    return errors
+
+
+def validate_skill_package_release(root: Path, report: dict, qa: dict, proofs: dict[str, dict]) -> list[str]:
+    """SKILL_PACKAGE_RELEASE: synthetic proofs prove skill function, never a customer result.
+
+    The proof PDFs must be the ones an independent review passed against the fixed probe checklist, the QA record
+    must be rebound to the live tree, customer mode must have refused every example-data case, and no proof may
+    claim customer readiness or a customer semantic PASS.
+    """
+    errors: list[str] = []
+    build = tree_digest(root)
+    decision = report.get("skill_package_release") or {}
+    if decision.get("status") != "PASS":
+        errors.append("skill package release is not PASS")
+    if decision.get("artifact_digest") != build:
+        errors.append("skill package release not bound to the current build artifact digest")
+    if qa.get("status") != PROOF_QA_PASS:
+        errors.append("proof QA record is not PASS against the fixed checklist")
+    if qa.get("artifact_digest") != build:
+        errors.append("proof QA record not bound to the current build artifact digest")
+    if qa.get("unadjudicated") != []:
+        errors.append("proof QA record has unadjudicated review items")
+    checklist = root / PROOF_CHECKLIST
+    if not checklist.is_file() or qa.get("yardstick_sha256") != hashlib.sha256(checklist.read_bytes()).hexdigest():
+        errors.append("proof QA yardstick differs from the fixed probe checklist")
+    probes = re.findall(r"^\| ([A-E]\d) \|", checklist.read_text(encoding="utf-8"), re.M) if checklist.is_file() else []
+    raw_rounds = (qa.get("independent_review") or {}).get("rounds") or []
+    rounds = [r for r in raw_rounds if isinstance(r, dict) and type(r.get("round")) is int]
+    numbers = [r["round"] for r in rounds]
+    if not rounds or len(rounds) != len(raw_rounds) or len(numbers) != len(set(numbers)):
+        errors.append("proof QA review rounds must carry unique integer round numbers")
+    latest = max(rounds, key=lambda r: r["round"], default={})
+    lines = latest.get("probe_lines") if isinstance(latest.get("probe_lines"), dict) else {}
+    if type(latest.get("fail")) is not int or latest.get("fail") != 0 or latest.get("confirmed"):
+        errors.append("latest independent proof review round has confirmed defects")
+    owner = _owner_resolved_probes(checklist.read_text(encoding="utf-8")) if checklist.is_file() else set()
+    if checklist.is_file() and latest.get("probe_rows_sha256") != probe_rows_sha256(checklist.read_text(encoding="utf-8")):
+        errors.append("checklist probe rows differ from the rows the latest independent review used")
+    owner &= {p for p in latest.get("owner_resolved") or [] if isinstance(p, str)}
+    if not probes or sorted(lines) != sorted(probes) or not all(_probe_passed(k, v, owner) for k, v in lines.items()):
+        errors.append("latest independent proof review did not pass every checklist probe")
+    raw_cases, raw_refusals = qa.get("cases") or [], qa.get("customer_mode_refusals") or []
+    cases = [c for c in raw_cases if isinstance(c, dict)]
+    refusals = {r.get("case"): r for r in raw_refusals if isinstance(r, dict)}
+    if not cases or len(cases) != len(raw_cases) or len(refusals) != len(raw_refusals):
+        errors.append("proof QA record lists no cases or malformed case/refusal entries")
+    names = [c.get("case") for c in cases]
+    if len(names) != len(set(names)) or set(names) != RELEASE_CASES:
+        errors.append("proof QA record does not cover exactly the nine release cases")
+    for case in cases:
+        name = case.get("case")
+        if case.get("release_mode") != "proof":
+            errors.append(f"proof case {name} was not built in proof mode")
+        if not re.fullmatch(r"PASS( \(validate_pdf_visual_qa rc 0\))?", str(case.get("visual_qa", ""))):
+            errors.append(f"proof case {name} visual QA is not PASS")
+        if case.get("deliverable_status") != "CUSTOMER_RELEASE_BLOCKED":
+            errors.append(f"proof case {name} must stay CUSTOMER_RELEASE_BLOCKED")
+        refusal = refusals.get(name) or {}
+        if refusal.get("blocked") is not True or refusal.get("pdf_written") is not False:
+            errors.append(f"customer mode did not refuse proof case {name}")
+    if any(r.get("blocked") is not True or r.get("pdf_written") is not False for r in refusals.values()):
+        errors.append("customer mode did not refuse every example-data case")
+    try:
+        review_dir = reviewed_visual_qa_dir(root, qa)
+    except ValueError as exc:
+        errors.append(str(exc))
+        review_dir = None
+    for case in cases:
+        name, pdf = case.get("case"), case.get("pdf_sha256")
+        if not _is_sha256(pdf) or case.get("reviewed_pdf_sha256") != pdf:
+            errors.append(f"proof case {name} PDF is not the PDF the independent review inspected")
+        manifest = review_dir / f"{name}.visual-qa.json" if review_dir is not None and isinstance(name, str) else None
+        try:
+            inspected = json.loads(manifest.read_text(encoding="utf-8")) if manifest is not None and manifest.is_file() else {}
+        except (OSError, ValueError):
+            inspected = {}
+        if inspected.get("inspection_status") != "PASS" or inspected.get("pdf_sha256") != pdf:
+            errors.append(f"proof case {name} PDF is not the PDF of its review visual QA manifest")
+    reviewed = {c.get("pdf_sha256") for c in cases if _is_sha256(c.get("pdf_sha256"))}
+    for label, proof in proofs.items():
+        if proof.get("release_mode") != "proof":
+            errors.append(f"{label} proof was not built in proof mode")
+        if proof.get("customer_release_ready") is not False:
+            errors.append(f"{label} proof claims customer release readiness")
+        if _claims_pass(proof.get("semantic_qa")):
+            errors.append(f"{label} proof claims a customer semantic PASS on example data")
+        if proof.get("visual_qa") != "PASS" or proof.get("proof_semantic_qa") != PROOF_SEMANTIC_PASS:
+            errors.append(f"{label} proof is not visual PASS and PASS against the fixed checklist")
+        if not _is_sha256(proof.get("pdf_sha256")) or proof.get("pdf_sha256") not in reviewed:
+            errors.append(f"{label} proof PDF is not one of the reviewed proof PDFs")
+    return errors
+
+
+PACKAGE_FONT_POLICY = "PACKAGE_BUNDLED_MANIFEST_PINNED"
+ANTI_SYCOPHANCY_THRESHOLD = 3
+
+# Two release decisions (release-gate-policy.md): the skill package is proven on synthetic proofs; a customer report
+# needs a real audit input. Proof QA is judged against the fixed probe checklist.
+REAL_AUDIT_INPUT = "REAL_AUDIT_INPUT"
+CUSTOMER_REPORT_BLOCKED = "BLOCKED_NO_REAL_AUDIT_INPUT"
+PROOF_QA_PASS = "PROOF_QA_PASS_AGAINST_CHECKLIST_CUSTOMER_RELEASE_BLOCKED"
+PROOF_SEMANTIC_PASS = "PASS_AGAINST_CHECKLIST"
+PROOF_CHECKLIST = "docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md"
+# The nine release cases scripts/run_customer_release_cases.py builds; a proof QA record must cover exactly these.
+RELEASE_CASES = frozenset({"legacy-baseline", "legal-golden", "case-a-critical", "case-b-equal-rank-profile", "case-c-vc03-detail",
+                           "active-positive", "proof-realistic", "proof-strategic", "proof-measurement-gateway"})
+PROOF_QA_RECORD = re.compile(r"customer-pdf-qa-release-[0-9a-f]{7,40}\.json")
+
+
+def _is_sha256(value: object) -> bool:
+    return isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value) is not None
+
+
+def _claims_pass(value: object) -> bool:
+    return isinstance(value, str) and value.strip().upper().startswith("PASS")
+
+
+OWNER_RESOLVED = "AMBIGUOUS -> resolved PASS by owner clarification"
+
+
+def probe_rows_sha256(checklist_text: str) -> str:
+    """SHA-256 of the checklist's probe rows: an edit to a probe after the review changes it."""
+    rows = [line for line in checklist_text.splitlines() if re.match(r"^\| [A-E]\d \|", line)]
+    return hashlib.sha256("\n".join(rows).encode("utf-8")).hexdigest()
+
+
+def _owner_resolved_probes(checklist_text: str) -> set[str]:
+    """Probe IDs named on their own in the checklist's "Owner clarifications" table."""
+    section = checklist_text.split("## Owner clarifications", 1)[1] if "## Owner clarifications" in checklist_text else ""
+    section = re.split(r"^## ", section, maxsplit=1, flags=re.M)[0]
+    return set(re.findall(r"^\| [^|]+ \| ([A-E]\d) \|", section, re.M))
+
+
+def _probe_passed(probe: str, value: object, owner_resolved: set[str]) -> bool:
+    """A probe passed, or was AMBIGUOUS and the checklist's owner-clarification table resolves exactly that probe."""
+    return value == "PASS" or (value == OWNER_RESOLVED and probe in owner_resolved)
+
+
+def _tree_file_hashes(root: Path) -> set[str]:
+    return {hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob("*") if p.is_file() and ".git" not in p.parts}
+
+
+def reviewed_visual_qa_dir(root: Path, qa: dict) -> Path:
+    """Folder of the per-case visual QA manifests written for the independent review, confined to reports/.
+
+    They are JSON records, not cryptographic signatures; like every file under reports/ they bind hashes, not authorship.
+    """
+    rel = str(qa.get("reviewed_visual_qa_dir") or "")
+    path = (root / rel).resolve()
+    if not rel or path.parent != (root / "reports").resolve() or not path.is_dir():
+        raise ValueError("proof QA record must name reviewed_visual_qa_dir as a folder under reports/")
+    return path
+
+
+def proof_qa_record_path(root: Path, report: dict) -> Path:
+    """The proof QA record named in skill_package_release, confined to reports/customer-pdf-qa-release-<sha>.json."""
+    rel = str((report.get("skill_package_release") or {}).get("proof_qa_record") or "")
+    path = (root / rel).resolve()
+    if path.parent != (root / "reports").resolve() or not PROOF_QA_RECORD.fullmatch(path.name):
+        raise ValueError("skill_package_release.proof_qa_record must be reports/customer-pdf-qa-release-<sha>.json")
+    return path
+
+
+# Mirrors visualization_policy.CUSTOMER_FORBIDDEN_TEMPLATES for recorded proof evidence.
+CUSTOMER_FORBIDDEN_PROOF_TEMPLATES = frozenset({"V01_OVERALL_SCORE", "V11_SEVERITY_DISTRIBUTION", "V12_AUDIT_COVERAGE"})
+
+
+def validate_font_gate(root: Path, report: dict, fonts: dict) -> list[str]:
+    """Font policy and strict-font evidence; re-derives the package font check live."""
+    errors: list[str] = []
+    strict = report.get("strict_customer_output_gate", {})
+    brand = report.get("brand_rendering_gate", {})
+    exact = bool(fonts.get("exact", {}).get("display") and fonts.get("exact", {}).get("data"))
+    if exact:
+        if strict.get("status") != "PASS": errors.append("exact fonts available but strict customer output gate is not PASS")
+    else:
+        if strict.get("status") != "BLOCKED_EXTERNAL_FONT": errors.append("missing exact fonts must block strict customer output")
+        if strict.get("customer_release_ready") is not False: errors.append("missing exact fonts cannot be customer-release-ready")
+    if brand.get("font_binary_policy") != PACKAGE_FONT_POLICY: errors.append("font binary policy must be the manifest-pinned package allowlist")
+    if brand.get("strict_customer_mode_fail_closed") is not True: errors.append("strict customer font gate must fail closed")
+    if fonts.get("package_policy") != PACKAGE_FONT_POLICY: errors.append("brand font capability report predates the package font policy")
+    manifest = root / "assets/fonts/font-manifest.json"
+    live_manifest = hashlib.sha256(manifest.read_bytes()).hexdigest() if manifest.is_file() else None
+    if (fonts.get("package_fonts") or {}).get("manifest_sha256") != live_manifest:
+        errors.append("brand font capability report is stale against the font manifest")
+    if brand.get("font_manifest_sha256") != live_manifest:
+        errors.append("release brand gate is stale against the font manifest")
+    try:
+        policy = subprocess.run(
+            [sys.executable, str(root / "scripts" / "validate_no_font_binaries.py"), str(root)],
+            text=True, capture_output=True, timeout=120,
+        )
+        if policy.returncode != 0:
+            errors.append(f"package font allowlist live check failed: {(policy.stderr or policy.stdout).strip()}")
+    except Exception as exc:
+        errors.append(f"package font allowlist live check unavailable: {exc}")
     return errors
 
 
@@ -114,6 +393,7 @@ def main(argv: list[str]) -> int:
         legal_customer = json.loads((root / "reports/legal-customer-projection-eval-results.json").read_text(encoding="utf-8"))
         paired = json.loads((root / "reports/paired-release-report.json").read_text(encoding="utf-8"))
         semantic = json.loads((root / "reports/semantic-customer-qa-eval-report.json").read_text(encoding="utf-8"))
+        claims_eval = json.loads((root / "reports/evidence-bound-claims-eval-results.json").read_text(encoding="utf-8"))
     except Exception as exc:
         return fail(f"invalid or missing release evidence: {exc}")
 
@@ -147,29 +427,28 @@ def main(argv: list[str]) -> int:
             errors.append(f"v3.2.1 preservation live check failed: {detail}")
     except Exception as exc:
         errors.append(f"v3.2.1 preservation live check unavailable: {exc}")
-    if report.get("release_scope") != "website-diagnosis-package": errors.append("release scope drift")
-    if report.get("release_gate", {}).get("status") != "PASS": errors.append("release status is not PASS")
-    if report.get("release_gate", {}).get("allowed_to_package") is not True: errors.append("allowed_to_package must be true")
-    if report.get("craftsmanship_gate", {}).get("status") != "PASS": errors.append("craftsmanship gate failed")
-    if report.get("anti_confabulation_gate", {}).get("status") != "PASS": errors.append("anti-confabulation gate failed")
-    if report.get("anti_confabulation_gate", {}).get("blocked_claims"): errors.append("blocked_claims must be empty")
-    syco = report.get("anti_sycophancy", {})
-    if not isinstance(syco.get("score"), int) or syco["score"] >= syco.get("threshold", 3): errors.append("anti-sycophancy threshold failed")
-    if report.get("bias_gate", {}).get("status") == "BLOCKED": errors.append("bias gate blocked")
-    browser = report.get("browser_gate", {})
-    if browser.get("applicable") and browser.get("status") not in {"PASS", "PASS_WITH_ASSUMPTIONS"}: errors.append("browser gate failed")
-    if browser.get("blockers"): errors.append("browser blockers must be empty")
-
-    for gate_name in (
-        "batch_contract_gate", "batch_evals_gate", "core_regression_gate", "internal_report_gate",
-        "active_core_gate", "active_core_render_gate",
-        "visualization_reporting_gate", "weasyprint_render_gate", "brand_rendering_gate", "proof_output_gate",
-        "measurement_gateway_gate", "protected_baseline_gate", "third_party_reuse_gate", "measurement_platform_proof_gate",
-        "strategic_relevance_gate", "customer_output_guardrail_gate", "measurement_platform_preservation_gate",
-        "customer_presentation_quality_gate",
-        "impressum_legal_source_gate", "impressum_compliance_gate", "impressum_eval_gate", "impressum_customer_projection_gate",
-    ):
-        if report.get(gate_name, {}).get("status") != "PASS": errors.append(f"{gate_name} failed")
+    # Evidence-bound customer claims: the stored eval must be PASS for this tree, and the suite is re-run live
+    # (a skipped case is NOT RUN, which the runner already reports as FAIL).
+    try:
+        with tempfile.TemporaryDirectory(prefix="pxk-claims-") as td:
+            live_out = Path(td) / "evidence-bound-claims-eval-results.json"
+            live_claims = subprocess.run(
+                [sys.executable, "-B", str(root / "scripts" / "run_evidence_bound_claim_evals.py"), str(root), "--json-out", str(live_out)],
+                text=True, capture_output=True, timeout=900,
+            )
+            live_doc = json.loads(live_out.read_text(encoding="utf-8")) if live_out.is_file() else {}
+        if live_claims.returncode != 0 or live_doc.get("status") != "PASS":
+            errors.append(f"evidence-bound claims live eval failed: {(live_claims.stdout or live_claims.stderr).strip()[:300]}")
+    except Exception as exc:
+        errors.append(f"evidence-bound claims live eval unavailable: {exc}")
+    if claims_eval.get("status") != "PASS" or claims_eval.get("skipped"):
+        errors.append("evidence-bound claims eval evidence is not PASS")
+    try:
+        if claims_eval.get("artifact_digest") != tree_digest(root):
+            errors.append("evidence-bound claims eval evidence is stale (STALE_ARTIFACT_DIGEST)")
+    except Exception as exc:
+        errors.append(f"evidence-bound claims digest check unavailable: {exc}")
+    errors.extend(validate_gate_statuses(report))
 
     if legal_sources.get("status") != "PASS": errors.append("impressum legal source validation failed")
     if legal_evals.get("status") != "PASS" or int(legal_evals.get("pass_count", 0)) != int(legal_evals.get("case_count", -1)): errors.append("impressum compliance evals failed")
@@ -207,15 +486,8 @@ def main(argv: list[str]) -> int:
     if active_render.get("fixture_only") is not True:
         errors.append("active core render proof must remain fixture-only")
 
-    strict = report.get("strict_customer_output_gate", {})
     exact = bool(fonts.get("exact", {}).get("display") and fonts.get("exact", {}).get("data"))
-    if exact:
-        if strict.get("status") != "PASS": errors.append("exact fonts available but strict customer output gate is not PASS")
-    else:
-        if strict.get("status") != "BLOCKED_EXTERNAL_FONT": errors.append("missing exact fonts must block strict customer output")
-        if strict.get("customer_release_ready") is not False: errors.append("missing exact fonts cannot be customer-release-ready")
-    if report.get("brand_rendering_gate", {}).get("font_binary_policy") != "NOT_BUNDLED": errors.append("font binaries must not be bundled")
-    if report.get("brand_rendering_gate", {}).get("strict_customer_mode_fail_closed") is not True: errors.append("strict customer font gate must fail closed")
+    errors.extend(validate_font_gate(root, report, fonts))
 
     if visual.get("status") != "PASS" or visual.get("metric_count") != 48: errors.append("visual/reporting architecture eval incomplete")
     if visual.get("mandatory_product_outputs") != ["analysis_report.json", "analysis_report.md", "customer_presentation.pdf"]: errors.append("mandatory output contract drift")
@@ -228,12 +500,12 @@ def main(argv: list[str]) -> int:
         errors.append("approved visualization gallery incomplete")
     if realistic.get("status") != "PASS" or not 8 <= int(realistic.get("page_count", 0)) <= 12 or not 4 <= int(realistic.get("selected_visual_count", 0)) <= 7:
         errors.append("realistic rendered presentation QA incomplete")
-    if realistic.get("visual_qa") != "PASS" or realistic.get("semantic_qa") != "PASS": errors.append("realistic rendered QA did not pass")
+    # Proof QA (visual + fixed checklist) and the customer-semantic boundary are checked in validate_skill_package_release.
     if realistic.get("internal_metric_count") != 48: errors.append("realistic internal report is not complete")
     if realistic.get("customer_release_ready") is not False and not exact: errors.append("realistic proof incorrectly claims exact-font customer release")
-    selected_templates = set(realistic.get("selected_template_ids") or [])
-    if selected_templates & {"V01_OVERALL_SCORE", "V12_AUDIT_COVERAGE"}:
-        errors.append("customer proof selected forbidden score/coverage visual")
+    for label, proof in (("realistic", realistic), ("strategic", strategic_proof), ("measurement platform", platform_proof)):
+        if set(proof.get("selected_template_ids") or []) & CUSTOMER_FORBIDDEN_PROOF_TEMPLATES:
+            errors.append(f"{label} customer proof selected forbidden score/finding-count/coverage visual")
 
 
     if gateway.get("status") != "PASS" or gateway.get("core_metric_count") != 48:
@@ -250,7 +522,8 @@ def main(argv: list[str]) -> int:
         errors.append("third-party no-copy gate failed")
     if platform_proof.get("status") != "PASS":
         errors.append("measurement platform proof status failed")
-    if platform_proof.get("renderer") != "WEASYPRINT" or platform_proof.get("page_count") != 12 or platform_proof.get("selected_visual_count") != 7:
+    # Enriched synthetic fixture: six admissible visuals since the finding-count visual is internal-only (SEM-003).
+    if platform_proof.get("renderer") != "WEASYPRINT" or platform_proof.get("page_count") != 11 or platform_proof.get("selected_visual_count") != 6:
         errors.append("measurement platform rendered proof incomplete")
     if platform_proof.get("pdf_output") != "PASS" or platform_proof.get("pdf_brand") != "PASS" or platform_proof.get("customer_language") != "PASS":
         errors.append("measurement platform PDF proof validators failed")
@@ -263,7 +536,7 @@ def main(argv: list[str]) -> int:
         errors.append("strategic relevance required checks incomplete")
     if quality_eval.get("status") != "PASS":
         errors.append("customer presentation quality regression failed")
-    if quality_proof.get("status") != "PASS" or quality_proof.get("final_state", {}).get("quality_status") != "PASS":
+    if quality_proof.get("status") != "PASS" or quality_proof.get("final_state", {}).get("quality_status") != "PROOF_PASS_CUSTOMER_BLOCKED":
         errors.append("customer presentation quality rendered proof failed")
     if quality_proof.get("initial_state", {}).get("quality_status") != "PENDING_QA" or quality_proof.get("initial_state", {}).get("delivery_allowed") is not False:
         errors.append("quality proof does not demonstrate fail-closed PENDING_QA draft state")
@@ -276,8 +549,6 @@ def main(argv: list[str]) -> int:
         errors.append("customer score projection policy not reconciled")
     if strategic_proof.get("status") != "PASS" or strategic_proof.get("guardrails") != "PASS":
         errors.append("strategic customer proof failed")
-    if strategic_proof.get("visual_qa") != "PASS" or strategic_proof.get("semantic_qa") != "PASS":
-        errors.append("strategic proof rendered QA failed")
     if strategic_proof.get("top_lever_count") != 4 or not 4 <= int(strategic_proof.get("selected_visual_count", 0)) <= 7:
         errors.append("strategic proof story contract failed")
     if strategic_proof.get("internal_metric_count") != 48:
@@ -294,8 +565,17 @@ def main(argv: list[str]) -> int:
     if live.get("package_blocking") is not False:
         errors.append("optional live gateway verification must be explicitly non-package-blocking")
 
+    proof_pdfs: set[str] = set()
     try:
-        errors.extend(validate_reports(root, report, paired, semantic))
+        proof_qa = json.loads(proof_qa_record_path(root, report).read_text(encoding="utf-8"))
+        proof_pdfs = {c.get("pdf_sha256") for c in proof_qa.get("cases") or [] if isinstance(c, dict)}
+        proofs = {"realistic": realistic, "strategic": strategic_proof, "quality": quality_proof.get("final_state") or {},
+                  "active core render": active_render, "measurement platform": platform_proof}
+        errors.extend(validate_skill_package_release(root, report, proof_qa, proofs))
+    except Exception as exc:
+        errors.append(f"skill package proof evidence unavailable: {exc}")
+    try:
+        errors.extend(validate_reports(root, report, paired, semantic, proof_pdfs))
     except Exception as exc:
         errors.append(f"cross-skill/semantic evidence unavailable: {exc}")
 

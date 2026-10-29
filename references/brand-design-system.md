@@ -35,7 +35,7 @@ The requested report families are:
 - Schibsted Grotesk for display/body;
 - IBM Plex Mono for measured values, axes and labels.
 
-Font binaries are runtime inputs and must not be bundled or returned in the Skill package. Read `references/brand-rendering-contract-v2.md` for exact resolution rules.
+The exact Regular/Bold files ship manifest-pinned under OFL-1.1 in `assets/fonts/`; no other font binary may be bundled, and fonts are never returned in customer deliverables. Read `references/brand-rendering-contract-v2.md` for exact resolution rules.
 
 Two explicitly different modes exist:
 

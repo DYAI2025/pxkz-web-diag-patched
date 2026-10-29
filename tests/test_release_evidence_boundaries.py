@@ -131,7 +131,11 @@ class ProtectedChangeChainTest(unittest.TestCase):
         self.assertEqual(apply_protected_changes({SCHEMA: A}, None), {SCHEMA: A})
 
     def test_reasons_are_fixed_in_code(self) -> None:
-        self.assertEqual(set(ALLOWED_PROTECTED_CHANGES), {"IMPRESSUM_CUSTOMER_RISK_SCHEMA", "VIBECHECK03_DIAGNOSTICS_SCHEMA"})
+        self.assertEqual(ALLOWED_PROTECTED_CHANGES, {
+            "IMPRESSUM_CUSTOMER_RISK_SCHEMA": {"schemas/diagnosis-report.schema.json"},
+            "VIBECHECK03_DIAGNOSTICS_SCHEMA": {"schemas/diagnosis-report.schema.json"},
+            "PACKAGED_BRAND_FONT_PATCH": {"scripts/render_diagnosis_pdf.py"},
+        })
 
     def test_chain_advances_pin(self) -> None:
         rep = self.report((A, B, "IMPRESSUM_CUSTOMER_RISK_SCHEMA"), (B, C, "VIBECHECK03_DIAGNOSTICS_SCHEMA"))

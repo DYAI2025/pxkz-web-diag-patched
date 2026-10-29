@@ -7,14 +7,13 @@
     "customer_presentation.pdf"
   ],
   "metric_count": 48,
-  "selected_visual_count": 6,
+  "selected_visual_count": 5,
   "selected_template_ids": [
     "V02_CATEGORY_BARS",
     "V03_TOP_LEVERS",
     "V07_PERFORMANCE_THRESHOLD",
     "V08_AI_ANSWERABILITY",
-    "V10_TRUST_MATRIX",
-    "V11_SEVERITY_DISTRIBUTION"
+    "V10_TRUST_MATRIX"
   ],
   "top_lever_count": 4,
   "renderer": "SEPARATE_RENDER_PROOF_REQUIRED",
@@ -28,7 +27,7 @@
   "customer_release_ready_before_qa": false,
   "artifact_examples": {
     "analysis_sha256": "ad959b518725d1f882470dd2fa435d089ffe52ea600ab8588d3fc68dae5928bf",
-    "model_sha256": "f6163365844786cb018014f5d3ec5e33b134f5ad3fcebdecef06f27a6d0e5254"
+    "model_sha256": "14e07acdd5641513b064b68756534dab34788fd4a9de28f23155523b66554a9d"
   },
   "does_not_prove": [
     "exact runtime font availability",

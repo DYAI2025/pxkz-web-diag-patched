@@ -1,60 +1,209 @@
 {
   "status": "PASS",
-  "fixture": "synthetic 48-core + impressum-compliance integration proof",
-  "customer": "Meyer & Sohn Bau GmbH",
+  "candidate_commit": "49c0806",
+  "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+  "proof_case": "proof-realistic",
   "release_mode": "proof",
-  "candidate_artifact_digest": "1f4fe8356420f494020fcb23d40b5b221e743cd41d636a5a8dd8fd288643fe0b",
-  "revalidated_at": "2026-09-08T18:43:44.369490+00:00",
-  "page_count": 11,
-  "selected_visual_count": 6,
+  "fixture_only": true,
+  "customer_release_ready": false,
+  "visual_qa": "PASS",
+  "proof_semantic_qa": "PASS_AGAINST_CHECKLIST",
+  "semantic_qa": "FAIL by fact: example data cannot pass customer semantic QA",
+  "inspection_basis": "reports/customer-pdf-qa-release-49c0806.json (independent review round 4 against the fixed checklist; rebuilt PDF and rasters byte-identical)",
+  "renderer": "WEASYPRINT",
+  "page_count": 10,
+  "selected_visual_count": 5,
   "selected_template_ids": [
     "V02_CATEGORY_BARS",
     "V03_TOP_LEVERS",
-    "V07_PERFORMANCE_THRESHOLD",
     "V08_AI_ANSWERABILITY",
     "V10_TRUST_MATRIX",
-    "V11_SEVERITY_DISTRIBUTION"
+    "V05_RANKING_POSITION"
   ],
-  "top_lever_count": 4,
+  "pdf_sha256": "b4de0b1d7e48eb3b9caa3e56b598b70772efe757f7cf591c3993c12a69bc333b",
+  "client_model_sha256": "dadd2647c8dc73f52d987b56849b58d7e3e13241d823232a6e3ac95499b9dff8",
+  "visualization_plan_sha256": "cae8a81cbea1f9108568640176cc88350567697835f53060b92f0ee74975f0b6",
+  "analysis_json_sha256": "239c33da21815dc96835542983629ffa9d413e256632cd4c5e050ba607b4cf5e",
+  "analysis_markdown_sha256": "9c5f5b06c380519241bca81dc24c475dd6c9778628ad70d7d75ca45f7a390a35",
+  "font_status": "EXACT",
+  "pdf_font_embedding": "VERIFIED",
   "internal_metric_count": 48,
-  "legal_enabled": true,
-  "impressum_compliance_sha256": "544bc8cf94eec70f37dafcbc90d77fba69cfff2e08ea1dd06d5affab3d58c2d3",
-  "internal_json": "PASS",
-  "internal_markdown": "PASS",
-  "visual_qa": "PASS",
-  "semantic_qa": "PASS",
-  "closing_page_role": "PASS",
-  "weasyprint_renderer": "PASS",
-  "renderer": "WEASYPRINT",
-  "minimum_rendered_text_size_pt": 8.499755859375,
-  "font_status": "PARTIAL_EXACT_APPROVED_FALLBACK",
-  "exact_font_status": {
-    "display": false,
-    "data": true
+  "validators": {
+    "cross_artifact_digests": "PASS",
+    "customer_claim_bindings": "PASS",
+    "impressum_compliance_sidecar": "PASS",
+    "no_font_binaries_in_deliverable": "PASS",
+    "required_artifacts": "PASS",
+    "validate_customer_business_language": "PASS",
+    "validate_customer_output_guardrails": "PASS",
+    "validate_internal_analysis_report": "PASS",
+    "validate_pdf_output": "PASS",
+    "validate_presentation_brand": "PASS",
+    "validate_visualization_assets": "PASS",
+    "validate_visualization_plan": "PASS",
+    "visual_count_parity": "PASS"
   },
-  "customer_release_ready": false,
-  "strict_customer_release": "BLOCKED_EXTERNAL_FONT",
-  "customer_language_firewall": "PASS",
   "customer_output_guardrails": "PASS",
-  "strategic_relevance": "PASS",
-  "measurement_platform_preservation": "PASS",
-  "pdf_sha256": "80d41c51e50f862bea37004bc448226f74594fadf442d45a4c8eb840f486d03f",
-  "analysis_json_sha256": "416399da56acb8c4c11c4a958982b91e8fd261087b638d593b51c3db308e8e80",
-  "analysis_markdown_sha256": "d9ce627609b16d3bf9e8d68f109585f57d68d6a8f8c71d1fd579f6c25b75e968",
-  "visualization_plan_sha256": "f8cfa44813b11b1bbfac252f4be86e2fba771128bb312584032fa02218a41c77",
-  "inspection_method": "agent_vision + deterministic validators",
-  "inspection_notes": [
-    "All 11 final pages were individually inspected from the final rendered PDF pages.",
-    "No clipping, overlap, broken glyphs, unreadable chart labels, or cross-page sentence splits were observed.",
-    "Customer/legal guardrails passed; ILES, applicability internals, expected-penalty language, and definitive legal overclaims were not exposed.",
-    "V01 overall score and V12 audit coverage are not selected as customer chart pages."
-  ],
-  "does_not_prove": [
-    "live customer measurements",
-    "provider credential availability",
-    "full WCAG conformance",
-    "legal compliance",
-    "exact production typeface parity",
-    "commercial outcome"
-  ]
+  "customer_business_language": "PASS",
+  "history": {
+    "document before Task 8 rebuild (candidate 49c0806)": {
+      "status": "PASS",
+      "candidate_commit": "49c0806",
+      "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+      "proof_case": "proof-realistic",
+      "release_mode": "proof",
+      "fixture_only": true,
+      "customer_release_ready": false,
+      "visual_qa": "PASS",
+      "proof_semantic_qa": "PASS_AGAINST_CHECKLIST",
+      "semantic_qa": "FAIL by fact: example data cannot pass customer semantic QA",
+      "inspection_basis": "reports/customer-pdf-qa-release-49c0806.json (independent review round 4 against the fixed checklist; rebuilt PDF and rasters byte-identical)",
+      "renderer": "WEASYPRINT",
+      "page_count": 10,
+      "selected_visual_count": 5,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX",
+        "V05_RANKING_POSITION"
+      ],
+      "pdf_sha256": "b4de0b1d7e48eb3b9caa3e56b598b70772efe757f7cf591c3993c12a69bc333b",
+      "client_model_sha256": "dadd2647c8dc73f52d987b56849b58d7e3e13241d823232a6e3ac95499b9dff8",
+      "visualization_plan_sha256": "cae8a81cbea1f9108568640176cc88350567697835f53060b92f0ee74975f0b6",
+      "analysis_json_sha256": "239c33da21815dc96835542983629ffa9d413e256632cd4c5e050ba607b4cf5e",
+      "analysis_markdown_sha256": "9c5f5b06c380519241bca81dc24c475dd6c9778628ad70d7d75ca45f7a390a35",
+      "font_status": "EXACT",
+      "pdf_font_embedding": "VERIFIED",
+      "internal_metric_count": 48,
+      "validators": {
+        "cross_artifact_digests": "PASS",
+        "customer_claim_bindings": "PASS",
+        "impressum_compliance_sidecar": "PASS",
+        "no_font_binaries_in_deliverable": "PASS",
+        "required_artifacts": "PASS",
+        "validate_customer_business_language": "PASS",
+        "validate_customer_output_guardrails": "PASS",
+        "validate_internal_analysis_report": "PASS",
+        "validate_pdf_output": "PASS",
+        "validate_presentation_brand": "PASS",
+        "validate_visualization_assets": "PASS",
+        "validate_visualization_plan": "PASS",
+        "visual_count_parity": "PASS"
+      },
+      "customer_output_guardrails": "PASS",
+      "customer_business_language": "PASS",
+      "history": {
+        "document before Task 8 rebuild (candidate a66710f)": {
+          "status": "FAIL",
+          "fixture": "synthetic 48-core + impressum-compliance integration proof (LEG-GOLD-BFL sidecar)",
+          "customer": "Meyer & Sohn Bau GmbH",
+          "release_mode": "proof",
+          "candidate_commit": "a66710f",
+          "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+          "revalidated_at": "2026-10-28",
+          "page_count": 10,
+          "selected_visual_count": 5,
+          "selected_template_ids": [
+            "V02_CATEGORY_BARS",
+            "V03_TOP_LEVERS",
+            "V07_PERFORMANCE_THRESHOLD",
+            "V08_AI_ANSWERABILITY",
+            "V10_TRUST_MATRIX"
+          ],
+          "top_lever_count": 4,
+          "internal_metric_count": 48,
+          "legal_enabled": true,
+          "impressum_compliance_sha256": "44be2d89da6d93529e9215cdac29cdc1e7f344ca3270693d00a9470034493717",
+          "internal_json": "PASS",
+          "internal_markdown": "PASS",
+          "visual_qa": "PASS",
+          "semantic_qa": "FAIL",
+          "closing_page_role": "PASS",
+          "weasyprint_renderer": "PASS",
+          "renderer": "WEASYPRINT",
+          "minimum_rendered_text_size_pt": 8.5,
+          "font_status": "EXACT",
+          "exact_font_status": {
+            "display": true,
+            "data": true
+          },
+          "pdf_font_embedding": "VERIFIED",
+          "customer_release_ready": false,
+          "strict_customer_release": "PROOF_MODE_ONLY_NOT_A_CUSTOMER_RELEASE",
+          "customer_language_firewall": "PASS",
+          "customer_output_guardrails": "PASS",
+          "strategic_relevance": "PASS",
+          "measurement_platform_preservation": "PASS",
+          "pdf_sha256": "c43027aafdac9fd803b7e5126db22ce8ca1ad5491c167db80b37aedec483d019",
+          "analysis_json_sha256": "12eba8ad10df530a214b58504336acc36131ff9157a454d8eccafc24fcde2fc7",
+          "analysis_markdown_sha256": "7fbab874ccc066c8ec553f93d08d8173b85874e36837545b256d1af403300147",
+          "visualization_plan_sha256": "331c54f9ad5cb1a364e1f4c6423e1cf1accadd340e18375431d53efff1ef77c6",
+          "client_model_sha256": "c943a3bf68fbb92dc6c882db656a267d1097a60f252d17d998dbd84b0a00b431",
+          "rendered_page_sha256": [
+            {
+              "page": 1,
+              "sha256": "d960b4eef61dff5fe9e2b14f6842e357ad7044b64ded219cb31ba22253b8a927"
+            },
+            {
+              "page": 2,
+              "sha256": "5dfcee0ae125a90afcf9e374c5ec5ce25e7daca02a99cafa89967fe95b1c209f"
+            },
+            {
+              "page": 3,
+              "sha256": "68ae56ab38d31350fdad9824557144207c4f9d7885b1fa516cd1eb36377291e2"
+            },
+            {
+              "page": 4,
+              "sha256": "08180acfe1386d053f84e4a9278d815088920b2bd4dee85507de336e134a2a84"
+            },
+            {
+              "page": 5,
+              "sha256": "3e157a96c84516c0f8946ee074b2b22fc553a437ef1d878ff099c65c12697d10"
+            },
+            {
+              "page": 6,
+              "sha256": "7e8849889c839a7bcd260e5412fd162242509cabe3c7184975f3ecf29f4ad3f1"
+            },
+            {
+              "page": 7,
+              "sha256": "da4a45201f79e3d46e4a5a20de4811f4e731aea6395366397700d995c070fbde"
+            },
+            {
+              "page": 8,
+              "sha256": "b4946c9180dbd0fdb5a6eefa70fac96a2ff0c01eeabf1860de214896582e42ec"
+            },
+            {
+              "page": 9,
+              "sha256": "a4fe7a75a1299665f5d8faf69778f172c1ec3b6a4ec69ed7357f9876743ed8c0"
+            },
+            {
+              "page": 10,
+              "sha256": "dc2c073472bcb71bbacd242213ae45f902685c6b30f41090cff1a1b5d8c84732"
+            }
+          ],
+          "inspection_method": "agent_vision + deterministic validators",
+          "render_basis": "Built offline from git archive of a66710f (tree digest bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d) in a network-denied sandbox with no system fonts and no PIXELKIEZ_FONT_DIR; packaged brand fonts resolved EXACT and embedding VERIFIED. Versus candidate badaf71, six page rasters changed (legal-golden/proof-realistic p2, proof-strategic p8, case-c p8-p10) and were re-inspected; every other raster is byte-identical to an inspected badaf71 raster.",
+          "inspection_notes": [
+            "All 10 pages inspected from the rendered page images; no clipping, overlap, broken glyphs or cross-page sentence splits.",
+            "Legal provider-identity risk is lever 1 with review wording ('rechtlich prüfen'), no claim of a legal violation; V10 shows Impressum X Handlungsbedarf consistent with it.",
+            "V11 severity distribution is no longer selected (internal-only, SEM-003); five admissible visuals remain.",
+            "Overview page carries the dated scope sentence; no AI-visibility claim beyond answerability wording.",
+            "O-5 resolved (CUSTOMER_LABEL_FIDELITY_PATCH): the strength 'Rechts-/Kontaktflächen gut erreichbar' is withheld while the provider-identity risk is projected; the overview shows two strengths.",
+            "O-9: lever 1 is labelled '01 · HOCH' (finding severity) while customer_risk.priority is MANDATORY_CRITICAL; rank 1 and the cover badge 'Dringender rechtlicher Prüfbedarf' carry the urgency.",
+            "O-10: the page-5 mobile load chart (F-002) has no matching lever because the legal risk took a lever slot."
+          ],
+          "supersedes": "11-page/6-visual proof with V11 and PARTIAL_EXACT fallback fonts (pdf 80d41c51...)",
+          "does_not_prove": [
+            "live customer measurements",
+            "provider credential availability",
+            "full WCAG conformance",
+            "legal compliance",
+            "commercial outcome"
+          ],
+          "round_2_review": "Round-2 independent review of 9ba024d, re-derived from PDF text and plan data: client_story.py rewrites 'im mobilen Labortest' to 'auf Mobilgeräten' (lab value shown as real mobile experience) in every case, and V08 shows minor-gap rows as 'klar'. User decision 2026-10-28: close BLOCKED; follow-up patch 'evidence-bound customer claims'."
+        }
+      }
+    }
+  }
 }

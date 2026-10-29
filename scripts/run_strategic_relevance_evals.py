@@ -150,6 +150,8 @@ def main() -> int:
             raise RuntimeError("overall score was redundantly selected as a dedicated customer visual")
         if "V12_AUDIT_COVERAGE" in selected:
             raise RuntimeError("audit coverage visual leaked into customer plan")
+        if "V11_SEVERITY_DISTRIBUTION" in selected:
+            raise RuntimeError("finding-count visual without strategic relevance leaked into customer plan")
         checks.append("customer_visual_score_coverage_guard")
 
         # 6) Internal report still preserves method/coverage transparency.
@@ -173,7 +175,7 @@ def main() -> int:
         "customer_partial_score_policy": "NUMERIC_BEWERTUNGSSTAND_NO_COVERAGE",
         "customer_process_metadata_policy": "FORBIDDEN",
         "not_assessed_customer_penalty": False,
-        "customer_visual_exclusions": ["V01_OVERALL_SCORE", "V12_AUDIT_COVERAGE"],
+        "customer_visual_exclusions": ["V01_OVERALL_SCORE", "V11_SEVERITY_DISTRIBUTION", "V12_AUDIT_COVERAGE"],
         "internal_metric_inventory": 48,
     }
     (ROOT / "reports" / "strategic-relevance-eval-results.json").write_text(

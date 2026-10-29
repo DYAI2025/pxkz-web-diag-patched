@@ -11,11 +11,16 @@ NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 FORBIDDEN_NAMES = {"render_diagnosis_pptx.mjs", "validate_pptx_output.py", "client-presentation.schema.json"}
 
 BASE_REQUIRED = [
-    "README.md", "SKILL.md", "agents/openai.yaml",
-    "assets/brand.json", "assets/brand-tokens.json", "assets/measurement-registry.json", "assets/branch-priority-profiles.v1.json", "schemas/branch-priority.schema.json", "scripts/branch_priority.py", "scripts/build_boundary.py", "references/branch-aware-customer-prioritization.md", "tests/test_branch_priority.py", "scripts/vibecheck03.py", "scripts/vibecheck03_admission.py", "scripts/attach_vibecheck03_findings.py", "schemas/vibecheck03-diagnostics.schema.json", "assets/vibecheck03.check-catalog.v1.json", "assets/vibecheck03-customer-admission-rules.v1.json", "references/vibecheck03-diagnostics.md", "tests/test_vibecheck03.py", "tests/test_vibecheck03_admission.py", "tests/test_priority_pipeline.py", "tests/test_legacy_oracles.py", "evals/fixtures/golden/legacy-oracles.v1.json", "evals/fixtures/branch-priority-tie-report.SYNTHETIC.json", "scripts/run_branch_priority_evals.py", "scripts/run_vc03_customer_release_evals.py", "assets/capability-registry.json", "assets/enrichment-metric-registry.json", "assets/core-evidence-bindings.active.v1.json",
+    "README.md", "SKILL.md", "agents/openai.yaml", "requirements.txt",
+    "assets/brand.json", "assets/brand-tokens.json", "assets/measurement-registry.json", "assets/branch-priority-profiles.v1.json", "schemas/branch-priority.schema.json", "scripts/branch_priority.py", "scripts/build_boundary.py", "references/branch-aware-customer-prioritization.md", "tests/test_branch_priority.py", "scripts/vibecheck03.py", "scripts/vibecheck03_admission.py", "scripts/attach_vibecheck03_findings.py", "schemas/vibecheck03-diagnostics.schema.json", "assets/vibecheck03.check-catalog.v1.json", "assets/vibecheck03-customer-admission-rules.v1.json", "references/vibecheck03-diagnostics.md", "tests/test_vibecheck03.py", "tests/test_vibecheck03_admission.py", "tests/test_priority_pipeline.py", "tests/test_legacy_oracles.py", "evals/fixtures/golden/legacy-oracles.v1.json", "evals/fixtures/branch-priority-tie-report.SYNTHETIC.json", "scripts/run_branch_priority_evals.py", "scripts/run_vc03_customer_release_evals.py", "scripts/evidence_method_labels.py", "scripts/validate_customer_claim_bindings.py", "scripts/run_evidence_bound_claim_evals.py", "scripts/run_customer_release_cases.py", "tests/test_evidence_bound_claims.py", "evals/fixtures/active-positive-consistent-findings.v1.json", "scripts/customer_reading.py", "scripts/validate_customer_surface_consistency.py", "assets/customer-topic-overlaps.v1.json", "assets/capability-registry.json", "assets/enrichment-metric-registry.json", "assets/core-evidence-bindings.active.v1.json",
     "assets/sql/ga4_journey_events.sql",
     "assets/PXK_web_audit_template.pdf", "assets/presentation.css", "assets/vega-lite-schema-v6.4.3.json",
     "assets/third-party/README.md", "assets/third-party/vega-lite-LICENSE.txt",
+    "assets/fonts/font-manifest.json", "assets/fonts/schibsted-grotesk/SchibstedGrotesk-Regular.ttf",
+    "assets/fonts/schibsted-grotesk/SchibstedGrotesk-Bold.ttf", "assets/fonts/schibsted-grotesk/OFL.txt",
+    "assets/fonts/schibsted-grotesk/AUTHORS.txt", "assets/fonts/ibm-plex-mono/IBMPlexMono-Regular.ttf",
+    "assets/fonts/ibm-plex-mono/IBMPlexMono-Bold.ttf", "assets/fonts/ibm-plex-mono/LICENSE.txt",
+    "tests/test_packaged_brand_fonts.py", "tests/test_customer_claim_scope.py", "tests/test_capability_execution_note.py",
     "assets/brand/colors.css", "assets/brand/typography.css", "assets/brand/spacing.css",
     "assets/brand/document.css", "assets/brand/brand-devices.css", "assets/brand/report-structure.html",
     "references/audit-method.md", "references/measurement-contract.md", "references/scoring-policy.md",
@@ -117,7 +122,7 @@ VEGA_TEMPLATE_NAMES = [
     "V11_SEVERITY_DISTRIBUTION", "V12_AUDIT_COVERAGE", "V13_IMPACT_EFFORT", "V14_REPEAT_AUDIT",
 ]
 JSON_REQUIRED = [
-    "assets/brand.json", "assets/brand-tokens.json", "assets/measurement-registry.json", "assets/branch-priority-profiles.v1.json", "schemas/branch-priority.schema.json", "assets/capability-registry.json", "assets/enrichment-metric-registry.json", "assets/impressum-compliance-registry.v1.json",
+    "assets/brand.json", "assets/brand-tokens.json", "assets/fonts/font-manifest.json", "assets/measurement-registry.json", "assets/branch-priority-profiles.v1.json", "schemas/branch-priority.schema.json", "assets/capability-registry.json", "assets/enrichment-metric-registry.json", "assets/impressum-compliance-registry.v1.json",
     "templates/chart-library.v1.json", "templates/client-report-template.json", "templates/visualization-catalog.v2.json",
     "schemas/diagnosis-report.schema.json", "schemas/client-report.schema.json", "schemas/analysis-report.schema.json", "schemas/impressum-evidence.schema.json", "schemas/impressum-compliance.schema.json", "schemas/measurement-enrichment.schema.json",
     "schemas/measurement-envelope.schema.json", "schemas/availability-monitoring.schema.json", "schemas/owner-analytics.schema.json",

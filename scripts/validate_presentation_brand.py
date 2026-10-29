@@ -5,6 +5,7 @@ import argparse,hashlib,json,sys,re
 from pathlib import Path
 import fitz
 from jsonschema import Draft202012Validator
+from check_brand_fonts import verify_packaged_fonts, reverify_receipt_fonts
 
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def fail(m):print('FAIL: '+m,file=sys.stderr);return 1
@@ -54,7 +55,19 @@ def main():
   if a.require_exact_fonts and r.get('brand_font_status')!='EXACT':return fail('BRAND_FONT_EXACT_REQUIRED: strict brand font mode requested')
   if r.get('brand_font_status')!='EXACT' and not r.get('limitations'):return fail('font fallback must disclose limitation')
   if font_resolution.get('exact',{}).get('data') is True and not any(any(marker in x.casefold() for marker in ('pixelkiezdata','plexmono')) for x in pdf_fonts):return fail('resolved IBM Plex Mono did not reach PDF')
-  print(f"PASS: presentation brand pages={len(doc)} visuals={r['embedded_visual_count']} min_text={min(sizes):.2f}pt font_status={r['brand_font_status']}")
+  # Re-derive fonts and embedding live; every identity in the receipt is a claim, not proof.
+  prov=r.get('font_provenance',{}); styles=prov.get('styles',{})
+  check=reverify_receipt_fonts(pdf,r,root); live=check['embedding']
+  if check['issues']:return fail('BRAND_FONT_EXACT_REQUIRED: receipt fonts not re-derivable: '+', '.join(check['issues']))
+  if live['status']!=r.get('pdf_font_embedding',{}).get('status'):return fail(f"receipt font embedding {r.get('pdf_font_embedding',{}).get('status')} contradicts PDF {live['status']}")
+  if r.get('brand_font_status')=='EXACT':
+   if live['status']!='VERIFIED':return fail(f"BRAND_FONT_EXACT_REQUIRED: exact status without verified PDF embedding (unexpected={live['unexpected_fonts']}, required={live['required_embedded']}, notdef={live['notdef_glyphs'][:5]})")
+   if {k:v.get('sha256') for k,v in styles.items()}!=font_resolution.get('font_file_sha256'):return fail('font provenance hashes contradict font_resolution hashes')
+   if any(v.get('source')=='PACKAGED' for v in styles.values()):
+    package=verify_packaged_fonts(root)
+    if package['status']!='VERIFIED':return fail('packaged brand fonts fail verification: '+'; '.join(package['issues'][:5]))
+    if prov.get('package_manifest_sha256')!=package['manifest_sha256']:return fail('receipt font manifest digest is stale against the package')
+  print(f"PASS: presentation brand pages={len(doc)} visuals={r['embedded_visual_count']} min_text={min(sizes):.2f}pt font_status={r['brand_font_status']} embedding={live['status']}")
   return 0
  except Exception as e:return fail(str(e))
 if __name__=='__main__':raise SystemExit(main())

@@ -1,0 +1,582 @@
+{
+  "status": "PROOF_QA_PASS_AGAINST_CHECKLIST_CUSTOMER_RELEASE_BLOCKED",
+  "inspected_at": "2026-10-29",
+  "candidate_commit": "49c0806",
+  "reviewed_build_commit": "4ab90a9",
+  "reviewed_build_identity": "9 PDFs, 88 page PNGs and 9 client models of the 49c0806 build are byte-identical to the 4ab90a9 build that review round 4 inspected; validate_pdf_visual_qa rc 0 for every case against the review manifests",
+  "yardstick": "docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md (fixed before round 4 by owner decision; owner clarifications for A3 and A2-A4 recorded there 2026-10-29)",
+  "distinct_pdfs": 8,
+  "distinct_pdf_note": "proof-measurement-gateway is byte-identical to legacy-baseline by design (non-scoring measurement layer without customer surface); every other pair differs.",
+  "inspection_method": "hybrid",
+  "inspected_by": "independent adversarial review round 4 (read-only agent, no authoring context, 50/50 unique rasters) + authoring re-derivation (main session, Claude Opus 5.5)",
+  "cases": [
+    {
+      "case": "legacy-baseline",
+      "release_mode": "proof",
+      "page_count": 10,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V07_PERFORMANCE_THRESHOLD",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX"
+      ],
+      "levers": [
+        "F-001",
+        "F-003",
+        "F-004",
+        "F-002"
+      ],
+      "pdf_sha256": "d8b20180a3dca89cc7fac421ffec5cbed57cc58783a0c50850e09b764c7673f4",
+      "reviewed_pdf_sha256": "d8b20180a3dca89cc7fac421ffec5cbed57cc58783a0c50850e09b764c7673f4",
+      "client_model_sha256": "14e07acdd5641513b064b68756534dab34788fd4a9de28f23155523b66554a9d",
+      "scored_report_sha256": "22a535a85bc3464132ffe42a3141c651b993d683cd50b45eaa94ed8e473e1931",
+      "visualization_plan_sha256": "ac9dc88e38cfce0165d322eafb8c4007ae4021ba4fdab9073f909895c20a03d3",
+      "claim_bindings_sha256": "96757af6e81bb832ee1d3b5b1526019507b7bbfe487823a56eb7318cfa81296b",
+      "brand_fonts": "EXACT",
+      "font_embedding": "VERIFIED",
+      "surface_consistency_gate": "validate_customer_surface_consistency rc [0] in the nine-case build trace",
+      "visual_qa": "PASS (validate_pdf_visual_qa rc 0)",
+      "semantic_qa": "FAIL by fact: example data (no_synthetic_metric_visuals false); checks outside the checklist not assessed",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "deliverable_status_source": "finalize_deliverable_manifest rc 1 on a copy of this build (FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection); customer_release_ready after: False",
+      "rendered_page_sha256": [
+        "f6321a422e08375a3b105938e0330a1ddc7be34f09b94472249436a4c2312371",
+        "b3460f7fe73bf825b5c8ef9b21000a83ccee82af41203b07e7225d7b796d3ad3",
+        "0a8ee30d5fca36a281c0007814c48f0200883048ee4bc4e09711f588eb6f30d2",
+        "b40341aa9fba055cad192c96f7f2bccf91cbf64ec109635a91ab0b20871f946e",
+        "1b10973220783a719c643cef97d9963ad67813948ce68bc9fb82dce8d3d93760",
+        "a523948f1f5c53d1bd60c7e55163c2d78859ab6799b8bd7a9d17a824d1b93d4c",
+        "61446d11cc79fde598d876ca9a1d492f44de5183ad26b8f38587445253531009",
+        "68294e61151413f70af08efb03aaa7ebbce41f966a32cfcc291cbfe6bfe9dfb2",
+        "facce07086accca02c0236744d4f4855e19ba0394574ed0e8a26c5a84af59187",
+        "b1920f9134f88c18c4a7d65bd375421371378a75031d27fee19eb368ad29fa4e"
+      ],
+      "plan_and_bindings_equal_to_reviewed_build_ignoring_observed_at_and_hashes": true
+    },
+    {
+      "case": "legal-golden",
+      "release_mode": "proof",
+      "page_count": 9,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX"
+      ],
+      "levers": [
+        "F-008",
+        "F-001",
+        "F-003",
+        "F-004"
+      ],
+      "pdf_sha256": "4a20a83468ba95e6c623a6675b24c73278445eed2df22f42d15686c4eb33d233",
+      "reviewed_pdf_sha256": "4a20a83468ba95e6c623a6675b24c73278445eed2df22f42d15686c4eb33d233",
+      "client_model_sha256": "944fb6e4f397e4363cdac5e6e2ffdc82b75f6282de6c2c0cc98f298a1c61f5ee",
+      "scored_report_sha256": "fc83e9dd9a8b1bc7af4d8ed48211762892b0c77093a8ca3767c3280f89a626bf",
+      "visualization_plan_sha256": "1c945f95b04bb70a1f3a2e6a32139558a36610f93d85d430232c1361b9dc8199",
+      "claim_bindings_sha256": "f56d308a568520df237c996d4c6968b4539038cce1f5cee8f55cbc4159c60598",
+      "brand_fonts": "EXACT",
+      "font_embedding": "VERIFIED",
+      "surface_consistency_gate": "validate_customer_surface_consistency rc [0] in the nine-case build trace",
+      "visual_qa": "PASS (validate_pdf_visual_qa rc 0)",
+      "semantic_qa": "FAIL by fact: example data (no_synthetic_metric_visuals false); checks outside the checklist not assessed",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "deliverable_status_source": "finalize_deliverable_manifest rc 1 on a copy of this build (FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection); customer_release_ready after: False",
+      "rendered_page_sha256": [
+        "fffe8f1bbacc9540f96a630f8d981f388a5b93dc1883d45393f5f07184b5007d",
+        "d08b94f34dedc94e47ea08e96f97a98d8f9d6b9f42e5fec3ba6ff3b87c20e601",
+        "77de31745b438518040191bee18c09ec03028b3249279dcf882cb6430c80605b",
+        "13e24f22dbeacd8e5d621ec444a602d358ff07b0f418c38485ee5cfc3a834ec1",
+        "453cfe1db09ae0f4ec82d74b2b349784f251b73e838e3e3439510deb3d85b207",
+        "149752c937dcf938a69e582bff9f868ce5a16c8acc60fd6b3c85aa2d5813b273",
+        "8974109342cfd91ca3aeb76359ba55b9d39a98434e759b6043fe1b574bfb9579",
+        "0bba889e57e1264ae6a50c7a7e2980531a4c5d08451424bca5320c2c8568b3e5",
+        "ec15dd2125d3dbd7321afdc863f88e132cb841a5910853d87e4b07a2c1d7aea2"
+      ],
+      "plan_and_bindings_equal_to_reviewed_build_ignoring_observed_at_and_hashes": true
+    },
+    {
+      "case": "case-a-critical",
+      "release_mode": "proof",
+      "page_count": 10,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V07_PERFORMANCE_THRESHOLD",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX"
+      ],
+      "levers": [
+        "F-001",
+        "F-003",
+        "F-004",
+        "F-002"
+      ],
+      "pdf_sha256": "426fe1159395e81dab07e0ccc91f6713297e9b299c7e3993359cb910e739c81c",
+      "reviewed_pdf_sha256": "426fe1159395e81dab07e0ccc91f6713297e9b299c7e3993359cb910e739c81c",
+      "client_model_sha256": "47609f9b90834ef284c0037a5330fd8f38bf557a7c3abf8bb176834f96a249b3",
+      "scored_report_sha256": "23f092ab63eb77e15ac0b048484408badd8dbdcbb0900c7079966a3555cfc221",
+      "visualization_plan_sha256": "cc3b588383444187cfaaa5fa1a756f5239f8872f7c7e0c00210e7771dce4301b",
+      "claim_bindings_sha256": "7aa5e045cecdf60b40fa2324839359e7763190886484b59e7439498c8b084930",
+      "brand_fonts": "EXACT",
+      "font_embedding": "VERIFIED",
+      "surface_consistency_gate": "validate_customer_surface_consistency rc [0] in the nine-case build trace",
+      "visual_qa": "PASS (validate_pdf_visual_qa rc 0)",
+      "semantic_qa": "FAIL by fact: example data (no_synthetic_metric_visuals false); checks outside the checklist not assessed",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "deliverable_status_source": "finalize_deliverable_manifest rc 1 on a copy of this build (FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection); customer_release_ready after: False",
+      "rendered_page_sha256": [
+        "8a12ce1abf25ab06ce7afb67d419bda3945064d34a2ccbc49045b5943f530420",
+        "b3460f7fe73bf825b5c8ef9b21000a83ccee82af41203b07e7225d7b796d3ad3",
+        "0a8ee30d5fca36a281c0007814c48f0200883048ee4bc4e09711f588eb6f30d2",
+        "b40341aa9fba055cad192c96f7f2bccf91cbf64ec109635a91ab0b20871f946e",
+        "1b10973220783a719c643cef97d9963ad67813948ce68bc9fb82dce8d3d93760",
+        "a523948f1f5c53d1bd60c7e55163c2d78859ab6799b8bd7a9d17a824d1b93d4c",
+        "61446d11cc79fde598d876ca9a1d492f44de5183ad26b8f38587445253531009",
+        "165d081914d6b479ec310c3d0b5166e687991381e57f9e6f1d2cd7ccff027b93",
+        "02def1542a2f009835785bdc8861a9e43103c2042772e151a638ce2ebf599b47",
+        "981d92adc0a8eabba4a8c9b1c6ba54916c8fa1680f8d74e904db120d74fe6e44"
+      ],
+      "plan_and_bindings_equal_to_reviewed_build_ignoring_observed_at_and_hashes": true
+    },
+    {
+      "case": "case-c-vc03-detail",
+      "release_mode": "proof",
+      "page_count": 9,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX"
+      ],
+      "levers": [
+        "F-001",
+        "F-003",
+        "F-004",
+        "F-930"
+      ],
+      "pdf_sha256": "b30f96ed417039630bef042f7e1c8aa4df1b0659675f12c35c23a27e818db297",
+      "reviewed_pdf_sha256": "b30f96ed417039630bef042f7e1c8aa4df1b0659675f12c35c23a27e818db297",
+      "client_model_sha256": "b2cc9dc3d5a0e6552615e70dd03ee0d1f530bce563259e72c4ee76874100ee9f",
+      "scored_report_sha256": "81a020c68e9e4ea0f156323f80bf24acdffb62c3d204a4591f2ad535a5f76ce3",
+      "visualization_plan_sha256": "0020a84bfd95422836d6a827d6278dd99bef1022090d32f4c903803be5a58fbd",
+      "claim_bindings_sha256": "e56a9531ff2a17dd88793c9ac24796960d16b6ba6ffcaec7f45a96b383791ec0",
+      "brand_fonts": "EXACT",
+      "font_embedding": "VERIFIED",
+      "surface_consistency_gate": "validate_customer_surface_consistency rc [0] in the nine-case build trace",
+      "visual_qa": "PASS (validate_pdf_visual_qa rc 0)",
+      "semantic_qa": "FAIL by fact: example data (no_synthetic_metric_visuals false); checks outside the checklist not assessed",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "deliverable_status_source": "finalize_deliverable_manifest rc 1 on a copy of this build (FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection); customer_release_ready after: False",
+      "rendered_page_sha256": [
+        "f6321a422e08375a3b105938e0330a1ddc7be34f09b94472249436a4c2312371",
+        "b3460f7fe73bf825b5c8ef9b21000a83ccee82af41203b07e7225d7b796d3ad3",
+        "0a8ee30d5fca36a281c0007814c48f0200883048ee4bc4e09711f588eb6f30d2",
+        "ea68d8051e480c0e8ed7c944b2243be794fe97a3bf6fcadde4f7d18bc5a2643a",
+        "b760a4a530a3e83c6d9de596a05ec19d4cdb48e025bbecc5032c50133d296c7c",
+        "225d175c025588af4af77c7cdf51eb283deb32afcd64eb9e3e9b74839ed0627b",
+        "53962a550f21c853f7ace6ee761dfa7e664670a5b078b16d8bddce67abc45f92",
+        "81053ceb030cc2fc7ed23d3636fa33178230fa691309c3e8b5e437433db4fe1a",
+        "588f4a3d017abd579767a02170b2bdfde8b7be74d41a42c060e127136ee8162b"
+      ],
+      "plan_and_bindings_equal_to_reviewed_build_ignoring_observed_at_and_hashes": true
+    },
+    {
+      "case": "active-positive",
+      "release_mode": "proof",
+      "page_count": 9,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX"
+      ],
+      "levers": [
+        "F-101",
+        "F-102",
+        "F-103",
+        "F-104"
+      ],
+      "pdf_sha256": "0e763bdf863306f61d898e7f64dc0b3e1ee7cdc5c690dbed181e25cd948df4e6",
+      "reviewed_pdf_sha256": "0e763bdf863306f61d898e7f64dc0b3e1ee7cdc5c690dbed181e25cd948df4e6",
+      "client_model_sha256": "cb853db7fef3e54170fc007a800af0473dc17f458a0629f72642c56821f54ea8",
+      "scored_report_sha256": "f4b5e72ecd0e04b714ae9689e53a1c30cc6334ea90eb5a17ad777204649c859a",
+      "visualization_plan_sha256": "5c5c26c2b308738a409723b78d1613e098db972692cc4289dbfd9b0cf59c88bb",
+      "claim_bindings_sha256": "a7b24ec54cc9fcc64ef00971b0103b8b21259c25968da0c23bfca10a18b67285",
+      "brand_fonts": "EXACT",
+      "font_embedding": "VERIFIED",
+      "surface_consistency_gate": "validate_customer_surface_consistency rc [0] in the nine-case build trace",
+      "visual_qa": "PASS (validate_pdf_visual_qa rc 0)",
+      "semantic_qa": "FAIL by fact: example data (no_synthetic_metric_visuals false); checks outside the checklist not assessed",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "deliverable_status_source": "finalize_deliverable_manifest rc 1 on a copy of this build (FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection); customer_release_ready after: False",
+      "rendered_page_sha256": [
+        "79ac3df994b67eeb81416fb9cba4f55fe14a774c9859fe5f67c5788852ffe05a",
+        "e87a551a41d33e6c0f70147b37fb094e561593e94c3e62595eba476396d35abc",
+        "d381342bd30dfc3724625ffde16d657fd1c07c5f3569ff2ff959e7b06f7f43c0",
+        "721403e3c0a0b90610638d3407161161106a30a8cb475661625d900ebc934553",
+        "47bc09833283f270079f92f81cf546ef3791f6926007a63d8232ea13796c4305",
+        "a0b6f133cec1a7426331b49eb7ccd0965ab1de16a5014800fea4754e9d9f1797",
+        "16ad8e533274c3dacb2ee5c9d050fcd5c77e24ce80d5562797924d00b19a2059",
+        "f7c21a1489bf0b275222a059285459af725f651cdad1a1307d9c38add1e057b0",
+        "3c95660eaf0ecafa1df6d57caff48386c65545fa3c12241acff2b813a3db102f"
+      ],
+      "plan_and_bindings_equal_to_reviewed_build_ignoring_observed_at_and_hashes": true
+    },
+    {
+      "case": "case-b-equal-rank-profile",
+      "release_mode": "proof",
+      "page_count": 10,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX",
+        "V05_RANKING_POSITION"
+      ],
+      "levers": [
+        "F-001",
+        "F-003",
+        "F-004",
+        "F-005"
+      ],
+      "pdf_sha256": "d411578f3af6208f248d4308674456beab8f1d8d26e12b8423a0cd6030123f41",
+      "reviewed_pdf_sha256": "d411578f3af6208f248d4308674456beab8f1d8d26e12b8423a0cd6030123f41",
+      "client_model_sha256": "3e807850e23bbd27522d5efb8a998f3e3222d6800fd1ed71f6ab629280fc9326",
+      "scored_report_sha256": "28a180f76e85405b3ff67e72dc90a0f763a28f2da523eadba6f108cbff31c120",
+      "visualization_plan_sha256": "927c0ce510f5258c22bb822f804ce754e1d8350cdd9b56d212e641c598f3116e",
+      "claim_bindings_sha256": "0fbd5bbaf792e35c845715cff6370daa89944323aececf435a752a432954a461",
+      "brand_fonts": "EXACT",
+      "font_embedding": "VERIFIED",
+      "surface_consistency_gate": "validate_customer_surface_consistency rc [0] in the nine-case build trace",
+      "visual_qa": "PASS (validate_pdf_visual_qa rc 0)",
+      "semantic_qa": "FAIL by fact: example data (no_synthetic_metric_visuals false); checks outside the checklist not assessed",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "deliverable_status_source": "finalize_deliverable_manifest rc 1 on a copy of this build (FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection); customer_release_ready after: False",
+      "rendered_page_sha256": [
+        "f6321a422e08375a3b105938e0330a1ddc7be34f09b94472249436a4c2312371",
+        "b3460f7fe73bf825b5c8ef9b21000a83ccee82af41203b07e7225d7b796d3ad3",
+        "0a8ee30d5fca36a281c0007814c48f0200883048ee4bc4e09711f588eb6f30d2",
+        "4ace8cd4f55ccb644d6f09b08f55910b564b7e245b908834e4aa22bf727ad28a",
+        "b760a4a530a3e83c6d9de596a05ec19d4cdb48e025bbecc5032c50133d296c7c",
+        "225d175c025588af4af77c7cdf51eb283deb32afcd64eb9e3e9b74839ed0627b",
+        "b3010e20126d2c27ba2ba90482e4c9e78e0f56bc3b2afd7e2dd64a6cce2c4bf9",
+        "5d12e66f9152ec5c64a0c90a69994dd5b6184a377049aa46ee219bdcd3ae47ea",
+        "bed45061546033831f1952b9c10c70350378b10e7cc9091cf5d735bfff9ea936",
+        "4d6a91fcf66b7878f5a3fcc0a7444e749442abe8c8631f02864bdfd427c25873"
+      ],
+      "plan_and_bindings_equal_to_reviewed_build_ignoring_observed_at_and_hashes": true
+    },
+    {
+      "case": "proof-realistic",
+      "release_mode": "proof",
+      "page_count": 10,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX",
+        "V05_RANKING_POSITION"
+      ],
+      "levers": [
+        "F-008",
+        "F-001",
+        "F-003",
+        "F-004"
+      ],
+      "pdf_sha256": "b4de0b1d7e48eb3b9caa3e56b598b70772efe757f7cf591c3993c12a69bc333b",
+      "reviewed_pdf_sha256": "b4de0b1d7e48eb3b9caa3e56b598b70772efe757f7cf591c3993c12a69bc333b",
+      "client_model_sha256": "dadd2647c8dc73f52d987b56849b58d7e3e13241d823232a6e3ac95499b9dff8",
+      "scored_report_sha256": "243fc026a8defc4b9295600ac3aa34acd8097f085786fb40447e8ad1d30663e7",
+      "visualization_plan_sha256": "cae8a81cbea1f9108568640176cc88350567697835f53060b92f0ee74975f0b6",
+      "claim_bindings_sha256": "db692a78c3c6c25018e4494aaa366a136586c48ce2ce5c5c8d13f40d4ca2c4ce",
+      "brand_fonts": "EXACT",
+      "font_embedding": "VERIFIED",
+      "surface_consistency_gate": "validate_customer_surface_consistency rc [0] in the nine-case build trace",
+      "visual_qa": "PASS (validate_pdf_visual_qa rc 0)",
+      "semantic_qa": "FAIL by fact: example data (no_synthetic_metric_visuals false); checks outside the checklist not assessed",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "deliverable_status_source": "finalize_deliverable_manifest rc 1 on a copy of this build (FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection); customer_release_ready after: False",
+      "rendered_page_sha256": [
+        "fffe8f1bbacc9540f96a630f8d981f388a5b93dc1883d45393f5f07184b5007d",
+        "d08b94f34dedc94e47ea08e96f97a98d8f9d6b9f42e5fec3ba6ff3b87c20e601",
+        "77de31745b438518040191bee18c09ec03028b3249279dcf882cb6430c80605b",
+        "13e24f22dbeacd8e5d621ec444a602d358ff07b0f418c38485ee5cfc3a834ec1",
+        "453cfe1db09ae0f4ec82d74b2b349784f251b73e838e3e3439510deb3d85b207",
+        "149752c937dcf938a69e582bff9f868ce5a16c8acc60fd6b3c85aa2d5813b273",
+        "b3010e20126d2c27ba2ba90482e4c9e78e0f56bc3b2afd7e2dd64a6cce2c4bf9",
+        "3c2065491e62eab379db09abf3c144dd770761c8bf1e39963c9578359981be32",
+        "4f338b13f1082153060ce1f88259ac7153f1c51c6bf79e56ba35b52de37da6b1",
+        "736463778e9dbbda9264e118820179268463a091d4f183b4294c2af5f194bcd2"
+      ],
+      "plan_and_bindings_equal_to_reviewed_build_ignoring_observed_at_and_hashes": true
+    },
+    {
+      "case": "proof-strategic",
+      "release_mode": "proof",
+      "page_count": 11,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V07_PERFORMANCE_THRESHOLD",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX",
+        "V05_RANKING_POSITION"
+      ],
+      "levers": [
+        "F-001",
+        "F-003",
+        "F-004",
+        "F-002"
+      ],
+      "pdf_sha256": "cf80008b6ae52f6df420ba1ebad6fca35572def940026634df77c141cf72adda",
+      "reviewed_pdf_sha256": "cf80008b6ae52f6df420ba1ebad6fca35572def940026634df77c141cf72adda",
+      "client_model_sha256": "548a72ce0d705f7e7b96cbc2a78231b985e367f01d6ab6e892c11c454a90b866",
+      "scored_report_sha256": "03071c435f51221d286fd8937bc5ddfc597ce0c06dcc5a04717f86070010b248",
+      "visualization_plan_sha256": "40cd2b6544526305f75739862d18abb6626dbfb9b5df1e7e48a992904c420329",
+      "claim_bindings_sha256": "b41466b332f3653601a5ea4311da56663233c81d90b4576ca900f4eb5be4dab5",
+      "brand_fonts": "EXACT",
+      "font_embedding": "VERIFIED",
+      "surface_consistency_gate": "validate_customer_surface_consistency rc [0] in the nine-case build trace",
+      "visual_qa": "PASS (validate_pdf_visual_qa rc 0)",
+      "semantic_qa": "FAIL by fact: example data (no_synthetic_metric_visuals false); checks outside the checklist not assessed",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "deliverable_status_source": "finalize_deliverable_manifest rc 1 on a copy of this build (FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection); customer_release_ready after: False",
+      "rendered_page_sha256": [
+        "f6321a422e08375a3b105938e0330a1ddc7be34f09b94472249436a4c2312371",
+        "b3460f7fe73bf825b5c8ef9b21000a83ccee82af41203b07e7225d7b796d3ad3",
+        "0a8ee30d5fca36a281c0007814c48f0200883048ee4bc4e09711f588eb6f30d2",
+        "b40341aa9fba055cad192c96f7f2bccf91cbf64ec109635a91ab0b20871f946e",
+        "1b10973220783a719c643cef97d9963ad67813948ce68bc9fb82dce8d3d93760",
+        "a523948f1f5c53d1bd60c7e55163c2d78859ab6799b8bd7a9d17a824d1b93d4c",
+        "61446d11cc79fde598d876ca9a1d492f44de5183ad26b8f38587445253531009",
+        "38162806b59eb1c51eeb1b6dc182dd69f07b2fa86861c4ff8fb86cde8911c7b7",
+        "0f631e38051ddd083258828bc883123eaf37fa6e401c7b18b1c5bf3fb597c171",
+        "76d35cc048c1ac9df94d389f65d61e43628d50c27e25a685f2470ccde57c9b0c",
+        "17e50e7a553bdcd1118466acaddd9d11f0780376cc299340557411b27d60b5b6"
+      ],
+      "plan_and_bindings_equal_to_reviewed_build_ignoring_observed_at_and_hashes": true
+    },
+    {
+      "case": "proof-measurement-gateway",
+      "release_mode": "proof",
+      "page_count": 10,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V07_PERFORMANCE_THRESHOLD",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX"
+      ],
+      "levers": [
+        "F-001",
+        "F-003",
+        "F-004",
+        "F-002"
+      ],
+      "pdf_sha256": "d8b20180a3dca89cc7fac421ffec5cbed57cc58783a0c50850e09b764c7673f4",
+      "reviewed_pdf_sha256": "d8b20180a3dca89cc7fac421ffec5cbed57cc58783a0c50850e09b764c7673f4",
+      "client_model_sha256": "14e07acdd5641513b064b68756534dab34788fd4a9de28f23155523b66554a9d",
+      "scored_report_sha256": "34b6ec04692a3085fe90a9df75b27efd5029d42a7bfb80c474dcdd7808857076",
+      "visualization_plan_sha256": "70e0ae9cc37205c885c464ff80f72c16cfa8cca9674e912a09d8c841ba023f85",
+      "claim_bindings_sha256": "769e9ea13ee10be18e14aa4e869b78929fd9139cfa9e05d0cbb60962e3a7d4d7",
+      "brand_fonts": "EXACT",
+      "font_embedding": "VERIFIED",
+      "surface_consistency_gate": "validate_customer_surface_consistency rc [0] in the nine-case build trace",
+      "visual_qa": "PASS (validate_pdf_visual_qa rc 0)",
+      "semantic_qa": "FAIL by fact: example data (no_synthetic_metric_visuals false); checks outside the checklist not assessed",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "deliverable_status_source": "finalize_deliverable_manifest rc 1 on a copy of this build (FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection); customer_release_ready after: False",
+      "rendered_page_sha256": [
+        "f6321a422e08375a3b105938e0330a1ddc7be34f09b94472249436a4c2312371",
+        "b3460f7fe73bf825b5c8ef9b21000a83ccee82af41203b07e7225d7b796d3ad3",
+        "0a8ee30d5fca36a281c0007814c48f0200883048ee4bc4e09711f588eb6f30d2",
+        "b40341aa9fba055cad192c96f7f2bccf91cbf64ec109635a91ab0b20871f946e",
+        "1b10973220783a719c643cef97d9963ad67813948ce68bc9fb82dce8d3d93760",
+        "a523948f1f5c53d1bd60c7e55163c2d78859ab6799b8bd7a9d17a824d1b93d4c",
+        "61446d11cc79fde598d876ca9a1d492f44de5183ad26b8f38587445253531009",
+        "68294e61151413f70af08efb03aaa7ebbce41f966a32cfcc291cbfe6bfe9dfb2",
+        "facce07086accca02c0236744d4f4855e19ba0394574ed0e8a26c5a84af59187",
+        "b1920f9134f88c18c4a7d65bd375421371378a75031d27fee19eb368ad29fa4e"
+      ],
+      "plan_and_bindings_equal_to_reviewed_build_ignoring_observed_at_and_hashes": true
+    }
+  ],
+  "negatives": [
+    {
+      "case": "baumdienst-renner-reflection-regression",
+      "rc": 1,
+      "blocked": true,
+      "reason": "CUSTOMER_MIN_VISUALS_NOT_MET",
+      "pdf_written": false
+    },
+    {
+      "case": "low-coverage-marketing-report",
+      "rc": 1,
+      "blocked": true,
+      "reason": "CUSTOMER_MIN_VISUALS_NOT_MET",
+      "pdf_written": false
+    }
+  ],
+  "customer_mode_refusals": [
+    {
+      "case": "legacy-baseline",
+      "rc": 1,
+      "blocked": true,
+      "reason": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT",
+      "pdf_written": false
+    },
+    {
+      "case": "legal-golden",
+      "rc": 1,
+      "blocked": true,
+      "reason": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT",
+      "pdf_written": false
+    },
+    {
+      "case": "case-a-critical",
+      "rc": 1,
+      "blocked": true,
+      "reason": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT",
+      "pdf_written": false
+    },
+    {
+      "case": "case-c-vc03-detail",
+      "rc": 1,
+      "blocked": true,
+      "reason": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT",
+      "pdf_written": false
+    },
+    {
+      "case": "active-positive",
+      "rc": 1,
+      "blocked": true,
+      "reason": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT",
+      "pdf_written": false
+    },
+    {
+      "case": "case-b-equal-rank-profile",
+      "rc": 1,
+      "blocked": true,
+      "reason": "synthetic priority profiles are test data",
+      "pdf_written": false
+    },
+    {
+      "case": "proof-realistic",
+      "rc": 1,
+      "blocked": true,
+      "reason": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT",
+      "pdf_written": false
+    },
+    {
+      "case": "proof-strategic",
+      "rc": 1,
+      "blocked": true,
+      "reason": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT",
+      "pdf_written": false
+    },
+    {
+      "case": "proof-measurement-gateway",
+      "rc": 1,
+      "blocked": true,
+      "reason": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT",
+      "pdf_written": false
+    }
+  ],
+  "independent_review": {
+    "rounds": [
+      {
+        "round": 1,
+        "build": "6846366",
+        "confirmed": 11,
+        "outcome": "fixed in 9c506de"
+      },
+      {
+        "round": 2,
+        "build": "9c506de",
+        "confirmed": 18,
+        "outcome": "fixed in cd8689d; owner decisions applied in 339518f, 2be0a98"
+      },
+      {
+        "round": 3,
+        "build": "2be0a98",
+        "confirmed": 12,
+        "plausible": 2,
+        "outcome": "review-convergence rule: strategy changed in d779396, 4ab90a9 (shared reading, topic overlaps, fail-closed cross-surface gate, fixed checklist)"
+      },
+      {
+        "round": 4,
+        "build": "4ab90a9",
+        "probes": 20,
+        "pass": 19,
+        "fail": 0,
+        "ambiguous": 1,
+        "ambiguous_resolution": "A3 on '1.240 aktive Nutzer': owner decision 2026-10-29, A3 covers field performance values; recorded in the checklist",
+        "probe_lines": {
+          "A1": "PASS",
+          "A2": "PASS",
+          "A3": "AMBIGUOUS -> resolved PASS by owner clarification",
+          "A4": "PASS",
+          "A5": "PASS",
+          "B1": "PASS",
+          "B2": "PASS",
+          "B3": "PASS",
+          "B4": "PASS",
+          "B5": "PASS",
+          "B6": "PASS",
+          "C1": "PASS",
+          "C2": "PASS",
+          "C3": "PASS",
+          "C4": "PASS",
+          "C5": "PASS",
+          "D1": "PASS",
+          "D2": "PASS",
+          "E1": "PASS",
+          "E2": "PASS"
+        },
+        "rasters_opened": "50 of 50",
+        "count_note": "the reviewer's summary said '18 of 19'; its own per-probe lines list 20 probes, 19 PASS and 1 AMBIGUOUS",
+        "probe_rows_sha256": "305bd1469fa8dfc7a55ed7f3694b10d814ae1ad3aa772b4b2839dc4933ed8b53",
+        "owner_resolved": [
+          "A3"
+        ],
+        "binding_note": "probe_rows_sha256 is computed from the checklist of 4ab90a9 (the round's yardstick); owner_resolved is read from the round's own ambiguous_resolution text"
+      }
+    ],
+    "backlog_round_4": [
+      "fixed in 5305049 by owner decision: real-data paths ('Reale Nutzung', ISO periods, LCP as 'Ladezeit', 'reale Nutzerdaten')",
+      "proof-strategic shows LCP 3,8 s (Testmessung) and 3,2 s (visits): both labelled, two methods",
+      "'Klar' rows beside levers in topics outside the five declared overlap groups (UX-02 vs UX-05, TRUST-08, TRUST-07)",
+      "page 2 PRIORITÄTEN lists 3 of 4 levers in business order",
+      "active-positive roadmap column 'Danach' empty",
+      "roadmap footer repeats the first action",
+      "visual: lever stripe on orange page, chart frame on white, cover warning box spacing, closing summary spacing",
+      "ranking fixture query 'blitzschutz ludwigsfelde' vs location Berlin",
+      "case-b refusal comes from the priority-profile guard (still a refusal)"
+    ],
+    "authoring_rederivation_inherited": {
+      "recorded_on": "4ab90a9 build (5305049 record)",
+      "valid_for_this_candidate_by": "byte identity of the 9 PDFs and 88 page rasters (reviewed_build_identity)",
+      "items": [
+        "forbidden-term, ISO/German date, 'Ladezeit' and P1-P4 scans over 88 pages: 0 hits; 0 pages without 'Beispieldaten'",
+        "only identical PDF pair: legacy-baseline = proof-measurement-gateway (d8b20180a3dc...)",
+        "validate_customer_surface_consistency.py PASS on 9 of 9 cases",
+        "11 of 11 customer-mode attempts refused, pdf_written false",
+        "88 of 88 page PNGs pixel-identical between 4ab90a9 and 5305049 builds"
+      ]
+    }
+  },
+  "unadjudicated": [],
+  "does_not_prove": [
+    "a customer release: every input is example data, so semantic customer QA cannot pass and every bundle is CUSTOMER_RELEASE_BLOCKED; a real audit input is required",
+    "real-data rendering: the real-data wording is covered by unit tests on a real-data-shaped report only",
+    "brand fonts beyond the build receipts (EXACT / VERIFIED)"
+  ],
+  "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+  "rebound_from": "reports/customer-pdf-qa-release-5305049.json",
+  "reviewed_visual_qa_dir": "reports/customer-pdf-qa-release-5305049",
+  "yardstick_sha256": "e0440aa05b1b553fb1d27a70ff0d45dabf0115678a2e61a5c11f5a38fbb0df17",
+  "round4_yardstick_sha256": "a1d6aca5bf57a8e97c58ee06b325e89befb2801087f62667b7d50bcab1abb13c",
+  "yardstick_note": "round 4 used the checklist of 4ab90a9; the current file adds the owner-clarifications table; probe rows identical: True"
+}

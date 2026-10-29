@@ -1,9 +1,9 @@
 {
   "status": "PASS",
-  "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
+  "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
   "semantic_digest": "fa0f763b6c98703fe3c5114498105517dc0ee71c65e0a93ec000e464e91ed90f",
   "shuffled_semantic_digest": "fa0f763b6c98703fe3c5114498105517dc0ee71c65e0a93ec000e464e91ed90f",
-  "scored_report_sha256": "de915b6f43e26dfbd8198b36738bb6202f5f6bd4576462fcddca936ed1542c34",
-  "shuffled_scored_report_sha256": "de915b6f43e26dfbd8198b36738bb6202f5f6bd4576462fcddca936ed1542c34",
+  "scored_report_sha256": "de27e873f05dfb862c387203381a203b78d585c8ec93c902a85914078b1ec6d1",
+  "shuffled_scored_report_sha256": "de27e873f05dfb862c387203381a203b78d585c8ec93c902a85914078b1ec6d1",
   "timestamps_excluded_from_semantic_digest": true
 }

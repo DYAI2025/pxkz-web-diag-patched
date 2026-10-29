@@ -14,7 +14,12 @@ No source code, screenshots or sample designs from Charts/DGCharts or fl_chart a
 
 ## Fonts
 
-No font binaries are bundled or redistributed. The runtime must supply any requested brand font under its own applicable license and deployment policy.
+Four unmodified font files are bundled under the SIL Open Font License 1.1 and pinned in `assets/fonts/font-manifest.json`:
+
+- **Schibsted Grotesk** Regular/Bold — Copyright 2023 The Schibsted-Grotesk Project Authors (https://github.com/schibsted/schibsted-grotesk), release 1.100, commit `d485f61f105e1b3935f4d21dfb4d371359798603`, files `fonts/ttf/SchibstedGrotesk-{Regular,Bold}.ttf`. Licence `assets/fonts/schibsted-grotesk/OFL.txt`, authors `assets/fonts/schibsted-grotesk/AUTHORS.txt`. No Reserved Font Name.
+- **IBM Plex Mono** Regular/Bold — Copyright © 2017 IBM Corp. with Reserved Font Name "Plex", release `@ibm/plex-mono@2.5.0`, commit `2f9ba1b25957d958db71a849e85d72e3ecfb845a`, files from the release asset `ibm-plex-mono.zip`. Licence `assets/fonts/ibm-plex-mono/LICENSE.txt`.
+
+The files are redistributed only inside the Skill package together with their licences, are not sold by themselves and are not modified or renamed, so the Reserved Font Name clause is not triggered. Customer PDFs contain embedded subsets (document embedding is permitted by OFL-1.1); font files are never placed in customer deliverables. The hash-pinned design-system template `assets/PXK_web_audit_template.pdf` contains its own embedded IBM Plex Mono and Menlo subsets as document data. No other font binary is bundled; `scripts/validate_no_font_binaries.py` enforces this.
 
 
 ## Measurement Platform repository snapshots

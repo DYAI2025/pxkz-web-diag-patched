@@ -4,12 +4,17 @@
 This script never sets QA to PASS. It consumes already completed digest-bound visual and
 semantic QA, reruns their validators, refreshes artifact digests, and derives the final
 status. Exact requested brand fonts remain a separate customer-release condition.
+
+Fail-closed: a manifest that says CUSTOMER_RELEASE_READY is downgraded before any re-validation starts,
+and any validation failure records CUSTOMER_RELEASE_BLOCKED in the manifest instead of leaving an old
+READY status on disk.
 """
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -17,6 +22,12 @@ from pathlib import Path
 
 def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def write_atomic(path: Path, data: dict) -> None:
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    os.replace(tmp, path)
 
 
 def fail(message: str) -> int:
@@ -39,6 +50,16 @@ def main() -> int:
     manifest_path = out / "deliverable-manifest.json"
     try:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return fail(f"unreadable deliverable manifest: {exc}")
+    previous_status = manifest.get("status")
+    if previous_status == "CUSTOMER_RELEASE_READY":
+        # A READY status is never carried over: it is re-earned by this run or replaced.
+        manifest.update({"status": "BUILT_PENDING_QA", "customer_release_ready": False})
+        manifest.setdefault("status_history", []).append(
+            {"from": previous_status, "to": "BUILT_PENDING_QA", "reason": "REVALIDATION_STARTED"})
+        write_atomic(manifest_path, manifest)
+    try:
         visual_qa = json.loads((out / "customer_presentation.visual-qa.json").read_text(encoding="utf-8"))
         semantic_qa = json.loads((out / "customer_presentation.semantic-qa.json").read_text(encoding="utf-8"))
         receipt = json.loads((out / "presentation-render-receipt.json").read_text(encoding="utf-8"))
@@ -66,7 +87,12 @@ def main() -> int:
         qa_complete = visual_status == "PASS" and semantic_status == "PASS"
         quality = json.loads((out / "customer-presentation-quality-report.json").read_text(encoding="utf-8"))
         quality_status = quality.get("quality_status")
-        customer_ready = bool(qa_complete and quality_status == "PASS" and font_status == "EXACT")
+        embedding_status = (receipt.get("pdf_font_embedding") or {}).get("status")
+        if font_status == "EXACT" or embedding_status == "VERIFIED":
+            # The receipt was written by the renderer and may have been edited since; re-derive the font verdict.
+            run([sys.executable, str(root / "scripts/validate_presentation_brand.py"), str(out / "customer_presentation.pdf"),
+                 str(out / "presentation-render-receipt.json"), str(root / "assets/brand-tokens.json"), "--require-exact-fonts"])
+        customer_ready = bool(qa_complete and quality_status == "PASS" and font_status == "EXACT" and embedding_status == "VERIFIED")
         manifest.update({
             "status": "CUSTOMER_RELEASE_READY" if customer_ready else ("QA_COMPLETE_FONT_BLOCKED" if qa_complete else "BUILT_PENDING_QA"),
             "qa_status": {"visual": visual_status, "semantic": semantic_status},
@@ -75,14 +101,18 @@ def main() -> int:
             "font_resolution": {
                 **(manifest.get("font_resolution") if isinstance(manifest.get("font_resolution"), dict) else {}),
                 "status": font_status,
-                "customer_release_ready": font_status == "EXACT",
+                "customer_release_ready": font_status == "EXACT" and embedding_status == "VERIFIED",
+                "pdf_font_embedding_status": embedding_status,
             },
         })
-        manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        write_atomic(manifest_path, manifest)
         print(f"PASS: deliverable manifest finalized status={manifest['status']} customer_release_ready={str(customer_ready).lower()}")
         return 0
     except Exception as exc:
-        return fail(str(exc))
+        manifest.update({"status": "CUSTOMER_RELEASE_BLOCKED", "customer_release_ready": False,
+                         "block_reason": f"{type(exc).__name__}: {exc}"[:500]})
+        write_atomic(manifest_path, manifest)
+        return fail("CUSTOMER_RELEASE_BLOCKED: " + str(exc))
 
 
 if __name__ == "__main__":

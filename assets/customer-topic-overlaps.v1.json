@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Core metrics whose registry labels name the same customer-visible subject. Owner decision 2026-10-29: a strength or a 'Klar' row is not shown while a metric of the same topic is a lever metric or reads 'Handlungsbedarf'. Scores, weights and the registry are untouched.",
+  "groups": [
+    {"topic": "headings_and_structure", "metrics": ["FIND-06", "A11Y-02", "UX-07"], "basis": "Titles, Metas & Überschriften / Semantische Struktur & Landmarks / Inhaltshierarchie"},
+    {"topic": "proof_and_references", "metrics": ["AI-05", "TRUST-06", "UX-06"], "basis": "Zuordnung von Claims zu Belegen / Referenzen, Belege & Proof Points / Vertrauenssignale im Entscheidungsweg"},
+    {"topic": "image_alternatives", "metrics": ["FIND-09", "A11Y-03"], "basis": "Bild-SEO / Alternativtexte im Stichprobenumfang"},
+    {"topic": "form_burden", "metrics": ["UX-05", "A11Y-05"], "basis": "Kontakt- & Formularreibung / Formularbeschriftungen"},
+    {"topic": "company_facts", "metrics": ["TRUST-04", "AI-01", "AI-06"], "basis": "Konsistente Unternehmens- & Leistungsdaten / Entitätsklarheit / Faktenkonsistenz über Seiten hinweg"}
+  ]
+}

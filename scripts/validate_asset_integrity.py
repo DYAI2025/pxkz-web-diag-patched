@@ -32,6 +32,9 @@ REQUIRED_SNAPSHOTS = [
     "assets/presentation.css",
     "assets/vega-lite-schema-v6.4.3.json",
     "assets/third-party/vega-lite-LICENSE.txt",
+    "assets/fonts/font-manifest.json",
+    "assets/fonts/schibsted-grotesk/OFL.txt",
+    "assets/fonts/ibm-plex-mono/LICENSE.txt",
 ]
 
 
@@ -63,8 +66,10 @@ def main(argv: list[str]) -> int:
     if not EXPECTED_DEVICES <= devices:
         return fail("required Pixelkiez recognition devices missing")
     font_cfg = brand.get("fonts", {})
-    if font_cfg.get("binary_status") not in {"NOT_BUNDLED", "RUNTIME_SUPPLIED_NOT_BUNDLED"}:
-        return fail("font binaries must remain runtime-supplied and not bundled")
+    if font_cfg.get("binary_status") != "PACKAGE_BUNDLED_MANIFEST_PINNED" or font_cfg.get("font_manifest") != "assets/fonts/font-manifest.json":
+        return fail("brand fonts must be the manifest-pinned package fonts (PACKAGE_BUNDLED_MANIFEST_PINNED)")
+    if not (root / "assets/fonts/font-manifest.json").is_file():
+        return fail("brand font manifest missing: assets/fonts/font-manifest.json")
     if font_cfg.get("display_requested") != "Schibsted Grotesk" or font_cfg.get("data_requested") != "IBM Plex Mono":
         return fail("requested Pixelkiez report font families drifted")
     if font_cfg.get("customer_release_requirement") != "EXACT_BOTH_FAMILIES":
@@ -73,8 +78,8 @@ def main(argv: list[str]) -> int:
         return fail("client report geometry must be A4 landscape")
 
     typography = tokens.get("typography", {})
-    if typography.get("font_binary_status") not in {"NOT_BUNDLED", "RUNTIME_SUPPLIED_NOT_BUNDLED"}:
-        return fail("brand tokens must not imply bundled fonts")
+    if typography.get("font_binary_status") != "PACKAGE_BUNDLED_MANIFEST_PINNED" or typography.get("font_manifest") != "assets/fonts/font-manifest.json":
+        return fail("brand tokens must point at the manifest-pinned package fonts")
     if typography.get("body_min_pt") != 12 or typography.get("chart_label_min_pt") != 10 or typography.get("note_min_pt") != 8.5:
         return fail("brand type-size minima drifted")
     if tokens.get("token_version") != "3.0.0" or tokens.get("source_resolution") != "USER_PROVIDED_PIXELKIEZ_DESIGN_SYSTEM":

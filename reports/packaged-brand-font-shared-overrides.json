@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "patch_id": "PACKAGED_BRAND_FONT_PATCH",
+  "authorization_basis": "Explicit user authorization on 2026-10-28 (answer 'Freigeben (Recommended)' to the question naming PACKAGED_BRAND_FONT_PATCH with render_diagnosis_pdf.py 411d7adf… -> 7f3ca782… and build_audit_deliverables.py 3a7dfee0… -> c6cf4b71…), after an independent read-only review (workflow wf_532a77be-acb) whose confirmed findings were fixed before the hashes were presented.",
+  "scope_note": "PXK-FONT-002: bind the packaged, manifest-pinned Schibsted Grotesk / IBM Plex Mono files via @font-face (aliases plus real family names when exact), re-verify the fonts embedded in the PDF, record font provenance and embedding in the render receipt, pass --require-exact-fonts to the brand validator in customer mode, and refuse font binaries in customer deliverables. No change to scoring, the 48 core metrics, legal projection, batch v1.3 or QA status logic.",
+  "previous_sha256_semantics": "render_diagnosis_pdf.py: first override, previous = protected baseline digest. build_audit_deliverables.py: previous = effective approved digest after reports/customer-status-coherence-shared-overrides.json chain (equal to the committed file at base commit 0d3a301).",
+  "evidence": [
+    "reports/override-evidence/packaged-fonts.render_diagnosis_pdf.baseline-to-candidate.diff",
+    "reports/override-evidence/packaged-fonts.build_audit_deliverables.approved-to-candidate.diff"
+  ],
+  "overrides": [
+    {
+      "path": "scripts/render_diagnosis_pdf.py",
+      "baseline_sha256": "411d7adfe8952de7b5dd60f566b0384ccfc3ceda8b7b4b5c83378b471f474ea1",
+      "previous_sha256": "411d7adfe8952de7b5dd60f566b0384ccfc3ceda8b7b4b5c83378b471f474ea1",
+      "current_sha256": "7f3ca7826b6ec5ea2a5787ca3eb0aa1fc4878b6521fc57c76bc63be852110260",
+      "reason": "PACKAGED_BRAND_FONT_PATCH"
+    },
+    {
+      "path": "scripts/build_audit_deliverables.py",
+      "baseline_sha256": "b8d3ba5536a2054d2545c17ef2868950597a2fdf7c01bf9dae2a4adf1bae203b",
+      "previous_sha256": "3a7dfee0c0982033cc80f100c29bc90749a5bdd7db130149cf3bc59fa8d48c5e",
+      "current_sha256": "c6cf4b71c5a77fdfa52efad70b6f1cf26c8dbdecffff664ba9f4bc31c1f3ff02",
+      "reason": "PACKAGED_BRAND_FONT_PATCH"
+    }
+  ],
+  "current_hash_confirmation": "Hashes shown to and approved by the user on 2026-10-28 are exactly current_sha256 above."
+}

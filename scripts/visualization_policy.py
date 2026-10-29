@@ -5,6 +5,9 @@ from __future__ import annotations
 from typing import Any
 
 CUSTOMER_MIN_VISUALS = 4
+# Never customer-visible: V01 duplicates the cover score, V12 is audit coverage, V11 counts findings
+# without strategic relevance (finding count measures neither effort nor business impact).
+CUSTOMER_FORBIDDEN_TEMPLATES = frozenset({"V01_OVERALL_SCORE", "V11_SEVERITY_DISTRIBUTION", "V12_AUDIT_COVERAGE"})
 CUSTOMER_MAX_VISUALS = 7
 CUSTOMER_TEMPLATE_PRIORITY = (
     "V01_OVERALL_SCORE",

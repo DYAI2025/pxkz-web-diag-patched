@@ -1,0 +1,701 @@
+{
+  "status": "FAIL_ALL_CASES_SEMANTIC",
+  "inspected_at": "2026-10-28",
+  "distinct_pdfs": 7,
+  "distinct_pdf_note": "9 cases render 7 distinct PDFs: proof-realistic is byte-identical to legal-golden and proof-measurement-gateway to legacy-baseline (the gateway enrichment selects no customer visual).",
+  "inspection_method": "agent_vision",
+  "inspected_by": "Claude Opus 5.5 (main session, 2026-10-28; same session that authored the release-completion and label-fidelity patches, so not independent; cross-checked by an independent read-only reviewer on candidate fa791c3)",
+  "candidate_commit": "a66710f",
+  "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+  "semantic_bundle_sha256": "9fd973c94e7493e804ccd923b60abfc42a66a8ef3e1c8bbd9dc9bb78939abfeb",
+  "render_basis": "Built offline from git archive of a66710f (tree digest bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d) in a network-denied sandbox with no system fonts and no PIXELKIEZ_FONT_DIR; packaged brand fonts resolved EXACT and embedding VERIFIED. Versus candidate badaf71, six page rasters changed (legal-golden/proof-realistic p2, proof-strategic p8, case-c p8-p10) and were re-inspected; every other raster is byte-identical to an inspected badaf71 raster.",
+  "cases": [
+    {
+      "case": "legacy-baseline",
+      "release_mode": "customer",
+      "page_count": 10,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V07_PERFORMANCE_THRESHOLD",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX"
+      ],
+      "levers": [
+        "F-001",
+        "F-003",
+        "F-004",
+        "F-002"
+      ],
+      "pdf_sha256": "de27843d7798299cb891ee937a7deb3a000cb2860006fc755a21f34e439df597",
+      "client_model_sha256": "d4ee5c61ba08787166e1188c5ea52fbfd5e10ffb8b057d8f31966b7aa312c3c7",
+      "scored_report_sha256": "22a535a85bc3464132ffe42a3141c651b993d683cd50b45eaa94ed8e473e1931",
+      "visual_qa": "PASS",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "rendered_page_sha256": [
+        {
+          "page": 1,
+          "sha256": "1912bd20ab43ea727a69c0e4cf5ed1a51661d2b8d06c6ef89dee4e9c09446b66"
+        },
+        {
+          "page": 2,
+          "sha256": "ae494f30ca65f30e73942eca88ecea77ac1680dce4a11c49e2984a0f0d41a82f"
+        },
+        {
+          "page": 3,
+          "sha256": "68ae56ab38d31350fdad9824557144207c4f9d7885b1fa516cd1eb36377291e2"
+        },
+        {
+          "page": 4,
+          "sha256": "53fb1dce97bb998d2873a05bd0e4ad3366f636227683e8f7c301bef4d97d3002"
+        },
+        {
+          "page": 5,
+          "sha256": "3e157a96c84516c0f8946ee074b2b22fc553a437ef1d878ff099c65c12697d10"
+        },
+        {
+          "page": 6,
+          "sha256": "ff7111fca6abe5c655efcb8a96df5e40adcd08fe41b1e04e9a54c47a4029070b"
+        },
+        {
+          "page": 7,
+          "sha256": "2975940d6562339938a6c3d1e48096746c1b0e7769a23f516f99007b79e5dc5c"
+        },
+        {
+          "page": 8,
+          "sha256": "828829375145e4d5d553b3f6a6327bfe1d8f0f20195ecf95c64ecfab43960e7c"
+        },
+        {
+          "page": 9,
+          "sha256": "cf1e8fe6dbe6ceba27e65f4cb59c70d508e3dc71dd40c08d51b6a2adb6ff31d0"
+        },
+        {
+          "page": 10,
+          "sha256": "e197f564452d7a121f59465023c6a4269f1651de356b99c2e02c402859389725"
+        }
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
+    },
+    {
+      "case": "legal-golden",
+      "release_mode": "customer",
+      "page_count": 10,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V07_PERFORMANCE_THRESHOLD",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX"
+      ],
+      "levers": [
+        "F-008",
+        "F-001",
+        "F-003",
+        "F-004"
+      ],
+      "pdf_sha256": "c43027aafdac9fd803b7e5126db22ce8ca1ad5491c167db80b37aedec483d019",
+      "client_model_sha256": "c943a3bf68fbb92dc6c882db656a267d1097a60f252d17d998dbd84b0a00b431",
+      "scored_report_sha256": "fc83e9dd9a8b1bc7af4d8ed48211762892b0c77093a8ca3767c3280f89a626bf",
+      "visual_qa": "PASS",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "rendered_page_sha256": [
+        {
+          "page": 1,
+          "sha256": "d960b4eef61dff5fe9e2b14f6842e357ad7044b64ded219cb31ba22253b8a927"
+        },
+        {
+          "page": 2,
+          "sha256": "5dfcee0ae125a90afcf9e374c5ec5ce25e7daca02a99cafa89967fe95b1c209f"
+        },
+        {
+          "page": 3,
+          "sha256": "68ae56ab38d31350fdad9824557144207c4f9d7885b1fa516cd1eb36377291e2"
+        },
+        {
+          "page": 4,
+          "sha256": "08180acfe1386d053f84e4a9278d815088920b2bd4dee85507de336e134a2a84"
+        },
+        {
+          "page": 5,
+          "sha256": "3e157a96c84516c0f8946ee074b2b22fc553a437ef1d878ff099c65c12697d10"
+        },
+        {
+          "page": 6,
+          "sha256": "7e8849889c839a7bcd260e5412fd162242509cabe3c7184975f3ecf29f4ad3f1"
+        },
+        {
+          "page": 7,
+          "sha256": "da4a45201f79e3d46e4a5a20de4811f4e731aea6395366397700d995c070fbde"
+        },
+        {
+          "page": 8,
+          "sha256": "b4946c9180dbd0fdb5a6eefa70fac96a2ff0c01eeabf1860de214896582e42ec"
+        },
+        {
+          "page": 9,
+          "sha256": "a4fe7a75a1299665f5d8faf69778f172c1ec3b6a4ec69ed7357f9876743ed8c0"
+        },
+        {
+          "page": 10,
+          "sha256": "dc2c073472bcb71bbacd242213ae45f902685c6b30f41090cff1a1b5d8c84732"
+        }
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
+    },
+    {
+      "case": "case-a-critical",
+      "release_mode": "customer",
+      "page_count": 10,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V07_PERFORMANCE_THRESHOLD",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX"
+      ],
+      "levers": [
+        "F-001",
+        "F-003",
+        "F-004",
+        "F-002"
+      ],
+      "pdf_sha256": "cb3fc2df7d1d51794f54ce04c66f6d366b2cfd1404bab59d427c091aec6e514a",
+      "client_model_sha256": "b887ceb0b1faec42eb1d4fd1f08413551c5d662df53de561d2f9bde36a5580b9",
+      "scored_report_sha256": "cde90133a103b19e4937acc97600d9e96308cad317f9f04270697948a636c3f9",
+      "visual_qa": "PASS",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "rendered_page_sha256": [
+        {
+          "page": 1,
+          "sha256": "1912bd20ab43ea727a69c0e4cf5ed1a51661d2b8d06c6ef89dee4e9c09446b66"
+        },
+        {
+          "page": 2,
+          "sha256": "ae494f30ca65f30e73942eca88ecea77ac1680dce4a11c49e2984a0f0d41a82f"
+        },
+        {
+          "page": 3,
+          "sha256": "68ae56ab38d31350fdad9824557144207c4f9d7885b1fa516cd1eb36377291e2"
+        },
+        {
+          "page": 4,
+          "sha256": "53fb1dce97bb998d2873a05bd0e4ad3366f636227683e8f7c301bef4d97d3002"
+        },
+        {
+          "page": 5,
+          "sha256": "3e157a96c84516c0f8946ee074b2b22fc553a437ef1d878ff099c65c12697d10"
+        },
+        {
+          "page": 6,
+          "sha256": "ff7111fca6abe5c655efcb8a96df5e40adcd08fe41b1e04e9a54c47a4029070b"
+        },
+        {
+          "page": 7,
+          "sha256": "2975940d6562339938a6c3d1e48096746c1b0e7769a23f516f99007b79e5dc5c"
+        },
+        {
+          "page": 8,
+          "sha256": "43c068e3727c3dcb002e7c72cf78acb978e3fe739e00980f478934c97aa64e10"
+        },
+        {
+          "page": 9,
+          "sha256": "cf1e8fe6dbe6ceba27e65f4cb59c70d508e3dc71dd40c08d51b6a2adb6ff31d0"
+        },
+        {
+          "page": 10,
+          "sha256": "e197f564452d7a121f59465023c6a4269f1651de356b99c2e02c402859389725"
+        }
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
+    },
+    {
+      "case": "case-b-equal-rank-profile",
+      "release_mode": "proof",
+      "page_count": 10,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V07_PERFORMANCE_THRESHOLD",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX"
+      ],
+      "levers": [
+        "F-001",
+        "F-003",
+        "F-004",
+        "F-005"
+      ],
+      "pdf_sha256": "25220ad91d50a38314efe1d042f9b1947258e7e802195bccac2e579429b00191",
+      "client_model_sha256": "793c0e9c02998691c26f85229ed386ed3d4faed1709a9a9ee0f1ae048da6806e",
+      "scored_report_sha256": "cb59ebc3d1d9ecd40670b7fa6a0e29c096e55a5c91f7516e7927e5d876040afa",
+      "visual_qa": "PASS",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "rendered_page_sha256": [
+        {
+          "page": 1,
+          "sha256": "1912bd20ab43ea727a69c0e4cf5ed1a51661d2b8d06c6ef89dee4e9c09446b66"
+        },
+        {
+          "page": 2,
+          "sha256": "ae494f30ca65f30e73942eca88ecea77ac1680dce4a11c49e2984a0f0d41a82f"
+        },
+        {
+          "page": 3,
+          "sha256": "68ae56ab38d31350fdad9824557144207c4f9d7885b1fa516cd1eb36377291e2"
+        },
+        {
+          "page": 4,
+          "sha256": "072b0240b231eb12e79859c0d1a6da8a03ef9256d07b16b37fd871c144f0df58"
+        },
+        {
+          "page": 5,
+          "sha256": "3e157a96c84516c0f8946ee074b2b22fc553a437ef1d878ff099c65c12697d10"
+        },
+        {
+          "page": 6,
+          "sha256": "ff7111fca6abe5c655efcb8a96df5e40adcd08fe41b1e04e9a54c47a4029070b"
+        },
+        {
+          "page": 7,
+          "sha256": "2975940d6562339938a6c3d1e48096746c1b0e7769a23f516f99007b79e5dc5c"
+        },
+        {
+          "page": 8,
+          "sha256": "c194a26fcecda33283be965642394005fa0996f4ecaa38ee7798bdd1965a84e8"
+        },
+        {
+          "page": 9,
+          "sha256": "3ba4b991dbc82db839cdb48a330a011a3ac34041c6dbe6f3c4cf249189957a59"
+        },
+        {
+          "page": 10,
+          "sha256": "706da66a5aefc2501906ec89163efc253f73e106e2696d45bdba751fc9969994"
+        }
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
+    },
+    {
+      "case": "case-c-vc03-detail",
+      "release_mode": "customer",
+      "page_count": 10,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V07_PERFORMANCE_THRESHOLD",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX"
+      ],
+      "levers": [
+        "F-001",
+        "F-003",
+        "F-004",
+        "F-930"
+      ],
+      "pdf_sha256": "589a65139cc303afecbe68993cbfaaaeae098fa89b1059259fb0237e541e6f2f",
+      "client_model_sha256": "3632b28b054936e4e2123a1a6712018d28cfdb26f80e76e6de73c385a6d48b50",
+      "scored_report_sha256": "5e9aaac6b09d4290e7e695773944e50001f4dd0d09ecb8bebfc2f8c3b43c549c",
+      "visual_qa": "PASS",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "rendered_page_sha256": [
+        {
+          "page": 1,
+          "sha256": "1912bd20ab43ea727a69c0e4cf5ed1a51661d2b8d06c6ef89dee4e9c09446b66"
+        },
+        {
+          "page": 2,
+          "sha256": "ae494f30ca65f30e73942eca88ecea77ac1680dce4a11c49e2984a0f0d41a82f"
+        },
+        {
+          "page": 3,
+          "sha256": "68ae56ab38d31350fdad9824557144207c4f9d7885b1fa516cd1eb36377291e2"
+        },
+        {
+          "page": 4,
+          "sha256": "a9ff347b28983b9860f559637e31a802812799ed28bbddda3800ac4700d78d6d"
+        },
+        {
+          "page": 5,
+          "sha256": "3e157a96c84516c0f8946ee074b2b22fc553a437ef1d878ff099c65c12697d10"
+        },
+        {
+          "page": 6,
+          "sha256": "ff7111fca6abe5c655efcb8a96df5e40adcd08fe41b1e04e9a54c47a4029070b"
+        },
+        {
+          "page": 7,
+          "sha256": "2975940d6562339938a6c3d1e48096746c1b0e7769a23f516f99007b79e5dc5c"
+        },
+        {
+          "page": 8,
+          "sha256": "0897c1b8188f60a558adcaaeae33f34d11c0d2349ff150371e75399ce16989b5"
+        },
+        {
+          "page": 9,
+          "sha256": "ab951f37e9f0b2ffca5389f284c48d66695a545dc6aadff2865e8685e7fd958f"
+        },
+        {
+          "page": 10,
+          "sha256": "6c20012db0b654a708973b31ee9816f3c180077806136a49d11bddc6b2304111"
+        }
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
+    },
+    {
+      "case": "active-positive",
+      "release_mode": "customer",
+      "page_count": 10,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V07_PERFORMANCE_THRESHOLD",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX"
+      ],
+      "levers": [
+        "F-001",
+        "F-003",
+        "F-004",
+        "F-002"
+      ],
+      "pdf_sha256": "62303d0deeed5b38b7144a4e3eff6a8014ebb566f17b25d64feefc2ea959257b",
+      "client_model_sha256": "62689828b4e263e3841bd58a8573ea31047f4af010b9a42c20de2b259bac12f3",
+      "scored_report_sha256": "de27e873f05dfb862c387203381a203b78d585c8ec93c902a85914078b1ec6d1",
+      "visual_qa": "PASS",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "rendered_page_sha256": [
+        {
+          "page": 1,
+          "sha256": "0f24f6f8f68b2e768a99747f613dbdc54663ccf548f1bda524b33d692fe877b0"
+        },
+        {
+          "page": 2,
+          "sha256": "11a2f8843678cb8336e1476940fdad6b5b21bd65460b09ddafa5a12886bb84cc"
+        },
+        {
+          "page": 3,
+          "sha256": "72e0149d47af99c117aa4112df514d6ae62cf968afd2e545c7401c173a910da1"
+        },
+        {
+          "page": 4,
+          "sha256": "53fb1dce97bb998d2873a05bd0e4ad3366f636227683e8f7c301bef4d97d3002"
+        },
+        {
+          "page": 5,
+          "sha256": "3e157a96c84516c0f8946ee074b2b22fc553a437ef1d878ff099c65c12697d10"
+        },
+        {
+          "page": 6,
+          "sha256": "ed13af06a50133237feedecfc82b2bda37a499b9ea68c5775422336d4d136c76"
+        },
+        {
+          "page": 7,
+          "sha256": "3b8a34a146adaa05a733e42c05d32edd698750b8467c1ea77a93b49ced519ac6"
+        },
+        {
+          "page": 8,
+          "sha256": "828829375145e4d5d553b3f6a6327bfe1d8f0f20195ecf95c64ecfab43960e7c"
+        },
+        {
+          "page": 9,
+          "sha256": "cf1e8fe6dbe6ceba27e65f4cb59c70d508e3dc71dd40c08d51b6a2adb6ff31d0"
+        },
+        {
+          "page": 10,
+          "sha256": "e197f564452d7a121f59465023c6a4269f1651de356b99c2e02c402859389725"
+        }
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
+    },
+    {
+      "case": "proof-realistic",
+      "release_mode": "proof",
+      "page_count": 10,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V07_PERFORMANCE_THRESHOLD",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX"
+      ],
+      "levers": [
+        "F-008",
+        "F-001",
+        "F-003",
+        "F-004"
+      ],
+      "pdf_sha256": "c43027aafdac9fd803b7e5126db22ce8ca1ad5491c167db80b37aedec483d019",
+      "client_model_sha256": "c943a3bf68fbb92dc6c882db656a267d1097a60f252d17d998dbd84b0a00b431",
+      "scored_report_sha256": "fc83e9dd9a8b1bc7af4d8ed48211762892b0c77093a8ca3767c3280f89a626bf",
+      "visual_qa": "PASS",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "rendered_page_sha256": [
+        {
+          "page": 1,
+          "sha256": "d960b4eef61dff5fe9e2b14f6842e357ad7044b64ded219cb31ba22253b8a927"
+        },
+        {
+          "page": 2,
+          "sha256": "5dfcee0ae125a90afcf9e374c5ec5ce25e7daca02a99cafa89967fe95b1c209f"
+        },
+        {
+          "page": 3,
+          "sha256": "68ae56ab38d31350fdad9824557144207c4f9d7885b1fa516cd1eb36377291e2"
+        },
+        {
+          "page": 4,
+          "sha256": "08180acfe1386d053f84e4a9278d815088920b2bd4dee85507de336e134a2a84"
+        },
+        {
+          "page": 5,
+          "sha256": "3e157a96c84516c0f8946ee074b2b22fc553a437ef1d878ff099c65c12697d10"
+        },
+        {
+          "page": 6,
+          "sha256": "7e8849889c839a7bcd260e5412fd162242509cabe3c7184975f3ecf29f4ad3f1"
+        },
+        {
+          "page": 7,
+          "sha256": "da4a45201f79e3d46e4a5a20de4811f4e731aea6395366397700d995c070fbde"
+        },
+        {
+          "page": 8,
+          "sha256": "b4946c9180dbd0fdb5a6eefa70fac96a2ff0c01eeabf1860de214896582e42ec"
+        },
+        {
+          "page": 9,
+          "sha256": "a4fe7a75a1299665f5d8faf69778f172c1ec3b6a4ec69ed7357f9876743ed8c0"
+        },
+        {
+          "page": 10,
+          "sha256": "dc2c073472bcb71bbacd242213ae45f902685c6b30f41090cff1a1b5d8c84732"
+        }
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
+    },
+    {
+      "case": "proof-strategic",
+      "release_mode": "proof",
+      "page_count": 11,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V07_PERFORMANCE_THRESHOLD",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX",
+        "V05_RANKING_POSITION"
+      ],
+      "levers": [
+        "F-001",
+        "F-003",
+        "F-004",
+        "F-002"
+      ],
+      "pdf_sha256": "23c433f023dca62442052998f931361baff887ec8f0c1d490e306d70bb8038f2",
+      "client_model_sha256": "978ba38edf172d851eb3b1ba37d98e7e195f26a92f0ae8208d5ce3d3c160eece",
+      "scored_report_sha256": "e3389634a8f26f3fefaecb5e1eaebeaa24e2626ae01b9b38aee76b40e60f7b31",
+      "visual_qa": "PASS",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "rendered_page_sha256": [
+        {
+          "page": 1,
+          "sha256": "1912bd20ab43ea727a69c0e4cf5ed1a51661d2b8d06c6ef89dee4e9c09446b66"
+        },
+        {
+          "page": 2,
+          "sha256": "ae494f30ca65f30e73942eca88ecea77ac1680dce4a11c49e2984a0f0d41a82f"
+        },
+        {
+          "page": 3,
+          "sha256": "68ae56ab38d31350fdad9824557144207c4f9d7885b1fa516cd1eb36377291e2"
+        },
+        {
+          "page": 4,
+          "sha256": "53fb1dce97bb998d2873a05bd0e4ad3366f636227683e8f7c301bef4d97d3002"
+        },
+        {
+          "page": 5,
+          "sha256": "3e157a96c84516c0f8946ee074b2b22fc553a437ef1d878ff099c65c12697d10"
+        },
+        {
+          "page": 6,
+          "sha256": "ff7111fca6abe5c655efcb8a96df5e40adcd08fe41b1e04e9a54c47a4029070b"
+        },
+        {
+          "page": 7,
+          "sha256": "2975940d6562339938a6c3d1e48096746c1b0e7769a23f516f99007b79e5dc5c"
+        },
+        {
+          "page": 8,
+          "sha256": "95768e5b4c9550bbedc64f23bb0807e0571cb7d1bc7a625eced20b004188a9c1"
+        },
+        {
+          "page": 9,
+          "sha256": "e458248fbc784e5fe7e2afb47f9c40aa2c6581b45a4919fade4d52f5da107c2a"
+        },
+        {
+          "page": 10,
+          "sha256": "ccbe2a42f3a9dcab5a154416833da38d293ae40b6e4a01bddeaf52847dda847e"
+        },
+        {
+          "page": 11,
+          "sha256": "366958ffb10be21b508d38a3f56f4b4f40fc141d5ff8e1c7648451d6893de29b"
+        }
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
+    },
+    {
+      "case": "proof-measurement-gateway",
+      "release_mode": "proof",
+      "page_count": 10,
+      "selected_template_ids": [
+        "V02_CATEGORY_BARS",
+        "V03_TOP_LEVERS",
+        "V07_PERFORMANCE_THRESHOLD",
+        "V08_AI_ANSWERABILITY",
+        "V10_TRUST_MATRIX"
+      ],
+      "levers": [
+        "F-001",
+        "F-003",
+        "F-004",
+        "F-002"
+      ],
+      "pdf_sha256": "de27843d7798299cb891ee937a7deb3a000cb2860006fc755a21f34e439df597",
+      "client_model_sha256": "d4ee5c61ba08787166e1188c5ea52fbfd5e10ffb8b057d8f31966b7aa312c3c7",
+      "scored_report_sha256": "5bc06cab34f26aa454da915bde425c86e21d940d7df0d6502107ab0f688d7b84",
+      "visual_qa": "PASS",
+      "semantic_qa": "FAIL",
+      "deliverable_status": "CUSTOMER_RELEASE_BLOCKED",
+      "rendered_page_sha256": [
+        {
+          "page": 1,
+          "sha256": "1912bd20ab43ea727a69c0e4cf5ed1a51661d2b8d06c6ef89dee4e9c09446b66"
+        },
+        {
+          "page": 2,
+          "sha256": "ae494f30ca65f30e73942eca88ecea77ac1680dce4a11c49e2984a0f0d41a82f"
+        },
+        {
+          "page": 3,
+          "sha256": "68ae56ab38d31350fdad9824557144207c4f9d7885b1fa516cd1eb36377291e2"
+        },
+        {
+          "page": 4,
+          "sha256": "53fb1dce97bb998d2873a05bd0e4ad3366f636227683e8f7c301bef4d97d3002"
+        },
+        {
+          "page": 5,
+          "sha256": "3e157a96c84516c0f8946ee074b2b22fc553a437ef1d878ff099c65c12697d10"
+        },
+        {
+          "page": 6,
+          "sha256": "ff7111fca6abe5c655efcb8a96df5e40adcd08fe41b1e04e9a54c47a4029070b"
+        },
+        {
+          "page": 7,
+          "sha256": "2975940d6562339938a6c3d1e48096746c1b0e7769a23f516f99007b79e5dc5c"
+        },
+        {
+          "page": 8,
+          "sha256": "828829375145e4d5d553b3f6a6327bfe1d8f0f20195ecf95c64ecfab43960e7c"
+        },
+        {
+          "page": 9,
+          "sha256": "cf1e8fe6dbe6ceba27e65f4cb59c70d508e3dc71dd40c08d51b6a2adb6ff31d0"
+        },
+        {
+          "page": 10,
+          "sha256": "e197f564452d7a121f59465023c6a4269f1651de356b99c2e02c402859389725"
+        }
+      ],
+      "deliverable_status_source": "validate_deliverable_bundle --require-customer-release-ready rc 1"
+    }
+  ],
+  "negatives": [
+    {
+      "fixture": "baumdienst-renner-reflection-regression",
+      "rc": 1,
+      "blocked": true,
+      "pdf_written": false,
+      "expected": "CUSTOMER_RELEASE_BLOCKED: CUSTOMER_MIN_VISUALS_NOT_MET"
+    },
+    {
+      "fixture": "low-coverage-marketing-report",
+      "rc": 1,
+      "blocked": true,
+      "pdf_written": false,
+      "expected": "CUSTOMER_RELEASE_BLOCKED: CUSTOMER_MIN_VISUALS_NOT_MET"
+    }
+  ],
+  "open_observations_non_blocking": {
+    "O-2": "roadmap columns follow report roadmap data, not lever rank",
+    "O-3": "case C admits a low-severity technical detail as lever 4 by category diversity (rule-conform)",
+    "O-4": "lever-page subtitle and footer grey on orange: low contrast, legible at print size",
+    "O-5": "RESOLVED in a66710f: the legal-surface strength is withheld while a legal customer risk is projected",
+    "O-9": "legal lever 1 card reads '01 · HOCH' (finding severity) while customer_risk.priority is MANDATORY_CRITICAL; ranking and cover badge carry the urgency",
+    "O-10": "the page-5 mobile load chart stays when its finding F-002 loses its lever slot (legal-golden, case C)",
+    "O-11": "page 5/lever 4 wording 'erscheint auf Mobilgeräten spürbar verzögert' generalizes 4 controlled mobile lab runs; the internal finding says 'im Labortest'",
+    "O-12": "V07 value and thresholds show '3.8' / '2.5' without unit and with an English decimal point",
+    "O-13": "a minor_gaps 75 status reads 'klar' in V08 (page 6) but 'Verbesserung sinnvoll' in V10 (page 7); the two matrices use different status scales",
+    "O-14": "technical notation in customer copy: 'Entität' (page 2), 'Schema' (page 6), 'Ladezeit p75' and ISO date range (strategic closing)",
+    "O-7": "strategic proof enrichment fixture: query trade and ranking date do not match the customer/audit date",
+    "O-8": "proof-mode bundles (incl. case B with a synthetic priority profile) finalize to CUSTOMER_RELEASE_READY because fonts resolve EXACT; release_mode stays 'proof' and customer mode refuses synthetic profiles"
+  },
+  "independent_review": {
+    "basis": "read-only adversarial reviewer agent on candidate fa791c3 builds (no authoring context); its findings were re-derived from the scored reports before acting",
+    "confirmed_and_fixed_in_a66710f": [
+      "V05 subtitle 'Mobil' for a desktop measurement (proof-strategic p8)",
+      "case C lever 4 called a declared-but-unfetchable icon missing",
+      "legal-golden p2 strength vouching for the legal/contact surface next to the provider-identity risk"
+    ],
+    "confirmed_and_recorded_in_active_positive_fail": [
+      "lever 1 vs UX-02 strong",
+      "strength vs FIND-02 robots/sitemap false",
+      "V08 AI-05 strong shown as teilweise",
+      "V07 3.8 not from PERF-02"
+    ],
+    "recorded_as_observations": [
+      "O-9",
+      "O-10",
+      "O-11",
+      "O-12",
+      "O-13",
+      "O-14"
+    ]
+  },
+  "superseded_badaf71": "reports/customer-pdf-qa-release-badaf71.json (same cases on candidate badaf71) is kept as history only: its PASS verdicts do not hold; the lab-to-device rewrite and V08 'klar' found in round 2 were already present there, and legal-golden and case C had further defects fixed in a66710f.",
+  "superseded": "reports/customer-pdf-qa-2026-10-28.json (six cases incl. Baumdienst on 9-11 page renders with V11) is kept as history; Baumdienst and low-coverage are now fail-closed negatives.",
+  "does_not_prove": [
+    "quality of PDFs for other customers without per-output rendered QA",
+    "commercial effect",
+    "legal compliance"
+  ],
+  "round_2_review": {
+    "candidate": "9ba024d",
+    "result": "semantic FAIL in all 9 cases",
+    "why": "Round-2 independent review of 9ba024d, re-derived from PDF text and plan data: client_story.py rewrites 'im mobilen Labortest' to 'auf Mobilgeräten' (lab value shown as real mobile experience) in every case, and V08 shows minor-gap rows as 'klar'. User decision 2026-10-28: close BLOCKED; follow-up patch 'evidence-bound customer claims'.",
+    "confirmed_by_main_session": [
+      "scripts/client_story.py:20 maps 'im mobilen Labortest' -> 'auf Mobilgeräten'",
+      "V08 rows with value 0.75 carry status 'klar'"
+    ],
+    "reviewer_findings_not_individually_adjudicated": [
+      "legal-golden 'Entität' strength and trust bar 89 next to the identity risk",
+      "proof-strategic lab 3.8 vs field p75 3,2 s without explanation",
+      "V05 'Mobil und Desktop' without per-row device",
+      "case-c lever-4 ordering vs evidence strength",
+      "case-a KRITISCH lever scheduled 'In 30 Tagen'"
+    ],
+    "rubric_evaluator_major": "LEGAL_SURFACE_STRENGTH_TERMS is a keyword heuristic that misses other contact/legal wordings"
+  },
+  "limitations": [
+    "finalize_deliverable_manifest.py exits 1 on semantic FAIL but leaves a previously written CUSTOMER_RELEASE_READY status in deliverable-manifest.json; validate_deliverable_bundle --require-customer-release-ready is the authoritative check and exits 1."
+  ]
+}

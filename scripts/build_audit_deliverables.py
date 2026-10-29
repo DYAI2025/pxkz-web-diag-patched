@@ -12,6 +12,9 @@ import sys
 import tempfile
 from pathlib import Path
 
+from check_brand_fonts import looks_like_font
+from evidence_method_labels import evidence_method
+
 
 def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -65,8 +68,11 @@ def main() -> int:
         font_state = json.loads(font_proc.stdout)
         if require_exact and font_state.get("status") != "EXACT":
             raise ValueError(
-                "BRAND_FONT_EXACT_REQUIRED: install Schibsted Grotesk and IBM Plex Mono in the runtime; "
-                f"current status={font_state.get('status')} resolved={font_state.get('resolved')}"
+                "BRAND_FONT_EXACT_REQUIRED: the packaged brand fonts (assets/fonts/font-manifest.json) or verified "
+                "runtime fonts must resolve Schibsted Grotesk and IBM Plex Mono exactly; "
+                f"current status={font_state.get('status')} resolved={font_state.get('resolved')} "
+                f"package={(font_state.get('package_fonts') or {}).get('status')} "
+                f"issues={(font_state.get('package_fonts') or {}).get('issues', [])[:5]}"
             )
 
         destination.parent.mkdir(parents=True, exist_ok=True)
@@ -125,11 +131,33 @@ def main() -> int:
             raise ValueError("industry catalog without a priority context cannot be applied")
         run([py, str(root / "scripts/build_visualization_plan.py"), str(canonical), str(plan), *priority_args])
         run([py, str(root / "scripts/validate_visualization_plan.py"), str(plan), str(canonical)])
-        customer_cmd = [py, str(root / "scripts/build_client_report_model.py"), str(canonical), str(model), "--visual-plan", str(plan), *priority_args]
+        if args.release_mode == "customer":
+            # Example/fixture data stays recognizable: it may appear in proof bundles, never in a customer release.
+            # Checked per plotted visual and per metric behind it, so a rubric matrix of fixture metrics is caught too.
+            source_metrics = {str(m.get("id")): m for m in json.loads(canonical.read_text(encoding="utf-8")).get("metrics", [])
+                              if isinstance(m, dict)}
+            synthetic = [str(v.get("template_id")) for v in json.loads(plan.read_text(encoding="utf-8")).get("visuals", [])
+                         if isinstance(v, dict) and v.get("status") == "SELECTED"
+                         and (v.get("evidence_method") == "SYNTHETIC"
+                              or any(evidence_method(source_metrics[r]) == "SYNTHETIC" for r in v.get("metric_refs", []) if r in source_metrics))]
+            # Enrichment replayed from a fixture bundle can also reach customer text (highlights), not only charts.
+            enrichment = json.loads(canonical.read_text(encoding="utf-8")).get("measurement_enrichment") or {}
+            if isinstance(enrichment, dict) and (str(enrichment.get("mode") or "").upper() in {"FIXTURE", "SYNTHETIC"}
+                                                 or any(isinstance(m, dict) and evidence_method(m) == "SYNTHETIC"
+                                                        for m in enrichment.get("metrics", []))):
+                synthetic.append("MEASUREMENT_ENRICHMENT")
+            if synthetic:
+                raise ValueError("CUSTOMER_RELEASE_BLOCKED: SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT " + ",".join(synthetic))
+        claim_bindings = out / "customer-claim-bindings.json"
+        customer_cmd = [py, str(root / "scripts/build_client_report_model.py"), str(canonical), str(model), "--visual-plan", str(plan),
+                        "--claim-bindings-out", str(claim_bindings), *priority_args]
         if args.priority_context:
             customer_cmd.extend(["--priority-decision-out", str(out / "prioritization-decision.json")])
         run(customer_cmd)
         run([py, str(root / "scripts/validate_client_report_model.py"), str(model)])
+        run([py, str(root / "scripts/validate_customer_claim_bindings.py"), str(canonical), str(model), str(claim_bindings)])
+        # One reading per metric and one execution order across strengths, matrices, bars, levers and roadmap.
+        run([py, str(root / "scripts/validate_customer_surface_consistency.py"), str(canonical), str(plan), str(model), str(claim_bindings)])
         if legal_sidecar is not None:
             run([py, str(root / "scripts/validate_impressum_projection.py"), str(legal_sidecar), str(canonical), str(model)])
         run([py, str(root / "scripts/validate_client_semantics.py"), str(model)])
@@ -152,7 +180,10 @@ def main() -> int:
             run([py, str(root / "scripts/validate_impressum_projection.py"), str(legal_sidecar), str(canonical), str(model), str(pdf)])
         run([py, str(root / "scripts/validate_customer_business_language.py"), str(model), str(pdf)])
         run([py, str(root / "scripts/validate_customer_output_guardrails.py"), str(model), str(html), str(pdf), str(visuals)])
-        run([py, str(root / "scripts/validate_pdf_brand.py"), str(pdf), str(preceipt), str(root / "assets/brand-tokens.json")])
+        brand_command = [py, str(root / "scripts/validate_pdf_brand.py"), str(pdf), str(preceipt), str(root / "assets/brand-tokens.json")]
+        if require_exact:
+            brand_command.append("--require-exact-fonts")
+        run(brand_command)
         pages = out / "rendered-pages"
         run([py, str(root / "scripts/render_pdf_pages.py"), str(pdf), str(pages)])
         visual_qa = out / "customer_presentation.visual-qa.json"
@@ -162,7 +193,7 @@ def main() -> int:
         quality_report = out / "customer-presentation-quality-report.json"
         run([py, str(root / "scripts/validate_customer_presentation_quality.py"), str(out), "--allow-pending", "--json-out", str(quality_report)])
 
-        required = [canonical, analysis, markdown, model, plan, vreceipt, html, preceipt, pdf, visual_qa, semantic_qa, quality_report]
+        required = [canonical, analysis, markdown, model, claim_bindings, plan, vreceipt, html, preceipt, pdf, visual_qa, semantic_qa, quality_report]
         if legal_sidecar is not None:
             required.append(legal_sidecar)
         if legal_projection is not None:
@@ -185,6 +216,9 @@ def main() -> int:
                 "requested": font_state.get("requested"),
                 "resolved": font_state.get("resolved"),
                 "customer_release_ready": font_state.get("customer_release_ready"),
+                "source": font_state.get("source"),
+                "package_fonts_status": (font_state.get("package_fonts") or {}).get("status"),
+                "package_manifest_sha256": (font_state.get("package_fonts") or {}).get("manifest_sha256"),
             },
             "qa_status": {"visual": "PENDING_ACTUAL_INSPECTION", "semantic": "PENDING_ACTUAL_INSPECTION"},
             "quality_gate_status": "PENDING_QA",
@@ -199,6 +233,10 @@ def main() -> int:
                 "live provider or telephony behavior",
             ],
         }
+        # Font binaries ship in the Skill package only; customers get the subsets embedded in the PDF.
+        font_files = sorted(str(path.relative_to(out)) for path in out.rglob("*") if path.is_file() and looks_like_font(path))
+        if font_files:
+            raise ValueError("font binaries must not be copied into customer deliverables: " + ", ".join(font_files))
         (out / "deliverable-manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         run([
             py, str(root / "scripts/validate_deliverable_bundle.py"), str(out),

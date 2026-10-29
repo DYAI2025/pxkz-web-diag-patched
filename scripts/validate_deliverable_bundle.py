@@ -14,6 +14,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from check_brand_fonts import looks_like_font
+
 
 def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -56,6 +58,7 @@ def main() -> int:
             "analysis_report.json",
             "analysis_report.md",
             "client-report-model.json",
+            "customer-claim-bindings.json",
             "visualization-plan.json",
             "visualization-render-receipt.json",
             "customer_presentation.html",
@@ -77,7 +80,8 @@ def main() -> int:
             [py, str(root / "scripts/validate_visualization_plan.py"), str(out_dir / "visualization-plan.json"), str(out_dir / "diagnosis-report.json")],
             [py, str(root / "scripts/validate_visualization_assets.py"), str(out_dir / "visualization-plan.json"), str(out_dir / "visualization-render-receipt.json"), str(out_dir / "visuals")],
             [py, str(root / "scripts/validate_pdf_output.py"), str(out_dir / "customer_presentation.pdf"), str(out_dir / "client-report-model.json")],
-            [py, str(root / "scripts/validate_presentation_brand.py"), str(out_dir / "customer_presentation.pdf"), str(out_dir / "presentation-render-receipt.json"), str(root / "assets/brand-tokens.json")],
+            [py, str(root / "scripts/validate_presentation_brand.py"), str(out_dir / "customer_presentation.pdf"), str(out_dir / "presentation-render-receipt.json"), str(root / "assets/brand-tokens.json")]
+            + (["--require-exact-fonts"] if args.require_customer_release_ready else []),
         ]
         for command in commands:
             code, stdout, stderr = run(command)
@@ -114,6 +118,19 @@ def main() -> int:
             return fail("presentation receipt PDF digest mismatch", report_path, payload)
         if receipt.get("html_sha256") != sha(out_dir / "customer_presentation.html"):
             return fail("presentation receipt HTML digest mismatch", report_path, payload)
+        code, stdout, stderr = run([py, str(root / "scripts/validate_customer_claim_bindings.py"), str(out_dir / "diagnosis-report.json"),
+                                    str(out_dir / "client-report-model.json"), str(out_dir / "customer-claim-bindings.json")])
+        payload["checks"].append({"id": "customer_claim_bindings", "status": "PASS" if code == 0 else "FAIL", "stdout": stdout.strip()})
+        if code != 0:
+            return fail("customer claim bindings failed: " + stdout.strip()[-500:], report_path, payload)
+        for item in manifest.get("required_artifacts", []):
+            if not isinstance(item, dict) or not item.get("path"):
+                return fail("malformed required_artifacts entry in deliverable manifest", report_path, payload)
+            artifact = out_dir / str(item["path"])
+            if not artifact.is_file():
+                return fail(f"required artifact missing: {item['path']}", report_path, payload)
+            if item.get("sha256") != sha(artifact):
+                return fail(f"required artifact sha256 mismatch: {item['path']}", report_path, payload)
         payload["checks"].append({"id": "cross_artifact_digests", "status": "PASS"})
 
         selected = [x for x in plan.get("visuals", []) if isinstance(x, dict) and x.get("status") == "SELECTED"]
@@ -121,16 +138,27 @@ def main() -> int:
             return fail("selected/rendered/embedded visual counts differ or fall below four", report_path, payload)
         payload["checks"].append({"id": "visual_count_parity", "status": "PASS", "count": len(selected)})
 
+        font_files = sorted(str(path.relative_to(out_dir)) for path in out_dir.rglob("*") if path.is_file() and looks_like_font(path))
+        if font_files:
+            return fail("font binaries must not be shipped in customer deliverables: " + ", ".join(font_files), report_path, payload)
+        payload["checks"].append({"id": "no_font_binaries_in_deliverable", "status": "PASS"})
+
         font_status = receipt.get("brand_font_status")
+        embedding_status = (receipt.get("pdf_font_embedding") or {}).get("status")
         visual_status = visual_qa.get("inspection_status")
         semantic_status = semantic_qa.get("inspection_status")
         quality_status = quality.get("quality_status")
-        customer_release_ready = bool(font_status == "EXACT" and visual_status == "PASS" and semantic_status == "PASS" and quality_status == "PASS")
+        customer_release_ready = bool(font_status == "EXACT" and embedding_status == "VERIFIED" and visual_status == "PASS" and semantic_status == "PASS" and quality_status == "PASS")
+        if manifest.get("status") == "CUSTOMER_RELEASE_READY" and not (
+            customer_release_ready and visual_qa.get("pdf_sha256") == receipt.get("pdf_sha256") == semantic_qa.get("pdf_sha256")
+        ):
+            return fail("MANIFEST_STATUS_NOT_SUPPORTED_BY_QA: CUSTOMER_RELEASE_READY without PASS QA bound to this PDF", report_path, payload)
         payload.update({
             "status": "PASS",
             "build_complete": True,
             "customer_release_ready": customer_release_ready,
             "brand_font_status": font_status,
+            "pdf_font_embedding_status": embedding_status,
             "visual_qa_status": visual_status,
             "semantic_qa_status": semantic_status,
             "quality_gate_status": quality_status,

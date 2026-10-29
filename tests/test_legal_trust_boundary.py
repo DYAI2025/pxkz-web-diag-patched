@@ -101,8 +101,12 @@ class LegalSurfaceStatusTest(unittest.TestCase):
 
     def test_trust_row_follows_legal_risk(self) -> None:
         base = json.loads((ROOT / "evals/fixtures/synthetic-report.json").read_text(encoding="utf-8"))
-        self.assertEqual(self.trust_row(base)["status"], "Klar")
-        self.assertEqual(self.trust_row(report_with(finding_from(golden_sidecar(), 99)))["status"], "Handlungsbedarf")
+        # Owner decision 2026-10-29: TRUST-01 is presence-only, so a present Impressum reads "vorhanden" and
+        # "Nicht belastbar bewertet" instead of "Klar"; under a projected legal risk it stays not assessed.
+        row = self.trust_row(base)
+        self.assertEqual(row["status"], "Nicht belastbar bewertet")
+        self.assertTrue(row["signal"].endswith("(vorhanden)"), row["signal"])
+        self.assertEqual(self.trust_row(report_with(finding_from(golden_sidecar(), 99)))["status"], "Nicht belastbar bewertet")
 
 
 class CitedMetricNotClearTest(unittest.TestCase):
@@ -116,6 +120,7 @@ class CitedMetricNotClearTest(unittest.TestCase):
             subprocess.run([sys.executable, "-B", str(ROOT / "scripts/compute_score.py"), str(src), str(scored)], check=True, capture_output=True)
             subprocess.run([sys.executable, "-B", str(ROOT / "scripts/build_visualization_plan.py"), str(scored), str(plan)], check=True, capture_output=True)
             data = json.loads(plan.read_text(encoding="utf-8"))
+        self.top_levers = data["top_levers"]
         self.values = {(r.get("signal") or r.get("question")): r["value"] for v in data["visuals"]
                        if v["template_id"] == "V08_AI_ANSWERABILITY" for r in v["data"]}
         return {(r.get("signal") or r.get("question")): r["status"] for v in data["visuals"]
@@ -125,19 +130,26 @@ class CitedMetricNotClearTest(unittest.TestCase):
         base = json.loads((ROOT / "evals/fixtures/synthetic-report.json").read_text(encoding="utf-8"))
         self.assertEqual(self.rows(base)["Kontakttransparenz"], "Klar")
         cited = copy.deepcopy(base)
+        # Customer-visible means: selected as one of the four levers (critical findings always are).
         cited["findings"].append({**copy.deepcopy(next(f for f in base["findings"] if f.get("severity") == "medium")),
-                                  "id": "F-940", "metric_refs": ["TRUST-07"]})
+                                  "id": "F-940", "severity": "critical", "metric_refs": ["A11Y-01", "TRUST-07"]})
         self.assertEqual(self.rows(cited)["Kontakttransparenz"], "Verbesserung sinnvoll")
+        self.assertIn("F-940", self.top_levers)
+        # A problem finding that is not among the levers is invisible to the reader and caps nothing.
+        hidden = copy.deepcopy(base)
+        hidden["findings"].append({**copy.deepcopy(next(f for f in base["findings"] if f.get("severity") == "medium")),
+                                   "id": "F-941", "severity": "low", "metric_refs": ["A11Y-01", "TRUST-07"]})
+        self.assertEqual(self.rows(hidden)["Kontakttransparenz"], "Klar")
+        self.assertNotIn("F-941", self.top_levers)
 
     def test_identity_rows_not_clear_next_to_identity_risk(self) -> None:
         rows = self.rows(report_with(finding_from(golden_sidecar(), 99)))
-        for label in ("Eindeutige Unternehmensdarstellung", "Fakten überall gleich", "Kontakttransparenz"):
-            self.assertNotIn(rows[label], {"Klar", "klar"}, label)
-        # The matrix tint is a scale over value; a capped row must sit on the template's "teilweise" anchor,
-        # not at a value that both renderers paint as clear.
-        for label in ("Eindeutige Unternehmensdarstellung", "Fakten überall gleich"):
-            self.assertLessEqual(self.values[label], 0.5, label)
-        self.assertEqual(rows["Impressum und rechtliche Angaben"], "Handlungsbedarf")
+        # Owner decision 2026-10-29: rows contested by the projected identity risk read "Nicht belastbar bewertet"
+        # in the four-state trust matrix; the value-tinted AI matrix has no neutral state, so they stay out there.
+        self.assertEqual(rows["Kontakttransparenz"], "Nicht belastbar bewertet")
+        for label in ("Eindeutige Unternehmensdarstellung", "Einheitliche Fakten"):
+            self.assertNotIn(label, rows, label)
+        self.assertEqual(rows["Impressum und rechtliche Angaben (vorhanden)"], "Nicht belastbar bewertet")
 
 
 if __name__ == "__main__":

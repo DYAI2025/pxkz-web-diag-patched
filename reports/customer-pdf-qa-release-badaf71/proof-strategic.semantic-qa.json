@@ -1,0 +1,188 @@
+{
+  "schema_version": "1.1",
+  "pdf_path": "customer_presentation.pdf",
+  "pdf_sha256": "87b96f3ef5a59c74089e23da7ec312452dd3604ed3bbf0b93e8df88499e54bb6",
+  "client_model_path": "client-report-model.json",
+  "client_model_sha256": "978ba38edf172d851eb3b1ba37d98e7e195f26a92f0ae8208d5ce3d3c160eece",
+  "scored_report_path": "diagnosis-report.json",
+  "scored_report_sha256": "26c68c04f8f6d19e45e8eedf32113fde16a35a29379393158aa1e4ee920207c8",
+  "customer": "Meyer & Sohn Bau GmbH",
+  "page_count": 11,
+  "inspection_status": "PASS",
+  "inspection_method": "agent_vision",
+  "inspected_by": "Claude Opus 5.5 (main session, 2026-10-28; same session that authored the release-completion patch, so not independent)",
+  "overall_checks": {
+    "customer_specificity": true,
+    "plain_language_comprehension": true,
+    "scan_first_story": true,
+    "evidence_fidelity": true,
+    "priority_quality": true,
+    "quantitative_content_visualized": true,
+    "cross_page_coherence": true,
+    "actionability": true,
+    "no_generic_agency_copy": true,
+    "no_unsupported_business_claims": true,
+    "cover_message_complete": true,
+    "score_projection_correct": true,
+    "lever_business_impact_complete": true,
+    "privacy_claim_scope_correct": true,
+    "no_synthetic_metric_visuals": true
+  },
+  "pages": [
+    {
+      "page": 1,
+      "role": "cover",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Cover: title, Meyer & Sohn Bau GmbH, URL, score 65 and the complete two-line core message (mobile next step) in the bottom band. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 2,
+      "role": "executive",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Overview: 65/100, main lever, three strengths, three priorities; dated scope sentence (sampled public pages, AI answers not queried) inside the card, clear of the footer. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 3,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "V02 category bars, six categories with values; labels legible; 'KI-Verständlichkeit' label kept by user decision. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 4,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "V03 four levers 1-4, same order as the lever page. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 5,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "V07 mobile load 3.8 against target 2.5 / warning 4; value and thresholds clear. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 6,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "V08 answerability matrix klar/teilweise; title frames answerability, not AI answers. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 7,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "V10 trust matrix four-state rows; consistent with the strengths on page 2. (raster identical to inspected legacy-baseline page)"
+    },
+    {
+      "page": 8,
+      "role": "decision_visual",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "V05 Google positions (2 queries, Berlin, mobile, 28.10.2026). Proof fixture: queries name a different trade (Blitzschutz) than the customer (Bau) and the ranking date differs from the audit date 27.08.2026 (O-7, proof-mode synthetic enrichment fixture)."
+    },
+    {
+      "page": 9,
+      "role": "findings",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Lever cards (3 hoch, 1 mittel), above the footer. O-4 contrast as elsewhere."
+    },
+    {
+      "page": 10,
+      "role": "roadmap",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Roadmap Jetzt / In 30 Tagen / Danach."
+    },
+    {
+      "page": 11,
+      "role": "closing",
+      "checks": {
+        "customer_specific": true,
+        "main_message_clear": true,
+        "scan_in_seconds": true,
+        "plain_language": true,
+        "evidence_faithful": true,
+        "visual_semantic_fit": true
+      },
+      "notes": "Closing with three measured highlight cards (position 18, 1.240 active users, p75 3,2 s) and four actions."
+    }
+  ],
+  "review_questions": [
+    "Würde der Kerninhalt ohne Firmenname/Logo noch konkrete Beobachtungen dieser Website enthalten?",
+    "Kann ein Nicht-Fachmann je Prioritätsseite in einem Satz Problem und nächsten Schritt erklären?",
+    "Sind direkt messbare oder zählbare Signale als Zahl/Visual sichtbar statt im Fließtext versteckt?",
+    "Passt jedes Visual zur Aussage der Seite und zum kanonischen Audit?",
+    "Sind die wichtigsten 3-4 Hebel des konkreten Kunden priorisiert statt generischer Agenturthemen?",
+    "Ist die Kernaussage auf Seite 1 vollständig sichtbar und nicht auf eine Folgeseite abgeschnitten?",
+    "Ist die Score-Darstellung exakt mit dem internen display_status konsistent?",
+    "Zeigt jeder der vier Hebel Befund, geschäftliche Wirkung und nächsten Schritt?"
+  ],
+  "inspection_note": "Set PASS only after actual rendered-page review against both the client model and canonical scored audit. This file must not self-certify.",
+  "review_answers": "All eight review questions answered yes"
+}

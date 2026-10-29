@@ -1,0 +1,97 @@
+diff --git a/scripts/render_diagnosis_pdf.py b/scripts/render_diagnosis_pdf.py
+index 275b76c..0799111 100644
+--- a/scripts/render_diagnosis_pdf.py
++++ b/scripts/render_diagnosis_pdf.py
+@@ -16,7 +16,7 @@ import weasyprint
+ from jinja2 import Environment, FileSystemLoader, StrictUndefined
+ from weasyprint import HTML, default_url_fetcher
+ from visualization_policy import CUSTOMER_MAX_VISUALS, CUSTOMER_MIN_VISUALS, order_customer_visuals
+-from check_brand_fonts import resolve_fonts
++from check_brand_fonts import resolve_fonts, verify_pdf_font_embedding
+ 
+ 
+ def sha(path: Path) -> str:
+@@ -102,19 +102,23 @@ def main() -> int:
+         css = css_path.read_text(encoding="utf-8")
+         files = font_resolution.get("files", {}) if isinstance(font_resolution.get("files"), dict) else {}
+         font_faces: list[str] = []
+-        for alias, key, weight in (
+-            ("PixelkiezDisplay", "display_regular", 400),
+-            ("PixelkiezDisplay", "display_bold", 700),
+-            ("PixelkiezData", "data_regular", 400),
+-            ("PixelkiezData", "data_bold", 700),
++        exact_roles = font_resolution.get("exact", {}) if isinstance(font_resolution.get("exact"), dict) else {}
++        for alias, family, role, key, weight in (
++            ("PixelkiezDisplay", "Schibsted Grotesk", "display", "display_regular", 400),
++            ("PixelkiezDisplay", "Schibsted Grotesk", "display", "display_bold", 700),
++            ("PixelkiezData", "IBM Plex Mono", "data", "data_regular", 400),
++            ("PixelkiezData", "IBM Plex Mono", "data", "data_bold", 700),
+         ):
+             value = files.get(key)
+             if value:
+                 path = Path(str(value)).resolve()
+-                font_faces.append(
+-                    f'@font-face {{ font-family: "{alias}"; src: url("{path.as_uri()}"); '
+-                    f'font-style: normal; font-weight: {weight}; }}'
+-                )
++                # The real family name is registered only for a verified exact file, so CSS rules and
++                # SVG text that name the brand family use the verified file instead of a host lookup.
++                for name in (alias, family) if exact_roles.get(role) else (alias,):
++                    font_faces.append(
++                        f'@font-face {{ font-family: "{name}"; src: url("{path.as_uri()}"); '
++                        f'font-style: normal; font-weight: {weight}; }}'
++                    )
+         css = "\n".join(font_faces) + "\n" + css
+         css = css.replace('"Schibsted Grotesk", "DejaVu Sans", sans-serif', '"PixelkiezDisplay", "IBM Plex Sans", "Noto Sans", "DejaVu Sans", sans-serif')
+         css = css.replace('"IBM Plex Mono", "DejaVu Sans Mono", monospace', '"PixelkiezData", "IBM Plex Mono", "Noto Sans Mono", "DejaVu Sans Mono", monospace')
+@@ -155,6 +159,16 @@ def main() -> int:
+         page_count = len(doc)
+         doc.close()
+         fonts, sizes = pdf_fonts_and_sizes(output)
++        embedding = verify_pdf_font_embedding(
++            output, font_resolution, {k: v for k, v in files.items() if k in (font_resolution.get("verified_fonts") or {})}
++        )
++        if args.require_exact_fonts and embedding["status"] != "VERIFIED":
++            raise ValueError(
++                "BRAND_FONT_EXACT_REQUIRED: embedded PDF fonts do not match the verified brand fonts "
++                f"(missing={[k for k, v in embedding['required_embedded'].items() if not v]}, "
++                f"unexpected={embedding['unexpected_fonts']}, not_embedded={embedding['not_embedded_fonts']})"
++            )
++        verified_fonts = font_resolution.get("verified_fonts", {}) if isinstance(font_resolution.get("verified_fonts"), dict) else {}
+         receipt = {
+             "schema_version": "1.0",
+             "status": "PASS",
+@@ -184,6 +198,18 @@ def main() -> int:
+                     key: sha(Path(value)) for key, value in files.items() if value
+                 },
+             },
++            "font_provenance": {
++                "source": font_resolution.get("source"),
++                "package_policy": font_resolution.get("package_policy"),
++                "package_fonts_status": (font_resolution.get("package_fonts") or {}).get("status"),
++                "package_manifest_sha256": (font_resolution.get("package_fonts") or {}).get("manifest_sha256"),
++                "verification": font_resolution.get("verification"),
++                "styles": {
++                    key: {k: value.get(k) for k in ("family", "style", "weight", "postscript_name", "unique_id", "head_created", "font_revision", "sha256", "source")}
++                    for key, value in sorted(verified_fonts.items())
++                },
++            },
++            "pdf_font_embedding": embedding,
+             "pdf_fonts": fonts,
+             "minimum_rendered_text_size_pt": min(sizes) if sizes else None,
+             "body_text_size_pt": 12.0,
+@@ -191,8 +217,12 @@ def main() -> int:
+             "brand_palette": ["#EC5E43", "#0E1414", "#B6C7C4", "#C6D4D1", "#566360", "#FFFFFF"],
+             "local_only_resources": True,
+             "legacy_reportlab_default": False,
+-            "limitations": [] if exact else [
+-                "Exact Schibsted Grotesk display font is unavailable in this runtime. The PDF uses an approved local fallback while IBM Plex Mono is resolved exactly where available. Strict customer release remains blocked until both requested families are supplied by the runtime."
++            "limitations": [] if exact and embedding["status"] == "VERIFIED" else [
++                f"Exact brand typography is not proven for this PDF (font status {font_status}, "
++                f"display {'exact' if exact_roles.get('display') else 'fallback ' + str(font_resolution['resolved']['display'])}, "
++                f"data {'exact' if exact_roles.get('data') else 'fallback ' + str(font_resolution['resolved']['data'])}, "
++                f"embedding {embedding['status']}). Strict customer release stays blocked until the verified package fonts, "
++                "or verified runtime fonts, render both requested families."
+             ],
+         }
+         receipt_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

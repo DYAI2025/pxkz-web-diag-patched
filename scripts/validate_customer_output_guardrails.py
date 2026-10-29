@@ -20,6 +20,48 @@ FORBIDDEN = {
 }
 RX = {name: re.compile(pattern, re.I) for name, pattern in FORBIDDEN.items()}
 
+# Claim scope (PXK-BUG-001). Public pages are sampled, so an observation never reads as a whole-site fact
+# (SEM-001); content inspection measures extractability and answerability, never AI answers, citations or
+# rankings (SEM-002; registry limitations AI-01/AI-03/AI-06).
+_AI_PLACE = r"(?:KI-Antworten|KI-Suchen?|KI-Ergebnissen|KI-Assistenten|ChatGPT|Gemini|Perplexity|Copilot)\b"
+_SEEN = r"(?:sichtbar|genannt|zitiert|empfohlen|platziert|gelistet|gefunden|erschein|auftauch|taucht|tauchen|vorkomm)\w*"
+CLAIM_RX = {
+    "ai_visibility_overclaim": re.compile(
+        r"KI-?/?\s*(?:Such)?(?:sichtbarkeit|ranking|platzierung|empfehlung|nennung|zitierung|zitation|traffic)\w*"
+        r"|\b(?:die\s+KI|KI-Systeme?|KI-Assistenten?|KI-Suchen?|ChatGPT|Gemini|Perplexity|Copilot)\s+(?:\w+\s+)?"
+        r"(?:nennt|nennen|zitiert|zitieren|empfiehlt|empfehlen|versteht|verstehen|kennt|kennen|bevorzugt|bevorzugen"
+        r"|listet|listen|übersieht|übersehen|ignoriert|ignorieren)\b"
+        rf"|{_SEEN}\s+(?:\w+\s+){{0,3}}(?:in|bei|von)\s+{_AI_PLACE}"
+        rf"|\b(?:in|bei|von)\s+{_AI_PLACE}\s+(?:\w+\s+){{0,3}}(?:{_SEEN}|auf\b|vor\b|seltener|häufiger)"
+        r"|für\s+KI-Systeme\s+(?:ist|sind|wirkt|wirken|erscheint)\b|\bwie\s+\w+\s+(?:die\s+)?Website\s+für\s+KI",
+        re.I),
+    "universal_scope": re.compile(
+        r"auf\s+(?:allen|jeder|sämtlichen)\s+\w*seiten?\b|auf\s+der\s+gesamten\s+(?:Website|Webseite|Seite|Präsenz)"
+        r"|überall\s+(?:gleich|identisch|einheitlich|konsistent|vorhanden|sichtbar)"
+        r"|\b(?:jede|alle)\s+\w*seiten?\s+(?:zeigt|zeigen|ist|sind|hat|haben|nennt|nennen|fehlt|fehlen|enthält|enthalten)\b"
+        r"|durchgängig\s+(?:gleich|einheitlich|identisch|konsistent)|websiteweit"
+        r"|seitenübergreifend\s+(?:gleich|einheitlich|konsistent|identisch)",
+        re.I),
+}
+# A sentence that states the measurement boundary ("... wurde nicht gemessen") is a disclaimer, not a claim.
+DISCLAIMER = re.compile(r"nicht\s+(?:gemessen|belegt|geprüft|nachgewiesen|untersucht)|belegen?\s+keine|kein(?:en)?\s+Nachweis", re.I)
+SENTENCE = re.compile(r"(?<=[.!?])\s+|\n+")
+
+
+def claim_violations(text: str, *, scope: bool = True) -> list[tuple[str, str]]:
+    """Claim-scope hits per sentence; ``scope=False`` skips the whole-site check (target-state actions)."""
+    hits: list[tuple[str, str]] = []
+    for sentence in SENTENCE.split(text):
+        if DISCLAIMER.search(sentence):
+            continue
+        for name, rx in CLAIM_RX.items():
+            if name == "universal_scope" and not scope:
+                continue
+            m = rx.search(sentence)
+            if m:
+                hits.append((name, m.group(0)))
+    return hits
+
 
 def visible_model(data: dict[str, Any]) -> object:
     return {
@@ -34,6 +76,45 @@ def visible_model(data: dict[str, Any]) -> object:
         "recommendation": data.get("recommendation"),
         "closing": data.get("closing"),
     }
+
+
+def observation_model(data: dict[str, Any]) -> object:
+    """Customer statements about the observed state; actions and closing steps describe a target state."""
+    return {
+        "cover": data.get("cover"),
+        "executive": data.get("executive"),
+        "categories": data.get("categories"),
+        "findings": [
+            {k: f.get(k) for k in ("headline", "observation", "impact")}
+            for f in data.get("findings", []) if isinstance(f, dict)
+        ],
+    }
+
+
+def _strings(value: object) -> list[str]:
+    if isinstance(value, str):
+        return [value]
+    if isinstance(value, dict):
+        return [s for v in value.values() for s in _strings(v)]
+    if isinstance(value, list):
+        return [s for v in value for s in _strings(v)]
+    return []
+
+
+def claim_text(path: Path) -> tuple[str, bool]:
+    """Text checked for claim scope and whether the whole-site check applies to it.
+
+    The model is checked field by field (observations with the scope check); the SVG charts carry the row
+    labels. HTML and PDF render the same model fields and cannot separate actions from observations, so they
+    get the AI-visibility check only.
+    """
+    suffix = path.suffix.lower()
+    if suffix == ".json":
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if isinstance(data, dict) and "cover" in data and "findings" in data:
+            return "\n".join(_strings(observation_model(data))), True
+        return "\n".join(_strings(data)), True
+    return text_from(path), suffix == ".svg"
 
 
 def text_from(path: Path) -> str:
@@ -79,6 +160,8 @@ def main(argv: list[str]) -> int:
                 m = rx.search(text)
                 if m:
                     hits.append(f"{path.name}:{name}:{m.group(0)}")
+            claims, scoped = claim_text(path)
+            hits.extend(f"{path.name}:{name}:{match}" for name, match in claim_violations(claims, scope=scoped))
         if hits:
             raise ValueError("; ".join(hits))
         print(f"PASS: customer output guardrails artifacts={len(paths)}")

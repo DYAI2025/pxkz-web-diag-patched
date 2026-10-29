@@ -70,6 +70,8 @@ Never expose these as customer findings, score factors, chart content, roadmap i
 
 Measurement context that is itself needed to understand a business fact may remain concise, for example the search query, location/device and date attached to a ranking snapshot. Provider/tool names and internal execution details remain internal.
 
+The overview page carries exactly one dated scope sentence (`Grundlage: Stichprobe öffentlich erreichbarer Seiten, Stand <Datum>. KI-Antworten wurden nicht abgefragt.`). It states the sample and the AI boundary that every status row depends on; it is not method boilerplate and names no tool, provider, metric count or coverage.
+
 ## Score projection
 
 - Keep `FULL_SCORE`, `PARTIAL_SCORE`, `NO_SCORE`, coverage and confidence internally.

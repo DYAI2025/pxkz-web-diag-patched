@@ -1,0 +1,376 @@
+# Evidence-bound customer claims — evidence ledger
+
+Branch feature/pixelkiez-packaged-brand-fonts, base 6db8fb1. Every row: command, exit code, value, pasted from terminal.
+Runtime: `~/.venvs/pxkz-ebc` (uv, CPython 3.12, `requirements.txt` + pytest), `DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib`; WeasyPrint 68.1.
+
+## Task 1 — baseline (2026-10-29)
+| check | command | rc | value |
+|---|---|---|---|
+| worktree clean | `git status --porcelain \| wc -l` | 0 | 0 |
+| HEAD | `git rev-parse --short HEAD` | 0 | 6db8fb1 |
+| tree digest | `python3 -B scripts/pipeline_ledger.py digest .` | 0 | bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d |
+| release gate (system python) | `python3 -B scripts/validate_release_gate.py .` | 1 | FAIL; includes FONT_UNREADABLE_OR_FONTTOOLS_UNAVAILABLE (system python lacks fontTools) |
+| release gate (venv) | `$PY -B scripts/validate_release_gate.py .` | 1 | FAIL: release status not PASS; semantic gate not PASS (no font error) |
+| full suite (venv) | `$PY -B -m pytest tests -q` | 0 | 186 passed, 69 subtests passed |
+| defect lines | rg fingerprints | 0 | client_story.py:20-22,28-30,36,60; build_visualization_plan.py:230; build_client_report_model.py:186; finalize_deliverable_manifest.py:91 |
+
+## Task 2 — red suite
+| check | command | rc | value |
+|---|---|---|---|
+| red suite | `$PY -B -m unittest tests.test_evidence_bound_claims -v` | 1 | Ran 14; failures=10 errors=3 (KeyError evidence_method/metric_ref/context_label); Case7 canary ok |
+
+Deviations from plan: `clientize(text, limit)` has a required limit → tests pass 200. PDF byte change is already caught by receipt digest, so Case 8 targets the real gaps: READY without PASS QA, tampered required artifact not in receipt. Strength rule tightened to `customer_status == CLEAR` (a `minor_gaps` metric is shown as "Verbesserung sinnvoll" in V10; a strength on it would contradict the visual).
+
+## Task 3 — meaning-preserving simplification
+| check | command | rc | value |
+|---|---|---|---|
+| golden pairs + case 1 + case 2 text | `$PY -B -m unittest tests.test_evidence_bound_claims.GoldenPairs …Case1LabStaysLab …test_synthetic_wording_is_not_called_documented` | 0 | Ran 5, OK |
+| guardrails on synthetic client model | `$PY -B scripts/validate_customer_output_guardrails.py <model>` | 0 | PASS artifacts=1 |
+| existing suites | `$PY -B -m pytest tests -k 'not Case and not GoldenPairs'` | 1 | 186 passed; 2 expected legacy-oracle drifts: synthetic-report plan, model (amended in Task 6) |
+| method classifier spot check | `evidence_method(...)` | 0 | Lighthouse+field-limitation→LAB, CrUX→FIELD, Synthetic→SYNTHETIC, mode FIELD→FIELD |
+
+Deviation: no sentence-capitalisation pass (would change unrelated outputs); sentence-initial case kept by `_keep_case` callables instead. Compound rule `Lighthouse/PageSpeed-Labortest` moved before the generic `Labortest` rule so it can fire. Golden pair for `Kernsample` dropped: the existing rule yields ungrammatical "Das geprüften Seiten" and is not a method/scope rule.
+
+## Task 4 — claims bound to scored metrics
+| check | command | rc | value |
+|---|---|---|---|
+| cases 3, 5 (+ validator negative) | `$PY -B -m unittest …Case3SampleScopeStaysVisible …Case5NoOppositeStrength` | 0 | Ran 3, OK |
+| full suite | `$PY -B -m pytest tests -q` | 1 | 195 passed; 9 failed = 7 Task-5/6 targets + 2 known oracle drifts (synthetic-report plan, model); legacy lever_ids unchanged |
+
+Rule as implemented: a strength is admitted only from a positive finding whose every metric_ref is assessed, reads "Klar" under `customer_status` and is not contested by a legal/identity risk; AI-06-only claims get whole-site wording rewritten to "auf den geprüften Seiten", other whole-site wording is refused. Free-text `top_strengths` are recorded as `NO_FINDING_LINK`. Levers on the core-metric route whose every linked assessed metric reads "Klar" are not selectable. Critical and MANDATORY_CRITICAL levers go to roadmap "now". Sidecar `customer-claim-bindings.json` is a required bundle artifact, validated in the build and in `validate_deliverable_bundle.py`.
+
+## Task 5 — visuals, one status scale, synthetic block
+| check | command | rc | value |
+|---|---|---|---|
+| full suite | `$PY -B -m pytest tests -q` | 1 | 200 passed; 5 failed = 3 Case8 (Task 6) + 2 known oracle drifts |
+| visual architecture eval (scratch copy) | `$PY -B scripts/run_visual_architecture_evals.py .` | 0 | PASS |
+| template gallery eval | `… run_visual_template_gallery_evals.py .` | 0 | PASS |
+| customer semantic eval | `… run_customer_semantic_evals.py .` | 0 | PASS |
+| legal customer projection eval | `… run_legal_customer_projection_evals.py .` | 0 | PASS |
+| presentation quality eval | `… run_customer_presentation_quality_evals.py .` | 0 | PASS |
+| business-first eval | `… run_business_first_reporting_evals.py .` | 0 | PASS |
+| VC03 customer release eval | `… run_vc03_customer_release_evals.py .` | 0 | PASS |
+| chart template eval | `… run_chart_template_evals.py .` | 1 | ModuleNotFoundError reportlab (legacy renderer, not in requirements.txt; environmental) |
+
+Decisions measured during the task:
+- The active-core path (synthetic report + `full-48-core-execution.json`, bundle `mode: FIXTURE`) is fixture data too: materialized metrics carry `note: FIXTURE_ONLY_NOT_LIVE_EVIDENCE` and `value.fixture: true`. `evidence_method` treats those structural markers as SYNTHETIC. Result: no repository fixture can produce a customer-mode PDF; customer mode refuses with `CUSTOMER_RELEASE_BLOCKED: SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT` (checked per selected visual and per metric behind it). Proof mode keeps fixture outputs, labelled "Beispieldaten, keine Live-Messung".
+- `tests/test_positive_customer_e2e.py` and `tests/test_packaged_brand_fonts.py::OfflineStrictRenderTests` now build `--release-mode proof --require-exact-fonts` (same strict font contract); the positive E2E additionally asserts the customer-mode refusal.
+- Matrix values: V08 Vega tints by value on 0/0.5/1, V10 by label. Shared anchor `MATRIX_VALUE` (Klar 1.0, Verbesserung sinnvoll 0.5, Handlungsbedarf 0.0) gives the same colour for the same status in both renderers; V08 still omits unscored rows (no neutral colour on its scale).
+- `schemas/visualization-plan.schema.json` gains optional `evidence_method` (LAB/FIELD/SYNTHETIC); the schema is not in the protected baseline.
+
+## Task 6 — fail-closed validators, live eval, override evidence
+| check | command | rc | value |
+|---|---|---|---|
+| Case 8 (3 tests) | `$PY -B -m unittest tests.test_evidence_bound_claims.Case8ReadyIsInvalidated` | 0 | OK |
+| mutation canary | `$PY -B -m unittest tests.test_evidence_bound_claims.MutationCanary` | 0 | lab→device mutation makes the inner eval FAIL (Case1 + GoldenPairs fail) |
+| claim eval, venv | `$PY -B scripts/run_evidence_bound_claim_evals.py .` | 0 | PASS ran=17 skipped=0 |
+| claim eval, system python (skip canary) | `python3 -B scripts/run_evidence_bound_claim_evals.py . --json-out …` | 1 | FAIL skipped=4 (PDF runtime missing → NOT RUN) |
+| protected baseline | `python3 -B scripts/validate_measurement_platform_baseline.py .` | 0 | PASS exact=35 overrides=12 chained=7 reports=12 (was rc 1 invalid_override ×5 before the override report) |
+| legacy oracles | `$PY -B -m unittest tests.test_legacy_oracles` | 0 | OK after amendment (synthetic-report plan 894ea740…→45a14b49…, model a881d84f…→77793c00…; lever ids unchanged) |
+| quick_validate (named copy) | `python3 -B <copy>/scripts/quick_validate.py <copy>` | 0 | PASS 317 required files |
+| full suite | `$PY -B -m pytest tests -q` | 0 | 204 passed, 69 subtests |
+
+Implementation notes: finalize downgrades a stored READY to BUILT_PENDING_QA before revalidation and writes CUSTOMER_RELEASE_BLOCKED with block_reason on any failure (atomic replace). Bundle validation checks every `required_artifacts[].sha256` and refuses READY without PASS visual+semantic QA bound to the receipt PDF digest. Release gate loads `reports/evidence-bound-claims-eval-results.json` (PASS, no skips, digest = live tree) and re-runs the suite live.
+
+## Task 7 — part 1: fresh nine-case build found two defects (fixed TDD before review)
+| check | command | rc | value |
+|---|---|---|---|
+| first nine-case build | `$PY -B scripts/run_customer_release_cases.py <named copy> <out>` | 1 | proof-strategic FAIL `SVG font too small VIZ-006=9.0px` (V05 per-row caption from Task 4) |
+| red: SVG legibility | `…Case6RankingContextPerRow.test_per_row_context_stays_legible_in_the_rendered_svg` | 1 | `9.0 not greater than or equal to 13` |
+| green after fix | same | 0 | caption 13 px, row pitch 34, 8 rows end y=387 < footer 407 |
+| red: example-data notice | `…Case2SyntheticStaysSynthetic` (model + every proof page) | 1 | pages [1,2,3,4,6,7,8,9,10] without "Beispieldaten"; model meta has no notice |
+| red: real-data template path | `…test_real_data_template_keeps_its_sampling_basis` | 1 | `UndefinedError: 'dict object' has no attribute 'sample_data_notice'` (StrictUndefined) |
+| green | `$PY -B -m pytest tests/test_evidence_bound_claims.py tests/test_positive_customer_e2e.py` | 0 | 28 passed |
+| legacy oracles | `$PY -B -m unittest tests.test_legacy_oracles` | 0 | amendment updated in place: synthetic-report model 77793c00…→e5f745cc… (plan unchanged) |
+| protected baseline | `python3 -B scripts/validate_measurement_platform_baseline.py .` | 0 | PASS; override scope now 6 files incl. templates/presentation.html.j2 |
+| v3.2.1 layer | `add_v321_patch_layer.py` + validator | 0 | 23 transitions; PASS modified=73 added=85 |
+| full suite | `$PY -B -m pytest tests -q` | 0 | 209 passed, 69 subtests |
+| claim eval | `$PY -B scripts/run_evidence_bound_claim_evals.py .` | 0 | PASS ran=22 skipped=0 |
+
+Deviation: case B (synthetic priority profile) builds without `--require-exact-fonts`, because build_audit_deliverables refuses that pairing by design; its receipt still has to read EXACT/VERIFIED or the builder fails. All five former customer cases are first attempted in customer mode and must be refused (`SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT`, no PDF); the nine inspectable PDFs are proof-mode builds of fixture data, now labelled "Beispieldaten" on every page. They are not nine live audits.
+
+## Task 7 — part 2: fixture-replay rankings (found by own raster check of the frozen 4671d0a build)
+proof-strategic page 8 showed SERP rankings from an offline `mode: FIXTURE` bundle (`source_type: FIXTURE_REPLAY`) dated with the replay time (29.10.2026) and without evidence_method, so the customer-mode block could not see them.
+| check | command | rc | value |
+|---|---|---|---|
+| red | `…Case6RankingContextPerRow.test_fixture_replay_rankings_are_example_data_without_a_measurement_date` | 1 | `None != 'SYNTHETIC'` |
+| red | `…Case6RankingContextPerRow.test_example_data_enrichment_blocks_customer_mode` | 1 | `'MEASUREMENT_ENRICHMENT' not found` |
+| green | `$PY -B -m unittest tests.test_evidence_bound_claims.Case6RankingContextPerRow` | 0 | 4 tests OK |
+| full suite | `$PY -B -m pytest tests -q` | 0 | 211 passed, 69 subtests |
+| evals | enrichment / gateway / strategic / visual architecture / customer semantic / VC03 / branch priority / legal projection | 0 | all PASS (gateway after override refresh) |
+| baseline + v3.2.1 | validators | 0 | PASS / PASS (23 transitions) |
+
+## Task 7 — review round 1 (independent adversarial reviewer, 39/39 unique rasters of 6846366 opened)
+Result: 11 confirmed, 4 plausible findings, so QA was NOT signed. Each was re-derived from files before acting.
+| finding | verdict after re-derivation | action |
+|---|---|---|
+| F1 blocker: closing highlights "Reale Nutzung … 2026-08-01 bis 2026-08-28", "Reale Ladeerfahrung … dokumentierter Zeitraum" from `FIXTURE_REPLAY` | confirmed (PDF text + model) | fixed: example data → "Nutzung"/"Ladeerfahrung", context "Beispieldaten"; LCP named "Hauptinhalt sichtbar nach … (p75)" |
+| F2/F3 roadmap "Jetzt" vs next step/closing order; P1/P2 re-derived from severity | confirmed (source roadmap F-003 now, F-002 P1, F-004 P2) | fixed: audit roadmap entry (evidence_basis) decides slot + priority; next step and closing follow that order |
+| F4 active-positive lever F-001 vs UX-02 = 100 "Klarheit des nächsten Schritts" | confirmed (fixture stitches legacy findings onto full-48 FIXTURE metrics) | OPEN — owner decision (lever admission rule or consistent positive fixture) |
+| F5 V08 AI-05 = 100 shown "Verbesserung sinnvoll" via non-lever F-005 | confirmed | fixed: cap only from the four levers; test_legal_trust_boundary aligned to its "customer-visible" docstring + hidden-finding control |
+| F6 V02 trust bar 89 under legal risk | confirmed | fixed: bar withheld while legal projection contests its metrics (recorded in V02 population) |
+| F7 V07 page for non-lever F-002 | confirmed as observation; chart is evidence-bound | OPEN — owner decision (visual admission policy) |
+| F8 #566360 on orange 1.87:1 | confirmed | fixed: ink on orange pages |
+| F9 empty "Stärken" column | confirmed | fixed: column omitted when empty |
+| F10 "3.8" without unit; "Ladezeit" for LCP | confirmed | fixed: "3,8 s", "Ziel ≤ 2,5 s", subtitle "Mobile Anzeige des Hauptinhalts" |
+| F11 ranking axis unnamed | confirmed | fixed: "Position N" / "Position 1" scale labels |
+| P1 page-2 footer date next to "Beispieldaten" | plausible → fixed | footer "Auf einen Blick" for example data |
+| P2 "KI-Antworten wurden nicht abgefragt." | not a defect | intentional scope boundary from the claim-scope patch |
+| P3 `font_resolution.customer_release_ready` | not a defect | font sub-status; top-level status stays BUILT_PENDING_QA |
+| P4 "die Website läuft über HTTPS" | not a defect | site-level transport property, not a sample claim |
+| reviewer note: customer mode not attempted for 4 cases | confirmed | builder now attempts customer mode for all nine |
+
+| check | command | rc | value |
+|---|---|---|---|
+| red | `…ReviewRoundOne` (9 tests) | 1 | 9 failures, each for the stated reason |
+| green | `$PY -B -m unittest tests.test_evidence_bound_claims` | 0 | 33 tests OK |
+| full suite | `$PY -B -m pytest tests -q` | 0 | 220 passed, 69 subtests |
+| 12 eval suites | enrichment, gateway, strategic, visual architecture, customer semantic, VC03, branch priority, legal projection, business-first, gallery, truth discipline, reporting bundle | 0 | all PASS |
+| oracles | amendment in place: plan 45a14b49…→ac5e2787…, model e5f745cc…→ffae93dd…; lever ids unchanged | 0 | OK |
+| baseline / v3.2.1 | validators | 0 | PASS (7 override files incl. assets/presentation.css) / PASS 25 transitions |
+
+### Task 7 — own look at the frozen build of 3a1f4da (before dispatching reviewer round 2)
+Frozen build from `git archive 3a1f4da`: rc 0, 9 cases, 90 pages / 41 unique rasters, crosscheck BAD 0; customer mode refused for all nine cases (8 × `SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT`, case B × synthetic priority profile) plus both negatives, no PDF written.
+Inspected pages: proof-strategic 08 (V05 scale), 10 (roadmap), 11 (highlights); legacy-baseline 05 (V07), 08 (orange lever page); legal-golden 02. The fixes look as intended. One new defect: with the strengths column hidden, the priorities column stayed half-width (right half of the card empty).
+| check | rc | value |
+|---|---|---|
+| red `test_empty_strengths_leave_no_empty_column` (+ `summary-columns single`) | 1 | assertion failed for the stated reason |
+| green after template class + `.summary-columns.single` CSS | 0 | OK |
+| full suite | 0 | see commit; claim eval PASS ran=33 skipped=0 |
+
+## Task 7 — review round 2 (fresh independent reviewer, 41/41 unique rasters of 9c506de opened)
+Result: 18 findings (1 blocker, 9 major), so QA was NOT signed. Each fix-candidate was re-derived from code/data before acting.
+| finding | verdict after re-derivation | action |
+|---|---|---|
+| R01/R02 active-positive lever F-001 vs UX-02 = 100; findings and metrics from different snapshots | confirmed (= round-1 F4) | OPEN — owner decision (fixture vs lever rule) |
+| R03 lever order (business rank) ≠ execution order (audit roadmap); HOCH under "Danach" | confirmed | OPEN — owner decision (one order, or explain both) |
+| R04 MANDATORY_CRITICAL legal lever shown "01 · HOCH" | confirmed (template maps severity only) | fixed: model shows it as critical |
+| R05 legal-override rows "Handlungsbedarf" next to TRUST-01 = 100 and score 65 incl. trust 89 | confirmed | OPEN — owner decision (legal projection semantics) |
+| R06 presence-only TRUST-01/02 shown "Klar" for rechtliche Angaben/Datenschutz | confirmed (registry score_mode presence_only) | OPEN — owner decision (presence wording vs status) |
+| R07 "HTTPS & sichtbare Sicherheitsangaben · Klar" with 0 security headers | confirmed | fixed: row named "HTTPS-Verschlüsselung" |
+| R08 "Testmessung" vs spec "Laborwerte bleiben als Labor bezeichnet" | spec ↔ guardrail conflict; plan chose "Testmessung" | OPEN — owner confirmation |
+| R09 field LCP 3,2 s and lab 3,8 s both unmarked | confirmed | fixed: field value reads "bei 3 von 4 Besuchen" |
+| R10/R11 V07 page and case-c lever selection vs audit roadmap | confirmed (= round-1 F7) | OPEN — owner decision (visual admission) |
+| R12 LCP action asserts images as cause, drops re-measure | confirmed (client_story replacement) | fixed |
+| R13 case-a cover without warning while two levers are KRITISCH | confirmed | OPEN — minor, part of R03 decision |
+| R14 "gut macht"/"Was heute trägt" titles with no strengths | confirmed | fixed |
+| R15 footer/subtitle 3.57:1 on sage | confirmed | fixed: #3A4543 |
+| R16 V05 position 1 plotted at x=784, label at 810 | confirmed | fixed: axis ends match labels |
+| R17 legacy ≡ gateway, legal-golden ≡ proof-realistic (identical PDFs) | confirmed | OPEN — case design; counted as 41 unique rasters, not nine proofs |
+| R18 plausible minors (p75 jargon fixed with R09; rest noted) | partly | p75 fixed; others open |
+
+| check | rc | value |
+|---|---|---|
+| red `ReviewRoundTwo` (7 new tests) | 1 | 7 failures, each for the stated reason |
+| green claim suite | 0 | 49 tests OK |
+| full suite | 0 | 236 passed, 69 subtests |
+| 12 eval suites | 0 | all PASS |
+| oracles | 0 | amendment in place: plan ac5e2787…→8f23ac34…, model ffae93dd…→4146f0fb…; lever ids unchanged |
+| baseline / v3.2.1 | 0 | PASS / PASS 25 transitions |
+
+### Task 7 — owner decisions on review round 2 (asked and answered 2026-10-29)
+| question | decision | implementation |
+|---|---|---|
+| R03 lever order vs execution order | keep both, label them | V03 "Nach geschäftlicher Bedeutung geordnet; die Reihenfolge der Umsetzung zeigt der Fahrplan"; lever page "Nach geschäftlicher Bedeutung geordnet …"; closing "REIHENFOLGE DER UMSETZUNG"; audit roadmap timing stays authoritative |
+| R05/R06 legal and presence rows | presence wording | present presence-only rows (TRUST-01/02) read "… (vorhanden) · Nicht belastbar bewertet"; rows contested by a projected legal/identity risk read "Nicht belastbar bewertet" in V10 and stay out of the value-tinted V08; scores untouched |
+| R08 lab term | keep "Testmessung" | recorded as the customer-safe lab designation; guardrail unchanged |
+| F4/R01/R02, F7/R10/R11, R17 fixtures | all four measures | lever rejected when its primary cited metric reads "Klar"; V07 only for one of the four levers; active-positive built from `evals/fixtures/active-positive-consistent-findings.v1.json` (findings cite weak metrics, positives cite strong ones, evidence ids from the full-48 execution); proof-realistic = legal projection + enrichment; gateway case asserts PDF == legacy-baseline (non-scoring layer without customer surface), any other identical pair fails the run |
+| R13 case-a cover without warning | builder defect, not design | case-a and case-c inputs are re-scored after mutation, so blocker_present matches the findings |
+
+Consequence recorded: the bare branch-priority tie report under its synthetic profile now has 3 visuals (F-002 is no lever, so no V07) and fails closed with CUSTOMER_MIN_VISUALS_NOT_MET — pinned by `test_bare_tie_report_under_profile_fails_closed`; case B and the plan/model agreement test carry the offline search/visitor enrichment.
+
+| check | rc | value |
+|---|---|---|
+| red `ReviewRoundThree` | 1 | 5 failures for the stated reasons (R13 and fixture consistency passed on scored input → builder defect) |
+| green claim suite | 0 | OK |
+| canary legal eval vs cd8689d plan builder | 1 | FAIL legal row check (live) |
+| canary identity check (identity cap reverted) | 1 | FAIL "identity rows not marked as not assessed …" (live) |
+| full suite | 0 | see commit message |
+| 12 eval suites | 0 | all PASS (legal projection eval updated to the decision, rows matched by metric_ref) |
+| synthetic-report plan diff vs cd8689d | — | only V03 subtitle and TRUST-01/02 rows changed; lever ids unchanged |
+| oracles / baseline / v3.2.1 / quick_validate | 0 | amendment in place (plan 8f23ac34…→ac9dc88e…) / PASS / PASS / PASS 319 files |
+Follow-up: the frozen build of 339518f failed at `validate_report_input.py` ("VIZ-001 references unknown finding F-002") because the legacy `visualizations`/`options` still referenced replaced findings. Red: the fixture test now runs `validate_report_input.py` (rc 1, same message). Green: the fixture carries its own `options` and empty `visualizations`; the working-tree nine-case build returns rc 0 (gateway invariant True, no other identical PDFs).
+
+### Task 7 — review round 3 and strategy change (review convergence, 2026-10-29)
+Independent review round 3 on the frozen build of 2be0a98 opened 50/50 rasters and reported 12 confirmed and 2 plausible
+findings. Third consecutive round with the same defect class (two customer surfaces reading one metric or one order
+differently), so the per-finding patch strategy was frozen. Root cause: every surface (strengths, lever admission, V02,
+V08, V10, roadmap, closing) derived its own reading of a metric; nothing compared them. Classified as an insufficient
+oracle plus an architecture mismatch, not as single wrong implementations.
+
+Materially different remediation:
+- one reading per metric for every surface: `scripts/customer_reading.py` (presence-only and present, contested,
+  score status) and a declared topic-overlap map `assets/customer-topic-overlaps.v1.json` (registry untouched);
+- a fail-closed cross-surface gate `scripts/validate_customer_surface_consistency.py`, run by
+  `build_audit_deliverables.py` after the claim-binding check, with a positive control and four mutation canaries
+  (STRENGTH_NOT_CLEAR, MATRIX_READING_MISMATCH, EXECUTION_ORDER_MISMATCH, LEVER_NOT_SCHEDULED);
+- a fixed probe checklist `docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md`, frozen before round 4.
+
+| question (asked and answered 2026-10-29) | decision | implementation |
+|---|---|---|
+| F5 roadmap P1/P2 next to lever severity | drop P1/P2 | roadmap items carry `finding_ref`, no `priority`; timing still from the audit roadmap; every lever scheduled once (two-per-bucket cap removed) |
+| F3/F4 overlapping metrics | declare topic overlaps | a strength or a "Klar" matrix row is withheld while a same-topic metric is a lever metric or reads "Handlungsbedarf" |
+| F6 low lever ahead of medium | low never outranks medium | `select_client_levers` fills medium (diversity, then fill) before low; VC03 case C lowers F-002/F-005 so the VC03 detail is admitted only once no medium remains |
+| QA gate scope | fixed probe checklist | zero confirmed defects against the checklist; other items are backlog |
+
+Finding disposition: F1 fixed (presence-only metrics back no strength; `test_customer_label_fidelity` updated to the
+decision, reasons asserted); F3/F4 fixed (overlap map); F5 fixed; F6 fixed; F7 fixed (V02 withholds every category
+with a legal- or identity-contested metric and says so); F9 fixed (roadmap subtitle names the execution order instead
+of route and lever 1); F10 fixed (cover note "Ein kritischer Befund wiegt schwerer als der Gesamtwert."); F11 fixed
+(V03 rank and V10 symbols in ink, closing numerals #8F250F 8.6:1). Backlog: F2 (category bar includes presence-only
+metrics; decision 3 keeps scores unchanged), F8 (periods on example data conflict with checklist A2), F12 (whitespace,
+stripe), F13 (fixture presence score), F14 (internal scope_summary not rendered).
+
+| check | rc | value |
+|---|---|---|
+| red `SurfaceConsistency` (11 new tests) | 1 | 11 failures for the stated reasons (gate script absent → canaries and positive control red) |
+| green claim suite | 0 | 24 selected tests OK |
+| full suite | 0 | 277 passed, 73 subtests |
+| eval suites | 0 | all PASS except two environment gaps unrelated to this change: `run_browser_measurement_evals.py` (no Playwright), `run_chart_template_evals.py` (no reportlab) |
+| oracles | 0 | amendment in place: model 4146f0fb…→a09512e5…; plan unchanged; lever ids unchanged |
+| baseline / v3.2.1 / quick_validate | 0 | PASS / PASS 34 transitions / PASS 322 files |
+Follow-up after the frozen build of d779396: the gate passed on all nine cases, but no case showed an admitted
+strength any more, because the active-positive positives cited FIND-06 and UX-07, which overlap the heading lever
+(A11Y-02). The fixture positives now cite only metrics that read "Klar" without overlap (F-107: FIND-01 + TRUST-03,
+"… erreichbar und läuft verschlüsselt über HTTPS."; F-108: UX-02, "Der wichtigste nächste Schritt ist klar
+erkennbar."). Red: `test_consistent_positives_are_shown` failed with `[] != ['F-107', 'F-108']`; green after the fixture
+change.
+
+### Task 7 — review round 4 (checklist-bound) and real-data wording
+Independent review round 4 on the frozen build of 4ab90a9, against the fixed probe checklist: 50/50 rasters opened,
+20 probes, 19 PASS, 0 FAIL, 1 AMBIGUOUS (A3, "1.240 aktive Nutzer"; the reviewer's summary line said "18 of 19"). Re-derived locally on the same build: forbidden-term,
+date, "Ladezeit" and P-label scans 0 hits on all 88 pages, 0 pages without "Beispieldaten", gateway pair the only
+identical PDFs, surface gate PASS 9/9, 11/11 customer-mode refusals without PDF.
+
+| question (asked and answered 2026-10-29) | decision | implementation |
+|---|---|---|
+| A3 reading for a GA4 user count | performance values only | recorded in the checklist's owner clarifications; "aktive Nutzer" stays |
+| backlog 1: real-data paths ("Reale Nutzung", ISO periods, LCP → "Ladezeit") | fix before QA sign-off | field data reads as visits in `client_story.py` rules and `evidence_method_labels.py` (FIELD "Daten aus Besuchen, keine Testmessung", LAB "technische Testmessung, keine Besuchsdaten"); LCP → "Anzeigewert des wichtigsten sichtbaren Inhalts"; Core Web Vitals rules moved ahead of the "Web" rule (they were dead); real highlights print "TT.MM.JJJJ bis TT.MM.JJJJ" and are left out without a period |
+
+| check | rc | value |
+|---|---|---|
+| red `RealDataWording` + updated golden pair | 1 | 11 failures for the stated reasons |
+| green | 0 | 6 selected tests OK |
+| full suite | 0 | 282 passed, 79 subtests |
+| oracles | 0 | unchanged (default outputs byte-identical) |
+
+### Task 7 — QA sign-off for the proof PDFs (5305049)
+Frozen build of 5305049: rc 0, crosscheck BAD 0, surface gate PASS 9/9; all 9 PDFs and all 88 page PNGs byte-identical
+to the 4ab90a9 build that review round 4 inspected. Reviewer findings round 4: 0 FAIL, 1 AMBIGUOUS (resolved by owner
+clarification), 0 confirmed (the reviewer's summary said "18 of 19"; its probe lines list 20 probes, 19 PASS).
+Visual QA signed PASS per case (`validate_pdf_visual_qa.py` rc 0, 9/9). Semantic QA recorded FAIL by fact: example data
+(`no_synthetic_metric_visuals` false) and checks outside the checklist not assessed; `finalize_deliverable_manifest.py`
+records CUSTOMER_RELEASE_BLOCKED for all 9 cases. Record: `reports/customer-pdf-qa-release-5305049.json` (+ per-case
+manifests in `reports/customer-pdf-qa-release-5305049/`). A customer release needs a real audit input.
+
+### Task 8 — release reconciliation (owner brief 2026-10-29)
+Runtime: isolated venv `~/.venvs/pxkz-release` (Python 3.12.11, the pxkz-ebc pins plus playwright 1.64.1 and
+reportlab 5.1.0; Chromium 156 via `PIXELKIEZ_CHROMIUM_PATH`). `run_browser_measurement_evals.py` PASS (8 metrics) and
+`run_chart_template_evals.py` PASS, both previously NOT RUN for missing dependencies. Without
+`DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib` WeasyPrint cannot render and the live claim eval in the release gate
+fails closed (`ran=91 failures=1 errors=1`); every sweep sets it.
+
+CLI usage lines (Step 1): `validate_full_48_active.py <skill-dir>`, `validate_measurement_platform_baseline.py <skill-dir>`,
+`validate_strategic_relevance_v321_preservation.py <skill-dir>`, `run_browser_measurement_evals.py <skill-dir>`
+(no usage string; needs Chromium), `validate_release_gate.py <skill-dir>`, `validate_pipeline_ledger.py <skill-dir>`,
+`package_skill.py [-h] skill_dir [out_dir]`.
+
+Baseline sweep on d95ad75 (50 root-arg scripts): 45 rc 0. Non-zero: `run_paired_release` rc 2 (needs
+`--consumer-skill-dir`, the external voice-architect consumer is not installed) and `validate_paired_release` rc 1
+(declared non-package-blocking); `validate_strategic_relevance_v321_preservation` rc 1
+(`unreported_addition` of this ledger: d95ad75 edited it without a v3.2.1 layer); `validate_release_gate` rc 1 and
+`validate_pipeline_ledger` rc 1 (stale release evidence).
+
+Release contract (`references/release-gate-policy.md` 3-31): packaging rests on the synthetic PDF fixture, visual
+inspection and fail-closed QA creation; the gate code additionally required a customer semantic PASS, which example
+data can no longer produce. The gate now makes two decisions (policy § Two release decisions): `SKILL_PACKAGE_RELEASE`
+on proofs reviewed against the fixed checklist and bound to the live tree; `CUSTOMER_REPORT_RELEASE` PASS only for a
+real audit input built in customer mode, otherwise `BLOCKED_NO_REAL_AUDIT_INPUT`, non-package-blocking. A semantic
+PASS on proof or example data is rejected in both states (this closes the gap that let 746c424 package on a fixture).
+`run_release_gate_mutation_evals.py`: 22 → 45 fail-closed cases; canary (two checks disabled) → exactly those two red.
+
+Swap probe (real CLIs, two fixtures, 57 records in `reports/task8-swap-probe/`): 51 reorder, swap or identical-value
+replacement mutations left the levers unchanged (strengths changed in 2 one-sided replacements, B2 topic overlap); the
+6 primary-rule controls changed the levers in 3. Proven narrower defect: lever admission (`client_story.contradicted_by_clear_metrics`)
+read the primary metric with `customer_status` and counted `inferred_risk` as assessed, while B4 and the surface gate
+used `customer_reading`; reordering refs that B4 reads alike changed the levers, and one order failed the gate
+(`LEVER_PRIMARY_CLEAR`). Both now call `customer_reading.primary_metric`. `PrimaryMetricOrder`: red 2 FAIL on d95ad75,
+green 4/4; full suite 286 passed. Nine-case build of the fix: 9/9 PDFs and client models byte-identical to the
+reviewed build (plans and bindings differ only by the offline enrichment's `observed_at`, as between 4ab90a9 and
+5305049). Sweep, gate, ledger and package results for the frozen candidate are recorded in `reports/task8-release-reconciliation.json`
+as each step runs; a step not yet run is recorded NOT_RUN.
+
+Independent review of a65c5b6 (two read-only lenses, no authoring context). Gate lens: 1 MAJOR, 7 MINOR, 1 PLAUSIBLE.
+The MAJOR: a customer PASS rested on the self-declared `data_class`; an example-data record relabelled REAL passed.
+Fixed: a customer PASS now also needs an `audit_input_sha256` that is no file of the skill tree, a PDF that is none
+of the proof PDFs, and no fixture provenance; any `PASS…` spelling counts as a semantic PASS; while blocked no gate
+may claim customer readiness; every proof case needs its own customer-mode refusal; malformed entries and missing
+hashes fail; the latest review round (by number) must have `fail` 0 and every checklist probe PASS; the QA record
+path is confined to `reports/customer-pdf-qa-release-<sha>.json`; the measurement-platform proof is bound too.
+The PLAUSIBLE (the gate compares recorded hashes, it does not re-render) is narrowed in the policy text: the rebuild
+at rebinding time is what shows the tree still produces the reviewed PDFs. Mutation evals 45 → 61; canary (two new
+checks disabled) → exactly their four cases red.
+Selector lens: 1 MAJOR, 2 MINOR. The MAJOR: `primary_metric` skipped refs by measurement class, so UX-08
+(not_assessed) and TRUST-01 (present presence check), which both read "Nicht belastbar bewertet", were not
+interchangeable. Fixed: the primary metric is the first cited metric that reads as a status; a skipped ref never
+reads "Klar", so the rule never admits a lever that checklist B4 rejects (MINOR 3, docstring now says so; the
+checklist is unchanged). New test red first (`['F-003','F-004','F-002','F-005'] != ['F-001','F-003','F-004','F-002']`),
+then green; full suite 287 passed. MINOR 2 (a legal-sidecar lever citing a "Klar" core metric fails the build via B4)
+exists on d95ad75 too and fails closed: backlog, not changed here.
+
+Independent evaluation of cf98339 and its first regenerated evidence (two read-only lenses): both REVISE. Code and
+measurements reproduced (61 mutation cases, 287 passed, 97/97 PDF+PNG identical to the round-4 build). Blocking:
+the regenerated release report kept 32 gate bodies of d95ad75 under a new `measured_on` stamp, several contradicting
+live output (baseline counts 6/11 vs 7/12, an active-core PDF hash not in the build, page count 10 vs 9,
+`proof_output_gate.semantic_qa` PASS on example data); the four judgment gates were inherited from the Impressum
+patch; `reliability_gate` read PASS while the ledger was stale; the QA record copied four cases' plan/binding hashes
+from 5305049. Changed strategy: the release report is rebuilt from measurements only (prior report moved whole into
+`historical_sections`), judgment gates come from the evaluator verdict or stay NOT_RUN, `reliability_gate` follows
+`validate_pipeline_ledger.py`. Gate: the proof QA record must cover exactly the nine release cases, and while the
+customer report is blocked no gate may carry a semantic PASS (mutation evals 61 → 63, canary → those two red).
+Residual, documented: a customer PASS rests on recorded hashes and labels; binding it to a deliverable bundle on disk
+belongs to the first real customer release, not this package.
+
+Independent evaluation round 2 of a16ea1f and its rebuilt evidence: rubric PASS_WITH_MINOR_REVISIONS, evidence audit
+REVISE; all round-1 findings but one closed (the ledger sentence on NOT_RUN steps). Blocking: `validate_installability.py`
+(SKILL.md § Validation) was neither in the recorded sweep nor recorded NOT_RUN; the generator on disk was 20 s newer than
+the evidence, so its recorded output excerpts (pytest without a test count) came from an earlier revision. Gate
+hardening taken from both lenses: a proof case's PDF must equal the PDF the review inspected and the PDF of its review
+visual QA manifest (a record whose cases and proofs share one unreviewed hash was self-consistent and passed); an owner
+resolution counts only as `AMBIGUOUS -> resolved PASS by owner clarification` with a row for exactly that probe in the
+checklist's owner-clarifications table; the policy states that `package_skill.py` enforces the pipeline ledger. Mutation
+evals 63 → 69, canary → those six red. The sweep now includes `validate_installability.py` and is checked against the
+SKILL.md list; the evidence records the generator's SHA-256, the pytest summary, the path-argument validators the nine-case
+build covers, and the swap probe rerun on the final rule. Residual, unchanged: `reports/brand-font-capability.json`
+`customer_release_ready: true` means font capability, not release.
+
+Independent evaluation round 3 of 6d846de: rubric PASS_WITH_MINOR_REVISIONS, evidence audit REVISE; round-2 findings
+closed but (f) in part. Blocking: the evidence recorded path-argument validators as NOT_RUN that the nine-case build runs
+fail-closed (`build_audit_deliverables.py` raises on a non-zero rc), so it under-claimed what ran. This is the third
+round in which the evidence generator's own mapping differed from what executed (inherited bodies, an unrecorded step,
+now under-recorded coverage), so the strategy changes: coverage is no longer mapped by hand but read from an execution
+trace of the build (every Python subprocess the build starts, with its rc), and the QA record's inherited
+authoring checks are labelled as inherited, valid by byte identity. Gate hardening from the rubric lens: review rounds
+need unique integer numbers (a reused or string number hid a failing round behind round 4); `bias_gate`,
+`installability_gate` and `test_suite_gate` must read PASS (`validate_gate_statuses`); the review manifests are named
+for what they are (`reviewed_visual_qa_dir`, JSON records, not signatures); the `primary_metric` docstring now states
+that a class-less scored ref would be skipped although it reads Klar, and that all 48 class-skipped refs in the nine
+release cases read "Nicht belastbar bewertet" (superseded in round 4: 48 counted not_assessed metric entries, not refs). Mutation evals
+69 → 76, canary → those six red (the judgment-gate case was already enforced). Backlog: `run_batch_contract_evals.py`
+prints its not-executed sibling case as PASS.
+
+Independent evaluation round 4 of 2d89e61: both lenses REVISE. Confirmed by re-measurement: (1) the 2d89e61 docstring,
+commit message and the round-3 entry above said "all 48 class-skipped refs"; measured on the nine cases, their findings
+cite 141 refs, 0 skipped by class, 18 skipped by their "Nicht belastbar bewertet" reading, 4 naming metrics the report
+lacks (LEGAL-IMP-02/03 in legal-golden and proof-realistic); 48 is the number of not_assessed metric entries, none of
+them cited. The docstring now states that. (2) Coverage still under-recorded what ran: the build trace missed
+validators imported in-process (`validate_visualization_assets` runs `validate_visual_assets.main`), validators the
+sweep runners start, and the generator's own subprocesses; `skill_md_not_executed` exempted path-argument names. The
+trace now covers the sweep, the build and the generator, records in-process imports, and a validator counts as not run
+only if no trace shows it. (3) The gate bound the review to the current checklist only: a probe edited after the review
+passed. The latest round now records the SHA-256 of the probe rows it used and the owner resolutions it accepted
+(`probe_rows_sha256`, `owner_resolved`). (4) `anti_sycophancy` accepted `False`, negative scores and a self-declared
+threshold; the threshold is pinned to 3. (5) The swap probe's primary oracle modelled the d95ad75 selector; it now asks
+the probed tree's `customer_reading.primary_metric` and prints the rule it used. The remaining report gates
+(`measurement_enrichment_gate` … `visual_story_gate`) are required PASS too. Mutation evals 76 → 83, canary → those
+seven red; canaries are recorded in `reports/task8-gate-canaries.json`.

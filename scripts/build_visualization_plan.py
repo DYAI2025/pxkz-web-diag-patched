@@ -7,19 +7,23 @@ import hashlib
 import json
 import re
 import sys
-from collections import Counter
 from datetime import datetime
 
-from customer_status import STATUS_META, customer_status
+from customer_status import STATUS_META
 from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority  # noqa: E402
 from client_story import clientize, select_client_levers  # noqa: E402
-from legal_customer_projection import contested_identity_surface, contested_legal_surface  # noqa: E402
+from evidence_method_labels import evidence_method, method_phrase, short_label  # noqa: E402
+from customer_reading import contested_metrics, metric_reading, overlap_blocked  # noqa: E402
 from strategic_relevance import eligible_findings  # noqa: E402
 from visualization_policy import apply_customer_visual_budget, CUSTOMER_MIN_VISUALS  # noqa: E402
+
+# Matrix cell value per customer status. V08's Vega template tints by value on the anchors 0 / 0.5 / 1 and
+# V10's by status label, so "Verbesserung sinnvoll" must sit on 0.5 to get the same colour in both.
+MATRIX_VALUE = {"CLEAR": 1.0, "IMPROVE": 0.5, "ACTION": 0.0, "UNASSESSED": STATUS_META["UNASSESSED"]["value"]}
 
 SEVERITY_WEIGHT = {"critical": 100, "high": 80, "medium": 60, "low": 40, "positive": 20}
 RATIO_RE = re.compile(r"(\d+)\s*(?:of|von|/)\s*(\d+)", re.I)
@@ -126,12 +130,21 @@ def main() -> int:
         excluded.append({"template_id": "V01_OVERALL_SCORE", "reason": "COVER_OR_OVERVIEW_ONLY_NO_DUPLICATE_CHART_PAGE"})
 
         cats = []
+        # A category bar must not vouch for an area while a projected legal or provider-identity risk contests any
+        # of its metrics: those rows read "Nicht belastbar bewertet", so the bar would be a second reading.
+        legal_review_categories = {str(defs.get(mid, {}).get("category")) for mid in contested_metrics(report) if mid in defs}
+        withheld = []
         if score.get("display_status") == "FULL_SCORE":
             for c in score.get("category_scores", []) if isinstance(score.get("category_scores"), list) else []:
+                if str(c.get("category")) in legal_review_categories:
+                    withheld.append(str(c.get("category")))
+                    continue
                 if isinstance(c.get("score"), (int, float)) and not isinstance(c.get("score"), bool):
                     cats.append({"label": clientize(c.get("label") or c.get("category"), 36), "value": float(c["score"])})
         if len(cats) >= 2:
-            visuals.append(visual(vid, "V02_CATEGORY_BARS", "Stärken und Schwächen nach Bereich", "Wie die wichtigsten Bereiche der Website heute abschneiden", [f"CATEGORY:{c.get('category')}" for c in score.get("category_scores", [])], [], "DERIVED", f"{len(cats)} bewertete Kategorien", "Pixelkiez Bewertungsmodell", "Bereichswerte sind keine externen Benchmarks und beweisen keine Geschäftswirkung.", cats)); vid += 1
+            population = f"{len(cats)} bewertete Kategorien" + (f"; ohne Balken wegen rechtlichem Prüfbedarf: {', '.join(withheld)}" if withheld else "")
+            v02_subtitle = "Wie die wichtigsten Bereiche der Website heute abschneiden" + ("; ohne Bereiche mit rechtlichem Prüfbedarf" if withheld else "")
+            visuals.append(visual(vid, "V02_CATEGORY_BARS", "Stärken und Schwächen nach Bereich", v02_subtitle, [f"CATEGORY:{c.get('category')}" for c in score.get("category_scores", []) if str(c.get("category")) not in withheld], [], "DERIVED", population, "Pixelkiez Bewertungsmodell", "Bereichswerte sind keine externen Benchmarks und beweisen keine Geschäftswirkung.", cats)); vid += 1
         else:
             excluded.append({"template_id": "V02_CATEGORY_BARS", "reason": "NO_CUSTOMER_FULL_SCORE_OR_TOO_FEW_CATEGORIES"})
 
@@ -142,7 +155,7 @@ def main() -> int:
             lever_rows.append({"label": plain_text(clientize(f.get("client_observation") or f.get("title"), 130), 130, f"lever {rank} label"), "priority": rank})
             lever_refs.append(str(f.get("id")))
             lever_metric_refs.extend(str(x) for x in f.get("metric_refs", []))
-        visuals.append(visual(vid, "V03_TOP_LEVERS", "Die vier wichtigsten Hebel", "Priorisiert nach geschäftlicher Bedeutung und Dringlichkeit", list(dict.fromkeys(lever_metric_refs)), lever_refs, "DERIVED_FROM_FINDINGS", "Vier priorisierte Website-Hebel", "Interne Priorisierung", "Die Rangfolge ist ordinal. Sie enthält keine gemessene Größe, Umsatz- oder Aufwandsschätzung.", lever_rows)); vid += 1
+        visuals.append(visual(vid, "V03_TOP_LEVERS", "Die vier wichtigsten Hebel", "Nach geschäftlicher Bedeutung geordnet; die Reihenfolge der Umsetzung zeigt der Fahrplan", list(dict.fromkeys(lever_metric_refs)), lever_refs, "DERIVED_FROM_FINDINGS", "Vier priorisierte Website-Hebel", "Interne Priorisierung", "Die Rangfolge ist ordinal. Sie enthält keine gemessene Größe, Umsatz- oder Aufwandsschätzung.", lever_rows)); vid += 1
 
         # Prefer a directly measured threshold visualization already attached to the audit.
         threshold_source = None
@@ -157,7 +170,15 @@ def main() -> int:
             bands = item.get("data", {}).get("bands", []) if isinstance(item.get("data"), dict) else []
             if not series:
                 continue
-            current = float(series[-1].get("value"))
+            metric_value = linked[0].get("value")
+            if len(linked) != 1 or not isinstance(metric_value, (int, float)) or isinstance(metric_value, bool):
+                excluded.append({"template_id": "V07_PERFORMANCE_THRESHOLD", "reason": "METRIC_VALUE_NOT_NUMERIC_OR_AMBIGUOUS"})
+                continue
+            current = float(metric_value)
+            if abs(float(series[-1].get("value")) - current) > 1e-9:
+                excluded.append({"template_id": "V07_PERFORMANCE_THRESHOLD", "reason": "SERIES_VALUE_IS_NOT_METRIC_VALUE"})
+                continue
+            method_kind = evidence_method(linked[0], item)
             good = next((float(x.get("boundary")) for x in bands if x.get("status") == "good"), None)
             warn = next((float(x.get("boundary")) for x in bands if x.get("status") == "warn"), None)
             if good is None or warn is None:
@@ -165,13 +186,21 @@ def main() -> int:
             ev = item.get("evidence", {}) if isinstance(item.get("evidence"), dict) else {}
             finding_ref = str(item.get("finding_ref") or "").strip()
             finding = next((f for f in findings if str(f.get("id")) == finding_ref), None)
+            if finding is None:
+                finding = next((f for f in findings if refs[0] in [str(x) for x in f.get("metric_refs", [])]), None)
+            # Owner decision 2026-10-29: the threshold page only illustrates one of the four customer levers.
+            if finding is None or str(finding.get("id")) not in lever_refs:
+                excluded.append({"template_id": "V07_PERFORMANCE_THRESHOLD", "reason": "FINDING_IS_NOT_A_CUSTOMER_LEVER"})
+                continue
+            finding_ref = str(finding.get("id"))
             customer_title = clientize(
                 (finding or {}).get("client_observation")
-                or "Der wichtigste sichtbare Inhalt lädt auf Mobilgeräten langsamer als empfohlen.",
+                or "Der wichtigste sichtbare Inhalt lädt in der mobilen Testmessung langsamer als empfohlen.",
                 120,
             )
-            customer_subtitle = "Mobile Ladezeit im Vergleich zum Zielwert"
-            customer_metric_label = "Mobile Ladezeit"
+            # The plotted value is when the main content became visible (LCP), not a whole-page load time.
+            customer_subtitle = f"Mobile Anzeige des Hauptinhalts im Vergleich zum Zielwert · {method_phrase(method_kind)}"
+            customer_metric_label = f"Hauptinhalt sichtbar ({short_label(method_kind)})"
             threshold_source = visual(
                 vid,
                 "V07_PERFORMANCE_THRESHOLD",
@@ -183,29 +212,29 @@ def main() -> int:
                 str(ev.get("population") or f"{len(series)} Messpunkte"),
                 f"{ev.get('tool', 'Audit measurement')} {ev.get('version', '')}".strip(),
                 str(item.get("does_not_prove") or linked[0].get("does_not_prove") or "Keine Geschäftswirkung belegt."),
-                [{"label": customer_metric_label, "value": current, "good": good, "warn": warn}],
+                [{"label": customer_metric_label, "value": current, "good": good, "warn": warn, **({"unit": str(linked[0]["unit"])} if linked[0].get("unit") else {})}],
             )
+            threshold_source["evidence_method"] = method_kind
             break
         if threshold_source:
             visuals.append(threshold_source); vid += 1
         else:
             excluded.append({"template_id": "V07_PERFORMANCE_THRESHOLD", "reason": "NO_DIRECT_VALUE_WITH_SUPPORTED_THRESHOLD"})
 
-        sev = Counter(str(f.get("severity")) for f in findings)
-        severity_de = {"critical": "kritisch", "high": "hoch", "medium": "mittel", "low": "niedrig"}
-        sev_rows = [{"group": "Befunde", "severity": severity_de[key], "count": sev.get(key, 0)} for key in ("critical", "high", "medium", "low") if sev.get(key, 0)]
-        if sev_rows:
-            all_refs = list(dict.fromkeys(str(x) for f in findings for x in f.get("metric_refs", [])))
-            visuals.append(visual(vid, "V11_SEVERITY_DISTRIBUTION", "Befunde nach Dringlichkeit", "Verteilung der priorisierbaren Befunde", all_refs, [str(f.get("id")) for f in findings], "CLASSIFIED_FINDINGS", f"{len(findings)} Verbesserungsbefunde", "Finding severity inventory", "Die Anzahl der Befunde misst weder Aufwand noch wirtschaftliche Wirkung.", sev_rows)); vid += 1
+        # A finding count carries no strategic relevance for the customer; the severity inventory stays internal.
+        excluded.append({"template_id": "V11_SEVERITY_DISTRIBUTION", "reason": "INTERNAL_ONLY_FINDING_COUNT_WITHOUT_STRATEGIC_RELEVANCE"})
 
         excluded.append({"template_id": "V12_AUDIT_COVERAGE", "reason": "INTERNAL_ONLY_NOT_CUSTOMER_VISIBLE"})
 
-        contested = contested_legal_surface(report)
-        # A metric that a customer-visible problem finding cites (or an identity metric next to a projected
-        # provider-identity risk) must not read as clear on the same PDF.
-        capped = {str(x) for f in findings for x in f.get("metric_refs", [])} | contested_identity_surface(report)
+        # A metric that a customer-visible problem finding cites must not read as clear on the same PDF.
+        # Only the four customer levers are visible problem findings; a finding the reader never sees cannot cap a status.
+        capped = {str(x) for f in levers for x in f.get("metric_refs", [])}
+        # Owner decision 2026-10-29: a "Klar" row is not shown while a metric of the same declared topic is a lever
+        # metric or reads "Handlungsbedarf" (assets/customer-topic-overlaps.v1.json).
+        overlap = overlap_blocked(report, capped, defs)
 
-        def category_matrix(category: str, template: str, title: str, label_name: str, *, four_state: bool = False) -> None:
+        def category_matrix(category: str, template: str, title: str, label_name: str, *, four_state: bool = False,
+                            limitation_default: str = "Die Matrix ist kein Marktbenchmark und keine Erfolgsprognose.") -> None:
             nonlocal vid
             rows = []
             refs = []
@@ -215,32 +244,29 @@ def main() -> int:
                     continue
                 if m.get("measurement_class") == "not_assessed":
                     continue
-                if four_state:
-                    # A projected legal customer risk outranks the presence-only core status on the customer label.
-                    state = {"key": "ACTION", **STATUS_META["ACTION"]} if mid in contested else customer_status(m)
-                    if state["key"] == "CLEAR" and mid in capped:
-                        state = {"key": "IMPROVE", **STATUS_META["IMPROVE"]}
-                    rows.append({label_name: metric_label(defs, m), "status": state["label"], "symbol": state["symbol"], "tone": state["tone"], "value": state["value"]})
-                    refs.append(mid)
+                # One customer reading per metric for every surface (customer_reading): presence-only and present or
+                # contested by a projected legal/identity risk -> "Nicht belastbar bewertet"; scores are untouched.
+                reading = state = metric_reading(report, defs, m)
+                if state["key"] == "CLEAR" and mid in capped:
+                    state = {"key": "IMPROVE", **STATUS_META["IMPROVE"]}
+                if state["key"] == "CLEAR" and mid in overlap:
                     continue
-                sc = m.get("score")
-                if not isinstance(sc, (int, float)) or isinstance(sc, bool):
+                if state["key"] == "UNASSESSED" and not four_state:
+                    # The value-tinted matrix has no neutral colour; unscored rows stay out as before.
                     continue
-                value = max(0.0, min(1.0, float(sc) / 100.0))
-                if mid in capped:
-                    # 0.5 is the template's "teilweise" anchor; the tint is a scale over value, so a higher cap
-                    # would still be painted as clear.
-                    value = min(value, .5)
-                status = "klar" if value >= .75 else "teilweise" if value >= .5 else "offen"
-                rows.append({label_name: metric_label(defs, m), "status": status, "value": value})
+                label = metric_label(defs, m) + (" (vorhanden)" if reading["present"] else "")
+                rows.append({label_name: label, "metric_ref": mid, "status": state["label"],
+                             "symbol": state["symbol"], "tone": state["tone"], "value": MATRIX_VALUE[state["key"]]})
                 refs.append(mid)
             if len(rows) >= 3:
                 subtitle = "Wo Handlungsbedarf besteht und was bereits trägt" if four_state else "Wie klar dieser Bereich heute aufgestellt ist"
-                limitation = "Handlungsbedarf ist ein technischer/inhaltlicher Befund und keine juristische Feststellung." if four_state else "Die Matrix ist kein Marktbenchmark und keine Erfolgsprognose."
+                limitation = "Handlungsbedarf ist ein technischer/inhaltlicher Befund und keine juristische Feststellung." if four_state else limitation_default
                 visuals.append(visual(vid, template, title, subtitle, refs, [], evidence_class([metric_by_id[x] for x in refs]), f"{len(rows)} Aspekte in diesem Bereich", "Pixelkiez four-state customer status projection" if four_state else "Pixelkiez metric-status projection", limitation, rows[:8])); vid += 1
             else:
                 excluded.append({"template_id": template, "reason": "TOO_FEW_ELIGIBLE_CATEGORY_METRICS"})
-        category_matrix("ai_readiness", "V08_AI_ANSWERABILITY", "Wie klar die Website für KI-Systeme ist", "question")
+        # Content inspection measures extractability and answerability only, never AI answers or citations.
+        category_matrix("ai_readiness", "V08_AI_ANSWERABILITY", "Wie eindeutig die Website Fragen beantwortet", "question",
+                        limitation_default="Maschinenlesbare Antworten belegen keine Nennung, Zitierung oder Platzierung in KI-Antworten.")
         category_matrix("trust_privacy_content", "V10_TRUST_MATRIX", "Vertrauen und Konsistenz", "signal", four_state=True)
 
         ranking_added = False
@@ -249,10 +275,19 @@ def main() -> int:
         serp_positions = [x for x in enrichment_metrics if x.get("id") == "SERP_CURRENT_POSITION" and x.get("status") in {"MEASURED", "OBSERVED"} and x.get("query") and isinstance(x.get("value"), (int, float))]
         if serp_positions:
             page_by_key = {(x.get("query"), x.get("device"), x.get("location")): x.get("value") for x in enrichment_metrics if x.get("id") == "SERP_CURRENT_PAGE" and x.get("status") in {"MEASURED", "OBSERVED"}}
-            rankings = [{"query": x.get("query"), "position": int(x.get("value")), "page": page_by_key.get((x.get("query"), x.get("device"), x.get("location"))), "device": x.get("device"), "location": x.get("location"), "observed_at": x.get("observed_at")} for x in serp_positions]
+            # Rankings replayed from a fixture bundle are example data: the replay time is not a measurement date.
+            example_rankings = (str(enrichment.get("mode") or "").upper() in {"FIXTURE", "SYNTHETIC"}
+                                or any(evidence_method(x) == "SYNTHETIC" for x in serp_positions))
+            when = (lambda value: short_label("SYNTHETIC")) if example_rankings else customer_date
+            rankings = [{"query": x.get("query"), "position": int(x.get("value")), "page": page_by_key.get((x.get("query"), x.get("device"), x.get("location"))), "device": x.get("device"), "location": x.get("location"), "observed_at": x.get("observed_at"), "context_label": " · ".join(c for c in (customer_location(x.get("location")), customer_device(x.get("device")), when(x.get("observed_at"))) if c)} for x in serp_positions]
             first = serp_positions[0]
-            context = " · ".join(str(x) for x in [customer_location(first.get("location")), customer_device(first.get("device")), customer_date(first.get("observed_at"))] if x)
+            # Place, device and date name every plotted query, not only the first one.
+            shared = lambda fmt, key: " und ".join(dict.fromkeys(fmt(x.get(key)) for x in serp_positions if fmt(x.get(key))))
+            context = " · ".join(x for x in [shared(customer_location, "location"), shared(customer_device, "device"),
+                                             method_phrase("SYNTHETIC") if example_rankings else shared(customer_date, "observed_at")] if x)
             visuals.append(visual(vid, "V05_RANKING_POSITION", "Google-Positionen nach Suchanfrage", context or "Aktueller Suchstand", [], [], "MEASURED_SERP", f"{len(rankings)} dokumentierte Suchanfragen", str(first.get("source_provider") or "SERP provider"), "Rankings gelten nur für Query, Ort, Gerät, Zeitpunkt und Messmethode und sind keine dauerhafte Position.", rankings)); vid += 1
+            if example_rankings:
+                visuals[-1]["evidence_method"] = "SYNTHETIC"
             ranking_added = True
 
         benchmark = report.get("benchmark_data")
@@ -292,7 +327,7 @@ def main() -> int:
                 "reason": "CUSTOMER_PAGE_BUDGET_MAX_7",
             })
         if len(visuals) < CUSTOMER_MIN_VISUALS:
-            raise ValueError(f"customer visualization plan requires at least {CUSTOMER_MIN_VISUALS} selected visuals")
+            raise ValueError(f"CUSTOMER_RELEASE_BLOCKED: CUSTOMER_MIN_VISUALS_NOT_MET: customer visualization plan requires at least {CUSTOMER_MIN_VISUALS} admissible visuals, got {len(visuals)}")
 
         payload = {
             "schema_version": "1.0",

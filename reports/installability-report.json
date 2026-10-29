@@ -1,23 +1,39 @@
 {
-  "artifact_name": "skill.zip",
-  "chatgpt_install_ready": true,
-  "frontend_install_suggestion_status": "prepared",
-  "not_controlled_by_skill": [
-    "client UI rendering",
-    "workspace installation permissions",
-    "plan or feature availability",
-    "runtime browser/search/performance capabilities",
-    "runtime PDF/font availability outside the validated environment",
-    "third-party platform acceptance",
-    "ChatGPT upload scan result",
-    "workspace skill upload/install permissions",
-    "exact Schibsted Grotesk availability in the execution runtime",
-    "optional companion measurement-gateway deployment and egress policy outside the skill package",
-    "live public gateway network reachability in the execution runtime"
-  ],
-  "blocking_issues": [],
-  "user_action": "Upload skill.zip via Skills > Create > Upload from your computer. If installation is disabled, a workspace admin must enable skill upload/install permissions.",
-  "legacy_installability_data_historical": false,
-  "candidate_artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
-  "basis": "Package authorized 2026-10-28; the packaged artifact is verified after packaging by re-running quick_validate, validate_release_gate, validate_pipeline_ledger and validate_installability on the extracted skill.zip (receipt in reports/package-receipt-2026-10-28.json)."
+ "artifact_name": "skill.zip",
+ "chatgpt_install_ready": true,
+ "frontend_install_suggestion_status": "prepared",
+ "not_controlled_by_skill": [
+  "client UI rendering",
+  "workspace installation permissions",
+  "plan or feature availability",
+  "runtime browser/search/performance capabilities",
+  "runtime PDF/font availability outside the validated environment",
+  "third-party platform acceptance",
+  "ChatGPT upload scan result",
+  "workspace skill upload/install permissions",
+  "optional companion measurement-gateway deployment and egress policy outside the skill package",
+  "live public gateway network reachability in the execution runtime",
+  "host Python 3 with the packages declared in requirements.txt (WeasyPrint >=68.1,<69 plus Pango/GObject system libraries, PyMuPDF, pypdf, fontTools, jsonschema, Jinja2)",
+  "a Chromium binary named by PIXELKIEZ_CHROMIUM_PATH for optional live browser enrichment"
+ ],
+ "blocking_issues": [],
+ "user_action": "Upload skill.zip via Skills > Create > Upload from your computer. If installation is disabled, a workspace admin must enable skill upload/install permissions.",
+ "legacy_installability_data_historical": false,
+ "candidate_artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+ "basis": "Release completion 2026-10-28 on candidate a66710f ended BLOCKED (customer semantic QA FAIL); no skill.zip was built, so no packaged artifact was verified. Installability controls of the package tree itself pass.",
+ "runtime_declaration": {
+  "file": "requirements.txt",
+  "verified_with": {
+   "weasyprint": "68.1",
+   "pymupdf": "2.0",
+   "pypdf": "6.21.4",
+   "fonttools": "4.68.0",
+   "jsonschema": "4.26.0",
+   "jinja2": "3.1.6",
+   "python": "3.12"
+  },
+  "known_incompatibility": "WeasyPrint 70.0 removed default_url_fetcher (renderer import fails); bound <69",
+  "fail_closed_without_fonttools": "validate_no_font_binaries / validate_release_gate / strict customer render fail with FONT_UNREADABLE_OR_FONTTOOLS_UNAVAILABLE"
+ },
+ "exact_fonts": "packaged and manifest-pinned (assets/fonts, OFL); offline render needs no host fonts and no PIXELKIEZ_FONT_DIR"
 }

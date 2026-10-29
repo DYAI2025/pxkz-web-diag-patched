@@ -1,11 +1,11 @@
 {
   "status": "PASS",
-  "artifact_digest": "dc7ba52985a5ffc17a224767e91123be54dfeeedc1d43c5cf56c41eb4030c334",
+  "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
   "metric_count": 48,
   "weighted_contributions": "RECONCILED",
   "category_results": "RECONCILED",
   "overall_result": "RECONCILED",
-  "analysis_report_sha256": "3bdd2e71e19d54ea2928c1dd40342b4b3709497f6b347429496099ac1bb1971f",
-  "scored_report_sha256": "de915b6f43e26dfbd8198b36738bb6202f5f6bd4576462fcddca936ed1542c34",
+  "analysis_report_sha256": "d9d7021dbf6d21e578234788ae1c2f4dd135cef0cd2c68d5c1289ca30550ba13",
+  "scored_report_sha256": "de27e873f05dfb862c387203381a203b78d585c8ec93c902a85914078b1ec6d1",
   "customer_internal_leakage": "NONE_DETECTED_IN_CLIENT_MODEL"
 }

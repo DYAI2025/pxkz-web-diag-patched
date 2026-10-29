@@ -36,9 +36,27 @@ class PriorityPipelineTests(unittest.TestCase):
         self.assertEqual(m.returncode, 0, m.stdout + m.stderr)
         return (json.loads(plan.read_text()), json.loads(model.read_text()), json.loads(decision.read_text()))
 
+    def enriched_tie(self, tmp: Path) -> Path:
+        """Tie report with the offline search/visitor enrichment: under the profile F-002 is no lever, so its threshold
+        page is not admitted (owner decision 2026-10-29) and the bare tie report has only three visuals."""
+        scored, enrichment, enriched = tmp / "tie.scored.json", tmp / "enrichment.json", tmp / "tie.enriched.json"
+        for args in (("scripts/compute_score.py", str(TIE), str(scored)),
+                     ("scripts/collect_measurement_enrichment.py", "https://example.com", str(enrichment), "--config",
+                      str(FIX / "measurement-enrichment-config.json"), "--fixture-bundle", str(FIX / "measurement-provider-responses.json"), "--offline"),
+                     ("scripts/attach_measurement_enrichment.py", str(scored), str(enrichment), str(enriched))):
+            result = run(*args)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        return enriched
+
+    def test_bare_tie_report_under_profile_fails_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p = run("scripts/build_visualization_plan.py", str(TIE), str(Path(tmp) / "plan.json"), *priority_args())
+            self.assertNotEqual(p.returncode, 0)
+            self.assertIn("CUSTOMER_MIN_VISUALS_NOT_MET", p.stdout + p.stderr)
+
     def test_plan_and_model_agree_under_profile(self):
         with tempfile.TemporaryDirectory() as tmp:
-            plan, model, decision = self.build(Path(tmp), TIE, priority_args())
+            plan, model, decision = self.build(Path(tmp), self.enriched_tie(Path(tmp)), priority_args())
             self.assertEqual(plan["top_levers"], [f["id"] for f in model["findings"]])
             self.assertEqual(plan["top_levers"], ["F-001", "F-003", "F-004", "F-005"])
             self.assertEqual(decision["legacy_selected_ids"], ["F-001", "F-003", "F-004", "F-002"])

@@ -8,32 +8,46 @@ from typing import Any
 
 from strategic_relevance import evaluate_finding
 from branch_priority import preferred_order
+from customer_reading import metric_reading, primary_metric, registry_defs
 
 REAL_CHARTS = {f"V{i:02d}" for i in range(1, 12)}
 SEVERITY_RANK = {"critical": 0, "high": 1, "medium": 2, "low": 3, "positive": 4}
 CONFIDENCE_DE = {"HIGH": "hoch", "MEDIUM": "mittel", "LOW": "niedrig"}
 
+
+def _keep_case(replacement: str):
+    """Replacement callable that keeps a sentence-initial capital letter."""
+    def sub(match: re.Match) -> str:
+        return replacement[:1].upper() + replacement[1:] if match.group(0)[:1].isupper() else replacement
+    return sub
+
 CLIENT_REPLACEMENTS = [
     (re.compile(r"Die drei wichtigsten Suchintentionen auf eigene, klar verlinkte Leistungsseiten abbilden\.?", re.I), "Die drei wichtigsten Suchanfragen mit klar verlinkten Leistungsseiten abdecken."),
-    (re.compile(r"LCP-Element,?\s*Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen\.?", re.I), "Mobile Hauptdarstellung durch optimierte Bilder und Ressourcen beschleunigen."),
-    (re.compile(r"größtes sichtbares Seitenelement,?\s*Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen\.?", re.I), "Mobile Hauptdarstellung durch optimierte Bilder und Ressourcen beschleunigen."),
-    (re.compile(r"\bim\s+mobilen\s+Labortest\b", re.I), "auf Mobilgeräten"),
-    (re.compile(r"\bim\s+Labortest\b", re.I), ""),
-    (re.compile(r"\bLabortest(?:s)?\b", re.I), ""),
+    # The audit asks to check and re-measure; the customer text must not name a cause the audit did not establish.
+    (re.compile(r"LCP-Element,?\s*Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen\.?", re.I), "Größtes sichtbares Element, Bilder und wichtige Ladeschritte prüfen und danach erneut messen."),
+    (re.compile(r"größtes sichtbares Seitenelement,?\s*Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen\.?", re.I), "Größtes sichtbares Element, Bilder und wichtige Ladeschritte prüfen und danach erneut messen."),
+    # Method, synthetic origin and sample scope survive simplification (evidence-bound claims patch).
+    # "Testmessung" is customer-safe; "Labortest"/"Labormessung" are guardrail-forbidden provider/test terms.
+    (re.compile(r"Lighthouse/PageSpeed-Labortest", re.I), "technische Testmessung der Ladezeit"),
+    (re.compile(r"\bim\s+mobilen\s+Labortest\b", re.I), _keep_case("in der mobilen Testmessung")),
+    (re.compile(r"\bim\s+Labortest\b", re.I), _keep_case("in der Testmessung")),
+    (re.compile(r"\bLabortest(?:s)?\b", re.I), "Testmessung"),
+    (re.compile(r"\bdie\s+mobile\s+Labormessung\b", re.I), _keep_case("die mobile Testmessung")),
+    (re.compile(r"\bLabormessung(?:en)?\b", re.I), "Testmessung"),
+    (re.compile(r"synthetische\s+Testreihe", re.I), "Beispieldaten"),
+    (re.compile(r"synthetisches?\s+Testfeld", re.I), "Beispieldaten"),
+    (re.compile(r"Synthetic fixture", re.I), "Beispieldaten"),
+    (re.compile(r"synthetisch(?:e|en|er|es)?\s+(?:Fixture|Daten|Messung)", re.I), "Beispieldaten"),
     (re.compile(r"\bTestläufe?\b", re.I), "Messwerte"),
     (re.compile(r"\bTestreihen?\b", re.I), "Messwerte"),
     (re.compile(r"\bMessreihe(?:n)?\b", re.I), "Messwerte"),
     (re.compile(r"\bdokumentierte\s+Datenbasis\b", re.I), "vorliegende Werte"),
-    (re.compile(r"\bim\s+geprüften\s+Umfang\b", re.I), ""),
-    (re.compile(r"\bBelegstärke\b", re.I), "geschäftlicher Bedeutung"),
-    (re.compile(r"synthetische\s+Testreihe", re.I), "dokumentierte Messreihe"),
-    (re.compile(r"synthetisches?\s+Testfeld", re.I), "dokumentierte Datenbasis"),
+    (re.compile(r"\bim\s+geprüften\s+Umfang\b", re.I), "in der Stichprobe"),
+    (re.compile(r"\bBelegstärke\b", re.I), "Belastbarkeit der Werte"),
     (re.compile(r"Testläufen", re.I), "Messungen"),
     (re.compile(r"Testlauf", re.I), "Messung"),
     (re.compile(r"Testreihe", re.I), "Messreihe"),
     (re.compile(r"\bTests?\b", re.I), "Prüfung"),
-    (re.compile(r"Synthetic fixture", re.I), "dokumentierte Datenbasis"),
-    (re.compile(r"synthetisch(?:e|en|er|es)?\s+(?:Fixture|Daten|Messung)", re.I), "dokumentierte Datenbasis"),
     (re.compile(r"\bFixture\b", re.I), "Analyse"),
     (re.compile(r"Belegte Projektbeispiele, Zertifikate und Qualifikationsnachweise und freigegebene Kundenstimmen", re.I), "Belegte Projektbeispiele, Zertifikate, Qualifikationsnachweise und freigegebene Kundenstimmen"),
     (re.compile(r"\bEntitätsklarheit\b", re.I), "Eindeutige Unternehmensdarstellung"),
@@ -43,12 +57,15 @@ CLIENT_REPLACEMENTS = [
     (re.compile(r"\bThematische Tiefe\b", re.I), "Inhaltliche Tiefe"),
     (re.compile(r"Nach den Korrekturen Audit mit Performance-, Mobile-, Accessibility- und privaten Such-/Nutzungsdaten erweitern\.?", re.I), "Nach den Korrekturen Ladezeit, mobile Bedienung, Barrierefreiheit sowie private Such- und Nutzungsdaten prüfen."),
     (re.compile(r"Zertifikats-/Qualifikationsnachweise", re.I), "Zertifikate und Qualifikationsnachweise"),
+    # Field data reads as visits, never as "real" (owner decision 2026-10-29, checklist A3/A4); must run before "Web".
+    (re.compile(r"\bCore Web Vitals[- ]Felddaten\b", re.I), "Lade- und Reaktionswerte aus Besuchen"),
+    (re.compile(r"\bCore Web Vitals\b", re.I), "Lade- und Reaktionswerte aus Besuchen"),
     (re.compile(r"\bWeb\b", re.I), "Website"),
     (re.compile(r"Besucherdaten/CRM", re.I), "Besucher- und Kundendaten"),
     (re.compile(r"datiertes öffentliches Suchtest", re.I), "datierter öffentlicher Suchtest"),
     (re.compile(r"Local Auffindbarkeit", re.I), "Lokale Auffindbarkeit"),
     (re.compile(r"Nach den Korrekturen Audit mit Ladegeschwindigkeit-, Mobile-, Barrierefreiheit- und privaten Such-/Nutzungsdaten erweitern\.?", re.I), "Nach den Korrekturen Ladezeit, mobile Bedienung, Barrierefreiheit sowie private Such- und Nutzungsdaten prüfen."),
-    (re.compile(r"direkter CrUX/PSI/Lighthouse-Messrunner", re.I), "direkte reale und technische Ladezeit-Messung"),
+    (re.compile(r"direkter CrUX/PSI/Lighthouse-Messrunner", re.I), "direkte Messung aus Besuchen und technische Testmessung"),
     (re.compile(r"vollständiger Roh-HTML-/Header-Inspektor", re.I), "vollständige Prüfung technischer Seitendaten"),
     (re.compile(r"Search Console/Analytics/CRM", re.I), "Google-Daten zu Suchanfragen sowie Besucher- und Kundendaten"),
     (re.compile(r"interaktiver Accessibility-/Viewport-Runner", re.I), "interaktive Prüfung mobiler Bedienung und Barrierefreiheit"),
@@ -56,14 +73,13 @@ CLIENT_REPLACEMENTS = [
     (re.compile(r"öffentlicher Browser-/Webabruf", re.I), "öffentlicher Website-Abruf"),
     (re.compile(r"lokale Pixelkiez Scoring-/Validierungs-/PDF-Werkzeuge", re.I), "lokale Pixelkiez Prüf- und Berichtswerkzeuge"),
     (re.compile(r"Raw-HTML Canonical/Robots-Meta/JSON-LD", re.I), "technische Angaben zur Hauptadresse, Indexierung und Seitenstruktur"),
-    (re.compile(r"CrUX/Felddaten", re.I), "reale Lade- und Nutzungsdaten"),
-    (re.compile(r"Lighthouse/PageSpeed-Labortest", re.I), "technische Ladezeit-Messung"),
+    (re.compile(r"CrUX/Felddaten", re.I), "Lade- und Nutzungsdaten aus Besuchen"),
     (re.compile(r"Assetgrößen und Response-Header", re.I), "Größe wichtiger Seitendateien und Serverantworten"),
     (re.compile(r"pixelgenaue Mobile-/Desktop-Viewportprüfung", re.I), "pixelgenaue Prüfung auf Mobilgeräten und Desktop"),
     (re.compile(r"Tastatur/Fokus/Kontrast/automatisierter WCAG-Snapshot", re.I), "vollständige Prüfung von Tastaturbedienung, Fokus, Kontrast und Barrierefreiheit"),
     (re.compile(r"Repository, Backend und Deployment", re.I), "Entwicklungs-, System- und Hostingzugriff"),
     (re.compile(r"technischer Ladezeit-Test/Ladezeit-Test-Labortest", re.I), "technischer Ladezeit-Test"),
-    (re.compile(r"reale Nutzungsdaten/reale Nutzerdaten", re.I), "reale Lade- und Nutzungsdaten"),
+    (re.compile(r"reale Nutzungsdaten/reale Nutzerdaten", re.I), "Lade- und Nutzungsdaten aus Besuchen"),
     (re.compile(r"Besucherdaten/CRM", re.I), "Besucher- und Kundendaten"),
     (re.compile(r"vollständiger Roh-HTML-/Serverangaben-Inspektor", re.I), "vollständige Prüfung technischer Seitendaten"),
     (re.compile(r"interaktiver Barrierefreiheit-/Viewport-Runner", re.I), "interaktive Prüfung mobiler Bedienung und Barrierefreiheit"),
@@ -75,9 +91,9 @@ CLIENT_REPLACEMENTS = [
     (re.compile(r"\bContent\b", re.I), "Inhalte"),
     (re.compile(r"technischer Ladezeit-Test/PageSpeed-Labortest", re.I), "technischer Ladezeit-Test"),
     (re.compile(r"\bPageSpeed\b", re.I), "Ladezeit-Test"),
-    (re.compile(r"direkter CrUX/PSI/technischer Ladezeit-Test-Messrunner", re.I), "direkte reale und technische Ladezeit-Messung"),
-    (re.compile(r"CrUX/reale Nutzerdaten", re.I), "reale Lade- und Nutzungsdaten"),
-    (re.compile(r"\bCrUX\b", re.I), "reale Nutzungsdaten"),
+    (re.compile(r"direkter CrUX/PSI/technischer Ladezeit-Test-Messrunner", re.I), "direkte Messung aus Besuchen und technische Testmessung"),
+    (re.compile(r"CrUX/reale Nutzerdaten", re.I), "Lade- und Nutzungsdaten aus Besuchen"),
+    (re.compile(r"\bCrUX\b", re.I), "Besuchsdaten"),
     (re.compile(r"\bPSI\b", re.I), "Ladezeit-Test"),
     (re.compile(r"\bauthoritative\b", re.I), "verbindliche"),
     (re.compile(r"Raw-HTML eindeutige Hauptadressen/Robots-Meta/strukturierte Daten", re.I), "technische Angaben zur Hauptadresse, Indexierung und Seitenstruktur"),
@@ -90,12 +106,13 @@ CLIENT_REPLACEMENTS = [
     (re.compile(r"\bRepository(?:-Zugriff)?\b", re.I), "Entwicklungszugriff"),
     (re.compile(r"\bSearch Console\b", re.I), "Google-Daten zu Suchanfragen"),
     (re.compile(r"Analytics/CRM", re.I), "Besucher-, Anfrage- und Kundendaten"),
-    (re.compile(r"reale Lade- und Reaktionswerte reale Nutzerdaten", re.I), "reale Lade- und Reaktionswerte aus Nutzerdaten"),
+    (re.compile(r"reale Lade- und Reaktionswerte reale Nutzerdaten", re.I), "Lade- und Reaktionswerte aus Besuchen"),
     (re.compile(r"\bCanonicals?\b", re.I), "eindeutige Hauptadressen"),
     (re.compile(r"robots\.txt", re.I), "Suchmaschinen-Steuerdatei"),
     (re.compile(r"sitemap\.xml", re.I), "Seitenübersicht für Suchmaschinen"),
     (re.compile(r"\bLCP-Element\b", re.I), "größtes sichtbares Seitenelement"),
-    (re.compile(r"\bLCP\b", re.I), "Ladezeit des wichtigsten sichtbaren Inhalts"),
+    # LCP says when the main content became visible, not how long the page took to load.
+    (re.compile(r"\bLCP\b", re.I), "Anzeigewert des wichtigsten sichtbaren Inhalts"),
     (re.compile(r"\bINP\b", re.I), "Reaktionszeit"),
     (re.compile(r"\bCLS\b", re.I), "Layout-Stabilität"),
     (re.compile(r"\bTTFB\b", re.I), "Server-Antwortzeit"),
@@ -108,7 +125,7 @@ CLIENT_REPLACEMENTS = [
     (re.compile(r"\bBackendzugriff\b", re.I), "Zugriff auf interne Systeme"),
     (re.compile(r"Search Console Index- und Query-Daten", re.I), "Search-Console-Daten zu Auffindbarkeit und Suchanfragen"),
     (re.compile(r"Analytics-/Conversion-Daten", re.I), "Besucher- und Anfrage-Daten"),
-    (re.compile(r"\bFelddaten\b", re.I), "reale Nutzerdaten"),
+    (re.compile(r"\bFelddaten\b", re.I), "Besuchsdaten"),
     (re.compile(r"\bRankinganteile\b", re.I), "dauerhaften Platzierungen"),
     (re.compile(r"Zweck, Zielgruppe, Vorgehen und Preis macht", re.I), "Zweck, Zielgruppe, Vorgehen und Preis machen"),
     (re.compile(r"Im\s+Brand-\s*(?:/|und)\s*Non-Brand-Suchsample", re.I), "In Suchtests mit und ohne Firmennamen"),
@@ -122,7 +139,7 @@ CLIENT_REPLACEMENTS = [
     (re.compile(r"Indexierung\s+pruefen\s+und\s+fuer\s+wichtige Suchanfragen\s+klar benannte Leistungsseiten\s+mit\s+eindeutigen(?:\s+Seitentitel(?:n)?\s+und\s+Haupt(?:ue|\u00fc)berschriften)?\s*erstellen", re.I), "Pr\u00fcfen, ob wichtige Seiten auffindbar sind, und Kernleistungen klar benennen"),
     (re.compile(r"Indexierung\s+pruefen\s+und\s+klare Seiten f\u00fcr wichtige Suchanfragen fuer Kernleistungen aufbauen", re.I), "Kernleistungen auf klar benannten Seiten f\u00fcr wichtige Suchanfragen erkl\u00e4ren"),
     (re.compile(r"Zwei bis drei belegte Fallbeispiele/Belege", re.I), "Zwei bis drei belegte Fallbeispiele"),
-    (re.compile(r"\bFakten auf allen Seiten gleich\b", re.I), "Fakten \u00fcberall gleich"),
+    (re.compile(r"\bFakten auf allen Seiten gleich\b", re.I), "Einheitliche Fakten"),
     (re.compile(r"\bAktualit\u00e4t sichtbarer Inhalte?\b", re.I), "Aktuelle Inhalte"),
     (re.compile(r"\bTitles?, Metas? \& (?:Ue|\u00dc)berschriften\b", re.I), "Titel und \u00dcberschriften"),
     (re.compile(r"\bAntwortbarkeit \& FAQ-Struktur\b", re.I), "Antworten auf Kundenfragen"),
@@ -152,8 +169,8 @@ CLIENT_REPLACEMENTS = [
     (re.compile(r"\bAeltere\b"), "\u00c4ltere"),
     (re.compile(r"\bNon-Brand-Sichtbarkeit\b", re.I), "Treffer ohne Firmennamen"),
     (re.compile(r"\bBrand-Sichtbarkeit\b", re.I), "Treffer beim Firmennamen"),
-    (re.compile(r"Konsistente Unternehmens-\s*&\s*Leistungsdaten", re.I), "Firmendaten auf allen Seiten"),
-    (re.compile(r"Faktenkonsistenz \u00fcber Seiten(?: hinweg)?", re.I), "Fakten \u00fcberall gleich"),
+    (re.compile(r"Konsistente Unternehmens-\s*&\s*Leistungsdaten", re.I), "Einheitliche Firmendaten"),
+    (re.compile(r"Faktenkonsistenz \u00fcber Seiten(?: hinweg)?", re.I), "Einheitliche Fakten"),
     (re.compile(r"Referenzen, Belege \& Proof Points", re.I), "Referenzen und Fallbelege"),
     (re.compile(r"Zuordnung von Claims zu Belegen", re.I), "Belege f\u00fcr Nutzenversprechen"),
     (re.compile(r"Das\s+(?:oeffentliche|\u00f6ffentliche)\s+Suchsample\s+zeigt", re.I), "Die \u00f6ffentlichen Suchtests zeigen"),
@@ -162,6 +179,8 @@ CLIENT_REPLACEMENTS = [
     (re.compile(r"\bPerformance\b", re.I), "Ladegeschwindigkeit"),
     (re.compile(r"\bMobile-UX\b", re.I), "mobile Bedienbarkeit"),
     (re.compile(r"\bAccessibility\b", re.I), "Barrierefreiheit"),
+    # TRUST-03 scores the encrypted connection; security headers are not visible statements to a visitor.
+    (re.compile(r"HTTPS\s*(?:&|und)\s*sichtbare\s+Security-Header", re.I), "HTTPS-Verschlüsselung"),
     (re.compile(r"\bSecurity-Header\b", re.I), "Sicherheitsangaben"),
     (re.compile(r"\bHeader\b", re.I), "Serverangaben"),
     (re.compile(r"Brand-\s*(?:/|und)\s*Non-Brand-Suchsample", re.I), "Suchtests mit und ohne Firmennamen"),
@@ -192,7 +211,6 @@ CLIENT_REPLACEMENTS = [
     (re.compile(r"\bRaw DOM\b", re.I), "Seitenquelltext"),
     (re.compile(r"\bJSON-LD\b", re.I), "strukturierte Daten"),
     (re.compile(r"\bSERP\b", re.I), "Suchergebnis"),
-    (re.compile(r"\bCore Web Vitals\b", re.I), "reale Lade- und Reaktionswerte"),
     (re.compile(r"\bLighthouse\b", re.I), "technischer Ladezeit-Test"),
     (re.compile(r"Assets,? Caching,? Kompression,? Security-Header", re.I), "Seitendateien, Zwischenspeicherung und Sicherheitsangaben"),
     (re.compile(r"Canonical,? noindex und hreflang", re.I), "Indexierungs- und Sprachsignale"),
@@ -239,6 +257,23 @@ def confidence_de(value: object) -> str:
     return CONFIDENCE_DE.get(str(value).upper(), str(value).lower() if value else "niedrig")
 
 
+def contradicted_by_clear_metrics(report: dict[str, Any], finding: dict[str, Any]) -> bool:
+    """A core-metric lever whose primary (first cited) assessed metric reads "Klar" contradicts that metric.
+
+    Owner decision 2026-10-29: one clear primary metric is enough, e.g. "the next step is unclear" next to
+    "Klarheit des nächsten Schritts = 100". A clear secondary metric alone does not reject the lever.
+
+    Legal-sidecar and VibeCheck03 routes keep their own evidence and are never suppressed here.
+    """
+    verdict = evaluate_finding(report, finding)
+    if verdict.get("evidence_route") != "CORE_METRIC":
+        return False
+    # Same primary and same reading as checklist B4 and validate_customer_surface_consistency.py.
+    defs = registry_defs()
+    primary = primary_metric(report, finding, defs)
+    return primary is not None and metric_reading(report, defs, primary)["key"] == "CLEAR"
+
+
 def select_client_levers(
     report: dict[str, Any], max_levers: int = 4, *,
     branch_weights: dict[str, int] | None = None,
@@ -249,6 +284,7 @@ def select_client_levers(
         if isinstance(f, dict)
         and f.get("severity") != "positive"
         and evaluate_finding(report, f)["eligible"]
+        and not contradicted_by_clear_metrics(report, f)
     ]
     findings.sort(key=lambda f: (SEVERITY_RANK.get(str(f.get("severity")), 9), -int(f.get("confidence", 0)), str(f.get("id", ""))))
     # Approved industry priorities reorder only existing evidence-admitted findings
@@ -289,19 +325,20 @@ def select_client_levers(
             selected.append(f)
             seen_categories.add(str(f.get("category", "")))
 
-    # Then add medium/low findings with category diversity where possible.
-    for f in findings:
-        if f in selected or len(selected) >= max_levers:
-            continue
-        cat = str(f.get("category", ""))
-        if cat not in seen_categories:
-            selected.append(f)
-            seen_categories.add(cat)
-
-    # Fill remaining slots only from findings that passed the Strategic Relevance Gate.
-    for f in findings:
-        if f not in selected and len(selected) < max_levers:
-            selected.append(f)
+    # Then medium findings, then low findings, each band with category diversity where possible. A low finding
+    # never takes a slot while an admissible medium-or-higher finding remains (owner decision 2026-10-29).
+    for band in ({"medium"}, None):
+        for f in findings:
+            if f in selected or len(selected) >= max_levers or (band is not None and f.get("severity") not in band):
+                continue
+            cat = str(f.get("category", ""))
+            if cat not in seen_categories:
+                selected.append(f)
+                seen_categories.add(cat)
+        # Fill remaining slots only from findings that passed the Strategic Relevance Gate.
+        for f in findings:
+            if f not in selected and len(selected) < max_levers and (band is None or f.get("severity") in band):
+                selected.append(f)
     return selected[:max_levers]
 
 def _next_viz_id(values: list[dict[str, Any]]) -> str:

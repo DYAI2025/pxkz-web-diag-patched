@@ -1,0 +1,22 @@
+--- a/scripts/client_story.py
++++ b/scripts/client_story.py
+@@ -122,7 +122,7 @@
+     (re.compile(r"Indexierung\s+pruefen\s+und\s+fuer\s+wichtige Suchanfragen\s+klar benannte Leistungsseiten\s+mit\s+eindeutigen(?:\s+Seitentitel(?:n)?\s+und\s+Haupt(?:ue|\u00fc)berschriften)?\s*erstellen", re.I), "Pr\u00fcfen, ob wichtige Seiten auffindbar sind, und Kernleistungen klar benennen"),
+     (re.compile(r"Indexierung\s+pruefen\s+und\s+klare Seiten f\u00fcr wichtige Suchanfragen fuer Kernleistungen aufbauen", re.I), "Kernleistungen auf klar benannten Seiten f\u00fcr wichtige Suchanfragen erkl\u00e4ren"),
+     (re.compile(r"Zwei bis drei belegte Fallbeispiele/Belege", re.I), "Zwei bis drei belegte Fallbeispiele"),
+-    (re.compile(r"\bFakten auf allen Seiten gleich\b", re.I), "Fakten \u00fcberall gleich"),
++    (re.compile(r"\bFakten auf allen Seiten gleich\b", re.I), "Einheitliche Fakten"),
+     (re.compile(r"\bAktualit\u00e4t sichtbarer Inhalte?\b", re.I), "Aktuelle Inhalte"),
+     (re.compile(r"\bTitles?, Metas? \& (?:Ue|\u00dc)berschriften\b", re.I), "Titel und \u00dcberschriften"),
+     (re.compile(r"\bAntwortbarkeit \& FAQ-Struktur\b", re.I), "Antworten auf Kundenfragen"),
+@@ -152,8 +152,8 @@
+     (re.compile(r"\bAeltere\b"), "\u00c4ltere"),
+     (re.compile(r"\bNon-Brand-Sichtbarkeit\b", re.I), "Treffer ohne Firmennamen"),
+     (re.compile(r"\bBrand-Sichtbarkeit\b", re.I), "Treffer beim Firmennamen"),
+-    (re.compile(r"Konsistente Unternehmens-\s*&\s*Leistungsdaten", re.I), "Firmendaten auf allen Seiten"),
+-    (re.compile(r"Faktenkonsistenz \u00fcber Seiten(?: hinweg)?", re.I), "Fakten \u00fcberall gleich"),
++    (re.compile(r"Konsistente Unternehmens-\s*&\s*Leistungsdaten", re.I), "Einheitliche Firmendaten"),
++    (re.compile(r"Faktenkonsistenz \u00fcber Seiten(?: hinweg)?", re.I), "Einheitliche Fakten"),
+     (re.compile(r"Referenzen, Belege \& Proof Points", re.I), "Referenzen und Fallbelege"),
+     (re.compile(r"Zuordnung von Claims zu Belegen", re.I), "Belege f\u00fcr Nutzenversprechen"),
+     (re.compile(r"Das\s+(?:oeffentliche|\u00f6ffentliche)\s+Suchsample\s+zeigt", re.I), "Die \u00f6ffentlichen Suchtests zeigen"),

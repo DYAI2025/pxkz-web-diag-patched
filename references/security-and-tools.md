@@ -76,7 +76,7 @@ The 13 observed current-agent variables remain non-empty in compiler-built v1.3 
 - SVGs are parsed and rejected when they contain `script`, `foreignObject`, event attributes or external references.
 - Mermaid labels are quoted and sanitized before optional CLI invocation.
 - HTML/CSS/PDF resource loading is local-only; remote `src`, `href`, CSS imports and network installation are forbidden.
-- Font files may be supplied by an approved runtime directory but may not be copied into the Skill package.
+- Only the four manifest-pinned OFL brand fonts in `assets/fonts/` may exist in the Skill package; any other font binary, including one hidden in a zip, gzip stream or base64 `data:` URI, fails `validate_no_font_binaries.py`. Fonts are never copied into customer deliverables.
 - External Vega/Mermaid capabilities are optional. Absence triggers the deterministic local fallback and is recorded; it is not hidden.
 
 

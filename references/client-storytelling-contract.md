@@ -13,10 +13,12 @@ A completed default customer PDF must contain:
 - no V12 evidence-table page;
 - no technical metric appendix;
 - no raw source ledger;
-- one short measurement-boundaries page;
+- one short measurement-boundaries statement: the dated scope sentence on the overview page (`Grundlage: Stichprobe öffentlich erreichbarer Seiten, Stand <Datum>. KI-Antworten wurden nicht abgefragt.`);
 - at most twelve pages total.
 
-If the runtime cannot build at least four truthful v2-catalog visualizations from direct or already-approved derived scoring evidence, the customer PDF is not complete. Do not invent data to satisfy the gate.
+If the runtime cannot build at least four truthful v2-catalog visualizations from direct or already-approved derived scoring evidence, the customer PDF is not complete: the visualization planner fails closed with `CUSTOMER_RELEASE_BLOCKED: CUSTOMER_MIN_VISUALS_NOT_MET` and no customer bundle is written. Do not invent data or re-admit internal-only visuals (score duplicate V01, finding count V11, coverage V12) to satisfy the gate.
+
+Customer wording stays inside the measured scope. Public pages are sampled, so row labels and observations never claim a whole-site state (`auf allen Seiten`, `überall gleich`); content inspection measures machine extractability and answerability, never AI answers, citations, rankings or traffic. `validate_customer_output_guardrails.py` enforces both on the model, HTML, PDF and SVG text.
 
 ## One-glance rule
 

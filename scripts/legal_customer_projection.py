@@ -46,6 +46,20 @@ def contested_legal_surface(report: dict[str, Any]) -> frozenset[str]:
     return frozenset()
 
 
+# Customer wording that vouches for the legal or contact surface. Auditor-written strengths carry no metric
+# ids, so while a legal customer risk is projected they are matched on these terms instead.
+LEGAL_SURFACE_STRENGTH_TERMS = ("impressum", "rechts-", "rechtlich", "anbieterkennzeichnung", "anbieterangaben",
+                                "betreiber", "kontaktfläche", "kontaktangaben")
+
+
+def vouches_for_contested_legal_surface(report: dict[str, Any], text: object) -> bool:
+    """True when a customer strength would vouch for a surface that a projected legal risk contests."""
+    if not contested_legal_surface(report):
+        return False
+    folded = str(text or "").casefold()
+    return any(term in folded for term in LEGAL_SURFACE_STRENGTH_TERMS)
+
+
 def _active_results(sidecar: dict[str, Any]) -> list[dict[str, Any]]:
     return [
         r for r in sidecar.get("results", [])

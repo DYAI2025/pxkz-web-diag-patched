@@ -1,0 +1,129 @@
+{
+  "schema_version": "1.0",
+  "policy": "PACKAGE_BUNDLED_MANIFEST_PINNED",
+  "purpose": "Exact Pixelkiez brand typography for offline WeasyPrint rendering. Only the files listed here may be font binaries in the Skill package; they are unmodified upstream originals and are never copied into customer deliverables.",
+  "font_root": "assets/fonts",
+  "required_styles": {
+    "display": [
+      "Regular",
+      "Bold"
+    ],
+    "data": [
+      "Regular",
+      "Bold"
+    ]
+  },
+  "required_glyphs": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789äöüÄÖÜß€–—„“”‚‘’…§°·×%&@#«»→",
+  "retrieved_on": "2026-10-28",
+  "families": [
+    {
+      "family": "Schibsted Grotesk",
+      "role": "display",
+      "license_id": "OFL-1.1",
+      "license_file": "assets/fonts/schibsted-grotesk/OFL.txt",
+      "license_sha256": "3b4f3063b6ac7c1e403e2c4a5e8ef3a58190ff83ed7b15af66511858699139ce",
+      "notice_files": [
+        {
+          "path": "assets/fonts/schibsted-grotesk/AUTHORS.txt",
+          "sha256": "0e0bf58c8b8bfdc2e1b0311a6c68f4d95eeee02340d39d409f42e1c435e617f9"
+        }
+      ],
+      "copyright": "Copyright 2023 The Schibsted-Grotesk Project Authors (https://github.com/schibsted/schibsted-grotesk)",
+      "reserved_font_names": [],
+      "upstream": {
+        "repository": "https://github.com/schibsted/schibsted-grotesk",
+        "release": "1.100",
+        "release_url": "https://github.com/schibsted/schibsted-grotesk/releases/tag/1.100",
+        "commit": "d485f61f105e1b3935f4d21dfb4d371359798603",
+        "acquisition": "raw file at the release tag commit; git blob sha1 checked against the upstream tree"
+      }
+    },
+    {
+      "family": "IBM Plex Mono",
+      "role": "data",
+      "license_id": "OFL-1.1",
+      "license_file": "assets/fonts/ibm-plex-mono/LICENSE.txt",
+      "license_sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da",
+      "notice_files": [],
+      "copyright": "Copyright © 2017 IBM Corp. with Reserved Font Name \"Plex\"",
+      "reserved_font_names": [
+        "Plex"
+      ],
+      "upstream": {
+        "repository": "https://github.com/IBM/plex",
+        "release": "@ibm/plex-mono@2.5.0",
+        "release_url": "https://github.com/IBM/plex/releases/tag/%40ibm/plex-mono%402.5.0",
+        "commit": "2f9ba1b25957d958db71a849e85d72e3ecfb845a",
+        "release_asset": "ibm-plex-mono.zip",
+        "release_asset_sha256": "6d23f01257663d8cc49a0d64c22ced630b79e0e2a0ac08a0da86e9a38bbc481c",
+        "acquisition": "extracted from the release asset (GitHub asset digest checked); git blob sha1 checked against packages/plex-mono in the tag commit tree"
+      }
+    }
+  ],
+  "fonts": [
+    {
+      "family": "Schibsted Grotesk",
+      "role": "display",
+      "style": "Regular",
+      "weight": 400,
+      "original_filename": "SchibstedGrotesk-Regular.ttf",
+      "path": "assets/fonts/schibsted-grotesk/SchibstedGrotesk-Regular.ttf",
+      "postscript_name": "SchibstedGrotesk-Regular",
+      "font_version": "Version 1.100; ttfautohint (v1.8.4.7-5d5b);gftools[0.9.25]",
+      "upstream_path": "fonts/ttf/SchibstedGrotesk-Regular.ttf",
+      "upstream_url": "https://raw.githubusercontent.com/schibsted/schibsted-grotesk/d485f61f105e1b3935f4d21dfb4d371359798603/fonts/ttf/SchibstedGrotesk-Regular.ttf",
+      "upstream_git_blob_sha1": "72cf18b899f827f54b3bb4b97fc7edbac80da195",
+      "sha256": "e2cc0926fd159816bd934df5875000077e5ec8b1f9cd18154fe4d3e482b03b42",
+      "size_bytes": 122624,
+      "modified": false
+    },
+    {
+      "family": "Schibsted Grotesk",
+      "role": "display",
+      "style": "Bold",
+      "weight": 700,
+      "original_filename": "SchibstedGrotesk-Bold.ttf",
+      "path": "assets/fonts/schibsted-grotesk/SchibstedGrotesk-Bold.ttf",
+      "postscript_name": "SchibstedGrotesk-Bold",
+      "font_version": "Version 1.100; ttfautohint (v1.8.4.7-5d5b);gftools[0.9.25]",
+      "upstream_path": "fonts/ttf/SchibstedGrotesk-Bold.ttf",
+      "upstream_url": "https://raw.githubusercontent.com/schibsted/schibsted-grotesk/d485f61f105e1b3935f4d21dfb4d371359798603/fonts/ttf/SchibstedGrotesk-Bold.ttf",
+      "upstream_git_blob_sha1": "9cfcc8d4179f3db8ca37dd702d08fd1d11ec03ad",
+      "sha256": "d1d1ed9301f19a994161b0b763db11cce356204477e81bf3434d2f5dd85905e0",
+      "size_bytes": 123216,
+      "modified": false
+    },
+    {
+      "family": "IBM Plex Mono",
+      "role": "data",
+      "style": "Regular",
+      "weight": 400,
+      "original_filename": "IBMPlexMono-Regular.ttf",
+      "path": "assets/fonts/ibm-plex-mono/IBMPlexMono-Regular.ttf",
+      "postscript_name": "IBMPlexMono",
+      "font_version": "Version 2.005",
+      "upstream_path": "packages/plex-mono/fonts/complete/ttf/IBMPlexMono-Regular.ttf",
+      "upstream_url": "https://raw.githubusercontent.com/IBM/plex/2f9ba1b25957d958db71a849e85d72e3ecfb845a/packages/plex-mono/fonts/complete/ttf/IBMPlexMono-Regular.ttf",
+      "upstream_git_blob_sha1": "4254c37f20ba57e829a3315fdc91cda4e63589f5",
+      "sha256": "7c6fbddca4b700be918f5f6183d9bd4464fa427fe435f0b480d77fe2bb8c5a43",
+      "size_bytes": 173052,
+      "modified": false
+    },
+    {
+      "family": "IBM Plex Mono",
+      "role": "data",
+      "style": "Bold",
+      "weight": 700,
+      "original_filename": "IBMPlexMono-Bold.ttf",
+      "path": "assets/fonts/ibm-plex-mono/IBMPlexMono-Bold.ttf",
+      "postscript_name": "IBMPlexMono-Bold",
+      "font_version": "Version 2.005",
+      "upstream_path": "packages/plex-mono/fonts/complete/ttf/IBMPlexMono-Bold.ttf",
+      "upstream_url": "https://raw.githubusercontent.com/IBM/plex/2f9ba1b25957d958db71a849e85d72e3ecfb845a/packages/plex-mono/fonts/complete/ttf/IBMPlexMono-Bold.ttf",
+      "upstream_git_blob_sha1": "9a168d21d5f8a951fa1940cf4703926fcccc5ee0",
+      "sha256": "74e5eedcfa4596497d34e19023cabdabd3a8c852b903007a5654a59591a72ffb",
+      "size_bytes": 175096,
+      "modified": false
+    }
+  ]
+}

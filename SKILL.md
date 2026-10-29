@@ -30,16 +30,13 @@ python scripts/build_audit_deliverables.py \
   --release-mode proof
 ```
 
-`proof` mode permits an explicitly labeled approved font fallback for development/QA. `customer` mode requires exact `Schibsted Grotesk` and `IBM Plex Mono` runtime fonts and fails closed otherwise:
+`proof` mode permits an explicitly labeled approved font fallback for development/QA. `customer` mode requires exact `Schibsted Grotesk` and `IBM Plex Mono` and fails closed otherwise. The exact Regular/Bold files ship in `assets/fonts/` (OFL-1.1, pinned in `assets/fonts/font-manifest.json`); they resolve first, offline, without `PIXELKIEZ_FONT_DIR` (consulted only when the package fonts are absent), and the PDF embedding is re-verified:
 
 ```bash
-PIXELKIEZ_FONT_DIR=/approved/runtime/fonts \
-python scripts/build_audit_deliverables.py \
-  diagnosis-report-scored.json ./deliverables \
-  --release-mode customer
+python scripts/build_audit_deliverables.py diagnosis-report-scored.json ./deliverables --release-mode customer
 ```
 
-Font binaries are runtime inputs and must never be bundled or returned as Skill artifacts.
+Only manifest-pinned fonts may exist in the package (`validate_no_font_binaries.py`); fonts are never copied into customer deliverables. Font verification never sets visual or semantic QA to PASS.
 
 PowerPoint generation remains outside this Skill. Do not create a PPTX.
 
@@ -118,7 +115,9 @@ Attempt, where available and permitted:
 - at least three relevant non-brand intent queries;
 - public performance data when available.
 
-If a capability is unavailable, record `not_assessed`; do not fabricate the result.
+If a capability is unavailable, record `not_assessed`; do not fabricate the result. A text-only fetch (HTTP or Markdown extraction without a browser DOM/viewport run) is not `public_page_render`; never declare that capability `available` for it.
+
+Customer wording stays inside the measured scope: sampled pages never become `auf allen Seiten`/`überall gleich`, and AI readiness never becomes AI answers, citations or rankings (`validate_customer_output_guardrails.py`).
 
 ## Audit categories
 
@@ -313,7 +312,7 @@ Architecture decisions:
 
 Only the approved template IDs may be used. Arbitrary model-written Vega or Mermaid specifications are prohibited. Every selected visual must remain traceable internally to metric/finding references, population, method and limitation data in the plan/receipts. Those internal fields are not rendered into customer SVG/PDF footers. Customer-visible chart copy describes the website/business result and must not expose test, method, coverage, evidence-grade, tool, validator, QA or runtime terminology.
 
-A full customer report selects four to seven strategically relevant visual pages. Category bars are allowed only when the customer has a full approved score. Exactly four top levers remain core. `V01_OVERALL_SCORE` is not repeated as a separate customer chart page because the full score already appears on cover/overview. `V12_AUDIT_COVERAGE` is internal-only and forbidden in the customer projection. Performance, AI, trust, query, benchmark, ranking, agent-readiness, impact/effort, repeat-audit and process visuals remain conditional on exact evidence and Strategic Relevance requirements.
+A full customer report selects four to seven strategically relevant visual pages. Category bars are allowed only when the customer has a full approved score. Exactly four top levers remain core. `V01_OVERALL_SCORE` is not repeated as a separate customer chart page because the full score already appears on cover/overview. `V12_AUDIT_COVERAGE` (coverage) and `V11_SEVERITY_DISTRIBUTION` (finding count) are internal-only and forbidden in the customer projection. With fewer than four admissible visuals the planner stops with `CUSTOMER_RELEASE_BLOCKED: CUSTOMER_MIN_VISUALS_NOT_MET`: deliver the internal report, no customer PDF, and never pad the story. Performance, AI, trust, query, benchmark, ranking, agent-readiness, impact/effort, repeat-audit and process visuals remain conditional on exact evidence and Strategic Relevance requirements.
 
 Benchmark and Google-ranking charts require documented query/entity, location, method/device and timestamp context. When those fields are missing, the plan records `BENCHMARK_CONTEXT_MISSING` or `SERP_QUERY_CONTEXT_MISSING`; no substitute value or industry average may be invented.
 
@@ -468,6 +467,8 @@ python scripts/validate_no_font_binaries.py .
 python scripts/run_visualization_gallery_evals.py .
 python scripts/validate_customer_business_language.py /path/to/client-report-model.json /path/to/customer_presentation.pdf
 python scripts/validate_customer_output_guardrails.py /path/to/client-report-model.json /path/to/customer_presentation.html /path/to/customer_presentation.pdf /path/to/visuals
+python scripts/validate_customer_claim_bindings.py /path/to/diagnosis-report.json /path/to/client-report-model.json /path/to/customer-claim-bindings.json
+python scripts/run_evidence_bound_claim_evals.py .
 python scripts/validate_analysis_report_completeness.py /path/to/analysis_report.json /path/to/analysis_report.md /path/to/diagnosis-report.json
 python scripts/run_reporting_bundle_evals.py .
 python scripts/run_strategic_relevance_evals.py
@@ -486,6 +487,10 @@ python scripts/validate_installability.py .
 python scripts/validate_agent_agnostic.py .
 python scripts/validate_pipeline_ledger.py .
 ```
+
+Evidence-bound customer claims: customer copy keeps the measurement method ("Testmessung" for lab runs, never device or real-user wording), fixture/example data is labelled "Beispieldaten" and refused in customer mode (`SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT`), strengths come only from positive findings whose metrics read "Klar" (bound in `customer-claim-bindings.json`), every matrix visual uses the one `customer_status` scale, and a deliverable manifest never keeps `CUSTOMER_RELEASE_READY` without PASS QA bound to the current PDF. `run_evidence_bound_claim_evals.py` treats skipped cases as NOT RUN and the release gate re-runs it live.
+
+The release gate makes two separate decisions (`references/release-gate-policy.md` § Two release decisions): `SKILL_PACKAGE_RELEASE` is proven on synthetic proofs reviewed against the fixed probe checklist; `CUSTOMER_REPORT_RELEASE` needs a real audit input and stays `BLOCKED_NO_REAL_AUDIT_INPUT` without one. Synthetic proofs are never released as customer reports.
 
 The gallery gate may render all approved templates for internal regression, including internal-only coverage visuals. The customer reporting-bundle gate plus Strategic Relevance eval proves the three mandatory product outputs, 4-7 business visuals, exactly four strategic levers, full-score-only customer score projection, no internal audit/test/runtime/QA leakage, deterministic plans, no fabricated benchmark/ranking, pending QA, fail-closed fonts and rejection of unsafe SVG.
 

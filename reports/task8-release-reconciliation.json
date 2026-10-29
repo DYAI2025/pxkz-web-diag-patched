@@ -1,0 +1,2610 @@
+{
+  "candidate_commit": "49c0806",
+  "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+  "generator": {
+    "script": "regen_release_evidence_v2.py (scratchpad, not shipped)",
+    "sha256": "1cf91f343d5fa9129802bc797401efa50b6e4de2a8c1058a8ae59fa9bc4e5d1a"
+  },
+  "runner_reports_copied": [
+    "reports/analysis-report-reconciliation.json",
+    "reports/browser-measurement-enrichment.fixture.json",
+    "reports/browser-measurement-eval-results.json",
+    "reports/business-first-reporting-eval-results.json",
+    "reports/core-active-determinism-report.json",
+    "reports/core-active-eval-results.json",
+    "reports/core-active-mutation-test-report.json",
+    "reports/evidence-bound-claims-eval-results.json",
+    "reports/score-reconciliation-report.json"
+  ],
+  "extra_runs": {
+    "tests/test_packaged_brand_fonts.py": {
+      "rc": 0,
+      "last": "42 passed, 8 warnings, 4 subtests passed in 12.10s"
+    },
+    "pytest tests": {
+      "rc": 0,
+      "last": "287 passed, 8 warnings, 79 subtests passed in 254.81s (0:04:14)"
+    },
+    "run_batch_contract_evals not executed cases": [
+      "PASS: cross_skill_v1_3_same_digest (NOT_EXECUTED_SIBLING_V1_3_NOT_PRESENT)"
+    ]
+  },
+  "identity": [
+    {
+      "case": "active-positive",
+      "pdf_identical": true,
+      "pages": 9,
+      "pages_identical": true,
+      "client_model_identical": true
+    },
+    {
+      "case": "case-a-critical",
+      "pdf_identical": true,
+      "pages": 10,
+      "pages_identical": true,
+      "client_model_identical": true
+    },
+    {
+      "case": "case-b-equal-rank-profile",
+      "pdf_identical": true,
+      "pages": 10,
+      "pages_identical": true,
+      "client_model_identical": true
+    },
+    {
+      "case": "case-c-vc03-detail",
+      "pdf_identical": true,
+      "pages": 9,
+      "pages_identical": true,
+      "client_model_identical": true
+    },
+    {
+      "case": "legacy-baseline",
+      "pdf_identical": true,
+      "pages": 10,
+      "pages_identical": true,
+      "client_model_identical": true
+    },
+    {
+      "case": "legal-golden",
+      "pdf_identical": true,
+      "pages": 9,
+      "pages_identical": true,
+      "client_model_identical": true
+    },
+    {
+      "case": "proof-measurement-gateway",
+      "pdf_identical": true,
+      "pages": 10,
+      "pages_identical": true,
+      "client_model_identical": true
+    },
+    {
+      "case": "proof-realistic",
+      "pdf_identical": true,
+      "pages": 10,
+      "pages_identical": true,
+      "client_model_identical": true
+    },
+    {
+      "case": "proof-strategic",
+      "pdf_identical": true,
+      "pages": 11,
+      "pages_identical": true,
+      "client_model_identical": true
+    }
+  ],
+  "plan_and_bindings_equal_ignoring_observed_at_and_hashes": {
+    "active-positive": {
+      "visualization-plan.json": true,
+      "customer-claim-bindings.json": true
+    },
+    "case-a-critical": {
+      "visualization-plan.json": true,
+      "customer-claim-bindings.json": true
+    },
+    "case-b-equal-rank-profile": {
+      "visualization-plan.json": true,
+      "customer-claim-bindings.json": true
+    },
+    "case-c-vc03-detail": {
+      "visualization-plan.json": true,
+      "customer-claim-bindings.json": true
+    },
+    "legacy-baseline": {
+      "visualization-plan.json": true,
+      "customer-claim-bindings.json": true
+    },
+    "legal-golden": {
+      "visualization-plan.json": true,
+      "customer-claim-bindings.json": true
+    },
+    "proof-measurement-gateway": {
+      "visualization-plan.json": true,
+      "customer-claim-bindings.json": true
+    },
+    "proof-realistic": {
+      "visualization-plan.json": true,
+      "customer-claim-bindings.json": true
+    },
+    "proof-strategic": {
+      "visualization-plan.json": true,
+      "customer-claim-bindings.json": true
+    }
+  },
+  "visual_qa": [
+    {
+      "case": "active-positive",
+      "rc": 0,
+      "out": "PASS: visual QA bound to PDF (9 pages, 4 chart pages)",
+      "finalize_deliverable_manifest": {
+        "rc": 1,
+        "out": "FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection",
+        "status_after": "CUSTOMER_RELEASE_BLOCKED",
+        "customer_release_ready_after": false
+      }
+    },
+    {
+      "case": "case-a-critical",
+      "rc": 0,
+      "out": "PASS: visual QA bound to PDF (10 pages, 5 chart pages)",
+      "finalize_deliverable_manifest": {
+        "rc": 1,
+        "out": "FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection",
+        "status_after": "CUSTOMER_RELEASE_BLOCKED",
+        "customer_release_ready_after": false
+      }
+    },
+    {
+      "case": "case-b-equal-rank-profile",
+      "rc": 0,
+      "out": "PASS: visual QA bound to PDF (10 pages, 5 chart pages)",
+      "finalize_deliverable_manifest": {
+        "rc": 1,
+        "out": "FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection",
+        "status_after": "CUSTOMER_RELEASE_BLOCKED",
+        "customer_release_ready_after": false
+      }
+    },
+    {
+      "case": "case-c-vc03-detail",
+      "rc": 0,
+      "out": "PASS: visual QA bound to PDF (9 pages, 4 chart pages)",
+      "finalize_deliverable_manifest": {
+        "rc": 1,
+        "out": "FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection",
+        "status_after": "CUSTOMER_RELEASE_BLOCKED",
+        "customer_release_ready_after": false
+      }
+    },
+    {
+      "case": "legacy-baseline",
+      "rc": 0,
+      "out": "PASS: visual QA bound to PDF (10 pages, 5 chart pages)",
+      "finalize_deliverable_manifest": {
+        "rc": 1,
+        "out": "FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection",
+        "status_after": "CUSTOMER_RELEASE_BLOCKED",
+        "customer_release_ready_after": false
+      }
+    },
+    {
+      "case": "legal-golden",
+      "rc": 0,
+      "out": "PASS: visual QA bound to PDF (9 pages, 4 chart pages)",
+      "finalize_deliverable_manifest": {
+        "rc": 1,
+        "out": "FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection",
+        "status_after": "CUSTOMER_RELEASE_BLOCKED",
+        "customer_release_ready_after": false
+      }
+    },
+    {
+      "case": "proof-measurement-gateway",
+      "rc": 0,
+      "out": "PASS: visual QA bound to PDF (10 pages, 5 chart pages)",
+      "finalize_deliverable_manifest": {
+        "rc": 1,
+        "out": "FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection",
+        "status_after": "CUSTOMER_RELEASE_BLOCKED",
+        "customer_release_ready_after": false
+      }
+    },
+    {
+      "case": "proof-realistic",
+      "rc": 0,
+      "out": "PASS: visual QA bound to PDF (10 pages, 5 chart pages)",
+      "finalize_deliverable_manifest": {
+        "rc": 1,
+        "out": "FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection",
+        "status_after": "CUSTOMER_RELEASE_BLOCKED",
+        "customer_release_ready_after": false
+      }
+    },
+    {
+      "case": "proof-strategic",
+      "rc": 0,
+      "out": "PASS: visual QA bound to PDF (11 pages, 6 chart pages)",
+      "finalize_deliverable_manifest": {
+        "rc": 1,
+        "out": "FAIL: CUSTOMER_RELEASE_BLOCKED: FAIL: inspection_status must be PASS after actual semantic inspection",
+        "status_after": "CUSTOMER_RELEASE_BLOCKED",
+        "customer_release_ready_after": false
+      }
+    }
+  ],
+  "pages_total": 88,
+  "direct_validators": {
+    "active-positive": {
+      "validate_customer_business_language": {
+        "rc": 0,
+        "out": "PASS: customer business language firewall"
+      },
+      "validate_customer_output_guardrails": {
+        "rc": 0,
+        "out": "PASS: customer output guardrails artifacts=7"
+      },
+      "validate_pdf_output": {
+        "rc": 0,
+        "out": "PASS: chart-led customer PDF pages=9 embedded_visuals=4 levers=4"
+      }
+    },
+    "case-a-critical": {
+      "validate_customer_business_language": {
+        "rc": 0,
+        "out": "PASS: customer business language firewall"
+      },
+      "validate_customer_output_guardrails": {
+        "rc": 0,
+        "out": "PASS: customer output guardrails artifacts=8"
+      },
+      "validate_pdf_output": {
+        "rc": 0,
+        "out": "PASS: chart-led customer PDF pages=10 embedded_visuals=5 levers=4"
+      }
+    },
+    "case-b-equal-rank-profile": {
+      "validate_customer_business_language": {
+        "rc": 0,
+        "out": "PASS: customer business language firewall"
+      },
+      "validate_customer_output_guardrails": {
+        "rc": 0,
+        "out": "PASS: customer output guardrails artifacts=8"
+      },
+      "validate_pdf_output": {
+        "rc": 0,
+        "out": "PASS: chart-led customer PDF pages=10 embedded_visuals=5 levers=4"
+      }
+    },
+    "case-c-vc03-detail": {
+      "validate_customer_business_language": {
+        "rc": 0,
+        "out": "PASS: customer business language firewall"
+      },
+      "validate_customer_output_guardrails": {
+        "rc": 0,
+        "out": "PASS: customer output guardrails artifacts=7"
+      },
+      "validate_pdf_output": {
+        "rc": 0,
+        "out": "PASS: chart-led customer PDF pages=9 embedded_visuals=4 levers=4"
+      }
+    },
+    "legacy-baseline": {
+      "validate_customer_business_language": {
+        "rc": 0,
+        "out": "PASS: customer business language firewall"
+      },
+      "validate_customer_output_guardrails": {
+        "rc": 0,
+        "out": "PASS: customer output guardrails artifacts=8"
+      },
+      "validate_pdf_output": {
+        "rc": 0,
+        "out": "PASS: chart-led customer PDF pages=10 embedded_visuals=5 levers=4"
+      }
+    },
+    "legal-golden": {
+      "validate_customer_business_language": {
+        "rc": 0,
+        "out": "PASS: customer business language firewall"
+      },
+      "validate_customer_output_guardrails": {
+        "rc": 0,
+        "out": "PASS: customer output guardrails artifacts=7"
+      },
+      "validate_pdf_output": {
+        "rc": 0,
+        "out": "PASS: chart-led customer PDF pages=9 embedded_visuals=4 levers=4"
+      }
+    },
+    "proof-measurement-gateway": {
+      "validate_customer_business_language": {
+        "rc": 0,
+        "out": "PASS: customer business language firewall"
+      },
+      "validate_customer_output_guardrails": {
+        "rc": 0,
+        "out": "PASS: customer output guardrails artifacts=8"
+      },
+      "validate_pdf_output": {
+        "rc": 0,
+        "out": "PASS: chart-led customer PDF pages=10 embedded_visuals=5 levers=4"
+      }
+    },
+    "proof-realistic": {
+      "validate_customer_business_language": {
+        "rc": 0,
+        "out": "PASS: customer business language firewall"
+      },
+      "validate_customer_output_guardrails": {
+        "rc": 0,
+        "out": "PASS: customer output guardrails artifacts=8"
+      },
+      "validate_pdf_output": {
+        "rc": 0,
+        "out": "PASS: chart-led customer PDF pages=10 embedded_visuals=5 levers=4"
+      }
+    },
+    "proof-strategic": {
+      "validate_customer_business_language": {
+        "rc": 0,
+        "out": "PASS: customer business language firewall"
+      },
+      "validate_customer_output_guardrails": {
+        "rc": 0,
+        "out": "PASS: customer output guardrails artifacts=9"
+      },
+      "validate_pdf_output": {
+        "rc": 0,
+        "out": "PASS: chart-led customer PDF pages=11 embedded_visuals=6 levers=4"
+      }
+    }
+  },
+  "customer_mode_refusals": [
+    {
+      "case": "legacy-baseline",
+      "rc": 1,
+      "blocked": true,
+      "reason": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT",
+      "pdf_written": false
+    },
+    {
+      "case": "legal-golden",
+      "rc": 1,
+      "blocked": true,
+      "reason": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT",
+      "pdf_written": false
+    },
+    {
+      "case": "case-a-critical",
+      "rc": 1,
+      "blocked": true,
+      "reason": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT",
+      "pdf_written": false
+    },
+    {
+      "case": "case-c-vc03-detail",
+      "rc": 1,
+      "blocked": true,
+      "reason": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT",
+      "pdf_written": false
+    },
+    {
+      "case": "active-positive",
+      "rc": 1,
+      "blocked": true,
+      "reason": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT",
+      "pdf_written": false
+    },
+    {
+      "case": "case-b-equal-rank-profile",
+      "rc": 1,
+      "blocked": true,
+      "reason": "synthetic priority profiles are test data",
+      "pdf_written": false
+    },
+    {
+      "case": "proof-realistic",
+      "rc": 1,
+      "blocked": true,
+      "reason": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT",
+      "pdf_written": false
+    },
+    {
+      "case": "proof-strategic",
+      "rc": 1,
+      "blocked": true,
+      "reason": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT",
+      "pdf_written": false
+    },
+    {
+      "case": "proof-measurement-gateway",
+      "rc": 1,
+      "blocked": true,
+      "reason": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT",
+      "pdf_written": false
+    }
+  ],
+  "negatives": [
+    {
+      "case": "baumdienst-renner-reflection-regression",
+      "rc": 1,
+      "blocked": true,
+      "reason": "CUSTOMER_MIN_VISUALS_NOT_MET",
+      "pdf_written": false
+    },
+    {
+      "case": "low-coverage-marketing-report",
+      "rc": 1,
+      "blocked": true,
+      "reason": "CUSTOMER_MIN_VISUALS_NOT_MET",
+      "pdf_written": false
+    }
+  ],
+  "traces": [
+    "build-trace.jsonl",
+    "sweep-trace.jsonl",
+    "generator-trace-r6.jsonl"
+  ],
+  "path_arg_validators": {
+    "validate_analysis_report_completeness": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 20,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 24,
+          "cases": [],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 18,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "run_business_first_reporting_evals.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_batch_context": {
+      "subprocess_runs": "NOT_RUN",
+      "imported_in_process_by": []
+    },
+    "validate_chart_payloads": {
+      "subprocess_runs": "NOT_RUN",
+      "imported_in_process_by": []
+    },
+    "validate_client_report_model": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 9,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 12,
+          "cases": [],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 17,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "run_business_first_reporting_evals.py",
+            "run_legal_customer_projection_evals.py",
+            "run_score_gate_evals.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_client_semantics": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 9,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 12,
+          "cases": [],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 17,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0,
+            1
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "run_customer_presentation_quality_evals.py",
+            "run_customer_semantic_evals.py",
+            "run_legal_customer_projection_evals.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_core_execution_bundle": {
+      "subprocess_runs": "NOT_RUN",
+      "imported_in_process_by": []
+    },
+    "validate_core_score_admission": {
+      "subprocess_runs": "NOT_RUN",
+      "imported_in_process_by": []
+    },
+    "validate_cross_skill_batch_contract": {
+      "subprocess_runs": "NOT_RUN",
+      "imported_in_process_by": []
+    },
+    "validate_customer_business_language": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 27,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "validate_customer_presentation_quality.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 45,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "regen_release_evidence_v2.py",
+            "validate_customer_presentation_quality.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 37,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "run_business_first_reporting_evals.py",
+            "validate_customer_presentation_quality.py"
+          ]
+        }
+      },
+      "imported_in_process_by": [
+        "validate_client_report_model.py"
+      ]
+    },
+    "validate_customer_claim_bindings": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 18,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "validate_deliverable_bundle.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 54,
+          "cases": [],
+          "rcs": [
+            0,
+            1
+          ],
+          "callers": [
+            "__main__.py",
+            "build_audit_deliverables.py",
+            "python -m unittest",
+            "validate_deliverable_bundle.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 34,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0,
+            1
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "python -m unittest",
+            "validate_deliverable_bundle.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_customer_output_guardrails": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 9,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 21,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "regen_release_evidence_v2.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 16,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0,
+            1
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "run_impressum_compliance_evals.py",
+            "run_legal_customer_projection_evals.py"
+          ]
+        }
+      },
+      "imported_in_process_by": [
+        "__main__.py"
+      ]
+    },
+    "validate_customer_presentation_quality": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 9,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 12,
+          "cases": [],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 12,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_customer_semantic_qa": {
+      "subprocess_runs": {
+        "generator-trace-r6.jsonl": {
+          "invocations": 9,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            1
+          ],
+          "callers": [
+            "finalize_deliverable_manifest.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 1,
+          "cases": [],
+          "rcs": [
+            1
+          ],
+          "callers": [
+            "run_customer_semantic_evals.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_customer_surface_consistency": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 9,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 102,
+          "cases": [],
+          "rcs": [
+            0,
+            1
+          ],
+          "callers": [
+            "__main__.py",
+            "build_audit_deliverables.py",
+            "python -m unittest"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 42,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0,
+            1
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "python -m unittest"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_deliverable_bundle": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 9,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 30,
+          "cases": [],
+          "rcs": [
+            0,
+            1
+          ],
+          "callers": [
+            "__main__.py",
+            "build_audit_deliverables.py",
+            "python -m unittest"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 18,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0,
+            1
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "python -m unittest"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_elevenlabs_batch_csv": {
+      "subprocess_runs": {
+        "sweep-trace.jsonl": {
+          "invocations": 1,
+          "cases": [],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "run_fixture_eval.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_enterprise_skill_evaluation": {
+      "subprocess_runs": "NOT_RUN",
+      "imported_in_process_by": []
+    },
+    "validate_impressum_projection": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 10,
+          "cases": [
+            "legal-golden",
+            "proof-realistic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "validate_customer_presentation_quality.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 5,
+          "cases": [],
+          "rcs": [
+            0,
+            1
+          ],
+          "callers": [
+            "run_legal_customer_projection_evals.py"
+          ]
+        }
+      },
+      "imported_in_process_by": [
+        "__main__.py"
+      ]
+    },
+    "validate_internal_analysis_report": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 29,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "validate_deliverable_bundle.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 54,
+          "cases": [],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "validate_deliverable_bundle.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 36,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "run_business_first_reporting_evals.py",
+            "validate_deliverable_bundle.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_measurement_enrichment": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 24,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "attach_measurement_enrichment.py",
+            "build_audit_deliverables.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 61,
+          "cases": [],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "attach_measurement_enrichment.py",
+            "build_audit_deliverables.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 32,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "attach_measurement_enrichment.py",
+            "build_audit_deliverables.py",
+            "run_measurement_enrichment_evals.py",
+            "run_measurement_gateway_evals.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_measurement_envelope": {
+      "subprocess_runs": {
+        "sweep-trace.jsonl": {
+          "invocations": 2,
+          "cases": [],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "run_measurement_gateway_evals.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_pdf_brand": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 9,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 12,
+          "cases": [],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 12,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_pdf_output": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 18,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "validate_deliverable_bundle.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 51,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "regen_release_evidence_v2.py",
+            "validate_deliverable_bundle.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 32,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "run_customer_semantic_evals.py",
+            "run_legal_customer_projection_evals.py",
+            "validate_deliverable_bundle.py"
+          ]
+        }
+      },
+      "imported_in_process_by": [
+        "__main__.py"
+      ]
+    },
+    "validate_pdf_visual_qa": {
+      "subprocess_runs": {
+        "generator-trace-r6.jsonl": {
+          "invocations": 24,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0,
+            1
+          ],
+          "callers": [
+            "finalize_deliverable_manifest.py",
+            "regen_release_evidence_v2.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 2,
+          "cases": [],
+          "rcs": [
+            1
+          ],
+          "callers": [
+            "finalize_deliverable_manifest.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_presentation_brand": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 18,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "validate_deliverable_bundle.py",
+            "validate_pdf_brand.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 46,
+          "cases": [],
+          "rcs": [
+            0,
+            1
+          ],
+          "callers": [
+            "__main__.py",
+            "validate_deliverable_bundle.py",
+            "validate_pdf_brand.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 30,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "validate_deliverable_bundle.py",
+            "validate_pdf_brand.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_report_input": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 24,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "attach_measurement_enrichment.py",
+            "build_audit_deliverables.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 74,
+          "cases": [],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "__main__.py",
+            "attach_measurement_enrichment.py",
+            "build_audit_deliverables.py",
+            "python -m unittest"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 39,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "attach_measurement_enrichment.py",
+            "build_audit_deliverables.py",
+            "python -m unittest",
+            "run_impressum_compliance_evals.py",
+            "run_legal_customer_projection_evals.py",
+            "run_score_gate_evals.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_template_asset": {
+      "subprocess_runs": "NOT_RUN",
+      "imported_in_process_by": []
+    },
+    "validate_visual_assets": {
+      "subprocess_runs": {
+        "sweep-trace.jsonl": {
+          "invocations": 5,
+          "cases": [],
+          "rcs": [
+            0,
+            1
+          ],
+          "callers": [
+            "run_visual_architecture_evals.py",
+            "run_visual_template_gallery_evals.py"
+          ]
+        }
+      },
+      "imported_in_process_by": [
+        "validate_visualization_assets.py"
+      ]
+    },
+    "validate_visual_story": {
+      "subprocess_runs": "NOT_RUN",
+      "imported_in_process_by": []
+    },
+    "validate_visualization_assets": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 18,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "validate_deliverable_bundle.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 42,
+          "cases": [],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "validate_deliverable_bundle.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 30,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "validate_deliverable_bundle.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_visualization_plan": {
+      "subprocess_runs": {
+        "build-trace.jsonl": {
+          "invocations": 26,
+          "cases": [
+            "active-positive",
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline",
+            "legal-golden",
+            "proof-measurement-gateway",
+            "proof-realistic",
+            "proof-strategic"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "validate_deliverable_bundle.py"
+          ]
+        },
+        "generator-trace-r6.jsonl": {
+          "invocations": 55,
+          "cases": [],
+          "rcs": [
+            0,
+            1
+          ],
+          "callers": [
+            "__main__.py",
+            "build_audit_deliverables.py",
+            "validate_deliverable_bundle.py"
+          ]
+        },
+        "sweep-trace.jsonl": {
+          "invocations": 35,
+          "cases": [
+            "case-a-critical",
+            "case-b-equal-rank-profile",
+            "case-c-vc03-detail",
+            "legacy-baseline"
+          ],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "build_audit_deliverables.py",
+            "run_business_first_reporting_evals.py",
+            "validate_deliverable_bundle.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    },
+    "validate_website_audit_packet": {
+      "subprocess_runs": {
+        "sweep-trace.jsonl": {
+          "invocations": 1,
+          "cases": [],
+          "rcs": [
+            0
+          ],
+          "callers": [
+            "run_reflection_improvement_evals.py"
+          ]
+        }
+      },
+      "imported_in_process_by": []
+    }
+  },
+  "path_arg_validators_summary": {
+    "total": 32,
+    "run_as_subprocess": [
+      "validate_analysis_report_completeness",
+      "validate_client_report_model",
+      "validate_client_semantics",
+      "validate_customer_business_language",
+      "validate_customer_claim_bindings",
+      "validate_customer_output_guardrails",
+      "validate_customer_presentation_quality",
+      "validate_customer_semantic_qa",
+      "validate_customer_surface_consistency",
+      "validate_deliverable_bundle",
+      "validate_elevenlabs_batch_csv",
+      "validate_impressum_projection",
+      "validate_internal_analysis_report",
+      "validate_measurement_enrichment",
+      "validate_measurement_envelope",
+      "validate_pdf_brand",
+      "validate_pdf_output",
+      "validate_pdf_visual_qa",
+      "validate_presentation_brand",
+      "validate_report_input",
+      "validate_visual_assets",
+      "validate_visualization_assets",
+      "validate_visualization_plan",
+      "validate_website_audit_packet"
+    ],
+    "imported_in_process_only": [],
+    "not_run": [
+      "validate_batch_context",
+      "validate_chart_payloads",
+      "validate_core_execution_bundle",
+      "validate_core_score_admission",
+      "validate_cross_skill_batch_contract",
+      "validate_enterprise_skill_evaluation",
+      "validate_template_asset",
+      "validate_visual_story"
+    ]
+  },
+  "build_trace": {
+    "file": "build-trace.jsonl (scratch, not shipped)",
+    "events": 4078,
+    "scripts": {
+      "attach_impressum_findings": 3,
+      "attach_measurement_enrichment": 54,
+      "build_audit_deliverables": 68,
+      "build_client_report_model": 453,
+      "build_elevenlabs_batch_csv": 9,
+      "build_internal_analysis_report": 70,
+      "build_visualization_plan": 533,
+      "build_website_audit_packet": 2,
+      "check_brand_fonts": 70,
+      "collect_measurement_enrichment": 54,
+      "compute_score": 778,
+      "create_customer_semantic_qa_manifest": 34,
+      "create_pdf_visual_qa_manifest": 33,
+      "finalize_deliverable_manifest": 17,
+      "legal_customer_projection": 4,
+      "materialize_core_metrics": 34,
+      "normalize_gateway_measurements": 1,
+      "pipeline_ledger": 74,
+      "quick_validate": 1,
+      "render_diagnosis_pdf": 35,
+      "render_internal_analysis_markdown": 63,
+      "render_pdf_pages": 33,
+      "render_visualizations": 37,
+      "run_batch_contract_evals": 2,
+      "run_branch_priority_evals": 1,
+      "run_browser_measurement_evals": 1,
+      "run_business_first_reporting_evals": 1,
+      "run_chart_template_evals": 1,
+      "run_client_marketing_evals": 1,
+      "run_customer_presentation_quality_evals": 1,
+      "run_customer_semantic_evals": 1,
+      "run_evidence_bound_claim_evals": 7,
+      "run_fixture_eval": 1,
+      "run_full_48_active_evals": 1,
+      "run_impressum_compliance_evals": 1,
+      "run_legal_customer_projection_evals": 1,
+      "run_measurement_enrichment_evals": 1,
+      "run_measurement_gateway_evals": 1,
+      "run_paired_release": 1,
+      "run_reflection_improvement_evals": 1,
+      "run_release_gate_mutation_evals": 1,
+      "run_reporting_bundle_evals": 1,
+      "run_score_gate_evals": 1,
+      "run_strategic_relevance_evals": 1,
+      "run_truth_discipline_evals": 1,
+      "run_vc03_customer_release_evals": 1,
+      "run_visual_architecture_evals": 3,
+      "run_visual_reporting_evals": 1,
+      "run_visual_template_gallery_evals": 2,
+      "run_visualization_gallery_evals": 1,
+      "validate_agent_agnostic": 1,
+      "validate_analysis_report_completeness": 62,
+      "validate_asset_integrity": 1,
+      "validate_batch_contract": 1,
+      "validate_client_report_model": 38,
+      "validate_client_semantics": 38,
+      "validate_core_evidence_bindings": 9,
+      "validate_core_parity": 1,
+      "validate_customer_business_language": 109,
+      "validate_customer_claim_bindings": 106,
+      "validate_customer_output_guardrails": 46,
+      "validate_customer_presentation_quality": 33,
+      "validate_customer_semantic_qa": 10,
+      "validate_customer_surface_consistency": 153,
+      "validate_deliverable_bundle": 57,
+      "validate_elevenlabs_batch_csv": 1,
+      "validate_evals": 1,
+      "validate_full_48_active": 1,
+      "validate_gateway_optional_contracts": 2,
+      "validate_impressum_compliance": 7,
+      "validate_impressum_legal_sources": 1,
+      "validate_impressum_projection": 15,
+      "validate_installability": 1,
+      "validate_internal_analysis_report": 119,
+      "validate_measurement_enrichment": 117,
+      "validate_measurement_envelope": 2,
+      "validate_measurement_platform_baseline": 4,
+      "validate_no_font_binaries": 30,
+      "validate_no_placeholders": 1,
+      "validate_paired_release": 1,
+      "validate_pdf_brand": 33,
+      "validate_pdf_output": 101,
+      "validate_pdf_visual_qa": 26,
+      "validate_presentation_brand": 94,
+      "validate_release_gate": 2,
+      "validate_report_input": 137,
+      "validate_schema": 1,
+      "validate_security_patterns": 1,
+      "validate_source_map": 1,
+      "validate_strategic_relevance_v321_preservation": 3,
+      "validate_third_party_license_ledger": 2,
+      "validate_visual_assets": 5,
+      "validate_visualization_assets": 90,
+      "validate_visualization_plan": 116,
+      "validate_website_audit_packet": 1
+    },
+    "nonzero_rc_all_customer_mode_attempts": [
+      {
+        "script": "build_audit_deliverables.py",
+        "rc": 1,
+        "customer_attempt": "legacy-baseline",
+        "recorded_refusal": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT"
+      },
+      {
+        "script": "build_audit_deliverables.py",
+        "rc": 1,
+        "customer_attempt": "legal-golden",
+        "recorded_refusal": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT"
+      },
+      {
+        "script": "build_audit_deliverables.py",
+        "rc": 1,
+        "customer_attempt": "case-a-critical",
+        "recorded_refusal": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT"
+      },
+      {
+        "script": "build_audit_deliverables.py",
+        "rc": 1,
+        "customer_attempt": "case-c-vc03-detail",
+        "recorded_refusal": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT"
+      },
+      {
+        "script": "build_audit_deliverables.py",
+        "rc": 1,
+        "customer_attempt": "active-positive",
+        "recorded_refusal": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT"
+      },
+      {
+        "script": "build_audit_deliverables.py",
+        "rc": 1,
+        "customer_attempt": "case-b-equal-rank-profile",
+        "recorded_refusal": "synthetic priority profiles are test data"
+      },
+      {
+        "script": "build_audit_deliverables.py",
+        "rc": 1,
+        "customer_attempt": "proof-realistic",
+        "recorded_refusal": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT"
+      },
+      {
+        "script": "build_audit_deliverables.py",
+        "rc": 1,
+        "customer_attempt": "proof-strategic",
+        "recorded_refusal": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT"
+      },
+      {
+        "script": "build_audit_deliverables.py",
+        "rc": 1,
+        "customer_attempt": "proof-measurement-gateway",
+        "recorded_refusal": "SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT"
+      },
+      {
+        "script": "build_visualization_plan.py",
+        "rc": 1,
+        "customer_attempt": "baumdienst-renner-reflection-regression",
+        "recorded_refusal": "CUSTOMER_MIN_VISUALS_NOT_MET"
+      },
+      {
+        "script": "build_audit_deliverables.py",
+        "rc": 1,
+        "customer_attempt": "baumdienst-renner-reflection-regression",
+        "recorded_refusal": "CUSTOMER_MIN_VISUALS_NOT_MET"
+      },
+      {
+        "script": "build_visualization_plan.py",
+        "rc": 1,
+        "customer_attempt": "low-coverage-marketing-report",
+        "recorded_refusal": "CUSTOMER_MIN_VISUALS_NOT_MET"
+      },
+      {
+        "script": "build_audit_deliverables.py",
+        "rc": 1,
+        "customer_attempt": "low-coverage-marketing-report",
+        "recorded_refusal": "CUSTOMER_MIN_VISUALS_NOT_MET"
+      }
+    ],
+    "nonzero_rc_unexpected": []
+  },
+  "skill_md_validation_scripts": {
+    "listed": 26,
+    "per_script": {
+      "quick_validate": {
+        "sweep_step_rc": 0,
+        "traced_runs": 1,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      },
+      "run_batch_contract_evals": {
+        "sweep_step_rc": 0,
+        "traced_runs": 2,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      },
+      "run_evidence_bound_claim_evals": {
+        "sweep_step_rc": 0,
+        "traced_runs": 7,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [
+          0,
+          1
+        ],
+        "imported_in_process_by": []
+      },
+      "run_measurement_gateway_evals": {
+        "sweep_step_rc": 0,
+        "traced_runs": 1,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      },
+      "run_reporting_bundle_evals": {
+        "sweep_step_rc": 0,
+        "traced_runs": 1,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      },
+      "run_strategic_relevance_evals": {
+        "sweep_step_rc": 0,
+        "traced_runs": 1,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      },
+      "run_truth_discipline_evals": {
+        "sweep_step_rc": 0,
+        "traced_runs": 1,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      },
+      "run_visualization_gallery_evals": {
+        "sweep_step_rc": 0,
+        "traced_runs": 1,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      },
+      "validate_agent_agnostic": {
+        "sweep_step_rc": 0,
+        "traced_runs": 1,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      },
+      "validate_analysis_report_completeness": {
+        "sweep_step_rc": "NOT_A_STEP",
+        "traced_runs": 62,
+        "traced_runs_on_candidate_tree_or_release_cases": 13,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      },
+      "validate_core_parity": {
+        "sweep_step_rc": 0,
+        "traced_runs": 1,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      },
+      "validate_cross_skill_batch_contract": {
+        "sweep_step_rc": "NOT_A_STEP",
+        "traced_runs": 0,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [],
+        "imported_in_process_by": []
+      },
+      "validate_customer_business_language": {
+        "sweep_step_rc": "NOT_A_STEP",
+        "traced_runs": 109,
+        "traced_runs_on_candidate_tree_or_release_cases": 48,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": [
+          "validate_client_report_model.py"
+        ]
+      },
+      "validate_customer_claim_bindings": {
+        "sweep_step_rc": "NOT_A_STEP",
+        "traced_runs": 106,
+        "traced_runs_on_candidate_tree_or_release_cases": 26,
+        "traced_rcs": [
+          0,
+          1
+        ],
+        "imported_in_process_by": []
+      },
+      "validate_customer_output_guardrails": {
+        "sweep_step_rc": "NOT_A_STEP",
+        "traced_runs": 46,
+        "traced_runs_on_candidate_tree_or_release_cases": 22,
+        "traced_rcs": [
+          0,
+          1
+        ],
+        "imported_in_process_by": [
+          "__main__.py"
+        ]
+      },
+      "validate_evals": {
+        "sweep_step_rc": 0,
+        "traced_runs": 1,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      },
+      "validate_gateway_optional_contracts": {
+        "sweep_step_rc": 0,
+        "traced_runs": 2,
+        "traced_runs_on_candidate_tree_or_release_cases": 1,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      },
+      "validate_installability": {
+        "sweep_step_rc": 0,
+        "traced_runs": 1,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      },
+      "validate_measurement_platform_baseline": {
+        "sweep_step_rc": 0,
+        "traced_runs": 4,
+        "traced_runs_on_candidate_tree_or_release_cases": 1,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      },
+      "validate_no_font_binaries": {
+        "sweep_step_rc": 0,
+        "traced_runs": 30,
+        "traced_runs_on_candidate_tree_or_release_cases": 11,
+        "traced_rcs": [
+          0,
+          1
+        ],
+        "imported_in_process_by": []
+      },
+      "validate_pipeline_ledger": {
+        "sweep_step_rc": "NOT_A_STEP",
+        "traced_runs": 0,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [],
+        "imported_in_process_by": []
+      },
+      "validate_release_gate": {
+        "sweep_step_rc": "NOT_A_STEP",
+        "traced_runs": 2,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [
+          1
+        ],
+        "imported_in_process_by": [
+          "run_release_gate_mutation_evals.py"
+        ]
+      },
+      "validate_schema": {
+        "sweep_step_rc": 0,
+        "traced_runs": 1,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      },
+      "validate_source_map": {
+        "sweep_step_rc": 0,
+        "traced_runs": 1,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      },
+      "validate_strategic_relevance_v321_preservation": {
+        "sweep_step_rc": 0,
+        "traced_runs": 3,
+        "traced_runs_on_candidate_tree_or_release_cases": 0,
+        "traced_rcs": [
+          0,
+          1
+        ],
+        "imported_in_process_by": [
+          "__main__.py"
+        ]
+      },
+      "validate_third_party_license_ledger": {
+        "sweep_step_rc": 0,
+        "traced_runs": 2,
+        "traced_runs_on_candidate_tree_or_release_cases": 1,
+        "traced_rcs": [
+          0
+        ],
+        "imported_in_process_by": []
+      }
+    },
+    "not_executed": [
+      "validate_cross_skill_batch_contract",
+      "validate_pipeline_ledger"
+    ],
+    "run_only_on_test_or_eval_copies": [
+      "validate_release_gate"
+    ],
+    "note": "a run counts against the candidate only as a sweep step on the candidate copy, or as a traced run whose arguments name the candidate copy or a release case; runs on test or eval fixture copies are listed separately"
+  },
+  "swap_probe": {
+    "file": "reports/task8-swap-probe/probe_output_49c0806.txt",
+    "records": 57,
+    "primary_rule_controls": 6,
+    "levers_changed": [
+      "c:control-clear-first F-001 refs=['TRUST-03', 'UX-02']",
+      "c:inferred-first F-001 refs=['PERF-01', 'TRUST-03']",
+      "c:inferred-second F-001 refs=['TRUST-03', 'PERF-01']"
+    ],
+    "lever_primary_clear_hits": 0,
+    "summary_lines": [
+      "records: 57",
+      "lever-set/order changed: 3",
+      "lever change WITHOUT a selector-primary reading change: 0",
+      "identical-value mutations with any customer-field change: []",
+      "candidates for BUG: []"
+    ]
+  },
+  "proof_qa_derivation": {
+    "latest_round": 4,
+    "probes": 20,
+    "owner_resolved_rows": [
+      "A3"
+    ],
+    "proof_qa_ok": true,
+    "rasters_opened": "50 of 50"
+  },
+  "gate_status": {
+    "batch_contract_gate": "PASS",
+    "batch_evals_gate": "PASS",
+    "core_regression_gate": "PASS",
+    "internal_report_gate": "PASS",
+    "visualization_reporting_gate": "PASS",
+    "weasyprint_render_gate": "PASS",
+    "brand_rendering_gate": "PASS",
+    "proof_output_gate": "PASS",
+    "strict_customer_output_gate": "PASS",
+    "measurement_enrichment_gate": "PASS",
+    "customer_warning_semantics_gate": "PASS",
+    "customer_closing_gate": "PASS",
+    "measurement_gateway_gate": "PASS",
+    "protected_baseline_gate": "PASS",
+    "measurement_platform_baseline_gate": "PASS",
+    "protected_candidate_gate": "PASS",
+    "third_party_reuse_gate": "PASS",
+    "measurement_platform_proof_gate": "PASS",
+    "strategic_relevance_gate": "PASS",
+    "customer_output_guardrail_gate": "PASS",
+    "measurement_platform_preservation_gate": "PASS",
+    "strategic_relevance_preservation_gate": "PASS",
+    "customer_presentation_quality_gate": "PASS",
+    "active_core_gate": "PASS",
+    "active_core_render_gate": "PASS",
+    "impressum_legal_source_gate": "PASS",
+    "impressum_compliance_gate": "PASS",
+    "impressum_eval_gate": "PASS",
+    "impressum_customer_projection_gate": "PASS",
+    "fresh_reporting_gate": "PASS",
+    "template_gate": "PASS",
+    "visual_story_gate": "PASS",
+    "browser_gate": "PASS",
+    "installability_gate": "PASS",
+    "test_suite_gate": "PASS"
+  },
+  "judgment_gates": {
+    "craftsmanship_gate": "PASS",
+    "anti_confabulation_gate": "PASS",
+    "anti_sycophancy": "PASS",
+    "bias_gate": "PASS"
+  },
+  "release_gate": {
+    "status": "PASS",
+    "allowed_to_package": true,
+    "decision_basis": "Task 8 owner brief 2026-10-29: SKILL_PACKAGE_RELEASE and CUSTOMER_REPORT_RELEASE decided separately; every gate below is measured on this candidate or comes from the independent evaluator",
+    "measured_gates_failed": [],
+    "evaluator_decision": "PASS_WITH_MINOR_REVISIONS"
+  },
+  "reliability_gate": {
+    "status": "NOT_RUN",
+    "validator": "scripts/validate_pipeline_ledger.py",
+    "rc": null,
+    "measured_on": {
+      "candidate_commit": "49c0806",
+      "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a"
+    }
+  },
+  "sweep": [
+    {
+      "script": "run_full_48_active_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: FULL_48_ACTIVE checks=33 mutations=20 metrics=48"
+      ]
+    },
+    {
+      "script": "run_visual_architecture_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: visual/reporting architecture E2E (3 outputs, 5-7 visuals, WeasyPrint, no fake benchmarks, fail-closed fonts/QA/SVG)"
+      ]
+    },
+    {
+      "script": "run_visual_template_gallery_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: visual template gallery 14 Vega-Lite + 1 Mermaid/fallback templates"
+      ]
+    },
+    {
+      "script": "run_measurement_gateway_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: measurement gateway integration checks=9"
+      ]
+    },
+    {
+      "script": "run_legal_customer_projection_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: legal customer projection evals -> bo_feng_lin_mandatory_projection, core_score_coverage_delta_zero, mandatory_legal_risk_rank1_cover_roadmap_closing, legal_surface_status_reconciled, identity_surface_not_clear, mandatory_legal_risk_visible_in_rendered_pdf, omission_fails_closed, cover_warning_required, roadmap_action_required, anti_overclaim_preserved"
+      ]
+    },
+    {
+      "script": "run_customer_presentation_quality_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: customer presentation quality evals -> partial_score_as_bewertungsstand, ordinal_priority_no_fake_magnitude, privacy_overclaim_rejected, closing_action_fragment_rejected, four_lever_business_impact_rendered"
+      ]
+    },
+    {
+      "script": "run_business_first_reporting_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: business-first reporting E2E"
+      ]
+    },
+    {
+      "script": "run_browser_measurement_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: browser measurement eval metrics=8",
+        "192.168.178.86 - - [29/Oct/2026 15:07:03] \"GET /index.html HTTP/1.1\" 200 -",
+        "192.168.178.86 - - [29/Oct/2026 15:07:04] \"GET /index.html HTTP/1.1\" 200 -"
+      ]
+    },
+    {
+      "script": "run_paired_release.py",
+      "group": "evals",
+      "rc": 2,
+      "tail": [
+        "                             [--reuse-current-harness]",
+        "run_paired_release.py: error: the following arguments are required: --consumer-skill-dir"
+      ]
+    },
+    {
+      "script": "run_evidence_bound_claim_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: tests.test_evidence_bound_claims ran=99 failures=0 errors=0 skipped=0 digest=1160c5b60d11"
+      ]
+    },
+    {
+      "script": "run_customer_semantic_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: customer semantics -> proactive model gates, chart-led PDF, fail-closed rendered QA"
+      ]
+    },
+    {
+      "script": "run_batch_contract_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: batch contract acceptance evals (17)"
+      ]
+    },
+    {
+      "script": "run_branch_priority_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: contextual customer selection, genuine-tie-only profile order, synthetic test-mode gate, SHA-pinned catalog, fallback, score neutrality"
+      ]
+    },
+    {
+      "script": "run_chart_template_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: V01-V12 payload contracts and internal renderer smoke; V12 remains internal-only for customer default"
+      ]
+    },
+    {
+      "script": "run_client_marketing_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: low-coverage regression -> hidden score, complete internal report, customer presentation fails closed below four admissible visuals"
+      ]
+    },
+    {
+      "script": "run_fixture_eval.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: full fixture -> 48-metric JSON/Markdown, chart-led 12-page PDF, 96-field v1.3 batch"
+      ]
+    },
+    {
+      "script": "run_impressum_compliance_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: impressum compliance evals (31)"
+      ]
+    },
+    {
+      "script": "run_measurement_enrichment_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: measurement enrichment evals checks=13"
+      ]
+    },
+    {
+      "script": "run_reflection_improvement_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: reflection regression -> labelled partial score, customer bundle fails closed below four admissible visuals, full internal report, voice handoff"
+      ]
+    },
+    {
+      "script": "run_reporting_bundle_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: visual/reporting architecture E2E (3 outputs, 5-7 visuals, WeasyPrint, no fake benchmarks, fail-closed fonts/QA/SVG)"
+      ]
+    },
+    {
+      "script": "run_score_gate_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: score coverage gates"
+      ]
+    },
+    {
+      "script": "run_strategic_relevance_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: strategic relevance evals -> partial_score_customer_bewertungsstand, process_finding_rejected, not_assessed_not_customer_problem, legal_sidecar_route_customer_eligible, customer_visual_score_coverage_guard, internal_transparency_preserved"
+      ]
+    },
+    {
+      "script": "run_truth_discipline_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: truth-discipline evals (8 cases)"
+      ]
+    },
+    {
+      "script": "run_vc03_customer_release_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: VC03/priority customer PDF cases A/B/C proof-mode, plan=model=PDF levers, no internal leakage, page budget",
+        "<local-path> FutureWarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.",
+        "  warnings.warn("
+      ]
+    },
+    {
+      "script": "run_visual_reporting_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: visual/reporting architecture E2E (3 outputs, 5-7 visuals, WeasyPrint, no fake benchmarks, fail-closed fonts/QA/SVG)"
+      ]
+    },
+    {
+      "script": "run_visualization_gallery_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: visual template gallery 14 Vega-Lite + 1 Mermaid/fallback templates"
+      ]
+    },
+    {
+      "script": "run_release_gate_mutation_evals.py",
+      "group": "evals",
+      "rc": 0,
+      "tail": [
+        "PASS: release-gate mutation evals (83 fail-closed cases)"
+      ]
+    },
+    {
+      "script": "quick_validate.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: <local-path> (322 required files, 14 Vega templates)"
+      ]
+    },
+    {
+      "script": "validate_schema.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: schemas, capability registry and measurement registry (48 metrics, 14 capabilities; legal_submetrics=11)"
+      ]
+    },
+    {
+      "script": "validate_source_map.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: source map and policy"
+      ]
+    },
+    {
+      "script": "validate_evals.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: evals (22 triggers, 26 outputs)"
+      ]
+    },
+    {
+      "script": "validate_no_font_binaries.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: PACKAGE_BUNDLED_MANIFEST_PINNED: 4 manifest-pinned font files verified (manifest sha256 4b8a2e8ca39cdb5a1a3b6b0221d3e6afe9fdf2ec451390ac58a4c7a1255e1e16); no other font binaries"
+      ]
+    },
+    {
+      "script": "validate_batch_contract.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: batch contracts v1=82 v1.1=83 v1.2=96 v1.3=96 five_class={'INTERNAL_RECORD': 48, 'EL_RUNTIME_REQUIRED': 3, 'EL_RUNTIME_DEFAULTED': 18, 'OPTIONAL': 14, 'PRODUCTION_GATE_ONLY': 13} sha=ed9924084c479c3627ceb2648ef301162d5b99bbfddfe3fefe265c7cec915d38"
+      ]
+    },
+    {
+      "script": "validate_full_48_active.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: FULL_48_ACTIVE contract path metrics=48 protected_core=unchanged fixture_only=true"
+      ]
+    },
+    {
+      "script": "validate_measurement_platform_baseline.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: protected baseline exact=35 intentional_shared_overrides=12 chained_overrides=7 override_reports=12"
+      ]
+    },
+    {
+      "script": "validate_strategic_relevance_v321_preservation.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: v3.2.1 preservation baseline=238 modified=74 added=90 deleted=0"
+      ]
+    },
+    {
+      "script": "validate_third_party_license_ledger.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: third-party ledger 4 repositories; no source code copied"
+      ]
+    },
+    {
+      "script": "validate_gateway_optional_contracts.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: optional monitoring/owner-analytics contracts"
+      ]
+    },
+    {
+      "script": "validate_core_parity.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: core functionality preserved; customer presentation intentionally hardened"
+      ]
+    },
+    {
+      "script": "validate_agent_agnostic.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: agent compatibility disclosures"
+      ]
+    },
+    {
+      "script": "validate_asset_integrity.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: Pixelkiez brand contract and snapshots"
+      ]
+    },
+    {
+      "script": "validate_core_evidence_bindings.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: active core evidence bindings metrics=48 registry_weights=unchanged"
+      ]
+    },
+    {
+      "script": "validate_impressum_compliance.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: impressum compliance registry/schema invariants"
+      ]
+    },
+    {
+      "script": "validate_impressum_legal_sources.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: impressum legal sources enabled=9 disabled_source_needed=6"
+      ]
+    },
+    {
+      "script": "validate_no_placeholders.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: no unresolved production placeholders"
+      ]
+    },
+    {
+      "script": "validate_security_patterns.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: security boundary and secret scan"
+      ]
+    },
+    {
+      "script": "validate_paired_release.py",
+      "group": "validators",
+      "rc": 1,
+      "tail": [
+        "FAIL: paired release status is not PASS"
+      ]
+    },
+    {
+      "script": "validate_installability.py",
+      "group": "validators",
+      "rc": 0,
+      "tail": [
+        "PASS: installability controls"
+      ]
+    }
+  ],
+  "final_validators": {
+    "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+    "validate_enterprise_skill_evaluation": {
+      "rc": 0
+    },
+    "validate_release_gate": {
+      "rc": 0
+    },
+    "validate_pipeline_ledger": {
+      "rc": 0,
+      "note": "fresh 9-stage ledger, run pxk-task8-release-49c0806-20261029; the same ledger with 8 stages returned rc 1"
+    },
+    "r1_fixture_run": {
+      "note": "validate_core_execution_bundle, materialize_core_metrics, validate_core_score_admission, compute_score on the golden fixture: rc 0; three canaries rc 1; log sha256 c306e188462cfde3528e20b661059e64e268b1f14068222510aebcb9ac929bcb (not in the package)"
+    }
+  },
+  "evaluator_round6": {
+    "decision": "PASS_WITH_MINOR_REVISIONS",
+    "scores_all": 4,
+    "blocking_issues": 0,
+    "required_revisions": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R5"
+    ],
+    "owner_decision": "2026-10-29: PASS_WITH_MINOR_REVISIONS accepted for SKILL_PACKAGE_RELEASE (option A); R1-R5 to backlog",
+    "evidence": "reports/enterprise-skill-evaluation.xml"
+  },
+  "package": {
+    "script": "scripts/package_skill.py",
+    "rc": 0,
+    "built_from_commit": "bcb0189",
+    "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+    "skill_zip_sha256": "8ea5e045f042bc5f78a8d766918e8caa2a7d26dcd3732270cb9252f330f53290",
+    "entries": 536,
+    "content_mismatches_vs_commit": 0,
+    "unzip_test": "no errors",
+    "output": "outside the repository",
+    "pushed_or_uploaded": false,
+    "note": "this receipt is committed after the build, so the archive does not contain it"
+  }
+}

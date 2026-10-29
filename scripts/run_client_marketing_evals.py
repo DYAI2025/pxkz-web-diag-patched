@@ -1,17 +1,12 @@
 #!/usr/bin/env python3
-"""Regression-test the low-coverage, chart-led customer presentation path."""
+"""Regression-test the low-coverage customer path: hidden score, full internal report, fail-closed customer plan."""
 from __future__ import annotations
 
 import json
-import re
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
-
-from pypdf import PdfReader
-
-FORBIDDEN = ["TECHNISCHER ANHANG", "QUELLEN & METHODEN", "MISSING / SOURCE_NEEDED", "not_assessed", "…"]
 
 
 def run(args: list[str]) -> str:
@@ -54,46 +49,19 @@ def main(argv: list[str]) -> int:
             canonical.write_bytes(scored.read_bytes())
             analysis_path = out / "analysis_report.json"
             plan_path = out / "visualization-plan.json"
-            model_path = out / "client-report-model.json"
-            visuals = out / "visuals"
-            vreceipt = out / "visualization-render-receipt.json"
-            pdf_path = out / "customer_presentation.pdf"
-            receipt_path = out / "presentation-render-receipt.json"
             run([sys.executable, str(root / "scripts/build_internal_analysis_report.py"), str(canonical), str(analysis_path)])
-            run([sys.executable, str(root / "scripts/build_visualization_plan.py"), str(canonical), str(plan_path)])
-            run([sys.executable, str(root / "scripts/build_client_report_model.py"), str(canonical), str(model_path), "--visual-plan", str(plan_path)])
-            run([sys.executable, str(root / "scripts/render_visualizations.py"), str(plan_path), str(visuals), "--receipt", str(vreceipt), "--force-fallback"])
-            run([sys.executable, str(root / "scripts/render_diagnosis_pdf.py"), str(model_path), str(pdf_path), "--visual-plan", str(plan_path), "--visual-receipt", str(vreceipt), "--visual-dir", str(visuals), "--render-receipt", str(receipt_path), "--html-out", str(out / "customer_presentation.html")])
-            run([sys.executable, str(root / "scripts/validate_pdf_output.py"), str(pdf_path), str(model_path)])
-            model = json.loads(model_path.read_text(encoding="utf-8"))
-            if len(model.get("findings", [])) != 4:
-                raise RuntimeError("customer story must contain exactly four levers")
-            if model.get("client_story", {}).get("technical_appendix_rendered") is not False:
-                raise RuntimeError("technical appendix must be disabled for customer output")
             analysis = json.loads(analysis_path.read_text(encoding="utf-8"))
             if len(analysis.get("metrics", [])) < 40:
                 raise RuntimeError("complete internal metric trace must remain in analysis_report.json")
-            plan = json.loads(plan_path.read_text(encoding="utf-8"))
-            selected = [v for v in plan.get("visuals", []) if v.get("status") == "SELECTED"]
-            if len(selected) < 4:
-                raise RuntimeError(f"low-coverage customer report still requires >=4 truthful visuals, got {len(selected)}")
-            if any(v.get("template_id") in {"V04_FINDABILITY_BENCHMARK", "V05_RANKING_POSITION"} for v in selected):
-                raise RuntimeError("benchmark/ranking chart appeared without complete context")
-
-            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
-            reader = PdfReader(str(pdf_path))
-            expected_pages = 5 + receipt.get("embedded_visual_count", 0)
-            if len(reader.pages) != expected_pages or not 8 <= len(reader.pages) <= 12:
-                raise RuntimeError(f"customer page budget failed: {len(reader.pages)} pages")
-            text = "\n".join((page.extract_text() or "") for page in reader.pages)
-            hits = [marker for marker in FORBIDDEN if marker.casefold() in text.casefold()]
-            if hits:
-                raise RuntimeError("internal/truncated material leaked into customer PDF: " + ", ".join(hits))
-            compact = re.sub(r"\s+", "", text).casefold()
-            if "beweistnicht:" in compact:
-                raise RuntimeError("internal evidence-boundary boilerplate leaked into customer PDF")
-            run([sys.executable, str(root / "scripts/validate_customer_output_guardrails.py"), str(model_path), str(out / "customer_presentation.html"), str(pdf_path), str(visuals)])
-        print("PASS: low-coverage regression -> hidden score, >=4 evidence visuals, four levers, complete internal report")
+            # Without the internal-only finding-count visual this case has three admissible customer visuals,
+            # so the customer presentation must fail closed instead of padding the story (SEM-003).
+            blocked = subprocess.run([sys.executable, str(root / "scripts/build_visualization_plan.py"), str(canonical), str(plan_path)],
+                                     text=True, capture_output=True)
+            if blocked.returncode == 0 or "CUSTOMER_MIN_VISUALS_NOT_MET" not in blocked.stderr:
+                raise RuntimeError("low-coverage customer plan must fail closed below four admissible visuals: " + blocked.stderr.strip())
+            if plan_path.exists():
+                raise RuntimeError("blocked customer plan must not leave a plan artifact")
+        print("PASS: low-coverage regression -> hidden score, complete internal report, customer presentation fails closed below four admissible visuals")
         return 0
     except Exception as exc:
         print(f"FAIL: {exc}", file=sys.stderr)

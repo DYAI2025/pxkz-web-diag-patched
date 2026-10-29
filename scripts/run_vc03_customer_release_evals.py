@@ -4,7 +4,7 @@
 Builds three differentiated proof-mode deliverable bundles from frozen fixtures:
   A  urgent critical findings (legacy selection, no context)
   B  two equally ranked business findings ordered by an approved (synthetic, test-mode) profile
-  C  a VC03 technical detail with weak business impact filling the fourth lever
+  C  a VC03 technical detail with weak business impact filling the fourth lever once only low findings remain
 and checks that plan, model and PDF carry the same four levers, that no internal
 state leaks into the PDF, and that page count stays within the legacy budget.
 Proof mode only: this is not a customer release.
@@ -118,12 +118,13 @@ def main() -> int:
         if not decision["deviations"] or decision["score_changed"] is not False:
             raise RuntimeError("case B: deviation provenance missing")
 
-        # C: VC03 detail fills the fourth lever when no other medium/low candidate covers a new category.
-        # The medium findings move into an already covered category, so category diversity leaves the slot open.
+        # C: VC03 detail fills the fourth lever when no medium-or-higher finding remains (owner decision 2026-10-29:
+        # low never outranks medium) and no other low candidate covers a new category. The two medium findings are
+        # lowered and moved into an already covered category, so category diversity among the lows leaves the slot open.
         c = copy.deepcopy(base)
         for f in c["findings"]:
             if f["id"] in {"F-002", "F-005"}:
-                f["category"] = "ux_conversion"
+                f["category"], f["severity"] = "ux_conversion", "low"
         c["meta"]["audit_id"] = "vc03-eval-c"  # VC03 binds only to an identified analysis run
         vc = observe({"run_id": "vc03-eval-c", "page_url": c["meta"]["audited_url"], "html": VC03_HTML,
                       "html_complete": True, "observed_at": "2026-10-27T10:00:00+01:00",

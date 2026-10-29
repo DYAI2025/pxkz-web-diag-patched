@@ -11,10 +11,10 @@ The canonical machine catalog is `templates/visualization-catalog.v2.json`. All 
 | `V05_RANKING_POSITION` | query-specific SERP positions | query, position, location, method, timestamp | conditional |
 | `V06_QUERY_COVERAGE` | query/intent coverage matrix | query-level measured/observed matrix | conditional |
 | `V07_PERFORMANCE_THRESHOLD` | direct value against sourced bands | measured/observed value + sourced thresholds | conditional |
-| `V08_AI_ANSWERABILITY` | AI answerability status matrix | at least three assessed AI metrics | conditional/core when available |
+| `V08_AI_ANSWERABILITY` | answerability and machine-extractability status matrix; never framed as AI answers, citations or rankings | at least three assessed AI metrics | conditional/core when available |
 | `V09_AGENT_READINESS` | task/capability status matrix | explicit task-level evidence | conditional |
 | `V10_TRUST_MATRIX` | trust/content consistency | at least three assessed trust metrics | conditional/core when available |
-| `V11_SEVERITY_DISTRIBUTION` | finding distribution | classified findings | lower priority |
+| `V11_SEVERITY_DISTRIBUTION` | finding distribution | classified findings | internal-only: a finding count carries no strategic relevance |
 | `V12_AUDIT_COVERAGE` | evidence-class coverage | complete metric inventory | core |
 | `V13_IMPACT_EFFORT` | action prioritization | evidence-bound impact and effort values | conditional; no invented effort |
 | `V14_REPEAT_AUDIT` | before/after comparison | comparable earlier audit | conditional |

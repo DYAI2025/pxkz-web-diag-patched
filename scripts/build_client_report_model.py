@@ -3,13 +3,19 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import re
 import sys
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
 from client_story import clientize, confidence_de, plan_visual_story, select_client_levers
 from customer_story_semantics import presentation_metadata, semantic_story_summary
+from customer_reading import contested_metrics, metric_reading, overlap_blocked, registry_defs
+from evidence_method_labels import evidence_method, method_phrase
+from legal_customer_projection import vouches_for_contested_legal_surface
 from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority, selection_provenance
 
 SKILL_DIR = Path(__file__).resolve().parent.parent
@@ -23,6 +29,75 @@ ROUTE_DE = {
     "redesign": "Neu aufsetzen",
     "evidence_first": "Zuerst Messl\u00fccken schlie\u00dfen",
 }
+
+
+WHOLE_SITE_RX = re.compile(r"(?:auf\s+)?(?:der\s+)?gesamten?\s+(?:Website|Webseite|Seite|Auftritt)|\balle[nr]?\s+Seiten\b|\bsite-?wide\b|\büberall\b", re.I)
+SAMPLE_SCOPED_METRICS = {"AI-06"}
+UNASSESSED_CLASSES = {None, "", "not_assessed", "inferred_risk"}
+
+
+def bound_strengths(report: dict[str, Any], limit: int,
+                    lever_metric_refs: set[str] | frozenset[str] = frozenset()) -> tuple[list[str], list[dict[str, Any]]]:
+    """Customer strengths come only from positive findings whose linked metrics all read "Klar".
+
+    One reading per metric (customer_reading): a metric the visuals label "Verbesserung sinnvoll", "(vorhanden) ·
+    Nicht belastbar bewertet" or worse cannot back a strength, and neither can a metric whose declared topic
+    overlaps a lever metric or a metric reading "Handlungsbedarf" (owner decision 2026-10-29).
+    Free-text executive_summary.top_strengths have no metric link and are recorded as not admitted.
+    """
+    metrics = {str(m.get("id")): m for m in report.get("metrics", []) if isinstance(m, dict)}
+    defs = registry_defs()
+    contested = contested_metrics(report)
+    blocked = overlap_blocked(report, set(lever_metric_refs), defs)
+    positives = sorted(
+        [f for f in report.get("findings", []) if isinstance(f, dict) and f.get("severity") == "positive"],
+        key=lambda f: (-int(f.get("confidence", 0)), str(f.get("id", ""))),
+    )
+    claims: list[dict[str, Any]] = []
+    strengths: list[str] = []
+    for f in positives:
+        refs = [str(x) for x in f.get("metric_refs", []) if str(x).strip()]
+        raw = str(f.get("client_observation") or f.get("title") or "")
+        reasons: list[str] = []
+        if not refs:
+            reasons.append("NO_METRIC_REFS")
+        for ref in refs:
+            m = metrics.get(ref)
+            if m is None or m.get("measurement_class") in UNASSESSED_CLASSES:
+                reasons.append(f"METRIC_NOT_ASSESSED:{ref}")
+            elif metric_reading(report, defs, m)["key"] != "CLEAR":
+                reasons.append(f"METRIC_NOT_CLEAR:{ref}")
+            if ref in contested:
+                reasons.append(f"METRIC_CONTESTED:{ref}")
+            if ref in blocked:
+                reasons.append(f"TOPIC_OVERLAP:{ref}")
+        if WHOLE_SITE_RX.search(raw):
+            if refs and set(refs) <= SAMPLE_SCOPED_METRICS:
+                raw = WHOLE_SITE_RX.sub("auf den geprüften Seiten", raw)
+            else:
+                reasons.append("WHOLE_SITE_WORDING")
+        text = clientize(raw, limit)
+        if vouches_for_contested_legal_surface(report, text):
+            reasons.append("LEGAL_SURFACE_CONTESTED")
+        if not text:
+            reasons.append("EMPTY_TEXT")
+        admitted = not reasons and text not in strengths and len(strengths) < 3
+        if not reasons and not admitted:
+            reasons.append("DUPLICATE_OR_LIMIT")
+        claims.append({"text": text, "finding_ref": str(f.get("id")), "metric_refs": refs,
+                       "evidence_refs": [str(e.get("id")) for e in f.get("evidence", []) if isinstance(e, dict) and e.get("id")],
+                       "admitted": admitted, "reasons": reasons or ["BOUND_TO_CLEAR_METRICS"]})
+        if admitted:
+            strengths.append(text)
+    executive = report.get("executive_summary") if isinstance(report.get("executive_summary"), dict) else {}
+    known = {c["text"] for c in claims}
+    for raw in executive.get("top_strengths", []) or []:
+        text = clientize(raw, limit)
+        if text and text not in known:
+            claims.append({"text": text, "finding_ref": None, "metric_refs": [], "evidence_refs": [],
+                           "admitted": False, "reasons": ["NO_FINDING_LINK"]})
+            known.add(text)
+    return strengths, claims
 
 
 def fail(msg: str) -> int:
@@ -100,10 +175,25 @@ def customer_device(value: object) -> str:
     return {"mobile": "Mobil", "phone": "Mobil", "desktop": "Desktop", "tablet": "Tablet"}.get(raw.casefold(), raw)
 
 
+def customer_period(value: object) -> str:
+    """A measurement period in German date format ("01.08.2026 bis 28.08.2026"); empty when it is incomplete."""
+    if not isinstance(value, dict):
+        return ""
+    try:
+        start, end = (datetime.strptime(str(value.get(k) or "")[:10], "%Y-%m-%d").strftime("%d.%m.%Y") for k in ("start", "end"))
+    except ValueError:
+        return ""
+    return f"{start} bis {end}"
+
+
 def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
     enrichment = report.get("measurement_enrichment") if isinstance(report.get("measurement_enrichment"), dict) else {}
     metrics = [x for x in enrichment.get("metrics", []) if isinstance(x, dict) and x.get("status") in {"MEASURED", "OBSERVED"}]
     out: list[dict[str, str]] = []
+    # Values replayed from a fixture bundle are example data: no "real" label, no documented period.
+    example = (str(enrichment.get("mode") or "").upper() in {"FIXTURE", "SYNTHETIC"}
+               or any(evidence_method(x) == "SYNTHETIC" for x in metrics))
+    sample = method_phrase("SYNTHETIC")
     # 1) current query-specific SERP result, only with explicit provider page if present
     pos = next((x for x in metrics if x.get("id") == "SERP_CURRENT_POSITION" and x.get("query")), None)
     if pos:
@@ -111,21 +201,27 @@ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
         value = f"Position {int(pos.get('value'))}"
         if page and isinstance(page.get("value"), (int,float)):
             value += f" · Seite {int(page.get('value'))}"
-        context = " · ".join(str(x) for x in (pos.get("query"), customer_location(pos.get("location")), customer_device(pos.get("device"))) if x)
+        context = " · ".join(str(x) for x in (pos.get("query"), customer_location(pos.get("location")), customer_device(pos.get("device")), "Beispieldaten" if example else "") if x)
         out.append({"label":"Google-Sichtbarkeit", "value":value, "context":clientize(context, 100)})
     # 2) authorized real audience signal
     users = next((x for x in metrics if x.get("id") == "GA4_ACTIVE_USERS"), None)
     if users:
         value = f"{int(users.get('value')):,}".replace(",", ".") + " aktive Nutzer"
-        dr = users.get("date_range") or {}
-        context = f"{dr.get('start','')} bis {dr.get('end','')}" if isinstance(dr, dict) else "Dokumentierter Zeitraum"
-        out.append({"label":"Reale Nutzung", "value":value, "context":clientize(context, 100)})
+        # A real usage number means nothing without its period; without one the card is left out.
+        period = customer_period(users.get("date_range"))
+        if example or period:
+            out.append({"label": "Nutzung", "value": value, "context": sample if example else clientize(period, 100)})
     # 3) field performance, preferably phone
     field = next((x for x in metrics if x.get("id") == "CRUX_LCP_P75_MS" and str(x.get("device")).upper() == "PHONE"), None) or next((x for x in metrics if x.get("id") == "CRUX_LCP_P75_MS"), None)
     if field:
         sec = float(field.get("value"))/1000.0
         device = "Mobil" if str(field.get("device")).upper() == "PHONE" else (field.get("device") or "Feldwert")
-        out.append({"label":"Reale Ladeerfahrung", "value":f"Ladezeit p75 {sec:.1f} s".replace(".", ","), "context":clientize(f"{device} · dokumentierter Zeitraum", 100)})
+        # LCP p75 says when the main content became visible for 75 % of visits, not a page load time.
+        period = customer_period(field.get("date_range"))
+        if example or period:
+            out.append({"label": "Ladeerfahrung",
+                        "value": f"Hauptinhalt nach max. {sec:.1f}".replace(".", ",").replace("max,", "max.") + " s bei 3 von 4 Besuchen",
+                        "context": clientize(f"{device} · {'Beispieldaten' if example else period}", 100)})
     return out[:3]
 
 
@@ -136,6 +232,7 @@ def main(argv: list[str]) -> int:
     parser.add_argument("--visual-plan")
     add_priority_arguments(parser)
     parser.add_argument("--priority-decision-out", help="Internal-only selection provenance, not customer PDF")
+    parser.add_argument("--claim-bindings-out", help="Internal-only strength-to-metric bindings, not customer PDF")
     try:
         args = parser.parse_args(argv[1:])
         report = load(Path(args.report))
@@ -161,10 +258,6 @@ def main(argv: list[str]) -> int:
     score = report.get("score_summary", {})
     executive = report.get("executive_summary", {})
     findings = [f for f in report.get("findings", []) if isinstance(f, dict)]
-    positive = sorted(
-        [f for f in findings if f.get("severity") == "positive"],
-        key=lambda f: (-int(f.get("confidence", 0)), str(f.get("id", ""))),
-    )
     selected_levers = select_client_levers(
         report, max_levers=4, branch_weights=branch_weights, branch_roles=branch_roles
     )
@@ -180,14 +273,9 @@ def main(argv: list[str]) -> int:
             json.dumps(provenance, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
         )
 
-    strengths = [clientize(x, budget("executive_strength", 110)) for x in executive.get("top_strengths", []) if str(x).strip()][:3]
-    if len(strengths) < 3:
-        for f in positive:
-            candidate = clientize(f.get("client_observation") or f.get("title"), budget("executive_strength", 110))
-            if candidate and candidate not in strengths:
-                strengths.append(candidate)
-            if len(strengths) == 3:
-                break
+    # Strengths are bound to positive findings whose metrics read "Klar"; see bound_strengths.
+    lever_metric_refs = {str(x) for f in selected_levers for x in f.get("metric_refs", []) or []}
+    strengths, claim_bindings = bound_strengths(report, budget("executive_strength", 110), lever_metric_refs)
 
     priorities: list[str] = []
     for f in selected_levers:
@@ -251,7 +339,9 @@ def main(argv: list[str]) -> int:
         semantic = presentation_metadata(report, f, registry)
         finding_models.append({
             "id": str(f.get("id", "")),
-            "severity": str(f.get("severity", "medium")),
+            # A mandatory-critical legal risk is shown as critical, never as a mere "HOCH".
+            "severity": "critical" if isinstance(f.get("customer_risk"), dict) and f["customer_risk"].get("priority") == "MANDATORY_CRITICAL"
+                        else str(f.get("severity", "medium")),
             "category": str(f.get("category", "")),
             "headline": clientize(f.get("title"), budget("finding_headline", 110)),
             "observation": clientize(f.get("client_observation") or f.get("observation"), budget("finding_observation", 130)),
@@ -263,24 +353,35 @@ def main(argv: list[str]) -> int:
         })
 
     roadmap = {"now": [], "next_30_days": [], "next_quarter": []}
-    for f in selected_levers:
+    # The audit's own roadmap entry (linked by evidence_basis) decides the timing of each lever, so the roadmap,
+    # the next step and the closing actions follow one execution order. The audit's P1/P2 labels stay internal:
+    # next to the lever severity they read as a third, unexplained priority scale (owner decision 2026-10-29).
+    source_roadmap = [x for x in report.get("roadmap", []) if isinstance(x, dict)]
+    bucket_order = {"now": 0, "next_30_days": 1, "next_quarter": 2}
+    scheduled = []
+    for rank, f in enumerate(selected_levers):
         rec = f.get("recommendation") if isinstance(f.get("recommendation"), dict) else {}
         action = clientize(f.get("client_action") or rec.get("action"), budget("roadmap_action", 120))
         if not action:
             continue
-        horizon = rec.get("horizon")
-        if horizon == "now":
+        entry = next((x for x in source_roadmap if str(f.get("id")) in [str(y) for y in x.get("evidence_basis") or []]), {})
+        horizon = entry.get("horizon") or rec.get("horizon")
+        mandatory_critical = isinstance(f.get("customer_risk"), dict) and f["customer_risk"].get("priority") == "MANDATORY_CRITICAL"
+        if f.get("severity") == "critical" or mandatory_critical:
+            # A critical finding is never scheduled behind "Jetzt".
+            bucket = "now"
+        elif horizon == "now":
             bucket = "now"
         elif horizon == "0_30_days":
             bucket = "next_30_days"
         else:
             bucket = "next_quarter"
-        if len(roadmap[bucket]) < 2:
-            roadmap[bucket].append({
-                "priority": "P1" if f.get("severity") in {"critical", "high"} else "P2",
-                "action": action,
-                "owner": clientize(rec.get("owner"), 55),
-            })
+        scheduled.append((bucket_order[bucket], rank, bucket, action, f, rec))
+    scheduled.sort(key=lambda x: (x[0], x[1]))
+    # Every lever is scheduled exactly once; a bucket holds at most the four levers.
+    for _, _, bucket, action, f, rec in scheduled:
+        roadmap[bucket].append({"finding_ref": str(f.get("id")), "action": action, "owner": clientize(rec.get("owner"), 55)})
+    execution_ids = [str(x[4].get("id")) for x in scheduled]
 
     display_status = str(score.get("display_status") or "NO_SCORE")
     numeric_score_visible = (
@@ -303,14 +404,20 @@ def main(argv: list[str]) -> int:
     if mandatory_risk is not None:
         blocker_note = clientize(mandatory_risk.get("customer_risk", {}).get("warning_label"), 80)
     elif numeric_score_visible and score.get("blocker_present"):
-        blocker_note = "Ein kritischer Website-Befund bleibt trotz Gesamtwert sichtbar."
+        blocker_note = "Ein kritischer Befund wiegt schwerer als der Gesamtwert."
     # The cover takeaway must be a customer-specific website finding, not a generic score band.
     cover_verdict = scan_first_recommendation_reason(selected_levers, executive.get("decision") or score.get("interpretation"))
 
     next_step = "Die wichtigsten Maßnahmen zuerst umsetzen."
-    if selected_levers:
+    first_bucket = next((roadmap[k] for k in ("now", "next_30_days", "next_quarter") if roadmap[k]), [])
+    if first_bucket:
+        next_step = first_bucket[0]["action"]
+    elif selected_levers:
         next_step = clientize(selected_levers[0].get("client_action") or selected_levers[0].get("recommendation", {}).get("action"), budget("recommendation_next_step", 160))
+    rank_of = {fid: i for i, fid in enumerate(execution_ids)}
+    closing_findings = sorted(finding_models[:4], key=lambda fm: rank_of.get(str(fm.get("id")), len(rank_of)))
 
+    executive_strengths_shown = bool(strengths)
     model = {
         "template_version": str(template.get("template_version", "5.0")),
         "brand": "Pixelkiez",
@@ -319,10 +426,13 @@ def main(argv: list[str]) -> int:
             "url": meta.get("audited_url", ""),
             "date": meta.get("audit_date", ""),
             "language": meta.get("language", "de"),
+            # Example data stays recognizable on every page; real measurements never carry this key.
+            **({"sample_data_notice": method_phrase("SYNTHETIC")}
+               if any(evidence_method(m) == "SYNTHETIC" for m in report.get("metrics", []) if isinstance(m, dict)) else {}),
         },
         "cover": {
             "eyebrow": "01 · WEBSITE-ANALYSE",
-            "title": "Was Ihre Website heute gut macht - und was sie bremst.",
+            "title": "Was Ihre Website heute gut macht - und was sie bremst." if executive_strengths_shown else "Was Ihre Website heute bremst - und was zuerst zählt.",
             "customer": meta.get("customer_name", ""),
             "url": meta.get("audited_url", ""),
             "date": meta.get("audit_date", ""),
@@ -355,7 +465,7 @@ def main(argv: list[str]) -> int:
             "eyebrow": "NÄCHSTER SCHRITT",
             "title": "Aus Analyse wird Umsetzung.",
             "summary": "Die wichtigsten Stellschrauben sind klar. Jetzt geht es darum, sie in der richtigen Reihenfolge umzusetzen und die geschäftliche Wirkung zu verbessern.",
-            "actions": [short_action(f.get("action")) for f in finding_models[:4]],
+            "actions": [short_action(f.get("action")) for f in closing_findings],
             "cta": "Prioritäten bestätigen. Umsetzung starten.",
             "next_step": "Gemeinsam priorisieren wir die vier Hebel und starten mit dem ersten konkreten Umsetzungspaket.",
             "measurement_highlights": measurement_highlights(report),
@@ -363,6 +473,16 @@ def main(argv: list[str]) -> int:
     }
 
     Path(args.output).write_text(json.dumps(model, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if args.claim_bindings_out:
+        bindings = {
+            "schema_version": "1.0",
+            "audited_url": str(meta.get("audited_url") or ""),
+            "scored_report_sha256": hashlib.sha256(Path(args.report).read_bytes()).hexdigest(),
+            "client_model_sha256": hashlib.sha256(Path(args.output).read_bytes()).hexdigest(),
+            "rule": "strength admitted only from a positive finding whose metric_refs all read Klar and are uncontested",
+            "claims": claim_bindings,
+        }
+        Path(args.claim_bindings_out).write_text(json.dumps(bindings, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(
         f"PASS: client model with {len(categories)} categories, {len(finding_models)} levers, "
         f"{len(visualizations)} customer charts, visual_story={story_plan['visual_story_status']}"

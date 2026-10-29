@@ -1,0 +1,19 @@
+{
+ "status": "PASS",
+ "patch_id": "CUSTOMER_SCOPE_STATEMENT_PATCH",
+ "authorization_basis": "Explicit user authorization on 2026-10-28 (answer 'Scope-Satz S.2 (Recommended)'): one dated scope sentence on the 'Auf einen Blick' page in templates/presentation.html.j2, with a new hash-bound override for that file and no legacy-oracle amendment.",
+ "scope_note": "Release completion: the customer PDF previously carried no statement of its sampling basis, so status rows such as 'Einheitliche Fakten - klar' read as site-wide facts. The overview card now ends with 'Grundlage: Stichprobe öffentlich erreichbarer Seiten, Stand <Datum>. KI-Antworten wurden nicht abgefragt.' Template only; assets/presentation.css, the client model, the visualization plan, scoring, the 48 core metrics, batch v1.3 and QA status logic are unchanged. Layout checked on every rendered case (no overlap with the footer band).",
+ "previous_sha256_semantics": "previous = effective approved digest after the existing override chain for this path (customer-layout-legal-boundary-shared-overrides.json current_sha256, identical to the file at candidate commit 1f0650a).",
+ "evidence": [
+  "reports/override-evidence/customer-scope-statement.presentation.approved-to-candidate.diff"
+ ],
+ "overrides": [
+  {
+   "path": "templates/presentation.html.j2",
+   "baseline_sha256": "71c4af5c66c59e9db107fc1f903e7527c93a3a4101d0693e33df9a9e6287fb02",
+   "previous_sha256": "2b141092d49cbea389371f96fe35814974c4f9b64cfe04c0bc1e762a7033fecd",
+   "current_sha256": "3f55a096ed246ae2099d4bceda11ad38490d8daa837efb93d731ffe4496e9a44",
+   "reason": "CUSTOMER_SCOPE_STATEMENT_PATCH"
+  }
+ ]
+}

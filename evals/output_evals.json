@@ -124,7 +124,7 @@
       "client copy is semantically rewritten into observation impact and action fields",
       "template text budgets are respected instead of shrinking type",
       "technical notes, evidence IDs, raw sources and not_assessed metrics remain in canonical JSON/model artifacts and are not rendered into the default customer PDF",
-      "default customer PDF contains two to three V01-V11 charts and at most four prioritized lever findings",
+      "default customer PDF contains four to seven approved business charts (V11 finding count and V12 coverage stay internal) and exactly four prioritized lever findings",
       "PDF follows Pixelkiez color, spacing, cards, mono labels and pixel-meter devices consistently",
       "default customer PDF contains at most twelve pages"
     ],
@@ -229,19 +229,16 @@
     "id": "OUT-PDF-MARKETING-003",
     "prompt": "The audit has 40 percent coverage, no overall score, three scoreable categories, many not_assessed metrics, and several high/medium customer findings. Produce the final customer PDF.",
     "expected_properties": [
-      "overall numeric score remains hidden and Score nicht belastbar is visible",
-      "two to three V01-V11 charts are generated automatically from truthful direct or already-scored evidence",
-      "V12 does not count and is absent from the default customer PDF",
-      "at most four improvement levers are shown",
-      "technical metric tables, raw source-ledger pages and not_assessed rows are absent from the customer PDF",
-      "full metric/source trace remains in canonical JSON/model artifacts",
-      "customer PDF is at most twelve pages"
+      "overall numeric score remains hidden and Score nicht belastbar is visible in the internal report",
+      "fewer than four admissible business visuals make the planner fail closed with CUSTOMER_RELEASE_BLOCKED: CUSTOMER_MIN_VISUALS_NOT_MET and no customer PDF is produced",
+      "V11 finding count and V12 coverage are not admitted to reach the visual minimum",
+      "full metric/source trace remains in the internal analysis report"
     ],
     "failure_modes": [
-      "empty visualizations array passes because overall score is hidden",
-      "customer PDF contains the full 48-metric appendix",
-      "derived score gap is described as revenue, ranking or conversion uplift",
-      "missing values or thresholds are invented to satisfy the chart minimum"
+      "empty or padded visualizations pass because overall score is hidden",
+      "internal-only visuals (V11, V12) are re-admitted to reach four visuals",
+      "missing values or thresholds are invented to satisfy the chart minimum",
+      "a partial customer bundle is left behind after the block"
     ]
   },
   {
@@ -331,17 +328,20 @@
   },
   {
     "id": "OUT-BRAND-FONT-020",
-    "prompt": "Render a proof report on a runtime without Schibsted Grotesk, then attempt a customer-release render.",
+    "prompt": "Render a proof report with a damaged or removed package font, then a customer-release render; separately render a customer report offline with the intact package and no PIXELKIEZ_FONT_DIR.",
     "expected_properties": [
-      "proof render uses a named approved fallback and records degraded/partial font status",
-      "customer-release mode fails closed with BRAND_FONT_EXACT_REQUIRED",
-      "no font binary is bundled or returned in skill.zip",
+      "proof render with a damaged package uses a named approved fallback and records degraded/partial font status",
+      "customer-release mode with a damaged package fails closed with BRAND_FONT_EXACT_REQUIRED naming the manifest issue",
+      "with the intact package, customer mode resolves both families EXACT from PACKAGED sources offline and the embedded PDF fonts verify against the pinned files",
+      "only manifest-pinned fonts and their licences are in skill.zip; no font file is returned in customer deliverables",
       "font fallback is never described as exact Pixelkiez parity"
     ],
     "failure_modes": [
       "silent DejaVu fallback claimed as brand exact",
       "customer release passes without exact requested families",
-      "font files are included in the delivered skill package"
+      "a filename or fc-match result accepted as font identity",
+      "unknown or extra font files included in the delivered skill package",
+      "font files copied into customer deliverables"
     ]
   },
   {
