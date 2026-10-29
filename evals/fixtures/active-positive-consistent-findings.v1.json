@@ -221,9 +221,9 @@
     {
       "id": "F-107",
       "category": "findability_seo",
-      "title": "Erreichbarkeit und Seitentitel sind sauber",
+      "title": "Erreichbarkeit und Verschlüsselung sind in Ordnung",
       "severity": "positive",
-      "observation": "Die Website ist öffentlich erreichbar und Seitentitel sowie Überschriften sind gepflegt.",
+      "observation": "Die Website ist öffentlich erreichbar und läuft verschlüsselt über HTTPS.",
       "evidence": [
         {
           "id": "E-1001",
@@ -235,9 +235,9 @@
           "asset_path": null
         },
         {
-          "id": "E-1006",
+          "id": "E-1036",
           "type": "metric_evidence",
-          "detail": "Core metric FIND-06 from the full-48 fixture execution bundle.",
+          "detail": "Core metric TRUST-03 from the full-48 fixture execution bundle.",
           "url": "https://example.com/",
           "observed_at": "2026-09-07T21:36:00Z",
           "method": "full-48 fixture execution (example data)",
@@ -248,28 +248,28 @@
         "classification": "fact",
         "text": "Das ist eine gute technische Grundlage für weitere Verbesserungen."
       },
-      "client_observation": "Die Website ist öffentlich erreichbar und Seitentitel sowie Überschriften sind gepflegt.",
+      "client_observation": "Die Website ist öffentlich erreichbar und läuft verschlüsselt über HTTPS.",
       "client_impact": "Das ist eine gute technische Grundlage für weitere Verbesserungen.",
       "client_action": "Diese Basis bei Änderungen beibehalten.",
       "recommendation": {
         "action": "Diese Basis bei Änderungen beibehalten.",
         "owner": "Betrieb & SEO",
         "horizon": "monitor",
-        "acceptance_test": "Erreichbarkeit und Seitentitel bleiben nach Releases unverändert."
+        "acceptance_test": "Erreichbarkeit und HTTPS bleiben nach Releases unverändert."
       },
       "confidence": 4,
       "visual_asset": null,
       "metric_refs": [
         "FIND-01",
-        "FIND-06"
+        "TRUST-03"
       ]
     },
     {
       "id": "F-108",
       "category": "ux_conversion",
-      "title": "Nächster Schritt und Inhaltsaufbau sind klar",
+      "title": "Der nächste Schritt ist klar",
       "severity": "positive",
-      "observation": "Der wichtigste nächste Schritt ist erkennbar und die Inhalte sind klar gegliedert.",
+      "observation": "Der wichtigste nächste Schritt ist klar erkennbar.",
       "evidence": [
         {
           "id": "E-1021",
@@ -279,35 +279,25 @@
           "observed_at": "2026-09-07T21:36:00Z",
           "method": "full-48 fixture execution (example data)",
           "asset_path": null
-        },
-        {
-          "id": "E-1026",
-          "type": "metric_evidence",
-          "detail": "Core metric UX-07 from the full-48 fixture execution bundle.",
-          "url": "https://example.com/",
-          "observed_at": "2026-09-07T21:36:00Z",
-          "method": "full-48 fixture execution (example data)",
-          "asset_path": null
         }
       ],
       "business_relevance": {
         "classification": "fact",
-        "text": "Besucher finden sich schnell zurecht."
+        "text": "Besucher wissen schnell, wie es weitergeht."
       },
-      "client_observation": "Der wichtigste nächste Schritt ist erkennbar und die Inhalte sind klar gegliedert.",
-      "client_impact": "Besucher finden sich schnell zurecht.",
+      "client_observation": "Der wichtigste nächste Schritt ist klar erkennbar.",
+      "client_impact": "Besucher wissen schnell, wie es weitergeht.",
       "client_action": "Diese Klarheit bei neuen Seiten beibehalten.",
       "recommendation": {
         "action": "Diese Klarheit bei neuen Seiten beibehalten.",
         "owner": "UX & Content",
         "horizon": "monitor",
-        "acceptance_test": "Neue Seiten folgen derselben klaren Gliederung."
+        "acceptance_test": "Neue Seiten zeigen den nächsten Schritt ebenso klar."
       },
       "confidence": 4,
       "visual_asset": null,
       "metric_refs": [
-        "UX-02",
-        "UX-07"
+        "UX-02"
       ]
     }
   ],
@@ -412,7 +402,7 @@
   "visualizations": [],
   "executive_summary": {
     "overall_status": "needs_action",
-    "decision": "Die Website ist erreichbar und klar gegliedert. Die größten Hebel liegen im Anfrageweg, in der Seitenlast, in der Struktur für Hilfsmittel und in der Sichtbarkeit beim Firmennamen.",
+    "decision": "Die Website ist erreichbar, läuft über HTTPS und zeigt den nächsten Schritt klar. Die größten Hebel liegen im Anfrageweg, in der Seitenlast, in der Struktur für Hilfsmittel und in der Sichtbarkeit beim Firmennamen.",
     "recommended_route": "targeted_modernization",
     "top_risks": [
       "Der Weg zur Anfrage hat zu viele Hürden.",
@@ -420,8 +410,8 @@
       "Die Seitenstruktur ist für Hilfsmittel schwer lesbar."
     ],
     "top_strengths": [
-      "Die Website ist erreichbar und Seitentitel sind gepflegt.",
-      "Der nächste Schritt und der Inhaltsaufbau sind klar."
+      "Die Website ist erreichbar und läuft über HTTPS.",
+      "Der nächste Schritt ist klar erkennbar."
     ]
   }
 }

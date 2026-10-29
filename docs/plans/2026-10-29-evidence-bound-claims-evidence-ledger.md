@@ -229,3 +229,9 @@ stripe), F13 (fixture presence score), F14 (internal scope_summary not rendered)
 | eval suites | 0 | all PASS except two environment gaps unrelated to this change: `run_browser_measurement_evals.py` (no Playwright), `run_chart_template_evals.py` (no reportlab) |
 | oracles | 0 | amendment in place: model 4146f0fb…→a09512e5…; plan unchanged; lever ids unchanged |
 | baseline / v3.2.1 / quick_validate | 0 | PASS / PASS 34 transitions / PASS 322 files |
+Follow-up after the frozen build of d779396: the gate passed on all nine cases, but no case showed an admitted
+strength any more, because the active-positive positives cited FIND-06 and UX-07, which overlap the heading lever
+(A11Y-02). The fixture positives now cite only metrics that read "Klar" without overlap (F-107: FIND-01 + TRUST-03,
+"… erreichbar und läuft verschlüsselt über HTTPS."; F-108: UX-02, "Der wichtigste nächste Schritt ist klar
+erkennbar."). Red: `test_consistent_positives_are_shown` failed with `[] != ['F-107', 'F-108']`; green after the fixture
+change.

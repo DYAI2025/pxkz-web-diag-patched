@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "status": "PASS",
   "suite": "tests.test_evidence_bound_claims",
-  "artifact_digest": "2c17f8645e579e92d9df2a50bc3bb6657cbd70262108e3ddb549a8c5ab0c9504",
-  "tests_run": 89,
+  "artifact_digest": "0fdb603c1a6eafd28a93ff99321aafa2becee6b9b71c52075cf21bf3bc012d45",
+  "tests_run": 90,
   "failures": 0,
   "errors": 0,
   "skipped": [],
@@ -278,6 +278,10 @@
     },
     {
       "test": "tests.test_evidence_bound_claims.SurfaceConsistency.test_consistency_gate_passes_a_consistent_bundle",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.SurfaceConsistency.test_consistent_positives_are_shown",
       "outcome": "ok"
     },
     {

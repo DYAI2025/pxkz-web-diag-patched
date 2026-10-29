@@ -1487,7 +1487,7 @@
     {
       "path": "docs/plans/2026-10-29-evidence-bound-claims-evidence-ledger.md",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "d1241879bb2f37d6c772e5e0c460d1eca9eaf8c86a2c9b7b21c92522ec1de27a"
+      "current_sha256": "02ca91f3baebae2569a71a5b8d720e831b1148136b7c9651c985671651f26cb9"
     },
     {
       "path": "enterprise-skill-patch-order-branch-priority.xml",
@@ -1497,7 +1497,7 @@
     {
       "path": "evals/fixtures/active-positive-consistent-findings.v1.json",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "5bbf359fb50051302bd6b1471b3cc600edabf6e62eb15f586b61e9a7348ea4cb"
+      "current_sha256": "18965da357e655c01760a313da6c4cf051accc5937a9ae4f6ab55c544555c01d"
     },
     {
       "path": "evals/fixtures/branch-priority-catalog.SYNTHETIC.json",
@@ -1807,7 +1807,7 @@
     {
       "path": "tests/test_evidence_bound_claims.py",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "1f0ceaaeec455c2633cdbc635608479ff7a97f8c60c533e557ee247708f03753"
+      "current_sha256": "e240a84068f2606d4d5994fca5b55dba4d44fe2930f1680446b3fb6487d8d7cb"
     },
     {
       "path": "tests/test_legacy_oracles.py",
@@ -2755,12 +2755,12 @@
         {
           "path": "docs/plans/2026-10-29-evidence-bound-claims-evidence-ledger.md",
           "previous_sha256": null,
-          "current_sha256": "d1241879bb2f37d6c772e5e0c460d1eca9eaf8c86a2c9b7b21c92522ec1de27a"
+          "current_sha256": "02ca91f3baebae2569a71a5b8d720e831b1148136b7c9651c985671651f26cb9"
         },
         {
           "path": "evals/fixtures/active-positive-consistent-findings.v1.json",
           "previous_sha256": null,
-          "current_sha256": "5bbf359fb50051302bd6b1471b3cc600edabf6e62eb15f586b61e9a7348ea4cb"
+          "current_sha256": "18965da357e655c01760a313da6c4cf051accc5937a9ae4f6ab55c544555c01d"
         },
         {
           "path": "evals/fixtures/golden/legacy-oracles.v1.json",
@@ -2880,7 +2880,7 @@
         {
           "path": "tests/test_evidence_bound_claims.py",
           "previous_sha256": null,
-          "current_sha256": "1f0ceaaeec455c2633cdbc635608479ff7a97f8c60c533e557ee247708f03753"
+          "current_sha256": "e240a84068f2606d4d5994fca5b55dba4d44fe2930f1680446b3fb6487d8d7cb"
         },
         {
           "path": "tests/test_legal_trust_boundary.py",

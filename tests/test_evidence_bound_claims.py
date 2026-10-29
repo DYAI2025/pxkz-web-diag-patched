@@ -738,6 +738,18 @@ class SurfaceConsistency(ReviewRoundThree):
         v08 = self.rows(plan, "V08_AI_ANSWERABILITY")
         self.assertFalse("AI-05" in v08 and v08["AI-05"]["status"] == "Klar", "proof reads Handlungsbedarf in TRUST-06")
 
+    def test_consistent_positives_are_shown(self) -> None:  # positive control for B2
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            scored = active_positive_scored(tmp)
+            build_plan(scored, tmp)
+            model, bindings = tmp / "m.json", tmp / "b.json"
+            result = run("scripts/build_client_report_model.py", str(scored), str(model), "--visual-plan", str(tmp / "plan.json"),
+                         "--claim-bindings-out", str(bindings))
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            admitted = [c["finding_ref"] for c in load(bindings)["claims"] if c["admitted"]]
+        self.assertEqual(admitted, ["F-107", "F-108"])
+
     def test_category_bars_skip_every_contested_area_and_say_so(self) -> None:  # round 3 F7
         with tempfile.TemporaryDirectory() as td:
             tmp = Path(td)
