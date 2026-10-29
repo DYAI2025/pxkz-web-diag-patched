@@ -335,7 +335,7 @@ Independent evaluation round 2 of a16ea1f and its rebuilt evidence: rubric PASS_
 REVISE; all round-1 findings but one closed (the ledger sentence on NOT_RUN steps). Blocking: `validate_installability.py`
 (SKILL.md § Validation) was neither in the recorded sweep nor recorded NOT_RUN; the generator on disk was 20 s newer than
 the evidence, so its recorded output excerpts (pytest without a test count) came from an earlier revision. Gate
-hardening taken from both lenses: a proof case's PDF must equal the PDF the review inspected and the PDF of its signed
+hardening taken from both lenses: a proof case's PDF must equal the PDF the review inspected and the PDF of its review
 visual QA manifest (a record whose cases and proofs share one unreviewed hash was self-consistent and passed); an owner
 resolution counts only as `AMBIGUOUS -> resolved PASS by owner clarification` with a row for exactly that probe in the
 checklist's owner-clarifications table; the policy states that `package_skill.py` enforces the pipeline ledger. Mutation
@@ -343,3 +343,18 @@ evals 63 → 69, canary → those six red. The sweep now includes `validate_inst
 SKILL.md list; the evidence records the generator's SHA-256, the pytest summary, the path-argument validators the nine-case
 build covers, and the swap probe rerun on the final rule. Residual, unchanged: `reports/brand-font-capability.json`
 `customer_release_ready: true` means font capability, not release.
+
+Independent evaluation round 3 of 6d846de: rubric PASS_WITH_MINOR_REVISIONS, evidence audit REVISE; round-2 findings
+closed but (f) in part. Blocking: the evidence recorded path-argument validators as NOT_RUN that the nine-case build runs
+fail-closed (`build_audit_deliverables.py` raises on a non-zero rc), so it under-claimed what ran. This is the third
+round in which the evidence generator's own mapping differed from what executed (inherited bodies, an unrecorded step,
+now under-recorded coverage), so the strategy changes: coverage is no longer mapped by hand but read from an execution
+trace of the build (every Python subprocess the build starts, with its rc), and the QA record's inherited
+authoring checks are labelled as inherited, valid by byte identity. Gate hardening from the rubric lens: review rounds
+need unique integer numbers (a reused or string number hid a failing round behind round 4); `bias_gate`,
+`installability_gate` and `test_suite_gate` must read PASS (`validate_gate_statuses`); the review manifests are named
+for what they are (`reviewed_visual_qa_dir`, JSON records, not signatures); the `primary_metric` docstring now states
+that a class-less scored ref would be skipped although it reads Klar, and that all 48 class-skipped refs in the nine
+release cases read "Nicht belastbar bewertet" (measured; the evaluator's count of 142 did not reproduce). Mutation evals
+69 → 76, canary → those six red (the judgment-gate case was already enforced). Backlog: `run_batch_contract_evals.py`
+prints its not-executed sibling case as PASS.

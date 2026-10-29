@@ -133,6 +133,36 @@ def validate_customer_report_release(root: Path, report: dict, semantic: dict, p
     return errors
 
 
+def validate_gate_statuses(report: dict) -> list[str]:
+    """Release decision, judgment gates and every measured gate the package needs must read PASS."""
+    errors: list[str] = []
+    if report.get("release_scope") != "website-diagnosis-package": errors.append("release scope drift")
+    if report.get("release_gate", {}).get("status") != "PASS": errors.append("release status is not PASS")
+    if report.get("release_gate", {}).get("allowed_to_package") is not True: errors.append("allowed_to_package must be true")
+    if report.get("craftsmanship_gate", {}).get("status") != "PASS": errors.append("craftsmanship gate failed")
+    if report.get("anti_confabulation_gate", {}).get("status") != "PASS": errors.append("anti-confabulation gate failed")
+    if report.get("anti_confabulation_gate", {}).get("blocked_claims"): errors.append("blocked_claims must be empty")
+    syco = report.get("anti_sycophancy", {})
+    if not isinstance(syco.get("score"), int) or syco["score"] >= syco.get("threshold", 3): errors.append("anti-sycophancy threshold failed")
+    if report.get("bias_gate", {}).get("status") != "PASS": errors.append("bias gate is not PASS")
+    browser = report.get("browser_gate", {})
+    if browser.get("applicable") and browser.get("status") not in {"PASS", "PASS_WITH_ASSUMPTIONS"}: errors.append("browser gate failed")
+    if browser.get("blockers"): errors.append("browser blockers must be empty")
+
+    for gate_name in (
+        "batch_contract_gate", "batch_evals_gate", "core_regression_gate", "internal_report_gate",
+        "active_core_gate", "active_core_render_gate",
+        "visualization_reporting_gate", "weasyprint_render_gate", "brand_rendering_gate", "proof_output_gate",
+        "measurement_gateway_gate", "protected_baseline_gate", "third_party_reuse_gate", "measurement_platform_proof_gate",
+        "strategic_relevance_gate", "customer_output_guardrail_gate", "measurement_platform_preservation_gate",
+        "customer_presentation_quality_gate",
+        "impressum_legal_source_gate", "impressum_compliance_gate", "impressum_eval_gate", "impressum_customer_projection_gate",
+        "installability_gate", "test_suite_gate",
+    ):
+        if report.get(gate_name, {}).get("status") != "PASS": errors.append(f"{gate_name} failed")
+    return errors
+
+
 def validate_skill_package_release(root: Path, report: dict, qa: dict, proofs: dict[str, dict]) -> list[str]:
     """SKILL_PACKAGE_RELEASE: synthetic proofs prove skill function, never a customer result.
 
@@ -157,8 +187,12 @@ def validate_skill_package_release(root: Path, report: dict, qa: dict, proofs: d
     if not checklist.is_file() or qa.get("yardstick_sha256") != hashlib.sha256(checklist.read_bytes()).hexdigest():
         errors.append("proof QA yardstick differs from the fixed probe checklist")
     probes = re.findall(r"^\| ([A-E]\d) \|", checklist.read_text(encoding="utf-8"), re.M) if checklist.is_file() else []
-    rounds = [r for r in (qa.get("independent_review") or {}).get("rounds") or [] if isinstance(r, dict)]
-    latest = max(rounds, key=lambda r: r.get("round") if isinstance(r.get("round"), int) else -1, default={})
+    raw_rounds = (qa.get("independent_review") or {}).get("rounds") or []
+    rounds = [r for r in raw_rounds if isinstance(r, dict) and type(r.get("round")) is int]
+    numbers = [r["round"] for r in rounds]
+    if not rounds or len(rounds) != len(raw_rounds) or len(numbers) != len(set(numbers)):
+        errors.append("proof QA review rounds must carry unique integer round numbers")
+    latest = max(rounds, key=lambda r: r["round"], default={})
     lines = latest.get("probe_lines") if isinstance(latest.get("probe_lines"), dict) else {}
     if type(latest.get("fail")) is not int or latest.get("fail") != 0 or latest.get("confirmed"):
         errors.append("latest independent proof review round has confirmed defects")
@@ -187,21 +221,21 @@ def validate_skill_package_release(root: Path, report: dict, qa: dict, proofs: d
     if any(r.get("blocked") is not True or r.get("pdf_written") is not False for r in refusals.values()):
         errors.append("customer mode did not refuse every example-data case")
     try:
-        signed_dir = signed_visual_qa_dir(root, qa)
+        review_dir = reviewed_visual_qa_dir(root, qa)
     except ValueError as exc:
         errors.append(str(exc))
-        signed_dir = None
+        review_dir = None
     for case in cases:
         name, pdf = case.get("case"), case.get("pdf_sha256")
         if not _is_sha256(pdf) or case.get("reviewed_pdf_sha256") != pdf:
             errors.append(f"proof case {name} PDF is not the PDF the independent review inspected")
-        manifest = signed_dir / f"{name}.visual-qa.json" if signed_dir is not None and isinstance(name, str) else None
+        manifest = review_dir / f"{name}.visual-qa.json" if review_dir is not None and isinstance(name, str) else None
         try:
-            signed = json.loads(manifest.read_text(encoding="utf-8")) if manifest is not None and manifest.is_file() else {}
+            inspected = json.loads(manifest.read_text(encoding="utf-8")) if manifest is not None and manifest.is_file() else {}
         except (OSError, ValueError):
-            signed = {}
-        if signed.get("inspection_status") != "PASS" or signed.get("pdf_sha256") != pdf:
-            errors.append(f"proof case {name} PDF is not the PDF of its signed visual QA manifest")
+            inspected = {}
+        if inspected.get("inspection_status") != "PASS" or inspected.get("pdf_sha256") != pdf:
+            errors.append(f"proof case {name} PDF is not the PDF of its review visual QA manifest")
     reviewed = {c.get("pdf_sha256") for c in cases if _is_sha256(c.get("pdf_sha256"))}
     for label, proof in proofs.items():
         if proof.get("release_mode") != "proof":
@@ -259,12 +293,15 @@ def _tree_file_hashes(root: Path) -> set[str]:
     return {hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob("*") if p.is_file() and ".git" not in p.parts}
 
 
-def signed_visual_qa_dir(root: Path, qa: dict) -> Path:
-    """Folder of the per-case visual QA manifests the independent review signed, confined to reports/."""
-    rel = str(qa.get("signed_visual_qa_dir") or "")
+def reviewed_visual_qa_dir(root: Path, qa: dict) -> Path:
+    """Folder of the per-case visual QA manifests written for the independent review, confined to reports/.
+
+    They are JSON records, not cryptographic signatures; like every file under reports/ they bind hashes, not authorship.
+    """
+    rel = str(qa.get("reviewed_visual_qa_dir") or "")
     path = (root / rel).resolve()
     if not rel or path.parent != (root / "reports").resolve() or not path.is_dir():
-        raise ValueError("proof QA record must name signed_visual_qa_dir as a folder under reports/")
+        raise ValueError("proof QA record must name reviewed_visual_qa_dir as a folder under reports/")
     return path
 
 
@@ -398,29 +435,7 @@ def main(argv: list[str]) -> int:
             errors.append("evidence-bound claims eval evidence is stale (STALE_ARTIFACT_DIGEST)")
     except Exception as exc:
         errors.append(f"evidence-bound claims digest check unavailable: {exc}")
-    if report.get("release_scope") != "website-diagnosis-package": errors.append("release scope drift")
-    if report.get("release_gate", {}).get("status") != "PASS": errors.append("release status is not PASS")
-    if report.get("release_gate", {}).get("allowed_to_package") is not True: errors.append("allowed_to_package must be true")
-    if report.get("craftsmanship_gate", {}).get("status") != "PASS": errors.append("craftsmanship gate failed")
-    if report.get("anti_confabulation_gate", {}).get("status") != "PASS": errors.append("anti-confabulation gate failed")
-    if report.get("anti_confabulation_gate", {}).get("blocked_claims"): errors.append("blocked_claims must be empty")
-    syco = report.get("anti_sycophancy", {})
-    if not isinstance(syco.get("score"), int) or syco["score"] >= syco.get("threshold", 3): errors.append("anti-sycophancy threshold failed")
-    if report.get("bias_gate", {}).get("status") == "BLOCKED": errors.append("bias gate blocked")
-    browser = report.get("browser_gate", {})
-    if browser.get("applicable") and browser.get("status") not in {"PASS", "PASS_WITH_ASSUMPTIONS"}: errors.append("browser gate failed")
-    if browser.get("blockers"): errors.append("browser blockers must be empty")
-
-    for gate_name in (
-        "batch_contract_gate", "batch_evals_gate", "core_regression_gate", "internal_report_gate",
-        "active_core_gate", "active_core_render_gate",
-        "visualization_reporting_gate", "weasyprint_render_gate", "brand_rendering_gate", "proof_output_gate",
-        "measurement_gateway_gate", "protected_baseline_gate", "third_party_reuse_gate", "measurement_platform_proof_gate",
-        "strategic_relevance_gate", "customer_output_guardrail_gate", "measurement_platform_preservation_gate",
-        "customer_presentation_quality_gate",
-        "impressum_legal_source_gate", "impressum_compliance_gate", "impressum_eval_gate", "impressum_customer_projection_gate",
-    ):
-        if report.get(gate_name, {}).get("status") != "PASS": errors.append(f"{gate_name} failed")
+    errors.extend(validate_gate_statuses(report))
 
     if legal_sources.get("status") != "PASS": errors.append("impressum legal source validation failed")
     if legal_evals.get("status") != "PASS" or int(legal_evals.get("pass_count", 0)) != int(legal_evals.get("case_count", -1)): errors.append("impressum compliance evals failed")
