@@ -28,6 +28,7 @@ ALLOWED_REASON_PATHS = {
         "scripts/build_audit_deliverables.py",
         "scripts/svg_chart_renderer.py",
         "templates/presentation.html.j2",
+        "assets/presentation.css",
     },
     "CUSTOMER_SCOPE_STATEMENT_PATCH": {
         "templates/presentation.html.j2",

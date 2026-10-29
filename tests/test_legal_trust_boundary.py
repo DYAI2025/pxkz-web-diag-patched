@@ -116,6 +116,7 @@ class CitedMetricNotClearTest(unittest.TestCase):
             subprocess.run([sys.executable, "-B", str(ROOT / "scripts/compute_score.py"), str(src), str(scored)], check=True, capture_output=True)
             subprocess.run([sys.executable, "-B", str(ROOT / "scripts/build_visualization_plan.py"), str(scored), str(plan)], check=True, capture_output=True)
             data = json.loads(plan.read_text(encoding="utf-8"))
+        self.top_levers = data["top_levers"]
         self.values = {(r.get("signal") or r.get("question")): r["value"] for v in data["visuals"]
                        if v["template_id"] == "V08_AI_ANSWERABILITY" for r in v["data"]}
         return {(r.get("signal") or r.get("question")): r["status"] for v in data["visuals"]
@@ -125,9 +126,17 @@ class CitedMetricNotClearTest(unittest.TestCase):
         base = json.loads((ROOT / "evals/fixtures/synthetic-report.json").read_text(encoding="utf-8"))
         self.assertEqual(self.rows(base)["Kontakttransparenz"], "Klar")
         cited = copy.deepcopy(base)
+        # Customer-visible means: selected as one of the four levers (critical findings always are).
         cited["findings"].append({**copy.deepcopy(next(f for f in base["findings"] if f.get("severity") == "medium")),
-                                  "id": "F-940", "metric_refs": ["TRUST-07"]})
+                                  "id": "F-940", "severity": "critical", "metric_refs": ["TRUST-07", "A11Y-01"]})
         self.assertEqual(self.rows(cited)["Kontakttransparenz"], "Verbesserung sinnvoll")
+        self.assertIn("F-940", self.top_levers)
+        # A problem finding that is not among the levers is invisible to the reader and caps nothing.
+        hidden = copy.deepcopy(base)
+        hidden["findings"].append({**copy.deepcopy(next(f for f in base["findings"] if f.get("severity") == "medium")),
+                                   "id": "F-941", "severity": "low", "metric_refs": ["TRUST-07", "A11Y-01"]})
+        self.assertEqual(self.rows(hidden)["Kontakttransparenz"], "Klar")
+        self.assertNotIn("F-941", self.top_levers)
 
     def test_identity_rows_not_clear_next_to_identity_risk(self) -> None:
         rows = self.rows(report_with(finding_from(golden_sidecar(), 99)))

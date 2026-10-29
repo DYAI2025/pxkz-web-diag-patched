@@ -171,6 +171,10 @@ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
     enrichment = report.get("measurement_enrichment") if isinstance(report.get("measurement_enrichment"), dict) else {}
     metrics = [x for x in enrichment.get("metrics", []) if isinstance(x, dict) and x.get("status") in {"MEASURED", "OBSERVED"}]
     out: list[dict[str, str]] = []
+    # Values replayed from a fixture bundle are example data: no "real" label, no documented period.
+    example = (str(enrichment.get("mode") or "").upper() in {"FIXTURE", "SYNTHETIC"}
+               or any(evidence_method(x) == "SYNTHETIC" for x in metrics))
+    sample = method_phrase("SYNTHETIC")
     # 1) current query-specific SERP result, only with explicit provider page if present
     pos = next((x for x in metrics if x.get("id") == "SERP_CURRENT_POSITION" and x.get("query")), None)
     if pos:
@@ -178,7 +182,7 @@ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
         value = f"Position {int(pos.get('value'))}"
         if page and isinstance(page.get("value"), (int,float)):
             value += f" · Seite {int(page.get('value'))}"
-        context = " · ".join(str(x) for x in (pos.get("query"), customer_location(pos.get("location")), customer_device(pos.get("device"))) if x)
+        context = " · ".join(str(x) for x in (pos.get("query"), customer_location(pos.get("location")), customer_device(pos.get("device")), "Beispieldaten" if example else "") if x)
         out.append({"label":"Google-Sichtbarkeit", "value":value, "context":clientize(context, 100)})
     # 2) authorized real audience signal
     users = next((x for x in metrics if x.get("id") == "GA4_ACTIVE_USERS"), None)
@@ -186,13 +190,16 @@ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
         value = f"{int(users.get('value')):,}".replace(",", ".") + " aktive Nutzer"
         dr = users.get("date_range") or {}
         context = f"{dr.get('start','')} bis {dr.get('end','')}" if isinstance(dr, dict) else "Dokumentierter Zeitraum"
-        out.append({"label":"Reale Nutzung", "value":value, "context":clientize(context, 100)})
+        out.append({"label": "Nutzung" if example else "Reale Nutzung", "value": value, "context": sample if example else clientize(context, 100)})
     # 3) field performance, preferably phone
     field = next((x for x in metrics if x.get("id") == "CRUX_LCP_P75_MS" and str(x.get("device")).upper() == "PHONE"), None) or next((x for x in metrics if x.get("id") == "CRUX_LCP_P75_MS"), None)
     if field:
         sec = float(field.get("value"))/1000.0
         device = "Mobil" if str(field.get("device")).upper() == "PHONE" else (field.get("device") or "Feldwert")
-        out.append({"label":"Reale Ladeerfahrung", "value":f"Ladezeit p75 {sec:.1f} s".replace(".", ","), "context":clientize(f"{device} · dokumentierter Zeitraum", 100)})
+        # LCP p75 says when the main content became visible for 75 % of visits, not a page load time.
+        out.append({"label": "Ladeerfahrung" if example else "Reale Ladeerfahrung",
+                    "value": f"Hauptinhalt sichtbar nach {sec:.1f} s (p75)".replace(".", ","),
+                    "context": clientize(f"{device} · {'Beispieldaten' if example else 'dokumentierter Zeitraum'}", 100)})
     return out[:3]
 
 
@@ -321,28 +328,35 @@ def main(argv: list[str]) -> int:
         })
 
     roadmap = {"now": [], "next_30_days": [], "next_quarter": []}
-    for f in selected_levers:
+    # The audit's own roadmap entry (linked by evidence_basis) decides timing and priority of each lever, so the
+    # roadmap, the next step and the closing actions follow one execution order instead of re-deriving P1/P2.
+    source_roadmap = [x for x in report.get("roadmap", []) if isinstance(x, dict)]
+    bucket_order = {"now": 0, "next_30_days": 1, "next_quarter": 2}
+    scheduled = []
+    for rank, f in enumerate(selected_levers):
         rec = f.get("recommendation") if isinstance(f.get("recommendation"), dict) else {}
         action = clientize(f.get("client_action") or rec.get("action"), budget("roadmap_action", 120))
         if not action:
             continue
-        horizon = rec.get("horizon")
+        entry = next((x for x in source_roadmap if str(f.get("id")) in [str(y) for y in x.get("evidence_basis") or []]), {})
+        horizon = entry.get("horizon") or rec.get("horizon")
+        priority = entry.get("priority") if entry.get("priority") in {"P1", "P2", "P3"} else ("P1" if f.get("severity") in {"critical", "high"} else "P2")
         mandatory_critical = isinstance(f.get("customer_risk"), dict) and f["customer_risk"].get("priority") == "MANDATORY_CRITICAL"
         if f.get("severity") == "critical" or mandatory_critical:
             # A critical finding is never scheduled behind "Jetzt".
-            bucket = "now"
+            bucket, priority = "now", "P1"
         elif horizon == "now":
             bucket = "now"
         elif horizon == "0_30_days":
             bucket = "next_30_days"
         else:
             bucket = "next_quarter"
+        scheduled.append((bucket_order[bucket], rank, bucket, priority, action, f, rec))
+    scheduled.sort(key=lambda x: (x[0], x[1]))
+    for _, _, bucket, priority, action, f, rec in scheduled:
         if len(roadmap[bucket]) < 2:
-            roadmap[bucket].append({
-                "priority": "P1" if f.get("severity") in {"critical", "high"} else "P2",
-                "action": action,
-                "owner": clientize(rec.get("owner"), 55),
-            })
+            roadmap[bucket].append({"priority": priority, "action": action, "owner": clientize(rec.get("owner"), 55)})
+    execution_ids = [str(x[5].get("id")) for x in scheduled]
 
     display_status = str(score.get("display_status") or "NO_SCORE")
     numeric_score_visible = (
@@ -370,8 +384,13 @@ def main(argv: list[str]) -> int:
     cover_verdict = scan_first_recommendation_reason(selected_levers, executive.get("decision") or score.get("interpretation"))
 
     next_step = "Die wichtigsten Maßnahmen zuerst umsetzen."
-    if selected_levers:
+    first_bucket = next((roadmap[k] for k in ("now", "next_30_days", "next_quarter") if roadmap[k]), [])
+    if first_bucket:
+        next_step = first_bucket[0]["action"]
+    elif selected_levers:
         next_step = clientize(selected_levers[0].get("client_action") or selected_levers[0].get("recommendation", {}).get("action"), budget("recommendation_next_step", 160))
+    rank_of = {fid: i for i, fid in enumerate(execution_ids)}
+    closing_findings = sorted(finding_models[:4], key=lambda fm: rank_of.get(str(fm.get("id")), len(rank_of)))
 
     model = {
         "template_version": str(template.get("template_version", "5.0")),
@@ -420,7 +439,7 @@ def main(argv: list[str]) -> int:
             "eyebrow": "NÄCHSTER SCHRITT",
             "title": "Aus Analyse wird Umsetzung.",
             "summary": "Die wichtigsten Stellschrauben sind klar. Jetzt geht es darum, sie in der richtigen Reihenfolge umzusetzen und die geschäftliche Wirkung zu verbessern.",
-            "actions": [short_action(f.get("action")) for f in finding_models[:4]],
+            "actions": [short_action(f.get("action")) for f in closing_findings],
             "cta": "Prioritäten bestätigen. Umsetzung starten.",
             "next_step": "Gemeinsam priorisieren wir die vier Hebel und starten mit dem ersten konkreten Umsetzungspaket.",
             "measurement_highlights": measurement_highlights(report),

@@ -5,8 +5,8 @@
   "cases": {
     "synthetic-report": {
       "scored": "22a535a85bc3464132ffe42a3141c651b993d683cd50b45eaa94ed8e473e1931",
-      "plan": "45a14b497bda4765c8c9a82299f093be817ba72af504680be867e8cde58732e9",
-      "model": "e5f745ccf15f0ca8b0d948e5a4f4281d69a2d4b331ec490f76c13ce9868ac9ee",
+      "plan": "ac5e278735fb9be8f2821e88a54799e8c0ba6a4451305c3840fbc24fbc12413a",
+      "model": "ffae93dd60579d3aa9ed3d653b83afa1fac64594dfb8e45f1a3a8085e81c852d",
       "batch_csv": "a6dbcf82116fd4e0ba480f377b1592bfc5e974ee9f7ab25393931b11f6184843",
       "internal": "ad959b518725d1f882470dd2fa435d089ffe52ea600ab8588d3fc68dae5928bf",
       "lever_ids": [
@@ -177,17 +177,17 @@
           "fixture": "synthetic-report",
           "output": "plan",
           "previous_sha256": "894ea740c6a0d786cf1ff43f7a2f748cba3d3aa39a1d224105d3e99957025666",
-          "current_sha256": "45a14b497bda4765c8c9a82299f093be817ba72af504680be867e8cde58732e9"
+          "current_sha256": "ac5e278735fb9be8f2821e88a54799e8c0ba6a4451305c3840fbc24fbc12413a"
         },
         {
           "fixture": "synthetic-report",
           "output": "model",
           "previous_sha256": "a881d84fcfe01ffad3b96f44464cf5e43a2a3311c4e4554f89d714502d7f17b9",
-          "current_sha256": "e5f745ccf15f0ca8b0d948e5a4f4281d69a2d4b331ec490f76c13ce9868ac9ee"
+          "current_sha256": "ffae93dd60579d3aa9ed3d653b83afa1fac64594dfb8e45f1a3a8085e81c852d"
         }
       ],
       "status_deltas": {
-        "synthetic-report": "plan: V07 title/subtitle/label keep the method ('in der mobilen Testmessung', 'Beispieldaten, keine Live-Messung', 'Mobile Ladezeit (Beispieldaten)') and carry evidence_method SYNTHETIC; V08/V10 rows carry metric_ref and the one customer_status scale (V08 'klar'/'teilweise' replaced by 'Klar'/'Verbesserung sinnvoll', matrix value anchors 1.0/0.5/0.0); model: lab/synthetic wording kept, strengths bound to positive findings whose metrics read 'Klar' (F-006 only), free-text top_strengths dropped. Lever ids unchanged for every fixture. Model meta carries sample_data_notice 'Beispieldaten, keine Live-Messung' because every metric of this fixture is example data (real measurements never carry the key)."
+        "synthetic-report": "plan: V07 title/subtitle/label keep the method ('in der mobilen Testmessung', 'Beispieldaten, keine Live-Messung', 'Mobile Ladezeit (Beispieldaten)') and carry evidence_method SYNTHETIC; V08/V10 rows carry metric_ref and the one customer_status scale (V08 'klar'/'teilweise' replaced by 'Klar'/'Verbesserung sinnvoll', matrix value anchors 1.0/0.5/0.0); model: lab/synthetic wording kept, strengths bound to positive findings whose metrics read 'Klar' (F-006 only), free-text top_strengths dropped. Lever ids unchanged for every fixture. Model meta carries sample_data_notice 'Beispieldaten, keine Live-Messung' because every metric of this fixture is example data (real measurements never carry the key). Review round 1: V07 subtitle 'Mobile Anzeige des Hauptinhalts im Vergleich zum Zielwert', label 'Hauptinhalt sichtbar (Beispieldaten)', data unit 's'; roadmap priorities and horizons from the audit roadmap (F-003 now P1; F-001, F-002 0-30 days P1; F-004 31-90 days P2), recommendation.next_step and closing.actions in that execution order."
       }
     }
   ]

@@ -130,12 +130,19 @@ def main() -> int:
         excluded.append({"template_id": "V01_OVERALL_SCORE", "reason": "COVER_OR_OVERVIEW_ONLY_NO_DUPLICATE_CHART_PAGE"})
 
         cats = []
+        # A category bar must not vouch for an area while a projected legal risk contests its metrics.
+        legal_review_categories = {str(defs.get(mid, {}).get("category")) for mid in contested_legal_surface(report) if mid in defs}
+        withheld = []
         if score.get("display_status") == "FULL_SCORE":
             for c in score.get("category_scores", []) if isinstance(score.get("category_scores"), list) else []:
+                if str(c.get("category")) in legal_review_categories:
+                    withheld.append(str(c.get("category")))
+                    continue
                 if isinstance(c.get("score"), (int, float)) and not isinstance(c.get("score"), bool):
                     cats.append({"label": clientize(c.get("label") or c.get("category"), 36), "value": float(c["score"])})
         if len(cats) >= 2:
-            visuals.append(visual(vid, "V02_CATEGORY_BARS", "Stärken und Schwächen nach Bereich", "Wie die wichtigsten Bereiche der Website heute abschneiden", [f"CATEGORY:{c.get('category')}" for c in score.get("category_scores", [])], [], "DERIVED", f"{len(cats)} bewertete Kategorien", "Pixelkiez Bewertungsmodell", "Bereichswerte sind keine externen Benchmarks und beweisen keine Geschäftswirkung.", cats)); vid += 1
+            population = f"{len(cats)} bewertete Kategorien" + (f"; ohne Balken wegen rechtlichem Prüfbedarf: {', '.join(withheld)}" if withheld else "")
+            visuals.append(visual(vid, "V02_CATEGORY_BARS", "Stärken und Schwächen nach Bereich", "Wie die wichtigsten Bereiche der Website heute abschneiden", [f"CATEGORY:{c.get('category')}" for c in score.get("category_scores", []) if str(c.get("category")) not in withheld], [], "DERIVED", population, "Pixelkiez Bewertungsmodell", "Bereichswerte sind keine externen Benchmarks und beweisen keine Geschäftswirkung.", cats)); vid += 1
         else:
             excluded.append({"template_id": "V02_CATEGORY_BARS", "reason": "NO_CUSTOMER_FULL_SCORE_OR_TOO_FEW_CATEGORIES"})
 
@@ -182,8 +189,9 @@ def main() -> int:
                 or "Der wichtigste sichtbare Inhalt lädt in der mobilen Testmessung langsamer als empfohlen.",
                 120,
             )
-            customer_subtitle = f"Mobile Ladezeit im Vergleich zum Zielwert · {method_phrase(method_kind)}"
-            customer_metric_label = f"Mobile Ladezeit ({short_label(method_kind)})"
+            # The plotted value is when the main content became visible (LCP), not a whole-page load time.
+            customer_subtitle = f"Mobile Anzeige des Hauptinhalts im Vergleich zum Zielwert · {method_phrase(method_kind)}"
+            customer_metric_label = f"Hauptinhalt sichtbar ({short_label(method_kind)})"
             threshold_source = visual(
                 vid,
                 "V07_PERFORMANCE_THRESHOLD",
@@ -195,7 +203,7 @@ def main() -> int:
                 str(ev.get("population") or f"{len(series)} Messpunkte"),
                 f"{ev.get('tool', 'Audit measurement')} {ev.get('version', '')}".strip(),
                 str(item.get("does_not_prove") or linked[0].get("does_not_prove") or "Keine Geschäftswirkung belegt."),
-                [{"label": customer_metric_label, "value": current, "good": good, "warn": warn}],
+                [{"label": customer_metric_label, "value": current, "good": good, "warn": warn, **({"unit": str(linked[0]["unit"])} if linked[0].get("unit") else {})}],
             )
             threshold_source["evidence_method"] = method_kind
             break
@@ -212,7 +220,8 @@ def main() -> int:
         contested = contested_legal_surface(report)
         # A metric that a customer-visible problem finding cites (or an identity metric next to a projected
         # provider-identity risk) must not read as clear on the same PDF.
-        capped = {str(x) for f in findings for x in f.get("metric_refs", [])} | contested_identity_surface(report)
+        # Only the four customer levers are visible problem findings; a finding the reader never sees cannot cap a status.
+        capped = {str(x) for f in levers for x in f.get("metric_refs", [])} | contested_identity_surface(report)
 
         def category_matrix(category: str, template: str, title: str, label_name: str, *, four_state: bool = False,
                             limitation_default: str = "Die Matrix ist kein Marktbenchmark und keine Erfolgsprognose.") -> None:

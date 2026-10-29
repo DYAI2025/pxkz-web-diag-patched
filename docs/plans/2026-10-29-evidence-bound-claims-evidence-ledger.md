@@ -99,3 +99,32 @@ proof-strategic page 8 showed SERP rankings from an offline `mode: FIXTURE` bund
 | full suite | `$PY -B -m pytest tests -q` | 0 | 211 passed, 69 subtests |
 | evals | enrichment / gateway / strategic / visual architecture / customer semantic / VC03 / branch priority / legal projection | 0 | all PASS (gateway after override refresh) |
 | baseline + v3.2.1 | validators | 0 | PASS / PASS (23 transitions) |
+
+## Task 7 — review round 1 (independent adversarial reviewer, 39/39 unique rasters of 6846366 opened)
+Result: 11 confirmed, 4 plausible findings, so QA was NOT signed. Each was re-derived from files before acting.
+| finding | verdict after re-derivation | action |
+|---|---|---|
+| F1 blocker: closing highlights "Reale Nutzung … 2026-08-01 bis 2026-08-28", "Reale Ladeerfahrung … dokumentierter Zeitraum" from `FIXTURE_REPLAY` | confirmed (PDF text + model) | fixed: example data → "Nutzung"/"Ladeerfahrung", context "Beispieldaten"; LCP named "Hauptinhalt sichtbar nach … (p75)" |
+| F2/F3 roadmap "Jetzt" vs next step/closing order; P1/P2 re-derived from severity | confirmed (source roadmap F-003 now, F-002 P1, F-004 P2) | fixed: audit roadmap entry (evidence_basis) decides slot + priority; next step and closing follow that order |
+| F4 active-positive lever F-001 vs UX-02 = 100 "Klarheit des nächsten Schritts" | confirmed (fixture stitches legacy findings onto full-48 FIXTURE metrics) | OPEN — owner decision (lever admission rule or consistent positive fixture) |
+| F5 V08 AI-05 = 100 shown "Verbesserung sinnvoll" via non-lever F-005 | confirmed | fixed: cap only from the four levers; test_legal_trust_boundary aligned to its "customer-visible" docstring + hidden-finding control |
+| F6 V02 trust bar 89 under legal risk | confirmed | fixed: bar withheld while legal projection contests its metrics (recorded in V02 population) |
+| F7 V07 page for non-lever F-002 | confirmed as observation; chart is evidence-bound | OPEN — owner decision (visual admission policy) |
+| F8 #566360 on orange 1.87:1 | confirmed | fixed: ink on orange pages |
+| F9 empty "Stärken" column | confirmed | fixed: column omitted when empty |
+| F10 "3.8" without unit; "Ladezeit" for LCP | confirmed | fixed: "3,8 s", "Ziel ≤ 2,5 s", subtitle "Mobile Anzeige des Hauptinhalts" |
+| F11 ranking axis unnamed | confirmed | fixed: "Position N" / "Position 1" scale labels |
+| P1 page-2 footer date next to "Beispieldaten" | plausible → fixed | footer "Auf einen Blick" for example data |
+| P2 "KI-Antworten wurden nicht abgefragt." | not a defect | intentional scope boundary from the claim-scope patch |
+| P3 `font_resolution.customer_release_ready` | not a defect | font sub-status; top-level status stays BUILT_PENDING_QA |
+| P4 "die Website läuft über HTTPS" | not a defect | site-level transport property, not a sample claim |
+| reviewer note: customer mode not attempted for 4 cases | confirmed | builder now attempts customer mode for all nine |
+
+| check | command | rc | value |
+|---|---|---|---|
+| red | `…ReviewRoundOne` (9 tests) | 1 | 9 failures, each for the stated reason |
+| green | `$PY -B -m unittest tests.test_evidence_bound_claims` | 0 | 33 tests OK |
+| full suite | `$PY -B -m pytest tests -q` | 0 | 220 passed, 69 subtests |
+| 12 eval suites | enrichment, gateway, strategic, visual architecture, customer semantic, VC03, branch priority, legal projection, business-first, gallery, truth discipline, reporting bundle | 0 | all PASS |
+| oracles | amendment in place: plan 45a14b49…→ac5e2787…, model e5f745cc…→ffae93dd…; lever ids unchanged | 0 | OK |
+| baseline / v3.2.1 | validators | 0 | PASS (7 override files incl. assets/presentation.css) / PASS 25 transitions |

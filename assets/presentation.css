@@ -100,6 +100,8 @@ p { margin: 0; }
 .page.levers .section-title { margin-top: 4mm; }
 .page.levers .section-title h2 { font-size: 22pt; }
 .page.levers .section-title p { font-size: 9.5pt; }
+/* One ink on orange: the sage hairline colour reaches only 1.9:1 there. */
+.page.orange .footer, .page.orange .section-title p { color: #0E1414; }
 .page.levers .lever-grid { margin-top: 4mm; gap: 3mm; }
 .page.levers .lever { min-height: 0; padding: 3.5mm 4.5mm 4mm; border-top-width: 3mm; border-radius: 4mm; }
 .page.levers .lever .number { font-size: 8.5pt; margin-bottom: 1mm; }

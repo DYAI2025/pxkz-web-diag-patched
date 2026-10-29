@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "status": "PASS",
   "suite": "tests.test_evidence_bound_claims",
-  "artifact_digest": "4b72715328821f1d4c9cf91020f8fd21f337dedf51d67ca042546c763373f552",
-  "tests_run": 24,
+  "artifact_digest": "de899a912477dbc74d9aee13d9640636cb4e0ce46683182718b57f6477b8deff",
+  "tests_run": 33,
   "failures": 0,
   "errors": 0,
   "skipped": [],
@@ -94,6 +94,42 @@
     },
     {
       "test": "tests.test_evidence_bound_claims.MutationCanary.test_eval_fails_on_reintroduced_lab_rewrite",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundOne.test_category_bars_do_not_vouch_for_an_area_under_legal_review",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundOne.test_empty_strengths_leave_no_empty_column",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundOne.test_example_data_page_two_footer_carries_no_report_date",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundOne.test_example_enrichment_highlights_do_not_claim_real_usage",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundOne.test_matrix_cap_comes_only_from_customer_levers",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundOne.test_orange_page_text_meets_contrast_minimum",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundOne.test_ranking_chart_names_its_position_scale",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundOne.test_roadmap_keeps_audit_priorities_and_one_execution_order",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundOne.test_threshold_value_carries_unit_and_german_decimal",
       "outcome": "ok"
     }
   ],

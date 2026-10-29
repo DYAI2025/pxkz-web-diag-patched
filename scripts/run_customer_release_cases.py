@@ -95,7 +95,8 @@ def main(argv: list[str]) -> int:
         proc = run([root / "scripts/build_audit_deliverables.py", scored, target, "--release-mode", "customer", "--force-svg-fallback", *extra],
                    expect_ok=False)
         text = proc.stdout + proc.stderr
-        reason = next((tok for tok in ("SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT", "CUSTOMER_MIN_VISUALS_NOT_MET") if tok in text), None)
+        reason = next((tok for tok in ("SYNTHETIC_EVIDENCE_IN_CUSTOMER_OUTPUT", "CUSTOMER_MIN_VISUALS_NOT_MET",
+                                       "synthetic priority profiles are test data") if tok in text), None)
         return {"case": name, "rc": proc.returncode, "blocked": proc.returncode != 0 and reason is not None, "reason": reason,
                 "pdf_written": (target / "customer_presentation.pdf").exists()}
 
@@ -158,12 +159,16 @@ def main(argv: list[str]) -> int:
         "case-c-vc03-detail": (c_path, ()),
         "active-positive": (active, ()),
     }
-    refusals = [refuse_customer(scored, name, extra) for name, (scored, extra) in inputs.items()]
+    proof_only = {
+        "case-b-equal-rank-profile": (b, prio),
+        "proof-realistic": (legal_scored, ("--impressum-compliance", side)),
+        "proof-strategic": (enriched, ()),
+        "proof-measurement-gateway": (gw_scored, ()),
+    }
+    # Every case is first attempted as a customer release; all inputs are example data, so each must be refused.
+    refusals = [refuse_customer(scored, name, extra) for name, (scored, extra) in {**inputs, **proof_only}.items()]
     cases = [build(scored, name, extra) for name, (scored, extra) in inputs.items()]
-    cases.append(build(b, "case-b-equal-rank-profile", prio, strict_fonts=False))
-    cases.append(build(legal_scored, "proof-realistic", ("--impressum-compliance", side)))
-    cases.append(build(enriched, "proof-strategic"))
-    cases.append(build(gw_scored, "proof-measurement-gateway"))
+    cases += [build(scored, name, extra, strict_fonts=(name != "case-b-equal-rank-profile")) for name, (scored, extra) in proof_only.items()]
 
     negatives = []
     for fixture in ("baumdienst-renner-reflection-regression", "low-coverage-marketing-report"):

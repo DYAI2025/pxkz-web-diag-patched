@@ -36,13 +36,13 @@
     <div class="summary-card" style="display: flex; flex-direction: column;">
       <p class="takeaway">{{ model.executive.takeaway }}</p>
       <div class="summary-columns">
-        <div><div class="label">Stärken</div><ul class="summary-list">{% for item in model.executive.strengths[:3] %}<li>{{ item }}</li>{% endfor %}</ul></div>
+        {% if model.executive.strengths %}<div><div class="label">Stärken</div><ul class="summary-list">{% for item in model.executive.strengths[:3] %}<li>{{ item }}</li>{% endfor %}</ul></div>{% endif %}
         <div><div class="label">Prioritäten</div><ul class="summary-list">{% for item in model.executive.priorities[:3] %}<li>{{ item }}</li>{% endfor %}</ul></div>
       </div>
       <p class="scope-note" style="margin-top: auto; padding-top: 4mm; font-size: 10pt; line-height: 1.35; color: #566360;">{% if notice %}Grundlage: {{ notice }}.{% else %}Grundlage: Stichprobe öffentlich erreichbarer Seiten, Stand {{ model.meta.date }}.{% endif %} KI-Antworten wurden nicht abgefragt.</p>
     </div>
   </div>
-  <div class="footer"><span>{{ owner }} · {{ model.meta.date }}</span><span>02</span></div>
+  <div class="footer"><span>{{ owner }} · {{ 'Auf einen Blick' if notice else model.meta.date }}</span><span>02</span></div>
 </section>
 
 {% for visual in visuals %}

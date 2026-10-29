@@ -404,6 +404,132 @@ class GoldenPairs(unittest.TestCase):
             self.assertTrue(clientize(raw, 200).strip(), raw)
 
 
+class ReviewRoundOne(unittest.TestCase):
+    """Defects an independent adversarial review found on the nine fresh proof PDFs of 6846366."""
+
+    def model_for(self, report: dict, tmp: Path) -> dict:
+        scored, model = scored_from(report, tmp), tmp / "model.json"
+        result = run("scripts/build_client_report_model.py", str(scored), str(model))
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        return load(model)
+
+    def render_template(self, model: dict) -> str:
+        from jinja2 import Environment, FileSystemLoader, StrictUndefined
+        env = Environment(loader=FileSystemLoader(str(ROOT / "templates")), undefined=StrictUndefined, autoescape=True)
+        return env.get_template("presentation.html.j2").render(model=model, visuals=[], findings=model["findings"][:4], css="", font_status="EXACT")
+
+    def test_example_enrichment_highlights_do_not_claim_real_usage(self) -> None:  # F1
+        import re
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            scored, enrichment, enriched, model = scored_from(load(FIXTURE), tmp), tmp / "e.json", tmp / "enriched.json", tmp / "m.json"
+            self.assertEqual(run("scripts/collect_measurement_enrichment.py", "https://example.com", str(enrichment), "--config",
+                                 "evals/fixtures/measurement-enrichment-config.json", "--fixture-bundle",
+                                 "evals/fixtures/measurement-provider-responses.json", "--offline").returncode, 0)
+            self.assertEqual(run("scripts/attach_measurement_enrichment.py", str(scored), str(enrichment), str(enriched)).returncode, 0)
+            self.assertEqual(run("scripts/build_client_report_model.py", str(enriched), str(model)).returncode, 0)
+            highlights = load(model)["closing"]["measurement_highlights"]
+        self.assertEqual(len(highlights), 3)
+        text = " ".join(f"{h['label']} {h['value']} {h['context']}" for h in highlights)
+        self.assertNotIn("Reale", text)
+        self.assertNotIn("dokumentiert", text)
+        self.assertIsNone(re.search(r"\d{4}-\d{2}-\d{2}", text), text)
+        self.assertNotIn("Ladezeit", text, "an LCP p75 value is not a load time")
+        self.assertTrue(all("Beispieldaten" in h["context"] for h in highlights), highlights)
+
+    def test_roadmap_keeps_audit_priorities_and_one_execution_order(self) -> None:  # F2, F3
+        from build_client_report_model import short_action
+        with tempfile.TemporaryDirectory() as td:
+            model = self.model_for(load(FIXTURE), Path(td))
+        # Audit roadmap: F-003 now/P1, F-001 and F-002 0-30 days/P1, F-004 31-90 days/P2.
+        self.assertEqual([[i["priority"] for i in model["roadmap"][k]] for k in ("now", "next_30_days", "next_quarter")],
+                         [["P1"], ["P1", "P1"], ["P2"]])
+        by_id = {f["id"]: f for f in model["findings"]}
+        order = ["F-003", "F-001", "F-002", "F-004"]
+        self.assertEqual(model["closing"]["actions"], [short_action(by_id[x]["action"]) for x in order])
+        self.assertEqual(model["recommendation"]["next_step"], model["roadmap"]["now"][0]["action"])
+
+    def test_matrix_cap_comes_only_from_customer_levers(self) -> None:  # F5
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            report = load(FIXTURE)
+            set_metric(report, "AI-05", score=100, status="strong")  # cited only by F-005, which is not a customer lever
+            plan = build_plan(scored_from(report, tmp), tmp)
+        self.assertNotIn("F-005", plan["top_levers"])
+        v08 = next(v for v in plan["visuals"] if v["template_id"] == "V08_AI_ANSWERABILITY")
+        self.assertEqual(next(r["status"] for r in v08["data"] if r["metric_ref"] == "AI-05"), "Klar")
+
+    def legal_report(self) -> dict:
+        from attach_impressum_findings import finding_from
+        from impressum_compliance import assess_case
+        report = load(FIXTURE)
+        golden = next(c for c in load(ROOT / "evals/fixtures/impressum-compliance-cases.json")["cases"] if c.get("id") == "LEG-GOLD-BFL")
+        report["findings"].append(finding_from(assess_case(golden["context"], golden["observations"], root=ROOT, discovery_scope={"complete": True}), 99))
+        return report
+
+    def test_category_bars_do_not_vouch_for_an_area_under_legal_review(self) -> None:  # F6
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            legal = build_plan(scored_from(self.legal_report(), tmp, "legal"), tmp)
+            plain = build_plan(scored_from(load(FIXTURE), tmp, "plain"), tmp)
+        bars = lambda plan: [r["label"] for v in plan["visuals"] if v["template_id"] == "V02_CATEGORY_BARS" for r in v["data"]]
+        self.assertTrue(any(x.startswith("Vertrauen") for x in bars(plain)), bars(plain))
+        self.assertFalse(any(x.startswith("Vertrauen") for x in bars(legal)), bars(legal))
+
+    def test_empty_strengths_leave_no_empty_column(self) -> None:  # F9
+        with tempfile.TemporaryDirectory() as td:
+            model = self.model_for(load(FIXTURE), Path(td))
+        model["executive"]["strengths"] = []
+        self.assertNotIn('<div class="label">Stärken</div>', self.render_template(model))
+
+    def test_example_data_page_two_footer_carries_no_report_date(self) -> None:  # P1
+        with tempfile.TemporaryDirectory() as td:
+            model = self.model_for(load(FIXTURE), Path(td))
+        self.assertIn("sample_data_notice", model["meta"])
+        self.assertNotIn(f"Beispieldaten · {model['meta']['date']}", self.render_template(model))
+
+    def test_threshold_value_carries_unit_and_german_decimal(self) -> None:  # F10
+        from svg_chart_renderer import render_svg
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            v07 = next(v for v in build_plan(scored_from(load(FIXTURE), tmp), tmp)["visuals"] if v["template_id"] == "V07_PERFORMANCE_THRESHOLD")
+        self.assertNotIn("Ladezeit", v07["subtitle"])
+        svg = render_svg(v07)
+        self.assertIn("3,8 s", svg)
+        self.assertIn("Ziel ≤ 2,5 s", svg)
+        self.assertNotIn("3.8", svg)
+
+    def test_ranking_chart_names_its_position_scale(self) -> None:  # F11
+        from svg_chart_renderer import render_svg
+        visual = {"id": "VIZ-001", "template_id": "V05_RANKING_POSITION", "title": "Google-Positionen nach Suchanfrage", "subtitle": "x",
+                  "data": [{"query": "a", "position": 18}, {"query": "b", "position": 9}]}
+        svg = render_svg(visual)
+        self.assertIn("Position 1", svg)
+        self.assertIn("Position 18", svg)
+
+    def test_orange_page_text_meets_contrast_minimum(self) -> None:  # F8
+        import re
+        css = (ROOT / "assets/presentation.css").read_text(encoding="utf-8")
+
+        def colour(selector: str, fallback: str) -> str:
+            m = re.search(re.escape(selector) + r"[^{]*\{[^}]*?color:\s*(#[0-9A-Fa-f]{6})", css)
+            if m:
+                return m.group(1)
+            return re.search(re.escape(fallback) + r"\s*\{[^}]*?color:\s*(#[0-9A-Fa-f]{6})", css).group(1)
+
+        def lum(hexcode: str) -> float:
+            c = [int(hexcode[i:i + 2], 16) / 255 for i in (1, 3, 5)]
+            c = [x / 12.92 if x <= 0.03928 else ((x + 0.055) / 1.055) ** 2.4 for x in c]
+            return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
+
+        def ratio(a: str, b: str) -> float:
+            hi, lo = sorted((lum(a), lum(b)), reverse=True)
+            return (hi + 0.05) / (lo + 0.05)
+
+        for selector, fallback in ((".page.orange .footer", ".footer"), (".page.orange .section-title p", ".section-title p")):
+            self.assertGreaterEqual(ratio(colour(selector, fallback), "#EC5E43"), 4.5, selector)
+
+
 class MutationCanary(unittest.TestCase):
     """The claim eval must go red when the lab-to-device rewrite returns: proves the gate can fail."""
 

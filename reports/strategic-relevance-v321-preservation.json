@@ -985,7 +985,7 @@
     {
       "path": "assets/presentation.css",
       "baseline_sha256": "ffd55bb7baa0b458de6db423792842f2bd4c0ee6e061003f53823ef588955a23",
-      "current_sha256": "49a0f04b5a2b69da404dba2e7adff496a38f00ff6efcef1620a214ab5dbcf2d0",
+      "current_sha256": "3900eb15c400d61b19a907ce8e2151363790c3ce32bb1ca08b83b95a88fa7d87",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1177,7 +1177,7 @@
     {
       "path": "scripts/build_client_report_model.py",
       "baseline_sha256": "433a909ec9bb38b29a4864f468d2cdf66a4a83b1beef0fdada2f6db8716a538e",
-      "current_sha256": "69c9180d7581e91f8bfacb39b80dbdb203bed06e08e51c90fe72b21b3da01ec2",
+      "current_sha256": "724892d237c18deb760238fbe4acb249ad3b326fee10140d3531ced0eaea5aee",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1195,7 +1195,7 @@
     {
       "path": "scripts/build_visualization_plan.py",
       "baseline_sha256": "baf5d85df264a812165d4ba0fb534619e0ab5b9f3a601b8011955164358be954",
-      "current_sha256": "ea3f5fd1d471d826fbec4a78fae49de4311a65a448c306c0537ad9407c25695f",
+      "current_sha256": "799211ce41c990f3ed8e19a2a2f197b50d82af44f443bb7c11f03a8a0130989e",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1285,7 +1285,7 @@
     {
       "path": "scripts/svg_chart_renderer.py",
       "baseline_sha256": "35d0ee5acb12d7d798d41e50ab9e9b0593ebca18f66e9fd1dbbe40e38befba89",
-      "current_sha256": "418624363b5b42f49e541e65b57240b26575185aafd919a7c554d5fe0320f235",
+      "current_sha256": "0c49eabeaf118e41782393aa673d1577519fccddd17c2d7925ff374b8f4d1107",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE"
     },
     {
@@ -1321,7 +1321,7 @@
     {
       "path": "scripts/validate_measurement_platform_baseline.py",
       "baseline_sha256": "44c342a3da39bf050fa0e6def30502b357c79ce5bf04130e262646c0e6c12532",
-      "current_sha256": "f2c5cc004b3f7c419033a2e42d1797954a32ea61ce7e9ed8c3eca29cc110c3c5",
+      "current_sha256": "0a0101bacb3285cf098f854c3bb0ac8c880e6e72f6421a59cfe01cc1e66818f3",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + IMPRESSUM_COMPLIANCE_PATCH + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1387,7 +1387,7 @@
     {
       "path": "templates/presentation.html.j2",
       "baseline_sha256": "71c4af5c66c59e9db107fc1f903e7527c93a3a4101d0693e33df9a9e6287fb02",
-      "current_sha256": "e3712c138159d9316428effb271e0115a579c0b41484e866c5c89898560a985b",
+      "current_sha256": "be3fc4664d7064b320ab33185acd083c983685a1bd60c48783078f26f6548979",
       "reason": "CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1471,7 +1471,7 @@
     {
       "path": "docs/plans/2026-10-29-evidence-bound-claims-evidence-ledger.md",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "419746e0bd67dc4706d63a18666e5cc31ea2829ef755823248a8a6c7ba3bf0fb"
+      "current_sha256": "4ee2946311a3c256948ea0b9c3d38fb6cf06b4e22289ba571993fbe30fa968f3"
     },
     {
       "path": "enterprise-skill-patch-order-branch-priority.xml",
@@ -1506,7 +1506,7 @@
     {
       "path": "evals/fixtures/golden/legacy-oracles.v1.json",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "dc1835f44323f741c8c811e902322801b7a647ba5f38c2d4c8342412d87f9992"
+      "current_sha256": "da8846ec6073f67b2b224745add48996f41945d778c8c5c24489c92996864e20"
     },
     {
       "path": "evals/fixtures/impressum-compliance-cases.json",
@@ -1651,7 +1651,7 @@
     {
       "path": "scripts/run_customer_release_cases.py",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "3494a0ef37f36371ee130bdea3c7d87d04d25c8902842aa6f325c86f30bb0c56"
+      "current_sha256": "3501a90493902df9c4cd4393337643a795f1c3a5d56e224a9d8387594a06aef8"
     },
     {
       "path": "scripts/run_evidence_bound_claim_evals.py",
@@ -1776,7 +1776,7 @@
     {
       "path": "tests/test_evidence_bound_claims.py",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "3cc836f6edbe26e5f2072a05f8b02473bb92a44801c782cea60ab32752d5e752"
+      "current_sha256": "341e464457d23caf1defeac4b592bc3a12bc71d4123d58b7e23e8685f23103aa"
     },
     {
       "path": "tests/test_legacy_oracles.py",
@@ -1786,7 +1786,7 @@
     {
       "path": "tests/test_legal_trust_boundary.py",
       "reason": "BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE",
-      "current_sha256": "c85f19bfb6b5fc6a435398c05fd12faa86156d13a5da63dea0d43a46279b2a36"
+      "current_sha256": "908d3c04222b66fe9c2c15c9bfea4e174716380af8326255b9e7dff7d697a6fe"
     },
     {
       "path": "tests/test_packaged_brand_fonts.py",
@@ -2707,14 +2707,19 @@
           "current_sha256": "c35632f0bd1ef07057ffd8d2258598e8585d65803cdca3951ff1bab1dc1507c7"
         },
         {
+          "path": "assets/presentation.css",
+          "previous_sha256": "49a0f04b5a2b69da404dba2e7adff496a38f00ff6efcef1620a214ab5dbcf2d0",
+          "current_sha256": "3900eb15c400d61b19a907ce8e2151363790c3ce32bb1ca08b83b95a88fa7d87"
+        },
+        {
           "path": "docs/plans/2026-10-29-evidence-bound-claims-evidence-ledger.md",
           "previous_sha256": null,
-          "current_sha256": "419746e0bd67dc4706d63a18666e5cc31ea2829ef755823248a8a6c7ba3bf0fb"
+          "current_sha256": "4ee2946311a3c256948ea0b9c3d38fb6cf06b4e22289ba571993fbe30fa968f3"
         },
         {
           "path": "evals/fixtures/golden/legacy-oracles.v1.json",
           "previous_sha256": "ceef30d6e413f55898be1d6449d813ba70548dd1a58f4b1d3e057025a72bdfbb",
-          "current_sha256": "dc1835f44323f741c8c811e902322801b7a647ba5f38c2d4c8342412d87f9992"
+          "current_sha256": "da8846ec6073f67b2b224745add48996f41945d778c8c5c24489c92996864e20"
         },
         {
           "path": "schemas/visualization-plan.schema.json",
@@ -2729,12 +2734,12 @@
         {
           "path": "scripts/build_client_report_model.py",
           "previous_sha256": "3875b71e2e689fe90154889a7ebffb773e751dede762122e49bae67f25a7d5d7",
-          "current_sha256": "69c9180d7581e91f8bfacb39b80dbdb203bed06e08e51c90fe72b21b3da01ec2"
+          "current_sha256": "724892d237c18deb760238fbe4acb249ad3b326fee10140d3531ced0eaea5aee"
         },
         {
           "path": "scripts/build_visualization_plan.py",
           "previous_sha256": "488b034dd5fde6b3680fe005e8946417870068467f57bd36e2aebf6a79a8f30c",
-          "current_sha256": "ea3f5fd1d471d826fbec4a78fae49de4311a65a448c306c0537ad9407c25695f"
+          "current_sha256": "799211ce41c990f3ed8e19a2a2f197b50d82af44f443bb7c11f03a8a0130989e"
         },
         {
           "path": "scripts/client_story.py",
@@ -2759,7 +2764,7 @@
         {
           "path": "scripts/run_customer_release_cases.py",
           "previous_sha256": null,
-          "current_sha256": "3494a0ef37f36371ee130bdea3c7d87d04d25c8902842aa6f325c86f30bb0c56"
+          "current_sha256": "3501a90493902df9c4cd4393337643a795f1c3a5d56e224a9d8387594a06aef8"
         },
         {
           "path": "scripts/run_evidence_bound_claim_evals.py",
@@ -2769,7 +2774,7 @@
         {
           "path": "scripts/svg_chart_renderer.py",
           "previous_sha256": "56346daa17f50190bc5a824e38958a25d125db85a3f50f7f9f670c220e1da113",
-          "current_sha256": "418624363b5b42f49e541e65b57240b26575185aafd919a7c554d5fe0320f235"
+          "current_sha256": "0c49eabeaf118e41782393aa673d1577519fccddd17c2d7925ff374b8f4d1107"
         },
         {
           "path": "scripts/validate_customer_claim_bindings.py",
@@ -2784,7 +2789,7 @@
         {
           "path": "scripts/validate_measurement_platform_baseline.py",
           "previous_sha256": "daeadc5af2fde036a5b58ea8a9f94ef050df2db8c7414507a0c28239d838ac43",
-          "current_sha256": "f2c5cc004b3f7c419033a2e42d1797954a32ea61ce7e9ed8c3eca29cc110c3c5"
+          "current_sha256": "0a0101bacb3285cf098f854c3bb0ac8c880e6e72f6421a59cfe01cc1e66818f3"
         },
         {
           "path": "scripts/validate_release_gate.py",
@@ -2794,7 +2799,7 @@
         {
           "path": "templates/presentation.html.j2",
           "previous_sha256": "3f55a096ed246ae2099d4bceda11ad38490d8daa837efb93d731ffe4496e9a44",
-          "current_sha256": "e3712c138159d9316428effb271e0115a579c0b41484e866c5c89898560a985b"
+          "current_sha256": "be3fc4664d7064b320ab33185acd083c983685a1bd60c48783078f26f6548979"
         },
         {
           "path": "tests/test_customer_label_fidelity.py",
@@ -2804,7 +2809,12 @@
         {
           "path": "tests/test_evidence_bound_claims.py",
           "previous_sha256": null,
-          "current_sha256": "3cc836f6edbe26e5f2072a05f8b02473bb92a44801c782cea60ab32752d5e752"
+          "current_sha256": "341e464457d23caf1defeac4b592bc3a12bc71d4123d58b7e23e8685f23103aa"
+        },
+        {
+          "path": "tests/test_legal_trust_boundary.py",
+          "previous_sha256": "c85f19bfb6b5fc6a435398c05fd12faa86156d13a5da63dea0d43a46279b2a36",
+          "current_sha256": "908d3c04222b66fe9c2c15c9bfea4e174716380af8326255b9e7dff7d697a6fe"
         },
         {
           "path": "tests/test_packaged_brand_fonts.py",

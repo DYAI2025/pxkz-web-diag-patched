@@ -200,6 +200,9 @@ def render_svg(visual: dict[str, Any]) -> str:
         # Rows that carry their own place/device/date get a caption line, so they need a little more pitch:
         # eight captioned rows end at y=387, above the footer rule at y=407.
         pitch = 34 if any(row.get("context_label") for row in rows) else 32
+        # Name the scale: better positions sit to the right, position 1 at the right end of the track.
+        lines.append(f'<text x="340" y="112" font-family="{MONO}" font-size="13" fill="{SAGE_LINE}">Position {maxp:g}</text>')
+        lines.append(f'<text x="810" y="112" text-anchor="end" font-family="{MONO}" font-size="13" fill="{SAGE_LINE}">Position 1</text>')
         for i, row in enumerate(rows):
             y = 130 + i * pitch
             pos = float(row.get("position", 0) or 0)
@@ -225,6 +228,9 @@ def render_svg(visual: dict[str, Any]) -> str:
         warn = float(row.get("warn", max(good, 1)) or max(good, 1))
         domain = max(warn * 1.5, value * 1.15, 1)
         x, width, y, h = 90, 720, 190, 70
+        # German decimal comma and the metric's own unit on every printed number.
+        unit = f" {row['unit']}" if row.get("unit") else ""
+        num = lambda v: f"{v:g}".replace(".", ",") + unit
         gx = width * good / domain
         wx = width * warn / domain
         lines += [
@@ -232,8 +238,8 @@ def render_svg(visual: dict[str, Any]) -> str:
             f'<rect x="{x+gx:.1f}" y="{y}" width="{max(0,wx-gx):.1f}" height="{h}" fill="{WARN_SURFACE}"/>',
             f'<rect x="{x+wx:.1f}" y="{y}" width="{max(0,width-wx):.1f}" height="{h}" fill="{BAD_SURFACE}"/>',
             f'<line x1="{x+width*value/domain:.1f}" y1="{y-18}" x2="{x+width*value/domain:.1f}" y2="{y+h+18}" stroke="{ORANGE}" stroke-width="6"/>',
-            f'<text x="{x}" y="{y+120}" font-family="{FONT}" font-size="15" fill="{INK}">Ziel ≤ {good:g} · Warnschwelle {warn:g}</text>',
-            f'<text x="{x+width*value/domain:.1f}" y="{y-28}" text-anchor="middle" font-family="{MONO}" font-size="25" font-weight="700" fill="{INK}">{value:g}</text>',
+            f'<text x="{x}" y="{y+120}" font-family="{FONT}" font-size="15" fill="{INK}">Ziel ≤ {esc(num(good))} · Warnschwelle {esc(num(warn))}</text>',
+            f'<text x="{x+width*value/domain:.1f}" y="{y-28}" text-anchor="middle" font-family="{MONO}" font-size="25" font-weight="700" fill="{INK}">{esc(num(value))}</text>',
         ]
     elif tid == "V11_SEVERITY_DISTRIBUTION":
         stacked(lines, data, "severity", "count")
