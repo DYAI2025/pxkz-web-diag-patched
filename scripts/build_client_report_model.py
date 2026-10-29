@@ -198,7 +198,7 @@ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
         device = "Mobil" if str(field.get("device")).upper() == "PHONE" else (field.get("device") or "Feldwert")
         # LCP p75 says when the main content became visible for 75 % of visits, not a page load time.
         out.append({"label": "Ladeerfahrung" if example else "Reale Ladeerfahrung",
-                    "value": f"Hauptinhalt sichtbar nach {sec:.1f} s (p75)".replace(".", ","),
+                    "value": f"Hauptinhalt nach max. {sec:.1f}".replace(".", ",").replace("max,", "max.") + " s bei 3 von 4 Besuchen",
                     "context": clientize(f"{device} · {'Beispieldaten' if example else 'dokumentierter Zeitraum'}", 100)})
     return out[:3]
 
@@ -316,7 +316,9 @@ def main(argv: list[str]) -> int:
         semantic = presentation_metadata(report, f, registry)
         finding_models.append({
             "id": str(f.get("id", "")),
-            "severity": str(f.get("severity", "medium")),
+            # A mandatory-critical legal risk is shown as critical, never as a mere "HOCH".
+            "severity": "critical" if isinstance(f.get("customer_risk"), dict) and f["customer_risk"].get("priority") == "MANDATORY_CRITICAL"
+                        else str(f.get("severity", "medium")),
             "category": str(f.get("category", "")),
             "headline": clientize(f.get("title"), budget("finding_headline", 110)),
             "observation": clientize(f.get("client_observation") or f.get("observation"), budget("finding_observation", 130)),
@@ -392,6 +394,7 @@ def main(argv: list[str]) -> int:
     rank_of = {fid: i for i, fid in enumerate(execution_ids)}
     closing_findings = sorted(finding_models[:4], key=lambda fm: rank_of.get(str(fm.get("id")), len(rank_of)))
 
+    executive_strengths_shown = bool(strengths)
     model = {
         "template_version": str(template.get("template_version", "5.0")),
         "brand": "Pixelkiez",
@@ -406,7 +409,7 @@ def main(argv: list[str]) -> int:
         },
         "cover": {
             "eyebrow": "01 · WEBSITE-ANALYSE",
-            "title": "Was Ihre Website heute gut macht - und was sie bremst.",
+            "title": "Was Ihre Website heute gut macht - und was sie bremst." if executive_strengths_shown else "Was Ihre Website heute bremst - und was zuerst zählt.",
             "customer": meta.get("customer_name", ""),
             "url": meta.get("audited_url", ""),
             "date": meta.get("audit_date", ""),

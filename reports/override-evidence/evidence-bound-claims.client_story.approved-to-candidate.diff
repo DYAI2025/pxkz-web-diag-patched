@@ -1,8 +1,8 @@
 diff --git a/scripts/client_story.py b/scripts/client_story.py
-index 8a7a789..9b9675e 100644
+index 8a7a789..f3706a0 100644
 --- a/scripts/client_story.py
 +++ b/scripts/client_story.py
-@@ -8,32 +8,45 @@ from typing import Any
+@@ -8,32 +8,46 @@ from typing import Any
  
  from strategic_relevance import evaluate_finding
  from branch_priority import preferred_order
@@ -21,11 +21,14 @@ index 8a7a789..9b9675e 100644
 +
  CLIENT_REPLACEMENTS = [
      (re.compile(r"Die drei wichtigsten Suchintentionen auf eigene, klar verlinkte Leistungsseiten abbilden\.?", re.I), "Die drei wichtigsten Suchanfragen mit klar verlinkten Leistungsseiten abdecken."),
-     (re.compile(r"LCP-Element,?\s*Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen\.?", re.I), "Mobile Hauptdarstellung durch optimierte Bilder und Ressourcen beschleunigen."),
-     (re.compile(r"größtes sichtbares Seitenelement,?\s*Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen\.?", re.I), "Mobile Hauptdarstellung durch optimierte Bilder und Ressourcen beschleunigen."),
+-    (re.compile(r"LCP-Element,?\s*Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen\.?", re.I), "Mobile Hauptdarstellung durch optimierte Bilder und Ressourcen beschleunigen."),
+-    (re.compile(r"größtes sichtbares Seitenelement,?\s*Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen\.?", re.I), "Mobile Hauptdarstellung durch optimierte Bilder und Ressourcen beschleunigen."),
 -    (re.compile(r"\bim\s+mobilen\s+Labortest\b", re.I), "auf Mobilgeräten"),
 -    (re.compile(r"\bim\s+Labortest\b", re.I), ""),
 -    (re.compile(r"\bLabortest(?:s)?\b", re.I), ""),
++    # The audit asks to check and re-measure; the customer text must not name a cause the audit did not establish.
++    (re.compile(r"LCP-Element,?\s*Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen\.?", re.I), "Größtes sichtbares Element, Bilder und wichtige Ladeschritte prüfen und danach erneut messen."),
++    (re.compile(r"größtes sichtbares Seitenelement,?\s*Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen\.?", re.I), "Größtes sichtbares Element, Bilder und wichtige Ladeschritte prüfen und danach erneut messen."),
 +    # Method, synthetic origin and sample scope survive simplification (evidence-bound claims patch).
 +    # "Testmessung" is customer-safe; "Labortest"/"Labormessung" are guardrail-forbidden provider/test terms.
 +    (re.compile(r"Lighthouse/PageSpeed-Labortest", re.I), "technische Testmessung der Ladezeit"),
@@ -57,7 +60,7 @@ index 8a7a789..9b9675e 100644
      (re.compile(r"\bFixture\b", re.I), "Analyse"),
      (re.compile(r"Belegte Projektbeispiele, Zertifikate und Qualifikationsnachweise und freigegebene Kundenstimmen", re.I), "Belegte Projektbeispiele, Zertifikate, Qualifikationsnachweise und freigegebene Kundenstimmen"),
      (re.compile(r"\bEntitätsklarheit\b", re.I), "Eindeutige Unternehmensdarstellung"),
-@@ -57,7 +70,6 @@ CLIENT_REPLACEMENTS = [
+@@ -57,7 +71,6 @@ CLIENT_REPLACEMENTS = [
      (re.compile(r"lokale Pixelkiez Scoring-/Validierungs-/PDF-Werkzeuge", re.I), "lokale Pixelkiez Prüf- und Berichtswerkzeuge"),
      (re.compile(r"Raw-HTML Canonical/Robots-Meta/JSON-LD", re.I), "technische Angaben zur Hauptadresse, Indexierung und Seitenstruktur"),
      (re.compile(r"CrUX/Felddaten", re.I), "reale Lade- und Nutzungsdaten"),
@@ -65,7 +68,16 @@ index 8a7a789..9b9675e 100644
      (re.compile(r"Assetgrößen und Response-Header", re.I), "Größe wichtiger Seitendateien und Serverantworten"),
      (re.compile(r"pixelgenaue Mobile-/Desktop-Viewportprüfung", re.I), "pixelgenaue Prüfung auf Mobilgeräten und Desktop"),
      (re.compile(r"Tastatur/Fokus/Kontrast/automatisierter WCAG-Snapshot", re.I), "vollständige Prüfung von Tastaturbedienung, Fokus, Kontrast und Barrierefreiheit"),
-@@ -239,6 +251,19 @@ def confidence_de(value: object) -> str:
+@@ -162,6 +175,8 @@ CLIENT_REPLACEMENTS = [
+     (re.compile(r"\bPerformance\b", re.I), "Ladegeschwindigkeit"),
+     (re.compile(r"\bMobile-UX\b", re.I), "mobile Bedienbarkeit"),
+     (re.compile(r"\bAccessibility\b", re.I), "Barrierefreiheit"),
++    # TRUST-03 scores the encrypted connection; security headers are not visible statements to a visitor.
++    (re.compile(r"HTTPS\s*(?:&|und)\s*sichtbare\s+Security-Header", re.I), "HTTPS-Verschlüsselung"),
+     (re.compile(r"\bSecurity-Header\b", re.I), "Sicherheitsangaben"),
+     (re.compile(r"\bHeader\b", re.I), "Serverangaben"),
+     (re.compile(r"Brand-\s*(?:/|und)\s*Non-Brand-Suchsample", re.I), "Suchtests mit und ohne Firmennamen"),
+@@ -239,6 +254,19 @@ def confidence_de(value: object) -> str:
      return CONFIDENCE_DE.get(str(value).upper(), str(value).lower() if value else "niedrig")
  
  
@@ -85,7 +97,7 @@ index 8a7a789..9b9675e 100644
  def select_client_levers(
      report: dict[str, Any], max_levers: int = 4, *,
      branch_weights: dict[str, int] | None = None,
-@@ -249,6 +274,7 @@ def select_client_levers(
+@@ -249,6 +277,7 @@ def select_client_levers(
          if isinstance(f, dict)
          and f.get("severity") != "positive"
          and evaluate_finding(report, f)["eligible"]

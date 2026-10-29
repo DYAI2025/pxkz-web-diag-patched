@@ -137,3 +137,33 @@ Inspected pages: proof-strategic 08 (V05 scale), 10 (roadmap), 11 (highlights); 
 | red `test_empty_strengths_leave_no_empty_column` (+ `summary-columns single`) | 1 | assertion failed for the stated reason |
 | green after template class + `.summary-columns.single` CSS | 0 | OK |
 | full suite | 0 | see commit; claim eval PASS ran=33 skipped=0 |
+
+## Task 7 — review round 2 (fresh independent reviewer, 41/41 unique rasters of 9c506de opened)
+Result: 18 findings (1 blocker, 9 major), so QA was NOT signed. Each fix-candidate was re-derived from code/data before acting.
+| finding | verdict after re-derivation | action |
+|---|---|---|
+| R01/R02 active-positive lever F-001 vs UX-02 = 100; findings and metrics from different snapshots | confirmed (= round-1 F4) | OPEN — owner decision (fixture vs lever rule) |
+| R03 lever order (business rank) ≠ execution order (audit roadmap); HOCH under "Danach" | confirmed | OPEN — owner decision (one order, or explain both) |
+| R04 MANDATORY_CRITICAL legal lever shown "01 · HOCH" | confirmed (template maps severity only) | fixed: model shows it as critical |
+| R05 legal-override rows "Handlungsbedarf" next to TRUST-01 = 100 and score 65 incl. trust 89 | confirmed | OPEN — owner decision (legal projection semantics) |
+| R06 presence-only TRUST-01/02 shown "Klar" for rechtliche Angaben/Datenschutz | confirmed (registry score_mode presence_only) | OPEN — owner decision (presence wording vs status) |
+| R07 "HTTPS & sichtbare Sicherheitsangaben · Klar" with 0 security headers | confirmed | fixed: row named "HTTPS-Verschlüsselung" |
+| R08 "Testmessung" vs spec "Laborwerte bleiben als Labor bezeichnet" | spec ↔ guardrail conflict; plan chose "Testmessung" | OPEN — owner confirmation |
+| R09 field LCP 3,2 s and lab 3,8 s both unmarked | confirmed | fixed: field value reads "bei 3 von 4 Besuchen" |
+| R10/R11 V07 page and case-c lever selection vs audit roadmap | confirmed (= round-1 F7) | OPEN — owner decision (visual admission) |
+| R12 LCP action asserts images as cause, drops re-measure | confirmed (client_story replacement) | fixed |
+| R13 case-a cover without warning while two levers are KRITISCH | confirmed | OPEN — minor, part of R03 decision |
+| R14 "gut macht"/"Was heute trägt" titles with no strengths | confirmed | fixed |
+| R15 footer/subtitle 3.57:1 on sage | confirmed | fixed: #3A4543 |
+| R16 V05 position 1 plotted at x=784, label at 810 | confirmed | fixed: axis ends match labels |
+| R17 legacy ≡ gateway, legal-golden ≡ proof-realistic (identical PDFs) | confirmed | OPEN — case design; counted as 41 unique rasters, not nine proofs |
+| R18 plausible minors (p75 jargon fixed with R09; rest noted) | partly | p75 fixed; others open |
+
+| check | rc | value |
+|---|---|---|
+| red `ReviewRoundTwo` (7 new tests) | 1 | 7 failures, each for the stated reason |
+| green claim suite | 0 | 49 tests OK |
+| full suite | 0 | 236 passed, 69 subtests |
+| 12 eval suites | 0 | all PASS |
+| oracles | 0 | amendment in place: plan ac5e2787…→8f23ac34…, model ffae93dd…→4146f0fb…; lever ids unchanged |
+| baseline / v3.2.1 | 0 | PASS / PASS 25 transitions |

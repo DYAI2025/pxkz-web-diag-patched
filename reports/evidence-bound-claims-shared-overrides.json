@@ -2,7 +2,7 @@
  "status": "PASS",
  "patch_id": "EVIDENCE_BOUND_CLAIMS_PATCH",
  "authorization_basis": "User-approved fix slice 'Pixelkiez — Evidence-bound Customer Claims' (spec dated 2026-10-28, READY FOR DISCOVERY + IMPLEMENTATION; requirements REQ-F-001…006, REQ-NF-001/002, REQ-A-001 allow minimal authorized overrides) and the user's 2026-10-29 instruction to execute its implementation plan.",
- "scope_note": "Customer projection only. (1) client_story.py: lab wording becomes 'Testmessung' instead of device/real-user wording, synthetic wording becomes 'Beispieldaten' instead of 'dokumentierte Datenbasis', sample scope 'in der Stichprobe' is kept; core-metric levers whose every linked assessed metric reads 'Klar' are not selectable. (2) build_client_report_model.py: strengths only from positive findings whose metrics read 'Klar' and are uncontested, internal sidecar customer-claim-bindings.json; critical/MANDATORY_CRITICAL levers go to roadmap 'now'. (3) build_visualization_plan.py: V07 plots only the linked metric's own numeric value and names the method; V08 and V10 share the customer_status scale and matrix anchors; V05 rows carry their own place/device/date; rankings replayed from a fixture bundle are marked SYNTHETIC and say 'Beispieldaten' instead of a replay timestamp. (4) build_audit_deliverables.py: claim-binding validation, sidecar as required artifact, customer mode refuses fixture/synthetic evidence in plotted metrics and in measurement enrichment (MEASUREMENT_ENRICHMENT). (5) svg_chart_renderer.py: V05 prints the per-row context as a 13 px caption (SVG legibility floor) with a 34 px row pitch. (6) templates/presentation.html.j2: when the model carries meta.sample_data_notice (every input metric of this kind is example data), the cover, the page-2 basis line and every page footer name 'Beispieldaten'; real-data models render unchanged. Scores, the 48 core metrics, registry weights/anchors, evidence admission, batch v1.3 and the four-visual minimum are unchanged. Red/green: tests/test_evidence_bound_claims.py. Review round 1 (independent adversarial PDF review of 6846366): example-data measurement highlights no longer say 'Reale …' or name a documented period, and the LCP value is named as main-content visibility; roadmap timing/priority come from the audit's roadmap entry and drive next step and closing order; status caps come only from the four customer levers; a category bar is withheld while a projected legal risk contests its metrics; V07 prints German decimals with unit; V05 names its position scale; empty strengths column is not rendered; assets/presentation.css sets ink text on orange pages (contrast 1.9:1 -> ink).",
+ "scope_note": "Customer projection only. (1) client_story.py: lab wording becomes 'Testmessung' instead of device/real-user wording, synthetic wording becomes 'Beispieldaten' instead of 'dokumentierte Datenbasis', sample scope 'in der Stichprobe' is kept; core-metric levers whose every linked assessed metric reads 'Klar' are not selectable. (2) build_client_report_model.py: strengths only from positive findings whose metrics read 'Klar' and are uncontested, internal sidecar customer-claim-bindings.json; critical/MANDATORY_CRITICAL levers go to roadmap 'now'. (3) build_visualization_plan.py: V07 plots only the linked metric's own numeric value and names the method; V08 and V10 share the customer_status scale and matrix anchors; V05 rows carry their own place/device/date; rankings replayed from a fixture bundle are marked SYNTHETIC and say 'Beispieldaten' instead of a replay timestamp. (4) build_audit_deliverables.py: claim-binding validation, sidecar as required artifact, customer mode refuses fixture/synthetic evidence in plotted metrics and in measurement enrichment (MEASUREMENT_ENRICHMENT). (5) svg_chart_renderer.py: V05 prints the per-row context as a 13 px caption (SVG legibility floor) with a 34 px row pitch. (6) templates/presentation.html.j2: when the model carries meta.sample_data_notice (every input metric of this kind is example data), the cover, the page-2 basis line and every page footer name 'Beispieldaten'; real-data models render unchanged. Scores, the 48 core metrics, registry weights/anchors, evidence admission, batch v1.3 and the four-visual minimum are unchanged. Red/green: tests/test_evidence_bound_claims.py. Review round 1 (independent adversarial PDF review of 6846366): example-data measurement highlights no longer say 'Reale …' or name a documented period, and the LCP value is named as main-content visibility; roadmap timing/priority come from the audit's roadmap entry and drive next step and closing order; status caps come only from the four customer levers; a category bar is withheld while a projected legal risk contests its metrics; V07 prints German decimals with unit; V05 names its position scale; empty strengths column is not rendered; assets/presentation.css sets ink text on orange pages (contrast 1.9:1 -> ink). Review round 2 (independent adversarial PDF review of 9c506de): mandatory-critical legal lever shown as critical; LCP action keeps 'prüfen und erneut messen' without an asserted cause; TRUST-03 row named HTTPS-Verschlüsselung; visitor LCP highlight reads 'bei 3 von 4 Besuchen' instead of p75; no strengths-promising titles without strengths; footer/subtitle colour #3A4543 (4.5:1 on sage); V05 axis ends match their position labels.",
  "previous_sha256_semantics": "previous = effective approved digest after the existing override chain for each path, identical to the file at commit 6db8fb1 (last commit validated PASS by validate_measurement_platform_baseline.py).",
  "evidence": [
   "reports/override-evidence/evidence-bound-claims.client_story.approved-to-candidate.diff",
@@ -19,14 +19,14 @@
    "path": "scripts/client_story.py",
    "baseline_sha256": "3798a2babca162db109ce7750b324b7e1c993eb1ba48f1ab0afe4bebba230b2d",
    "previous_sha256": "fd43e018fca5269c6178ab15ad4de23d0144fb2021338f827349e145e3f6abf7",
-   "current_sha256": "0560f928f6e5c9f7b56fd7f75edee6bb3429249d3c90659b4741abed390b8e2a",
+   "current_sha256": "ba1e29808335b72c064e652401af209232b76141deea29ce1795d8cb7af82578",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   },
   {
    "path": "scripts/build_client_report_model.py",
    "baseline_sha256": "433a909ec9bb38b29a4864f468d2cdf66a4a83b1beef0fdada2f6db8716a538e",
    "previous_sha256": "3875b71e2e689fe90154889a7ebffb773e751dede762122e49bae67f25a7d5d7",
-   "current_sha256": "724892d237c18deb760238fbe4acb249ad3b326fee10140d3531ced0eaea5aee",
+   "current_sha256": "b29ef002b3ee1c876b34d72a819f6e5ea1d6cc925d79cc5de2405f1a38ec3698",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   },
   {
@@ -47,21 +47,21 @@
    "path": "scripts/svg_chart_renderer.py",
    "baseline_sha256": "35d0ee5acb12d7d798d41e50ab9e9b0593ebca18f66e9fd1dbbe40e38befba89",
    "previous_sha256": "56346daa17f50190bc5a824e38958a25d125db85a3f50f7f9f670c220e1da113",
-   "current_sha256": "0c49eabeaf118e41782393aa673d1577519fccddd17c2d7925ff374b8f4d1107",
+   "current_sha256": "abb42c523eec881894febe8dc32fc1000ec539576d4aa7d99f359255f640c473",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   },
   {
    "path": "templates/presentation.html.j2",
    "baseline_sha256": "71c4af5c66c59e9db107fc1f903e7527c93a3a4101d0693e33df9a9e6287fb02",
    "previous_sha256": "3f55a096ed246ae2099d4bceda11ad38490d8daa837efb93d731ffe4496e9a44",
-   "current_sha256": "529cc83de5cb3277b72a94f8114d184f8aa7021e634f5e12d77df989f7b62588",
+   "current_sha256": "1ba55d7f57d2a9dcb72268befceb8f9a29cf2d826cec041630c6ae04c12f5740",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   },
   {
    "path": "assets/presentation.css",
    "baseline_sha256": "ffd55bb7baa0b458de6db423792842f2bd4c0ee6e061003f53823ef588955a23",
    "previous_sha256": "49a0f04b5a2b69da404dba2e7adff496a38f00ff6efcef1620a214ab5dbcf2d0",
-   "current_sha256": "0daebd869bcb774c323ccb103e695860b309a9116a213978705969916714d875",
+   "current_sha256": "e065ce1e5937d4e653fceb2deabfec603081ae8b44d1d02397966be1cc9d3be8",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   }
  ]

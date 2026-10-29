@@ -23,8 +23,9 @@ def _keep_case(replacement: str):
 
 CLIENT_REPLACEMENTS = [
     (re.compile(r"Die drei wichtigsten Suchintentionen auf eigene, klar verlinkte Leistungsseiten abbilden\.?", re.I), "Die drei wichtigsten Suchanfragen mit klar verlinkten Leistungsseiten abdecken."),
-    (re.compile(r"LCP-Element,?\s*Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen\.?", re.I), "Mobile Hauptdarstellung durch optimierte Bilder und Ressourcen beschleunigen."),
-    (re.compile(r"größtes sichtbares Seitenelement,?\s*Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen\.?", re.I), "Mobile Hauptdarstellung durch optimierte Bilder und Ressourcen beschleunigen."),
+    # The audit asks to check and re-measure; the customer text must not name a cause the audit did not establish.
+    (re.compile(r"LCP-Element,?\s*Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen\.?", re.I), "Größtes sichtbares Element, Bilder und wichtige Ladeschritte prüfen und danach erneut messen."),
+    (re.compile(r"größtes sichtbares Seitenelement,?\s*Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen\.?", re.I), "Größtes sichtbares Element, Bilder und wichtige Ladeschritte prüfen und danach erneut messen."),
     # Method, synthetic origin and sample scope survive simplification (evidence-bound claims patch).
     # "Testmessung" is customer-safe; "Labortest"/"Labormessung" are guardrail-forbidden provider/test terms.
     (re.compile(r"Lighthouse/PageSpeed-Labortest", re.I), "technische Testmessung der Ladezeit"),
@@ -174,6 +175,8 @@ CLIENT_REPLACEMENTS = [
     (re.compile(r"\bPerformance\b", re.I), "Ladegeschwindigkeit"),
     (re.compile(r"\bMobile-UX\b", re.I), "mobile Bedienbarkeit"),
     (re.compile(r"\bAccessibility\b", re.I), "Barrierefreiheit"),
+    # TRUST-03 scores the encrypted connection; security headers are not visible statements to a visitor.
+    (re.compile(r"HTTPS\s*(?:&|und)\s*sichtbare\s+Security-Header", re.I), "HTTPS-Verschlüsselung"),
     (re.compile(r"\bSecurity-Header\b", re.I), "Sicherheitsangaben"),
     (re.compile(r"\bHeader\b", re.I), "Serverangaben"),
     (re.compile(r"Brand-\s*(?:/|und)\s*Non-Brand-Suchsample", re.I), "Suchtests mit und ohne Firmennamen"),

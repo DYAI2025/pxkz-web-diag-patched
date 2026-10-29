@@ -206,7 +206,8 @@ def render_svg(visual: dict[str, Any]) -> str:
         for i, row in enumerate(rows):
             y = 130 + i * pitch
             pos = float(row.get("position", 0) or 0)
-            x = 810 - (pos / maxp) * 470
+            # Position maxp sits on the left end (x=340, labelled "Position maxp"), position 1 on the right end (x=810).
+            x = min(810.0, max(340.0, 340 + (maxp - pos) / (maxp - 1) * 470))
             lines.append(text_block(42, y + 5, row.get("query"), width=45, max_lines=1, font_size=13.5))
             if row.get("context_label"):
                 # Place, device and date belong to each plotted query, not only to the chart subtitle.
@@ -214,7 +215,7 @@ def render_svg(visual: dict[str, Any]) -> str:
                 # below the 8 px position dot, and never truncates (wrapped() raises on overflow).
                 lines.append(text_block(42, y + 19, row.get("context_label"), width=100, max_lines=1, font_size=13, fill=SAGE_LINE))
             lines.append(f'<line x1="340" y1="{y}" x2="810" y2="{y}" stroke="{SAGE_RAISED}"/>')
-            lines.append(f'<circle cx="{max(345,x):.1f}" cy="{y}" r="8" fill="{ORANGE}"/>')
+            lines.append(f'<circle cx="{x:.1f}" cy="{y}" r="8" fill="{ORANGE}"/>')
             lines.append(f'<text x="825" y="{y+6}" font-family="{MONO}" font-size="13.5" fill="{INK}">{pos:g}</text>')
     elif tid == "V10_TRUST_MATRIX":
         trust_matrix(lines, data)

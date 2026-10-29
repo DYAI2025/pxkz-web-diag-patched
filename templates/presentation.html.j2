@@ -26,7 +26,7 @@
 
 <section class="page">
   <div class="header"><div class="brand">Pixelkiez.</div><div class="eyebrow">02 · AUF EINEN BLICK</div></div>
-  <div class="section-title"><h2>Was heute trägt – und was zuerst zählt.</h2></div>
+  <div class="section-title"><h2>{% if model.executive.strengths %}Was heute trägt – und was zuerst zählt.{% else %}Was zuerst zählt.{% endif %}</h2></div>
   <div class="executive-grid">
     <div class="score-card">
       {% if model.cover.score is not none %}<div><div class="label">{{ model.cover.score_label }}</div><div class="score">{{ model.cover.score }}<span>/100</span></div></div>

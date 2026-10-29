@@ -1,8 +1,8 @@
 diff --git a/scripts/svg_chart_renderer.py b/scripts/svg_chart_renderer.py
-index 01d21a9..e829f84 100644
+index 01d21a9..5873602 100644
 --- a/scripts/svg_chart_renderer.py
 +++ b/scripts/svg_chart_renderer.py
-@@ -197,11 +197,22 @@ def render_svg(visual: dict[str, Any]) -> str:
+@@ -197,13 +197,25 @@ def render_svg(visual: dict[str, Any]) -> str:
      elif tid == "V05_RANKING_POSITION":
          rows = data[:8]
          maxp = max(max_value(rows, "position", 100), 10)
@@ -16,7 +16,9 @@ index 01d21a9..e829f84 100644
 -            y = 130 + i * 32
 +            y = 130 + i * pitch
              pos = float(row.get("position", 0) or 0)
-             x = 810 - (pos / maxp) * 470
+-            x = 810 - (pos / maxp) * 470
++            # Position maxp sits on the left end (x=340, labelled "Position maxp"), position 1 on the right end (x=810).
++            x = min(810.0, max(340.0, 340 + (maxp - pos) / (maxp - 1) * 470))
              lines.append(text_block(42, y + 5, row.get("query"), width=45, max_lines=1, font_size=13.5))
 +            if row.get("context_label"):
 +                # Place, device and date belong to each plotted query, not only to the chart subtitle.
@@ -24,9 +26,12 @@ index 01d21a9..e829f84 100644
 +                # below the 8 px position dot, and never truncates (wrapped() raises on overflow).
 +                lines.append(text_block(42, y + 19, row.get("context_label"), width=100, max_lines=1, font_size=13, fill=SAGE_LINE))
              lines.append(f'<line x1="340" y1="{y}" x2="810" y2="{y}" stroke="{SAGE_RAISED}"/>')
-             lines.append(f'<circle cx="{max(345,x):.1f}" cy="{y}" r="8" fill="{ORANGE}"/>')
+-            lines.append(f'<circle cx="{max(345,x):.1f}" cy="{y}" r="8" fill="{ORANGE}"/>')
++            lines.append(f'<circle cx="{x:.1f}" cy="{y}" r="8" fill="{ORANGE}"/>')
              lines.append(f'<text x="825" y="{y+6}" font-family="{MONO}" font-size="13.5" fill="{INK}">{pos:g}</text>')
-@@ -217,6 +228,9 @@ def render_svg(visual: dict[str, Any]) -> str:
+     elif tid == "V10_TRUST_MATRIX":
+         trust_matrix(lines, data)
+@@ -217,6 +229,9 @@ def render_svg(visual: dict[str, Any]) -> str:
          warn = float(row.get("warn", max(good, 1)) or max(good, 1))
          domain = max(warn * 1.5, value * 1.15, 1)
          x, width, y, h = 90, 720, 190, 70
@@ -36,7 +41,7 @@ index 01d21a9..e829f84 100644
          gx = width * good / domain
          wx = width * warn / domain
          lines += [
-@@ -224,8 +238,8 @@ def render_svg(visual: dict[str, Any]) -> str:
+@@ -224,8 +239,8 @@ def render_svg(visual: dict[str, Any]) -> str:
              f'<rect x="{x+gx:.1f}" y="{y}" width="{max(0,wx-gx):.1f}" height="{h}" fill="{WARN_SURFACE}"/>',
              f'<rect x="{x+wx:.1f}" y="{y}" width="{max(0,width-wx):.1f}" height="{h}" fill="{BAD_SURFACE}"/>',
              f'<line x1="{x+width*value/domain:.1f}" y1="{y-18}" x2="{x+width*value/domain:.1f}" y2="{y+h+18}" stroke="{ORANGE}" stroke-width="6"/>',

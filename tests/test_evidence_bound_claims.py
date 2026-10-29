@@ -533,6 +533,65 @@ class ReviewRoundOne(unittest.TestCase):
             self.assertGreaterEqual(ratio(colour(selector, fallback), "#EC5E43"), 4.5, selector)
 
 
+class ReviewRoundTwo(ReviewRoundOne):
+    """Defects the second independent adversarial review found on the nine proof PDFs of 9c506de."""
+
+    def test_mandatory_critical_legal_lever_is_not_sold_as_high(self) -> None:  # R04
+        with tempfile.TemporaryDirectory() as td:
+            model = self.model_for(self.legal_report(), Path(td))
+        legal = model["findings"][0]
+        self.assertEqual(legal["severity"], "critical", legal["headline"])
+
+    def test_https_row_does_not_vouch_for_security_headers(self) -> None:  # R07
+        from client_story import clientize
+        self.assertEqual(clientize("HTTPS & sichtbare Security-Header", 80), "HTTPS-Verschlüsselung")
+
+    def test_lcp_action_keeps_check_and_remeasure(self) -> None:  # R12
+        from client_story import clientize
+        text = clientize("LCP-Element, Bildauslieferung und kritische Ressourcen prüfen und danach erneut messen.", 125)
+        self.assertIn("erneut messen", text)
+        self.assertNotIn("beschleunigen", text, "the audit asks to check and re-measure, it does not name images as the cause")
+
+    def test_titles_promise_no_strengths_when_none_are_shown(self) -> None:  # R14
+        with tempfile.TemporaryDirectory() as td:
+            model = self.model_for(self.legal_report(), Path(td))
+        self.assertEqual(model["executive"]["strengths"], [])
+        self.assertNotIn("gut macht", model["cover"]["title"])
+        self.assertNotIn("Was heute trägt", self.render_template(model))
+
+    def test_field_highlight_reads_as_visits_without_jargon(self) -> None:  # R09, R18
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            scored, enrichment, enriched, model = scored_from(load(FIXTURE), tmp), tmp / "e.json", tmp / "enriched.json", tmp / "m.json"
+            self.assertEqual(run("scripts/collect_measurement_enrichment.py", "https://example.com", str(enrichment), "--config",
+                                 "evals/fixtures/measurement-enrichment-config.json", "--fixture-bundle",
+                                 "evals/fixtures/measurement-provider-responses.json", "--offline").returncode, 0)
+            self.assertEqual(run("scripts/attach_measurement_enrichment.py", str(scored), str(enrichment), str(enriched)).returncode, 0)
+            self.assertEqual(run("scripts/build_client_report_model.py", str(enriched), str(model)).returncode, 0)
+            card = next(h for h in load(model)["closing"]["measurement_highlights"] if "Hauptinhalt" in h["value"])
+        self.assertNotIn("p75", card["value"])
+        self.assertIn("3 von 4 Besuchen", card["value"], "visitor data must read differently from the lab test measurement")
+
+    def test_sage_page_text_meets_contrast_minimum(self) -> None:  # R15
+        import re
+        css = (ROOT / "assets/presentation.css").read_text(encoding="utf-8")
+        sage = re.search(r"^\.page \{[^}]*background:\s*(#[0-9A-Fa-f]{6})", css, re.M).group(1)
+        for selector in (".footer", ".section-title p"):
+            colour = re.search(r"^" + re.escape(selector) + r"\s*\{[^}]*?color:\s*(#[0-9A-Fa-f]{6})", css, re.M).group(1)
+            lum = lambda h: (lambda c: 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2])(
+                [(x / 12.92 if x <= 0.03928 else ((x + 0.055) / 1.055) ** 2.4) for x in (int(h[i:i + 2], 16) / 255 for i in (1, 3, 5))])
+            hi, lo = sorted((lum(colour), lum(sage)), reverse=True)
+            self.assertGreaterEqual((hi + 0.05) / (lo + 0.05), 4.5, selector)
+
+    def test_ranking_axis_ends_match_their_labels(self) -> None:  # R16
+        import re
+        from svg_chart_renderer import render_svg
+        svg = render_svg({"id": "VIZ-001", "template_id": "V05_RANKING_POSITION", "title": "t", "subtitle": "s",
+                          "data": [{"query": "a", "position": 18}, {"query": "b", "position": 1}]})
+        xs = [float(x) for x in re.findall(r'<circle cx="([0-9.]+)"', svg)]
+        self.assertEqual(xs, [340.0, 810.0])
+
+
 class MutationCanary(unittest.TestCase):
     """The claim eval must go red when the lab-to-device rewrite returns: proves the gate can fail."""
 
