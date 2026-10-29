@@ -11,11 +11,11 @@ import re
 from typing import Any
 
 METHOD_PHRASES: dict[str, str] = {
-    "LAB": "technische Testmessung, keine realen Nutzerdaten",
-    "FIELD": "reale Nutzerdaten",
+    "LAB": "technische Testmessung, keine Besuchsdaten",
+    "FIELD": "Daten aus Besuchen, keine Testmessung",
     "SYNTHETIC": "Beispieldaten, keine Live-Messung",
 }
-SHORT_LABELS: dict[str, str] = {"LAB": "Testmessung", "FIELD": "reale Nutzerdaten", "SYNTHETIC": "Beispieldaten"}
+SHORT_LABELS: dict[str, str] = {"LAB": "Testmessung", "FIELD": "Besuchsdaten", "SYNTHETIC": "Beispieldaten"}
 
 SYNTHETIC_RX = re.compile(r"synthetic|synthetis", re.IGNORECASE)
 FIELD_RX = re.compile(r"\bCrUX\b|Chrome UX|Felddaten|\bfield\b", re.IGNORECASE)

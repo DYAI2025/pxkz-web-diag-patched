@@ -1177,7 +1177,7 @@
     {
       "path": "scripts/build_client_report_model.py",
       "baseline_sha256": "433a909ec9bb38b29a4864f468d2cdf66a4a83b1beef0fdada2f6db8716a538e",
-      "current_sha256": "d95bce2b6265ac10e3bcbc328d24ccfb0692d711a24d911f439badc726e0c40c",
+      "current_sha256": "99eb5394dbfd34800a7895aaab8de0f1880d96735fb2a01c96e6cb60d3d621c0",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1207,7 +1207,7 @@
     {
       "path": "scripts/client_story.py",
       "baseline_sha256": "3798a2babca162db109ce7750b324b7e1c993eb1ba48f1ab0afe4bebba230b2d",
-      "current_sha256": "d9281edaf26487abdb8df3c52167529d80e26ef611d39a6b75ef348f54556aba",
+      "current_sha256": "99f2494f6b33c1936993d3a623f2bdadca5f31772b89754b1e486d6db187aea4",
       "reason": "STRATEGIC_RELEVANCE_CUSTOMER_GUARDRAILS + CUSTOMER_PRESENTATION_QUALITY_GATE + INSTALLED_V2_1_LEGAL_CUSTOMER_TRUTH + BRANCH_PRIORITY_VC03_CUSTOMER_RELEASE"
     },
     {
@@ -1482,12 +1482,12 @@
     {
       "path": "docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "a1d6aca5bf57a8e97c58ee06b325e89befb2801087f62667b7d50bcab1abb13c"
+      "current_sha256": "e0440aa05b1b553fb1d27a70ff0d45dabf0115678a2e61a5c11f5a38fbb0df17"
     },
     {
       "path": "docs/plans/2026-10-29-evidence-bound-claims-evidence-ledger.md",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "02ca91f3baebae2569a71a5b8d720e831b1148136b7c9651c985671651f26cb9"
+      "current_sha256": "31f1ea5a4823c858b1f4a3532f45aa5556fbda68904fd8c7b5305a51d0e64601"
     },
     {
       "path": "enterprise-skill-patch-order-branch-priority.xml",
@@ -1647,7 +1647,7 @@
     {
       "path": "scripts/evidence_method_labels.py",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "62fd436513aabadbe79ab2522e834ea6bc05c7cb9b9886fd393d77d6525f6cae"
+      "current_sha256": "4bf67fb77d3739d3f3ef7a7262cc95b8a376aa0c0f7b635bfbc646f194a36476"
     },
     {
       "path": "scripts/impressum_compliance.py",
@@ -1807,7 +1807,7 @@
     {
       "path": "tests/test_evidence_bound_claims.py",
       "reason": "EVIDENCE_BOUND_CLAIMS_PATCH",
-      "current_sha256": "e240a84068f2606d4d5994fca5b55dba4d44fe2930f1680446b3fb6487d8d7cb"
+      "current_sha256": "250a6eed4535ab33c09a1c0a9c48c6ed72da7cb40f8484395cb7fc3f45a0d903"
     },
     {
       "path": "tests/test_legacy_oracles.py",
@@ -2750,12 +2750,12 @@
         {
           "path": "docs/plans/2026-10-29-customer-pdf-qa-probe-checklist.md",
           "previous_sha256": null,
-          "current_sha256": "a1d6aca5bf57a8e97c58ee06b325e89befb2801087f62667b7d50bcab1abb13c"
+          "current_sha256": "e0440aa05b1b553fb1d27a70ff0d45dabf0115678a2e61a5c11f5a38fbb0df17"
         },
         {
           "path": "docs/plans/2026-10-29-evidence-bound-claims-evidence-ledger.md",
           "previous_sha256": null,
-          "current_sha256": "02ca91f3baebae2569a71a5b8d720e831b1148136b7c9651c985671651f26cb9"
+          "current_sha256": "31f1ea5a4823c858b1f4a3532f45aa5556fbda68904fd8c7b5305a51d0e64601"
         },
         {
           "path": "evals/fixtures/active-positive-consistent-findings.v1.json",
@@ -2780,7 +2780,7 @@
         {
           "path": "scripts/build_client_report_model.py",
           "previous_sha256": "3875b71e2e689fe90154889a7ebffb773e751dede762122e49bae67f25a7d5d7",
-          "current_sha256": "d95bce2b6265ac10e3bcbc328d24ccfb0692d711a24d911f439badc726e0c40c"
+          "current_sha256": "99eb5394dbfd34800a7895aaab8de0f1880d96735fb2a01c96e6cb60d3d621c0"
         },
         {
           "path": "scripts/build_visualization_plan.py",
@@ -2790,7 +2790,7 @@
         {
           "path": "scripts/client_story.py",
           "previous_sha256": "fd43e018fca5269c6178ab15ad4de23d0144fb2021338f827349e145e3f6abf7",
-          "current_sha256": "d9281edaf26487abdb8df3c52167529d80e26ef611d39a6b75ef348f54556aba"
+          "current_sha256": "99f2494f6b33c1936993d3a623f2bdadca5f31772b89754b1e486d6db187aea4"
         },
         {
           "path": "scripts/customer_reading.py",
@@ -2800,7 +2800,7 @@
         {
           "path": "scripts/evidence_method_labels.py",
           "previous_sha256": null,
-          "current_sha256": "62fd436513aabadbe79ab2522e834ea6bc05c7cb9b9886fd393d77d6525f6cae"
+          "current_sha256": "4bf67fb77d3739d3f3ef7a7262cc95b8a376aa0c0f7b635bfbc646f194a36476"
         },
         {
           "path": "scripts/finalize_deliverable_manifest.py",
@@ -2880,7 +2880,7 @@
         {
           "path": "tests/test_evidence_bound_claims.py",
           "previous_sha256": null,
-          "current_sha256": "e240a84068f2606d4d5994fca5b55dba4d44fe2930f1680446b3fb6487d8d7cb"
+          "current_sha256": "250a6eed4535ab33c09a1c0a9c48c6ed72da7cb40f8484395cb7fc3f45a0d903"
         },
         {
           "path": "tests/test_legal_trust_boundary.py",

@@ -53,3 +53,9 @@ reviewer re-checks its result on the PDFs.
 
 ## Backlog (logged, not blocking): layout whitespace, decorative stripe visibility, wording style preferences,
 items a reviewer cannot tie to a probe above.
+
+## Owner clarifications
+| date | probe | decision | reason |
+|---|---|---|---|
+| 2026-10-29 | A3 | "visitor (field) values" means field **performance** values such as LCP. A user count (GA4 active users) stays "aktive Nutzer". | Review round 4 reported A3 AMBIGUOUS on "1.240 aktive Nutzer"; wording a user count as visits would misstate users as sessions. |
+| 2026-10-29 | A2–A4 | The probes also bind code paths that only real (non-example) data reaches: field data reads as visits ("Besuchsdaten", "aus Besuchen"), never "real"/"echt"; LCP is never "Ladezeit"; a real period is printed as "TT.MM.JJJJ bis TT.MM.JJJJ", and a real usage or field highlight without a period is left out. A2 (no period) stays limited to example data. | Review round 4 backlog 1: the nine example-data PDFs never reach these paths; checked by `RealDataWording` unit tests on a real-data-shaped report (no customer artifact). |

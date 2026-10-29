@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "status": "PASS",
   "suite": "tests.test_evidence_bound_claims",
-  "artifact_digest": "0fdb603c1a6eafd28a93ff99321aafa2becee6b9b71c52075cf21bf3bc012d45",
-  "tests_run": 90,
+  "artifact_digest": "cc2a843e4193166d04a0b4904b696d33dca1ed1a5f16efb16c174d8e243f3a47",
+  "tests_run": 94,
   "failures": 0,
   "errors": 0,
   "skipped": [],
@@ -94,6 +94,22 @@
     },
     {
       "test": "tests.test_evidence_bound_claims.MutationCanary.test_eval_fails_on_reintroduced_lab_rewrite",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.RealDataWording.test_field_wording_reads_as_visits_never_as_real",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.RealDataWording.test_lcp_is_not_called_a_load_time",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.RealDataWording.test_real_highlight_without_a_period_is_left_out",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.RealDataWording.test_real_highlights_carry_a_german_period_and_no_real_label",
       "outcome": "ok"
     },
     {

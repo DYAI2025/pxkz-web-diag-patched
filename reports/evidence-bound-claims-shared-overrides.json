@@ -19,14 +19,14 @@
    "path": "scripts/client_story.py",
    "baseline_sha256": "3798a2babca162db109ce7750b324b7e1c993eb1ba48f1ab0afe4bebba230b2d",
    "previous_sha256": "fd43e018fca5269c6178ab15ad4de23d0144fb2021338f827349e145e3f6abf7",
-   "current_sha256": "d9281edaf26487abdb8df3c52167529d80e26ef611d39a6b75ef348f54556aba",
+   "current_sha256": "99f2494f6b33c1936993d3a623f2bdadca5f31772b89754b1e486d6db187aea4",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   },
   {
    "path": "scripts/build_client_report_model.py",
    "baseline_sha256": "433a909ec9bb38b29a4864f468d2cdf66a4a83b1beef0fdada2f6db8716a538e",
    "previous_sha256": "3875b71e2e689fe90154889a7ebffb773e751dede762122e49bae67f25a7d5d7",
-   "current_sha256": "d95bce2b6265ac10e3bcbc328d24ccfb0692d711a24d911f439badc726e0c40c",
+   "current_sha256": "99eb5394dbfd34800a7895aaab8de0f1880d96735fb2a01c96e6cb60d3d621c0",
    "reason": "EVIDENCE_BOUND_CLAIMS_PATCH"
   },
   {

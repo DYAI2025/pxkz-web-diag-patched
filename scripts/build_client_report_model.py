@@ -7,6 +7,7 @@ import hashlib
 import json
 import re
 import sys
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -174,6 +175,17 @@ def customer_device(value: object) -> str:
     return {"mobile": "Mobil", "phone": "Mobil", "desktop": "Desktop", "tablet": "Tablet"}.get(raw.casefold(), raw)
 
 
+def customer_period(value: object) -> str:
+    """A measurement period in German date format ("01.08.2026 bis 28.08.2026"); empty when it is incomplete."""
+    if not isinstance(value, dict):
+        return ""
+    try:
+        start, end = (datetime.strptime(str(value.get(k) or "")[:10], "%Y-%m-%d").strftime("%d.%m.%Y") for k in ("start", "end"))
+    except ValueError:
+        return ""
+    return f"{start} bis {end}"
+
+
 def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
     enrichment = report.get("measurement_enrichment") if isinstance(report.get("measurement_enrichment"), dict) else {}
     metrics = [x for x in enrichment.get("metrics", []) if isinstance(x, dict) and x.get("status") in {"MEASURED", "OBSERVED"}]
@@ -195,18 +207,21 @@ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
     users = next((x for x in metrics if x.get("id") == "GA4_ACTIVE_USERS"), None)
     if users:
         value = f"{int(users.get('value')):,}".replace(",", ".") + " aktive Nutzer"
-        dr = users.get("date_range") or {}
-        context = f"{dr.get('start','')} bis {dr.get('end','')}" if isinstance(dr, dict) else "Dokumentierter Zeitraum"
-        out.append({"label": "Nutzung" if example else "Reale Nutzung", "value": value, "context": sample if example else clientize(context, 100)})
+        # A real usage number means nothing without its period; without one the card is left out.
+        period = customer_period(users.get("date_range"))
+        if example or period:
+            out.append({"label": "Nutzung", "value": value, "context": sample if example else clientize(period, 100)})
     # 3) field performance, preferably phone
     field = next((x for x in metrics if x.get("id") == "CRUX_LCP_P75_MS" and str(x.get("device")).upper() == "PHONE"), None) or next((x for x in metrics if x.get("id") == "CRUX_LCP_P75_MS"), None)
     if field:
         sec = float(field.get("value"))/1000.0
         device = "Mobil" if str(field.get("device")).upper() == "PHONE" else (field.get("device") or "Feldwert")
         # LCP p75 says when the main content became visible for 75 % of visits, not a page load time.
-        out.append({"label": "Ladeerfahrung" if example else "Reale Ladeerfahrung",
-                    "value": f"Hauptinhalt nach max. {sec:.1f}".replace(".", ",").replace("max,", "max.") + " s bei 3 von 4 Besuchen",
-                    "context": clientize(f"{device} · {'Beispieldaten' if example else 'dokumentierter Zeitraum'}", 100)})
+        period = customer_period(field.get("date_range"))
+        if example or period:
+            out.append({"label": "Ladeerfahrung",
+                        "value": f"Hauptinhalt nach max. {sec:.1f}".replace(".", ",").replace("max,", "max.") + " s bei 3 von 4 Besuchen",
+                        "context": clientize(f"{device} · {'Beispieldaten' if example else period}", 100)})
     return out[:3]
 
 

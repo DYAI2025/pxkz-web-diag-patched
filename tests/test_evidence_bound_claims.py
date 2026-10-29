@@ -390,7 +390,8 @@ GOLDEN_PAIRS = [
     ("Sortiert nach Belegstärke.", "Sortiert nach Belastbarkeit der Werte."),
     ("Lighthouse/PageSpeed-Labortest zeigt 3,8 s.", "technische Testmessung der Ladezeit zeigt 3,8 s."),
     # Unchanged rules that keep their meaning: pinned so a later edit cannot silently drop the evidence class.
-    ("CrUX/Felddaten zeigen 3,2 s.", "reale Lade- und Nutzungsdaten zeigen 3,2 s."),
+    # Owner decision 2026-10-29: field data reads as visits, never as "real" (checklist A3/A4).
+    ("CrUX/Felddaten zeigen 3,2 s.", "Lade- und Nutzungsdaten aus Besuchen zeigen 3,2 s."),
 ]
 
 
@@ -826,6 +827,56 @@ class SurfaceConsistency(ReviewRoundThree):
         self.assertEqual(symbol_fills, ["#0E1414", "#0E1414"])
         css = (ROOT / "assets/presentation.css").read_text(encoding="utf-8")
         self.assertRegex(css, r"\.closing-action b \{[^}]*color:\s*#8F250F")
+
+
+class RealDataWording(unittest.TestCase):
+    """Owner decision 2026-10-29 (review round 4 backlog 1): code paths that only real, non-example data reaches
+    follow the same checklist (A3, A4): field data reads as visits, LCP is never a load time, periods in German."""
+
+    FIELD_TERMS = ("CrUX/Felddaten zeigen 3,2 s.", "Felddaten", "CrUX", "Core Web Vitals", "direkter CrUX/PSI/Lighthouse-Messrunner",
+                   "reale Nutzungsdaten/reale Nutzerdaten")
+
+    def real_enrichment(self, *, with_period: bool = True) -> dict:
+        common = {"status": "MEASURED", "measurement_class": "measured", "source_type": "API", "observed_at": "2026-09-01T08:00:00Z",
+                  "url": "https://example.com"}
+        users = dict(common, id="GA4_ACTIVE_USERS", family="audience", value=1240, unit="count", source_provider="Google Analytics Data API",
+                     date_range={"start": "2026-08-01", "end": "2026-08-28"})
+        lcp = dict(common, id="CRUX_LCP_P75_MS", family="performance_field", value=3200.0, unit="ms", device="PHONE",
+                   source_provider="Chrome UX Report API", date_range={"start": "2026-08-02", "end": "2026-08-29"})
+        if not with_period:
+            users.pop("date_range"), lcp.pop("date_range")
+        return {"measurement_enrichment": {"mode": "LIVE", "metrics": [users, lcp]}}
+
+    def test_lcp_is_not_called_a_load_time(self) -> None:
+        text = clientize("Der mobile LCP liegt bei 3,8 s.", 200)
+        self.assertNotIn("Ladezeit", text)
+        self.assertIn("sichtbaren Inhalts", text)
+
+    def test_field_wording_reads_as_visits_never_as_real(self) -> None:
+        import re
+        from evidence_method_labels import method_phrase, short_label
+        for raw in self.FIELD_TERMS:
+            text = clientize(raw, 200)
+            with self.subTest(raw=raw):
+                self.assertNotRegex(text, r"(?i)\breal|\becht")
+                self.assertIn("Besuch", text, "field data must keep its evidence class")
+        for phrase in (method_phrase("FIELD"), short_label("FIELD")):
+            self.assertIsNone(re.search(r"(?i)\breal|\becht", phrase), phrase)
+            self.assertIn("Besuch", phrase)
+        self.assertIsNone(re.search(r"(?i)\breal|\becht", method_phrase("LAB")), method_phrase("LAB"))
+
+    def test_real_highlights_carry_a_german_period_and_no_real_label(self) -> None:
+        from build_client_report_model import measurement_highlights
+        cards = measurement_highlights(self.real_enrichment())
+        self.assertEqual([c["label"] for c in cards], ["Nutzung", "Ladeerfahrung"])
+        joined = " ".join(" ".join(c.values()) for c in cards)
+        self.assertNotRegex(joined, r"\d{4}-\d{2}-\d{2}|[Rr]eal|[Dd]okumentiert|Ladezeit")
+        self.assertIn("01.08.2026 bis 28.08.2026", cards[0]["context"])
+        self.assertIn("02.08.2026 bis 29.08.2026", cards[1]["context"])
+
+    def test_real_highlight_without_a_period_is_left_out(self) -> None:
+        from build_client_report_model import measurement_highlights
+        self.assertEqual(measurement_highlights(self.real_enrichment(with_period=False)), [])
 
 
 class MutationCanary(unittest.TestCase):

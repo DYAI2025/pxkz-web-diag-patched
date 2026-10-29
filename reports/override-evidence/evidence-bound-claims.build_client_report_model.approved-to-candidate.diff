@@ -1,8 +1,8 @@
 diff --git a/scripts/build_client_report_model.py b/scripts/build_client_report_model.py
-index 71d1ff1..4769632 100644
+index 71d1ff1..a69dbb0 100644
 --- a/scripts/build_client_report_model.py
 +++ b/scripts/build_client_report_model.py
-@@ -3,13 +3,17 @@
+@@ -3,13 +3,18 @@
  from __future__ import annotations
  
  import argparse
@@ -10,6 +10,7 @@ index 71d1ff1..4769632 100644
  import json
 +import re
  import sys
++from datetime import datetime
  from pathlib import Path
  from typing import Any
  
@@ -20,7 +21,7 @@ index 71d1ff1..4769632 100644
  from legal_customer_projection import vouches_for_contested_legal_surface
  from branch_priority import add_priority_arguments, load_priority_inputs, resolve_priority, selection_provenance
  
-@@ -26,6 +30,75 @@ ROUTE_DE = {
+@@ -26,6 +31,75 @@ ROUTE_DE = {
  }
  
  
@@ -96,7 +97,22 @@ index 71d1ff1..4769632 100644
  def fail(msg: str) -> int:
      print(f"FAIL: {msg}", file=sys.stderr)
      return 1
-@@ -105,6 +178,10 @@ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
+@@ -101,10 +175,25 @@ def customer_device(value: object) -> str:
+     return {"mobile": "Mobil", "phone": "Mobil", "desktop": "Desktop", "tablet": "Tablet"}.get(raw.casefold(), raw)
+ 
+ 
++def customer_period(value: object) -> str:
++    """A measurement period in German date format ("01.08.2026 bis 28.08.2026"); empty when it is incomplete."""
++    if not isinstance(value, dict):
++        return ""
++    try:
++        start, end = (datetime.strptime(str(value.get(k) or "")[:10], "%Y-%m-%d").strftime("%d.%m.%Y") for k in ("start", "end"))
++    except ValueError:
++        return ""
++    return f"{start} bis {end}"
++
++
+ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
      enrichment = report.get("measurement_enrichment") if isinstance(report.get("measurement_enrichment"), dict) else {}
      metrics = [x for x in enrichment.get("metrics", []) if isinstance(x, dict) and x.get("status") in {"MEASURED", "OBSERVED"}]
      out: list[dict[str, str]] = []
@@ -107,7 +123,7 @@ index 71d1ff1..4769632 100644
      # 1) current query-specific SERP result, only with explicit provider page if present
      pos = next((x for x in metrics if x.get("id") == "SERP_CURRENT_POSITION" and x.get("query")), None)
      if pos:
-@@ -112,7 +189,7 @@ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
+@@ -112,21 +201,27 @@ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
          value = f"Position {int(pos.get('value'))}"
          if page and isinstance(page.get("value"), (int,float)):
              value += f" · Seite {int(page.get('value'))}"
@@ -116,12 +132,15 @@ index 71d1ff1..4769632 100644
          out.append({"label":"Google-Sichtbarkeit", "value":value, "context":clientize(context, 100)})
      # 2) authorized real audience signal
      users = next((x for x in metrics if x.get("id") == "GA4_ACTIVE_USERS"), None)
-@@ -120,13 +197,16 @@ def measurement_highlights(report: dict[str, Any]) -> list[dict[str, str]]:
+     if users:
          value = f"{int(users.get('value')):,}".replace(",", ".") + " aktive Nutzer"
-         dr = users.get("date_range") or {}
-         context = f"{dr.get('start','')} bis {dr.get('end','')}" if isinstance(dr, dict) else "Dokumentierter Zeitraum"
+-        dr = users.get("date_range") or {}
+-        context = f"{dr.get('start','')} bis {dr.get('end','')}" if isinstance(dr, dict) else "Dokumentierter Zeitraum"
 -        out.append({"label":"Reale Nutzung", "value":value, "context":clientize(context, 100)})
-+        out.append({"label": "Nutzung" if example else "Reale Nutzung", "value": value, "context": sample if example else clientize(context, 100)})
++        # A real usage number means nothing without its period; without one the card is left out.
++        period = customer_period(users.get("date_range"))
++        if example or period:
++            out.append({"label": "Nutzung", "value": value, "context": sample if example else clientize(period, 100)})
      # 3) field performance, preferably phone
      field = next((x for x in metrics if x.get("id") == "CRUX_LCP_P75_MS" and str(x.get("device")).upper() == "PHONE"), None) or next((x for x in metrics if x.get("id") == "CRUX_LCP_P75_MS"), None)
      if field:
@@ -129,13 +148,15 @@ index 71d1ff1..4769632 100644
          device = "Mobil" if str(field.get("device")).upper() == "PHONE" else (field.get("device") or "Feldwert")
 -        out.append({"label":"Reale Ladeerfahrung", "value":f"Ladezeit p75 {sec:.1f} s".replace(".", ","), "context":clientize(f"{device} · dokumentierter Zeitraum", 100)})
 +        # LCP p75 says when the main content became visible for 75 % of visits, not a page load time.
-+        out.append({"label": "Ladeerfahrung" if example else "Reale Ladeerfahrung",
-+                    "value": f"Hauptinhalt nach max. {sec:.1f}".replace(".", ",").replace("max,", "max.") + " s bei 3 von 4 Besuchen",
-+                    "context": clientize(f"{device} · {'Beispieldaten' if example else 'dokumentierter Zeitraum'}", 100)})
++        period = customer_period(field.get("date_range"))
++        if example or period:
++            out.append({"label": "Ladeerfahrung",
++                        "value": f"Hauptinhalt nach max. {sec:.1f}".replace(".", ",").replace("max,", "max.") + " s bei 3 von 4 Besuchen",
++                        "context": clientize(f"{device} · {'Beispieldaten' if example else period}", 100)})
      return out[:3]
  
  
-@@ -137,6 +217,7 @@ def main(argv: list[str]) -> int:
+@@ -137,6 +232,7 @@ def main(argv: list[str]) -> int:
      parser.add_argument("--visual-plan")
      add_priority_arguments(parser)
      parser.add_argument("--priority-decision-out", help="Internal-only selection provenance, not customer PDF")
@@ -143,7 +164,7 @@ index 71d1ff1..4769632 100644
      try:
          args = parser.parse_args(argv[1:])
          report = load(Path(args.report))
-@@ -162,10 +243,6 @@ def main(argv: list[str]) -> int:
+@@ -162,10 +258,6 @@ def main(argv: list[str]) -> int:
      score = report.get("score_summary", {})
      executive = report.get("executive_summary", {})
      findings = [f for f in report.get("findings", []) if isinstance(f, dict)]
@@ -154,7 +175,7 @@ index 71d1ff1..4769632 100644
      selected_levers = select_client_levers(
          report, max_levers=4, branch_weights=branch_weights, branch_roles=branch_roles
      )
-@@ -181,18 +258,9 @@ def main(argv: list[str]) -> int:
+@@ -181,18 +273,9 @@ def main(argv: list[str]) -> int:
              json.dumps(provenance, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
          )
  
@@ -176,7 +197,7 @@ index 71d1ff1..4769632 100644
  
      priorities: list[str] = []
      for f in selected_levers:
-@@ -256,7 +324,9 @@ def main(argv: list[str]) -> int:
+@@ -256,7 +339,9 @@ def main(argv: list[str]) -> int:
          semantic = presentation_metadata(report, f, registry)
          finding_models.append({
              "id": str(f.get("id", "")),
@@ -187,7 +208,7 @@ index 71d1ff1..4769632 100644
              "category": str(f.get("category", "")),
              "headline": clientize(f.get("title"), budget("finding_headline", 110)),
              "observation": clientize(f.get("client_observation") or f.get("observation"), budget("finding_observation", 130)),
-@@ -268,24 +338,35 @@ def main(argv: list[str]) -> int:
+@@ -268,24 +353,35 @@ def main(argv: list[str]) -> int:
          })
  
      roadmap = {"now": [], "next_30_days": [], "next_quarter": []}
@@ -232,7 +253,7 @@ index 71d1ff1..4769632 100644
  
      display_status = str(score.get("display_status") or "NO_SCORE")
      numeric_score_visible = (
-@@ -308,14 +389,20 @@ def main(argv: list[str]) -> int:
+@@ -308,14 +404,20 @@ def main(argv: list[str]) -> int:
      if mandatory_risk is not None:
          blocker_note = clientize(mandatory_risk.get("customer_risk", {}).get("warning_label"), 80)
      elif numeric_score_visible and score.get("blocker_present"):
@@ -255,7 +276,7 @@ index 71d1ff1..4769632 100644
      model = {
          "template_version": str(template.get("template_version", "5.0")),
          "brand": "Pixelkiez",
-@@ -324,10 +411,13 @@ def main(argv: list[str]) -> int:
+@@ -324,10 +426,13 @@ def main(argv: list[str]) -> int:
              "url": meta.get("audited_url", ""),
              "date": meta.get("audit_date", ""),
              "language": meta.get("language", "de"),
@@ -270,7 +291,7 @@ index 71d1ff1..4769632 100644
              "customer": meta.get("customer_name", ""),
              "url": meta.get("audited_url", ""),
              "date": meta.get("audit_date", ""),
-@@ -360,7 +450,7 @@ def main(argv: list[str]) -> int:
+@@ -360,7 +465,7 @@ def main(argv: list[str]) -> int:
              "eyebrow": "NÄCHSTER SCHRITT",
              "title": "Aus Analyse wird Umsetzung.",
              "summary": "Die wichtigsten Stellschrauben sind klar. Jetzt geht es darum, sie in der richtigen Reihenfolge umzusetzen und die geschäftliche Wirkung zu verbessern.",
@@ -279,7 +300,7 @@ index 71d1ff1..4769632 100644
              "cta": "Prioritäten bestätigen. Umsetzung starten.",
              "next_step": "Gemeinsam priorisieren wir die vier Hebel und starten mit dem ersten konkreten Umsetzungspaket.",
              "measurement_highlights": measurement_highlights(report),
-@@ -368,6 +458,16 @@ def main(argv: list[str]) -> int:
+@@ -368,6 +473,16 @@ def main(argv: list[str]) -> int:
      }
  
      Path(args.output).write_text(json.dumps(model, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

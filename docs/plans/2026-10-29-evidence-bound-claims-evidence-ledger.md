@@ -235,3 +235,21 @@ strength any more, because the active-positive positives cited FIND-06 and UX-07
 "… erreichbar und läuft verschlüsselt über HTTPS."; F-108: UX-02, "Der wichtigste nächste Schritt ist klar
 erkennbar."). Red: `test_consistent_positives_are_shown` failed with `[] != ['F-107', 'F-108']`; green after the fixture
 change.
+
+### Task 7 — review round 4 (checklist-bound) and real-data wording
+Independent review round 4 on the frozen build of 4ab90a9, against the fixed probe checklist: 50/50 rasters opened,
+18 probes PASS, 0 FAIL, A3 AMBIGUOUS ("1.240 aktive Nutzer"). Re-derived locally on the same build: forbidden-term,
+date, "Ladezeit" and P-label scans 0 hits on all 88 pages, 0 pages without "Beispieldaten", gateway pair the only
+identical PDFs, surface gate PASS 9/9, 11/11 customer-mode refusals without PDF.
+
+| question (asked and answered 2026-10-29) | decision | implementation |
+|---|---|---|
+| A3 reading for a GA4 user count | performance values only | recorded in the checklist's owner clarifications; "aktive Nutzer" stays |
+| backlog 1: real-data paths ("Reale Nutzung", ISO periods, LCP → "Ladezeit") | fix before QA sign-off | field data reads as visits in `client_story.py` rules and `evidence_method_labels.py` (FIELD "Daten aus Besuchen, keine Testmessung", LAB "technische Testmessung, keine Besuchsdaten"); LCP → "Anzeigewert des wichtigsten sichtbaren Inhalts"; Core Web Vitals rules moved ahead of the "Web" rule (they were dead); real highlights print "TT.MM.JJJJ bis TT.MM.JJJJ" and are left out without a period |
+
+| check | rc | value |
+|---|---|---|
+| red `RealDataWording` + updated golden pair | 1 | 11 failures for the stated reasons |
+| green | 0 | 6 selected tests OK |
+| full suite | 0 | 282 passed, 79 subtests |
+| oracles | 0 | unchanged (default outputs byte-identical) |
