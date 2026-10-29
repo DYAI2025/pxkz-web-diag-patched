@@ -153,7 +153,7 @@ def main() -> int:
             lever_rows.append({"label": plain_text(clientize(f.get("client_observation") or f.get("title"), 130), 130, f"lever {rank} label"), "priority": rank})
             lever_refs.append(str(f.get("id")))
             lever_metric_refs.extend(str(x) for x in f.get("metric_refs", []))
-        visuals.append(visual(vid, "V03_TOP_LEVERS", "Die vier wichtigsten Hebel", "Priorisiert nach geschäftlicher Bedeutung und Dringlichkeit", list(dict.fromkeys(lever_metric_refs)), lever_refs, "DERIVED_FROM_FINDINGS", "Vier priorisierte Website-Hebel", "Interne Priorisierung", "Die Rangfolge ist ordinal. Sie enthält keine gemessene Größe, Umsatz- oder Aufwandsschätzung.", lever_rows)); vid += 1
+        visuals.append(visual(vid, "V03_TOP_LEVERS", "Die vier wichtigsten Hebel", "Nach geschäftlicher Bedeutung geordnet; die Reihenfolge der Umsetzung zeigt der Fahrplan", list(dict.fromkeys(lever_metric_refs)), lever_refs, "DERIVED_FROM_FINDINGS", "Vier priorisierte Website-Hebel", "Interne Priorisierung", "Die Rangfolge ist ordinal. Sie enthält keine gemessene Größe, Umsatz- oder Aufwandsschätzung.", lever_rows)); vid += 1
 
         # Prefer a directly measured threshold visualization already attached to the audit.
         threshold_source = None
@@ -184,6 +184,13 @@ def main() -> int:
             ev = item.get("evidence", {}) if isinstance(item.get("evidence"), dict) else {}
             finding_ref = str(item.get("finding_ref") or "").strip()
             finding = next((f for f in findings if str(f.get("id")) == finding_ref), None)
+            if finding is None:
+                finding = next((f for f in findings if refs[0] in [str(x) for x in f.get("metric_refs", [])]), None)
+            # Owner decision 2026-10-29: the threshold page only illustrates one of the four customer levers.
+            if finding is None or str(finding.get("id")) not in lever_refs:
+                excluded.append({"template_id": "V07_PERFORMANCE_THRESHOLD", "reason": "FINDING_IS_NOT_A_CUSTOMER_LEVER"})
+                continue
+            finding_ref = str(finding.get("id"))
             customer_title = clientize(
                 (finding or {}).get("client_observation")
                 or "Der wichtigste sichtbare Inhalt lädt in der mobilen Testmessung langsamer als empfohlen.",
@@ -221,7 +228,10 @@ def main() -> int:
         # A metric that a customer-visible problem finding cites (or an identity metric next to a projected
         # provider-identity risk) must not read as clear on the same PDF.
         # Only the four customer levers are visible problem findings; a finding the reader never sees cannot cap a status.
-        capped = {str(x) for f in levers for x in f.get("metric_refs", [])} | contested_identity_surface(report)
+        capped = {str(x) for f in levers for x in f.get("metric_refs", [])}
+        # Owner decision 2026-10-29: rows contested by a projected legal risk read "Nicht belastbar bewertet";
+        # the legal lever carries the explanation. Their scores are untouched.
+        contested = contested | contested_identity_surface(report)
 
         def category_matrix(category: str, template: str, title: str, label_name: str, *, four_state: bool = False,
                             limitation_default: str = "Die Matrix ist kein Marktbenchmark und keine Erfolgsprognose.") -> None:
@@ -236,13 +246,19 @@ def main() -> int:
                     continue
                 # One customer status scale for every matrix: the same score reads the same in V08 and V10.
                 # A projected legal customer risk outranks the presence-only core status on the customer label.
-                state = {"key": "ACTION", **STATUS_META["ACTION"]} if mid in contested else customer_status(m)
+                state = {"key": "UNASSESSED", **STATUS_META["UNASSESSED"]} if mid in contested else customer_status(m)
+                presence_only = defs.get(mid, {}).get("score_mode") == "presence_only"
+                present = presence_only and state["key"] != "ACTION" and mid not in contested
+                if present:
+                    # A presence check proves the page exists, not that its content is complete or compliant.
+                    state = {"key": "UNASSESSED", **STATUS_META["UNASSESSED"]}
                 if state["key"] == "CLEAR" and mid in capped:
                     state = {"key": "IMPROVE", **STATUS_META["IMPROVE"]}
                 if state["key"] == "UNASSESSED" and not four_state:
                     # The value-tinted matrix has no neutral colour; unscored rows stay out as before.
                     continue
-                rows.append({label_name: metric_label(defs, m), "metric_ref": mid, "status": state["label"],
+                label = metric_label(defs, m) + (" (vorhanden)" if presence_only and (present or mid in contested) else "")
+                rows.append({label_name: label, "metric_ref": mid, "status": state["label"],
                              "symbol": state["symbol"], "tone": state["tone"], "value": MATRIX_VALUE[state["key"]]})
                 refs.append(mid)
             if len(rows) >= 3:

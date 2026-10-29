@@ -10,6 +10,11 @@ with CUSTOMER_RELEASE_BLOCKED (fixture data is never a customer result), and is 
 with the strict exact-font contract so its pages can be inspected. Two negatives (Baumdienst,
 low coverage) must stay blocked in customer mode without a PDF.
 
+active-positive uses evals/fixtures/active-positive-consistent-findings.v1.json (findings bound to the full-48
+execution's own metrics); proof-realistic is the legal projection plus search/visitor enrichment. The gateway
+case proves an invariant: its PDF equals legacy-baseline (non-scoring layer without customer surface). Any other
+pair of identical PDFs fails the run.
+
 Writes <out_dir>/<case>/ bundles and <out_dir>/cases.json (commands, return codes, sha256 digests,
 selected visuals, levers, page rasters). Inputs mirror run_vc03_customer_release_evals.py,
 run_legal_customer_projection_evals.py, run_measurement_enrichment_evals.py and
@@ -121,9 +126,20 @@ def main(argv: list[str]) -> int:
          "--fixture-bundle", fix / "measurement-gateway-provider-bundle.json", "--offline"])
     gw_scored = out / "gateway.scored.json"
     run([root / "scripts/attach_measurement_enrichment.py", base, gw, gw_scored])
+    # Realistic proof: legal risk projection plus search/visitor enrichment on the same report.
+    realistic = out / "realistic.scored.json"
+    run([root / "scripts/attach_measurement_enrichment.py", legal_scored, enr, realistic])
 
+    # Active-positive: findings, roadmap and summary that are consistent with the full-48 execution's own metrics
+    # (the legacy synthetic findings contradict those metrics, e.g. "next step unclear" next to UX-02 = 100).
+    consistent = json.loads((fix / "active-positive-consistent-findings.v1.json").read_text(encoding="utf-8"))
+    active_input = json.loads((fix / "synthetic-report.json").read_text(encoding="utf-8"))
+    for key in ("findings", "roadmap", "executive_summary"):
+        active_input[key] = consistent[key]
+    active_src = out / "active.input.json"
+    write(active_src, active_input)
     mat = out / "active.materialized.json"
-    run([root / "scripts/materialize_core_metrics.py", root, fix / "synthetic-report.json", fix / "full-48-core-execution.json", mat,
+    run([root / "scripts/materialize_core_metrics.py", root, active_src, fix / "full-48-core-execution.json", mat,
          "--admission-out", out / "active.admission.json"])
     active = score(mat, "active")
 
@@ -133,7 +149,14 @@ def main(argv: list[str]) -> int:
             f["severity"] = "critical"
     a_path = out / "case-a.input.json"
     write(a_path, a)
+    # Re-score after the severity change so score_summary (blocker_present) matches the findings.
+    a_path = score(a_path, "case-a")
     b = score(fix / "branch-priority-tie-report.SYNTHETIC.json", "case-b")
+    # Under the profile F-002 is no lever, so the bare tie report has three visuals and fails closed; the case
+    # carries the offline search/visitor enrichment like proof-strategic.
+    b_enriched = out / "case-b.enriched.json"
+    run([root / "scripts/attach_measurement_enrichment.py", b, enr, b_enriched])
+    b = b_enriched
     catalog = fix / "branch-priority-catalog.SYNTHETIC.json"
     prio = ("--priority-context", fix / "branch-priority-context.SYNTHETIC.json", "--priority-catalog", catalog,
             "--priority-catalog-sha256", sha(catalog), "--priority-allow-synthetic")
@@ -151,6 +174,7 @@ def main(argv: list[str]) -> int:
                   "observed_at": "2026-10-27T10:00:00+01:00", "asset_results": {"https://example.com/icon.png": False}})
     c_path = out / "case-c.input.json"
     write(c_path, attach(c, vc))
+    c_path = score(c_path, "case-c")
 
     inputs = {
         "legacy-baseline": (base, ()),
@@ -161,7 +185,7 @@ def main(argv: list[str]) -> int:
     }
     proof_only = {
         "case-b-equal-rank-profile": (b, prio),
-        "proof-realistic": (legal_scored, ("--impressum-compliance", side)),
+        "proof-realistic": (realistic, ("--impressum-compliance", side)),
         "proof-strategic": (enriched, ()),
         "proof-measurement-gateway": (gw_scored, ()),
     }
@@ -175,12 +199,22 @@ def main(argv: list[str]) -> int:
         negatives.append(refuse_customer(score(fix / f"{fixture}.json", fixture), fixture))
 
     write(out / "cases.json", {"skill_root_name": root.name, "inputs": {"impressum_sidecar_sha256": sha(side), "enrichment_sha256": sha(enr),
-          "gateway_enrichment_sha256": sha(gw)}, "customer_refusals": refusals, "cases": cases, "negatives": negatives, "log": log})
+          "gateway_enrichment_sha256": sha(gw)}, "gateway_invariant_property": "proof-measurement-gateway PDF must equal legacy-baseline PDF (non-scoring layer, no customer surface)",
+          "customer_refusals": refusals, "cases": cases, "negatives": negatives, "log": log})
     for case in cases:
         print(case["case"], case["mode"], case["pages"], len(case["selected"]), case["selected"], case["font"], case["embedding"], case["manifest_status"])
     print("customer refusals:", [(r["case"], r["blocked"], r["reason"], r["pdf_written"]) for r in refusals])
     print("negatives:", [(n["case"], n["blocked"], n["reason"], n["pdf_written"]) for n in negatives])
-    ok = all(r["blocked"] and not r["pdf_written"] for r in refusals + negatives) and all(len(c["selected"]) >= 4 and c["font"] == "EXACT" and c["embedding"] == "VERIFIED" for c in cases)
+    # The gateway layer is non-scoring and has no customer surface: its PDF must equal the legacy baseline PDF.
+    # That equality is the property this case proves; it is not counted as an independent visual proof.
+    by_name = {c["case"]: c for c in cases}
+    gateway_invariant = by_name["proof-measurement-gateway"]["pdf_sha256"] == by_name["legacy-baseline"]["pdf_sha256"]
+    duplicates = sorted({c["case"] for c in cases for d in cases if c is not d and c["pdf_sha256"] == d["pdf_sha256"]}
+                        - {"proof-measurement-gateway", "legacy-baseline"})
+    print("gateway invariant (PDF == legacy-baseline):", gateway_invariant, "| other identical PDFs:", duplicates)
+    ok = (all(r["blocked"] and not r["pdf_written"] for r in refusals + negatives)
+          and all(len(c["selected"]) >= 4 and c["font"] == "EXACT" and c["embedding"] == "VERIFIED" for c in cases)
+          and gateway_invariant and not duplicates)
     return 0 if ok else 1
 
 

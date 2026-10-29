@@ -255,7 +255,10 @@ def confidence_de(value: object) -> str:
 
 
 def contradicted_by_clear_metrics(report: dict[str, Any], finding: dict[str, Any]) -> bool:
-    """A core-metric lever whose every linked assessed metric reads "Klar" would contradict the visuals.
+    """A core-metric lever whose primary (first cited) assessed metric reads "Klar" contradicts that metric.
+
+    Owner decision 2026-10-29: one clear primary metric is enough, e.g. "the next step is unclear" next to
+    "Klarheit des nächsten Schritts = 100". A clear secondary metric alone does not reject the lever.
 
     Legal-sidecar and VibeCheck03 routes keep their own evidence and are never suppressed here.
     """
@@ -263,8 +266,9 @@ def contradicted_by_clear_metrics(report: dict[str, Any], finding: dict[str, Any
     if verdict.get("evidence_route") != "CORE_METRIC":
         return False
     metrics = {str(m.get("id")): m for m in report.get("metrics", []) if isinstance(m, dict)}
-    linked = [metrics[x] for x in verdict.get("linked_assessed_metrics", []) if x in metrics]
-    return bool(linked) and all(customer_status(m)["key"] == "CLEAR" for m in linked)
+    assessed = {str(x) for x in verdict.get("linked_assessed_metrics", [])}
+    linked = [metrics[x] for x in (str(y) for y in finding.get("metric_refs", [])) if x in assessed and x in metrics]
+    return bool(linked) and customer_status(linked[0])["key"] == "CLEAR"
 
 
 def select_client_levers(

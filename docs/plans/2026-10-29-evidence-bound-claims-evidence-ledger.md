@@ -167,3 +167,25 @@ Result: 18 findings (1 blocker, 9 major), so QA was NOT signed. Each fix-candida
 | 12 eval suites | 0 | all PASS |
 | oracles | 0 | amendment in place: plan ac5e2787…→8f23ac34…, model ffae93dd…→4146f0fb…; lever ids unchanged |
 | baseline / v3.2.1 | 0 | PASS / PASS 25 transitions |
+
+### Task 7 — owner decisions on review round 2 (asked and answered 2026-10-29)
+| question | decision | implementation |
+|---|---|---|
+| R03 lever order vs execution order | keep both, label them | V03 "Nach geschäftlicher Bedeutung geordnet; die Reihenfolge der Umsetzung zeigt der Fahrplan"; lever page "Nach geschäftlicher Bedeutung geordnet …"; closing "REIHENFOLGE DER UMSETZUNG"; audit roadmap timing stays authoritative |
+| R05/R06 legal and presence rows | presence wording | present presence-only rows (TRUST-01/02) read "… (vorhanden) · Nicht belastbar bewertet"; rows contested by a projected legal/identity risk read "Nicht belastbar bewertet" in V10 and stay out of the value-tinted V08; scores untouched |
+| R08 lab term | keep "Testmessung" | recorded as the customer-safe lab designation; guardrail unchanged |
+| F4/R01/R02, F7/R10/R11, R17 fixtures | all four measures | lever rejected when its primary cited metric reads "Klar"; V07 only for one of the four levers; active-positive built from `evals/fixtures/active-positive-consistent-findings.v1.json` (findings cite weak metrics, positives cite strong ones, evidence ids from the full-48 execution); proof-realistic = legal projection + enrichment; gateway case asserts PDF == legacy-baseline (non-scoring layer without customer surface), any other identical pair fails the run |
+| R13 case-a cover without warning | builder defect, not design | case-a and case-c inputs are re-scored after mutation, so blocker_present matches the findings |
+
+Consequence recorded: the bare branch-priority tie report under its synthetic profile now has 3 visuals (F-002 is no lever, so no V07) and fails closed with CUSTOMER_MIN_VISUALS_NOT_MET — pinned by `test_bare_tie_report_under_profile_fails_closed`; case B and the plan/model agreement test carry the offline search/visitor enrichment.
+
+| check | rc | value |
+|---|---|---|
+| red `ReviewRoundThree` | 1 | 5 failures for the stated reasons (R13 and fixture consistency passed on scored input → builder defect) |
+| green claim suite | 0 | OK |
+| canary legal eval vs cd8689d plan builder | 1 | FAIL legal row check (live) |
+| canary identity check (identity cap reverted) | 1 | FAIL "identity rows not marked as not assessed …" (live) |
+| full suite | 0 | see commit message |
+| 12 eval suites | 0 | all PASS (legal projection eval updated to the decision, rows matched by metric_ref) |
+| synthetic-report plan diff vs cd8689d | — | only V03 subtitle and TRUST-01/02 rows changed; lever ids unchanged |
+| oracles / baseline / v3.2.1 / quick_validate | 0 | amendment in place (plan 8f23ac34…→ac9dc88e…) / PASS / PASS / PASS 319 files |

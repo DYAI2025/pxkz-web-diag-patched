@@ -55,7 +55,7 @@
 
 <section class="page orange levers">
   <div class="header"><div class="brand">Pixelkiez.</div><div class="eyebrow">{{ '%02d'|format(visuals|length + 3) }} · VIER HEBEL</div></div>
-  <div class="section-title"><h2>Vier konkrete Hebel – jeweils mit nächstem Schritt.</h2><p>Vier priorisierte Geschäftshebel mit konkretem nächsten Schritt.</p></div>
+  <div class="section-title"><h2>Vier konkrete Hebel – jeweils mit nächstem Schritt.</h2><p>Nach geschäftlicher Bedeutung geordnet, jeweils mit konkretem nächsten Schritt.</p></div>
   <div class="lever-grid">
     {% for finding in findings %}<div class="lever severity-{{ finding.severity }}"><div class="number">{{ '%02d'|format(loop.index) }} · {{ {'critical':'KRITISCH','high':'HOCH','medium':'MITTEL','low':'NIEDRIG','positive':'STÄRKE'}.get(finding.severity, finding.severity|upper) }}</div><h3>{{ finding.headline }}</h3><p class="observation">{{ finding.observation }}</p><p class="impact"><strong>Warum das zählt:</strong> {{ finding.impact }}</p><p class="action">Nächster Schritt: {{ finding.action }}</p></div>{% endfor %}
   </div>
@@ -76,7 +76,7 @@
   <div class="section-title"><h2>{{ model.closing.title }}</h2><p>{{ model.closing.summary }}</p></div>
   {% if model.closing.measurement_highlights %}<div class="measurement-highlights">{% for item in model.closing.measurement_highlights %}<div class="measurement-highlight"><span>{{ item.label }}</span><strong>{{ item.value }}</strong><small>{{ item.context }}</small></div>{% endfor %}</div>{% endif %}
   <div class="closing-grid">
-    <div class="closing-actions"><div class="label">WAS WIR JETZT TUN</div>{% for item in model.closing.actions %}<div class="closing-action"><b>{{ '%02d'|format(loop.index) }}</b><span>{{ item }}</span></div>{% endfor %}</div>
+    <div class="closing-actions"><div class="label">REIHENFOLGE DER UMSETZUNG</div>{% for item in model.closing.actions %}<div class="closing-action"><b>{{ '%02d'|format(loop.index) }}</b><span>{{ item }}</span></div>{% endfor %}</div>
     <div class="closing-cta"><div class="label">NÄCHSTER SCHRITT</div><h3>{{ model.closing.cta }}</h3><p>{{ model.closing.next_step }}</p></div>
   </div>
   <div class="footer"><span>{{ owner }} · Pixelkiez Umsetzungspfad</span><span>{{ '%02d'|format(visuals|length + 5) }}</span></div>

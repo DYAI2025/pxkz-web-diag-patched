@@ -1,0 +1,394 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Consistent findings for the active-positive release case: every finding cites only metrics of the full-48 fixture execution whose status supports it (problem findings cite weak metrics, positive findings cite strong ones) and carries that execution's evidence ids. Replaces the legacy synthetic-report findings, roadmap and executive summary before materialization. Example data, never a customer result.",
+  "findings": [
+    {
+      "id": "F-101",
+      "category": "ux_conversion",
+      "title": "Der Weg zur Anfrage hat zu viele Hürden",
+      "severity": "high",
+      "observation": "Das Kontaktformular verlangt für eine erste Anfrage mehr Angaben als nötig.",
+      "evidence": [
+        {
+          "id": "E-1024",
+          "type": "metric_evidence",
+          "detail": "Core metric UX-05 from the full-48 fixture execution bundle.",
+          "url": "https://example.com/",
+          "observed_at": "2026-09-07T21:36:00Z",
+          "method": "full-48 fixture execution (example data)",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Jede zusätzliche Hürde kann Interessenten vor der ersten Nachricht ausbremsen."
+      },
+      "client_observation": "Das Kontaktformular verlangt für eine erste Anfrage mehr Angaben als nötig.",
+      "client_impact": "Jede zusätzliche Hürde kann Interessenten vor der ersten Nachricht ausbremsen.",
+      "client_action": "Das Kontaktformular auf die für eine erste Anfrage nötigen Felder kürzen.",
+      "recommendation": {
+        "action": "Das Kontaktformular auf die für eine erste Anfrage nötigen Felder kürzen.",
+        "owner": "UX & Frontend",
+        "horizon": "now",
+        "acceptance_test": "Eine erste Anfrage ist mit höchstens vier Pflichtfeldern möglich."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "UX-05"
+      ]
+    },
+    {
+      "id": "F-102",
+      "category": "performance_technology",
+      "title": "Die Seiten laden zu viele schwere Dateien",
+      "severity": "high",
+      "observation": "Bilder und Skripte machen die Seiten deutlich schwerer als nötig.",
+      "evidence": [
+        {
+          "id": "E-1014",
+          "type": "metric_evidence",
+          "detail": "Core metric PERF-04 from the full-48 fixture execution bundle.",
+          "url": "https://example.com/",
+          "observed_at": "2026-09-07T21:36:00Z",
+          "method": "full-48 fixture execution (example data)",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Gerade mobil dauert es länger, bis Besucher mit dem Angebot arbeiten können."
+      },
+      "client_observation": "Bilder und Skripte machen die Seiten deutlich schwerer als nötig.",
+      "client_impact": "Gerade mobil dauert es länger, bis Besucher mit dem Angebot arbeiten können.",
+      "client_action": "Große Bilder und Skripte prüfen, verkleinern und danach erneut messen.",
+      "recommendation": {
+        "action": "Große Bilder und Skripte prüfen, verkleinern und danach erneut messen.",
+        "owner": "Frontend & Betrieb",
+        "horizon": "0_30_days",
+        "acceptance_test": "Die Seitenlast liegt nach der Optimierung messbar unter dem Ausgangswert."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "PERF-04"
+      ]
+    },
+    {
+      "id": "F-103",
+      "category": "accessibility",
+      "title": "Die Seitenstruktur ist für Hilfsmittel schwer lesbar",
+      "severity": "high",
+      "observation": "Überschriften und Seitenbereiche sind technisch nicht eindeutig ausgezeichnet.",
+      "evidence": [
+        {
+          "id": "E-1029",
+          "type": "metric_evidence",
+          "detail": "Core metric A11Y-02 from the full-48 fixture execution bundle.",
+          "url": "https://example.com/",
+          "observed_at": "2026-09-07T21:36:00Z",
+          "method": "full-48 fixture execution (example data)",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Wer mit Vorlesehilfe oder Tastatur navigiert, findet sich schlechter zurecht."
+      },
+      "client_observation": "Überschriften und Seitenbereiche sind technisch nicht eindeutig ausgezeichnet.",
+      "client_impact": "Wer mit Vorlesehilfe oder Tastatur navigiert, findet sich schlechter zurecht.",
+      "client_action": "Überschriften und Seitenbereiche eindeutig auszeichnen und mit Vorlesehilfe prüfen.",
+      "recommendation": {
+        "action": "Überschriften und Seitenbereiche eindeutig auszeichnen und mit Vorlesehilfe prüfen.",
+        "owner": "Designsystem & Frontend",
+        "horizon": "now",
+        "acceptance_test": "Jede Seite hat eine eindeutige Überschriftenfolge und benannte Hauptbereiche."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "A11Y-02"
+      ]
+    },
+    {
+      "id": "F-104",
+      "category": "findability_seo",
+      "title": "Bei Suchen nach dem Firmennamen ist die Website nicht sicher vorn",
+      "severity": "high",
+      "observation": "Bei Suchen nach dem Firmennamen erscheint die eigene Website nicht zuverlässig an erster Stelle.",
+      "evidence": [
+        {
+          "id": "E-1004",
+          "type": "metric_evidence",
+          "detail": "Core metric FIND-04 from the full-48 fixture execution bundle.",
+          "url": "https://example.com/",
+          "observed_at": "2026-09-07T21:36:00Z",
+          "method": "full-48 fixture execution (example data)",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Wer gezielt nach dem Unternehmen sucht, landet leichter bei Verzeichnissen oder Mitbewerbern."
+      },
+      "client_observation": "Bei Suchen nach dem Firmennamen erscheint die eigene Website nicht zuverlässig an erster Stelle.",
+      "client_impact": "Wer gezielt nach dem Unternehmen sucht, landet leichter bei Verzeichnissen oder Mitbewerbern.",
+      "client_action": "Unternehmensprofil, Seitentitel und Startseite eindeutig auf den Firmennamen ausrichten.",
+      "recommendation": {
+        "action": "Unternehmensprofil, Seitentitel und Startseite eindeutig auf den Firmennamen ausrichten.",
+        "owner": "SEO & Content",
+        "horizon": "0_30_days",
+        "acceptance_test": "Bei der Suche nach dem Firmennamen steht die eigene Website an erster Stelle."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "FIND-04"
+      ]
+    },
+    {
+      "id": "F-105",
+      "category": "trust_privacy_content",
+      "title": "Referenzen fehlen an den entscheidenden Stellen",
+      "severity": "medium",
+      "observation": "Auf den Leistungsseiten sind kaum Referenzen oder konkrete Projektbeispiele zu sehen.",
+      "evidence": [
+        {
+          "id": "E-1039",
+          "type": "metric_evidence",
+          "detail": "Core metric TRUST-06 from the full-48 fixture execution bundle.",
+          "url": "https://example.com/",
+          "observed_at": "2026-09-07T21:36:00Z",
+          "method": "full-48 fixture execution (example data)",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Interessenten finden wenig Bestätigung, dass ähnliche Aufträge bereits erledigt wurden."
+      },
+      "client_observation": "Auf den Leistungsseiten sind kaum Referenzen oder konkrete Projektbeispiele zu sehen.",
+      "client_impact": "Interessenten finden wenig Bestätigung, dass ähnliche Aufträge bereits erledigt wurden.",
+      "client_action": "Zwei bis drei Projektbeispiele mit Ergebnis direkt auf den Leistungsseiten zeigen.",
+      "recommendation": {
+        "action": "Zwei bis drei Projektbeispiele mit Ergebnis direkt auf den Leistungsseiten zeigen.",
+        "owner": "Content",
+        "horizon": "31_90_days",
+        "acceptance_test": "Jede Leistungsseite zeigt mindestens ein Projektbeispiel."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "TRUST-06"
+      ]
+    },
+    {
+      "id": "F-106",
+      "category": "ai_readiness",
+      "title": "Häufige Kundenfragen werden nicht direkt beantwortet",
+      "severity": "medium",
+      "observation": "Typische Fragen zu Ablauf, Kosten und Dauer werden auf der Website nicht direkt beantwortet.",
+      "evidence": [
+        {
+          "id": "E-1044",
+          "type": "metric_evidence",
+          "detail": "Core metric AI-03 from the full-48 fixture execution bundle.",
+          "url": "https://example.com/",
+          "observed_at": "2026-09-07T21:36:00Z",
+          "method": "full-48 fixture execution (example data)",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "inference",
+        "text": "Interessenten und Suchsysteme müssen sich Antworten selbst zusammensuchen."
+      },
+      "client_observation": "Typische Fragen zu Ablauf, Kosten und Dauer werden auf der Website nicht direkt beantwortet.",
+      "client_impact": "Interessenten und Suchsysteme müssen sich Antworten selbst zusammensuchen.",
+      "client_action": "Die fünf häufigsten Kundenfragen mit kurzen, direkten Antworten ergänzen.",
+      "recommendation": {
+        "action": "Die fünf häufigsten Kundenfragen mit kurzen, direkten Antworten ergänzen.",
+        "owner": "Content & SEO",
+        "horizon": "31_90_days",
+        "acceptance_test": "Die fünf häufigsten Kundenfragen sind auf einer Seite direkt beantwortet."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "AI-03"
+      ]
+    },
+    {
+      "id": "F-107",
+      "category": "findability_seo",
+      "title": "Erreichbarkeit und Seitentitel sind sauber",
+      "severity": "positive",
+      "observation": "Die Website ist öffentlich erreichbar und Seitentitel sowie Überschriften sind gepflegt.",
+      "evidence": [
+        {
+          "id": "E-1001",
+          "type": "metric_evidence",
+          "detail": "Core metric FIND-01 from the full-48 fixture execution bundle.",
+          "url": "https://example.com/",
+          "observed_at": "2026-09-07T21:36:00Z",
+          "method": "full-48 fixture execution (example data)",
+          "asset_path": null
+        },
+        {
+          "id": "E-1006",
+          "type": "metric_evidence",
+          "detail": "Core metric FIND-06 from the full-48 fixture execution bundle.",
+          "url": "https://example.com/",
+          "observed_at": "2026-09-07T21:36:00Z",
+          "method": "full-48 fixture execution (example data)",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "fact",
+        "text": "Das ist eine gute technische Grundlage für weitere Verbesserungen."
+      },
+      "client_observation": "Die Website ist öffentlich erreichbar und Seitentitel sowie Überschriften sind gepflegt.",
+      "client_impact": "Das ist eine gute technische Grundlage für weitere Verbesserungen.",
+      "client_action": "Diese Basis bei Änderungen beibehalten.",
+      "recommendation": {
+        "action": "Diese Basis bei Änderungen beibehalten.",
+        "owner": "Betrieb & SEO",
+        "horizon": "monitor",
+        "acceptance_test": "Erreichbarkeit und Seitentitel bleiben nach Releases unverändert."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "FIND-01",
+        "FIND-06"
+      ]
+    },
+    {
+      "id": "F-108",
+      "category": "ux_conversion",
+      "title": "Nächster Schritt und Inhaltsaufbau sind klar",
+      "severity": "positive",
+      "observation": "Der wichtigste nächste Schritt ist erkennbar und die Inhalte sind klar gegliedert.",
+      "evidence": [
+        {
+          "id": "E-1021",
+          "type": "metric_evidence",
+          "detail": "Core metric UX-02 from the full-48 fixture execution bundle.",
+          "url": "https://example.com/",
+          "observed_at": "2026-09-07T21:36:00Z",
+          "method": "full-48 fixture execution (example data)",
+          "asset_path": null
+        },
+        {
+          "id": "E-1026",
+          "type": "metric_evidence",
+          "detail": "Core metric UX-07 from the full-48 fixture execution bundle.",
+          "url": "https://example.com/",
+          "observed_at": "2026-09-07T21:36:00Z",
+          "method": "full-48 fixture execution (example data)",
+          "asset_path": null
+        }
+      ],
+      "business_relevance": {
+        "classification": "fact",
+        "text": "Besucher finden sich schnell zurecht."
+      },
+      "client_observation": "Der wichtigste nächste Schritt ist erkennbar und die Inhalte sind klar gegliedert.",
+      "client_impact": "Besucher finden sich schnell zurecht.",
+      "client_action": "Diese Klarheit bei neuen Seiten beibehalten.",
+      "recommendation": {
+        "action": "Diese Klarheit bei neuen Seiten beibehalten.",
+        "owner": "UX & Content",
+        "horizon": "monitor",
+        "acceptance_test": "Neue Seiten folgen derselben klaren Gliederung."
+      },
+      "confidence": 4,
+      "visual_asset": null,
+      "metric_refs": [
+        "UX-02",
+        "UX-07"
+      ]
+    }
+  ],
+  "roadmap": [
+    {
+      "priority": "P1",
+      "horizon": "now",
+      "action": "Kontaktformular auf die nötigen Felder kürzen.",
+      "owner": "UX & Frontend",
+      "evidence_basis": [
+        "F-101"
+      ]
+    },
+    {
+      "priority": "P1",
+      "horizon": "now",
+      "action": "Überschriften und Seitenbereiche eindeutig auszeichnen.",
+      "owner": "Designsystem & Frontend",
+      "evidence_basis": [
+        "F-103"
+      ]
+    },
+    {
+      "priority": "P1",
+      "horizon": "0_30_days",
+      "action": "Seitenlast prüfen, verkleinern und erneut messen.",
+      "owner": "Frontend & Betrieb",
+      "evidence_basis": [
+        "F-102"
+      ]
+    },
+    {
+      "priority": "P1",
+      "horizon": "0_30_days",
+      "action": "Startseite und Profil auf den Firmennamen ausrichten.",
+      "owner": "SEO & Content",
+      "evidence_basis": [
+        "F-104"
+      ]
+    },
+    {
+      "priority": "P2",
+      "horizon": "31_90_days",
+      "action": "Projektbeispiele auf Leistungsseiten zeigen.",
+      "owner": "Content",
+      "evidence_basis": [
+        "F-105"
+      ]
+    },
+    {
+      "priority": "P2",
+      "horizon": "31_90_days",
+      "action": "Häufige Kundenfragen direkt beantworten.",
+      "owner": "Content & SEO",
+      "evidence_basis": [
+        "F-106"
+      ]
+    },
+    {
+      "priority": "P3",
+      "horizon": "monitor",
+      "action": "Technische Basis und klare Gliederung bei Releases beibehalten.",
+      "owner": "Betrieb & SEO",
+      "evidence_basis": [
+        "F-107",
+        "F-108"
+      ]
+    }
+  ],
+  "executive_summary": {
+    "overall_status": "needs_action",
+    "decision": "Die Website ist erreichbar und klar gegliedert. Die größten Hebel liegen im Anfrageweg, in der Seitenlast, in der Struktur für Hilfsmittel und in der Sichtbarkeit beim Firmennamen.",
+    "recommended_route": "targeted_modernization",
+    "top_risks": [
+      "Der Weg zur Anfrage hat zu viele Hürden.",
+      "Die Seiten laden zu viele schwere Dateien.",
+      "Die Seitenstruktur ist für Hilfsmittel schwer lesbar."
+    ],
+    "top_strengths": [
+      "Die Website ist erreichbar und Seitentitel sind gepflegt.",
+      "Der nächste Schritt und der Inhaltsaufbau sind klar."
+    ]
+  }
+}

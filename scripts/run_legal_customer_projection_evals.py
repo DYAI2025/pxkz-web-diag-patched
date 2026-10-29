@@ -86,19 +86,23 @@ def main() -> int:
         plan = json.loads(planp.read_text(encoding="utf-8"))
         trust = next((v for v in plan.get("visuals", []) if v.get("template_id") == "V10_TRUST_MATRIX"), None)
         legal_rows = [r for r in (trust or {}).get("data", []) if "impressum" in str(r.get("signal", "")).casefold()]
-        if trust is not None and (not legal_rows or any(r.get("status") != "Handlungsbedarf" for r in legal_rows)):
+        # Owner decision 2026-10-29: the contested legal row reads "Nicht belastbar bewertet"; the legal lever explains it.
+        if trust is not None and (not legal_rows or any(r.get("status") != "Nicht belastbar bewertet" for r in legal_rows)):
             raise RuntimeError("trust matrix shows the legal surface as clear while a legal customer risk is projected")
         checks.append("legal_surface_status_reconciled")
-        identity = {"Eindeutige Unternehmensdarstellung", "Einheitliche Fakten", "Kontakttransparenz", "Einheitliche Firmendaten"}
-        identity_rows = [r for v in plan.get("visuals", []) if v.get("template_id") in {"V08_AI_ANSWERABILITY", "V10_TRUST_MATRIX"}
-                         for r in v.get("data", []) if (r.get("question") or r.get("signal")) in identity]
-        missing_identity = identity - {r.get("question") or r.get("signal") for r in identity_rows}
-        if missing_identity:
-            # Display labels drift with client wording; an unmatched label would drop its row from this check.
-            raise RuntimeError("identity labels absent from the customer matrices (update the label set): " + str(sorted(missing_identity)))
-        clear_identity = [r for r in identity_rows if str(r.get("status")).casefold() == "klar"]
-        if clear_identity:
-            raise RuntimeError("identity rows read as clear next to a provider-identity risk: " + str(clear_identity))
+        # Owner decision 2026-10-29: identity rows contested by the provider-identity risk read "Nicht belastbar
+        # bewertet" in the four-state trust matrix and stay out of the value-tinted AI matrix (no neutral state).
+        # Matched by metric_ref, so wording drift cannot empty the check.
+        rows_by = {v.get("template_id"): {str(r.get("metric_ref")): r for r in v.get("data", [])} for v in plan.get("visuals", [])}
+        v10_identity = {mid: rows_by.get("V10_TRUST_MATRIX", {}).get(mid) for mid in ("TRUST-04", "TRUST-07")}
+        if any(r is None for r in v10_identity.values()):
+            raise RuntimeError("identity rows missing from the trust matrix: " + str(sorted(k for k, r in v10_identity.items() if r is None)))
+        wrong = {k: r.get("status") for k, r in v10_identity.items() if r.get("status") != "Nicht belastbar bewertet"}
+        if wrong:
+            raise RuntimeError("identity rows not marked as not assessed next to a provider-identity risk: " + str(wrong))
+        shown_ai = sorted({"AI-01", "AI-06"} & set(rows_by.get("V08_AI_ANSWERABILITY", {})))
+        if shown_ai:
+            raise RuntimeError("contested identity rows still tinted in the AI matrix: " + str(shown_ai))
         checks.append("identity_surface_not_clear")
 
         visuals = t / "visuals"

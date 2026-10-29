@@ -592,6 +592,111 @@ class ReviewRoundTwo(ReviewRoundOne):
         self.assertEqual(xs, [340.0, 810.0])
 
 
+ACTIVE_FINDINGS = ROOT / "evals/fixtures/active-positive-consistent-findings.v1.json"
+
+
+def active_positive_scored(tmp: Path) -> Path:
+    """The active-positive release case: consistent findings on the full-48 fixture execution (example data)."""
+    report, fx = load(FIXTURE), load(ACTIVE_FINDINGS)
+    for key in ("findings", "roadmap", "executive_summary"):
+        report[key] = fx[key]
+    src, mat = tmp / "active.input.json", tmp / "active.materialized.json"
+    dump(src, report)
+    result = run("scripts/materialize_core_metrics.py", str(ROOT), str(src), "evals/fixtures/full-48-core-execution.json", str(mat),
+                 "--admission-out", str(tmp / "active.admission.json"))
+    assert result.returncode == 0, result.stdout + result.stderr
+    return scored_from(load(mat), tmp, "active")
+
+
+class ReviewRoundThree(ReviewRoundOne):
+    """Owner decisions on the second independent review (2026-10-29): lever contradiction rule, visual admission,
+    presence wording for legal rows, two named orders, consistent active-positive input."""
+
+    def rows(self, plan: dict, template: str) -> dict[str, dict]:
+        return {r["metric_ref"]: r for v in plan["visuals"] if v["template_id"] == template for r in v["data"]}
+
+    def test_lever_is_rejected_when_its_primary_metric_reads_clear(self) -> None:  # R01
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            report = load(FIXTURE)
+            set_metric(report, "UX-02", score=100, status="strong")  # F-001 cites UX-02 first
+            plan = build_plan(scored_from(report, tmp), tmp)
+        self.assertNotIn("F-001", plan["top_levers"])
+        self.assertEqual(len(plan["top_levers"]), 4)
+
+    def test_threshold_page_only_illustrates_a_lever(self) -> None:  # R10, R11
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            legal = build_plan(scored_from(self.legal_report(), tmp, "legal"), tmp)
+            plain = build_plan(scored_from(load(FIXTURE), tmp, "plain"), tmp)
+        has_v07 = lambda plan: any(v["template_id"] == "V07_PERFORMANCE_THRESHOLD" for v in plan["visuals"])
+        self.assertIn("F-002", plain["top_levers"])
+        self.assertTrue(has_v07(plain))
+        self.assertNotIn("F-002", legal["top_levers"])
+        self.assertFalse(has_v07(legal))
+
+    def test_presence_rows_read_as_present_not_clear(self) -> None:  # R06
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            rows = self.rows(build_plan(scored_from(load(FIXTURE), tmp), tmp), "V10_TRUST_MATRIX")
+        for mid in ("TRUST-01", "TRUST-02"):
+            self.assertEqual(rows[mid]["status"], "Nicht belastbar bewertet", mid)
+            self.assertTrue(rows[mid]["signal"].endswith("(vorhanden)"), rows[mid]["signal"])
+
+    def test_legal_contested_rows_are_not_assessed(self) -> None:  # R05
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            plan = build_plan(scored_from(self.legal_report(), tmp), tmp)
+        v10 = self.rows(plan, "V10_TRUST_MATRIX")
+        for mid in ("TRUST-01", "TRUST-04", "TRUST-07"):
+            if mid in v10:
+                self.assertEqual(v10[mid]["status"], "Nicht belastbar bewertet", mid)
+        self.assertIn("TRUST-01", v10)
+        v08 = self.rows(plan, "V08_AI_ANSWERABILITY")
+        self.assertFalse({"AI-01", "AI-06"} & set(v08), "the value-tinted matrix has no neutral state; contested rows stay out")
+
+    def test_lever_order_and_execution_order_are_named(self) -> None:  # R03
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            plan = build_plan(scored_from(load(FIXTURE), tmp), tmp)
+            model = self.model_for(load(FIXTURE), tmp)
+        v03 = next(v for v in plan["visuals"] if v["template_id"] == "V03_TOP_LEVERS")
+        self.assertNotIn("Dringlichkeit", v03["subtitle"])
+        self.assertIn("Bedeutung", v03["subtitle"])
+        html = self.render_template(model)
+        self.assertNotIn("WAS WIR JETZT TUN", html)
+        self.assertIn("REIHENFOLGE DER UMSETZUNG", html)
+        self.assertIn("Nach geschäftlicher Bedeutung geordnet", html)
+
+    def test_cover_warns_when_a_lever_is_critical(self) -> None:  # R13
+        report = load(FIXTURE)
+        for f in report["findings"]:
+            if f["id"] in {"F-001", "F-003"}:
+                f["severity"] = "critical"
+        with tempfile.TemporaryDirectory() as td:
+            model = self.model_for(report, Path(td))
+        self.assertTrue(model["cover"]["blocker_note"])
+
+    def test_active_positive_findings_match_their_metrics(self) -> None:  # R01, R02
+        from customer_status import customer_status
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            scored = active_positive_scored(tmp)
+            report = load(scored)
+            plan = build_plan(scored, tmp)
+        metrics = {m["id"]: m for m in report["metrics"]}
+        self.assertEqual(len(plan["top_levers"]), 4)
+        for f in report["findings"]:
+            cited = [metrics[x] for x in f["metric_refs"]]
+            states = {customer_status(m)["key"] for m in cited}
+            if f["severity"] == "positive":
+                self.assertEqual(states, {"CLEAR"}, f["id"])
+            else:
+                self.assertNotEqual(customer_status(cited[0])["key"], "CLEAR", f["id"])
+            ev_ids = {e["id"] for e in f["evidence"]}
+            self.assertTrue(ev_ids <= {r for m in cited for r in m.get("evidence_refs", [])}, f["id"])
+
+
 class MutationCanary(unittest.TestCase):
     """The claim eval must go red when the lab-to-device rewrite returns: proves the gate can fail."""
 

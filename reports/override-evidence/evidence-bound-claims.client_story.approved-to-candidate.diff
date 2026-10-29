@@ -1,5 +1,5 @@
 diff --git a/scripts/client_story.py b/scripts/client_story.py
-index 8a7a789..f3706a0 100644
+index 8a7a789..797750f 100644
 --- a/scripts/client_story.py
 +++ b/scripts/client_story.py
 @@ -8,32 +8,46 @@ from typing import Any
@@ -77,12 +77,15 @@ index 8a7a789..f3706a0 100644
      (re.compile(r"\bSecurity-Header\b", re.I), "Sicherheitsangaben"),
      (re.compile(r"\bHeader\b", re.I), "Serverangaben"),
      (re.compile(r"Brand-\s*(?:/|und)\s*Non-Brand-Suchsample", re.I), "Suchtests mit und ohne Firmennamen"),
-@@ -239,6 +254,19 @@ def confidence_de(value: object) -> str:
+@@ -239,6 +254,23 @@ def confidence_de(value: object) -> str:
      return CONFIDENCE_DE.get(str(value).upper(), str(value).lower() if value else "niedrig")
  
  
 +def contradicted_by_clear_metrics(report: dict[str, Any], finding: dict[str, Any]) -> bool:
-+    """A core-metric lever whose every linked assessed metric reads "Klar" would contradict the visuals.
++    """A core-metric lever whose primary (first cited) assessed metric reads "Klar" contradicts that metric.
++
++    Owner decision 2026-10-29: one clear primary metric is enough, e.g. "the next step is unclear" next to
++    "Klarheit des nächsten Schritts = 100". A clear secondary metric alone does not reject the lever.
 +
 +    Legal-sidecar and VibeCheck03 routes keep their own evidence and are never suppressed here.
 +    """
@@ -90,14 +93,15 @@ index 8a7a789..f3706a0 100644
 +    if verdict.get("evidence_route") != "CORE_METRIC":
 +        return False
 +    metrics = {str(m.get("id")): m for m in report.get("metrics", []) if isinstance(m, dict)}
-+    linked = [metrics[x] for x in verdict.get("linked_assessed_metrics", []) if x in metrics]
-+    return bool(linked) and all(customer_status(m)["key"] == "CLEAR" for m in linked)
++    assessed = {str(x) for x in verdict.get("linked_assessed_metrics", [])}
++    linked = [metrics[x] for x in (str(y) for y in finding.get("metric_refs", [])) if x in assessed and x in metrics]
++    return bool(linked) and customer_status(linked[0])["key"] == "CLEAR"
 +
 +
  def select_client_levers(
      report: dict[str, Any], max_levers: int = 4, *,
      branch_weights: dict[str, int] | None = None,
-@@ -249,6 +277,7 @@ def select_client_levers(
+@@ -249,6 +281,7 @@ def select_client_levers(
          if isinstance(f, dict)
          and f.get("severity") != "positive"
          and evaluate_finding(report, f)["eligible"]

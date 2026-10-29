@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "status": "PASS",
   "suite": "tests.test_evidence_bound_claims",
-  "artifact_digest": "95e8a20d54b3eeedaa167be908fdb65b2e1c63128b79ce00a485daafb5c9de19",
-  "tests_run": 49,
+  "artifact_digest": "9f7dab955264d52af5301558f755b408e5190b55bcdd1f408632a23d19f4670f",
+  "tests_run": 65,
   "failures": 0,
   "errors": 0,
   "skipped": [],
@@ -130,6 +130,70 @@
     },
     {
       "test": "tests.test_evidence_bound_claims.ReviewRoundOne.test_threshold_value_carries_unit_and_german_decimal",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundThree.test_active_positive_findings_match_their_metrics",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundThree.test_category_bars_do_not_vouch_for_an_area_under_legal_review",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundThree.test_cover_warns_when_a_lever_is_critical",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundThree.test_empty_strengths_leave_no_empty_column",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundThree.test_example_data_page_two_footer_carries_no_report_date",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundThree.test_example_enrichment_highlights_do_not_claim_real_usage",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundThree.test_legal_contested_rows_are_not_assessed",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundThree.test_lever_is_rejected_when_its_primary_metric_reads_clear",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundThree.test_lever_order_and_execution_order_are_named",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundThree.test_matrix_cap_comes_only_from_customer_levers",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundThree.test_orange_page_text_meets_contrast_minimum",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundThree.test_presence_rows_read_as_present_not_clear",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundThree.test_ranking_chart_names_its_position_scale",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundThree.test_roadmap_keeps_audit_priorities_and_one_execution_order",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundThree.test_threshold_page_only_illustrates_a_lever",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.ReviewRoundThree.test_threshold_value_carries_unit_and_german_decimal",
       "outcome": "ok"
     },
     {
