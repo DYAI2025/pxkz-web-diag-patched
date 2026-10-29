@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "status": "PASS",
   "suite": "tests.test_evidence_bound_claims",
-  "artifact_digest": "75e4313ba9b1483e98a35496f1db551adb263160d263c5f99ec193818a9b37d4",
-  "tests_run": 94,
+  "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+  "tests_run": 99,
   "failures": 0,
   "errors": 0,
   "skipped": [],
@@ -94,6 +94,26 @@
     },
     {
       "test": "tests.test_evidence_bound_claims.MutationCanary.test_eval_fails_on_reintroduced_lab_rewrite",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.PrimaryMetricOrder.test_documented_primary_rule_still_rejects_a_clear_primary",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.PrimaryMetricOrder.test_inferred_risk_ref_is_never_the_primary",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.PrimaryMetricOrder.test_present_presence_check_first_does_not_suppress_the_lever",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.PrimaryMetricOrder.test_refs_with_the_same_customer_reading_are_interchangeable",
+      "outcome": "ok"
+    },
+    {
+      "test": "tests.test_evidence_bound_claims.PrimaryMetricOrder.test_reversing_every_finding_keeps_the_levers",
       "outcome": "ok"
     },
     {

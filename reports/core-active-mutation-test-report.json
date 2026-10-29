@@ -1,17 +1,17 @@
 {
   "status": "PASS",
-  "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+  "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
   "detected": 20,
   "mutations": [
     {
       "mutation": "BIND-002",
       "status": "DETECTED",
-      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>"
+      "detail": "return 1 != 0: <local-path> <local-path> <local-path>\nSTDOUT:\nSTDERR:FAIL: binding must contain exactly 48 unique metric IDs\n"
     },
     {
       "mutation": "BIND-003",
       "status": "DETECTED",
-      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>"
+      "detail": "return 1 != 0: <local-path> <local-path> <local-path>\nSTDOUT:\nSTDERR:FAIL: binding/registry ID mismatch missing=['AI-07'] extra=['FAKE-99']\n"
     },
     {
       "mutation": "EXEC-005",
@@ -26,7 +26,7 @@
     {
       "mutation": "SCORE-002",
       "status": "DETECTED",
-      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>"
+      "detail": "return 1 != 0: <local-path> <local-path> <local-path>\nSTDOUT:\nSTDERR:FAIL: FIND-01 metric weight drift\n"
     },
     {
       "mutation": "SCORE-003",
@@ -41,17 +41,17 @@
     {
       "mutation": "MUT-REGISTRY-REMOVE",
       "status": "DETECTED",
-      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>"
+      "detail": "return 1 != 0: <local-path> <local-path> <local-path>\nSTDOUT:\nSTDERR:              'EVIDENCE_GRADE_TOO_WEAK',\n                                     'VALUE_TYPE_"
     },
     {
       "mutation": "MUT-REGISTRY-49TH",
       "status": "DETECTED",
-      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>"
+      "detail": "return 1 != 0: <local-path> <local-path> <local-path>\nSTDOUT:\nSTDERR:                              'EVIDENCE_GRADE_TOO_WEAK',\n                                 "
     },
     {
       "mutation": "MUT-CATEGORY-WEIGHT",
       "status": "DETECTED",
-      "detail": "return 1 != 0: <python> <candidate-root>/scripts/validate_core_evidence_bindings.py <tmp>"
+      "detail": "return 1 != 0: <local-path> <local-path> <local-path>\nSTDOUT:\nSTDERR:FAIL: FIND-01 category weight drift\n"
     },
     {
       "mutation": "MUT-EVIDENCE-REMOVE",

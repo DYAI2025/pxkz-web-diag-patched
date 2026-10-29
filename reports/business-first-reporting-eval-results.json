@@ -27,7 +27,7 @@
   "customer_release_ready_before_qa": false,
   "artifact_examples": {
     "analysis_sha256": "ad959b518725d1f882470dd2fa435d089ffe52ea600ab8588d3fc68dae5928bf",
-    "model_sha256": "a23b8533b947042eddc25d5d8bc3a42f8a2c2536827624b30bc74da3380a4463"
+    "model_sha256": "14e07acdd5641513b064b68756534dab34788fd4a9de28f23155523b66554a9d"
   },
   "does_not_prove": [
     "exact runtime font availability",

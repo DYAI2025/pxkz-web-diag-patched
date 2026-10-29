@@ -1,102 +1,120 @@
 {
   "status": "FAIL",
-  "policy_version": "1.0",
-  "semantic_bundle_sha256": "9fd973c94e7493e804ccd923b60abfc42a66a8ef3e1c8bbd9dc9bb78939abfeb",
-  "fixture": "evals/fixtures/synthetic-report.json (legacy-baseline, customer mode)",
-  "fixture_sha256": "5ab6b2268783bceccc58eb5a2aed542cb49c8f9ac0454016d12c34e1421db07a",
-  "customer": "Meyer & Sohn Bau GmbH",
-  "page_count": 10,
-  "decision_visual_count": 5,
-  "inspection_method": "agent_vision",
-  "inspected_by": "Claude Opus 5.5 (main session, 2026-10-28; same session that authored the release-completion and label-fidelity patches, so not independent; cross-checked by an independent read-only reviewer on candidate fa791c3)",
   "semantic_qa_validation": "FAIL",
   "visual_qa_validation": "PASS",
-  "pdf_sha256": "de27843d7798299cb891ee937a7deb3a000cb2860006fc755a21f34e439df597",
-  "client_model_sha256": "d4ee5c61ba08787166e1188c5ea52fbfd5e10ffb8b057d8f31966b7aa312c3c7",
-  "scored_report_sha256": "22a535a85bc3464132ffe42a3141c651b993d683cd50b45eaa94ed8e473e1931",
-  "release_mode": "customer",
-  "font_status": "EXACT",
-  "overall_checks": {
-    "customer_specificity": "PASS",
-    "plain_language_comprehension": "PASS",
-    "scan_first_story": "PASS",
-    "evidence_fidelity": "FAIL",
-    "priority_quality": "FAIL",
-    "quantitative_content_visualized": "PASS",
-    "cross_page_coherence": "FAIL",
-    "actionability": "PASS",
-    "no_generic_agency_copy": "PASS",
-    "no_unsupported_business_claims": "PASS",
-    "cover_message_complete": "PASS",
-    "score_projection_correct": "PASS",
-    "lever_business_impact_complete": "PASS",
-    "privacy_claim_scope_correct": "PASS",
-    "no_synthetic_metric_visuals": "PASS"
-  },
-  "page_evidence": "reports/customer-pdf-qa-release-a66710f/legacy-baseline.semantic-qa.json",
-  "all_cases": "reports/customer-pdf-qa-release-a66710f.json",
-  "case_verdicts": {
-    "legacy-baseline": {
-      "visual": "PASS",
-      "semantic": "FAIL"
-    },
-    "legal-golden": {
-      "visual": "PASS",
-      "semantic": "FAIL"
-    },
-    "case-a-critical": {
-      "visual": "PASS",
-      "semantic": "FAIL"
-    },
-    "case-b-equal-rank-profile": {
-      "visual": "PASS",
-      "semantic": "FAIL"
-    },
-    "case-c-vc03-detail": {
-      "visual": "PASS",
-      "semantic": "FAIL"
-    },
-    "active-positive": {
-      "visual": "PASS",
-      "semantic": "FAIL"
-    },
-    "proof-realistic": {
-      "visual": "PASS",
-      "semantic": "FAIL"
-    },
-    "proof-strategic": {
-      "visual": "PASS",
-      "semantic": "FAIL"
-    },
-    "proof-measurement-gateway": {
-      "visual": "PASS",
-      "semantic": "FAIL"
+  "candidate_commit": "49c0806",
+  "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+  "release_mode": "proof",
+  "data_class": "EXAMPLE_DATA",
+  "reason": "every input is example data; customer semantic QA cannot pass",
+  "case": "legacy-baseline",
+  "pdf_sha256": "d8b20180a3dca89cc7fac421ffec5cbed57cc58783a0c50850e09b764c7673f4",
+  "client_model_sha256": "14e07acdd5641513b064b68756534dab34788fd4a9de28f23155523b66554a9d",
+  "page_count": 10,
+  "semantic_bundle_sha256": "6fce98e4b2786baa338cfc599d8f776939a6813f4f64c571d4c9fd22850cabec",
+  "proof_qa_record": "reports/customer-pdf-qa-release-49c0806.json",
+  "history": {
+    "document before Task 8 rebuild (candidate a66710f)": {
+      "status": "FAIL",
+      "policy_version": "1.0",
+      "semantic_bundle_sha256": "9fd973c94e7493e804ccd923b60abfc42a66a8ef3e1c8bbd9dc9bb78939abfeb",
+      "fixture": "evals/fixtures/synthetic-report.json (legacy-baseline, customer mode)",
+      "fixture_sha256": "5ab6b2268783bceccc58eb5a2aed542cb49c8f9ac0454016d12c34e1421db07a",
+      "customer": "Meyer & Sohn Bau GmbH",
+      "page_count": 10,
+      "decision_visual_count": 5,
+      "inspection_method": "agent_vision",
+      "inspected_by": "Claude Opus 5.5 (main session, 2026-10-28; same session that authored the release-completion and label-fidelity patches, so not independent; cross-checked by an independent read-only reviewer on candidate fa791c3)",
+      "semantic_qa_validation": "FAIL",
+      "visual_qa_validation": "PASS",
+      "pdf_sha256": "de27843d7798299cb891ee937a7deb3a000cb2860006fc755a21f34e439df597",
+      "client_model_sha256": "d4ee5c61ba08787166e1188c5ea52fbfd5e10ffb8b057d8f31966b7aa312c3c7",
+      "scored_report_sha256": "22a535a85bc3464132ffe42a3141c651b993d683cd50b45eaa94ed8e473e1931",
+      "release_mode": "customer",
+      "font_status": "EXACT",
+      "overall_checks": {
+        "customer_specificity": "PASS",
+        "plain_language_comprehension": "PASS",
+        "scan_first_story": "PASS",
+        "evidence_fidelity": "FAIL",
+        "priority_quality": "FAIL",
+        "quantitative_content_visualized": "PASS",
+        "cross_page_coherence": "FAIL",
+        "actionability": "PASS",
+        "no_generic_agency_copy": "PASS",
+        "no_unsupported_business_claims": "PASS",
+        "cover_message_complete": "PASS",
+        "score_projection_correct": "PASS",
+        "lever_business_impact_complete": "PASS",
+        "privacy_claim_scope_correct": "PASS",
+        "no_synthetic_metric_visuals": "PASS"
+      },
+      "page_evidence": "reports/customer-pdf-qa-release-a66710f/legacy-baseline.semantic-qa.json",
+      "all_cases": "reports/customer-pdf-qa-release-a66710f.json",
+      "case_verdicts": {
+        "legacy-baseline": {
+          "visual": "PASS",
+          "semantic": "FAIL"
+        },
+        "legal-golden": {
+          "visual": "PASS",
+          "semantic": "FAIL"
+        },
+        "case-a-critical": {
+          "visual": "PASS",
+          "semantic": "FAIL"
+        },
+        "case-b-equal-rank-profile": {
+          "visual": "PASS",
+          "semantic": "FAIL"
+        },
+        "case-c-vc03-detail": {
+          "visual": "PASS",
+          "semantic": "FAIL"
+        },
+        "active-positive": {
+          "visual": "PASS",
+          "semantic": "FAIL"
+        },
+        "proof-realistic": {
+          "visual": "PASS",
+          "semantic": "FAIL"
+        },
+        "proof-strategic": {
+          "visual": "PASS",
+          "semantic": "FAIL"
+        },
+        "proof-measurement-gateway": {
+          "visual": "PASS",
+          "semantic": "FAIL"
+        }
+      },
+      "observed_quality": {
+        "executive_summary": "single main lever (mobile next step), three strengths and priorities, dated scope sentence",
+        "decision_visuals": "five approved visuals (category bars, levers list, mobile load threshold, answerability matrix, trust matrix) tied to the scored audit",
+        "findings": "four prioritized lever cards with observation, business impact and next step, above the footer band",
+        "roadmap": "Jetzt / In 30 Tagen / Danach owner actions (O-2)",
+        "closing": "four actions in lever order"
+      },
+      "open_observations": [
+        "O-2",
+        "O-4",
+        "O-7",
+        "O-8",
+        "O-11",
+        "O-12",
+        "O-13",
+        "O-14"
+      ],
+      "does_not_prove": [
+        "commercial conversion or revenue improvement",
+        "semantic quality for every future website without per-output rendered QA",
+        "ElevenLabs provider upload, live telephony, or legal outbound approval"
+      ],
+      "superseded": "Baumdienst Renner evidence (9 pages, pdf 1cdb5b7f...) no longer applies: that fixture now fails closed with fewer than four admissible visuals.",
+      "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
+      "candidate_commit": "a66710f",
+      "round_2_review": "Round-2 independent review of 9ba024d, re-derived from PDF text and plan data: client_story.py rewrites 'im mobilen Labortest' to 'auf Mobilgeräten' (lab value shown as real mobile experience) in every case, and V08 shows minor-gap rows as 'klar'. User decision 2026-10-28: close BLOCKED; follow-up patch 'evidence-bound customer claims'."
     }
-  },
-  "observed_quality": {
-    "executive_summary": "single main lever (mobile next step), three strengths and priorities, dated scope sentence",
-    "decision_visuals": "five approved visuals (category bars, levers list, mobile load threshold, answerability matrix, trust matrix) tied to the scored audit",
-    "findings": "four prioritized lever cards with observation, business impact and next step, above the footer band",
-    "roadmap": "Jetzt / In 30 Tagen / Danach owner actions (O-2)",
-    "closing": "four actions in lever order"
-  },
-  "open_observations": [
-    "O-2",
-    "O-4",
-    "O-7",
-    "O-8",
-    "O-11",
-    "O-12",
-    "O-13",
-    "O-14"
-  ],
-  "does_not_prove": [
-    "commercial conversion or revenue improvement",
-    "semantic quality for every future website without per-output rendered QA",
-    "ElevenLabs provider upload, live telephony, or legal outbound approval"
-  ],
-  "superseded": "Baumdienst Renner evidence (9 pages, pdf 1cdb5b7f...) no longer applies: that fixture now fails closed with fewer than four admissible visuals.",
-  "artifact_digest": "bc58cd9a6c9061258020974b9e11f8b17b89de61c5440a78efdd48b8752e941d",
-  "candidate_commit": "a66710f",
-  "round_2_review": "Round-2 independent review of 9ba024d, re-derived from PDF text and plan data: client_story.py rewrites 'im mobilen Labortest' to 'auf Mobilgeräten' (lab value shown as real mobile experience) in every case, and V08 shows minor-gap rows as 'klar'. User decision 2026-10-28: close BLOCKED; follow-up patch 'evidence-bound customer claims'."
+  }
 }

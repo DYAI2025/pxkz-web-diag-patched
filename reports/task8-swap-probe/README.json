@@ -4,5 +4,6 @@
   "probe_output.txt": "run on d95ad75 (unfixed): 57 records = 51 reorder/swap/identical-value replacement mutations (sections a, b, b') + 6 primary-rule controls (section c)",
   "probe_output_fixed.txt": "same probe after the first primary_metric fix (a65c5b6 equivalent)",
   "result": "51 mutations: levers unchanged in all 51 (strengths changed in 2 one-sided replacements via B2 topic overlap). 6 controls: levers changed in 3, all attributable to selector and gate reading the primary metric differently (fixed in a65c5b6, refined in the next candidate after review: primary = first cited metric that reads as a status)",
-  "regression_tests": "tests/test_evidence_bound_claims.py::PrimaryMetricOrder"
+  "regression_tests": "tests/test_evidence_bound_claims.py::PrimaryMetricOrder",
+  "probe_output_49c0806.txt": "same probe on candidate 49c0806 (final primary_metric rule): 57 records, levers changed in 3: [\"c:control-clear-first F-001 refs=['TRUST-03', 'UX-02']\", \"c:inferred-first F-001 refs=['PERF-01', 'TRUST-03']\", \"c:inferred-second F-001 refs=['TRUST-03', 'PERF-01']\"]"
 }

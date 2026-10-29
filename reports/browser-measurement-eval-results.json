@@ -15,7 +15,7 @@
   "metric_count": 8,
   "axe_runtime": "OPTIONAL_NOT_REQUIRED_FOR_BASE_EVAL",
   "details": {
-    "chromium_path": "$PIXELKIEZ_CHROMIUM_PATH (ms-playwright chromium-1248, Google Chrome for Testing)",
+    "chromium_path": "<local-path> Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
     "baseline": {
       "state": "baseline",
       "response_status": 200,
