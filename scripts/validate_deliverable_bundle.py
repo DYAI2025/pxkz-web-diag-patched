@@ -12,6 +12,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from customer_execution_release import validate_manifest_proof
 from typing import Any
 
 from check_brand_fonts import looks_like_font
@@ -91,6 +92,14 @@ def main() -> int:
                 return fail(f"{check['id']} failed", report_path, payload)
 
         manifest = json.loads((out_dir / "deliverable-manifest.json").read_text(encoding="utf-8"))
+        if manifest.get("release_mode")=="customer" or manifest.get("status")=="CUSTOMER_RELEASE_READY" or args.require_customer_release_ready:
+            if manifest.get("release_mode")!="customer":
+                return fail("CUSTOMER_RELEASE_REQUIRES_EXPLICIT_CUSTOMER_MODE", report_path, payload)
+            try:
+                validated_execution=validate_manifest_proof(root,out_dir,manifest)
+            except Exception as e:
+                return fail(f"CUSTOMER_EXECUTION_GATE_FAIL: {e}", report_path, payload)
+            payload["checks"].append({"id":"execution_completeness", "status":"PASS", "run_id":validated_execution["execution_run_id"]})
         if manifest.get("legal_enabled") is True:
             sidecar = out_dir / "impressum-compliance.json"
             if not sidecar.is_file():
@@ -148,7 +157,7 @@ def main() -> int:
         visual_status = visual_qa.get("inspection_status")
         semantic_status = semantic_qa.get("inspection_status")
         quality_status = quality.get("quality_status")
-        customer_release_ready = bool(font_status == "EXACT" and embedding_status == "VERIFIED" and visual_status == "PASS" and semantic_status == "PASS" and quality_status == "PASS")
+        customer_release_ready = bool(manifest.get("release_mode")=="customer" and manifest.get("execution_proof") and font_status == "EXACT" and embedding_status == "VERIFIED" and visual_status == "PASS" and semantic_status == "PASS" and quality_status == "PASS")
         if manifest.get("status") == "CUSTOMER_RELEASE_READY" and not (
             customer_release_ready and visual_qa.get("pdf_sha256") == receipt.get("pdf_sha256") == semantic_qa.get("pdf_sha256")
         ):

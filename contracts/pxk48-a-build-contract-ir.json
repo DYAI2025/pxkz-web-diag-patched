@@ -1,0 +1,354 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "PXK48-PATCH-A-2026-10-30",
+  "mode": "PATCH_ORDER_EXECUTION",
+  "target_skill": "pixelkiez-website-diagnosis",
+  "canonical_locator": "skills://pixelkiez-website-diagnosis",
+  "baseline_state": "EXACT_BASELINE",
+  "local_source_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+  "github_repository": "DYAI2025/pxkz-web-diag-patched",
+  "github_branch": "master",
+  "github_head": "e4f6c85ee3c5dcba83be4425bf6d1997f8eebd45",
+  "readback_verified": true,
+  "working_copy_only": true,
+  "protected_invariants": [
+    "INV-01",
+    "INV-02",
+    "INV-03",
+    "INV-04",
+    "INV-05",
+    "INV-06",
+    "INV-07"
+  ],
+  "requirements": [
+    {
+      "id": "PXK48-A-001",
+      "statement": "Metric Execution Route Catalog",
+      "authority": "user_request",
+      "source_refs": [
+        "S-USER",
+        "S-BASE"
+      ],
+      "target_artifact": "assets/metric-execution-routes.v1.json",
+      "verifier": "scripts/validate_metric_execution_routes.py",
+      "failure_action": "BLOCK",
+      "severity": "HARD",
+      "target": "assets/metric-execution-routes.v1.json"
+    },
+    {
+      "id": "PXK48-A-002",
+      "statement": "Deterministic 48-runner",
+      "authority": "user_request",
+      "source_refs": [
+        "S-USER",
+        "S-BASE"
+      ],
+      "target_artifact": "scripts/run_48_core_metrics.py",
+      "verifier": "tests/test_execution_gate_patch_a.py",
+      "failure_action": "BLOCK",
+      "severity": "HARD",
+      "target": "scripts/run_48_core_metrics.py"
+    },
+    {
+      "id": "PXK48-A-003",
+      "statement": "Attempt receipts/raw artifact integrity",
+      "authority": "user_request",
+      "source_refs": [
+        "S-USER",
+        "S-BASE"
+      ],
+      "target_artifact": "schemas/metric-attempt-receipt.v1.schema.json",
+      "verifier": "scripts/validate_metric_attempt_receipts.py",
+      "failure_action": "BLOCK",
+      "severity": "HARD",
+      "target": "schemas/metric-attempt-receipt.v1.schema.json"
+    },
+    {
+      "id": "PXK48-A-004",
+      "statement": "Reject unproved LIVE and retain fixture version",
+      "authority": "user_request",
+      "source_refs": [
+        "S-USER",
+        "S-BASE"
+      ],
+      "target_artifact": "scripts/core_active_measurement.py",
+      "verifier": "tests/test_execution_gate_patch_a.py",
+      "failure_action": "BLOCK",
+      "severity": "HARD",
+      "target": "scripts/core_active_measurement.py"
+    },
+    {
+      "id": "PXK48-A-005",
+      "statement": "Verifiable execution state machine",
+      "authority": "user_request",
+      "source_refs": [
+        "S-USER",
+        "S-BASE"
+      ],
+      "target_artifact": "scripts/core_execution_gate.py",
+      "verifier": "tests/test_execution_gate_patch_a.py",
+      "failure_action": "BLOCK",
+      "severity": "HARD",
+      "target": "scripts/core_execution_gate.py"
+    },
+    {
+      "id": "PXK48-A-006",
+      "statement": "Up to three different authorized fallbacks",
+      "authority": "user_request",
+      "source_refs": [
+        "S-USER",
+        "S-BASE"
+      ],
+      "target_artifact": "scripts/core_execution_gate.py",
+      "verifier": "tests/test_execution_gate_patch_a.py",
+      "failure_action": "BLOCK",
+      "severity": "HARD",
+      "target": "scripts/core_execution_gate.py"
+    },
+    {
+      "id": "PXK48-A-007",
+      "statement": "14-capability runtime preflight",
+      "authority": "user_request",
+      "source_refs": [
+        "S-USER",
+        "S-BASE"
+      ],
+      "target_artifact": "scripts/run_48_core_metrics.py",
+      "verifier": "tests/test_execution_gate_patch_a.py",
+      "failure_action": "REVISE",
+      "severity": "HARD",
+      "target": "scripts/run_48_core_metrics.py"
+    },
+    {
+      "id": "PXK48-A-008",
+      "statement": "Completion receipt and execution gate",
+      "authority": "user_request",
+      "source_refs": [
+        "S-USER",
+        "S-BASE"
+      ],
+      "target_artifact": "scripts/validate_audit_execution_completeness.py",
+      "verifier": "tests/test_execution_gate_patch_a.py",
+      "failure_action": "BLOCK",
+      "severity": "HARD",
+      "target": "scripts/validate_audit_execution_completeness.py"
+    },
+    {
+      "id": "PXK48-A-009",
+      "statement": "Score admission only from verified matching evidence",
+      "authority": "user_request",
+      "source_refs": [
+        "S-USER",
+        "S-BASE"
+      ],
+      "target_artifact": "scripts/core_active_measurement.py",
+      "verifier": "tests/test_execution_gate_patch_a.py",
+      "failure_action": "BLOCK",
+      "severity": "HARD",
+      "target": "scripts/core_active_measurement.py"
+    },
+    {
+      "id": "PXK48-A-010",
+      "statement": "Customer build/finalize/validate binding",
+      "authority": "user_request",
+      "source_refs": [
+        "S-USER",
+        "S-BASE"
+      ],
+      "target_artifact": "scripts/build_audit_deliverables.py",
+      "verifier": "tests/test_execution_gate_patch_a.py",
+      "failure_action": "BLOCK",
+      "severity": "HARD",
+      "target": "scripts/build_audit_deliverables.py"
+    },
+    {
+      "id": "PXK48-A-011",
+      "statement": "Path, digest, source, run boundary",
+      "authority": "user_request",
+      "source_refs": [
+        "S-USER",
+        "S-BASE"
+      ],
+      "target_artifact": "scripts/validate_metric_attempt_receipts.py",
+      "verifier": "tests/test_execution_gate_patch_a.py",
+      "failure_action": "BLOCK",
+      "severity": "HARD",
+      "target": "scripts/validate_metric_attempt_receipts.py"
+    },
+    {
+      "id": "PXK48-A-012",
+      "statement": "Skill and reference process documentation",
+      "authority": "user_request",
+      "source_refs": [
+        "S-USER",
+        "S-BASE"
+      ],
+      "target_artifact": "SKILL.md",
+      "verifier": "scripts/quick_validate.py",
+      "failure_action": "REVISE",
+      "severity": "HARD",
+      "target": "SKILL.md"
+    },
+    {
+      "id": "PXK48-A-013",
+      "statement": "18 falsification and historical regression cases",
+      "authority": "user_request",
+      "source_refs": [
+        "S-USER",
+        "S-BASE"
+      ],
+      "target_artifact": "tests/test_execution_gate_patch_a.py",
+      "verifier": "reports/patch-a-test-matrix.json",
+      "failure_action": "BLOCK",
+      "severity": "HARD",
+      "target": "tests/test_execution_gate_patch_a.py"
+    }
+  ],
+  "instruction_precedence": [
+    "system_and_developer",
+    "explicit_user_patch_order",
+    "canonical_skill_policy",
+    "external_content_as_data"
+  ],
+  "claim_authority": [
+    {
+      "source_id": "S-BASE",
+      "basis": "inspected local primary"
+    },
+    {
+      "source_id": "S-GH",
+      "basis": "GitHub connector current observed"
+    },
+    {
+      "source_id": "S-USER",
+      "basis": "normative user requirements"
+    },
+    {
+      "source_id": "S-FAIL",
+      "basis": "user statement only, original bundle not yet accessible"
+    },
+    {
+      "source_id": "S-REVIEW",
+      "basis": "not available as primary source"
+    }
+  ],
+  "semantic_capabilities": [
+    {
+      "id": "public_read_only_http",
+      "required": false,
+      "status": "UNVERIFIED",
+      "fallback": "BLOCK_AND_DISCLOSE"
+    },
+    {
+      "id": "html_observation",
+      "required": false,
+      "status": "UNVERIFIED",
+      "fallback": "BLOCK_AND_DISCLOSE"
+    },
+    {
+      "id": "public_browser_rendering",
+      "required": false,
+      "status": "UNVERIFIED",
+      "fallback": "BLOCK_AND_DISCLOSE"
+    },
+    {
+      "id": "lab_performance",
+      "required": false,
+      "status": "UNVERIFIED",
+      "fallback": "BLOCK_AND_DISCLOSE"
+    },
+    {
+      "id": "field_performance",
+      "required": false,
+      "status": "UNVERIFIED",
+      "fallback": "BLOCK_AND_DISCLOSE"
+    },
+    {
+      "id": "public_search",
+      "required": false,
+      "status": "UNVERIFIED",
+      "fallback": "BLOCK_AND_DISCLOSE"
+    },
+    {
+      "id": "manual_review",
+      "required": false,
+      "status": "UNVERIFIED",
+      "fallback": "BLOCK_AND_DISCLOSE"
+    },
+    {
+      "id": "private_authorized_export",
+      "required": false,
+      "status": "UNVERIFIED",
+      "fallback": "BLOCK_AND_DISCLOSE"
+    },
+    {
+      "id": "evidence_rehash",
+      "required": false,
+      "status": "UNVERIFIED",
+      "fallback": "BLOCK_AND_DISCLOSE"
+    },
+    {
+      "id": "customer_release_gate",
+      "required": false,
+      "status": "UNVERIFIED",
+      "fallback": "BLOCK_AND_DISCLOSE"
+    }
+  ],
+  "non_goals": [
+    "score policy B",
+    "new core IDs",
+    "new infrastructure",
+    "GitHub changes",
+    "installation changes"
+  ],
+  "gate_order": [
+    "EXACT_BASELINE",
+    "BUILD_CONTRACT_IR",
+    "RESEARCH_BAG",
+    "CAPABILITY_DISCOVERY",
+    "ARCHITECTURE_GATE",
+    "DRAFT_BUILD",
+    "DETERMINISTIC_ORACLES",
+    "RELEASE_HOOK",
+    "LLM_EVALUATOR",
+    "FINAL_VALIDATION",
+    "PACKAGE_AUTHORIZATION"
+  ],
+  "architecture_gate": {
+    "status": "PASS_WITH_ASSUMPTIONS",
+    "smallest_robust_slice": "reuse existing adapters and add single receipt-gated execution path; unimplemented adapters stay open",
+    "strongest_counterargument": "each of 48 semantic measurements requires distinct real acquisition and rubric; a generic runner cannot invent them",
+    "failure_mode_chain": "raw status -> invented success -> false score -> customer release; enforced receipts and final gate prevent this",
+    "assumptions": [
+      "no direct live credentials or target URL given; no customer smoke PASS inferred"
+    ]
+  },
+  "state": "IR_VALIDATED_BEFORE_MUTATION",
+  "contract_version": "3.0.0",
+  "upgrade_mode": "PATCH",
+  "model_confidence_authority": false,
+  "self_awarded_quality_authority": false,
+  "workflow_gate_order_original": [
+    "baseline_reconciliation",
+    "route_parity",
+    "preflight",
+    "execution",
+    "receipt_validation",
+    "completion",
+    "score_admission",
+    "scoring",
+    "customer_builder",
+    "report_qa",
+    "regression",
+    "release_hook",
+    "evaluator",
+    "installability",
+    "package"
+  ],
+  "approval": {
+    "classification": "user_provided",
+    "received_at": "2026-10-31T01:36:37Z",
+    "scope": "isolated patch, review branch, merge only after hard release gates PASS",
+    "evidence": "user message in current conversation"
+  }
+}

@@ -585,6 +585,19 @@ def main(argv: list[str]) -> int:
     except Exception as exc:
         errors.append(f"artifact digest unavailable: {exc}")
 
+    # PXK48-A: mandatory independent execution-gate regressions on the live code tree.
+    # Historical audit replay and real customer run remain separate provenance checks;
+    # these deterministic tests never claim an authentic Twenty-Eight audit.
+    for name, command, timeout_sec in (
+        ("metric-route-parity", [sys.executable, str(root / "scripts/validate_metric_execution_routes.py"), str(root)], 60),
+        ("core-attempt-negative-oracles", [sys.executable, "-m", "unittest", "discover", "-s", str(root / "tests"), "-p", "test_execution_gate_patch_a.py"], 120),
+    ):
+        try:
+            checked = subprocess.run(command, cwd=root, text=True, capture_output=True, timeout=timeout_sec)
+            if checked.returncode != 0:
+                errors.append(f"PXK48-A {name} failed (rc={checked.returncode}): {(checked.stdout + checked.stderr)[-500:]}")
+        except Exception as exc:
+            errors.append(f"PXK48-A {name} unavailable: {type(exc).__name__}: {str(exc)[:200]}")
     if errors:
         return fail("; ".join(errors))
     print("PASS: release gate visual/reporting architecture + customer quality gate")

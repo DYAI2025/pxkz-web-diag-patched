@@ -17,6 +17,9 @@ from pathlib import Path
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
 ALLOWED_REASON_PATHS = {
+    "CORE_EXECUTION_COMPLETENESS_CUSTOMER_GATE_PATCH": {
+        "scripts/build_audit_deliverables.py",
+    },
     "CUSTOMER_LABEL_FIDELITY_PATCH": {
         "scripts/build_visualization_plan.py",
         "scripts/build_client_report_model.py",
@@ -102,6 +105,7 @@ OVERRIDE_REPORTS = (
     "reports/customer-scope-statement-shared-overrides.json",
     "reports/customer-label-fidelity-shared-overrides.json",
     "reports/evidence-bound-claims-shared-overrides.json",
+    "reports/pxk48-core-execution-shared-overrides.json",
 )
 
 

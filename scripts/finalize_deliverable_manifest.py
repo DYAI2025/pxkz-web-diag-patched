@@ -18,6 +18,7 @@ import os
 import subprocess
 import sys
 from pathlib import Path
+from customer_execution_release import validate_manifest_proof
 
 
 def sha(path: Path) -> str:
@@ -60,6 +61,10 @@ def main() -> int:
             {"from": previous_status, "to": "BUILT_PENDING_QA", "reason": "REVALIDATION_STARTED"})
         write_atomic(manifest_path, manifest)
     try:
+        # Fail closed even if invoked directly, even on a previously QA-green artifact.
+        customer_mode=manifest.get('release_mode')=='customer'
+        if customer_mode:
+            validate_manifest_proof(root,out,manifest)
         visual_qa = json.loads((out / "customer_presentation.visual-qa.json").read_text(encoding="utf-8"))
         semantic_qa = json.loads((out / "customer_presentation.semantic-qa.json").read_text(encoding="utf-8"))
         receipt = json.loads((out / "presentation-render-receipt.json").read_text(encoding="utf-8"))
@@ -92,9 +97,9 @@ def main() -> int:
             # The receipt was written by the renderer and may have been edited since; re-derive the font verdict.
             run([sys.executable, str(root / "scripts/validate_presentation_brand.py"), str(out / "customer_presentation.pdf"),
                  str(out / "presentation-render-receipt.json"), str(root / "assets/brand-tokens.json"), "--require-exact-fonts"])
-        customer_ready = bool(qa_complete and quality_status == "PASS" and font_status == "EXACT" and embedding_status == "VERIFIED")
+        customer_ready = bool(customer_mode and qa_complete and quality_status == "PASS" and font_status == "EXACT" and embedding_status == "VERIFIED")
         manifest.update({
-            "status": "CUSTOMER_RELEASE_READY" if customer_ready else ("QA_COMPLETE_FONT_BLOCKED" if qa_complete else "BUILT_PENDING_QA"),
+            "status": "CUSTOMER_RELEASE_READY" if customer_ready else ("QA_COMPLETE_FONT_BLOCKED" if qa_complete and customer_mode else "QA_COMPLETE_PROOF_ONLY" if qa_complete else "BUILT_PENDING_QA"),
             "qa_status": {"visual": visual_status, "semantic": semantic_status},
             "quality_gate_status": quality_status,
             "customer_release_ready": customer_ready,

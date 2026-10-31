@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "patch_id": "PXK48-A",
+  "candidate_digest": "3fe627f168ad73efa90ccb19c0910046d51a000083b29e473669835276e292ef",
+  "baseline_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+  "approved_at": "2026-10-31T01:36:37Z",
+  "status": "BLOCKED",
+  "package_authorized": false,
+  "merge_authorized_by_quality_gates": false,
+  "new_oracle_tests": 19,
+  "route_count": 48,
+  "capability_families": 14,
+  "offline_smoke": {
+    "target": "https://example.org/",
+    "result": "FAIL_COMPLETENESS",
+    "planned": 48,
+    "closed": 1,
+    "attempt_receipts": 54,
+    "raw_receipt_validator": "PASS",
+    "completion_gate": "FAIL"
+  },
+  "live_smoke": {
+    "target": "https://example.org/",
+    "result": "PUBLIC_HOST_DNS_UNAVAILABLE",
+    "exit_code": 1
+  },
+  "remaining_hard_gates": [
+    "T02 original Twenty-Eight archive missing",
+    "T13 positive fully accounted 48/48 synthetic proof missing",
+    "T18 real DNS/network runtime missing",
+    "current-source independent evaluator missing",
+    "current-source full release gate not passed"
+  ],
+  "notes": "Code patch is applied to an isolated worktree. Historical PASS reports retained under *.pre-pxk48-a and do not prove current release."
+}

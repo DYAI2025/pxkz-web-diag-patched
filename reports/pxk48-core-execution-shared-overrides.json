@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "status": "PASS",
+  "patch_id": "PXK48-A-001..013",
+  "evidence_basis": "Current actual candidate file hash chained from last committed, inspected evidence-bound-claims override. Does not authorize customer release.",
+  "overrides": [
+    {
+      "path": "scripts/build_audit_deliverables.py",
+      "baseline_sha256": "b8d3ba5536a2054d2545c17ef2868950597a2fdf7c01bf9dae2a4adf1bae203b",
+      "previous_sha256": "0ac4b8d33846a6b4f02bf38c18e0420a45a279fb6b6810623b4e793cafa0bf46",
+      "current_sha256": "05e803a008c3050b5ee339efd77a24a6abf2a636e7492f3d2c72826366823523",
+      "reason": "CORE_EXECUTION_COMPLETENESS_CUSTOMER_GATE_PATCH"
+    }
+  ]
+}

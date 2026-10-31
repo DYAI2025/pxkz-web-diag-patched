@@ -14,6 +14,7 @@ from pathlib import Path
 
 from check_brand_fonts import looks_like_font
 from evidence_method_labels import evidence_method
+from customer_execution_release import validate_customer_run,copy_proof
 
 
 def sha(path: Path) -> str:
@@ -52,6 +53,7 @@ def main() -> int:
     parser.add_argument("--priority-catalog-sha256", default=None, help="Exact SHA-256 of external industry catalog")
     parser.add_argument("--priority-allow-synthetic", action="store_true", help="Proof/test mode only: honor synthetic test profiles")
     parser.add_argument("--impressum-compliance", default=None, help="Optional validated internal legal sidecar; if supplied it becomes a strict digest-bound artifact")
+    parser.add_argument("--execution-run-dir",default=None,help="Mandatory for customer mode: LIVE v2 run with verified completion receipt")
     args = parser.parse_args()
     src = Path(args.scored_report).resolve()
     destination = Path(args.output_dir).resolve()
@@ -62,6 +64,12 @@ def main() -> int:
     try:
         if not src.is_file():
             raise ValueError(f"scored report missing: {src}")
+        # CUSTOMER must bind to an actual same-epoch 48-obligation execution before rendering.
+        execution_source = Path(args.execution_run_dir).resolve() if args.execution_run_dir else None
+        if args.release_mode == "customer" and execution_source is None:
+            raise ValueError("CUSTOMER_EXECUTION_COMPLETENESS_RECEIPT_REQUIRED")
+        if args.release_mode == "customer":
+            validate_customer_run(root,execution_source,src,require_live=True)
         font_proc = subprocess.run([py, str(root / "scripts/check_brand_fonts.py"), str(root), "--json"], text=True, capture_output=True)
         if font_proc.returncode != 0:
             raise ValueError(font_proc.stderr.strip() or "brand font resolution failed")
@@ -81,6 +89,7 @@ def main() -> int:
         out.mkdir(parents=True, exist_ok=True)
         canonical = out / "diagnosis-report.json"
         shutil.copy2(src, canonical)
+        execution_proof = copy_proof(root,execution_source,out,canonical) if args.release_mode == "customer" else None
         legal_sidecar = None
         legal_projection = None
         if args.impressum_compliance:
@@ -204,6 +213,7 @@ def main() -> int:
             "release_mode": args.release_mode,
             "source_input_sha256": sha(src),
             "source_report_sha256": sha(canonical),
+            "execution_proof": execution_proof,
             "required_artifacts": [
                 {"path": str(path.relative_to(out)), "sha256": sha(path), "bytes": path.stat().st_size}
                 for path in required
