@@ -1,22 +1,29 @@
 {
   "skill_name": "pixelkiez-website-diagnosis",
   "release_scope": "website-diagnosis-package",
-  "draft_version": "task8-release-reconciliation-49c0806-2026-10-29",
-  "candidate_commit": "49c0806",
-  "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
-  "candidate_artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+  "draft_version": "task8-release-reconciliation-49c0806-2026-10-29+PXK48-A-DRAFT",
+  "candidate_commit": null,
+  "artifact_digest": "3fe627f168ad73efa90ccb19c0910046d51a000083b29e473669835276e292ef",
+  "candidate_artifact_digest": "3fe627f168ad73efa90ccb19c0910046d51a000083b29e473669835276e292ef",
   "release_gate": {
-    "status": "PASS",
-    "allowed_to_package": true,
+    "status": "BLOCKED",
+    "allowed_to_package": false,
     "decision_basis": "Task 8 owner brief 2026-10-29: SKILL_PACKAGE_RELEASE and CUSTOMER_REPORT_RELEASE decided separately; every gate below is measured on this candidate or comes from the independent evaluator",
-    "measured_gates_failed": [],
-    "evaluator_decision": "PASS_WITH_MINOR_REVISIONS"
+    "measured_gates_failed": [
+      "PXK48_A_T02_ORIGINAL_ZIP_MISSING",
+      "PXK48_A_T13_POSITIVE_COMPLETE_RUN_NOT_DEMONSTRATED",
+      "PXK48_A_T18_DNS_BLOCKED",
+      "PXK48_A_CUSTOMER_REPORT_NO_REAL_AUDIT",
+      "PXK48_A_INDEPENDENT_EVALUATOR_MISSING"
+    ],
+    "evaluator_decision": "BLOCKED"
   },
   "skill_package_release": {
-    "status": "PASS",
-    "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
+    "status": "BLOCKED",
+    "artifact_digest": "3fe627f168ad73efa90ccb19c0910046d51a000083b29e473669835276e292ef",
     "candidate_commit": "49c0806",
-    "proof_qa_record": "reports/customer-pdf-qa-release-49c0806.json"
+    "proof_qa_record": "reports/customer-pdf-qa-release-49c0806.json",
+    "customer_release_ready": false
   },
   "customer_report_release": {
     "status": "BLOCKED_NO_REAL_AUDIT_INPUT",
@@ -709,7 +716,7 @@
   },
   "measurement_platform_baseline_digest": "f8a385b42c6a3291e8544f1c600e405b112c1c8b27080cfe6bdf682304ab3e55",
   "pixelkiez_score_impact": "NONE_DIRECT",
-  "final_decision": "SKILL_PACKAGE_RELEASE_PASS_CUSTOMER_REPORT_BLOCKED",
+  "final_decision": "BLOCKED_PXK48_A_PATCH_WORKTREE_UNRELEASED",
   "candidate_gate_results": {
     "candidate_commit": "49c0806",
     "artifact_digest": "1160c5b60d11a8b06879af6ab4286a3004784fcd7e9b52e71afb215484bbdd9a",
@@ -957,7 +964,7 @@
       }
     ]
   },
-  "historical_sections_note": "superseded documents kept for history; their claims are not current, and some are refuted by this candidate's traces (e.g. the a66710f sentence that seven path-argument validators run inside the build: see task8-release-reconciliation.json path_arg_validators)",
+  "historical_sections_note": "Historical PASS values in other gates refer to the prior released source; they are not independent current Patch A release evidence.",
   "historical_sections": {
     "release-gate-report before Task 8 rebuild (draft task8-release-reconciliation-49c0806-2026-10-29)": {
       "skill_name": "pixelkiez-website-diagnosis",

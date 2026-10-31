@@ -223,7 +223,7 @@ A negative finding without traceable evidence is invalid.
 
 ## Active Core Measurement and Score Admission
 
-Read `references/core-active-measurement-migration.md` before creating or changing canonical core metric rows from measurement evidence. The active migration is separate from the historical score-neutral Shadow design.
+Read `references/core-active-measurement-migration.md` before creating or changing canonical core metric rows from measurement evidence. The active migration is separate from the historical score-neutral Shadow design. **Mandatory LIVE workflow (Patch A):** Read `references/core-metric-execution-route-contract.md` and `references/core-execution-receipt-policy.md`. Run the 14-capability preflight, registry-driven 48-metric collector, raw SHA-256 receipt validation and execution-completeness gate **before** score admission, `compute_score.py`, business prioritization, customer rendering and independent PDF/semantic QA. All 48 obligations require verified execution or a tested exception, not merely an `UNAVAILABLE`/`ERROR` status; field data cannot be replaced with lab data. Customer Builder/Finalizer/Bundle Validator require matching LIVE run, scored-report and registry/binding digests; FIXTURE/REPLAY is never customer release.
 
 Hard rules:
 
@@ -237,9 +237,9 @@ Hard rules:
 - a numeric metric score is materialized only from the existing registry anchor after admission;
 - external-threshold metrics require a current runtime threshold source;
 - method, limitation, evidence refs, evidence grade, target consistency and authorized source family are mandatory for score admission;
-- if a runtime cannot observe/measure the metric without guessing, emit `UNAVAILABLE`/`ERROR`; never replace the path with an LLM estimate.
+- if a runtime cannot observe/measure the metric without guessing, emit `UNAVAILABLE`/`ERROR` as an **open or independently proven exception state**, never a completed LIVE measurement; never replace the path with an LLM estimate.
 
-Canonical active path:
+Legacy FIXTURE/REPLAY scoring regression path (never an independent LIVE audit or customer release):
 
 ```bash
 python scripts/validate_core_evidence_bindings.py .

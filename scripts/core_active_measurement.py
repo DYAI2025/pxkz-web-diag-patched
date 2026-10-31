@@ -54,6 +54,7 @@ def _semantic_bundle(bundle: dict[str, Any]) -> dict[str, Any]:
             "limitation":r.get("limitation"), "product_status":r.get("product_status"), "threshold_source":r.get("threshold_source"),
             "confidence":r.get("confidence"), "reason_codes":sorted(r.get("reason_codes", [])), "note":r.get("note"),
             "raw_provider_payload_present":r.get("raw_provider_payload_present"),
+            **({"execution_proof":r.get("execution_proof")} if bundle.get("schema_version")=="2.0" else {}),
         })
     return {
         "schema_version":bundle.get("schema_version"),
@@ -77,12 +78,23 @@ def load_contracts(root: Path) -> tuple[dict[str, Any], dict[str, Any], dict[str
     return registry,caps,bindings,schema
 
 
-def validate_bundle(root: Path, bundle: dict[str, Any]) -> None:
+def validate_bundle(root: Path, bundle: dict[str, Any], *, run_dir: Path | None = None) -> None:
     registry,caps,bindings,schema=load_contracts(root)
     try:
         jsonschema.Draft202012Validator(schema).validate(bundle)
     except Exception as exc:
         raise ContractError(str(exc)) from exc
+    if bundle.get("mode")=="LIVE":
+        if bundle.get("schema_version")!="2.0":
+            raise ContractError("LIVE_V1_BUNDLE_REJECTED: collector-backed execution proof required")
+        if run_dir is None:
+            raise ContractError("LIVE_EVIDENCE_ROOT_REQUIRED")
+        from core_execution_gate import validate_execution
+        proof_gate=validate_execution(root,run_dir,bundle)
+        if proof_gate["execution_completeness"]!="PASS":
+            raise ContractError(f"EXECUTION_COMPLETENESS_FAIL: {proof_gate['completed']}/48 verified")
+    elif bundle.get("schema_version")!="1.0":
+        raise ContractError("FIXTURE_REPLAY_ONLY_V1; separate LIVE v2 requires collector proof")
     reg_by={m["id"]:m for m in registry["metrics"]}
     bind_by={b["metric_id"]:b for b in bindings["metrics"]}
     result_ids=[r["metric_id"] for r in bundle["results"]]
@@ -137,8 +149,8 @@ def validate_bundle(root: Path, bundle: dict[str, Any]) -> None:
                 raise ContractError(f"{mid}: non-scoreable state must include reason {expected}")
 
 
-def admission_report(root: Path, bundle: dict[str, Any]) -> dict[str, Any]:
-    validate_bundle(root,bundle)
+def admission_report(root: Path, bundle: dict[str, Any], *, run_dir: Path | None = None) -> dict[str, Any]:
+    validate_bundle(root,bundle,run_dir=run_dir)
     registry,_,bindings,_=load_contracts(root)
     bind_by={b["metric_id"]:b for b in bindings["metrics"]}
     anchors=registry["metric_score_scale"]
@@ -184,8 +196,8 @@ def admission_report(root: Path, bundle: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def materialize_report(root: Path, base_report: dict[str, Any], bundle: dict[str, Any]) -> tuple[dict[str, Any],dict[str, Any]]:
-    admission=admission_report(root,bundle)
+def materialize_report(root: Path, base_report: dict[str, Any], bundle: dict[str, Any], *, run_dir: Path | None = None) -> tuple[dict[str, Any],dict[str, Any]]:
+    admission=admission_report(root,bundle,run_dir=run_dir)
     registry,caps,_,_=load_contracts(root)
     result_by={r["metric_id"]:r for r in bundle["results"]}
     anchor=registry["metric_score_scale"]
@@ -213,6 +225,17 @@ def materialize_report(root: Path, base_report: dict[str, Any], bundle: dict[str
     out["metrics"]=metrics
     # Reconcile capability availability from execution truth; no scoreable metric may claim an unavailable capability.
     by_cap={c["id"]:[] for c in caps["capabilities"]}
+    if bundle.get("mode")=="LIVE":
+        if bundle.get("schema_version")!="2.0":
+            raise ContractError("LIVE_V1_BUNDLE_REJECTED: collector-backed execution proof required")
+        if run_dir is None:
+            raise ContractError("LIVE_EVIDENCE_ROOT_REQUIRED")
+        from core_execution_gate import validate_execution
+        proof_gate=validate_execution(root,run_dir,bundle)
+        if proof_gate["execution_completeness"]!="PASS":
+            raise ContractError(f"EXECUTION_COMPLETENESS_FAIL: {proof_gate['completed']}/48 verified")
+    elif bundle.get("schema_version")!="1.0":
+        raise ContractError("FIXTURE_REPLAY_ONLY_V1; separate LIVE v2 requires collector proof")
     reg_by={m["id"]:m for m in registry["metrics"]}
     for mid,r in result_by.items(): by_cap[reg_by[mid]["capability_id"]].append(r["execution_state"])
     cap_rows=[]

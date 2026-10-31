@@ -1,0 +1,32 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"Pixelkiez Metric Attempt Receipt v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["receipt_version","producer","receipt_id","execution_run_id","metric_id","route_id","method_id","method_version","adapter","measurement_class","source_family","target_url","observed_url","started_at","finished_at","tool","configuration","outcome","artifacts","scope","limits","context_params","reason"],
+  "properties":{
+    "receipt_version":{"const":"1.0"},
+    "producer":{"const":"pixelkiez.core-runner.v1"},
+    "receipt_id":{"type":"string","pattern":"^A-[A-Z0-9-]{7,}$"},
+    "execution_run_id":{"type":"string","minLength":8},
+    "metric_id":{"type":"string","pattern":"^[A-Z0-9]+-[0-9]{2}$"},
+    "route_id":{"type":"string","minLength":3},
+    "method_id":{"type":"string","minLength":2},
+    "method_version":{"type":"string","minLength":1},
+    "adapter":{"type":"string","minLength":2},
+    "measurement_class":{"type":"string","minLength":2},
+    "source_family":{"type":"string","minLength":2},
+    "target_url":{"type":"string","pattern":"^https?://"},
+    "observed_url":{"type":"string","pattern":"^https?://"},
+    "started_at":{"type":"string","format":"date-time"},
+    "finished_at":{"type":"string","format":"date-time"},
+    "tool":{"type":"object","additionalProperties":false,"required":["name","version","invocation","exit_code"],"properties":{"name":{"type":"string","minLength":1},"version":{"type":"string","minLength":1},"invocation":{"type":"string","minLength":1},"exit_code":{"type":["integer","null"]}}},
+    "configuration":{"type":"object"},
+    "outcome":{"enum":["SUCCESS_RAW","SUCCESS_VERIFIED","SOURCE_ABSENT","TOOL_FAILURE","POLICY_BLOCKED","CAPABILITY_UNAVAILABLE","IMPLEMENTATION_GAP"]},
+    "artifacts":{"type":"array","minItems":1,"items":{"type":"object","additionalProperties":false,"required":["path","sha256","kind","bytes"],"properties":{"path":{"type":"string","minLength":1},"sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},"kind":{"enum":["http_response","html","dom","viewport","screenshot","tool_log","provider_response","lab_json","authorized_export","manual_record"]},"bytes":{"type":"integer","minimum":1}}}},
+    "scope":{"type":"object","required":["url_scope","page_sample"]},
+    "limits":{"type":"object","required":["timeout_seconds","max_response_bytes"]},
+    "context_params":{"type":"object"},
+    "reason":{"type":"string","minLength":1}
+  }
+}

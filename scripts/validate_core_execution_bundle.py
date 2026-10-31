@@ -5,11 +5,11 @@ from pathlib import Path
 from core_active_measurement import ContractError,semantic_digest,validate_bundle
 
 def main(argv:list[str])->int:
-    if len(argv)!=3:
+    if len(argv) not in (3,4):
         print('FAIL: usage: validate_core_execution_bundle.py <skill-dir> <bundle.json>',file=sys.stderr); return 1
     root=Path(argv[1]).resolve(); path=Path(argv[2]).resolve()
     try:
-        bundle=json.loads(path.read_text(encoding='utf-8')); validate_bundle(root,bundle)
+        bundle=json.loads(path.read_text(encoding='utf-8')); validate_bundle(root,bundle,run_dir=Path(argv[3]).resolve() if len(argv)==4 else None)
     except Exception as exc:
         print(f'FAIL: {exc}',file=sys.stderr); return 1
     print(f'PASS: core execution bundle metrics=48 semantic_digest={semantic_digest(bundle)}'); return 0
